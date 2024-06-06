@@ -1,0 +1,26 @@
+{
+    "sourceFile": "algorithms/middleNode.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1717663968816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717664072557,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,7 @@\n+\n+\n+\n // https://leetcode.com/problems/middle-of-the-linked-list\n ListNode* middleNode(ListNode* head) \n {\n      auto one_step_ptr = head;\n"
+                },
+                {
+                    "date": 1717664077643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n+#include \"\"\n \n \n-\n // https://leetcode.com/problems/middle-of-the-linked-list\n ListNode* middleNode(ListNode* head) \n {\n      auto one_step_ptr = head;\n"
+                }
+            ],
+            "date": 1717663968816,
+            "name": "Commit-0",
+            "content": "// https://leetcode.com/problems/middle-of-the-linked-list\nListNode* middleNode(ListNode* head) \n{\n     auto one_step_ptr = head;\n     auto two_step_ptr = head->next;\n     while(two_step_ptr != nullptr)\n     {\n        one_step_ptr = one_step_ptr->next;\n        two_step_ptr = two_step_ptr->next != nullptr ? two_step_ptr->next->next : nullptr;\n     }\n     return one_step_ptr;\n}"
+        }
+    ]
+}

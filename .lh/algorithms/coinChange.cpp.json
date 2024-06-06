@@ -1,0 +1,30 @@
+{
+    "sourceFile": "algorithms/coinChange.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1717664376856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717664383890,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+\n+\n // https://leetcode.com/problems/coin-change\n /*\n The length of the memoization table is amount + 1 because we need to store results for all possible values from 0 up to the target amount. Here’s a detailed explanation:\n \n"
+                },
+                {
+                    "date": 1717664389555,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+#include <vec\n \n-\n // https://leetcode.com/problems/coin-change\n /*\n The length of the memoization table is amount + 1 because we need to store results for all possible values from 0 up to the target amount. Here’s a detailed explanation:\n \n"
+                },
+                {
+                    "date": 1717664394880,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n-#include <vec\n+#include <vector>\n \n+using namespace std;\n+\n // https://leetcode.com/problems/coin-change\n /*\n The length of the memoization table is amount + 1 because we need to store results for all possible values from 0 up to the target amount. Here’s a detailed explanation:\n \n"
+                }
+            ],
+            "date": 1717664376856,
+            "name": "Commit-0",
+            "content": "// https://leetcode.com/problems/coin-change\n/*\nThe length of the memoization table is amount + 1 because we need to store results for all possible values from 0 up to the target amount. Here’s a detailed explanation:\n\nRange of Subproblems\nIn the coin change problem, we need to determine the minimum number of coins required for every sub-amount from 0 to the given amount. This includes:\n\nBase Case: The minimum number of coins required to make up 0 amount is 0.\nSub-Amounts: For every amount from 1 to amount, we need to compute the minimum number of coins required.\nMemoization Table\nTo efficiently store and retrieve the results of these subproblems, we use a memoization table. The index of this table represents the sub-amount, and the value at each index represents the minimum number of coins needed to make up that amount.\n\nIndex 0: Corresponds to amount 0.\nIndex 1: Corresponds to amount 1.\n...\nIndex amount: Corresponds to the given target amount.\nBy having a table of size amount + 1, we ensure that we can store results for all amounts from 0 to amount.\n\nExample\nConsider the given amount is 11. The memoization table needs to store results for amounts ranging from 0 to 11. Thus, we need 12 slots in the table:\n\nmemo[0]: Minimum coins to make amount 0 (which is 0).\nmemo[1]: Minimum coins to make amount 1.\n...\nmemo[11]: Minimum coins to make amount 11.\nIf the table were of size amount (which would be 11 in this case), it would only have slots from 0 to 10, and we wouldn't be able to store the result for the target amount itself.\n\nCorrectness\nThe memoization table of size amount + 1 ensures that:\n\nAll Subproblems Are Covered: We can store results for all amounts from 0 up to amount.\nDirect Access: We can directly access and update the result for any sub-amount using its value as the index.\n*/\nint coinChangeSolve(vector<int>& coins, int amount, vector<int>& memo, vector<int>& lastCoin)\n{\n     if(amount < 0)\n       return INT_MAX;\n     if(amount == 0)\n       return 0;\n     if(memo[amount] != -1)\n       return memo[amount];\n\n     int minCoins = INT_MAX;\n     for(auto c : coins) {\n        int tmp = coinChangeSolve(coins, amount - c, memo, lastCoin);\n        if (tmp != INT_MAX && tmp + 1 < minCoins) {\n            minCoins = tmp + 1;\n            lastCoin[amount] = c;  // Track the coin used\n        }\n     }\n\n     memo[amount] = minCoins;\n     return minCoins;\n}\n\nstd::pair<int, vector<int>> coinChange(vector<int>& coins, int amount)\n{ \n   auto memo = vector<int>(amount + 1, -1);\n   auto lastCoin = vector<int>(amount + 1, -1);\n   vector<int> resultCoins = {};\n   auto res = coinChangeSolve(coins, amount, memo, lastCoin);\n\n   // Reconstruct the coins used to form the amount\n    int tempAmount = amount;\n    while (tempAmount > 0) {\n        int coin = lastCoin[tempAmount];\n        resultCoins.push_back(coin);\n        tempAmount -= coin;\n    }\n\n   return std::make_pair(res == INT_MAX ? -1 : res, resultCoins);\n}\n\nconst int MOD = 1e9 + 7; // Example modulus\n\nint coinAllSolutions(vector<int>& coins, int amount, vector<int>& memo)\n{\n    if(amount < 0)\n      return 0;\n    if(amount == 0)\n      return 1;\n    \n    if(memo[amount] != -1)\n      return memo[amount];\n\n    int solutions = 0;\n    for(auto c : coins)\n      solutions += coinAllSolutions(coins, amount - c, memo);\n\n    solutions %= MOD;\n    memo[amount] = solutions;\n    return solutions;\n}"
+        }
+    ]
+}

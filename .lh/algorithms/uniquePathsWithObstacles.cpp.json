@@ -1,0 +1,50 @@
+{
+    "sourceFile": "algorithms/uniquePathsWithObstacles.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1717663674553,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717663682090,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+#\n+\n // https://leetcode.com/problems/unique-paths-ii\n // dp[y][x] = grid[y - 1][x] == 1 ? 0 : dp[y - 1][x] + grid[y][x - 1] == 1 ? 0 : dp[y][x - 1]\n \n int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)\n"
+                },
+                {
+                    "date": 1717663687694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-#\n+#include <vec\n \n // https://leetcode.com/problems/unique-paths-ii\n // dp[y][x] = grid[y - 1][x] == 1 ? 0 : dp[y - 1][x] + grid[y][x - 1] == 1 ? 0 : dp[y][x - 1]\n \n"
+                },
+                {
+                    "date": 1717663695510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-#include <vec\n+#include <vector>\n \n // https://leetcode.com/problems/unique-paths-ii\n // dp[y][x] = grid[y - 1][x] == 1 ? 0 : dp[y - 1][x] + grid[y][x - 1] == 1 ? 0 : dp[y][x - 1]\n \n"
+                },
+                {
+                    "date": 1717663775191,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n // https://leetcode.com/problems/unique-paths-ii\n // dp[y][x] = grid[y - 1][x] == 1 ? 0 : dp[y - 1][x] + grid[y][x - 1] == 1 ? 0 : dp[y][x - 1]\n \n-int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)\n+int uniquePathsWithObstacles(std::vector<vector<int>>& obstacleGrid)\n {\n      int n = obstacleGrid.size(); // y\n      int m = obstacleGrid[0].size(); // x\n      vector<vector<int>> dp = vector<vector<int>>(n, vector<int>(m, 0));\n"
+                },
+                {
+                    "date": 1717663780976,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n // https://leetcode.com/problems/unique-paths-ii\n // dp[y][x] = grid[y - 1][x] == 1 ? 0 : dp[y - 1][x] + grid[y][x - 1] == 1 ? 0 : dp[y][x - 1]\n \n-int uniquePathsWithObstacles(std::vector<vector<int>>& obstacleGrid)\n+int uniquePathsWithObstacles(std::vector<std::vector<int>>& obstacleGrid)\n {\n      int n = obstacleGrid.size(); // y\n      int m = obstacleGrid[0].size(); // x\n      vector<vector<int>> dp = vector<vector<int>>(n, vector<int>(m, 0));\n"
+                },
+                {
+                    "date": 1717663786488,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n // https://leetcode.com/problems/unique-paths-ii\n // dp[y][x] = grid[y - 1][x] == 1 ? 0 : dp[y - 1][x] + grid[y][x - 1] == 1 ? 0 : dp[y][x - 1]\n \n-int uniquePathsWithObstacles(std::vector<std::vector<int>>& obstacleGrid)\n+int uniquePathsWithObstacles(vector<std::vector<int>>& obstacleGrid)\n {\n      int n = obstacleGrid.size(); // y\n      int m = obstacleGrid[0].size(); // x\n      vector<vector<int>> dp = vector<vector<int>>(n, vector<int>(m, 0));\n"
+                },
+                {
+                    "date": 1717663792497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,12 @@\n #include <vector>\n \n+usin\n+\n // https://leetcode.com/problems/unique-paths-ii\n // dp[y][x] = grid[y - 1][x] == 1 ? 0 : dp[y - 1][x] + grid[y][x - 1] == 1 ? 0 : dp[y][x - 1]\n \n-int uniquePathsWithObstacles(vector<std::vector<int>>& obstacleGrid)\n+int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)\n {\n      int n = obstacleGrid.size(); // y\n      int m = obstacleGrid[0].size(); // x\n      vector<vector<int>> dp = vector<vector<int>>(n, vector<int>(m, 0));\n"
+                },
+                {
+                    "date": 1717663800119,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n #include <vector>\n \n-usin\n+using namespace std;\n \n // https://leetcode.com/problems/unique-paths-ii\n // dp[y][x] = grid[y - 1][x] == 1 ? 0 : dp[y - 1][x] + grid[y][x - 1] == 1 ? 0 : dp[y][x - 1]\n \n"
+                }
+            ],
+            "date": 1717663674553,
+            "name": "Commit-0",
+            "content": "// https://leetcode.com/problems/unique-paths-ii\n// dp[y][x] = grid[y - 1][x] == 1 ? 0 : dp[y - 1][x] + grid[y][x - 1] == 1 ? 0 : dp[y][x - 1]\n\nint uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)\n{\n     int n = obstacleGrid.size(); // y\n     int m = obstacleGrid[0].size(); // x\n     vector<vector<int>> dp = vector<vector<int>>(n, vector<int>(m, 0));\n\n    if(obstacleGrid[0][0] == 1)\n      return 0;\n\n    // base case 0, 0\n    dp[0][0] = 1;\n\n    // y is zero\n    int xObstacle = -1;\n    for (size_t i = 0; i < m; i++)\n    {\n      if(obstacleGrid[0][i] == 1)\n        xObstacle = i;\n      dp[0][i] = xObstacle != -1 ? 0 : 1;\n    }\n\n    // x is zero\n    int yObstacle = -1;\n    for (size_t j = 0; j < n; j++)\n    {\n       if(obstacleGrid[j][0] == 1)\n         yObstacle = j;\n      dp[j][0] = yObstacle != -1 ? 0 : 1;\n    }\n\n    for (size_t i = 1; i < n; i++)\n      for (size_t j = 1; j < m; j++)\n      {  \n        if(obstacleGrid[i][j] == 1)\n          dp[i][j] = 0;\n        else\n        {\n            int fromAbove = obstacleGrid[i - 1][j] == 1 ? 0 : dp[i - 1][j];\n            int fromLeft = obstacleGrid[i][j - 1] == 1 ? 0 : dp[i][j - 1];\n            dp[i][j] = fromAbove + fromLeft;\n        }\n      }\n    return dp[n - 1][m - 1];\n}"
+        }
+    ]
+}

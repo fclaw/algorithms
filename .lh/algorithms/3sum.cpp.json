@@ -1,0 +1,30 @@
+{
+    "sourceFile": "algorithms/3sum.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1717664225730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717664231528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+\n+\n // https://leetcode.com/problems/3sum\n /*\n To solve the problem of finding all unique triplets in an array that sum to zero, we can use a combination of sorting and the two-pointer technique. \n The basic idea is to first sort the array, and then use three nested loops \n"
+                },
+                {
+                    "date": 1717664240478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+#include <ve\n \n-\n // https://leetcode.com/problems/3sum\n /*\n To solve the problem of finding all unique triplets in an array that sum to zero, we can use a combination of sorting and the two-pointer technique. \n The basic idea is to first sort the array, and then use three nested loops \n"
+                },
+                {
+                    "date": 1717664247966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-#include <ve\n+#include <vector>\n \n // https://leetcode.com/problems/3sum\n /*\n To solve the problem of finding all unique triplets in an array that sum to zero, we can use a combination of sorting and the two-pointer technique. \n"
+                }
+            ],
+            "date": 1717664225730,
+            "name": "Commit-0",
+            "content": "// https://leetcode.com/problems/3sum\n/*\nTo solve the problem of finding all unique triplets in an array that sum to zero, we can use a combination of sorting and the two-pointer technique. \nThe basic idea is to first sort the array, and then use three nested loops \nwhere the innermost loop is optimized using two pointers to avoid unnecessary comparisons. \nThis approach ensures that we can find the solution in 𝑂(𝑛2) time complexity.\n\nthere are steps:\n\n1 Sort the array: Sorting helps to easily avoid duplicates and also allows us to use the two-pointer technique efficiently.\n\n2 Iterate through the array: For each element in the array, treat it as a fixed element and try to find a pair of elements \nin the remaining part of the array which sums up to the negative of the fixed element.\n\n3 Two-pointer technique: For the remaining elements after the fixed element, use two pointers to find pairs that sum up to the required value. \nAdjust the pointers based on whether the current sum is less than or greater than the required sum.\nAvoid duplicates: After finding a valid triplet, move the pointers to skip over any duplicate elements to ensure that each triplet is unique.\n*/\nstd::vector<std::vector<int>> threeSum(std::vector<int>& nums)\n{\n    auto n = nums.size();\n    std::sort(nums.begin(), nums.end());\n    std::vector<std::vector<int>> res = {};\n    for (size_t i = 0; nums[i] <= 0; i++)\n    {\n        if(i > 0 && nums[i] == nums[i - 1])\n          continue;\n        size_t left = i + 1;\n        size_t right = n - 1;\n        int target = -nums[i];\n\n        while (left < right) {\n            int sum = nums[left] + nums[right];\n            if (sum == target) {\n                res.push_back({nums[i], nums[left], nums[right]});\n                // Move left and right pointers and skip duplicates\n                while (left < right && \n                       nums[left] == nums[left + 1]) \n                  ++left;\n                while (left < right && \n                       nums[right] == nums[right - 1]) \n                  --right;\n                ++left;\n                --right;\n            } else if (sum < target) {\n                ++left;\n            } else {\n                --right;\n            }\n        }\n    }\n    return res;\n}"
+        }
+    ]
+}

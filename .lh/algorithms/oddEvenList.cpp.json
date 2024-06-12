@@ -1,0 +1,70 @@
+{
+    "sourceFile": "algorithms/oddEvenList.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 13,
+            "patches": [
+                {
+                    "date": 1718041277627,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718041283727,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,3 @@\n #include \"list.cpp\"\n+\n+// https://leetcode.com/problems/odd-even-linked-list\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718041289356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,4 @@\n #include \"list.cpp\"\n \n-// https://leetcode.com/problems/odd-even-linked-list\n\\ No newline at end of file\n+// https://leetcode.com/problems/odd-even-linked-list\n+ListNode* oddEvenList(ListNode* head) {\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718041295841,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,7 @@\n #include \"list.cpp\"\n \n // https://leetcode.com/problems/odd-even-linked-list\n-ListNode* oddEvenList(ListNode* head) {\n\\ No newline at end of file\n+ListNode* oddEvenList(ListNode* head)\n+{\n+    return head;\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718041308383,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n #include \"list.cpp\"\n \n // https://leetcode.com/problems/odd-even-linked-list\n+/*\n+*/\n ListNode* oddEvenList(ListNode* head)\n {\n     return head;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718041313933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,13 @@\n #include \"list.cpp\"\n \n // https://leetcode.com/problems/odd-even-linked-list\n /*\n+Given the head of a singly linked list, group all the nodes with odd indices together followed by the nodes with even indices, and return the reordered list.\n+The first node is considered odd, and the second node is even, and so on.\n+Note that the relative order inside both the even and odd groups should remain as it was in the input.\n+\n+You must solve the problem in O(1) extra space complexity and O(n) time complexity.\n */\n ListNode* oddEvenList(ListNode* head)\n {\n     return head;\n"
+                },
+                {
+                    "date": 1718041325333,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,8 @@\n /*\n Given the head of a singly linked list, group all the nodes with odd indices together followed by the nodes with even indices, and return the reordered list.\n The first node is considered odd, and the second node is even, and so on.\n Note that the relative order inside both the even and odd groups should remain as it was in the input.\n-\n You must solve the problem in O(1) extra space complexity and O(n) time complexity.\n */\n ListNode* oddEvenList(ListNode* head)\n {\n"
+                },
+                {
+                    "date": 1718041606133,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,6 +8,8 @@\n You must solve the problem in O(1) extra space complexity and O(n) time complexity.\n */\n ListNode* oddEvenList(ListNode* head)\n {\n+        ListNode* dummy = new ListNode();\n+    dummy->next = head;\n     return head;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718041614908,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,8 @@\n You must solve the problem in O(1) extra space complexity and O(n) time complexity.\n */\n ListNode* oddEvenList(ListNode* head)\n {\n-        ListNode* dummy = new ListNode();\n+    ListNode*  = new ListNode();\n     dummy->next = head;\n     return head;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718041626470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,10 @@\n You must solve the problem in O(1) extra space complexity and O(n) time complexity.\n */\n ListNode* oddEvenList(ListNode* head)\n {\n-    ListNode*  = new ListNode();\n+    ListNode* dummy = new ListNode();\n     dummy->next = head;\n+    \n+\n     return head;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718041651446,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,7 +11,8 @@\n {\n     ListNode* dummy = new ListNode();\n     dummy->next = head;\n     \n+    ListNode* dummy = new ListNode()\n \n     return head;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718041658994,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,8 @@\n {\n     ListNode* dummy = new ListNode();\n     dummy->next = head;\n     \n-    ListNode* dummy = new ListNode()\n+    ListNode* dummy_even = new ListNode()\n \n     return head;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718041668726,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n */\n ListNode* oddEvenList(ListNode* head)\n {\n     ListNode* dummy_odd = new ListNode();\n-    dummy->next = head;\n+    dummy_odd->next = head;\n     \n     ListNode* dummy_even = new ListNode()\n \n     return head;\n"
+                },
+                {
+                    "date": 1718041790757,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,6 +18,6 @@\n     {\n \n     }      \n \n-    return head;\n+    returndummy->next;\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1718041277627,
+            "name": "Commit-0",
+            "content": "#include \"list.cpp\"\n"
+        }
+    ]
+}

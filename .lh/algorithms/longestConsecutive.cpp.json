@@ -1,0 +1,214 @@
+{
+    "sourceFile": "algorithms/longestConsecutive.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 49,
+            "patches": [
+                {
+                    "date": 1718035583015,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718035591295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,4 @@\n+\n+\n\\ No newline at end of file\n // https://leetcode.com/problems/longest-consecutive-sequence\n-int longestConsecutive(vector<int>& nums) { return 0; }\n+int longestConsecutive(std::vector<int>& nums) { return 0; }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718035600042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n+#include <vector>\n \n-\n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) { return 0; }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718035836730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n #include <vector>\n \n // https://leetcode.com/problems/longest-consecutive-sequence\n-int longestConsecutive(std::vector<int>& nums) { return 0; }\n\\ No newline at end of file\n+int longestConsecutive(std::vector<int>& nums) \n+{ return 0; }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718035844388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,8 @@\n #include <vector>\n \n+\n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n\\ No newline at end of file\n-{ return 0; }\n+{\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718035852057,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n #include <vector>\n+#include <\n \n-\n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n \n"
+                },
+                {
+                    "date": 1718035871304,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n-#include <\n+#include <unordered_map>\n \n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n"
+                },
+                {
+                    "date": 1718035880046,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n-#include <unordered_map>\n+#include <unordered_set>\n \n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n"
+                },
+                {
+                    "date": 1718035887993,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,6 @@\n \n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n-\n+    \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718035898171,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,6 @@\n \n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n-    \n+    std::u\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718035907186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,6 @@\n \n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n-    std::u\n+    std::unordered_set<int, int> \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718035916193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,6 @@\n \n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n-    std::unordered_set<int, int> \n+    std::unordered_set<int, int> hash;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718035928962,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,5 +4,6 @@\n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n     std::unordered_set<int, int> hash;\n+    \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718035941926,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n \n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n-    std::unordered_set<int, int> hash;\n-    \n+    std::unordered_set<int, int> hash(nums.);\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718035954308,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,12 @@\n \n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n-    std::unordered_set<int, int> hash(nums.);\n+    std::unordered_set<int, int> hash(nums.size());\n+    for (size_t i = 0; i < count; i++)\n+    {\n+        /* code */\n+    }\n+    \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718035964530,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n     std::unordered_set<int, int> hash(nums.size());\n-    for (size_t i = 0; i < count; i++)\n+    for ()\n     {\n         /* code */\n     }\n     \n"
+                },
+                {
+                    "date": 1718035971360,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,12 @@\n+#include <vector>\n+#include <unordered_set>\n+\n+// https://leetcode.com/problems/longest-consecutive-sequence\n+int longestConsecutive(std::vector<int>& nums) \n+{\n+    std::unordered_set<int, int> hash(nums.size());\n+    for (int x : nums)\n+    \n+    \n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718035979482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,22 +5,8 @@\n int longestConsecutive(std::vector<int>& nums) \n {\n     std::unordered_set<int, int> hash(nums.size());\n     for (int x : nums)\n+      \n     \n-    \n \n-}\n-#include <vector>\n-#include <unordered_set>\n-\n-// https://leetcode.com/problems/longest-consecutive-sequence\n-int longestConsecutive(std::vector<int>& nums) \n-{\n-    std::unordered_set<int, int> hash(nums.size());\n-    for ()\n-    {\n-        /* code */\n-    }\n-    \n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718035985893,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,8 @@\n int longestConsecutive(std::vector<int>& nums) \n {\n     std::unordered_set<int, int> hash(nums.size());\n     for (int x : nums)\n-      \n+      hash.insert()\n     \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036030441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n-    std::unordered_set<int, int> hash(nums.size());\n+    std::unordered_set<int> hash(nums.size());\n     for (int x : nums)\n       hash.insert()\n     \n \n"
+                },
+                {
+                    "date": 1718036047670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n-    std::unordered_set<int> hash(nums.size());\n+    std::unordered_set<int> hash(nums.begin(), nums.end());\n     for (int x : nums)\n       hash.insert()\n     \n \n"
+                },
+                {
+                    "date": 1718036053594,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,7 @@\n \n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n-    std::unordered_set<int> hash(nums.begin(), nums.end());\n-    for (int x : nums)\n-      hash.insert()\n-    \n+    std::unordered_set<int> hash(nums.begin(), nums.end());    \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036073176,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,8 @@\n \n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n-    std::unordered_set<int> hash(nums.begin(), nums.end());    \n+    std::unordered_set<int> hash(nums.begin(), nums.end());\n+    int counter    \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036080029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,7 +4,8 @@\n // https://leetcode.com/problems/longest-consecutive-sequence\n int longestConsecutive(std::vector<int>& nums) \n {\n     std::unordered_set<int> hash(nums.begin(), nums.end());\n-    int counter    \n+    int counter = 0;\n+        \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036086775,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,7 @@\n int longestConsecutive(std::vector<int>& nums) \n {\n     std::unordered_set<int> hash(nums.begin(), nums.end());\n     int counter = 0;\n-        \n+    int max_le    \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036092474,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,7 @@\n int longestConsecutive(std::vector<int>& nums) \n {\n     std::unordered_set<int> hash(nums.begin(), nums.end());\n     int counter = 0;\n-    int max_le    \n+    int max_length = INT    \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036099682,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,6 @@\n int longestConsecutive(std::vector<int>& nums) \n {\n     std::unordered_set<int> hash(nums.begin(), nums.end());\n     int counter = 0;\n-    int max_length = INT    \n-\n+    int max_length = 0;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036105385,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,5 +6,7 @@\n {\n     std::unordered_set<int> hash(nums.begin(), nums.end());\n     int counter = 0;\n     int max_length = 0;\n+\n+    while()\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036118488,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,6 +7,6 @@\n     std::unordered_set<int> hash(nums.begin(), nums.end());\n     int counter = 0;\n     int max_length = 0;\n \n-    while()\n+    while(hash.)\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036124787,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,9 @@\n {\n     std::unordered_set<int> hash(nums.begin(), nums.end());\n     int counter = 0;\n     int max_length = 0;\n+    \n+    \n \n-    while(hash.)\n+    while(hash.end())\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036129848,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,8 @@\n     std::unordered_set<int> hash(nums.begin(), nums.end());\n     int counter = 0;\n     int max_length = 0;\n     \n-    \n+    auto start \n \n     while(hash.end())\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036141405,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,8 @@\n     std::unordered_set<int> hash(nums.begin(), nums.end());\n     int counter = 0;\n     int max_length = 0;\n     \n-    auto start \n+    auto iter = hash.begin();\n \n     while(hash.end())\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036146797,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+#include <vector>\n+#include <unordered_set>\n+\n+// https://leetcode.com/problems/longest-consecutive-sequence\n+int longestConsecutive(std::vector<int>& nums) \n+{\n+    std::unordered_set<int> hash(nums.begin(), nums.end());\n+    int counter = 0;\n+    int max_length = 0;\n+    \n+    auto iter = hash.begin();\n+\n+    while(iter != )\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036154389,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,20 +9,9 @@\n     int max_length = 0;\n     \n     auto iter = hash.begin();\n \n-    while(iter != )\n-}\n-#include <vector>\n-#include <unordered_set>\n-\n-// https://leetcode.com/problems/longest-consecutive-sequence\n-int longestConsecutive(std::vector<int>& nums) \n-{\n-    std::unordered_set<int> hash(nums.begin(), nums.end());\n-    int counter = 0;\n-    int max_length = 0;\n-    \n-    auto iter = hash.begin();\n-\n-    while(hash.end())\n+    while(iter != hash.end())\n+    {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036168626,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,7 +11,7 @@\n     auto iter = hash.begin();\n \n     while(iter != hash.end())\n     {\n-        \n+        auto \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036184827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n     int counter = 0;\n     int max_length = 0;\n     \n     auto iter = hash.begin();\n+    \n \n     while(iter != hash.end())\n     {\n         auto \n"
+                },
+                {
+                    "date": 1718036238521,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,7 +12,7 @@\n     \n \n     while(iter != hash.end())\n     {\n-        auto \n+        auto\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036244371,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n     int counter = 0;\n     int max_length = 0;\n     \n     auto iter = hash.begin();\n-    \n+    for(auto )\n \n     while(iter != hash.end())\n     {\n         auto\n"
+                },
+                {
+                    "date": 1718036249962,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n     int counter = 0;\n     int max_length = 0;\n     \n     auto iter = hash.begin();\n-    for(auto )\n+    for(auto x : hash)\n \n     while(iter != hash.end())\n     {\n         auto\n"
+                },
+                {
+                    "date": 1718036333391,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,10 +9,11 @@\n     int max_length = 0;\n     \n     auto iter = hash.begin();\n     for(auto x : hash)\n+    {\n \n-    while(iter != hash.end())\n+    while()\n     {\n         auto\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036339801,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,19 @@\n+#include <vector>\n+#include <unordered_set>\n+\n+// https://leetcode.com/problems/longest-consecutive-sequence\n+int longestConsecutive(std::vector<int>& nums) \n+{\n+    std::unordered_set<int> hash(nums.begin(), nums.end());\n+    int counter = 0;\n+    int max_length = 0;\n+    \n+    auto iter = hash.begin();\n+    for(auto x : hash)\n+    {\n+\n+    while(hash)\n+    {\n+        auto\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036345708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,28 +11,9 @@\n     auto iter = hash.begin();\n     for(auto x : hash)\n     {\n \n-    while(hash)\n+    while(hash.find())\n     {\n         auto\n     }\n-}\n-#include <vector>\n-#include <unordered_set>\n-\n-// https://leetcode.com/problems/longest-consecutive-sequence\n-int longestConsecutive(std::vector<int>& nums) \n-{\n-    std::unordered_set<int> hash(nums.begin(), nums.end());\n-    int counter = 0;\n-    int max_length = 0;\n-    \n-    auto iter = hash.begin();\n-    for(auto x : hash)\n-    {\n-\n-    while()\n-    {\n-        auto\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036352552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,10 @@\n     \n     auto iter = hash.begin();\n     for(auto x : hash)\n     {\n-\n-    while(hash.find())\n+      \n+    while(hash.find(x - 1))\n     {\n         auto\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036358444,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n     \n     auto iter = hash.begin();\n     for(auto x : hash)\n     {\n-      \n+      int v = x;\n     while(hash.find(x - 1))\n     {\n         auto\n     }\n"
+                },
+                {
+                    "date": 1718036363676,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n     auto iter = hash.begin();\n     for(auto x : hash)\n     {\n       int v = x;\n-    while(hash.find(x - 1))\n+    while(hash.find())\n     {\n         auto\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036371537,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n     auto iter = hash.begin();\n     for(auto x : hash)\n     {\n       int v = x;\n-    while(hash.find())\n+    while(hash.find(--v))\n     {\n         auto\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036379362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n     auto iter = hash.begin();\n     for(auto x : hash)\n     {\n       int v = x;\n-    while(hash.find(--v))\n+    while(hash.find(v - 1))\n     {\n-        auto\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036384956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,10 @@\n     auto iter = hash.begin();\n     for(auto x : hash)\n     {\n       int v = x;\n+      c\n     while(hash.find(v - 1))\n     {\n-        \n+\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036391342,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,7 +14,7 @@\n       int v = x;\n       int c = 0;\n     while(hash.find(v - 1))\n     {\n-\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718036442772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,12 +12,12 @@\n     for(auto x : hash)\n     {\n       int v = x;\n       int c = 0;\n-    while(hash.find(v - 1) != hash.end())\n-    {\n-        v--;\n-        c++;\n+        while(hash.find(v - 1) != hash.end())\n+        {\n+            v--;\n+            c++;\n+        }\n+        max_length = std::max(max_length, c);\n     }\n-    max_length = std::max(max_length, c);\n-    }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1718035583015,
+            "name": "Commit-0",
+            "content": "// https://leetcode.com/problems/longest-consecutive-sequence\nint longestConsecutive(vector<int>& nums) { return 0; }"
+        }
+    ]
+}

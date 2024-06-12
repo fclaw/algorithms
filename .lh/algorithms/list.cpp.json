@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1717664006503,
@@ -32,6 +32,14 @@
                 {
                     "date": 1717664061294,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     {\n         auto ptr = this;\n         do\n         {\n-            cout << ptr->val << (ptr->next == nullptr ? \" \" : \" -> \");\n+            std::cout << ptr->val << (ptr->next == nullptr ? \" \" : \" -> \");\n             ptr = ptr->next;\n             \n         }while(ptr != nullptr);\n     }\n"
+                },
+                {
+                    "date": 1718003929121,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n #include <iostream>\n \n+\n struct ListNode \n {\n   int val;\n   ListNode *next;\n"
+                },
+                {
+                    "date": 1718003937360,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n+#pragma once\n #include <iostream>\n \n-\n struct ListNode \n {\n   int val;\n   ListNode *next;\n"
                 }
             ],
             "date": 1717664006503,

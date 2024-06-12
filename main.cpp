@@ -16,6 +16,13 @@
 #include "algorithms/3sum.cpp"
 #include "algorithms/coinChange.cpp"
 #include "algorithms/graph.cpp"
+#include "algorithms/minPathSum.cpp"
+#include "algorithms/dungeonGame.cpp"
+#include "algorithms/overlapIntervals.cpp"
+#include "algorithms/nthNode.cpp"
+#include "algorithms/swapPairs.cpp"
+#include "algorithms/threeSumClosest.cpp"
+#include "algorithms/burstBalloons.cpp"
 
 using namespace std;
 
@@ -1141,9 +1148,6 @@ int solveHouseRobber2(vector<int>& nums)
   return std::max(maxBootyNoLast, maxBootyNoFirst);
 }
 
-// https://leetcode.com/problems/burst-balloons
-int burstBalloons(vector<int>& nums) { return 0; }
-
 // https://leetcode.com/problems/rotate-array
 void rotateArray(vector<int>& xs, int k) 
 {
@@ -1240,9 +1244,6 @@ bool containsDuplicate(vector<int>& nums)
     return res;
 }
 
-// https://leetcode.com/problems/3sum-closest
-int threeSumClosest(vector<int>& nums, int target) { return 0; }
-
 // https://leetcode.com/problems/generate-parentheses
 vector<string> generateParenthesis(int n) 
 {
@@ -1273,11 +1274,6 @@ bool hasCycle(ListNode *head)
 
      return isCycle;
 }
-
-
-// https://leetcode.com/problems/longest-consecutive-sequence
-int longestConsecutive(vector<int>& nums) { return 0; }
-
 
 // Given a list of weights [w1,w2,...,wn], determine all sums that can be constructed using the weights
 // possible(x,k)=possible(x−wk,k−1) or possible(x,k−1)
@@ -1674,17 +1670,148 @@ int main()
 
     std::cout << std::endl;
     std::cout << std::endl;
+    std::cout << "--- Minimum Path Sum ---\n";
+
+    // vector<vector<int>> minPathSumGrid = { {1, 3, 1}, {1, 5, 1}, {4, 2, 1} };
+    vector<vector<int>> minPathSumGrid = { {1, 2, 3}, {4, 5, 6} };
+    // vector<vector<int>> minPathSumGrid = { {2}, {8}, {1} };
+    // vector<vector<int>> minPathSumGrid = { {1, 3, 4} };
+
+    std::cout << minPathSum(minPathSumGrid);
+
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "--- Non-overlapping Intervals ---\n";
+
+    // vector<vector<int>> eraseOverlapIntervalsXa = { {1, 2}, {2, 3}, {3, 4}, {1, 3} };
+    // vector<vector<int>> eraseOverlapIntervalsXa = { {1, 2}, {1, 2}, {1, 2} };
+    // vector<vector<int>> eraseOverlapIntervalsXa = { {1, 3}, {2, 4} };
+    vector<vector<int>> eraseOverlapIntervalsXa = { { 1, 100 }, { 11, 22}, { 1, 11 }, { 2, 12 } }; // should be 2
+    std::cout << leetcode::eraseOverlapIntervals(eraseOverlapIntervalsXa);
+
+    std::cout << std::endl;
+    std::cout << std::endl;
     std::cout << "--- Graph ---\n";
 
     auto graph = new Graph(5);
     graph->addEdge(1, 2)->addEdge(2, 3)->addEdge(2, 4)->addEdge(3, 4)->addEdge(4, 1);
 
     graph->display();
+    
+    auto dfs_graph = new Graph(6);
+    dfs_graph->addEdge(1, 2)->addEdge(2, 3)->addEdge(2, 5)->addEdge(3, 5)->addEdge(1, 4);
 
+    std::cout << " visiting each node via dfs: " << std::endl;
+    dfs(*dfs_graph, 1, [](int x) { std::cout << x << std::endl; } );
+
+    std::cout << " visiting each node via bfs: " << std::endl;
+    bfs(*dfs_graph, 1, [](int x, size_t dist) { std::cout << "node: " << x << ", distance: " << dist << std::endl; } );
+    
     std::cout << "--- Weighted Graph ---\n";
 
     auto weighted_graph = new WeightedGraph(5);
     weighted_graph->addEdge(1, 2, 5)->addEdge(2, 3, 7)->addEdge(2, 4, 6)->addEdge(3, 4, 5)->addEdge(4, 1, 2);
 
     weighted_graph->display();
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "--- Graph: Bellman–Ford Algorithm  ---\n";
+
+    auto weighted_graph_bf = new WeightedEdgedGraph(5);
+    weighted_graph_bf
+    ->addEdge(1, 2, 2)
+    ->addEdge(1, 3, 3)
+    ->addEdge(1, 4, 7)
+    ->addEdge(2, 5, 5)
+    ->addEdge(2, 4, 3)
+    ->addEdge(3, 4, -2)
+    ->addEdge(4, 5, 2);
+     
+    // weighted_graph_bf->display();
+   
+    std::vector<int> paths;
+    bool is_negative_cycle;
+    std::tie(paths, is_negative_cycle) = bellman_ford(*weighted_graph_bf, 1);
+
+    cout << "Vertex distances from source " << 1 << ":" << endl;
+    for (auto i : weighted_graph_bf->getVertexes()) {
+        cout << "Distance to vertex " << i << ": ";
+        if (paths[i] == numeric_limits<int>::max()) {
+            cout << "Infinity" << endl;
+        } else {
+            cout << paths[i] << endl;
+        }
+    }
+
+    if(is_negative_cycle)
+      std::cout << "Graph contains a negative weight cycle" << std::endl;
+    
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "--- Dijkstra’s Algorithm  ---\n";
+
+    auto weighted_graph_dijkstra = new WeightedGraph(5);
+    weighted_graph_dijkstra
+    ->addEdge(1, 2, 5)
+    ->addEdge(1, 4, 9)
+    ->addEdge(1, 5, 1)
+    ->addEdge(2, 3, 2)
+    ->addEdge(3, 4, 6)
+    ->addEdge(4, 5, 2);
+
+    // weighted_graph_dijkstra->display();
+
+    // Distance to node 1: 0
+    // Distance to node 2: 5
+    // Distance to node 3: 7
+    // Distance to node 4: 9
+    // Distance to node 5: 1
+    auto paths_dijkstra = dijkstra(*weighted_graph_dijkstra, 1);
+    for (auto n : weighted_graph_dijkstra->getNodes())
+       std::cout << "node: " << n << ", dist: " << paths_dijkstra[n] << std::endl;
+
+    // std::cout << std::endl;
+    // std::cout << std::endl;
+    // std::cout << "--- Floyd–Warshall Algorithm  ---\n";
+     
+    // auto floyd_warshall_paths = floyd_warshall(*weighted_graph_dijkstra);
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "--- Swap Nodes in Pairs  ---\n";
+
+    auto _ = swapPairs(new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4)))));
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "--- 3Sum Closest  ---\n";
+     
+    vector<int>  threeSumClosestXs = { -1, 2, 1, -4 }; // 2
+    // vector<int>  threeSumClosestXs = { 0, 0, 0 };
+    // vector<int>  threeSumClosestXs = { 4, 0, 5, -5, 3, 3, 0, -4, -5 }; // -2
+    std::cout << leetcode::array::threeSumClosest(threeSumClosestXs, 1);
+
+    // std::cout << std::endl;
+    // std::cout << std::endl;
+    // std::cout << "--- Topological sort (graph)  ---\n";
+
+    // std::vector<std::vector<int>> tsGraph = { {1, 2}, {1, 4}, {2, 3}, {2, 6}, {3, 6}, {4, 5}, {5, 2}};
+    // auto tsGraphPath = topologicalSortBfs(6, tsGraph);
+
+    // cout << "Topological Sort Order: ";
+    // for (int vertex : tsGraphPath) {
+    //     cout << vertex << " ";
+    // }
+    // cout << endl;
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "--- Burst Balloons  ---\n";
+     
+    // vector<int> balloonsXs = {1, 3, 5, 6, 4, 8, 2, 4, 76, 34, 22, 89, 8, 34, 23, 67, 12, 78, 4, 4, 78, 45, 23, 1111, 9999};
+    vector<int> balloonsXs = { 3, 1, 5, 8 }; // 25
+    std::cout << leetcode::dp::burstBalloonsDp(balloonsXs);
+
 }

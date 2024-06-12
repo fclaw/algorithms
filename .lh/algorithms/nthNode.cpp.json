@@ -1,0 +1,86 @@
+{
+    "sourceFile": "algorithms/nthNode.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 17,
+            "patches": [
+                {
+                    "date": 1717998249833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1717998261664,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,4 @@\n-// https://leetcode.com/problems/remove-nth-node-from-end-of-list/description\n\\ No newline at end of file\n+// https://leetcode.com/problems/remove-nth-node-from-end-of-list\n+\n+ListNode* removeNthFromEnd(ListNode* head, int n)\n+{}\n"
+                },
+                {
+                    "date": 1717998273983,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n // https://leetcode.com/problems/remove-nth-node-from-end-of-list\n \n+\n+\n ListNode* removeNthFromEnd(ListNode* head, int n)\n {}\n"
+                },
+                {
+                    "date": 1717998280590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n // https://leetcode.com/problems/remove-nth-node-from-end-of-list\n+#include <\n \n \n-\n ListNode* removeNthFromEnd(ListNode* head, int n)\n {}\n"
+                },
+                {
+                    "date": 1717998286456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,5 @@\n // https://leetcode.com/problems/remove-nth-node-from-end-of-list\n-#include <\n+#include <list.cpp>\n \n-\n ListNode* removeNthFromEnd(ListNode* head, int n)\n {}\n"
+                },
+                {
+                    "date": 1717998292393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-// https://leetcode.com/problems/remove-nth-node-from-end-of-list\n+\n #include <list.cpp>\n \n ListNode* removeNthFromEnd(ListNode* head, int n)\n {}\n"
+                },
+                {
+                    "date": 1717998316353,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n-\n #include <list.cpp>\n \n+// https://leetcode.com/problems/remove-nth-node-from-end-of-list\n+// Given the head of a linked list, remove the nth node from the end of the list and return its head.\n ListNode* removeNthFromEnd(ListNode* head, int n)\n {}\n"
+                },
+                {
+                    "date": 1718002999994,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,8 @@\n+#include <list.cpp>\n+\n+// https://leetcode.com/problems/remove-nth-node-from-end-of-list\n+// Given the head of a linked list, remove the nth node from the end of the list and return its head\n+ListNode* removeNthFromEnd(ListNode* head, int n)\n+{\n+    \n+}\n"
+                },
+                {
+                    "date": 1718003005319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,4 @@\n ListNode* removeNthFromEnd(ListNode* head, int n)\n {\n     \n }\n-#include <list.cpp>\n-\n-// https://leetcode.com/problems/remove-nth-node-from-end-of-list\n-// Given the head of a linked list, remove the nth node from the end of the list and return its head.\n-ListNode* removeNthFromEnd(ListNode* head, int n)\n-{}\n"
+                },
+                {
+                    "date": 1718003027515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,6 @@\n // https://leetcode.com/problems/remove-nth-node-from-end-of-list\n // Given the head of a linked list, remove the nth node from the end of the list and return its head\n ListNode* removeNthFromEnd(ListNode* head, int n)\n {\n-    \n+     auto ptr\n }\n"
+                },
+                {
+                    "date": 1718003033227,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,6 @@\n // https://leetcode.com/problems/remove-nth-node-from-end-of-list\n // Given the head of a linked list, remove the nth node from the end of the list and return its head\n ListNode* removeNthFromEnd(ListNode* head, int n)\n {\n-     auto ptr\n+     auto ptr = head;\n }\n"
+                },
+                {
+                    "date": 1718003040775,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,7 @@\n // https://leetcode.com/problems/remove-nth-node-from-end-of-list\n // Given the head of a linked list, remove the nth node from the end of the list and return its head\n ListNode* removeNthFromEnd(ListNode* head, int n)\n {\n-     auto ptr = head;\n+     ListNode* ptr = head;\n+\n }\n"
+                },
+                {
+                    "date": 1718003046029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,6 @@\n // Given the head of a linked list, remove the nth node from the end of the list and return its head\n ListNode* removeNthFromEnd(ListNode* head, int n)\n {\n      ListNode* ptr = head;\n-\n+     ListNode* \n }\n"
+                },
+                {
+                    "date": 1718003056977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,6 @@\n // Given the head of a linked list, remove the nth node from the end of the list and return its head\n ListNode* removeNthFromEnd(ListNode* head, int n)\n {\n      ListNode* ptr = head;\n-     ListNode* \n+     ListNode* removed\n }\n"
+                },
+                {
+                    "date": 1718003063913,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,8 @@\n // Given the head of a linked list, remove the nth node from the end of the list and return its head\n ListNode* removeNthFromEnd(ListNode* head, int n)\n {\n      ListNode* ptr = head;\n-     ListNode* removed\n+     ListNode* removed_ptr;\n+\n+     while()\n }\n"
+                },
+                {
+                    "date": 1718003070958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,8 @@\n ListNode* removeNthFromEnd(ListNode* head, int n)\n {\n      ListNode* ptr = head;\n      ListNode* removed_ptr;\n+     int i = \n \n      while()\n }\n"
+                },
+                {
+                    "date": 1718003083900,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,6 +7,6 @@\n      ListNode* ptr = head;\n      ListNode* removed_ptr;\n      int i = n;\n \n-     while()\n+     while(i-)\n }\n"
+                },
+                {
+                    "date": 1718003133158,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+#include <list.cpp>\n+\n+// https://leetcode.com/problems/remove-nth-node-from-end-of-list\n+// Given the head of a linked list, remove the nth node from the end of the list and return its head\n+ListNode* removeNthFromEnd(ListNode* head, int n)\n+{\n+     ListNode* ptr = head;\n+     ListNode* removed_ptr;\n+     int i = n;\n+\n+     while(i-- > 0)\n+       ptr = ptr->next;\n+       \n+}\n"
+                }
+            ],
+            "date": 1717998249833,
+            "name": "Commit-0",
+            "content": "// https://leetcode.com/problems/remove-nth-node-from-end-of-list/description"
+        }
+    ]
+}

@@ -50,6 +50,14 @@
         "__tree": "cpp",
         "set": "cpp",
         "stack": "cpp",
-        "deque": "cpp"
-    }
+        "deque": "cpp",
+        "queue": "cpp",
+        "list": "cpp",
+        "unordered_set": "cpp",
+        "iomanip": "cpp"
+    },
+    "cSpell.words": [
+        "leetcode",
+        "warshall"
+    ]
 }

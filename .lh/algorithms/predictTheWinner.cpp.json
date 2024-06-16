@@ -1,0 +1,54 @@
+{
+    "sourceFile": "algorithms/predictTheWinner.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1718281890403,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718281895508,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n-\n-\n #include <vector>\n #include <iostream>\n \n-namespace leetcode::dp\n\\ No newline at end of file\n+namespace leetcode::dp\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718281901657,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,8 @@\n #include <iostream>\n \n namespace leetcode::dp\n {\n+    /*\n     \n+    */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718281911591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,8 @@\n \n namespace leetcode::dp\n {\n     /*\n-    \n+    https://leetcode.com/problems/predict-the-winner\n     */\n+   bool predictTheWinner(vector<int>& nums) {\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718281918744,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,6 +5,6 @@\n {\n     /*\n     https://leetcode.com/problems/predict-the-winner\n     */\n-   bool predictTheWinner(vector<int>& nums) {\n+    bool predictTheWinner(vector<int>& nums) { return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718281925028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,6 +5,6 @@\n {\n     /*\n     https://leetcode.com/problems/predict-the-winner\n     */\n-    bool predictTheWinner(vector<int>& nums) { return false; }\n+    bool predictTheWinner(std::vector<int>& nums) { return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718281934505,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,7 +4,12 @@\n namespace leetcode::dp\n {\n     /*\n     https://leetcode.com/problems/predict-the-winner\n+    You are given an integer array nums. Two players are playing a game with this array: player 1 and player 2.\n+\n+Player 1 and player 2 take turns, with player 1 starting first. Both players start the game with a score of 0. At each turn, the player takes one of the numbers from either end of the array (i.e., nums[0] or nums[nums.length - 1]) which reduces the size of the array by 1. The player adds the chosen number to their score. The game ends when there are no more elements in the array.\n+\n+Return true if Player 1 can win the game. If the scores of both players are equal, then player 1 is still the winner, and you should also return true. You may assume that both players are playing optimally.\n     */\n     bool predictTheWinner(std::vector<int>& nums) { return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718281939909,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+#include <vector>\n+#include <iostream>\n+\n+namespace leetcode::dp\n+{\n+    /*\n+    https://leetcode.com/problems/predict-the-winner\n+    You are given an integer array nums. Two players are playing a game with this array: player 1 and player 2.\n+    Player 1 and player 2 take turns, with player 1 starting first. Both players start the game with a score of 0. At each turn, the player takes one of the numbers from either end of the array (i.e., nums[0] or nums[nums.length - 1]) which reduces the size of the array by 1. The player adds the chosen number to their score. The game ends when there are no more elements in the array.\n+Return true if Player 1 can win the game. If the scores of both players are equal, then player 1 is still the winner, and you should also return true. You may assume that both players are playing optimally.\n+    */\n+    bool predictTheWinner(std::vector<int>& nums) { return false; }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718281946682,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,10 @@\n {\n     /*\n     https://leetcode.com/problems/predict-the-winner\n     You are given an integer array nums. Two players are playing a game with this array: player 1 and player 2.\n-    Player 1 and player 2 take turns, with player 1 starting first. Both players start the game with a score of 0. At each turn, the player takes one of the numbers from either end of the array (i.e., nums[0] or nums[nums.length - 1]) which reduces the size of the array by 1. The player adds the chosen number to their score. The game ends when there are no more elements in the array.\n+    Player 1 and player 2 take turns, with player 1 starting first. Both players start the game with a score of 0. \n+    At each turn, the player takes one of the numbers from either end of the array (i.e., nums[0] or nums[nums.length - 1]) which reduces the size of the array by 1. The player adds the chosen number to their score. The game ends when there are no more elements in the array.\n     Return true if Player 1 can win the game. If the scores of both players are equal, then player 1 is still the winner, and you should also return true. You may assume that both players are playing optimally.\n     */\n     bool predictTheWinner(std::vector<int>& nums) { return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718281959132,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n     https://leetcode.com/problems/predict-the-winner\n     You are given an integer array nums. Two players are playing a game with this array: player 1 and player 2.\n     Player 1 and player 2 take turns, with player 1 starting first. Both players start the game with a score of 0. \n     At each turn, the player takes one of the numbers from either end of the array (i.e., nums[0] or nums[nums.length - 1])\n-     which reduces the size of the array by 1. The player adds the chosen number to their score. \n-     The game ends when there are no more elements in the array.\n-     Return true if Player 1 can win the game. If the scores of both players are equal, then player 1 is still the winner, and you should also return true. You may assume that both players are playing optimally.\n+    which reduces the size of the array by 1. The player adds the chosen number to their score. \n+    The game ends when there are no more elements in the array.\n+    Return true if Player 1 can win the game. If the scores of both players are equal, then player 1 is still the winner, and you should also return true. You may assume that both players are playing optimally.\n     */\n     bool predictTheWinner(std::vector<int>& nums) { return false; }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1718281890403,
+            "name": "Commit-0",
+            "content": "\n\n#include <vector>\n#include <iostream>\n\nnamespace leetcode::dp"
+        }
+    ]
+}

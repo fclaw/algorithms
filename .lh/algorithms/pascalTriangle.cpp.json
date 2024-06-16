@@ -1,0 +1,42 @@
+{
+    "sourceFile": "algorithms/pascalTriangle.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1718387574892,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718387581192,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace leetcode::dp\n {\n-    \n+    vector<vector<int>> generate(int numRows) {\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718387589195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n \n \n namespace leetcode::dp\n {\n-    vector<vector<int>> generate(int numRows) {\n+    std::vector<std::vector<int>> generate(int numRows) \n+    {}\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718387599541,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+#include <vector>\n \n \n namespace leetcode::dp\n {\n"
+                },
+                {
+                    "date": 1718387608561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,8 @@\n \n \n namespace leetcode::dp\n {\n+    // https://leetcode.com/problems/pascals-triangle/\n     std::vector<std::vector<int>> generate(int numRows) \n     {}\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718387616439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,10 @@\n \n namespace leetcode::dp\n {\n     // https://leetcode.com/problems/pascals-triangle\n+    // Given an integer numRows, return the first numRows of Pascal's triangle.\n+\n+In Pascal's triangle, each number is the sum of the two numbers directly above it as shown:\n     std::vector<std::vector<int>> generate(int numRows) \n     {}\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718387644754,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+#include <vector>\n+\n+\n+namespace leetcode::dp\n+{\n+    // https://leetcode.com/problems/pascals-triangle\n+    // Given an integer numRows, return the first numRows of Pascal's triangle.\n+    // In Pascal's triangle, each number is the sum of the two numbers directly above it as shown:\n+    std::vector<std::vector<int>> generate(int numRows) \n+    {\n+        std::\n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1718387574892,
+            "name": "Commit-0",
+            "content": "\n\nnamespace leetcode::dp\n{\n    \n}"
+        }
+    ]
+}

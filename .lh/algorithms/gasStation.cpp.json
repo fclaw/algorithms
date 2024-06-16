@@ -1,0 +1,34 @@
+{
+    "sourceFile": "algorithms/gasStation.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1718530631099,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718530644016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,7 @@\n+\n+namespace leetcode::array\n+{\n // https://leetcode.com/problems/gas-station\n /*\n To solve this problem, you can use a greedy approach with the following steps:\n \n"
+                },
+                {
+                    "date": 1718530654365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,32 +1,33 @@\n \n namespace leetcode::array\n {\n-// https://leetcode.com/problems/gas-station\n-/*\n-To solve this problem, you can use a greedy approach with the following steps:\n+    // https://leetcode.com/problems/gas-station\n+    /*\n+    To solve this problem, you can use a greedy approach with the following steps:\n \n-Check if the total gas available is greater than or equal to the total cost. If not, return -1.\n-Use a greedy method to find the starting station:\n-  - Traverse the gas stations and keep track of the current surplus of gas.\n-  - If the surplus drops below zero, reset the surplus and set the next station as the new starting point.\n-*/\n-int canCompleteCircuit(vector<int>& gas, vector<int>& cost) \n-{\n-     int diff = 0;\n-     int tank = 0;\n-     int petrol_station = 0;\n+    Check if the total gas available is greater than or equal to the total cost. If not, return -1.\n+    Use a greedy method to find the starting station:\n+    - Traverse the gas stations and keep track of the current surplus of gas.\n+    - If the surplus drops below zero, reset the surplus and set the next station as the new starting point.\n+    */\n+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) \n+    {\n+        int diff = 0;\n+        int tank = 0;\n+        int petrol_station = 0;\n \n-     for (size_t i = 0; i < gas.size(); i++)\n-     {\n-         tank += gas[i];\n-         if(tank - cost[i] < 0)\n-         {\n-             diff += tank - cost[i];\n-             tank = 0;\n-             petrol_station = i + 1; \n-         }\n-         else tank -= cost[i];\n-     }\n+        for (size_t i = 0; i < gas.size(); i++)\n+        {\n+            tank += gas[i];\n+            if(tank - cost[i] < 0)\n+            {\n+                diff += tank - cost[i];\n+                tank = 0;\n+                petrol_station = i + 1; \n+            }\n+            else tank -= cost[i];\n+        }\n \n-     return tank - (-1) * diff >= 0 ? petrol_station : -1;\n+        return tank - (-1) * diff >= 0 ? petrol_station : -1;\n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718530663508,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+#include <vector>\n+#include <algorithm>\n \n namespace leetcode::array\n {\n     // https://leetcode.com/problems/gas-station\n"
+                },
+                {
+                    "date": 1718530672115,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n     Use a greedy method to find the starting station:\n     - Traverse the gas stations and keep track of the current surplus of gas.\n     - If the surplus drops below zero, reset the surplus and set the next station as the new starting point.\n     */\n-    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) \n+    int canCompleteCircuit(std::vector<int>& gas, std::vector<int>& cost) \n     {\n         int diff = 0;\n         int tank = 0;\n         int petrol_station = 0;\n"
+                }
+            ],
+            "date": 1718530631099,
+            "name": "Commit-0",
+            "content": "// https://leetcode.com/problems/gas-station\n/*\nTo solve this problem, you can use a greedy approach with the following steps:\n\nCheck if the total gas available is greater than or equal to the total cost. If not, return -1.\nUse a greedy method to find the starting station:\n  - Traverse the gas stations and keep track of the current surplus of gas.\n  - If the surplus drops below zero, reset the surplus and set the next station as the new starting point.\n*/\nint canCompleteCircuit(vector<int>& gas, vector<int>& cost) \n{\n     int diff = 0;\n     int tank = 0;\n     int petrol_station = 0;\n\n     for (size_t i = 0; i < gas.size(); i++)\n     {\n         tank += gas[i];\n         if(tank - cost[i] < 0)\n         {\n             diff += tank - cost[i];\n             tank = 0;\n             petrol_station = i + 1; \n         }\n         else tank -= cost[i];\n     }\n\n     return tank - (-1) * diff >= 0 ? petrol_station : -1;\n}"
+        }
+    ]
+}

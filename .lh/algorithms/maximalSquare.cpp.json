@@ -1,0 +1,46 @@
+{
+    "sourceFile": "algorithms/maximalSquare.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1718275501188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718275513109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,6 @@\n-maximalSquare\n\\ No newline at end of file\n+\n+\n+namespace leetcode::dp\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718275521512,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace leetcode::dp\n {\n-    \n+    int maximalSquare(vector<vector<char>>& matrix) {\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718275532978,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n+#include <vector>\n \n \n namespace leetcode::dp\n {\n-    int maximalSquare(vector<vector<char>>& matrix) {\n+    int maximalSquare(vector<vector<char>>& matrix) {}\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718275538964,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n #include <vector>\n \n-\n namespace leetcode::dp\n {\n-    int maximalSquare(vector<vector<char>>& matrix) {}\n+    int maximalSquare(std::vector<vector<char>>& matrix) {}\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718275547017,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n \n namespace leetcode::dp\n {\n-    int maximalSquare(std::vector<vector<char>>& matrix) {}\n+    int maximalSquare(std::vector<std::vector<char>>& matrix) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718275556818,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n #include <vector>\n \n namespace leetcode::dp\n {\n+    // https://leetcode.com/problems/maximal-square\n     int maximalSquare(std::vector<std::vector<char>>& matrix) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718275565590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,7 @@\n \n namespace leetcode::dp\n {\n     // https://leetcode.com/problems/maximal-square\n+    Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n     int maximalSquare(std::vector<std::vector<char>>& matrix) { return 0; }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1718275501188,
+            "name": "Commit-0",
+            "content": "maximalSquare"
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+{
+    "sourceFile": "algorithms/maxSlidingWindow.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1718556432057,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718556440587,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,5 @@\n \n \n+namespace leetcode::\n+\n vector<int> maxSlidingWindow(vector<int>& nums, int k) \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718556446452,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n \n \n-namespace leetcode::\n+namespace leetcode::array\n+{\n \n vector<int> maxSlidingWindow(vector<int>& nums, int k) \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718556459672,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n+#include <vector>\n \n-\n namespace leetcode::array\n {\n \n\\ No newline at end of file\n-vector<int> maxSlidingWindow(vector<int>& nums, int k) \n+vector<int> maxSlidingWindow(vector<int>& nums, int k) {}\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718556465861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n #include <vector>\n \n namespace leetcode::array\n {\n-\n-vector<int> maxSlidingWindow(vector<int>& nums, int k) {}\n+    std::vector<int> maxSlidingWindow(vector<int>& nums, int k) {}\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718556473772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,9 @@\n #include <vector>\n \n namespace leetcode::array\n {\n-    std::vector<int> maxSlidingWindow(vector<int>& nums, int k) {}\n+    std::vector<int> maxSlidingWindow(std::vector<int>& nums, int k) \n+    {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718556484200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,10 @@\n #include <vector>\n \n namespace leetcode::array\n {\n+    // https://leetcode.com/problems/sliding-window-maximum\n     std::vector<int> maxSlidingWindow(std::vector<int>& nums, int k) \n     {\n-        \n+\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718556494200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,15 @@\n+#include <vector>\n+\n+namespace leetcode::array\n+{\n+    // https://leetcode.com/problems/sliding-window-maximum\n+    /*\n+      You are given an array of integers nums, there is a sliding window of size k which is moving from the very left of the array to the very right. You can only see the k numbers in the window. Each time the sliding window moves right by one position.\n+\n+Return the max sliding window.\n+    */\n+    std::vector<int> maxSlidingWindow(std::vector<int>& nums, int k) \n+    {\n+\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718556501866,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,10 @@\n namespace leetcode::array\n {\n     // https://leetcode.com/problems/sliding-window-maximum\n     /*\n-      You are given an array of integers nums, there is a sliding window of size k which is moving from the very left of the array to the very right. You can only see the k numbers in the window. Each time the sliding window moves right by one position.\n+      You are given an array of integers nums, there is a sliding window of size k which \n+      is moving from the very left of the array to the very right. You can only see the k numbers in the window. Each time the sliding window moves right by one position.\n \n Return the max sliding window.\n     */\n     std::vector<int> maxSlidingWindow(std::vector<int>& nums, int k) \n"
+                },
+                {
+                    "date": 1718556507549,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,8 @@\n     /*\n       You are given an array of integers nums, there is a sliding window of size k which \n       is moving from the very left of the array to the very right. \n       You can only see the k numbers in the window. Each time the sliding window moves right by one position.\n-\n Return the max sliding window.\n     */\n     std::vector<int> maxSlidingWindow(std::vector<int>& nums, int k) \n     {\n"
+                }
+            ],
+            "date": 1718556432057,
+            "name": "Commit-0",
+            "content": "\n\nvector<int> maxSlidingWindow(vector<int>& nums, int k) "
+        }
+    ]
+}

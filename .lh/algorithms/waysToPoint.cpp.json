@@ -1,0 +1,70 @@
+{
+    "sourceFile": "algorithms/waysToPoint.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 13,
+            "patches": [
+                {
+                    "date": 1718799553160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718799561967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n #include <vector>\n \n namespace algorithms::dp\n {\n-    int countWaysToReachPoint(int n, std::vector>int>  )\n+    int countWaysToReachPoint(int n, std::vectorint> xs)\n     {\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718799739070,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n #include <vector>\n \n namespace algorithms::dp\n {\n-    int countWaysToReachPoint(int n, std::vectorint> xs)\n+    int countWaysToReachPoint(int n, std::vector<int> xs)\n     {\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718799749830,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n namespace algorithms::dp\n {\n     int countWaysToReachPoint(int n, std::vector<int> xs)\n     {\n-        \n+        std::vector<int> dp\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718799757393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n namespace algorithms::dp\n {\n     int countWaysToReachPoint(int n, std::vector<int> xs)\n     {\n-        std::vector<int> dp\n+        std::vector<int> dp(n + 1, 0);\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718799771000,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,9 @@\n {\n     int countWaysToReachPoint(int n, std::vector<int> xs)\n     {\n         std::vector<int> dp(n + 1, 0);\n+        dp[0] = 1;\n+\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718799781016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,7 @@\n     {\n         std::vector<int> dp(n + 1, 0);\n         dp[0] = 1;\n \n-        \n+        for\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718799789255,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,11 @@\n     {\n         std::vector<int> dp(n + 1, 0);\n         dp[0] = 1;\n \n-        for\n+        for (size_t i = 1; i <= n; i++)\n+        {\n+            /* code */\n+        }\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718799803378,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n         dp[0] = 1;\n \n         for (size_t i = 1; i <= n; i++)\n         {\n-            /* code */\n+            if()\n         }\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718800012199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n         dp[0] = 1;\n \n         for (size_t i = 1; i <= n; i++)\n         {\n-            if()\n+            if(i )\n         }\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718800026052,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n         dp[0] = 1;\n \n         for (size_t i = 1; i <= n; i++)\n         {\n-            if(i )\n+            \n         }\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718800032124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,12 @@\n         dp[0] = 1;\n \n         for (size_t i = 1; i <= n; i++)\n         {\n+            for (size_t j = 0; i < count; i++)\n+            {\n+                /* code */\n+            }\n             \n         }\n         \n     }\n"
+                },
+                {
+                    "date": 1718800040382,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n         dp[0] = 1;\n \n         for (size_t i = 1; i <= n; i++)\n         {\n-            for (size_t j = 0; j < xs.size(); i++)\n+            for (size_t j = 0; j < xs.size(); ++)\n             {\n                 /* code */\n             }\n             \n"
+                },
+                {
+                    "date": 1718800070620,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n         for (size_t i = 1; i <= n; i++)\n         {\n             for (size_t j = 0; j < xs.size(); j++)\n               if(i - xs[j] > 0)\n-                \n+                dp[i]\n             \n         }\n         \n     }\n"
+                }
+            ],
+            "date": 1718799553160,
+            "name": "Commit-0",
+            "content": "#include <vector>\n\nnamespace algorithms::dp\n{\n    int countWaysToReachPoint(int n, std::vector>int>  )\n    {\n    }\n}"
+        }
+    ]
+}

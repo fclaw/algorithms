@@ -1,0 +1,30 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/lengthOfLongestSubsequence.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1718890458406,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718890471826,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n namespace algorithms::leetcode::dp\n {\n-       \n+    // https://leetcode.com/problems/length-of-the-longest-subsequence-that-sums-to-target/   \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718890480993,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n namespace algorithms::leetcode::dp\n {\n     // https://leetcode.com/problems/length-of-the-longest-subsequence-that-sums-to-target\n-       \n+    int lengthOfLongestSubsequence(vector<int>& nums, int target)    \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718890488539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n namespace algorithms::leetcode::dp\n {\n     // https://leetcode.com/problems/length-of-the-longest-subsequence-that-sums-to-target\n-    int lengthOfLongestSubsequence(vector<int>& nums, int target) \n+    int lengthOfLongestSubsequence(std::vector<int>& nums, int target) \n     {}   \n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1718890458406,
+            "name": "Commit-0",
+            "content": "namespace algorithms::leetcode::dp\n{\n       \n}"
+        }
+    ]
+}

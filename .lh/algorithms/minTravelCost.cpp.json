@@ -1,0 +1,70 @@
+{
+    "sourceFile": "algorithms/minTravelCost.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 13,
+            "patches": [
+                {
+                    "date": 1718617891946,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718617911900,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-namespace \n\\ No newline at end of file\n+name\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718617918196,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +0,0 @@\n-name\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718617928763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,4 @@\n+namespace algorithm::dp\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718617949935,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n namespace algorithm::dp\n {\n-    \n+    int minCost\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718617956258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n namespace algorithm::dp\n {\n-    int minCost\n+    int minTravelCost\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718617963097,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+\n+\n namespace algorithm::dp\n {\n-    int minTravelCost\n+    int minTravelCost()\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718617968736,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+#include <vector>\n \n-\n namespace algorithm::dp\n {\n     int minTravelCost()\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718617987217,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n \n namespace algorithm::dp\n {\n-    int minTravelCost()\n+    int minTravelCost(std::vector<int> stations,  )\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718617998351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n \n namespace algorithm::dp\n {\n-    int minTravelCost(std::vector<int> stations,  )\n+    int minTravelCost(std::vector<int> stations, std::vector<int>  )\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718618006064,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n \n namespace algorithm::dp\n {\n-    int minTravelCost(std::vector<int> stations, std::vector<int>  )\n+    int minTravelCost(std::vector<int> stations, std::vector<int> fares)\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718618021932,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,8 @@\n \n namespace algorithm::dp\n {\n     int minTravelCost(std::vector<int> stations, std::vector<int> fares)\n+    {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718618033911,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n #include <vector>\n \n namespace algorithm::dp\n {\n+    There are Nstations ni a route, starting from 0 ot N-1. A train moves from first station 0() to last station (N-1) ni only forward direction. The cost of ticket between any two stations si given, Find the minimum cost of travel from station 0 to station .1N-\n     int minTravelCost(std::vector<int> stations, std::vector<int> fares)\n     {\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718618039930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,9 @@\n+#include <vector>\n+\n+namespace algorithm::dp\n+{\n+    // There are Nstations ni a route, starting from 0 ot N-1. A train moves from first station 0() to last station (N-1) ni only forward direction. The cost of ticket between any two stations si given, Find the minimum cost of travel from station 0 to station .1N-\n+    int minTravelCost(std::vector<int> stations, std::vector<int> fares)\n+    {\n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1718617891946,
+            "name": "Commit-0",
+            "content": "namespace "
+        }
+    ]
+}

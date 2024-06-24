@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 7,
+            "activePatchIndex": 59,
             "patches": [
                 {
                     "date": 1718275501188,
@@ -36,6 +36,214 @@
                 {
                     "date": 1718275565590,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,7 @@\n \n namespace leetcode::dp\n {\n     // https://leetcode.com/problems/maximal-square\n+    Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n     int maximalSquare(std::vector<std::vector<char>>& matrix) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718792865948,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,8 @@\n+#include <vector>\n+\n+namespace leetcode::dp\n+{\n+    // https://leetcode.com/problems/maximal-square\n+    // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n+    int maximalSquare(std::vector<std::vector<char>>& matrix) { return 0; }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718793053273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,13 +4,5 @@\n {\n     // https://leetcode.com/problems/maximal-square\n     // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n     int maximalSquare(std::vector<std::vector<char>>& matrix) { return 0; }\n-}\n-#include <vector>\n-\n-namespace leetcode::dp\n-{\n-    // https://leetcode.com/problems/maximal-square\n-    Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n-    int maximalSquare(std::vector<std::vector<char>>& matrix) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794028812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,7 @@\n namespace leetcode::dp\n {\n     // https://leetcode.com/problems/maximal-square\n     // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n-    int maximalSquare(std::vector<std::vector<char>>& matrix) { return 0; }\n+    int maximalSquare(std::vector<std::vector<char>>& matrix) \n+    { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794035704,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,8 @@\n {\n     // https://leetcode.com/problems/maximal-square\n     // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n     int maximalSquare(std::vector<std::vector<char>>& matrix) \n-    { return 0; }\n+    {\n+        std::\n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794045925,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,7 @@\n     // https://leetcode.com/problems/maximal-square\n     // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n     int maximalSquare(std::vector<std::vector<char>>& matrix) \n     {\n-        std::\n+        std::vector<std::vector<int>>\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794053568,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,8 @@\n     // https://leetcode.com/problems/maximal-square\n     // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n     int maximalSquare(std::vector<std::vector<char>>& matrix) \n     {\n-        std::vector<std::vector<int>>\n+        int m = \n+        std::vector<std::vector<int>> dp()\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794059166,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,8 @@\n     // https://leetcode.com/problems/maximal-square\n     // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n     int maximalSquare(std::vector<std::vector<char>>& matrix) \n     {\n-        int m = \n+        int m = matrix\n         std::vector<std::vector<int>> dp()\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794068939,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,8 @@\n     // https://leetcode.com/problems/maximal-square\n     // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n     int maximalSquare(std::vector<std::vector<char>>& matrix) \n     {\n-        int m = matrix\n+        int m = matrix.size();\n         std::vector<std::vector<int>> dp()\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794078913,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,8 @@\n     // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n     int maximalSquare(std::vector<std::vector<char>>& matrix) \n     {\n         int m = matrix.size();\n+        int n = matrix[0].\n         std::vector<std::vector<int>> dp()\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794093531,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,8 @@\n     // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n     int maximalSquare(std::vector<std::vector<char>>& matrix) \n     {\n         int m = matrix.size();\n-        int n = matrix[0].\n-        std::vector<std::vector<int>> dp()\n+        int n = matrix[0].size();\n+        std::vector<std::vector<int>> dp(m, std::vector<int>())\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794099957,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,7 @@\n     int maximalSquare(std::vector<std::vector<char>>& matrix) \n     {\n         int m = matrix.size();\n         int n = matrix[0].size();\n-        std::vector<std::vector<int>> dp(m, std::vector<int>())\n+        std::vector<std::vector<int>> dp(m, std::vector<int>(n, ))\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794107598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,9 @@\n     int maximalSquare(std::vector<std::vector<char>>& matrix) \n     {\n         int m = matrix.size();\n         int n = matrix[0].size();\n-        std::vector<std::vector<int>> dp(m, std::vector<int>(n, ))\n+        std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n+\n+        return dp]\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794123952,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,7 +9,7 @@\n         int m = matrix.size();\n         int n = matrix[0].size();\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n-        return dp]\n+        return dp[m - 1][n - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794163570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,18 @@\n #include <vector>\n \n+using DP = std::vector<std::vector<int>>;\n+\n+void printDPTable(DP dp)\n+{\n+    for ( const auto &row : dp )\n+    {\n+        for ( const auto &s : row ) \n+          std::cout << std::setw(5) << s << ' ';\n+        std::cout << std::endl;\n+    }\n+}\n+\n namespace leetcode::dp\n {\n     // https://leetcode.com/problems/maximal-square\n     // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n"
+                },
+                {
+                    "date": 1718794176631,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n #include <vector>\n+#include <vector>\n \n using DP = std::vector<std::vector<int>>;\n \n void printDPTable(DP dp)\n"
+                },
+                {
+                    "date": 1718794181773,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n-#include <vector>\n+#include <iostream>\n \n using DP = std::vector<std::vector<int>>;\n \n void printDPTable(DP dp)\n"
+                },
+                {
+                    "date": 1718794194332,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n #include <vector>\n #include <iostream>\n+#include <iomanip> \n \n using DP = std::vector<std::vector<int>>;\n \n void printDPTable(DP dp)\n"
+                },
+                {
+                    "date": 1718794202599,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n #include <vector>\n #include <iostream>\n-#include <iomanip> \n+#include <iomanip>\n \n using DP = std::vector<std::vector<int>>;\n \n void printDPTable(DP dp)\n@@ -23,7 +23,9 @@\n         int m = matrix.size();\n         int n = matrix[0].size();\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n+     \n+ \n         return dp[m - 1][n - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794208057,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n         int m = matrix.size();\n         int n = matrix[0].size();\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n-     \n+        printDPTable(dp);\n  \n         return dp[m - 1][n - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794490277,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n #include <iomanip>\n \n using DP = std::vector<std::vector<int>>;\n \n-void printDPTable(DP dp)\n+void printmaximalSquare(DP dp)\n {\n     for ( const auto &row : dp )\n     {\n         for ( const auto &s : row ) \n"
+                },
+                {
+                    "date": 1718794495372,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n #include <iomanip>\n \n using DP = std::vector<std::vector<int>>;\n \n-void printmaximalSquare(DP dp)\n+void printMaximalSquareDp(DP dp)\n {\n     for ( const auto &row : dp )\n     {\n         for ( const auto &s : row ) \n"
+                },
+                {
+                    "date": 1718794534935,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,12 @@\n         int m = matrix.size();\n         int n = matrix[0].size();\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n-        printDPTable(dp);\n+        \n+        \n+\n+        printMaximalSquareDp(dp);\n  \n         return dp[m - 1][n - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794554419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,10 +23,9 @@\n         int m = matrix.size();\n         int n = matrix[0].size();\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n-        \n-        \n+        for\n \n         printMaximalSquareDp(dp);\n  \n         return dp[m - 1][n - 1];\n"
+                },
+                {
+                    "date": 1718794560955,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,13 @@\n         int m = matrix.size();\n         int n = matrix[0].size();\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n-        for\n+        for (size_t  = 0; i < count; i++)\n+        {\n+            /* code */\n+        }\n+        \n \n         printMaximalSquareDp(dp);\n  \n         return dp[m - 1][n - 1];\n"
+                },
+                {
+                    "date": 1718794566590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n         int m = matrix.size();\n         int n = matrix[0].size();\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n-        for (size_t  = 0; i < count; i++)\n+        for (size_t i = 0; i < ; i++)\n         {\n             /* code */\n         }\n         \n"
+                },
+                {
+                    "date": 1718794574273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,37 @@\n+#include <vector>\n+#include <iostream>\n+#include <iomanip>\n+\n+using DP = std::vector<std::vector<int>>;\n+\n+void printMaximalSquareDp(DP dp)\n+{\n+    for ( const auto &row : dp )\n+    {\n+        for ( const auto &s : row ) \n+          std::cout << std::setw(5) << s << ' ';\n+        std::cout << std::endl;\n+    }\n+}\n+\n+namespace leetcode::dp\n+{\n+    // https://leetcode.com/problems/maximal-square\n+    // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n+    int maximalSquare(std::vector<std::vector<char>>& matrix) \n+    {\n+        int m = matrix.size();\n+        int n = matrix[0].size();\n+        std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n+\n+        for (size_t i = 0; i < n; i++)\n+        {\n+            /* code */\n+        }\n+        \n+\n+        printMaximalSquareDp(dp);\n+ \n+        return dp[m - 1][n - 1];\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794581185,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,51 +24,12 @@\n         int n = matrix[0].size();\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n         for (size_t i = 0; i < n; i++)\n-        {\n-            /* code */\n-        }\n+          \n         \n \n         printMaximalSquareDp(dp);\n  \n         return dp[m - 1][n - 1];\n     }\n-}\n-#include <vector>\n-#include <iostream>\n-#include <iomanip>\n-\n-using DP = std::vector<std::vector<int>>;\n-\n-void printMaximalSquareDp(DP dp)\n-{\n-    for ( const auto &row : dp )\n-    {\n-        for ( const auto &s : row ) \n-          std::cout << std::setw(5) << s << ' ';\n-        std::cout << std::endl;\n-    }\n-}\n-\n-namespace leetcode::dp\n-{\n-    // https://leetcode.com/problems/maximal-square\n-    // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n-    int maximalSquare(std::vector<std::vector<char>>& matrix) \n-    {\n-        int m = matrix.size();\n-        int n = matrix[0].size();\n-        std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n-\n-        for (size_t i = 0; i < ; i++)\n-        {\n-            /* code */\n-        }\n-        \n-\n-        printMaximalSquareDp(dp);\n- \n-        return dp[m - 1][n - 1];\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794587410,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,11 @@\n         int n = matrix[0].size();\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n         for (size_t i = 0; i < n; i++)\n-          \n+        {\n+             \n+        }\n         \n \n         printMaximalSquareDp(dp);\n  \n"
+                },
+                {
+                    "date": 1718794593170,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n         for (size_t i = 0; i < n; i++)\n         {\n-             \n+             if\n         }\n         \n \n         printMaximalSquareDp(dp);\n"
+                },
+                {
+                    "date": 1718794609955,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n         for (size_t i = 0; i < n; i++)\n         {\n-             if\n+             if()\n         }\n         \n \n         printMaximalSquareDp(dp);\n"
+                },
+                {
+                    "date": 1718794616740,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n namespace leetcode::dp\n {\n     // https://leetcode.com/problems/maximal-square\n     // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n-    int maximalSquare(std::vector<std::vector<char>>& matrix) \n+    int maximalSquare(std::vector<std::vector<char>>& rect) \n     {\n         int m = matrix.size();\n         int n = matrix[0].size();\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n"
+                },
+                {
+                    "date": 1718794628912,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,15 +19,15 @@\n     // https://leetcode.com/problems/maximal-square\n     // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n     int maximalSquare(std::vector<std::vector<char>>& rect) \n     {\n-        int m = matrix.size();\n-        int n = matrix[0].size();\n+        int m = rect.size();\n+        int n = rect[0].size();\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n         for (size_t i = 0; i < n; i++)\n         {\n-             if()\n+             if(rect[0][])\n         }\n         \n \n         printMaximalSquareDp(dp);\n"
+                },
+                {
+                    "date": 1718794644621,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n         for (size_t i = 0; i < n; i++)\n         {\n-             if(rect[0][])\n+             if(rect[0][i] - '0' ==  )\n         }\n         \n \n         printMaximalSquareDp(dp);\n"
+                },
+                {
+                    "date": 1718794649924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,10 @@\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n         for (size_t i = 0; i < n; i++)\n         {\n-             if(rect[0][i] - '0' ==  )\n+             if(rect[0][i] - '0' == 1)\n+               dp[]\n         }\n         \n \n         printMaximalSquareDp(dp);\n"
+                },
+                {
+                    "date": 1718794662224,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,11 @@\n         int m = rect.size();\n         int n = rect[0].size();\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n-        for (size_t i = 0; i < n; i++)\n+        dp[0][0]\n+\n+        for (size_t i = 1; i < n; i++)\n         {\n              if(rect[0][i] - '0' == 1)\n                dp[]\n         }\n"
+                },
+                {
+                    "date": 1718794670171,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n         int m = rect.size();\n         int n = rect[0].size();\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n-        dp[0][0]\n+        dp[0][0] = rect[0][0];\n \n         for (size_t i = 1; i < n; i++)\n         {\n              if(rect[0][i] - '0' == 1)\n"
+                },
+                {
+                    "date": 1718794675629,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n         int m = rect.size();\n         int n = rect[0].size();\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n-        dp[0][0] = rect[0][0];\n+        dp[0][0] = rect[0][0] - '0';\n \n         for (size_t i = 1; i < n; i++)\n         {\n              if(rect[0][i] - '0' == 1)\n"
+                },
+                {
+                    "date": 1718794687751,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \n         for (size_t i = 1; i < n; i++)\n         {\n              if(rect[0][i] - '0' == 1)\n-               dp[]\n+               dp[o]\n         }\n         \n \n         printMaximalSquareDp(dp);\n"
+                },
+                {
+                    "date": 1718794695525,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \n         for (size_t i = 1; i < n; i++)\n         {\n              if(rect[0][i] - '0' == 1)\n-               dp[o]\n+               dp[0][i] = std::max()\n         }\n         \n \n         printMaximalSquareDp(dp);\n"
+                },
+                {
+                    "date": 1718794703213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,40 @@\n+#include <vector>\n+#include <iostream>\n+#include <iomanip>\n+\n+using DP = std::vector<std::vector<int>>;\n+\n+void printMaximalSquareDp(DP dp)\n+{\n+    for ( const auto &row : dp )\n+    {\n+        for ( const auto &s : row ) \n+          std::cout << std::setw(5) << s << ' ';\n+        std::cout << std::endl;\n+    }\n+}\n+\n+namespace leetcode::dp\n+{\n+    // https://leetcode.com/problems/maximal-square\n+    // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n+    int maximalSquare(std::vector<std::vector<char>>& rect) \n+    {\n+        int m = rect.size();\n+        int n = rect[0].size();\n+        std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n+\n+        dp[0][0] = rect[0][0] - '0';\n+\n+        for (size_t i = 1; i < n; i++)\n+        {\n+             if(rect[0][i] - '0' == 1)\n+               dp[0][i] = std::max(dp[0][i], )\n+        }\n+        \n+\n+        printMaximalSquareDp(dp);\n+ \n+        return dp[m - 1][n - 1];\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794710137,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,53 +28,13 @@\n \n         for (size_t i = 1; i < n; i++)\n         {\n              if(rect[0][i] - '0' == 1)\n-               dp[0][i] = std::max(dp[0][i], )\n+               dp[0][i] = std::max(dp[0][i], dp[0][])\n         }\n         \n \n         printMaximalSquareDp(dp);\n  \n         return dp[m - 1][n - 1];\n     }\n-}\n-#include <vector>\n-#include <iostream>\n-#include <iomanip>\n-\n-using DP = std::vector<std::vector<int>>;\n-\n-void printMaximalSquareDp(DP dp)\n-{\n-    for ( const auto &row : dp )\n-    {\n-        for ( const auto &s : row ) \n-          std::cout << std::setw(5) << s << ' ';\n-        std::cout << std::endl;\n-    }\n-}\n-\n-namespace leetcode::dp\n-{\n-    // https://leetcode.com/problems/maximal-square\n-    // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n-    int maximalSquare(std::vector<std::vector<char>>& rect) \n-    {\n-        int m = rect.size();\n-        int n = rect[0].size();\n-        std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n-\n-        dp[0][0] = rect[0][0] - '0';\n-\n-        for (size_t i = 1; i < n; i++)\n-        {\n-             if(rect[0][i] - '0' == 1)\n-               dp[0][i] = std::max()\n-        }\n-        \n-\n-        printMaximalSquareDp(dp);\n- \n-        return dp[m - 1][n - 1];\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794715312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \n         for (size_t i = 1; i < n; i++)\n         {\n              if(rect[0][i] - '0' == 1)\n-               dp[0][i] = std::max(dp[0][i], dp[0][])\n+               dp[0][i] = std::max(dp[0][i], dp[0][i - 1])\n         }\n         \n \n         printMaximalSquareDp(dp);\n"
+                },
+                {
+                    "date": 1718794732951,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,8 @@\n \n         dp[0][0] = rect[0][0] - '0';\n \n         for (size_t i = 1; i < n; i++)\n-        {\n              if(rect[0][i] - '0' == 1)\n                dp[0][i] = std::max(dp[0][i], dp[0][i - 1])\n         }\n         \n"
+                },
+                {
+                    "date": 1718794804368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,37 @@\n+#include <vector>\n+#include <iostream>\n+#include <iomanip>\n+\n+using DP = std::vector<std::vector<int>>;\n+\n+void printMaximalSquareDp(DP dp)\n+{\n+    for ( const auto &row : dp )\n+    {\n+        for ( const auto &s : row ) \n+          std::cout << std::setw(5) << s << ' ';\n+        std::cout << std::endl;\n+    }\n+}\n+\n+namespace leetcode::dp\n+{\n+    // https://leetcode.com/problems/maximal-square\n+    // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n+    int maximalSquare(std::vector<std::vector<char>>& rect) \n+    {\n+        int m = rect.size();\n+        int n = rect[0].size();\n+        std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n+\n+        dp[0][0] = rect[0][0] - '0';\n+\n+        for (size_t i = 1; i < n; i++)\n+             if(rect[0][i] - '0' == 1)\n+               dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n+\n+        printMaximalSquareDp(dp);\n+ \n+        return dp[m - 1][n - 1];\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794820920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,51 +26,11 @@\n \n         dp[0][0] = rect[0][0] - '0';\n \n         for (size_t i = 1; i < n; i++)\n-             if(rect[0][i] - '0' == 1)\n                dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n \n         printMaximalSquareDp(dp);\n  \n         return dp[m - 1][n - 1];\n     }\n-}\n-#include <vector>\n-#include <iostream>\n-#include <iomanip>\n-\n-using DP = std::vector<std::vector<int>>;\n-\n-void printMaximalSquareDp(DP dp)\n-{\n-    for ( const auto &row : dp )\n-    {\n-        for ( const auto &s : row ) \n-          std::cout << std::setw(5) << s << ' ';\n-        std::cout << std::endl;\n-    }\n-}\n-\n-namespace leetcode::dp\n-{\n-    // https://leetcode.com/problems/maximal-square\n-    // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n-    int maximalSquare(std::vector<std::vector<char>>& rect) \n-    {\n-        int m = rect.size();\n-        int n = rect[0].size();\n-        std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n-\n-        dp[0][0] = rect[0][0] - '0';\n-\n-        for (size_t i = 1; i < n; i++)\n-             if(rect[0][i] - '0' == 1)\n-               dp[0][i] = std::max(dp[0][i], dp[0][i - 1])\n-        }\n-        \n-\n-        printMaximalSquareDp(dp);\n- \n-        return dp[m - 1][n - 1];\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794831805,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \n         dp[0][0] = rect[0][0] - '0';\n \n         for (size_t i = 1; i < n; i++)\n-               dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n+          dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n \n         printMaximalSquareDp(dp);\n  \n         return dp[m - 1][n - 1];\n"
+                },
+                {
+                    "date": 1718794854622,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,39 @@\n+#include <vector>\n+#include <iostream>\n+#include <iomanip>\n+\n+using DP = std::vector<std::vector<int>>;\n+\n+void printMaximalSquareDp(DP dp)\n+{\n+    for ( const auto &row : dp )\n+    {\n+        for ( const auto &s : row ) \n+          std::cout << std::setw(5) << s << ' ';\n+        std::cout << std::endl;\n+    }\n+}\n+\n+namespace leetcode::dp\n+{\n+    // https://leetcode.com/problems/maximal-square\n+    // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n+    int maximalSquare(std::vector<std::vector<char>>& rect) \n+    {\n+        int m = rect.size();\n+        int n = rect[0].size();\n+        std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n+\n+        dp[0][0] = rect[0][0] - '0';\n+\n+        for (size_t i = 1; i < n; i++)\n+          dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n+\n+        for (size_t i = 1; i < n; i++)\n+          dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n+\n+        printMaximalSquareDp(dp);\n+ \n+        return dp[m - 1][n - 1];\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794861031,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,48 +28,12 @@\n \n         for (size_t i = 1; i < n; i++)\n           dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n \n-        for (size_t i = 1; i < n; i++)\n+        for (size_t j = 1;  < n; i++)\n           dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n \n         printMaximalSquareDp(dp);\n  \n         return dp[m - 1][n - 1];\n     }\n-}\n-#include <vector>\n-#include <iostream>\n-#include <iomanip>\n-\n-using DP = std::vector<std::vector<int>>;\n-\n-void printMaximalSquareDp(DP dp)\n-{\n-    for ( const auto &row : dp )\n-    {\n-        for ( const auto &s : row ) \n-          std::cout << std::setw(5) << s << ' ';\n-        std::cout << std::endl;\n-    }\n-}\n-\n-namespace leetcode::dp\n-{\n-    // https://leetcode.com/problems/maximal-square\n-    // Given an m x n binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area\n-    int maximalSquare(std::vector<std::vector<char>>& rect) \n-    {\n-        int m = rect.size();\n-        int n = rect[0].size();\n-        std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n-\n-        dp[0][0] = rect[0][0] - '0';\n-\n-        for (size_t i = 1; i < n; i++)\n-          dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n-\n-        printMaximalSquareDp(dp);\n- \n-        return dp[m - 1][n - 1];\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718794868205,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \n         for (size_t i = 1; i < n; i++)\n           dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n \n-        for (size_t j = 1;  < n; i++)\n+        for (size_t i = 1; i < m; i++)\n           dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n \n         printMaximalSquareDp(dp);\n  \n"
+                },
+                {
+                    "date": 1718794873485,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         for (size_t i = 1; i < n; i++)\n           dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n \n         for (size_t i = 1; i < m; i++)\n-          dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n+          dp[][i] = std::max(dp[0][i], dp[0][i - 1]);\n \n         printMaximalSquareDp(dp);\n  \n         return dp[m - 1][n - 1];\n"
+                },
+                {
+                    "date": 1718794883377,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         for (size_t i = 1; i < n; i++)\n           dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n \n         for (size_t i = 1; i < m; i++)\n-          dp[][i] = std::max(dp[0][i], dp[0][i - 1]);\n+          dp[i][0] = std::max(dp[i][0], dp[0][i - 1]);\n \n         printMaximalSquareDp(dp);\n  \n         return dp[m - 1][n - 1];\n"
+                },
+                {
+                    "date": 1718794889388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         for (size_t i = 1; i < n; i++)\n           dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n \n         for (size_t i = 1; i < m; i++)\n-          dp[i][0] = std::max(dp[i][0], dp[0][i - 1]);\n+          dp[i][0] = std::max(dp[i][0], dp[i - 1][0]);\n \n         printMaximalSquareDp(dp);\n  \n         return dp[m - 1][n - 1];\n"
                 }
             ],
             "date": 1718275501188,

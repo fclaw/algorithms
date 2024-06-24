@@ -30,6 +30,26 @@
 #include "algorithms/maxProfit.cpp"
 #include "algorithms/minCostClimbingStairs.cpp"
 #include "algorithms/longestPalindromeSubstring.cpp"
+#include "algorithms/subarrayOfTargetSum.cpp"
+#include "algorithms/numOfSubarrays.cpp"
+#include "algorithms/minTravelCost.cpp"
+#include "algorithms/maxSubStringLength.cpp"
+#include "algorithms/addChildSum.cpp"
+#include "algorithms/maximalSquare.cpp"
+#include "algorithms/waysToPoint.cpp"
+#include "algorithms/convertStrings.cpp"
+#include "algorithms/paintFence.cpp"
+#include "algorithms/dp/minMovesOnChessboard.cpp"
+#include "algorithms/dp/uniqueWaysOfCoins.cpp"
+#include "algorithms/dp/leetcode/stringInterleaving.cpp"
+#include "algorithms/dp/sumOfSubsetToTarget.cpp"
+#include "algorithms/maxSumAfterPartitioning.cpp"
+#include "algorithms/dp/knapsack.cpp"
+#include "algorithms/dp/leetcode/longestCommonSubsequence.cpp"
+#include "algorithms/dp/leetcode/findTargetSumWays.cpp"
+// codeforces
+#include "algorithms/codeforces/erasingZeroes.cpp"
+
 
 using namespace std;
 
@@ -346,16 +366,6 @@ int removeElement(vector<int>& nums, int val)
 void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) 
 {
 }
-
- struct TreeNode 
- {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- };
   
 std::vector<int> treePath(TreeNode* root)
 {
@@ -1182,7 +1192,13 @@ int main()
 {
     std::cout << std::endl;
     std::cout << std::endl;
-    std::cout << "--- Longest Palindromic Substring ---\n";
+    std::cout << "--- Paint fence ---\n";
 
-    std::cout << leetcode::dp::longestSubstringPalindrome("test");
+    std::cout << algorithms::dp::countWaysToPaintFence(2, 4);
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "--- Codeforces: Erasing Zeroes ---\n";
+
+    std::cout << algorithms::codeforces::eraseZero("100001");
 }

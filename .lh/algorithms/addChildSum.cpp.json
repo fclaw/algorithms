@@ -1,0 +1,50 @@
+{
+    "sourceFile": "algorithms/addChildSum.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1718774521418,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718774528668,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,2 @@\n+name\n \n-\n"
+                },
+                {
+                    "date": 1718774534984,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,2 @@\n-name\n+namespace algorit\n \n"
+                },
+                {
+                    "date": 1718774541977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,2 @@\n-namespace algorit\n+namespace algorithms::tree\n \n"
+                },
+                {
+                    "date": 1718774590295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,8 @@\n+\n+\n+\n namespace algorithms::tree\n+{\n \n+}\n+\n"
+                },
+                {
+                    "date": 1718774600979,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n+#include <\n \n \n-\n namespace algorithms::tree\n {\n \n }\n"
+                },
+                {
+                    "date": 1718774608650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-#include <\n+#include \"addChildSum.cpp\"\n \n \n namespace algorithms::tree\n {\n"
+                },
+                {
+                    "date": 1718774613955,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-#include \"al\"\n+#include \"algorithms\"\n \n \n namespace algorithms::tree\n {\n"
+                },
+                {
+                    "date": 1718774701291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,8 @@\n     {\n         if(node == nullptr)\n           return 0;\n \n-        if(node->left == nullptr && )  \n+        if(node->left == nullptr && node->right == null)  \n     }\n }\n \n"
+                }
+            ],
+            "date": 1718774521418,
+            "name": "Commit-0",
+            "content": "\n\n"
+        }
+    ]
+}

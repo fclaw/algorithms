@@ -1,0 +1,62 @@
+{
+    "sourceFile": "algorithms/dp/sumOfSubsetToTarget.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 11,
+            "patches": [
+                {
+                    "date": 1719069813808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719069821252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,4 @@\n namespace algorithms::dp\n-{}\n\\ No newline at end of file\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719069832556,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+#include <vector>\n+\n namespace algorithms::dp\n {\n-    \n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719069840571,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n \n namespace algorithms::dp\n {\n-\n+    sum\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719069849032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n \n namespace algorithms::dp\n {\n-    sum\n+    sumOfSubsetToT\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719069854827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n \n namespace algorithms::dp\n {\n-    sumOfSubsetToT\n+    sumOfSubsetToTarget()\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719069873891,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n \n namespace algorithms::dp\n {\n-    sumOfSubsetToTarget()\n+    bool sumOfSubsetToTarget(std::vector<int>, int target)\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719069889991,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,10 @@\n #include <vector>\n \n namespace algorithms::dp\n {\n+    // given an \n     bool sumOfSubsetToTarget(std::vector<int>, int target)\n+    {\n+\n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719069896847,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n namespace algorithms::dp\n {\n-    // given an \n+    // given an array of non-\n     bool sumOfSubsetToTarget(std::vector<int>, int target)\n     {\n \n     }\n"
+                },
+                {
+                    "date": 1719069905011,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n namespace algorithms::dp\n {\n-    // given an array of non-\n+    // given an array of non-negative \n     bool sumOfSubsetToTarget(std::vector<int>, int target)\n     {\n \n     }\n"
+                },
+                {
+                    "date": 1719069911992,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n namespace algorithms::dp\n {\n-    // given an array of non-negative in\n+    // given an array of non-negative integers \n     bool sumOfSubsetToTarget(std::vector<int>, int target)\n     {\n \n     }\n"
+                },
+                {
+                    "date": 1719069957901,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,11 @@\n+#include <vector>\n+\n+namespace algorithms::dp\n+{\n+    // given an array of non-negative integers and a positive number,\n+    // determine if there exists \n+    bool sumOfSubsetToTarget(std::vector<int>, int target)\n+    {\n+\n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1719069813808,
+            "name": "Commit-0",
+            "content": "namespace algorithms::dp\n{}"
+        }
+    ]
+}

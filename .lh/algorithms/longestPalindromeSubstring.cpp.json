@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 35,
+            "activePatchIndex": 45,
             "patches": [
                 {
                     "date": 1718379689164,
@@ -148,6 +148,46 @@
                 {
                     "date": 1718529941597,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,6 +16,6 @@\n         DP dp(n, std::vector<int>(n, 0));\n         return std::string();\n     }\n \n-    std::string longestPalindromeInString(std::string s) { return longestPalindromeDp(s); }\n+    std::string longestPalindrome(std::string s) { return longestPalindromeDp(s); }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718530715410,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,6 +16,6 @@\n         DP dp(n, std::vector<int>(n, 0));\n         return std::string();\n     }\n \n-    std::string longestPalindrome(std::string s) { return longestPalindromeDp(s); }\n+    std::string longestSubstringPalindrome(std::string s) { return longestPalindromeDp(s); }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718530721323,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     // where i an j are the right and left boundaries, n - max palindrome within i, j\n     std::string longestPalindromeDp(std::string str)\n     {\n         int n = str.size();\n-        DP dp(n, std::vector<int>(n, 0));\n+        DP dp(n, std::v ector<int>(n, 0));\n         return std::string();\n     }\n \n     std::string longestSubstringPalindrome(std::string s) { return longestPalindromeDp(s); }\n"
+                },
+                {
+                    "date": 1718530727026,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     // where i an j are the right and left boundaries, n - max palindrome within i, j\n     std::string longestPalindromeDp(std::string str)\n     {\n         int n = str.size();\n-        DP dp(n, std::v ector<int>(n, 0));\n+        DP dp(n, std::vector<int>(n, 0));\n         return std::string();\n     }\n \n     std::string longestSubstringPalindrome(std::string s) { return longestPalindromeDp(s); }\n"
+                },
+                {
+                    "date": 1718532016578,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,21 @@\n+#include <string>\n+#include <vector>\n+\n+using DP = std::vector<std::vector<int>>;\n+\n+namespace leetcode::dp\n+{\n+     \n+    // https://leetcode.com/problems/longest-palindromic-substring\n+    // Given a string s, return the longest palindromic substring in s\n+    // Objective fuction: P(i, j) = n, \n+    // where i an j are the right and left boundaries, n - max palindrome within i, j\n+    std::string longestPalindromeDp(std::string str)\n+    {\n+        int n = str.size();\n+        DP dp(n, std::vector<int>(n + 1, 0));\n+        return std::string();\n+    }\n+\n+    std::string longestSubstringPalindrome(std::string s) { return longestPalindromeDp(s); }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718532024545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,29 +13,12 @@\n     std::string longestPalindromeDp(std::string str)\n     {\n         int n = str.size();\n         DP dp(n, std::vector<int>(n + 1, 0));\n-        return std::string();\n-    }\n+ \n+        \n \n-    std::string longestSubstringPalindrome(std::string s) { return longestPalindromeDp(s); }\n-}\n-#include <string>\n-#include <vector>\n \n-using DP = std::vector<std::vector<int>>;\n-\n-namespace leetcode::dp\n-{\n-     \n-    // https://leetcode.com/problems/longest-palindromic-substring\n-    // Given a string s, return the longest palindromic substring in s\n-    // Objective fuction: P(i, j) = n, \n-    // where i an j are the right and left boundaries, n - max palindrome within i, j\n-    std::string longestPalindromeDp(std::string str)\n-    {\n-        int n = str.size();\n-        DP dp(n, std::vector<int>(n, 0));\n         return std::string();\n     }\n \n     std::string longestSubstringPalindrome(std::string s) { return longestPalindromeDp(s); }\n"
+                },
+                {
+                    "date": 1718532034452,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,12 @@\n     {\n         int n = str.size();\n         DP dp(n, std::vector<int>(n + 1, 0));\n  \n+        for (size_t i = 0; i < n; i++)\n+        {\n+            /* code */\n+        }\n         \n \n \n         return std::string();\n"
+                },
+                {
+                    "date": 1718532040876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,12 +14,10 @@\n     {\n         int n = str.size();\n         DP dp(n, std::vector<int>(n + 1, 0));\n  \n-        for (size_t i = 0; i < n; i++)\n-        {\n-            /* code */\n-        }\n+        for (size_t i = 0; i <= n; i++)\n+          dp[]\n         \n \n \n         return std::string();\n"
+                },
+                {
+                    "date": 1718532047791,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         int n = str.size();\n         DP dp(n, std::vector<int>(n + 1, 0));\n  \n         for (size_t i = 0; i <= n; i++)\n-          dp[]\n+          dp[i][i] = 1;\n         \n \n \n         return std::string();\n"
+                },
+                {
+                    "date": 1718532053573,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,10 @@\n  \n         for (size_t i = 0; i <= n; i++)\n           dp[i][i] = 1;\n         \n+ \n+\n         return std::string();\n     }\n \n     std::string longestSubstringPalindrome(std::string s) { return longestPalindromeDp(s); }\n"
+                },
+                {
+                    "date": 1718532065638,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,31 @@\n+#include <string>\n+#include <vector>\n+\n+using DP = std::vector<std::vector<int>>;\n+\n+namespace leetcode::dp\n+{\n+     \n+    // https://leetcode.com/problems/longest-palindromic-substring\n+    // Given a string s, return the longest palindromic substring in s\n+    // Objective fuction: P(i, j) = n, \n+    // where i an j are the right and left boundaries, n - max palindrome within i, j\n+    std::string longestPalindromeDp(std::string str)\n+    {\n+        int n = str.size();\n+        DP dp(n, std::vector<int>(n + 1, 0));\n+ \n+        for (size_t i = 0; i <= n; i++)\n+          dp[i][i] = 1;\n+        \n+        for (size_t left = 1; i < count; i++)\n+        {\n+            /* code */\n+        }\n+        \n+\n+        return std::string();\n+    }\n+\n+    std::string longestSubstringPalindrome(std::string s) { return longestPalindromeDp(s); }\n+}\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1718379689164,

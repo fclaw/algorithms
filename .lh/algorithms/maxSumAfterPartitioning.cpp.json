@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 7,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1718444671161,
@@ -36,6 +36,10 @@
                 {
                     "date": 1718444740988,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n     // https://leetcode.com/problems/partition-array-for-maximum-sum\n     /*\n       Given an integer array arr, partition the array into (contiguous) subarrays of length at most k. \n       After partitioning, each subarray has their values changed to become the maximum value of that subarray.\n-      Return the largest sum of the given array after partitioning. Test cases are generated so that the answer fits in a 32-bit integer.\n+      Return the largest sum of the given array after partitioning. \n+      Test cases are generated so that the answer fits in a 32-bit integer.\n     */\n     int maxSumAfterPartitioning(vector<int>& arr, int k) {}\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718600161224,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n {\n     // https://leetcode.com/problems/partition-array-for-maximum-sum\n     /*\n       Given an integer array arr, partition the array into (contiguous) subArrays of length at most k. \n-      After partitioning, each subarray has their values changed to become the maximum value of that subarray.\n+      After partitioning, each subArray has their values changed to become the maximum value of that subarray.\n       Return the largest sum of the given array after partitioning. \n       Test cases are generated so that the answer fits in a 32-bit integer.\n     */\n     int maxSumAfterPartitioning(std::vector<int>& arr, int k) \n"
                 }
             ],
             "date": 1718444671161,

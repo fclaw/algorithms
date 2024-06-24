@@ -1,0 +1,22 @@
+{
+    "sourceFile": "algorithms/waysToScore.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1718799526309,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718799532168,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n #include <vector>\n \n namespace algorithms::dp\n {\n-    int countWaysToReach(int n)\n+    int countWaysToReachPoint(int n)\n     {\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1718799526309,
+            "name": "Commit-0",
+            "content": "#include <vector>\n\nnamespace algorithms::dp\n{\n    int countWaysToReach(int n)\n    {\n    }\n}"
+        }
+    ]
+}

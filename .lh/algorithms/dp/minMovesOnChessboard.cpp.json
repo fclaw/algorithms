@@ -1,0 +1,30 @@
+{
+    "sourceFile": "algorithms/dp/minMovesOnChessboard.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1718892524597,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718892535651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n namespace algorithms::dp\n {\n-       \n+    /   \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718892542597,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n namespace algorithms::dp\n {\n     /*\n-    In the game of chess a Knight can move 2.5 steps a( square that can be reached by moving two squares horizontally and one square vertically, or two squares vertically and one square horizontally). Picture 9.9 shows al possible moves of aknight. A King, can move only one step (either horizontally, verticaly or diagonally).\n+       In the game of chess a Knight can move 2.5 steps a( square that can be reached by moving two squares horizontally and one square vertically, or two squares vertically and one square horizontally). Picture 9.9 shows al possible moves of aknight. A King, can move only one step (either horizontally, verticaly or diagonally).\n     */   \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718892554413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,7 @@\n {\n     /*\n        In the game of chess a Knight can move 2.5 steps a( square that can be reached by moving two squares horizontally \n        and one square vertically, or two squares vertically and one square horizontally). \n-       Picture 9.9 shows al possible moves of aknight. A King, can move only one step (either horizontally, verticaly or diagonally).\n+       A King, can move only one step (either horizontally, verticaly or diagonally).\n     */   \n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1718892524597,
+            "name": "Commit-0",
+            "content": "namespace algorithms::dp\n{\n       \n}"
+        }
+    ]
+}

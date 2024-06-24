@@ -1,0 +1,30 @@
+{
+    "sourceFile": "algorithms/codeforces/erasingZeroes.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1719241814215,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719241819529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-namespace \n\\ No newline at end of file\n+namespace algorithms::\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719241840305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n namespace algorithms::codeforces\n {\n-    \n+        \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719247765339,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,7 @@\n namespace algorithms::codeforces\n {\n-    int eraseZero(std::string s)    \n+    int eraseZero(std::string s)\n+    {\n+        \n+    }    \n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1719241814215,
+            "name": "Commit-0",
+            "content": "namespace "
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/stringInterleaving.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1719051134383,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719051140025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n-namespace name\n+namespace l\n {\n     \n } // namespace name\n"
+                },
+                {
+                    "date": 1719051148555,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n-namespace l\n+namespace algo\n {\n     \n } // namespace name\n"
+                },
+                {
+                    "date": 1719051155412,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n-namespace algorithms::dp\n+namespace algorithms::dp::leetcode\n {\n     \n } // namespace name\n"
+                },
+                {
+                    "date": 1719051201029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-#include <str\n+#include <string>\n \n namespace algorithms::dp::leetcode\n {\n     bool isInterleave(std::string s1, std::string s2, std::string s3)\n"
+                }
+            ],
+            "date": 1719051134383,
+            "name": "Commit-0",
+            "content": "namespace name\n{\n    \n} // namespace name\n"
+        }
+    ]
+}

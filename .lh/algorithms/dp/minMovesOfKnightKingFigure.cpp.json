@@ -1,0 +1,22 @@
+{
+    "sourceFile": "algorithms/dp/minMovesOfKnightKingFigure.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1718892462116,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718892474226,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,4 @@\n-namespace \n\\ No newline at end of file\n+namespace algorithms::dp\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1718892462116,
+            "name": "Commit-0",
+            "content": "namespace "
+        }
+    ]
+}

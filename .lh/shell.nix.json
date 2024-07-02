@@ -1,0 +1,22 @@
+{
+    "sourceFile": "shell.nix",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1719556092240,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719556115678,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n let\n-   pkgs = import (fetchTarball \"https://github.com/NixOS/nixpkgs/archive/nixos-2.11.tar.gz\") {};\n+   pkgs = import (fetchTarball \"https://github.com/NixOS/nixpkgs/archive/nixos-24.05.tar.gz\") {};\n    clang = pkgs.gcc;\n in\n pkgs.mkShell {\n \n"
+                }
+            ],
+            "date": 1719556092240,
+            "name": "Commit-0",
+            "content": "let\n   pkgs = import (fetchTarball \"https://github.com/NixOS/nixpkgs/archive/nixos-2.11.tar.gz\") {};\n   clang = pkgs.gcc;\nin\npkgs.mkShell {\n\n  buildInputs = [ clang ];\n  NIX_PATH = \"nixpkgs=\" + pkgs.path;\n  }"
+        }
+    ]
+}

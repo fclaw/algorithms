@@ -1,0 +1,366 @@
+{
+    "sourceFile": "algorithms/primesAndFactors.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 87,
+            "patches": [
+                {
+                    "date": 1719829219297,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719829248185,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-namespace algo\n\\ No newline at end of file\n+namespace algorithms::mathematics\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829264347,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,9 @@\n-namespace algorithms::mathematics\n\\ No newline at end of file\n+namespace algorithms::mathematics\n+{\n+    /*\n+    If an integer n is not prime, it can be represented as a product √√√\n+a·b,wherea≤ norb≤ n,soitcertainlyhasafactorbetween2and⌊ n⌋. Using this observation, we can both test if an integer is prime and find its prime\n+√\n+factorization in O( n) time.\n+    */\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829270033,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,6 @@\n namespace algorithms::mathematics\n {\n     /*\n-    If an integer n is not prime, it can be represented as a product √√√\n-a·b,wherea≤ norb≤ n,soitcertainlyhasafactorbetween2and⌊ n⌋. Using this observation, we can both test if an integer is prime and find its prime\n-√\n-factorization in O( n) time.\n+\n     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829368209,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,4 @@\n namespace algorithms::mathematics\n {\n-    /*\n-\n-    */\n+    bool isPrime()\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829382306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n namespace algorithms::mathematics\n {\n+    /\n     bool isPrime()\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829393756,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,9 @@\n namespace algorithms::mathematics\n {\n-    /\n+    /*\n+    The following function prime checks if a given integer n is prime. The function\n+attempts to divide n by all integers between 2 and ⌊ n⌋, and if none of them divides\n+n, then n is prime.\n+    */\n     bool isPrime()\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829400902,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n namespace algorithms::mathematics\n {\n     /*\n     The following function prime checks if a given integer n is prime. The function\n+√\n attempts to divide n by all integers between 2 and ⌊ n⌋, and if none of them divides\n n, then n is prime.\n     */\n     bool isPrime()\n"
+                },
+                {
+                    "date": 1719829406320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,9 @@\n namespace algorithms::mathematics\n {\n     /*\n     The following function prime checks if a given integer n is prime. The function\n-√\n-attempts to divide n by all integers between 2 and ⌊ n⌋, and if none of them divides\n+attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n n, then n is prime.\n     */\n     bool isPrime()\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829414120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n namespace algorithms::mathematics\n {\n     /*\n-    The following function prime checks if a given integer n is prime. The function\n+      The following function prime checks if a given integer n is prime. The function\n attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n n, then n is prime.\n     */\n     bool isPrime()\n"
+                },
+                {
+                    "date": 1719829422035,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n namespace algorithms::mathematics\n {\n     /*\n       The following function prime checks if a given integer n is prime. The function\n-attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n-n, then n is prime.\n+      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n+      n, then n is prime.\n     */\n     bool isPrime()\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829449393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,9 @@\n       The following function prime checks if a given integer n is prime. The function\n       attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n       n, then n is prime.\n     */\n-    bool isPrime()\n+    bool isPrime(int n)\n+    {\n+        if(n < )\n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829460072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,9 @@\n       n, then n is prime.\n     */\n     bool isPrime(int n)\n     {\n-        if(n < )\n+        if(n < 2)\n+          return true;\n+          \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829489862,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,7 +8,11 @@\n     bool isPrime(int n)\n     {\n         if(n < 2)\n           return true;\n+        for (size_t i = 0; i < count; i++)\n+        {\n+            /* code */\n+        }\n           \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829495302,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n     bool isPrime(int n)\n     {\n         if(n < 2)\n           return true;\n-        for (size_t i = 0; i < count; i++)\n+        for (size_t i = ; i < count; i++)\n         {\n             /* code */\n         }\n           \n"
+                },
+                {
+                    "date": 1719829504782,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n     bool isPrime(int n)\n     {\n         if(n < 2)\n           return true;\n-        for (size_t i = ; i < count; i++)\n+        for (size_t i = 2; i * i < count; i++)\n         {\n             /* code */\n         }\n           \n"
+                },
+                {
+                    "date": 1719829514803,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n     bool isPrime(int n)\n     {\n         if(n < 2)\n           return true;\n-        for (size_t i = 2; i * i < count; i++)\n+        for (size_t i = 2; i * i <= n; i++)\n         {\n             /* code */\n         }\n           \n"
+                },
+                {
+                    "date": 1719829524162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,11 +8,9 @@\n     bool isPrime(int n)\n     {\n         if(n < 2)\n           return true;\n-        for (size_t i = 2; i * i <= n; i++)\n-        {\n-            /* code */\n-        }\n+        for (int i = 2; i * i <= n; i++)\n+          if()\n           \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829531690,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,8 @@\n     {\n         if(n < 2)\n           return true;\n         for (int i = 2; i * i <= n; i++)\n-          if()\n+          if(n % )\n           \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829555511,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n     {\n         if(n < 2)\n           return true;\n         for (int i = 2; i * i <= n; i++)\n-          if(n % )\n+          if(n % x == 0)\n+            return \n           \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829562367,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     {\n         if(n < 2)\n           return true;\n         for (int i = 2; i * i <= n; i++)\n-          if(n % x == 0)\n-            return \n+          if(n % i == 0)\n+            return false;\n           \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719829574223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,7 +11,7 @@\n           return true;\n         for (int i = 2; i * i <= n; i++)\n           if(n % i == 0)\n             return false;\n-          \n+        return true;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830069745,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,5 +13,8 @@\n           if(n % i == 0)\n             return false;\n         return true;\n     }\n+\n+    std::vec\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830083030,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+#include <vec\n+\n namespace algorithms::mathematics\n {\n     /*\n       The following function prime checks if a given integer n is prime. The function\n"
+                },
+                {
+                    "date": 1719830090114,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,7 +16,7 @@\n             return false;\n         return true;\n     }\n \n-    std::vec\n+    std::vector<int> f\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830095498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-#include <vec\n+#include <vector>\n \n namespace algorithms::mathematics\n {\n     /*\n@@ -16,7 +16,7 @@\n             return false;\n         return true;\n     }\n \n-    std::vector<int> f\n+    std::vector<int> getFactor\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830101517,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,7 +16,10 @@\n             return false;\n         return true;\n     }\n \n-    std::vector<int> getFactor\n+    std::vector<int> getFactors(int n)\n+    {\n+        \n+    }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830123100,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,10 +16,16 @@\n             return false;\n         return true;\n     }\n \n+    /*\n+    Then, the following function factors constructs a vector that contains the prime\n+factorization of n. The function divides n by its prime factors and adds them to the\n+vector. The process ends when the remaining number n has no factors between 2 and √\n+n⌋. If n > 1, it is prime and the last factor.\n+    */\n     std::vector<int> getFactors(int n)\n     {\n-        \n+\n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830146804,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,10 @@\n         return true;\n     }\n \n     /*\n-    Then, the following function factors constructs a vector that contains the prime\n-factorization of n. The function divides n by its prime factors and adds them to the\n+      Then, the following function factors constructs a vector that contains the prime\n+      factorization of n. The function divides n by its prime factors and adds them to the\n vector. The process ends when the remaining number n has no factors between 2 and √\n n⌋. If n > 1, it is prime and the last factor.\n     */\n     std::vector<int> getFactors(int n)\n"
+                },
+                {
+                    "date": 1719830155088,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,9 @@\n \n     /*\n       Then, the following function factors constructs a vector that contains the prime\n       factorization of n. The function divides n by its prime factors and adds them to the\n-vector. The process ends when the remaining number n has no factors between 2 and √\n-n⌋. If n > 1, it is prime and the last factor.\n+      vector. The process ends when the remaining number n has no factors between 2 and √n⌋. If n > 1, it is prime and the last factor.\n     */\n     std::vector<int> getFactors(int n)\n     {\n \n"
+                },
+                {
+                    "date": 1719830161345,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n \n     /*\n       Then, the following function factors constructs a vector that contains the prime\n       factorization of n. The function divides n by its prime factors and adds them to the\n-      vector. The process ends when the remaining number n has no factors between 2 and √n⌋. If n > 1, it is prime and the last factor.\n+      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋. If n > 1, it is prime and the last factor.\n     */\n     std::vector<int> getFactors(int n)\n     {\n \n"
+                },
+                {
+                    "date": 1719830182900,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,10 @@\n \n     /*\n       Then, the following function factors constructs a vector that contains the prime\n       factorization of n. The function divides n by its prime factors and adds them to the\n-      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋. If n > 1, it is prime and the last factor.\n+      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n+      If n > 1, it is prime and the last factor.\n     */\n     std::vector<int> getFactors(int n)\n     {\n \n"
+                },
+                {
+                    "date": 1719830189929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,8 @@\n       If n > 1, it is prime and the last factor.\n     */\n     std::vector<int> getFactors(int n)\n     {\n-\n+        std::vector<>\n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830198317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,8 @@\n       If n > 1, it is prime and the last factor.\n     */\n     std::vector<int> getFactors(int n)\n     {\n-        std::vector<>\n+        std::vector<int> xs;\n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830205362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,7 +25,12 @@\n     */\n     std::vector<int> getFactors(int n)\n     {\n         std::vector<int> xs;\n+        for (int i = 0; i < count; i++)\n+        {\n+            /* code */\n+        }\n+        \n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830212040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n     */\n     std::vector<int> getFactors(int n)\n     {\n         std::vector<int> xs;\n-        for (int i = 0; i < count; i++)\n+        for (int x = 2; x * x < count; i++)\n         {\n             /* code */\n         }\n         \n"
+                },
+                {
+                    "date": 1719830217124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,36 @@\n+#include <vector>\n+\n+namespace algorithms::mathematics\n+{\n+    /*\n+      The following function prime checks if a given integer n is prime. The function\n+      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n+      n, then n is prime.\n+    */\n+    bool isPrime(int n)\n+    {\n+        if(n < 2)\n+          return true;\n+        for (int i = 2; i * i <= n; i++)\n+          if(n % i == 0)\n+            return false;\n+        return true;\n+    }\n+\n+    /*\n+      Then, the following function factors constructs a vector that contains the prime\n+      factorization of n. The function divides n by its prime factors and adds them to the\n+      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n+      If n > 1, it is prime and the last factor.\n+    */\n+    std::vector<int> getFactors(int n)\n+    {\n+        std::vector<int> xs;\n+        for (int x = 2; x * x <= n; x++)\n+        {\n+            /* code */\n+        }\n+        \n+    }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830222831,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n     bool isPrime(int n)\n     {\n         if(n < 2)\n           return true;\n-        for (int i = 2; i * i <= n; i++)\n+        for (int x = 2; i * i <= n; i++)\n           if(n % i == 0)\n             return false;\n         return true;\n     }\n@@ -32,41 +32,5 @@\n         }\n         \n     }\n \n-}\n-#include <vector>\n-\n-namespace algorithms::mathematics\n-{\n-    /*\n-      The following function prime checks if a given integer n is prime. The function\n-      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n-      n, then n is prime.\n-    */\n-    bool isPrime(int n)\n-    {\n-        if(n < 2)\n-          return true;\n-        for (int i = 2; i * i <= n; i++)\n-          if(n % i == 0)\n-            return false;\n-        return true;\n-    }\n-\n-    /*\n-      Then, the following function factors constructs a vector that contains the prime\n-      factorization of n. The function divides n by its prime factors and adds them to the\n-      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n-      If n > 1, it is prime and the last factor.\n-    */\n-    std::vector<int> getFactors(int n)\n-    {\n-        std::vector<int> xs;\n-        for (int x = 2; x * x < count; i++)\n-        {\n-            /* code */\n-        }\n-        \n-    }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830228996,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,36 @@\n+#include <vector>\n+\n+namespace algorithms::mathematics\n+{\n+    /*\n+      The following function prime checks if a given integer n is prime. The function\n+      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n+      n, then n is prime.\n+    */\n+    bool isPrime(int n)\n+    {\n+        if(n < 2)\n+          return true;\n+        for (int x = 2; x * x <= n; x++)\n+          if(n % x == 0)\n+            return false;\n+        return true;\n+    }\n+\n+    /*\n+      Then, the following function factors constructs a vector that contains the prime\n+      factorization of n. The function divides n by its prime factors and adds them to the\n+      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n+      If n > 1, it is prime and the last factor.\n+    */\n+    std::vector<int> getFactors(int n)\n+    {\n+        std::vector<int> xs;\n+        for (int x = 2; x * x <= n; x++)\n+        {\n+            /* code */\n+        }\n+        \n+    }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830245991,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,47 +26,9 @@\n     std::vector<int> getFactors(int n)\n     {\n         std::vector<int> xs;\n         for (int x = 2; x * x <= n; x++)\n-        {\n-            /* code */\n-        }\n+          if()\n         \n     }\n \n-}\n-#include <vector>\n-\n-namespace algorithms::mathematics\n-{\n-    /*\n-      The following function prime checks if a given integer n is prime. The function\n-      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n-      n, then n is prime.\n-    */\n-    bool isPrime(int n)\n-    {\n-        if(n < 2)\n-          return true;\n-        for (int x = 2; i * i <= n; i++)\n-          if(n % i == 0)\n-            return false;\n-        return true;\n-    }\n-\n-    /*\n-      Then, the following function factors constructs a vector that contains the prime\n-      factorization of n. The function divides n by its prime factors and adds them to the\n-      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n-      If n > 1, it is prime and the last factor.\n-    */\n-    std::vector<int> getFactors(int n)\n-    {\n-        std::vector<int> xs;\n-        for (int x = 2; x * x <= n; x++)\n-        {\n-            /* code */\n-        }\n-        \n-    }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830255257,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n     std::vector<int> getFactors(int n)\n     {\n         std::vector<int> xs;\n         for (int x = 2; x * x <= n; x++)\n-          if()\n+          if(n % )\n         \n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830264477,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,10 @@\n     std::vector<int> getFactors(int n)\n     {\n         std::vector<int> xs;\n         for (int x = 2; x * x <= n; x++)\n-          if(n % )\n+          if(n % x == 0)\n+            while()\n         \n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830282810,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n     std::vector<int> getFactors(int n)\n     {\n         std::vector<int> xs;\n         for (int x = 2; x * x <= n; x++)\n-          if(n % x == 0)\n+          while(n % x == 0)\n             while()\n         \n     }\n \n"
+                },
+                {
+                    "date": 1719830294088,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,12 @@\n     {\n         std::vector<int> xs;\n         for (int x = 2; x * x <= n; x++)\n           while(n % x == 0)\n-            while()\n+          {\n+              xs.push_back(x);\n+              \n+          }\n         \n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830302198,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         for (int x = 2; x * x <= n; x++)\n           while(n % x == 0)\n           {\n               xs.push_back(x);\n-              \n+              n /\n           }\n         \n     }\n \n"
+                },
+                {
+                    "date": 1719830307568,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,10 +29,10 @@\n         for (int x = 2; x * x <= n; x++)\n           while(n % x == 0)\n           {\n               xs.push_back(x);\n-              n /\n-          }\n+              n /= x;\n+          };\n         \n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830312605,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,11 @@\n           while(n % x == 0)\n           {\n               xs.push_back(x);\n               n /= x;\n-          };\n+          }\n         \n+          \n+        \n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830323859,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,10 +31,12 @@\n           {\n               xs.push_back(x);\n               n /= x;\n           }\n+\n+        if(n > 1) \n+          xs.push_back(n);\n+            \n         \n-          \n-        \n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830333433,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n           }\n \n         if(n > 1) \n           xs.push_back(n);\n-            \n         \n+        return xs;\n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830339387,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,42 @@\n+#include <vector>\n+\n+namespace algorithms::mathematics\n+{\n+    /*\n+      The following function prime checks if a given integer n is prime. The function\n+      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n+      n, then n is prime.\n+    */\n+    bool isPrime(int n)\n+    {\n+        if(n < 2)\n+          return true;\n+        for (int x = 2; x * x <= n; x++)\n+          if(n % x == 0)\n+            return false;\n+        return true;\n+    }\n+\n+    /*\n+      Then, the following function factors constructs a vector that contains the prime\n+      factorization of n. The function divides n by its prime factors and adds them to the\n+      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n+      If n > 1, it is prime and the last factor.\n+    */\n+    std::vector<int> getFactors(int n)\n+    {\n+        std::vector<int> fac;\n+        for (int x = 2; x * x <= n; x++)\n+          while(n % x == 0)\n+          {\n+              xs.push_back(x);\n+              n /= x;\n+          }\n+\n+        if(n > 1) \n+          xs.push_back(n);\n+        \n+        return xs;\n+    }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830346242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,42 @@\n+#include <vector>\n+\n+namespace algorithms::mathematics\n+{\n+    /*\n+      The following function prime checks if a given integer n is prime. The function\n+      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n+      n, then n is prime.\n+    */\n+    bool isPrime(int n)\n+    {\n+        if(n < 2)\n+          return true;\n+        for (int x = 2; x * x <= n; x++)\n+          if(n % x == 0)\n+            return false;\n+        return true;\n+    }\n+\n+    /*\n+      Then, the following function factors constructs a vector that contains the prime\n+      factorization of n. The function divides n by its prime factors and adds them to the\n+      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n+      If n > 1, it is prime and the last factor.\n+    */\n+    std::vector<int> getFactors(int n)\n+    {\n+        std::vector<int> factors;\n+        for (int x = 2; x * x <= n; x++)\n+          while(n % x == 0)\n+          {\n+              factors.push_back(x);\n+              n /= x;\n+          }\n+\n+        if(n > 1) \n+          xs.push_back(n);\n+        \n+        return xs;\n+    }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719830366561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,94 +33,10 @@\n               n /= x;\n           }\n \n         if(n > 1) \n-          xs.push_back(n);\n+          factors.push_back(n);\n         \n-        return xs;\n+        return factors;\n     }\n \n-}\n-#include <vector>\n-\n-namespace algorithms::mathematics\n-{\n-    /*\n-      The following function prime checks if a given integer n is prime. The function\n-      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n-      n, then n is prime.\n-    */\n-    bool isPrime(int n)\n-    {\n-        if(n < 2)\n-          return true;\n-        for (int x = 2; x * x <= n; x++)\n-          if(n % x == 0)\n-            return false;\n-        return true;\n-    }\n-\n-    /*\n-      Then, the following function factors constructs a vector that contains the prime\n-      factorization of n. The function divides n by its prime factors and adds them to the\n-      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n-      If n > 1, it is prime and the last factor.\n-    */\n-    std::vector<int> getFactors(int n)\n-    {\n-        std::vector<int> fac;\n-        for (int x = 2; x * x <= n; x++)\n-          while(n % x == 0)\n-          {\n-              xs.push_back(x);\n-              n /= x;\n-          }\n-\n-        if(n > 1) \n-          xs.push_back(n);\n-        \n-        return xs;\n-    }\n-\n-}\n-#include <vector>\n-\n-namespace algorithms::mathematics\n-{\n-    /*\n-      The following function prime checks if a given integer n is prime. The function\n-      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n-      n, then n is prime.\n-    */\n-    bool isPrime(int n)\n-    {\n-        if(n < 2)\n-          return true;\n-        for (int x = 2; x * x <= n; x++)\n-          if(n % x == 0)\n-            return false;\n-        return true;\n-    }\n-\n-    /*\n-      Then, the following function factors constructs a vector that contains the prime\n-      factorization of n. The function divides n by its prime factors and adds them to the\n-      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n-      If n > 1, it is prime and the last factor.\n-    */\n-    std::vector<int> getFactors(int n)\n-    {\n-        std::vector<int> xs;\n-        for (int x = 2; x * x <= n; x++)\n-          while(n % x == 0)\n-          {\n-              xs.push_back(x);\n-              n /= x;\n-          }\n-\n-        if(n > 1) \n-          xs.push_back(n);\n-        \n-        return xs;\n-    }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719831246200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,5 +38,7 @@\n         \n         return factors;\n     }\n \n+    Sieve of Eratosthenes\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719831252823,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,7 +38,7 @@\n         \n         return factors;\n     }\n \n-    Sieve of Eratosthenes\n+     sieveOfEratosthenes\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719831261470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,44 @@\n+#include <vector>\n+\n+namespace algorithms::mathematics\n+{\n+    /*\n+      The following function prime checks if a given integer n is prime. The function\n+      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n+      n, then n is prime.\n+    */\n+    bool isPrime(int n)\n+    {\n+        if(n < 2)\n+          return true;\n+        for (int x = 2; x * x <= n; x++)\n+          if(n % x == 0)\n+            return false;\n+        return true;\n+    }\n+\n+    /*\n+      Then, the following function factors constructs a vector that contains the prime\n+      factorization of n. The function divides n by its prime factors and adds them to the\n+      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n+      If n > 1, it is prime and the last factor.\n+    */\n+    std::vector<int> getFactors(int n)\n+    {\n+        std::vector<int> factors;\n+        for (int x = 2; x * x <= n; x++)\n+          while(n % x == 0)\n+          {\n+              factors.push_back(x);\n+              n /= x;\n+          }\n+\n+        if(n > 1) \n+          factors.push_back(n);\n+        \n+        return factors;\n+    }\n+\n+    std::vector<int> sieveOfEratosthenes\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719831268067,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,51 +38,10 @@\n         \n         return factors;\n     }\n \n-    std::vector<int> sieveOfEratosthenes\n-\n-}\n-#include <vector>\n-\n-namespace algorithms::mathematics\n-{\n-    /*\n-      The following function prime checks if a given integer n is prime. The function\n-      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n-      n, then n is prime.\n-    */\n-    bool isPrime(int n)\n+    std::vector<int> sieveOfEratosthenes(int n)\n     {\n-        if(n < 2)\n-          return true;\n-        for (int x = 2; x * x <= n; x++)\n-          if(n % x == 0)\n-            return false;\n-        return true;\n-    }\n-\n-    /*\n-      Then, the following function factors constructs a vector that contains the prime\n-      factorization of n. The function divides n by its prime factors and adds them to the\n-      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n-      If n > 1, it is prime and the last factor.\n-    */\n-    std::vector<int> getFactors(int n)\n-    {\n-        std::vector<int> factors;\n-        for (int x = 2; x * x <= n; x++)\n-          while(n % x == 0)\n-          {\n-              factors.push_back(x);\n-              n /= x;\n-          }\n-\n-        if(n > 1) \n-          factors.push_back(n);\n         \n-        return factors;\n     }\n \n-     sieveOfEratosthenes\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719831468395,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,8 +40,12 @@\n     }\n \n     std::vector<int> sieveOfEratosthenes(int n)\n     {\n+        for (size_t i = 0; i < count; i++)\n+        {\n+            /* code */\n+        }\n         \n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719831474796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n     }\n \n     std::vector<int> sieveOfEratosthenes(int n)\n     {\n-        for (size_t i = 0; i < count; i++)\n+        for (int x = 2; i < count; i++)\n         {\n             /* code */\n         }\n         \n"
+                },
+                {
+                    "date": 1719831482538,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,10 @@\n     }\n \n     std::vector<int> sieveOfEratosthenes(int n)\n     {\n-        for (int x = 2; i < count; i++)\n+        \n+        for (int x = 2; x <= n; i++)\n         {\n             /* code */\n         }\n         \n"
+                },
+                {
+                    "date": 1719831488900,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n     }\n \n     std::vector<int> sieveOfEratosthenes(int n)\n     {\n-        \n+        std::vector<>\n         for (int x = 2; x <= n; i++)\n         {\n             /* code */\n         }\n"
+                },
+                {
+                    "date": 1719831503217,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n     }\n \n     std::vector<int> sieveOfEratosthenes(int n)\n     {\n-        std::vector<>\n+        std::vector<int>\n         for (int x = 2; x <= n; i++)\n         {\n             /* code */\n         }\n"
+                },
+                {
+                    "date": 1719831510852,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,10 @@\n     }\n \n     std::vector<int> sieveOfEratosthenes(int n)\n     {\n-        std::vector<int>\n+        std::vector<int> primes;\n+        \n         for (int x = 2; x <= n; i++)\n         {\n             /* code */\n         }\n"
+                },
+                {
+                    "date": 1719831518878,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n \n     std::vector<int> sieveOfEratosthenes(int n)\n     {\n         std::vector<int> primes;\n-        \n+        primes[0] = \n         for (int x = 2; x <= n; i++)\n         {\n             /* code */\n         }\n"
+                },
+                {
+                    "date": 1719831537296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,10 @@\n \n     std::vector<int> sieveOfEratosthenes(int n)\n     {\n         std::vector<int> primes;\n-        primes[0] = \n+        primes[0] = 0;\n+        \n         for (int x = 2; x <= n; i++)\n         {\n             /* code */\n         }\n"
+                },
+                {
+                    "date": 1719831543828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n     std::vector<int> sieveOfEratosthenes(int n)\n     {\n         std::vector<int> primes;\n         primes[0] = 0;\n-        \n+        primes[1] = 0;\n         for (int x = 2; x <= n; i++)\n         {\n             /* code */\n         }\n"
+                },
+                {
+                    "date": 1719831549583,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n         primes[0] = 0;\n         primes[1] = 0;\n         for (int x = 2; x <= n; i++)\n         {\n-            /* code */\n+            if()\n         }\n         \n     }\n \n"
+                },
+                {
+                    "date": 1719831556677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n         primes[0] = 0;\n         primes[1] = 0;\n         for (int x = 2; x <= n; i++)\n         {\n-            if()\n+            if(primes[])\n         }\n         \n     }\n \n"
+                },
+                {
+                    "date": 1719831597400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,11 @@\n         primes[0] = 0;\n         primes[1] = 0;\n         for (int x = 2; x <= n; i++)\n         {\n-            if(primes[])\n+            if(primes[x])\n+              continue;\n+              \n         }\n         \n     }\n \n"
+                },
+                {
+                    "date": 1719831602920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,8 +47,12 @@\n         for (int x = 2; x <= n; i++)\n         {\n             if(primes[x])\n               continue;\n+            for int i = 0; i < count; i++)\n+            {\n+                /* code */\n+            }\n               \n         }\n         \n     }\n"
+                },
+                {
+                    "date": 1719831609945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n         for (int x = 2; x <= n; i++)\n         {\n             if(primes[x])\n               continue;\n-            for int i = 0; i < count; i++)\n+            for (int u = 0; i < count; i++)\n             {\n                 /* code */\n             }\n               \n"
+                },
+                {
+                    "date": 1719831616660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n         for (int x = 2; x <= n; i++)\n         {\n             if(primes[x])\n               continue;\n-            for (int u = 0; i < count; i++)\n+            for (int u = 2 * x; u < count; i++)\n             {\n                 /* code */\n             }\n               \n"
+                },
+                {
+                    "date": 1719831621916,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n         for (int x = 2; x <= n; i++)\n         {\n             if(primes[x])\n               continue;\n-            for (int u = 2 * x; u < count; i++)\n+            for (int u = 2 * x; u <= n; )\n             {\n                 /* code */\n             }\n               \n"
+                },
+                {
+                    "date": 1719831629942,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,12 +47,10 @@\n         for (int x = 2; x <= n; i++)\n         {\n             if(primes[x])\n               continue;\n-            for (int u = 2 * x; u <= n; )\n-            {\n-                /* code */\n-            }\n+            for (int u = 2 * x; u <= n; u += x)\n+            \n               \n         }\n         \n     }\n"
+                },
+                {
+                    "date": 1719831643251,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,9 +48,9 @@\n         {\n             if(primes[x])\n               continue;\n             for (int u = 2 * x; u <= n; u += x)\n-            \n+              pri\n               \n         }\n         \n     }\n"
+                },
+                {
+                    "date": 1719831648347,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,9 +48,9 @@\n         {\n             if(primes[x])\n               continue;\n             for (int u = 2 * x; u <= n; u += x)\n-              pri\n+              primes[u] = \n               \n         }\n         \n     }\n"
+                },
+                {
+                    "date": 1719831654604,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,58 @@\n+#include <vector>\n+\n+namespace algorithms::mathematics\n+{\n+    /*\n+      The following function prime checks if a given integer n is prime. The function\n+      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n+      n, then n is prime.\n+    */\n+    bool isPrime(int n)\n+    {\n+        if(n < 2)\n+          return true;\n+        for (int x = 2; x * x <= n; x++)\n+          if(n % x == 0)\n+            return false;\n+        return true;\n+    }\n+\n+    /*\n+      Then, the following function factors constructs a vector that contains the prime\n+      factorization of n. The function divides n by its prime factors and adds them to the\n+      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n+      If n > 1, it is prime and the last factor.\n+    */\n+    std::vector<int> getFactors(int n)\n+    {\n+        std::vector<int> factors;\n+        for (int x = 2; x * x <= n; x++)\n+          while(n % x == 0)\n+          {\n+              factors.push_back(x);\n+              n /= x;\n+          }\n+\n+        if(n > 1) \n+          factors.push_back(n);\n+        \n+        return factors;\n+    }\n+\n+    std::vector<int> sieveOfEratosthenes(int n)\n+    {\n+        std::vector<int> primes;\n+        primes[0] = 0;\n+        primes[1] = 0;\n+        for (int x = 2; x <= n; i++)\n+        {\n+            if(primes[x])\n+              continue;\n+            for (int u = 2 * x; u <= n; u += x)\n+              primes[u] = 1;\n+              \n+        }\n+        \n+    }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719831662389,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n     }\n \n     std::vector<int> sieveOfEratosthenes(int n)\n     {\n-        std::vector<int> primes;\n+        std::vector<int> primes(n + 1);\n         primes[0] = 0;\n         primes[1] = 0;\n         for (int x = 2; x <= n; i++)\n         {\n@@ -54,63 +54,5 @@\n         }\n         \n     }\n \n-}\n-#include <vector>\n-\n-namespace algorithms::mathematics\n-{\n-    /*\n-      The following function prime checks if a given integer n is prime. The function\n-      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n-      n, then n is prime.\n-    */\n-    bool isPrime(int n)\n-    {\n-        if(n < 2)\n-          return true;\n-        for (int x = 2; x * x <= n; x++)\n-          if(n % x == 0)\n-            return false;\n-        return true;\n-    }\n-\n-    /*\n-      Then, the following function factors constructs a vector that contains the prime\n-      factorization of n. The function divides n by its prime factors and adds them to the\n-      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n-      If n > 1, it is prime and the last factor.\n-    */\n-    std::vector<int> getFactors(int n)\n-    {\n-        std::vector<int> factors;\n-        for (int x = 2; x * x <= n; x++)\n-          while(n % x == 0)\n-          {\n-              factors.push_back(x);\n-              n /= x;\n-          }\n-\n-        if(n > 1) \n-          factors.push_back(n);\n-        \n-        return factors;\n-    }\n-\n-    std::vector<int> sieveOfEratosthenes(int n)\n-    {\n-        std::vector<int> primes;\n-        primes[0] = 0;\n-        primes[1] = 0;\n-        for (int x = 2; x <= n; i++)\n-        {\n-            if(primes[x])\n-              continue;\n-            for (int u = 2 * x; u <= n; u += x)\n-              primes[u] = \n-              \n-        }\n-        \n-    }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719831670856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,58 @@\n+#include <vector>\n+\n+namespace algorithms::mathematics\n+{\n+    /*\n+      The following function prime checks if a given integer n is prime. The function\n+      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n+      n, then n is prime.\n+    */\n+    bool isPrime(int n)\n+    {\n+        if(n < 2)\n+          return true;\n+        for (int x = 2; x * x <= n; x++)\n+          if(n % x == 0)\n+            return false;\n+        return true;\n+    }\n+\n+    /*\n+      Then, the following function factors constructs a vector that contains the prime\n+      factorization of n. The function divides n by its prime factors and adds them to the\n+      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n+      If n > 1, it is prime and the last factor.\n+    */\n+    std::vector<int> getFactors(int n)\n+    {\n+        std::vector<int> factors;\n+        for (int x = 2; x * x <= n; x++)\n+          while(n % x == 0)\n+          {\n+              factors.push_back(x);\n+              n /= x;\n+          }\n+\n+        if(n > 1) \n+          factors.push_back(n);\n+        \n+        return factors;\n+    }\n+\n+    std::vector<int> sieveOfEratosthenes(int n)\n+    {\n+        std::vector<int> primes(n + 1, 0);\n+        primes[0] = 0;\n+        primes[1] = 0;\n+        for (int x = 2; x <= n; x++)\n+        {\n+            if(primes[x])\n+              continue;\n+            for (int u = 2 * x; u <= n; u += x)\n+              primes[u] = 1;\n+              \n+        }\n+        \n+    }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719831676146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,66 +51,7 @@\n             for (int u = 2 * x; u <= n; u += x)\n               primes[u] = 1;\n               \n         }\n-        \n     }\n \n-}\n-#include <vector>\n-\n-namespace algorithms::mathematics\n-{\n-    /*\n-      The following function prime checks if a given integer n is prime. The function\n-      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n-      n, then n is prime.\n-    */\n-    bool isPrime(int n)\n-    {\n-        if(n < 2)\n-          return true;\n-        for (int x = 2; x * x <= n; x++)\n-          if(n % x == 0)\n-            return false;\n-        return true;\n-    }\n-\n-    /*\n-      Then, the following function factors constructs a vector that contains the prime\n-      factorization of n. The function divides n by its prime factors and adds them to the\n-      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n-      If n > 1, it is prime and the last factor.\n-    */\n-    std::vector<int> getFactors(int n)\n-    {\n-        std::vector<int> factors;\n-        for (int x = 2; x * x <= n; x++)\n-          while(n % x == 0)\n-          {\n-              factors.push_back(x);\n-              n /= x;\n-          }\n-\n-        if(n > 1) \n-          factors.push_back(n);\n-        \n-        return factors;\n-    }\n-\n-    std::vector<int> sieveOfEratosthenes(int n)\n-    {\n-        std::vector<int> primes(n + 1);\n-        primes[0] = 0;\n-        primes[1] = 0;\n-        for (int x = 2; x <= n; i++)\n-        {\n-            if(primes[x])\n-              continue;\n-            for (int u = 2 * x; u <= n; u += x)\n-              primes[u] = 1;\n-              \n-        }\n-        \n-    }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719831682820,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,7 +51,9 @@\n             for (int u = 2 * x; u <= n; u += x)\n               primes[u] = 1;\n               \n         }\n+\n+        return primes;\n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719831693486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,8 @@\n             for (int u = 2 * x; u <= n; u += x)\n               primes[u] = 1;\n               \n         }\n-\n         return primes;\n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719832270944,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,60 @@\n+#include <vector>\n+\n+namespace algorithms::mathematics\n+{\n+    /*\n+      The following function prime checks if a given integer n is prime. The function\n+      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n+      n, then n is prime.\n+    */\n+    bool isPrime(int n)\n+    {\n+        if(n < 2)\n+          return true;\n+        for (int x = 2; x * x <= n; x++)\n+          if(n % x == 0)\n+            return false;\n+        return true;\n+    }\n+\n+    /*\n+      Then, the following function factors constructs a vector that contains the prime\n+      factorization of n. The function divides n by its prime factors and adds them to the\n+      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n+      If n > 1, it is prime and the last factor.\n+    */\n+    std::vector<int> getFactors(int n)\n+    {\n+        std::vector<int> factors;\n+        for (int x = 2; x * x <= n; x++)\n+          while(n % x == 0)\n+          {\n+              factors.push_back(x);\n+              n /= x;\n+          }\n+\n+        if(n > 1) \n+          factors.push_back(n);\n+        \n+        return factors;\n+    }\n+\n+    std::vector<int> sieveOfEratosthenes(int n)\n+    {\n+        std::vector<int> primes(n + 1, 0);\n+        primes[0] = 0;\n+        primes[1] = 0;\n+        for (int x = 2; x <= n; x++)\n+        {\n+            if(primes[x])\n+              continue;\n+            for (int u = 2 * x; u <= n; u += x)\n+              primes[u] = 1;\n+              \n+        }\n+        return primes;\n+    }\n+\n+    int gcd(int )\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719832276214,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,65 +54,8 @@\n         }\n         return primes;\n     }\n \n-    int gcd(int )\n+    int gcd(int a, int b)\n+    {}\n \n-}\n-#include <vector>\n-\n-namespace algorithms::mathematics\n-{\n-    /*\n-      The following function prime checks if a given integer n is prime. The function\n-      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n-      n, then n is prime.\n-    */\n-    bool isPrime(int n)\n-    {\n-        if(n < 2)\n-          return true;\n-        for (int x = 2; x * x <= n; x++)\n-          if(n % x == 0)\n-            return false;\n-        return true;\n-    }\n-\n-    /*\n-      Then, the following function factors constructs a vector that contains the prime\n-      factorization of n. The function divides n by its prime factors and adds them to the\n-      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n-      If n > 1, it is prime and the last factor.\n-    */\n-    std::vector<int> getFactors(int n)\n-    {\n-        std::vector<int> factors;\n-        for (int x = 2; x * x <= n; x++)\n-          while(n % x == 0)\n-          {\n-              factors.push_back(x);\n-              n /= x;\n-          }\n-\n-        if(n > 1) \n-          factors.push_back(n);\n-        \n-        return factors;\n-    }\n-\n-    std::vector<int> sieveOfEratosthenes(int n)\n-    {\n-        std::vector<int> primes(n + 1, 0);\n-        primes[0] = 0;\n-        primes[1] = 0;\n-        for (int x = 2; x <= n; x++)\n-        {\n-            if(primes[x])\n-              continue;\n-            for (int u = 2 * x; u <= n; u += x)\n-              primes[u] = 1;\n-              \n-        }\n-        return primes;\n-    }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719832312551,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,8 +54,9 @@\n         }\n         return primes;\n     }\n \n+     // \n     int gcd(int a, int b)\n     {}\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719832319651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n         }\n         return primes;\n     }\n \n-     // \n+     // gcd(a, b)\n     int gcd(int a, int b)\n     {}\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719832330346,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,62 @@\n+#include <vector>\n+\n+namespace algorithms::mathematics\n+{\n+    /*\n+      The following function prime checks if a given integer n is prime. The function\n+      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n+      n, then n is prime.\n+    */\n+    bool isPrime(int n)\n+    {\n+        if(n < 2)\n+          return true;\n+        for (int x = 2; x * x <= n; x++)\n+          if(n % x == 0)\n+            return false;\n+        return true;\n+    }\n+\n+    /*\n+      Then, the following function factors constructs a vector that contains the prime\n+      factorization of n. The function divides n by its prime factors and adds them to the\n+      vector. The process ends when the remaining number n has no factors between 2 and ⌊√n⌋.\n+      If n > 1, it is prime and the last factor.\n+    */\n+    std::vector<int> getFactors(int n)\n+    {\n+        std::vector<int> factors;\n+        for (int x = 2; x * x <= n; x++)\n+          while(n % x == 0)\n+          {\n+              factors.push_back(x);\n+              n /= x;\n+          }\n+\n+        if(n > 1) \n+          factors.push_back(n);\n+        \n+        return factors;\n+    }\n+\n+    std::vector<int> sieveOfEratosthenes(int n)\n+    {\n+        std::vector<int> primes(n + 1, 0);\n+        primes[0] = 0;\n+        primes[1] = 0;\n+        for (int x = 2; x <= n; x++)\n+        {\n+            if(primes[x])\n+              continue;\n+            for (int u = 2 * x; u <= n; u += x)\n+              primes[u] = 1;\n+              \n+        }\n+        return primes;\n+    }\n+\n+     // gcd(a, b)\n+    int gcd(int a, int b)\n+    {}\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719832338246,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n         }\n         return primes;\n     }\n \n-     // gcd(a, b) \n+     // gcd(a, b)  a if b\n     int gcd(int a, int b)\n     {}\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719832352904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n         }\n         return primes;\n     }\n \n-     // gcd(a, b)  a if b = 0, else gcd() \n+     // gcd(a, b)  a if b = 0, else gcd(b, a ) \n     int gcd(int a, int b)\n     {}\n \n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1719829219297,
+            "name": "Commit-0",
+            "content": "namespace algo"
+        }
+    ]
+}

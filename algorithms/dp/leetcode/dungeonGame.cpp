@@ -1,6 +1,7 @@
 #include <vector>
+#include <iostream>
 
-namespace leetcode::dp
+namespace algorithms::leetcode::dp
 {
     // https://leetcode.com/problems/dungeon-game
     /*
@@ -16,14 +17,22 @@ namespace leetcode::dp
       Note that any room can contain threats or power-ups, 
       even the first room the knight enters and the bottom-right room where the princess is imprisoned.
     */
-    int calculateMinimumHP(std::vector<std::vector<int>> dungeon) 
+    int calculateMinimumHPRec(std::vector<std::vector<int>> dungeon, int i, int j)
+    {
+        if(i == 0 && j == 0)
+          return dungeon[0][0] >= 0 ? 1 : 1 + std::abs(dungeon[0][0]);
+
+        int hp = calculateMinimumHPRec(dungeon, i, j - 1);
+        std::cout << "hp: " << hp << std::endl;
+        if(dungeon[i][j] >= 0)
+          return 1;
+        else return std::max(hp, 1 + std::abs(dungeon[i][j]));
+    }
+    int calculateMinimumHP(std::vector<std::vector<int>> dungeon)
     {
         int m = dungeon.size();
         int n = dungeon[0].size();
-        std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));
-
-        dp[0][0] = dungeon[0][0];
-   
-        return 1 - dp[m - 1][n - 1];
+        
+        return calculateMinimumHPRec(dungeon, m - 1, n - 1);
     }
 }

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/maxSumAfterPartitioning.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1719469335051,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1719469335051,
+            "name": "Commit-0",
+            "content": "#include <vector>\n#include <iostream>\n\nnamespace algorithms::leetcode::dp\n{\n    // https://leetcode.com/problems/partition-array-for-maximum-sum\n    /*\n      Given an integer array arr, partition the array into (contiguous) subArrays of length at most k. \n      After partitioning, each subArray has their values changed to become the maximum value of that subArray.\n      Return the largest sum of the given array after partitioning.\n    */\n    int maxSumAfterPartitioningRecursive(std::vector<int> xs, int idx, int k, std::vector<int>& memo)\n    {\n        if(idx > xs.size())\n          return 0;\n\n        if(memo[idx] != -1)\n          return memo[idx];\n\n        int res = 0;\n        int maxVal = 0;\n        for (int i = 0; i < std::min((int)xs.size() - idx, k); i++)\n        {\n            maxVal = std::max(maxVal, xs[idx + i]);\n            int localMax = maxSumAfterPartitioningRecursive(xs, idx + i + 1, k, memo);\n            memo[idx + i + 1] = localMax;\n            res = std::max(res, maxVal * (i + 1) + localMax);\n        }\n        \n        return res;\n    }\n\n    int maxSumAfterPartitioningDp(std::vector<int> xs, int k)\n    {\n        return 0;\n    }\n\n    int maxSumAfterPartitioning(std::vector<int> xs, int k)\n    {\n        std::vector<int> memo(xs.size() + 1, -1); \n        return maxSumAfterPartitioningRecursive(xs, 0, k, memo); \n    }\n}"
+        }
+    ]
+}

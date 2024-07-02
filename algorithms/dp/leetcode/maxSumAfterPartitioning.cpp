@@ -1,7 +1,7 @@
 #include <vector>
 #include <iostream>
 
-namespace leetcode::dp
+namespace algorithms::leetcode::dp
 {
     // https://leetcode.com/problems/partition-array-for-maximum-sum
     /*

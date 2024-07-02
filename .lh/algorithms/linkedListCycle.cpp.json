@@ -1,0 +1,58 @@
+{
+    "sourceFile": "algorithms/linkedListCycle.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1719644414095,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719644420337,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,1 @@\n+namespace algorithms::\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719644426608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,1 @@\n-namespace algorithms::\n-namespace \n\\ No newline at end of file\n+namespace algorithms::linked\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719644441635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,4 @@\n-namespace algorithms::linked\n\\ No newline at end of file\n+namespace algorithms::linked-list\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719644448152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n-namespace algorithms::linked-list\n+namespace algorithms::linkedList\n {\n-    \n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719644473782,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,27 @@\n-namespace algorithms::linkedList\n+namespace algorithms::linkedlist\n {\n+// https://leetcode.com/problems/linked-list-cycle\n+/*\n+To check if a linked list has a cycle, you can use Floyd's Tortoise and Hare algorithm, which is a two-pointer technique. \n+This approach involves using two pointers that traverse the list at different speeds. \n+If there is a cycle, the faster pointer will eventually meet the slower pointer\n+*/\n+bool hasCycle(ListNode *head) \n+{\n+     auto one_step_ptr = head;\n+     auto two_step_ptr = head->next;\n+     auto isCycle = false;\n+     while(two_step_ptr != nullptr)\n+     {\n+        if(one_step_ptr == two_step_ptr)\n+        {\n+            isCycle = true;\n+            break;\n+        }\n+        one_step_ptr = one_step_ptr->next;\n+        two_step_ptr = two_step_ptr->next != nullptr ? two_step_ptr->next->next : nullptr;\n+     }\n \n+     return isCycle;\n+}\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719644479214,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,27 +1,27 @@\n namespace algorithms::linkedlist\n {\n-// https://leetcode.com/problems/linked-list-cycle\n-/*\n-To check if a linked list has a cycle, you can use Floyd's Tortoise and Hare algorithm, which is a two-pointer technique. \n-This approach involves using two pointers that traverse the list at different speeds. \n-If there is a cycle, the faster pointer will eventually meet the slower pointer\n-*/\n-bool hasCycle(ListNode *head) \n-{\n-     auto one_step_ptr = head;\n-     auto two_step_ptr = head->next;\n-     auto isCycle = false;\n-     while(two_step_ptr != nullptr)\n-     {\n-        if(one_step_ptr == two_step_ptr)\n+    // https://leetcode.com/problems/linked-list-cycle\n+    /*\n+    To check if a linked list has a cycle, you can use Floyd's Tortoise and Hare algorithm, which is a two-pointer technique. \n+    This approach involves using two pointers that traverse the list at different speeds. \n+    If there is a cycle, the faster pointer will eventually meet the slower pointer\n+    */\n+    bool hasCycle(ListNode *head) \n+    {\n+        auto one_step_ptr = head;\n+        auto two_step_ptr = head->next;\n+        auto isCycle = false;\n+        while(two_step_ptr != nullptr)\n         {\n-            isCycle = true;\n-            break;\n+            if(one_step_ptr == two_step_ptr)\n+            {\n+                isCycle = true;\n+                break;\n+            }\n+            one_step_ptr = one_step_ptr->next;\n+            two_step_ptr = two_step_ptr->next != nullptr ? two_step_ptr->next->next : nullptr;\n         }\n-        one_step_ptr = one_step_ptr->next;\n-        two_step_ptr = two_step_ptr->next != nullptr ? two_step_ptr->next->next : nullptr;\n-     }\n \n-     return isCycle;\n-}\n+        return isCycle;\n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719644491507,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+\n+\n namespace algorithms::linkedlist\n {\n     // https://leetcode.com/problems/linked-list-cycle\n     /*\n"
+                },
+                {
+                    "date": 1719644499832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+#include \"\"\n \n-\n namespace algorithms::linkedlist\n {\n     // https://leetcode.com/problems/linked-list-cycle\n     /*\n"
+                },
+                {
+                    "date": 1719644508255,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-#include \"\"\n+#include \"list\"\n \n namespace algorithms::linkedlist\n {\n     // https://leetcode.com/problems/linked-list-cycle\n"
+                },
+                {
+                    "date": 1719644534109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-#include \"list\"\n+#include \"list.cpp\"\n \n namespace algorithms::linkedlist\n {\n     // https://leetcode.com/problems/linked-list-cycle\n"
+                }
+            ],
+            "date": 1719644414095,
+            "name": "Commit-0",
+            "content": "namespace "
+        }
+    ]
+}

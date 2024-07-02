@@ -1,0 +1,62 @@
+{
+    "sourceFile": "algorithms/codeforces/goodPrefixes.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 11,
+            "patches": [
+                {
+                    "date": 1719430672563,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719430729676,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,18 @@\n-// https://codeforces.com/problemset/problem/1985/C\n\\ No newline at end of file\n+// https://codeforces.com/problemset/problem/1985/C\n+/*\n+Alex thinks some array is good if there exists some element that can be represented as the sum of all other elements (the sum of all other elements is 0\n+ if there are no other elements). For example, the array [1,6,3,2]\n+ is good since 1+3+2=6\n+. Furthermore, the array [0]\n+ is also good. However, the arrays [1,2,3,4]\n+ and [1]\n+ are not good.\n+\n+Alex has an array 𝑎1,𝑎2,…,𝑎𝑛\n+. Help him count the number of good non-empty prefixes of the array 𝑎\n+. In other words, count the number of integers 𝑖\n+ (1≤𝑖≤𝑛\n+) such that the length 𝑖\n+ prefix (i.e. 𝑎1,𝑎2,…,𝑎𝑖\n+) is good.\n+*/\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719430739124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n // https://codeforces.com/problemset/problem/1985/C\n /*\n Alex thinks some array is good if there exists some element that can be represented as the sum of all other elements (the sum of all other elements is 0\n- if there are no other elements). For example, the array [1,6,3,2]\n- is good since 1+3+2=6\n+ if there are no other elements). For example, the array [1,6,3,2] is good since 1+3+2=6\n . Furthermore, the array [0]\n  is also good. However, the arrays [1,2,3,4]\n  and [1]\n  are not good.\n"
+                },
+                {
+                    "date": 1719430747486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,9 @@\n // https://codeforces.com/problemset/problem/1985/C\n /*\n Alex thinks some array is good if there exists some element that can be represented as the sum of all other elements (the sum of all other elements is 0\n  if there are no other elements). For example, the array [1,6,3,2] is good since 1+3+2=6\n-. Furthermore, the array [0]\n- is also good. However, the arrays [1,2,3,4]\n+Furthermore, the array [0] is also good. However, the arrays [1,2,3,4]\n  and [1]\n  are not good.\n \n Alex has an array 𝑎1,𝑎2,…,𝑎𝑛\n"
+                },
+                {
+                    "date": 1719430756795,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,9 @@\n // https://codeforces.com/problemset/problem/1985/C\n /*\n Alex thinks some array is good if there exists some element that can be represented as the sum of all other elements (the sum of all other elements is 0\n- if there are no other elements). For example, the array [1,6,3,2] is good since 1+3+2=6\n-Furthermore, the array [0] is also good. However, the arrays [1,2,3,4]\n- and [1]\n- are not good.\n-\n+if there are no other elements). For example, the array [1,6,3,2] is good since 1+3+2=6\n+Furthermore, the array [0] is also good. However, the arrays [1,2,3,4] and [1] are not good.\n Alex has an array 𝑎1,𝑎2,…,𝑎𝑛\n . Help him count the number of good non-empty prefixes of the array 𝑎\n . In other words, count the number of integers 𝑖\n  (1≤𝑖≤𝑛\n"
+                },
+                {
+                    "date": 1719430763924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n /*\n Alex thinks some array is good if there exists some element that can be represented as the sum of all other elements (the sum of all other elements is 0\n if there are no other elements). For example, the array [1,6,3,2] is good since 1+3+2=6\n Furthermore, the array [0] is also good. However, the arrays [1,2,3,4] and [1] are not good.\n-Alex has an array 𝑎1,𝑎2,…,𝑎𝑛\n+Alex has an array 𝑎1,𝑎2, .. 𝑎()\n . Help him count the number of good non-empty prefixes of the array 𝑎\n . In other words, count the number of integers 𝑖\n  (1≤𝑖≤𝑛\n ) such that the length 𝑖\n"
+                },
+                {
+                    "date": 1719430770442,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n /*\n Alex thinks some array is good if there exists some element that can be represented as the sum of all other elements (the sum of all other elements is 0\n if there are no other elements). For example, the array [1,6,3,2] is good since 1+3+2=6\n Furthermore, the array [0] is also good. However, the arrays [1,2,3,4] and [1] are not good.\n-Alex has an array 𝑎1,𝑎2, .. 𝑎()\n+Alex has an array 𝑎1,𝑎(2), .. 𝑎(n)\n . Help him count the number of good non-empty prefixes of the array 𝑎\n . In other words, count the number of integers 𝑖\n  (1≤𝑖≤𝑛\n ) such that the length 𝑖\n"
+                },
+                {
+                    "date": 1719430777808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n /*\n Alex thinks some array is good if there exists some element that can be represented as the sum of all other elements (the sum of all other elements is 0\n if there are no other elements). For example, the array [1,6,3,2] is good since 1+3+2=6\n Furthermore, the array [0] is also good. However, the arrays [1,2,3,4] and [1] are not good.\n-Alex has an array 𝑎1,𝑎(2), .. 𝑎(n)\n+Alex has an array 𝑎(1), 𝑎(2), .. , 𝑎(n)\n . Help him count the number of good non-empty prefixes of the array 𝑎\n . In other words, count the number of integers 𝑖\n  (1≤𝑖≤𝑛\n ) such that the length 𝑖\n"
+                },
+                {
+                    "date": 1719430795432,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,11 +3,6 @@\n Alex thinks some array is good if there exists some element that can be represented as the sum of all other elements (the sum of all other elements is 0\n if there are no other elements). For example, the array [1,6,3,2] is good since 1+3+2=6\n Furthermore, the array [0] is also good. However, the arrays [1,2,3,4] and [1] are not good.\n Alex has an array 𝑎(1), 𝑎(2), .. , 𝑎(n)\n-. Help him count the number of good non-empty prefixes of the array 𝑎\n-. In other words, count the number of integers 𝑖\n- (1≤𝑖≤𝑛\n-) such that the length 𝑖\n- prefix (i.e. 𝑎1,𝑎2,…,𝑎𝑖\n-) is good.\n+. Help him count the number of good non-empty prefixes of the array 𝑎.\n */\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719430806616,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,8 @@\n /*\n Alex thinks some array is good if there exists some element that can be represented as the sum of all other elements (the sum of all other elements is 0\n if there are no other elements). For example, the array [1,6,3,2] is good since 1+3+2=6\n Furthermore, the array [0] is also good. However, the arrays [1,2,3,4] and [1] are not good.\n-Alex has an array 𝑎(1), 𝑎(2), .. , 𝑎(n)\n-. Help him count the number of good non-empty prefixes of the array 𝑎.\n-*/\n\\ No newline at end of file\n+Alex has an array 𝑎(1), 𝑎(2), .. , 𝑎(n). Help him count the number of good non-empty prefixes of the array 𝑎.\n+*/\n+\n+name\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719430819112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,5 +5,8 @@\n Furthermore, the array [0] is also good. However, the arrays [1,2,3,4] and [1] are not good.\n Alex has an array 𝑎(1), 𝑎(2), .. , 𝑎(n). Help him count the number of good non-empty prefixes of the array 𝑎.\n */\n \n-namespace \n\\ No newline at end of file\n+namespace algorithms::codeforces\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719430829145,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,6 +7,6 @@\n */\n \n namespace algorithms::codeforces\n {\n-    \n+    int \n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1719430672563,
+            "name": "Commit-0",
+            "content": "// https://codeforces.com/problemset/problem/1985/C"
+        }
+    ]
+}

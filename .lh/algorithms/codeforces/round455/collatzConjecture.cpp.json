@@ -1,0 +1,38 @@
+{
+    "sourceFile": "algorithms/codeforces/round455/collatzConjecture.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1719327408510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719327416386,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         It is guaranteed that at neither of the two time points Dima remembers the teams had equal scores. \n         However, it is possible that the score did not change during his absence.\n         Help Dima and answer the question!\n     */\n-      \n+     int collatzConjecture \n \n \n      \n      \n"
+                },
+                {
+                    "date": 1719327430695,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         It is guaranteed that at neither of the two time points Dima remembers the teams had equal scores. \n         However, it is possible that the score did not change during his absence.\n         Help Dima and answer the question!\n     */\n-     int collatzConjecture \n+    int collatzConjecture()\n \n \n      \n      \n"
+                },
+                {
+                    "date": 1719327437722,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         It is guaranteed that at neither of the two time points Dima remembers the teams had equal scores. \n         However, it is possible that the score did not change during his absence.\n         Help Dima and answer the question!\n     */\n-    int collatzConjecture()\n+    int collatzConjecture(int num, int )\n \n \n      \n      \n"
+                },
+                {
+                    "date": 1719327520424,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         It is guaranteed that at neither of the two time points Dima remembers the teams had equal scores. \n         However, it is possible that the score did not change during his absence.\n         Help Dima and answer the question!\n     */\n-    int collatzConjecture(int num, int c, int )\n+    int collatzConjecture(int num, int c, int times)\n \n \n      \n      \n"
+                },
+                {
+                    "date": 1719327542096,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,42 @@\n \n namespace algorithms::codeforces::round455\n {\n     /*\n+    Recently, the first-year student Maxim learned about the Collatz conjecture, but he didn't pay much attention during the lecture, so he believes that the following process is mentioned in the conjecture:\n+\n+There is a variable 𝑥\n+ and a constant 𝑦\n+. The following operation is performed 𝑘\n+ times:\n+\n+increase 𝑥\n+ by 1\n+, then\n+while the number 𝑥\n+ is divisible by 𝑦\n+, divide it by 𝑦\n+.\n+Note that both of these actions are performed sequentially within one operation.\n+For example, if the number 𝑥=16\n+, 𝑦=3\n+, and 𝑘=2\n+, then after one operation 𝑥\n+ becomes 17\n+, and after another operation 𝑥\n+ becomes 2\n+, because after adding one, 𝑥=18\n+ is divisible by 3\n+ twice.\n+\n+Given the initial values of 𝑥\n+, 𝑦\n+, and 𝑘\n+, Maxim wants to know what is the final value of 𝑥\n+.\n+\n+   \n        \n-       \n     \n     */\n     int collatzConjecture(int num, int c, int times)\n     {\n"
+                }
+            ],
+            "date": 1719327408510,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::codeforces::round455\n{\n    /*\n        Dima loves watching soccer. In such a game, the score on the scoreboard is represented as 𝑥 : 𝑦, where 𝑥\n        is the number of goals of the first team, and 𝑦\n        is the number of goals of the second team. At any given time, only one team can score a goal, so the score 𝑥 : 𝑦\n        can change to either (𝑥 + 1) : 𝑦, or 𝑥 : (𝑦 + 1).\n        While watching a soccer game, Dima was distracted by very important matters, and after some time, \n        he returned to watching the game. Dima remembers the score right before he was distracted, \n        and the score right after he returned. Given these two scores, he wonders the following question. \n        Is it possible that, while Dima was not watching the game, the teams never had an equal score?\n        It is guaranteed that at neither of the two time points Dima remembers the teams had equal scores. \n        However, it is possible that the score did not change during his absence.\n        Help Dima and answer the question!\n    */\n      \n\n\n     \n     \n\n}"
+        }
+    ]
+}

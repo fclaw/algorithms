@@ -1,0 +1,246 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/minimumTotal.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 57,
+            "patches": [
+                {
+                    "date": 1719727035152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719727041175,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n namespace algorithms::leetcode::dp\n {\n-    \n+    int minimumTotal(vector<vector<int>>& triangle) {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719727046651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,4 @@\n namespace algorithms::leetcode::dp\n {\n-    int minimumTotal(vector<vector<int>>& triangle) {\n-        \n-    }\n+    int minimumTotal(vector<vector<int>>& triangle) { return {}}\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719727052007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n namespace algorithms::leetcode::dp\n {\n-    int minimumTotal(vector<vector<int>>& triangle) { return {}}\n+    int minimumTotal(vector<vector<int>>& triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719727071856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+#include <vector>\n+\n namespace algorithms::leetcode::dp\n {\n     int minimumTotal(vector<vector<int>>& triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719727080202,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n \n namespace algorithms::leetcode::dp\n {\n-    int minimumTotal(vector<vector<int>>& triangle) { return 0; }\n+    int minimumTotal(std::vector<std::vector<int>>& triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719727287574,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n #include <vector>\n \n namespace algorithms::leetcode::dp\n {\n+    /\n     int minimumTotal(std::vector<std::vector<int>>& triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719727297151,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,11 @@\n #include <vector>\n \n namespace algorithms::leetcode::dp\n {\n-    /\n+    //\n+    /*\n+      Given a triangle array, return the minimum path sum from top to bottom.\n+For each step, you may move to an adjacent number of the row below. More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n+    */\n     int minimumTotal(std::vector<std::vector<int>>& triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719727302837,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n {\n     //\n     /*\n       Given a triangle array, return the minimum path sum from top to bottom.\n-For each step, you may move to an adjacent number of the row below. More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n+      For each step, you may move to an adjacent number of the row below. \n+      More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n     */\n     int minimumTotal(std::vector<std::vector<int>>& triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719727315338,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n namespace algorithms::leetcode::dp\n {\n-    //\n+    // https://leetcode.com/problems/triangle\n     /*\n       Given a triangle array, return the minimum path sum from top to bottom.\n       For each step, you may move to an adjacent number of the row below. \n       More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n"
+                },
+                {
+                    "date": 1719733667361,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,6 +7,7 @@\n       Given a triangle array, return the minimum path sum from top to bottom.\n       For each step, you may move to an adjacent number of the row below. \n       More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n     */\n+   \n     int minimumTotal(std::vector<std::vector<int>>& triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733676945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,7 @@\n       Given a triangle array, return the minimum path sum from top to bottom.\n       For each step, you may move to an adjacent number of the row below. \n       More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n     */\n-   \n+    int minimumTotalRec()\n     int minimumTotal(std::vector<std::vector<int>>& triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733695938,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n #include <vector>\n \n+\n+\n namespace algorithms::leetcode::dp\n {\n     // https://leetcode.com/problems/triangle\n     /*\n"
+                },
+                {
+                    "date": 1719733707734,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n #include <vector>\n \n+using Triangle = std::vector<std::vector<int>>;\n \n-\n namespace algorithms::leetcode::dp\n {\n     // https://leetcode.com/problems/triangle\n     /*\n"
+                },
+                {
+                    "date": 1719733713174,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,6 +10,6 @@\n       For each step, you may move to an adjacent number of the row below. \n       More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n     */\n     int minimumTotalRec()\n-    int minimumTotal(std::vector<std::vector<int>>& triangle) { return 0; }\n+    int minimumTotal(s& triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733722770,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,7 +9,7 @@\n       Given a triangle array, return the minimum path sum from top to bottom.\n       For each step, you may move to an adjacent number of the row below. \n       More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n     */\n-    int minimumTotalRec()\n-    int minimumTotal(s& triangle) { return 0; }\n+    int minimumTotalRec(Triangle triangle, int )\n+    int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733729019,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,7 +9,10 @@\n       Given a triangle array, return the minimum path sum from top to bottom.\n       For each step, you may move to an adjacent number of the row below. \n       More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n     */\n-    int minimumTotalRec(Triangle triangle, int )\n+    int minimumTotalRec(Triangle triangle, int r)\n+    {\n+        \n+    }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733737812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,18 @@\n+#include <vector>\n+\n+using Triangle = std::vector<std::vector<int>>;\n+\n+namespace algorithms::leetcode::dp\n+{\n+    // https://leetcode.com/problems/triangle\n+    /*\n+      Given a triangle array, return the minimum path sum from top to bottom.\n+      For each step, you may move to an adjacent number of the row below. \n+      More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n+    */\n+    int minimumTotalRec(Triangle triangle, int r)\n+    {\n+        if()\n+    }\n+    int minimumTotal(Triangle triangle) { return 0; }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733745171,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,26 +11,9 @@\n       More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n     */\n     int minimumTotalRec(Triangle triangle, int r)\n     {\n-        if()\n+        if(r == 0)\n+          return \n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n-}\n-#include <vector>\n-\n-using Triangle = std::vector<std::vector<int>>;\n-\n-namespace algorithms::leetcode::dp\n-{\n-    // https://leetcode.com/problems/triangle\n-    /*\n-      Given a triangle array, return the minimum path sum from top to bottom.\n-      For each step, you may move to an adjacent number of the row below. \n-      More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n-    */\n-    int minimumTotalRec(Triangle triangle, int r)\n-    {\n-        \n-    }\n-    int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733752542,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,8 @@\n     */\n     int minimumTotalRec(Triangle triangle, int r)\n     {\n         if(r == 0)\n-          return \n+          return triangle[0][0];\n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733790630,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,7 +13,9 @@\n     int minimumTotalRec(Triangle triangle, int r)\n     {\n         if(r == 0)\n           return triangle[0][0];\n+       \n+          \n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733800570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,10 @@\n     int minimumTotalRec(Triangle triangle, int r)\n     {\n         if(r == 0)\n           return triangle[0][0];\n-       \n-          \n+        \n+        int res = INT\n+\n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733810863,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,10 @@\n     {\n         if(r == 0)\n           return triangle[0][0];\n         \n-        int res = INT\n+        int res = INT32_MIN;\n+        for()\n \n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733824673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         if(r == 0)\n           return triangle[0][0];\n         \n         int res = INT32_MIN;\n-        for()\n+        for(int i = 0; i < )\n \n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733834204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         if(r == 0)\n           return triangle[0][0];\n         \n         int res = INT32_MIN;\n-        for(int i = 0; i < )\n+        for(int i = 0; i < triangle[r])\n \n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733845796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,24 @@\n+#include <vector>\n+\n+using Triangle = std::vector<std::vector<int>>;\n+\n+namespace algorithms::leetcode::dp\n+{\n+    // https://leetcode.com/problems/triangle\n+    /*\n+      Given a triangle array, return the minimum path sum from top to bottom.\n+      For each step, you may move to an adjacent number of the row below. \n+      More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n+    */\n+    int minimumTotalRec(Triangle triangle, int r)\n+    {\n+        if(r == 0)\n+          return triangle[0][0];\n+        \n+        int res = INT32_MIN;\n+        for(int i = 0; i < triangle[r].size(); i++ )\n+          \n+\n+    }\n+    int minimumTotal(Triangle triangle) { return 0; }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733858352,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,32 +16,9 @@\n           return triangle[0][0];\n         \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-          \n+            triangle[r]\n \n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n-}\n-#include <vector>\n-\n-using Triangle = std::vector<std::vector<int>>;\n-\n-namespace algorithms::leetcode::dp\n-{\n-    // https://leetcode.com/problems/triangle\n-    /*\n-      Given a triangle array, return the minimum path sum from top to bottom.\n-      For each step, you may move to an adjacent number of the row below. \n-      More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n-    */\n-    int minimumTotalRec(Triangle triangle, int r)\n-    {\n-        if(r == 0)\n-          return triangle[0][0];\n-        \n-        int res = INT32_MIN;\n-        for(int i = 0; i < triangle[r])\n-\n-    }\n-    int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733878264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n           return triangle[0][0];\n         \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-            triangle[r]\n+            std::max(triangle[r]\n \n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733883813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n           return triangle[0][0];\n         \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-            std::max(triangle[r]\n+            std::max(triangle[r][i] \n \n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733890411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n           return triangle[0][0];\n         \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-            std::max(triangle[r][i] \n+            std::max(triangle[r][i] + \n \n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733900087,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n           return triangle[0][0];\n         \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-            std::max(triangle[r][i] + \n+            std::max(triangle[r][i] + minimumTotalRec()\n \n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733906828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n           return triangle[0][0];\n         \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-            std::max(triangle[r][i] + minimumTotalRec()\n+            std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1)\n \n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733919949,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n           return triangle[0][0];\n         \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-            std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1)\n+            std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1), triangle[r][i] + minimumTotalRec(triangle, r - 1) \n \n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733927951,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n           return triangle[0][0];\n         \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-            std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1), triangle[r][i] + minimumTotalRec(triangle, r - 1) \n+             std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1), triangle[r][i] + minimumTotalRec(triangle, r - 1)) \n \n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733937080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n           return triangle[0][0];\n         \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-             std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1), triangle[r][i] + minimumTotalRec(triangle, r - 1)) \n+           res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1), triangle[r][i] + minimumTotalRec(triangle, r - 1)) \n \n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733944028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,25 @@\n+#include <vector>\n+\n+using Triangle = std::vector<std::vector<int>>;\n+\n+namespace algorithms::leetcode::dp\n+{\n+    // https://leetcode.com/problems/triangle\n+    /*\n+      Given a triangle array, return the minimum path sum from top to bottom.\n+      For each step, you may move to an adjacent number of the row below. \n+      More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n+    */\n+    int minimumTotalRec(Triangle triangle, int r)\n+    {\n+        if(r == 0)\n+          return triangle[0][0];\n+        \n+        int res = INT32_MIN;\n+        for(int i = 0; i < triangle[r].size(); i++ )\n+           res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1), triangle[r][i] + minimumTotalRec(triangle, r - 1)));\n+           \n+\n+    }\n+    int minimumTotal(Triangle triangle) { return 0; }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733949237,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,33 +17,8 @@\n         \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n            res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1), triangle[r][i] + minimumTotalRec(triangle, r - 1)));\n-           \n-\n+        return res;\n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n-}\n-#include <vector>\n-\n-using Triangle = std::vector<std::vector<int>>;\n-\n-namespace algorithms::leetcode::dp\n-{\n-    // https://leetcode.com/problems/triangle\n-    /*\n-      Given a triangle array, return the minimum path sum from top to bottom.\n-      For each step, you may move to an adjacent number of the row below. \n-      More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n-    */\n-    int minimumTotalRec(Triangle triangle, int r)\n-    {\n-        if(r == 0)\n-          return triangle[0][0];\n-        \n-        int res = INT32_MIN;\n-        for(int i = 0; i < triangle[r].size(); i++ )\n-           res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1), triangle[r][i] + minimumTotalRec(triangle, r - 1)) \n-\n-    }\n-    int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733962089,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n           return triangle[0][0];\n         \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-           res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1), triangle[r][i] + minimumTotalRec(triangle, r - 1)));\n+           res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, ), triangle[r][i] + minimumTotalRec(triangle, r - 1)));\n         return res;\n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719733967552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n       Given a triangle array, return the minimum path sum from top to bottom.\n       For each step, you may move to an adjacent number of the row below. \n       More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n     */\n-    int minimumTotalRec(Triangle triangle, int r)\n+    int minimumTotalRec(Triangle triangle, int r, int c)\n     {\n         if(r == 0)\n           return triangle[0][0];\n         \n"
+                },
+                {
+                    "date": 1719733980383,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n           return triangle[0][0];\n         \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-           res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, ), triangle[r][i] + minimumTotalRec(triangle, r - 1)));\n+           res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i ), triangle[r][i] + minimumTotalRec(triangle, r - 1)));\n         return res;\n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719734014696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n           return triangle[0][0];\n         \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-           res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i ), triangle[r][i] + minimumTotalRec(triangle, r - 1)));\n+           res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1)));\n         return res;\n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719734028937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,11 +14,12 @@\n     {\n         if(r == 0)\n           return triangle[0][0];\n         \n+        \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-           res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1)));\n+           res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n         return res;\n     }\n     int minimumTotal(Triangle triangle) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719734034365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,9 @@\n     int minimumTotalRec(Triangle triangle, int r, int c)\n     {\n         if(r == 0)\n           return triangle[0][0];\n-        \n-        \n+\n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n            res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n         return res;\n"
+                },
+                {
+                    "date": 1719734042730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,10 @@\n     {\n         if(r == 0)\n           return triangle[0][0];\n \n+        if(c > )\n+\n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n            res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n         return res;\n"
+                },
+                {
+                    "date": 1719734054331,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n     {\n         if(r == 0)\n           return triangle[0][0];\n \n-        if(c > )\n+        if(c == triangle[])\n \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n            res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n"
+                },
+                {
+                    "date": 1719734064156,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,10 @@\n     {\n         if(r == 0)\n           return triangle[0][0];\n \n-        if(c == triangle[])\n+        if(c == triangle[r].size())\n+          return \n \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n            res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n"
+                },
+                {
+                    "date": 1719734069305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         if(r == 0)\n           return triangle[0][0];\n \n         if(c == triangle[r].size())\n-          return \n+          return INT32_MIN;\n \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n            res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n"
+                },
+                {
+                    "date": 1719734081938,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,6 +22,6 @@\n         for(int i = 0; i < triangle[r].size(); i++ )\n            res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n         return res;\n     }\n-    int minimumTotal(Triangle triangle) { return 0; }\n+    int minimumTotal(Triangle triangle) { return minimumTotalRec(tra); }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719734090394,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,6 +22,6 @@\n         for(int i = 0; i < triangle[r].size(); i++ )\n            res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n         return res;\n     }\n-    int minimumTotal(Triangle triangle) { return minimumTotalRec(tra); }\n+    int minimumTotal(Triangle triangle) { return minimumTotalRec(triangle, tra); }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719734099189,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,6 +22,6 @@\n         for(int i = 0; i < triangle[r].size(); i++ )\n            res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n         return res;\n     }\n-    int minimumTotal(Triangle triangle) { return minimumTotalRec(triangle, tra); }\n+    int minimumTotal(Triangle triangle) { return minimumTotalRec(triangle, triangle.size() - 1, ); }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719734194989,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n using Triangle = std::vector<std::vector<int>>;\n \n-namespace algorithms::leetcode::dp\n+namespace algorithms::leetcode\n {\n     // https://leetcode.com/problems/triangle\n     /*\n       Given a triangle array, return the minimum path sum from top to bottom.\n@@ -22,6 +22,6 @@\n         for(int i = 0; i < triangle[r].size(); i++ )\n            res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n         return res;\n     }\n-    int minimumTotal(Triangle triangle) { return minimumTotalRec(triangle, triangle.size() - 1, ); }\n+    int minimumTotal(Triangle triangle) { return minimumTotalRec(triangle, triangle.size() - 1, 0); }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719734275502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n using Triangle = std::vector<std::vector<int>>;\n \n-namespace algorithms::leetcode\n+namespace algorithms::dp::leetcode\n {\n     // https://leetcode.com/problems/triangle\n     /*\n       Given a triangle array, return the minimum path sum from top to bottom.\n"
+                },
+                {
+                    "date": 1719734302462,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n           return INT32_MIN;\n \n         int res = INT32_MIN;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-           res = std::max(res, std::max(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n+           res = std::max(res, std::min(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n         return res;\n     }\n     int minimumTotal(Triangle triangle) { return minimumTotalRec(triangle, triangle.size() - 1, 0); }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719734310382,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,11 +17,11 @@\n \n         if(c == triangle[r].size())\n           return INT32_MIN;\n \n-        int res = INT32_MIN;\n+        int res = INT32_MAX;\n         for(int i = 0; i < triangle[r].size(); i++ )\n-           res = std::max(res, std::min(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n+           res = std::min(res, std::min(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n         return res;\n     }\n     int minimumTotal(Triangle triangle) { return minimumTotalRec(triangle, triangle.size() - 1, 0); }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719734315494,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         if(r == 0)\n           return triangle[0][0];\n \n         if(c == triangle[r].size())\n-          return INT32_MIN;\n+          return INT32_MAX;\n \n         int res = INT32_MAX;\n         for(int i = 0; i < triangle[r].size(); i++ )\n            res = std::min(res, std::min(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n"
+                },
+                {
+                    "date": 1719734353082,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n     {\n         if(r == 0)\n           return triangle[0][0];\n \n-        if(c == triangle[r].size())\n+        if(c > triangle[r].size())\n           return INT32_MAX;\n \n         int res = INT32_MAX;\n         for(int i = 0; i < triangle[r].size(); i++ )\n"
+                },
+                {
+                    "date": 1719734381520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n         if(c >= triangle[r].size())\n           return INT32_MAX;\n \n         int res = INT32_MAX;\n-        for(int i = 0; i < triangle[r].size(); i++ )\n+        for(int i = 0; i < triangle[r].size(); i++)\n            res = std::min(res, std::min(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n         return res;\n     }\n     int minimumTotal(Triangle triangle) { return minimumTotalRec(triangle, triangle.size() - 1, 0); }\n"
+                },
+                {
+                    "date": 1719734504311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,27 @@\n+#include <vector>\n+\n+using Triangle = std::vector<std::vector<int>>;\n+\n+namespace algorithms::dp::leetcode\n+{\n+    // https://leetcode.com/problems/triangle\n+    /*\n+      Given a triangle array, return the minimum path sum from top to bottom.\n+      For each step, you may move to an adjacent number of the row below. \n+      More formally, if you are on index i on the current row, you may move to either index i or index i + 1 on the next row.\n+    */\n+    int minimumTotalRec(Triangle triangle, int r, int c)\n+    {\n+        if(r == 0)\n+          return triangle[0][0];\n+\n+        if(c >= triangle[r].size())\n+          return INT32_MAX;\n+\n+        int res = INT32_MAX;\n+        for(int i = 0; i < triangle[r].size(); i++)\n+           res = std::min(res, std::min(triangle[r][i] + minimumTotalRec(triangle, r - 1, i), triangle[r][i] + minimumTotalRec(triangle, r - 1, i + 1)));\n+        return res;\n+    }\n+    int minimumTotal(Triangle triangle) { return minimumTotalRec(triangle, triangle.size() - 1, 0); }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1719727035152,
+            "name": "Commit-0",
+            "content": "namespace algorithms::leetcode::dp\n{\n    \n}"
+        }
+    ]
+}

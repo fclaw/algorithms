@@ -1,0 +1,38 @@
+{
+    "sourceFile": "algorithms/array/leetcode/nextGreaterElements.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1719479533722,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719479550992,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,6 @@\n \n \n-name\n\\ No newline at end of file\n+namespace algorithms::leetcode::array\n+vector<int> nextGreaterElements(vector<int>& nums) {\n+        \n+    }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719479556588,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n \n \n namespace algorithms::leetcode::array\n+{\n vector<int> nextGreaterElements(vector<int>& nums) {\n         \n\\ No newline at end of file\n-    }\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719479566315,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n \n \n namespace algorithms::leetcode::array\n {\n-vector<int> nextGreaterElements(vector<int>& nums) {\n-        \n+    vector<int> nextGreaterElements(vector<int>& nums) \n+    {\n+        return     \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719479573088,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n \n \n namespace algorithms::leetcode::array\n {\n-    vector<int> nextGreaterElements(vector<int>& nums) \n+    std::vector<int> nextGreaterElements(vector<int>& nums) \n     {\n         return {};    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719479586235,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+#include <vector>\n \n-\n namespace algorithms::leetcode::array\n {\n     std::vector<int> nextGreaterElements(std::vector<int>& nums) \n     {\n"
+                }
+            ],
+            "date": 1719479533722,
+            "name": "Commit-0",
+            "content": "\n\nname"
+        }
+    ]
+}

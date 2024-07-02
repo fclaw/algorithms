@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 59,
+            "activePatchIndex": 60,
             "patches": [
                 {
                     "date": 1718275501188,
@@ -244,6 +244,10 @@
                 {
                     "date": 1718794889388,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         for (size_t i = 1; i < n; i++)\n           dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n \n         for (size_t i = 1; i < m; i++)\n-          dp[i][0] = std::max(dp[i][0], dp[0][i - 1]);\n+          dp[i][0] = std::max(dp[i][0], dp[i - 1][0]);\n \n         printMaximalSquareDp(dp);\n  \n         return dp[m - 1][n - 1];\n"
+                },
+                {
+                    "date": 1719315354265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n         std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));\n \n         dp[0][0] = rect[0][0] - '0';\n \n-        for (size_t i = 1; i < n; i++)\n+        for (int i = 1; i < n; i++)\n           dp[0][i] = std::max(dp[0][i], dp[0][i - 1]);\n \n         for (size_t i = 1; i < m; i++)\n           dp[i][0] = std::max(dp[i][0], dp[i - 1][0]);\n"
                 }
             ],
             "date": 1718275501188,

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "algorithms/array/leetcode/largestRectangleArea.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1719466280329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1719466280329,
+            "name": "Commit-0",
+            "content": "#include <vector>\n\nnamespace algo leetcode::array\n{\n    // https://leetcode.com/problems/largest-rectangle-in-histogram\n    // Given an array of integers heights representing the histogram's bar height \n    // where the width of each bar is 1, return the area of the largest rectangle in the histogram.\n    int largestRectangleArea(std::vector<int>& heights) { return 0; }\n}"
+        }
+    ]
+}

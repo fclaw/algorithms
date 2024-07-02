@@ -1,0 +1,22 @@
+{
+    "sourceFile": "algorithms/dailyTemperatures.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1719466195997,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719466203222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-namespace \n\\ No newline at end of file\n+namespace leet\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1719466195997,
+            "name": "Commit-0",
+            "content": "namespace "
+        }
+    ]
+}

@@ -1,6 +1,6 @@
 #include <vector>
 
-namespace leetcode::dp
+namespace algorithms::leetcode::dp
 {
     // https://leetcode.com/problems/minimum-cost-for-tickets
     /*

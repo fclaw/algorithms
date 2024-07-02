@@ -1,0 +1,26 @@
+{
+    "sourceFile": "algorithms/array/leetcode/combinationSum.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1719469560128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719469583386,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,62 @@\n #include <vector>\n \n namespace algorithms::leetcode::array\n {\n-    \n+    // https://leetcode.com/problems/combination-sum\n+/*\n+Step-by-Step Approach\n+Sort the Array (Optional):\n+\n+1 (optional) Sorting the array can help in pruning branches early if you decide to skip further exploration when the current sum exceeds the target.\n+\n+2 Define the Backtracking Function:\n+  Create a recursive function that takes the current combination, \n+  the remaining target, the start index, and the original array as arguments.\n+\n+  - Base Cases:\n+      If the remaining target is zero, add the current combination to the list of results.\n+      If the remaining target is less than zero or if the start index is out of bounds, return without adding the combination.\n+\n+  - Recursive Exploration:\n+      Iterate over the array starting from the current index.\n+      Include the current element in the combination and recursively call the function with the updated combination and target.\n+      Exclude the current element and move to the next index.\n+\n+3 Backtracking: After exploring with the current element, remove it from the combination to explore other possibilities.\n+*/\n+void combinationSumHelper(size_t idx, vector<int> xs, int& target, vector<int>& ys, vector<vector<int>>& acc)\n+{\n+    auto n = xs.size();\n+    if(target == 0)\n+      acc.push_back(ys);\n+    else if(target < 0)\n+      return;\n+    else if (idx == n)\n+      return;\n+    else\n+    { \n+        // Include the current element in the combination and \n+        // recursively call the function with the updated combination and target.\n+        ys.push_back(xs[idx]);\n+        target -= xs[idx];\n+        combinationSumHelper(idx, xs, target, ys, acc);\n+        // Exclude the current element and move to the next index.\n+        ys.pop_back();\n+        target += xs[idx];\n+        combinationSumHelper(idx + 1, xs, target, ys, acc);\n+    }\n+}\n+\n+vector<vector<int>> combinationSum(vector<int>& candidates, int target)\n+{\n+    std::sort(candidates.begin(), candidates.end());\n+    vector<vector<int>> combinationXs = {};\n+    for (size_t i = 0; i < candidates.size(); i++)\n+    {\n+      vector<int> ys = {candidates[i]};\n+      int val = target - candidates[i];\n+      combinationSumHelper(i, candidates, val, ys, combinationXs);\n+    }\n+    return combinationXs;\n+}\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719469592074,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         Include the current element in the combination and recursively call the function with the updated combination and target.\n         Exclude the current element and move to the next index.\n \n     3 Backtracking: After exploring with the current element, remove it from the combination to explore other possibilities.\n-*/\n+    */\n void combinationSumHelper(size_t idx, vector<int> xs, int& target, vector<int>& ys, vector<vector<int>>& acc)\n {\n     auto n = xs.size();\n     if(target == 0)\n"
+                }
+            ],
+            "date": 1719469560128,
+            "name": "Commit-0",
+            "content": "#include <vector>\n\nnamespace algorithms::leetcode::array\n{\n    // https://leetcode.com/problems/daily-temperatures\n    // Given an array of integers temperatures represents the daily temperatures, \n    // return an array answer such that answer[i] is the number of days you have to wait after \n    // the ith day to get a warmer temperature. \n    // If there is no future day for which this is possible, keep answer[i] == 0 instead.\n    std::vector<int> dailyTemperatures(std::vector<int> heights) { return {}; }\n}"
+        }
+    ]
+}

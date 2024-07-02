@@ -2,9 +2,11 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include <optional>
 
 using SubstringPalindromeMemo = std::vector<std::vector<std::string>>;
 using SubstringPalindromeDp = std::vector<std::vector<std::string>>;
+using SubstringPalindromeTupleDp = std::vector<std::vector<std::pair<int, int>>>;
 
 void printSubstringPalindromeDp(SubstringPalindromeDp dp)
 {
@@ -57,22 +59,28 @@ namespace algorithms::leetcode::dp
     std::string longestSubstringPalindromeDp(std::string s)
     {
         int n = s.size();
-        SubstringPalindromeDp dp(n, std::vector<std::string>(n, std::string()));
+        SubstringPalindromeTupleDp dp(n, std::vector<std::pair<int, int>>(n, {-1, -1}));
 
         for (int i = 0; i < n; i++)
-          dp[i][i] = s[i];
+          dp[i][i] = {i, i};
         
         for(int i = n - 2; i >= 0; i--)
           for(int j = i + 1; j < n; j++)
           {
-               if(isPalindrome(s, i, j))
-                 dp[i][j] = s.substr(i, j - i + 1);
+               if(s[i] == s[j] &&
+                  isPalindrome(s, i + 1, j - 1))
+                 dp[i][j] = {i, j};
                else
-                 if(dp[i][j - 1].size() > dp[i + 1][j].size())
+                 if(dp[i][j - 1].second - dp[i][j - 1].first > dp[i + 1][j].second - dp[i + 1][j].first)
                    dp[i][j] = dp[i][j - 1];
                  else dp[i][j] = dp[i + 1][j];
           }
-        return dp[0][n - 1];
+        auto res = dp[0][n - 1];
+        
+        int f = res.first;
+        int l = res.second;
+
+        return s.substr(f, l - f + 1);
     }
 
     std::string longestSubstringPalindrome(std::string s) { return longestSubstringPalindromeDp(s); }

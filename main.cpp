@@ -110,5 +110,5 @@ int main()
        "nbkzvtbqdsknsrknsykqzucevgmmcoanilsyyklpbxqosoquolvytefh"
        "vozwtwcrmbnyijbammlzrgalrymyfpysbqpjwzirsfknnyseiujadovn"
        "gogvptphuyzkrwgjqwdhtvgxnmxuheofplizpxijfytfabx";
-    std::cout << algorithms::leetcode::dp::longestSubstringPalindrome(case4) << std::endl;
+    std::cout << algorithms::leetcode::dp::longestSubstringPalindrome(case2) << std::endl;
 }

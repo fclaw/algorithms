@@ -1,0 +1,18 @@
+{
+    "sourceFile": "algorithms/onlinejudge/ratAttack.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1720188137290,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1720188137290,
+            "name": "Commit-0",
+            "content": "namespace algorithms::onlinejudge\n{\n    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1301\n    \n}"
+        }
+    ]
+}

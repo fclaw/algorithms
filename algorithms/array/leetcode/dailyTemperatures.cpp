@@ -1,6 +1,6 @@
 #include <vector>
 
-namespace algorithms::leetcode::array
+namespace algorithms::array::leetcode
 {
     // https://leetcode.com/problems/daily-temperatures
     // Given an array of integers temperatures represents the daily temperatures, 

@@ -1,0 +1,530 @@
+{
+    "sourceFile": "algorithms/onlinejudge/greedy/dragonOfLoowater.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 128,
+            "patches": [
+                {
+                    "date": 1720345000273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1720345134495,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n {\n     // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     { \n-        return std::nullopt; \n+        return std::; \n     }\n     \n     void canLoowaterBeSaved() \n     {\n"
+                },
+                {
+                    "date": 1720345140788,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n {\n     // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     { \n-        return std::; \n+        return std::make_op; \n     }\n     \n     void canLoowaterBeSaved() \n     {\n"
+                },
+                {
+                    "date": 1720345155927,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n {\n     // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     { \n-        return std::make_op; \n+        return std::nullopt; \n     }\n     \n     void canLoowaterBeSaved() \n     {\n"
+                },
+                {
+                    "date": 1720345178232,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n \n namespace algorithms::onlinejudge::greedy\n {\n     // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n+    \n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     { \n         return std::nullopt; \n     }\n"
+                },
+                {
+                    "date": 1720345185659,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,29 @@\n+#include <optional>\n+#include <cstdio>\n+#include <vector>\n+\n+using arr = std::vector<int>;\n+\n+namespace algorithms::onlinejudge::greedy\n+{\n+    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n+    /*\n+    The input contains several test cases. The first line of each test case contains two integers between 1 and 20000 inclusive, indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n+The last test case is followed by a line containing ‘0 0’.\n+    */\n+    std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n+    { \n+        return std::nullopt; \n+    }\n+    \n+    void canLoowaterBeSaved() \n+    {\n+        arr dragonHeads = {};\n+        arr knightsHeights = {};\n+        auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n+        if(ans.has_value())\n+          printf(\"%d\", ans.value());\n+        else printf(\"%s\", \"Loowater is doomed!\");\n+    }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720345193352,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,11 @@\n \n namespace algorithms::onlinejudge::greedy\n {\n     // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n-    /*\n-    The input contains several test cases. The first line of each test case contains two integers between 1 and 20000 inclusive, indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n+    /* \n+       The input contains several test cases. \n+       The first line of each test case contains two integers between 1 and 20000 inclusive, indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n The last test case is followed by a line containing ‘0 0’.\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     { \n@@ -25,31 +26,5 @@\n           printf(\"%d\", ans.value());\n         else printf(\"%s\", \"Loowater is doomed!\");\n     }\n \n-}\n-#include <optional>\n-#include <cstdio>\n-#include <vector>\n-\n-using arr = std::vector<int>;\n-\n-namespace algorithms::onlinejudge::greedy\n-{\n-    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n-    \n-    std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n-    { \n-        return std::nullopt; \n-    }\n-    \n-    void canLoowaterBeSaved() \n-    {\n-        arr dragonHeads = {};\n-        arr knightsHeights = {};\n-        auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n-        if(ans.has_value())\n-          printf(\"%d\", ans.value());\n-        else printf(\"%s\", \"Loowater is doomed!\");\n-    }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720345202566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,11 @@\n {\n     // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n     /* \n        The input contains several test cases. \n-       The first line of each test case contains two integers between 1 and 20000 inclusive, indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n+       The first line of each test case contains two integers between 1 and 20000 inclusive, \n+       indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n+       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n The last test case is followed by a line containing ‘0 0’.\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     { \n"
+                },
+                {
+                    "date": 1720345225660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n     /* \n        The input contains several test cases. \n        The first line of each test case contains two integers between 1 and 20000 inclusive, \n        indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n-       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n+       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimeteters. The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n The last test case is followed by a line containing ‘0 0’.\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     { \n"
+                },
+                {
+                    "date": 1720345234303,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n     /* \n        The input contains several test cases. \n        The first line of each test case contains two integers between 1 and 20000 inclusive, \n        indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n-       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimeteters. The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n+       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n The last test case is followed by a line containing ‘0 0’.\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     { \n"
+                },
+                {
+                    "date": 1720345251750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,10 @@\n     /* \n        The input contains several test cases. \n        The first line of each test case contains two integers between 1 and 20000 inclusive, \n        indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n-       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n+       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n+       The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n The last test case is followed by a line containing ‘0 0’.\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     { \n"
+                },
+                {
+                    "date": 1720345260818,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,33 @@\n+#include <optional>\n+#include <cstdio>\n+#include <vector>\n+\n+using arr = std::vector<int>;\n+\n+namespace algorithms::onlinejudge::greedy\n+{\n+    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n+    /* \n+       The input contains several test cases. \n+       The first line of each test case contains two integers between 1 and 20000 inclusive, \n+       indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n+       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n+       The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n+       The last test case is followed by a line containing ‘0 0’.\n+    */\n+    std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n+    { \n+        return std::nullopt; \n+    }\n+    \n+    void canLoowaterBeSaved() \n+    {\n+        arr dragonHeads = {};\n+        arr knightsHeights = {};\n+        auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n+        if(ans.has_value())\n+          printf(\"%d\", ans.value());\n+        else printf(\"%s\", \"Loowater is doomed!\");\n+    }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720345284936,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,46 +21,14 @@\n     }\n     \n     void canLoowaterBeSaved() \n     {\n+        \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n         auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n         if(ans.has_value())\n           printf(\"%d\", ans.value());\n         else printf(\"%s\", \"Loowater is doomed!\");\n     }\n \n-}\n-#include <optional>\n-#include <cstdio>\n-#include <vector>\n-\n-using arr = std::vector<int>;\n-\n-namespace algorithms::onlinejudge::greedy\n-{\n-    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n-    /* \n-       The input contains several test cases. \n-       The first line of each test case contains two integers between 1 and 20000 inclusive, \n-       indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n-       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n-       The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n-The last test case is followed by a line containing ‘0 0’.\n-    */\n-    std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n-    { \n-        return std::nullopt; \n-    }\n-    \n-    void canLoowaterBeSaved() \n-    {\n-        arr dragonHeads = {};\n-        arr knightsHeights = {};\n-        auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n-        if(ans.has_value())\n-          printf(\"%d\", ans.value());\n-        else printf(\"%s\", \"Loowater is doomed!\");\n-    }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720345297162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,10 @@\n     }\n     \n     void canLoowaterBeSaved() \n     {\n+\n+\n         \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n         auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n"
+                },
+                {
+                    "date": 1720345303051,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,10 +22,10 @@\n     \n     void canLoowaterBeSaved() \n     {\n \n+        while()\n \n-        \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n         auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n         if(ans.has_value())\n"
+                },
+                {
+                    "date": 1720345327263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,9 @@\n     \n     void canLoowaterBeSaved() \n     {\n \n+        int \n         while()\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720345341953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n     \n     void canLoowaterBeSaved() \n     {\n \n-        int \n+        int N\n         while()\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720345349554,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,10 +22,10 @@\n     \n     void canLoowaterBeSaved() \n     {\n \n-        int N\n-        while()\n+        int N, M;\n+        while(N)\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n         auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n"
+                },
+                {
+                    "date": 1720345356685,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     void canLoowaterBeSaved() \n     {\n \n         int N, M;\n-        while(N)\n+        while(N != 0 && N )\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n         auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n"
+                },
+                {
+                    "date": 1720345365677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,10 +23,13 @@\n     void canLoowaterBeSaved() \n     {\n \n         int N, M;\n-        while(N != 0 && N )\n+        while(N != 0 && N != 0)\n+        {\n \n+        }\n+\n         arr dragonHeads = {};\n         arr knightsHeights = {};\n         auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n         if(ans.has_value())\n"
+                },
+                {
+                    "date": 1720345531786,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-\n+            sca   \n         }\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720345539009,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            sca   \n+            scanf(\"\")   \n         }\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720345544303,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"\")   \n+            scanf(\"%d\")   \n         }\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720345550352,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d\")   \n+            scanf(\"%d{/s}\")   \n         }\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720345555924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d{/s}\")   \n+            scanf(\"%d{/s}%d\")   \n         }\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720345564570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d{/s}%d\")   \n+            scanf(\"%d{/s}%d\", N, M);   \n         }\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720345584769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d{/s}%d\", N, M);   \n+            scanf(\"%d{/s}%d\", &N, &M);   \n         }\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720345598598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,10 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d{/s}%d\", &N, &M);   \n+            scanf(\"%d{/s}%d\", &N, &M);\n+            \n         }\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720345605058,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         int N, M;\n         while(N != 0 && N != 0)\n         {\n             scanf(\"%d{/s}%d\", &N, &M);\n-            \n+            printf()\n         }\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720345613140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         int N, M;\n         while(N != 0 && N != 0)\n         {\n             scanf(\"%d{/s}%d\", &N, &M);\n-            printf()\n+            printf(\"%d\", N)\n         }\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720345652722,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,10 +25,10 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d{/s}%d\", &N, &M);\n-            printf(\"%d\", N)\n+            scanf(\"%d{\\s}%d\", &N, &M);\n+            printf(\"%d\", N);\n         }\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720345668110,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d{\\s}%d\", &N, &M);\n+            scanf(\"%d[\\s]%d\", &N, &M);\n             printf(\"%d\", N);\n         }\n \n         arr dragonHeads = {};\n"
+                },
+                {
+                    "date": 1720345675660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d[\\s]%d\", &N, &M);\n+            scanf(\"%d\\s%d\", &N, &M);\n             printf(\"%d\", N);\n         }\n \n         arr dragonHeads = {};\n"
+                },
+                {
+                    "date": 1720345683613,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d\\s%d\", &N, &M);\n+            scanf(\"%d{\\\\s}%d\", &N, &M);\n             printf(\"%d\", N);\n         }\n \n         arr dragonHeads = {};\n"
+                },
+                {
+                    "date": 1720345696661,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d{\\\\s}%d\", &N, &M);\n+            scanf(\"%d[\\\\s}%d\", &N, &M);\n             printf(\"%d\", N);\n         }\n \n         arr dragonHeads = {};\n"
+                },
+                {
+                    "date": 1720345702234,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d[\\\\s}%d\", &N, &M);\n+            scanf(\"%d[\\\\s]{1}%d\", &N, &M);\n             printf(\"%d\", N);\n         }\n \n         arr dragonHeads = {};\n"
+                },
+                {
+                    "date": 1720345715745,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d[\\\\s]{1}%d\", &N, &M);\n+            scanf(\"%d{1}%d\", &N, &M);\n             printf(\"%d\", N);\n         }\n \n         arr dragonHeads = {};\n"
+                },
+                {
+                    "date": 1720345918972,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d{1}%d\", &N, &M);\n+            scanf(\"%d%d\", &N, &M);\n             printf(\"%d\", N);\n         }\n \n         arr dragonHeads = {};\n"
+                },
+                {
+                    "date": 1720345924959,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d%d\", &N, &M);\n+            scanf(\"%d%\\s%d\", &N, &M);\n             printf(\"%d\", N);\n         }\n \n         arr dragonHeads = {};\n"
+                },
+                {
+                    "date": 1720345935568,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d%\\s%d\", &N, &M);\n+            scanf(\"%d%s%d\", &N, &M);\n             printf(\"%d\", N);\n         }\n \n         arr dragonHeads = {};\n"
+                },
+                {
+                    "date": 1720345956285,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d%s%d\", &N, &M);\n+            scanf(\"%d\\s%d\", &N, &M);\n             printf(\"%d\", N);\n         }\n \n         arr dragonHeads = {};\n"
+                },
+                {
+                    "date": 1720345963413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d\\s%d\", &N, &M);\n+            scanf(\"%d\\\\s%d\", &N, &M);\n             printf(\"%d\", N);\n         }\n \n         arr dragonHeads = {};\n"
+                },
+                {
+                    "date": 1720347143720,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n         int N, M;\n         while(N != 0 && N != 0)\n         {\n-            scanf(\"%d\\\\s%d\", &N, &M);\n+            scanf(\"%d %d\", &N, &M);\n             printf(\"%d\", N);\n         }\n \n         arr dragonHeads = {};\n"
+                },
+                {
+                    "date": 1720347180947,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         int N, M;\n         while(N != 0 && N != 0)\n         {\n             scanf(\"%d %d\", &N, &M);\n-            printf(\"%d\", N);\n+            \n         }\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720347206005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         int N, M;\n         while(N != 0 && N != 0)\n         {\n             scanf(\"%d %d\", &N, &M);\n-            \n+            std::\n         }\n \n         arr dragonHeads = {};\n         arr knightsHeights = {};\n"
+                },
+                {
+                    "date": 1720347214834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,16 +26,9 @@\n         int N, M;\n         while(N != 0 && N != 0)\n         {\n             scanf(\"%d %d\", &N, &M);\n-            std::\n+            arr \n         }\n-\n-        arr dragonHeads = {};\n-        arr knightsHeights = {};\n-        auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n-        if(ans.has_value())\n-          printf(\"%d\", ans.value());\n-        else printf(\"%s\", \"Loowater is doomed!\");\n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720347220268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,14 @@\n         int N, M;\n         while(N != 0 && N != 0)\n         {\n             scanf(\"%d %d\", &N, &M);\n-            arr \n+            arr dragonHeads = {};\n+        arr knightsHeights = {};\n+        auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n+        if(ans.has_value())\n+          printf(\"%d\", ans.value());\n+        else printf(\"%s\", \"Loowater is doomed!\"); \n         }\n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720347227690,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,13 +27,13 @@\n         while(N != 0 && N != 0)\n         {\n             scanf(\"%d %d\", &N, &M);\n             arr dragonHeads = {};\n-        arr knightsHeights = {};\n-        auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n-        if(ans.has_value())\n-          printf(\"%d\", ans.value());\n-        else printf(\"%s\", \"Loowater is doomed!\"); \n+            arr knightsHeights = {};\n+            auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n+            if(ans.has_value())\n+              printf(\"%d\", ans.value());\n+            else printf(\"%s\", \"Loowater is doomed!\"); \n         }\n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720347233739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,40 @@\n+#include <optional>\n+#include <cstdio>\n+#include <vector>\n+\n+using arr = std::vector<int>;\n+\n+namespace algorithms::onlinejudge::greedy\n+{\n+    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n+    /* \n+       The input contains several test cases. \n+       The first line of each test case contains two integers between 1 and 20000 inclusive, \n+       indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n+       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n+       The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n+       The last test case is followed by a line containing ‘0 0’.\n+    */\n+    std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n+    { \n+        return std::nullopt; \n+    }\n+    \n+    void canLoowaterBeSaved() \n+    {\n+\n+        int N, M;\n+        while(N != 0 && N != 0)\n+        {\n+            scanf(\"%d %d\", &N, &M);\n+            arr dragonHeads;\n+            arr knightsHeights = {};\n+            auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n+            if(ans.has_value())\n+              printf(\"%d\", ans.value());\n+            else \n+              printf(\"%s\", \"Loowater is doomed!\"); \n+        }\n+    }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720347239203,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         int N, M;\n         while(N != 0 && N != 0)\n         {\n             scanf(\"%d %d\", &N, &M);\n-            arr dragonHeads;\n+            arr dragonHeads(N);\n             arr knightsHeights = {};\n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n               printf(\"%d\", ans.value());\n@@ -36,44 +36,5 @@\n               printf(\"%s\", \"Loowater is doomed!\"); \n         }\n     }\n \n-}\n-#include <optional>\n-#include <cstdio>\n-#include <vector>\n-\n-using arr = std::vector<int>;\n-\n-namespace algorithms::onlinejudge::greedy\n-{\n-    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n-    /* \n-       The input contains several test cases. \n-       The first line of each test case contains two integers between 1 and 20000 inclusive, \n-       indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n-       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n-       The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n-       The last test case is followed by a line containing ‘0 0’.\n-    */\n-    std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n-    { \n-        return std::nullopt; \n-    }\n-    \n-    void canLoowaterBeSaved() \n-    {\n-\n-        int N, M;\n-        while(N != 0 && N != 0)\n-        {\n-            scanf(\"%d %d\", &N, &M);\n-            arr dragonHeads = {};\n-            arr knightsHeights = {};\n-            auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n-            if(ans.has_value())\n-              printf(\"%d\", ans.value());\n-            else printf(\"%s\", \"Loowater is doomed!\"); \n-        }\n-    }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720347245548,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n         while(N != 0 && N != 0)\n         {\n             scanf(\"%d %d\", &N, &M);\n             arr dragonHeads(N);\n-            arr knightsHeights = {};\n+            arr knightsHeights(M);\n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n               printf(\"%d\", ans.value());\n             else \n"
+                },
+                {
+                    "date": 1720347260413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,8 +28,11 @@\n         {\n             scanf(\"%d %d\", &N, &M);\n             arr dragonHeads(N);\n             arr knightsHeights(M);\n+            \n+            while()\n+\n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n               printf(\"%d\", ans.value());\n             else \n"
+                },
+                {
+                    "date": 1720347266937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,8 +29,9 @@\n             scanf(\"%d %d\", &N, &M);\n             arr dragonHeads(N);\n             arr knightsHeights(M);\n             \n+            int \n             while()\n \n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n"
+                },
+                {
+                    "date": 1720347272536,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n             scanf(\"%d %d\", &N, &M);\n             arr dragonHeads(N);\n             arr knightsHeights(M);\n             \n-            int \n+            int i = 0;\n             while()\n \n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n"
+                },
+                {
+                    "date": 1720347278548,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n             arr dragonHeads(N);\n             arr knightsHeights(M);\n             \n             int i = 0;\n-            while()\n+            while(i < N)\n \n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n               printf(\"%d\", ans.value());\n"
+                },
+                {
+                    "date": 1720347290166,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,9 @@\n             arr knightsHeights(M);\n             \n             int i = 0;\n             while(i < N)\n+                \n \n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n               printf(\"%d\", ans.value());\n"
+                },
+                {
+                    "date": 1720347343592,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,11 @@\n             arr knightsHeights(M);\n             \n             int i = 0;\n             while(i < N)\n-                \n+            {\n+                int \n+            }    \n \n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n               printf(\"%d\", ans.value());\n"
+                },
+                {
+                    "date": 1720347352671,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,10 @@\n             \n             int i = 0;\n             while(i < N)\n             {\n-                int \n+                int x;\n+                scanf(\"\")\n             }    \n \n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n"
+                },
+                {
+                    "date": 1720347358373,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,10 @@\n             int i = 0;\n             while(i < N)\n             {\n                 int x;\n-                scanf(\"\")\n+                scanf(\"%d\", %x);\n+                \n             }    \n \n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n"
+                },
+                {
+                    "date": 1720347368982,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n             while(i < N)\n             {\n                 int x;\n                 scanf(\"%d\", %x);\n-                \n+                dragonHeads.push_back()\n             }    \n \n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n"
+                },
+                {
+                    "date": 1720347374099,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,10 +33,10 @@\n             int i = 0;\n             while(i < N)\n             {\n                 int x;\n-                scanf(\"%d\", %x);\n-                dragonHeads.push_back()\n+                scanf(\"%d\", &x);\n+                dragonHeads.push_back(x);\n             }    \n \n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n"
+                },
+                {
+                    "date": 1720347396449,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,10 @@\n             {\n                 int x;\n                 scanf(\"%d\", &x);\n                 dragonHeads.push_back(x);\n-            }    \n+                i++;\n+            };\n \n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n               printf(\"%d\", ans.value());\n"
+                },
+                {
+                    "date": 1720347405270,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,59 @@\n+#include <optional>\n+#include <cstdio>\n+#include <vector>\n+\n+using arr = std::vector<int>;\n+\n+namespace algorithms::onlinejudge::greedy\n+{\n+    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n+    /* \n+       The input contains several test cases. \n+       The first line of each test case contains two integers between 1 and 20000 inclusive, \n+       indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n+       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n+       The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n+       The last test case is followed by a line containing ‘0 0’.\n+    */\n+    std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n+    { \n+        return std::nullopt; \n+    }\n+    \n+    void canLoowaterBeSaved() \n+    {\n+\n+        int N, M;\n+        while(N != 0 && N != 0)\n+        {\n+            scanf(\"%d %d\", &N, &M);\n+            arr dragonHeads(N);\n+            arr knightsHeights(M);\n+            \n+            int i = 0;\n+            while(i < N)\n+            {\n+                int x;\n+                scanf(\"%d\", &x);\n+                dragonHeads.push_back(x);\n+                i++;\n+            };\n+\n+            int i = 0;\n+            while(i < N)\n+            {\n+                int x;\n+                scanf(\"%d\", &x);\n+                dragonHeads.push_back(x);\n+                i++;\n+            };\n+\n+            auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n+            if(ans.has_value())\n+              printf(\"%d\", ans.value());\n+            else \n+              printf(\"%s\", \"Loowater is doomed!\"); \n+        }\n+    }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720347411338,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,10 +38,10 @@\n                 dragonHeads.push_back(x);\n                 i++;\n             };\n \n-            int i = 0;\n-            while(i < N)\n+            int j = 0;\n+            while(j < N)\n             {\n                 int x;\n                 scanf(\"%d\", &x);\n                 dragonHeads.push_back(x);\n@@ -55,55 +55,5 @@\n               printf(\"%s\", \"Loowater is doomed!\"); \n         }\n     }\n \n-}\n-#include <optional>\n-#include <cstdio>\n-#include <vector>\n-\n-using arr = std::vector<int>;\n-\n-namespace algorithms::onlinejudge::greedy\n-{\n-    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n-    /* \n-       The input contains several test cases. \n-       The first line of each test case contains two integers between 1 and 20000 inclusive, \n-       indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n-       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n-       The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n-       The last test case is followed by a line containing ‘0 0’.\n-    */\n-    std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n-    { \n-        return std::nullopt; \n-    }\n-    \n-    void canLoowaterBeSaved() \n-    {\n-\n-        int N, M;\n-        while(N != 0 && N != 0)\n-        {\n-            scanf(\"%d %d\", &N, &M);\n-            arr dragonHeads(N);\n-            arr knightsHeights(M);\n-            \n-            int i = 0;\n-            while(i < N)\n-            {\n-                int x;\n-                scanf(\"%d\", &x);\n-                dragonHeads.push_back(x);\n-                i++;\n-            };\n-\n-            auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n-            if(ans.has_value())\n-              printf(\"%d\", ans.value());\n-            else \n-              printf(\"%s\", \"Loowater is doomed!\"); \n-        }\n-    }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720347417108,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,13 +39,13 @@\n                 i++;\n             };\n \n             int j = 0;\n-            while(j < N)\n+            while(j < M)\n             {\n                 int x;\n                 scanf(\"%d\", &x);\n-                dragonHeads.push_back(x);\n+                knightsHeights.push_back(x);\n                 i++;\n             };\n \n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n"
+                },
+                {
+                    "date": 1720347500501,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n             {\n                 int x;\n                 scanf(\"%d\", &x);\n                 knightsHeights.push_back(x);\n-                i++;\n+                j++;\n             };\n \n             auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n"
+                },
+                {
+                    "date": 1720349612413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,12 +13,14 @@\n        indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n        The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n        The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n        The last test case is followed by a line containing ‘0 0’.\n+\n+       In order to chop off a head, a knight must be at least as tall as the diameter of the head\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     { \n-        return std::nullopt; \n+        return std::nullopt;\n     }\n     \n     void canLoowaterBeSaved() \n     {\n"
+                },
+                {
+                    "date": 1720349618858,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,8 @@\n        indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n        The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n        The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n        The last test case is followed by a line containing ‘0 0’.\n-\n        In order to chop off a head, a knight must be at least as tall as the diameter of the head\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     { \n"
+                },
+                {
+                    "date": 1720349738364,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,10 @@\n        indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n        The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n        The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n        The last test case is followed by a line containing ‘0 0’.\n-       In order to chop off a head, a knight must be at least as tall as the diameter of the head\n+       In order to chop off a head, a knight must be at least as tall as the diameter of the head.\n+       The knights’ union demands that for chopping off a head, a knight must be paid a wage equal to one gold coin for each centimetre of the knight’s height\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     { \n         return std::nullopt;\n"
+                },
+                {
+                    "date": 1720349748114,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,10 @@\n        The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n        The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n        The last test case is followed by a line containing ‘0 0’.\n        In order to chop off a head, a knight must be at least as tall as the diameter of the head.\n-       The knights’ union demands that for chopping off a head, a knight must be paid a wage equal to one gold coin for each centimetre of the knight’s height\n+       The knights’ union demands that for chopping off a head, a knight must be paid a wage \n+       equal to one gold coin for each centimetre of the knight’s height\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     { \n         return std::nullopt;\n"
+                },
+                {
+                    "date": 1720349833023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,10 @@\n        The knights’ union demands that for chopping off a head, a knight must be paid a wage \n        equal to one gold coin for each centimetre of the knight’s height\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n-    { \n+    {\n+        \n         return std::nullopt;\n     }\n     \n     void canLoowaterBeSaved() \n"
+                },
+                {
+                    "date": 1720349839431,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n        equal to one gold coin for each centimetre of the knight’s height\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     {\n-        \n+        // sort \n         return std::nullopt;\n     }\n     \n     void canLoowaterBeSaved() \n"
+                },
+                {
+                    "date": 1720349857827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n        equal to one gold coin for each centimetre of the knight’s height\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     {\n-        // sort \n+        // sort the arrays \n         return std::nullopt;\n     }\n     \n     void canLoowaterBeSaved() \n"
+                },
+                {
+                    "date": 1720349870588,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,10 @@\n        equal to one gold coin for each centimetre of the knight’s height\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     {\n-        // sort the arrays \n+        // sort the arrays in an increasing order\n+        std::sort\n         return std::nullopt;\n     }\n     \n     void canLoowaterBeSaved() \n"
+                },
+                {
+                    "date": 1720349880001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     {\n         // sort the arrays in an increasing order\n-        std::sort\n+        std::sort(xs.begin())\n         return std::nullopt;\n     }\n     \n     void canLoowaterBeSaved() \n"
+                },
+                {
+                    "date": 1720349885160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n     */\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     {\n         // sort the arrays in an increasing order\n-        std::sort(xs.begin())\n+        std::sort(xs.begin(), xs.end());\n         return std::nullopt;\n     }\n     \n     void canLoowaterBeSaved() \n"
+                },
+                {
+                    "date": 1720349894059,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,9 @@\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     {\n         // sort the arrays in an increasing order\n         std::sort(xs.begin(), xs.end());\n+        std::sort(ys.begin(), xs.end());\n         return std::nullopt;\n     }\n     \n     void canLoowaterBeSaved() \n"
+                },
+                {
+                    "date": 1720349915463,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,13 @@\n     std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     {\n         // sort the arrays in an increasing order\n         std::sort(xs.begin(), xs.end());\n-        std::sort(ys.begin(), xs.end());\n+        std::sort(ys.begin(), ys.end());\n+\n+        int \n+        while()\n+\n         return std::nullopt;\n     }\n     \n     void canLoowaterBeSaved() \n"
+                },
+                {
+                    "date": 1720349921930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n         // sort the arrays in an increasing order\n         std::sort(xs.begin(), xs.end());\n         std::sort(ys.begin(), ys.end());\n \n-        int \n+        int i = j = 0;\n         while()\n \n         return std::nullopt;\n     }\n"
+                },
+                {
+                    "date": 1720349928638,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n         std::sort(xs.begin(), xs.end());\n         std::sort(ys.begin(), ys.end());\n \n         int i = j = 0;\n-        while()\n+        while(i < )\n \n         return std::nullopt;\n     }\n     \n"
+                },
+                {
+                    "date": 1720349937157,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n         std::sort(xs.begin(), xs.end());\n         std::sort(ys.begin(), ys.end());\n \n         int i = j = 0;\n-        while(i < )\n+        while(i < xs.)\n \n         return std::nullopt;\n     }\n     \n"
+                },
+                {
+                    "date": 1720349946124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,10 +23,11 @@\n         // sort the arrays in an increasing order\n         std::sort(xs.begin(), xs.end());\n         std::sort(ys.begin(), ys.end());\n \n+        int n = \n         int i = j = 0;\n-        while(i < xs.)\n+        while(i < )\n \n         return std::nullopt;\n     }\n     \n"
+                },
+                {
+                    "date": 1720349957075,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,10 @@\n         // sort the arrays in an increasing order\n         std::sort(xs.begin(), xs.end());\n         std::sort(ys.begin(), ys.end());\n \n-        int n = \n+        int n = xs.size();\n+        int m = ys.size()\n         int i = j = 0;\n         while(i < )\n \n         return std::nullopt;\n"
+                },
+                {
+                    "date": 1720349975318,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,10 +24,10 @@\n         std::sort(xs.begin(), xs.end());\n         std::sort(ys.begin(), ys.end());\n \n         int n = xs.size();\n-        int m = ys.size()\n-        int i = j = 0;\n+        int m = ys.size();\n+        int i = 0j = 0;\n         while(i < )\n \n         return std::nullopt;\n     }\n"
+                },
+                {
+                    "date": 1720349983980,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,10 +25,10 @@\n         std::sort(ys.begin(), ys.end());\n \n         int n = xs.size();\n         int m = ys.size();\n-        int i = 0j = 0;\n-        while(i < )\n+        int i, j = 0;\n+        while(i < n && )\n \n         return std::nullopt;\n     }\n     \n"
+                },
+                {
+                    "date": 1720349989189,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,12 @@\n \n         int n = xs.size();\n         int m = ys.size();\n         int i, j = 0;\n-        while(i < n && )\n+        while(i < n && j < m)\n+        {\n+            \n+        }\n \n         return std::nullopt;\n     }\n     \n"
+                },
+                {
+                    "date": 1720349994578,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,13 +26,14 @@\n \n         int n = xs.size();\n         int m = ys.size();\n         int i, j = 0;\n+        \n         while(i < n && j < m)\n         {\n-            \n-        }\n \n+        };\n+\n         return std::nullopt;\n     }\n     \n     void canLoowaterBeSaved() \n"
+                },
+                {
+                    "date": 1720349999990,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \n         int n = xs.size();\n         int m = ys.size();\n         int i, j = 0;\n-        \n+        int reward \n         while(i < n && j < m)\n         {\n \n         };\n"
+                },
+                {
+                    "date": 1720350006206,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \n         int n = xs.size();\n         int m = ys.size();\n         int i, j = 0;\n-        int reward \n+        auto reward = \n         while(i < n && j < m)\n         {\n \n         };\n"
+                },
+                {
+                    "date": 1720350013714,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \n         int n = xs.size();\n         int m = ys.size();\n         int i, j = 0;\n-        auto reward = \n+        auto reward = std::nullopt;\n         while(i < n && j < m)\n         {\n \n         };\n"
+                },
+                {
+                    "date": 1720350019840,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n         {\n \n         };\n \n-        return std::nullopt;\n+        return reward;\n     }\n     \n     void canLoowaterBeSaved() \n     {\n"
+                },
+                {
+                    "date": 1720350025662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         int i, j = 0;\n         auto reward = std::nullopt;\n         while(i < n && j < m)\n         {\n-\n+            if()\n         };\n \n         return reward;\n     }\n"
+                },
+                {
+                    "date": 1720350033363,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         int i, j = 0;\n         auto reward = std::nullopt;\n         while(i < n && j < m)\n         {\n-            if()\n+            if(xs[])\n         };\n \n         return reward;\n     }\n"
+                },
+                {
+                    "date": 1720350039895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         int i, j = 0;\n         auto reward = std::nullopt;\n         while(i < n && j < m)\n         {\n-            if(xs[])\n+            if(xs[i] > )\n         };\n \n         return reward;\n     }\n"
+                },
+                {
+                    "date": 1720350049689,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         int i, j = 0;\n         auto reward = std::nullopt;\n         while(i < n && j < m)\n         {\n-            if(xs[i] > )\n+            if(xs[i] > ys[])\n         };\n \n         return reward;\n     }\n"
+                },
+                {
+                    "date": 1720350056186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,11 @@\n         int i, j = 0;\n         auto reward = std::nullopt;\n         while(i < n && j < m)\n         {\n-            if(xs[i] > ys[])\n+            if(xs[i] > ys[j])\n+              j++\n+              con\n         };\n \n         return reward;\n     }\n"
+                },
+                {
+                    "date": 1720350062861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n         while(i < n && j < m)\n         {\n             if(xs[i] > ys[j])\n               j++\n-              con\n+              continue;\n         };\n \n         return reward;\n     }\n"
+                },
+                {
+                    "date": 1720350070815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,10 +30,14 @@\n         auto reward = std::nullopt;\n         while(i < n && j < m)\n         {\n             if(xs[i] > ys[j])\n-              j++\n+            {\n+              j++;\n               continue;\n+            }\n+\n+            \n         };\n \n         return reward;\n     }\n"
+                },
+                {
+                    "date": 1720350077713,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n               j++;\n               continue;\n             }\n \n-            \n+            req\n         };\n \n         return reward;\n     }\n"
+                },
+                {
+                    "date": 1720350085604,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n               j++;\n               continue;\n             }\n \n-            req\n+            reward += \n         };\n \n         return reward;\n     }\n"
+                },
+                {
+                    "date": 1720350091790,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,10 @@\n               j++;\n               continue;\n             }\n \n-            reward += \n+            reward += ys[j];\n+            \n         };\n \n         return reward;\n     }\n"
+                },
+                {
+                    "date": 1720350097061,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,10 @@\n               continue;\n             }\n \n             reward += ys[j];\n-            \n+            i++;\n+            j++;\n         };\n \n         return reward;\n     }\n"
+                },
+                {
+                    "date": 1720350169479,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         int i, j = 0;\n         auto reward = std::nullopt;\n         while(i < n && j < m)\n         {\n-            if(xs[i] > ys[j])\n+            if(xs[i] < )\n             {\n               j++;\n               continue;\n             }\n"
+                },
+                {
+                    "date": 1720350183607,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         int i, j = 0;\n         auto reward = std::nullopt;\n         while(i < n && j < m)\n         {\n-            if(xs[i] < )\n+            if(xs[i] < ys[j])\n             {\n               j++;\n               continue;\n             }\n"
+                },
+                {
+                    "date": 1720350188867,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n         while(i < n && j < m)\n         {\n             if(xs[i] < ys[j])\n             {\n-              j++;\n+              i++;\n               continue;\n             }\n \n             reward += ys[j];\n"
+                },
+                {
+                    "date": 1720350197243,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         int i, j = 0;\n         auto reward = std::nullopt;\n         while(i < n && j < m)\n         {\n-            if(xs[i] < ys[j])\n+            while(xs[i] < ys[j])\n             {\n               i++;\n               continue;\n             }\n"
+                },
+                {
+                    "date": 1720350203968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,80 @@\n+#include <optional>\n+#include <cstdio>\n+#include <vector>\n+\n+using arr = std::vector<int>;\n+\n+namespace algorithms::onlinejudge::greedy\n+{\n+    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n+    /* \n+       The input contains several test cases. \n+       The first line of each test case contains two integers between 1 and 20000 inclusive, \n+       indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n+       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n+       The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n+       The last test case is followed by a line containing ‘0 0’.\n+       In order to chop off a head, a knight must be at least as tall as the diameter of the head.\n+       The knights’ union demands that for chopping off a head, a knight must be paid a wage \n+       equal to one gold coin for each centimetre of the knight’s height\n+    */\n+    std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n+    {\n+        // sort the arrays in an increasing order\n+        std::sort(xs.begin(), xs.end());\n+        std::sort(ys.begin(), ys.end());\n+\n+        int n = xs.size();\n+        int m = ys.size();\n+        int i, j = 0;\n+        auto reward = std::nullopt;\n+        while(i < n && j < m)\n+        {\n+            while(xs[i] < ys[j])\n+              i++;\n+\n+            reward += ys[j];\n+            i++;\n+            j++;\n+        };\n+\n+        return reward;\n+    }\n+    \n+    void canLoowaterBeSaved() \n+    {\n+\n+        int N, M;\n+        while(N != 0 && N != 0)\n+        {\n+            scanf(\"%d %d\", &N, &M);\n+            arr dragonHeads(N);\n+            arr knightsHeights(M);\n+            \n+            int i = 0;\n+            while(i < N)\n+            {\n+                int x;\n+                scanf(\"%d\", &x);\n+                dragonHeads.push_back(x);\n+                i++;\n+            };\n+\n+            int j = 0;\n+            while(j < M)\n+            {\n+                int x;\n+                scanf(\"%d\", &x);\n+                knightsHeights.push_back(x);\n+                j++;\n+            };\n+\n+            auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n+            if(ans.has_value())\n+              printf(\"%d\", ans.value());\n+            else \n+              printf(\"%s\", \"Loowater is doomed!\"); \n+        }\n+    }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720350212716,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \n         int n = xs.size();\n         int m = ys.size();\n         int i, j = 0;\n-        auto reward = std::nullopt;\n+        int reward = std::nullopt;\n         while(i < n && j < m)\n         {\n             while(xs[i] < ys[j])\n               i++;\n@@ -76,88 +76,5 @@\n               printf(\"%s\", \"Loowater is doomed!\"); \n         }\n     }\n \n-}\n-#include <optional>\n-#include <cstdio>\n-#include <vector>\n-\n-using arr = std::vector<int>;\n-\n-namespace algorithms::onlinejudge::greedy\n-{\n-    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n-    /* \n-       The input contains several test cases. \n-       The first line of each test case contains two integers between 1 and 20000 inclusive, \n-       indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n-       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n-       The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n-       The last test case is followed by a line containing ‘0 0’.\n-       In order to chop off a head, a knight must be at least as tall as the diameter of the head.\n-       The knights’ union demands that for chopping off a head, a knight must be paid a wage \n-       equal to one gold coin for each centimetre of the knight’s height\n-    */\n-    std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n-    {\n-        // sort the arrays in an increasing order\n-        std::sort(xs.begin(), xs.end());\n-        std::sort(ys.begin(), ys.end());\n-\n-        int n = xs.size();\n-        int m = ys.size();\n-        int i, j = 0;\n-        auto reward = std::nullopt;\n-        while(i < n && j < m)\n-        {\n-            while(xs[i] < ys[j])\n-            {\n-              i++;\n-              continue;\n-            }\n-\n-            reward += ys[j];\n-            i++;\n-            j++;\n-        };\n-\n-        return reward;\n-    }\n-    \n-    void canLoowaterBeSaved() \n-    {\n-\n-        int N, M;\n-        while(N != 0 && N != 0)\n-        {\n-            scanf(\"%d %d\", &N, &M);\n-            arr dragonHeads(N);\n-            arr knightsHeights(M);\n-            \n-            int i = 0;\n-            while(i < N)\n-            {\n-                int x;\n-                scanf(\"%d\", &x);\n-                dragonHeads.push_back(x);\n-                i++;\n-            };\n-\n-            int j = 0;\n-            while(j < M)\n-            {\n-                int x;\n-                scanf(\"%d\", &x);\n-                knightsHeights.push_back(x);\n-                j++;\n-            };\n-\n-            auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n-            if(ans.has_value())\n-              printf(\"%d\", ans.value());\n-            else \n-              printf(\"%s\", \"Loowater is doomed!\"); \n-        }\n-    }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720350223893,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,79 @@\n+#include <optional>\n+#include <cstdio>\n+#include <vector>\n+\n+using arr = std::vector<int>;\n+\n+namespace algorithms::onlinejudge::greedy\n+{\n+    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n+    /* \n+       The input contains several test cases. \n+       The first line of each test case contains two integers between 1 and 20000 inclusive, \n+       indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n+       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n+       The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n+       The last test case is followed by a line containing ‘0 0’.\n+       In order to chop off a head, a knight must be at least as tall as the diameter of the head.\n+       The knights’ union demands that for chopping off a head, a knight must be paid a wage \n+       equal to one gold coin for each centimetre of the knight’s height\n+    */\n+    std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n+    {\n+        // sort the arrays in an increasing order\n+        std::sort(xs.begin(), xs.end());\n+        std::sort(ys.begin(), ys.end());\n+\n+        int n = xs.size();\n+        int m = ys.size();\n+        int i, j, reward = 0;\n+        while(i < n && j < m)\n+        {\n+            while(xs[i] < ys[j])\n+              i++;\n+\n+            reward += ys[j];\n+            i++;\n+            j++;\n+        };\n+\n+        return reward;\n+    }\n+    \n+    void canLoowaterBeSaved() \n+    {\n+\n+        int N, M;\n+        while(N != 0 && N != 0)\n+        {\n+            scanf(\"%d %d\", &N, &M);\n+            arr dragonHeads(N);\n+            arr knightsHeights(M);\n+            \n+            int i = 0;\n+            while(i < N)\n+            {\n+                int x;\n+                scanf(\"%d\", &x);\n+                dragonHeads.push_back(x);\n+                i++;\n+            };\n+\n+            int j = 0;\n+            while(j < M)\n+            {\n+                int x;\n+                scanf(\"%d\", &x);\n+                knightsHeights.push_back(x);\n+                j++;\n+            };\n+\n+            auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n+            if(ans.has_value())\n+              printf(\"%d\", ans.value());\n+            else \n+              printf(\"%s\", \"Loowater is doomed!\"); \n+        }\n+    }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720350244608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,15 +30,14 @@\n         while(i < n && j < m)\n         {\n             while(xs[i] < ys[j])\n               i++;\n-\n             reward += ys[j];\n             i++;\n             j++;\n         };\n \n-        return reward;\n+        return std::make_optional(reward;\n     }\n     \n     void canLoowaterBeSaved() \n     {\n@@ -75,85 +74,5 @@\n               printf(\"%s\", \"Loowater is doomed!\"); \n         }\n     }\n \n-}\n-#include <optional>\n-#include <cstdio>\n-#include <vector>\n-\n-using arr = std::vector<int>;\n-\n-namespace algorithms::onlinejudge::greedy\n-{\n-    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n-    /* \n-       The input contains several test cases. \n-       The first line of each test case contains two integers between 1 and 20000 inclusive, \n-       indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n-       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n-       The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n-       The last test case is followed by a line containing ‘0 0’.\n-       In order to chop off a head, a knight must be at least as tall as the diameter of the head.\n-       The knights’ union demands that for chopping off a head, a knight must be paid a wage \n-       equal to one gold coin for each centimetre of the knight’s height\n-    */\n-    std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n-    {\n-        // sort the arrays in an increasing order\n-        std::sort(xs.begin(), xs.end());\n-        std::sort(ys.begin(), ys.end());\n-\n-        int n = xs.size();\n-        int m = ys.size();\n-        int i, j = 0;\n-        int reward = std::nullopt;\n-        while(i < n && j < m)\n-        {\n-            while(xs[i] < ys[j])\n-              i++;\n-\n-            reward += ys[j];\n-            i++;\n-            j++;\n-        };\n-\n-        return reward;\n-    }\n-    \n-    void canLoowaterBeSaved() \n-    {\n-\n-        int N, M;\n-        while(N != 0 && N != 0)\n-        {\n-            scanf(\"%d %d\", &N, &M);\n-            arr dragonHeads(N);\n-            arr knightsHeights(M);\n-            \n-            int i = 0;\n-            while(i < N)\n-            {\n-                int x;\n-                scanf(\"%d\", &x);\n-                dragonHeads.push_back(x);\n-                i++;\n-            };\n-\n-            int j = 0;\n-            while(j < M)\n-            {\n-                int x;\n-                scanf(\"%d\", &x);\n-                knightsHeights.push_back(x);\n-                j++;\n-            };\n-\n-            auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n-            if(ans.has_value())\n-              printf(\"%d\", ans.value());\n-            else \n-              printf(\"%s\", \"Loowater is doomed!\"); \n-        }\n-    }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720350250481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,10 +34,9 @@\n             reward += ys[j];\n             i++;\n             j++;\n         };\n-\n-        return std::make_optional(reward;\n+        return std::make_optional(reward);\n     }\n     \n     void canLoowaterBeSaved() \n     {\n"
+                },
+                {
+                    "date": 1720350342767,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-#include <optional>\n #include <cstdio>\n #include <vector>\n \n using arr = std::vector<int>;\n@@ -26,16 +25,18 @@\n \n         int n = xs.size();\n         int m = ys.size();\n         int i, j, reward = 0;\n+\n         while(i < n && j < m)\n         {\n             while(xs[i] < ys[j])\n               i++;\n             reward += ys[j];\n             i++;\n             j++;\n         };\n+\n         return std::make_optional(reward);\n     }\n     \n     void canLoowaterBeSaved() \n"
+                },
+                {
+                    "date": 1720350350640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n        In order to chop off a head, a knight must be at least as tall as the diameter of the head.\n        The knights’ union demands that for chopping off a head, a knight must be paid a wage \n        equal to one gold coin for each centimetre of the knight’s height\n     */\n-    std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n+    int canDragonHeadsBeChoppedOff(arr xs, arr ys) \n     {\n         // sort the arrays in an increasing order\n         std::sort(xs.begin(), xs.end());\n         std::sort(ys.begin(), ys.end());\n"
+                },
+                {
+                    "date": 1720350364155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n             i++;\n             j++;\n         };\n \n-        return std::make_optional(reward);\n+        return ;\n     }\n     \n     void canLoowaterBeSaved() \n     {\n"
+                },
+                {
+                    "date": 1720350371417,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n             i++;\n             j++;\n         };\n \n-        return ;\n+        return reward == 0 ? -1 : ;\n     }\n     \n     void canLoowaterBeSaved() \n     {\n"
+                },
+                {
+                    "date": 1720350386030,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n             i++;\n             j++;\n         };\n \n-        return reward == 0 ? -1 : ;\n+        return reward == 0 ? -1 : reward;\n     }\n     \n     void canLoowaterBeSaved() \n     {\n@@ -66,9 +66,9 @@\n                 knightsHeights.push_back(x);\n                 j++;\n             };\n \n-            auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n+            int ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n             if(ans.has_value())\n               printf(\"%d\", ans.value());\n             else \n               printf(\"%s\", \"Loowater is doomed!\"); \n"
+                },
+                {
+                    "date": 1720350394057,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n                 j++;\n             };\n \n             int ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n-            if(ans.has_value())\n+            return \n               printf(\"%d\", ans.value());\n             else \n               printf(\"%s\", \"Loowater is doomed!\"); \n         }\n"
+                },
+                {
+                    "date": 1720350401533,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n                 j++;\n             };\n \n             int ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n-            return \n+            if()\n               printf(\"%d\", ans.value());\n             else \n               printf(\"%s\", \"Loowater is doomed!\"); \n         }\n"
+                },
+                {
+                    "date": 1720350409552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,10 +67,10 @@\n                 j++;\n             };\n \n             int ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n-            if()\n-              printf(\"%d\", ans.value());\n+            if(ans != -1)\n+              printf(\"%d\", ans);\n             else \n               printf(\"%s\", \"Loowater is doomed!\"); \n         }\n     }\n"
+                },
+                {
+                    "date": 1720350606878,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,6 +73,5 @@\n             else \n               printf(\"%s\", \"Loowater is doomed!\"); \n         }\n     }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720350708858,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n #include <cstdio>\n #include <vector>\n \n+\n using arr = std::vector<int>;\n \n namespace algorithms::onlinejudge::greedy\n {\n"
+                },
+                {
+                    "date": 1720350714191,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n #include <cstdio>\n #include <vector>\n+#include <algorithm>\n \n-\n using arr = std::vector<int>;\n \n namespace algorithms::onlinejudge::greedy\n {\n"
+                },
+                {
+                    "date": 1720351005112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,10 +29,9 @@\n         int i, j, reward = 0;\n \n         while(i < n && j < m)\n         {\n-            while(xs[i] < ys[j])\n-              i++;\n+            while (dragon[d] > knight[k] && k < m) k++;\n             reward += ys[j];\n             i++;\n             j++;\n         };\n"
+                },
+                {
+                    "date": 1720351010470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         int i, j, reward = 0;\n \n         while(i < n && j < m)\n         {\n-            while (dragon[d] > knight[k] && k < m) k++;\n+            while (xs[d] > ys[k] && k < m) k++;\n             reward += ys[j];\n             i++;\n             j++;\n         };\n"
+                },
+                {
+                    "date": 1720351016520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         int i, j, reward = 0;\n \n         while(i < n && j < m)\n         {\n-            while (xs[d] > ys[k] && k < m) k++;\n+            while (xs[i] > ys[j] &&  < m) k++;\n             reward += ys[j];\n             i++;\n             j++;\n         };\n"
+                },
+                {
+                    "date": 1720351023758,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         int i, j, reward = 0;\n \n         while(i < n && j < m)\n         {\n-            while (xs[i] > ys[j] &&  < m) k++;\n+            while (xs[i] > ys[j] && j < m) j++;\n             reward += ys[j];\n             i++;\n             j++;\n         };\n"
+                },
+                {
+                    "date": 1720351044061,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,8 +30,10 @@\n \n         while(i < n && j < m)\n         {\n             while (xs[i] > ys[j] && j < m) j++;\n+            if()\n+\n             reward += ys[j];\n             i++;\n             j++;\n         };\n"
+                },
+                {
+                    "date": 1720351051071,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,10 @@\n \n         while(i < n && j < m)\n         {\n             while (xs[i] > ys[j] && j < m) j++;\n-            if(j )\n+            if(j == m)\n+            \n \n             reward += ys[j];\n             i++;\n             j++;\n"
+                },
+                {
+                    "date": 1720351107356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,83 @@\n+#include <cstdio>\n+#include <vector>\n+#include <algorithm>\n+\n+using arr = std::vector<int>;\n+\n+namespace algorithms::onlinejudge::greedy\n+{\n+    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n+    /* \n+       The input contains several test cases. \n+       The first line of each test case contains two integers between 1 and 20000 inclusive, \n+       indicating the number n of heads that the dragon has, and the number m of knights in the kingdom. \n+       The next n lines each contain an integer, and give the diameters of the dragon’s heads, in centimetres. \n+       The following m lines each contain an integer, and specify the heights of the knights of Loowater, also in centimetres.\n+       The last test case is followed by a line containing ‘0 0’.\n+       In order to chop off a head, a knight must be at least as tall as the diameter of the head.\n+       The knights’ union demands that for chopping off a head, a knight must be paid a wage \n+       equal to one gold coin for each centimetre of the knight’s height\n+    */\n+    int canDragonHeadsBeChoppedOff(arr xs, arr ys) \n+    {\n+        // sort the arrays in an increasing order\n+        std::sort(xs.begin(), xs.end());\n+        std::sort(ys.begin(), ys.end());\n+\n+        int n = xs.size();\n+        int m = ys.size();\n+        int i, j, reward = 0;\n+\n+        while(i < n && j < m)\n+        {\n+            // select the knights until one greater then \n+            while (xs[i] > ys[j] && j < m) j++;\n+\n+            // if no knight found\n+            if(j == m)\n+              break;\n+            \n+            reward += ys[j];\n+            i++;\n+            j++;\n+        };\n+\n+        return reward == 0 ? -1 : reward;\n+    }\n+    \n+    void canLoowaterBeSaved() \n+    {\n+\n+        int N, M;\n+        while(N != 0 && N != 0)\n+        {\n+            scanf(\"%d %d\", &N, &M);\n+            arr dragonHeads(N);\n+            arr knightsHeights(M);\n+            \n+            int i = 0;\n+            while(i < N)\n+            {\n+                int x;\n+                scanf(\"%d\", &x);\n+                dragonHeads.push_back(x);\n+                i++;\n+            };\n+\n+            int j = 0;\n+            while(j < M)\n+            {\n+                int x;\n+                scanf(\"%d\", &x);\n+                knightsHeights.push_back(x);\n+                j++;\n+            };\n+\n+            int ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n+            if(ans != -1)\n+              printf(\"%d\", ans);\n+            else \n+              printf(\"%s\", \"Loowater is doomed!\"); \n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1720345000273,
+            "name": "Commit-0",
+            "content": "#include <optional>\n#include <cstdio>\n#include <vector>\n\nusing arr = std::vector<int>;\n\nnamespace algorithms::onlinejudge::greedy\n{\n    // https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=2267\n    std::optional<int> canDragonHeadsBeChoppedOff(arr xs, arr ys) \n    { \n        return std::nullopt; \n    }\n    \n    void canLoowaterBeSaved() \n    {\n        arr dragonHeads = {};\n        arr knightsHeights = {};\n        auto ans = canDragonHeadsBeChoppedOff(dragonHeads, knightsHeights);\n        if(ans.has_value())\n          printf(\"%d\", ans.value());\n        else printf(\"%s\", \"Loowater is doomed!\");\n    }\n\n}"
+        }
+    ]
+}

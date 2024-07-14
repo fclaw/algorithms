@@ -1,7 +1,7 @@
 #include <vector>
 #include <stack>
 
-namespace algorithms::leetcode::array
+namespace algorithms::array::leetcode
 {
     /*
       https://leetcode.com/problems/next-greater-element-ii

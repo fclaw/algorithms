@@ -1,0 +1,74 @@
+{
+    "sourceFile": "algorithms/array/leetcode/pivotIndex.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 14,
+            "patches": [
+                {
+                    "date": 1720807093425,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1720807105322,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,8 @@\n+\n+\n+\n+\n namespace algorithms::array::leetcode\n {\n-    \n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720807111148,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,6 @@\n \n \n namespace algorithms::array::leetcode\n {\n-\n+    // https://leetcode.com/problems/find-pivot-index\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720807123735,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,5 +4,7 @@\n \n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/find-pivot-index\n+    int pivotIndex(vector<int>& nums) {   \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720807131690,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,7 +4,9 @@\n \n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/find-pivot-index\n-    int pivotIndex(vector<int>& nums) {   \n+    int pivotIndex(vector<int>& nums) \n+    {\n+\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720807145023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n+#include <\n \n \n \n-\n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/find-pivot-index\n     int pivotIndex(vector<int>& nums) \n"
+                },
+                {
+                    "date": 1720807151077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,9 @@\n-#include <\n+#include <vector>\n \n-\n-\n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/find-pivot-index\n     int pivotIndex(vector<int>& nums) \n     {\n-\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720807156853,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/find-pivot-index\n-    int pivotIndex(vector<int>& nums) \n+    int pivotIndex(std::vector<int>& nums) \n     {\n+        int \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720807170445,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,10 @@\n+#include <vector>\n+\n+namespace algorithms::array::leetcode\n+{\n+    // https://leetcode.com/problems/find-pivot-index\n+    int pivotIndex(std::vector<int>& nums) \n+    {\n+        std::vector<int> prefix\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720807176242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,17 +4,7 @@\n {\n     // https://leetcode.com/problems/find-pivot-index\n     int pivotIndex(std::vector<int>& nums) \n     {\n-        std::vector<int> prefix\n+        std::vector<int> prefixSum()\n     }\n-}\n-#include <vector>\n-\n-namespace algorithms::array::leetcode\n-{\n-    // https://leetcode.com/problems/find-pivot-index\n-    int pivotIndex(std::vector<int>& nums) \n-    {\n-        int \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720807185261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,7 +4,8 @@\n {\n     // https://leetcode.com/problems/find-pivot-index\n     int pivotIndex(std::vector<int>& nums) \n     {\n+        int n = nums.size();\n         std::vector<int> prefixSum()\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720807194184,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,8 @@\n     // https://leetcode.com/problems/find-pivot-index\n     int pivotIndex(std::vector<int>& nums) \n     {\n         int n = nums.size();\n-        std::vector<int> prefixSum()\n+        std::vector<int> prefixSum(n);\n+        for(auto )\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720807201440,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,11 +2,11 @@\n \n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/find-pivot-index\n-    int pivotIndex(std::vector<int>& nums) \n+    int pivotIndex(std::vector<int> nums) \n     {\n         int n = nums.size();\n         std::vector<int> prefixSum(n);\n-        for(auto )\n+        for(auto x : )\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720807210133,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n {\n     // https://leetcode.com/problems/find-pivot-index\n     int pivotIndex(std::vector<int> xs) \n     {\n-        int n = nums.size();\n+        int n = xs.size();\n         std::vector<int> prefixSum(n);\n         for(auto x : xs)\n-        \n+\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720807299076,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,8 @@\n         prefixSum[0] = xs[0];\n         for (int i = 1; i < n; i++)\n           prefixSum[i] = prefixSum[i - 1] + xs[i];\n         \n-        \n+        bool ans \n \n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1720807093425,
+            "name": "Commit-0",
+            "content": "namespace algorithms::array::leetcode\n{\n    \n}"
+        }
+    ]
+}

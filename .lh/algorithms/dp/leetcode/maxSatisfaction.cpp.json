@@ -1,0 +1,26 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/maxSatisfaction.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1720686009655,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1720686024318,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n namespace algorithms::leetcode::dp\n {\n-    int maxProduct(std::vector<int> nums)\n+    int maxSatisfaction(std::vector<int> nums)\n     {\n         // can we employ Kadane's Algorithm here?\n         return 1;\n     }\n"
+                },
+                {
+                    "date": 1720686056463,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,15 @@\n \n namespace algorithms::leetcode::dp\n {\n     // https://leetcode.com/problems/reducing-dishes\n-    \n+    A chef has collected data on the satisfaction level of his n dishes. Chef can cook any dish in 1 unit of time.\n+\n+Like-time coefficient of a dish is defined as the time taken to cook that dish including previous dishes multiplied by its satisfaction level i.e. time[i] * satisfaction[i].\n+\n+Return the maximum sum of like-time coefficient that the chef can obtain after preparing some amount of dishes.\n+\n+Dishes can be prepared in any order and the chef can discard some dishes to get this maximum value.\n     int maxSatisfaction(std::vector<int> satisfaction)\n     {\n         // can we employ Kadane's Algorithm here?\n         return 1;\n"
+                }
+            ],
+            "date": 1720686009655,
+            "name": "Commit-0",
+            "content": "#include <vector>\n#include <iostream>\n\nnamespace algorithms::leetcode::dp\n{\n    int maxProduct(std::vector<int> nums)\n    {\n        // can we employ Kadane's Algorithm here?\n        return 1;\n    }\n}"
+        }
+    ]
+}

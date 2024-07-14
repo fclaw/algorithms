@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <iostream>
 
-namespace leetcode::dp
+namespace algorithms::leetcode::dp
 {
     // https://leetcode.com/problems/jump-game
     /*

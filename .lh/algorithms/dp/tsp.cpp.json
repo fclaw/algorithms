@@ -1,0 +1,34 @@
+{
+    "sourceFile": "algorithms/dp/tsp.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1720690151615,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1720690159830,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,6 @@\n \n \n+namespace algorithms::dp\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720690205360,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n \n \n namespace algorithms::dp\n {\n-    \n+    /*\n+    Problem: Given n cities and their pairwise distances in the form of a matrix dist of size n × n, compute the cost of making a tour18 that starts from any city s, goes through all the other n − 1 cities exactly once, and finally returns to the starting city s.\n+    */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720690211932,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,8 @@\n \n namespace algorithms::dp\n {\n     /*\n-        Problem: Given n cities and their pairwise distances in the form of a matrix dist of size n × n, compute the cost of making a tour18 that starts from any city s, goes through all the other n − 1 cities exactly once, and finally returns to the starting city s.\n+        Problem: Given n cities and their pairwise distances in the form of a matrix dist of size n × n, \n+        compute the cost of making a tour18 that starts from any city s, goes through all the other n − 1 cities exactly once, and finally returns to the starting city s.\n     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720690391180,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,11 @@\n+\n+\n+namespace algorithms::dp\n+{\n+    /*\n+        Problem: Given n cities and their pairwise distances in the form of a matrix dist of size n × n, \n+        compute the cost of making a tour18 that starts from any city s, \n+        goes through all the other n − 1 cities exactly once, and finally returns to the starting city s.\n+    */\n+    int tsp()\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1720690151615,
+            "name": "Commit-0",
+            "content": "\n\n"
+        }
+    ]
+}

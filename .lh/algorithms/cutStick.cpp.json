@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 10,
             "patches": [
                 {
                     "date": 1718379272815,
@@ -32,6 +32,22 @@
                 {
                     "date": 1718379321728,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+#include <vector>\n \n-\n namespace leetcode::dp\n {\n     // https://leetcode.com/problems/minimum-cost-to-cut-a-stick\n     int minCost(int n, vector<int>& cuts) {}\n"
+                },
+                {
+                    "date": 1719996135080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,8 @@\n \n namespace leetcode::dp\n {\n     // https://leetcode.com/problems/minimum-cost-to-cut-a-stick\n-    int minCost(int n, vector<int>& cuts) {}\n+    /*\n+    */\n+    int minCost(int n, std::vector<int>& cuts) {}\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719996142278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,13 @@\n namespace leetcode::dp\n {\n     // https://leetcode.com/problems/minimum-cost-to-cut-a-stick\n     /*\n+      Given an integer array cuts where cuts[i] denotes a position you should perform a cut at.\n+You should perform the cuts in order, you can change the order of the cuts as you wish.\n+\n+The cost of one cut is the length of the stick to be cut, the total cost is the sum of costs of all cuts. When you cut a stick, it will be split into two smaller sticks (i.e. the sum of their lengths is the length of the stick before the cut). Please refer to the first example for a better explanation.\n+\n+Return the minimum total cost of the cuts.\n     */\n     int minCost(int n, std::vector<int>& cuts) {}\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719996149728,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+#include <vector>\n+\n+namespace leetcode::dp\n+{\n+    // https://leetcode.com/problems/minimum-cost-to-cut-a-stick\n+    /*\n+      Given an integer array cuts where cuts[i] denotes a position you should perform a cut at.\n+      You should perform the cuts in order, you can change the order of the cuts as you wish.\n+      The cost of one cut is the length of the stick to be cut, the total cost is the sum of costs of all cuts. When you cut a stick, it will be split into two smaller sticks (i.e. the sum of their lengths is the length of the stick before the cut). Please refer to the first example for a better explanation.\n+Return the minimum total cost of the cuts.\n+    */\n+    int minCost(int n, std::vector<int>& cuts) {}\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719996159126,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,24 +5,10 @@\n     // https://leetcode.com/problems/minimum-cost-to-cut-a-stick\n     /*\n       Given an integer array cuts where cuts[i] denotes a position you should perform a cut at.\n       You should perform the cuts in order, you can change the order of the cuts as you wish.\n-      The cost of one cut is the length of the stick to be cut, the total cost is the sum of costs of all cuts. When you cut a stick, it will be split into two smaller sticks (i.e. the sum of their lengths is the length of the stick before the cut). Please refer to the first example for a better explanation.\n-Return the minimum total cost of the cuts.\n+      The cost of one cut is the length of the stick to be cut, the total cost is the sum of costs of all cuts. \n+      When you cut a stick, it will be split into two smaller sticks (i.e. the sum of their lengths is the length of the stick before the cut). Please refer to the first example for a better explanation.\n+      Return the minimum total cost of the cuts.\n     */\n     int minCost(int n, std::vector<int>& cuts) {}\n-}\n-#include <vector>\n-\n-namespace leetcode::dp\n-{\n-    // https://leetcode.com/problems/minimum-cost-to-cut-a-stick\n-    /*\n-      Given an integer array cuts where cuts[i] denotes a position you should perform a cut at.\n-You should perform the cuts in order, you can change the order of the cuts as you wish.\n-\n-The cost of one cut is the length of the stick to be cut, the total cost is the sum of costs of all cuts. When you cut a stick, it will be split into two smaller sticks (i.e. the sum of their lengths is the length of the stick before the cut). Please refer to the first example for a better explanation.\n-\n-Return the minimum total cost of the cuts.\n-    */\n-    int minCost(int n, std::vector<int>& cuts) {}\n }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1718379272815,

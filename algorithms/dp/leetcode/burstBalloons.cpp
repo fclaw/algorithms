@@ -15,7 +15,7 @@ void printDPTable(DP dp)
     }
 }
 
-namespace leetcode::dp
+namespace algorithms::dp::leetcode
 {
     // https://leetcode.com/problems/burst-balloons
     /*

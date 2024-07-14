@@ -74,4 +74,33 @@ namespace algorithms::mathematics
           u = (u * a) % m;
         return u; 
     }
+
+    // Euclid’s algorithm can also be extended so that it gives integers x and y for which
+    // ax + by = gcd(a, b)
+    // the following function returns a tuple (x, y, gcd(a, b)) that satisfies the equation
+    std::tuple<int, int, int> extendedEuclidAlgo(int a, int b)
+    {
+        if(b == 0)
+          return {1, 0, a};
+
+        int x, y, g;
+        std::tie(x, y, g) = extendedEuclidAlgo(b, a % b);
+        return {y, x - (a / b) * y, g};  
+    }
+
+    // binomial coefficients can be recursively computed using the formula:
+    // base case: dp[n][0] ~ dp[n][n] = 1
+    // recurrent equation: dp[n][k] = dp[n - 1][k - 1] + dp[n - 1][k] 
+    unsigned long long binomialCoeffDP(int n, int k)
+    {
+        std::vector<std::vector<unsigned long long>> dp(n + 1, std::vector<unsigned long long>(k + 1, -1));
+
+        for (int i = 0; i <= n; i++)
+          for(int j = 0; j <= std::min(i, k); j++)
+            if(j == 0 || j == i)
+              dp[i][j] = 1;
+            else dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
+
+        return dp[n][k];
+    }
 }

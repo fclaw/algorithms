@@ -1,0 +1,18 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/jumpGame.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1720851887640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1720851887640,
+            "name": "Commit-0",
+            "content": "#include <vector>\n#include <algorithm>\n#include <iostream>\n\nnamespace algorithms::leetcode::dp\n{\n    // https://leetcode.com/problems/jump-game\n    /*\n       You are given an integer array nums. You are initially positioned at the array's first index, \n       and each element in the array represents your maximum jump length at that position.\n       Return true if you can reach the last index, or false otherwise.\n    */\n   // dp approach is abjectly slow on large inputs due to time complexity of O(n^2)\n    bool canJumpDp(std::vector<int> nums)\n    {\n          int n = nums.size();\n        std::vector<bool> dp(n, false);\n        dp[0] = true;\n        for (int i = 0; i < n - 1; i++)\n          if(dp[i])\n          {\n              auto b = i + nums[i];\n              for(int j = 1; j <= std::min(b, n - 1); j++)\n                 dp[j] = true;\n          }\n        return dp[n - 1];\n    }\n    bool canJumpGreedy(std::vector<int> nums)\n    {\n       int n = nums.size();\n    if (n == 0) return false;\n\n    int farthest = 0;  // The farthest index we can reach\n\n    // Iterate through each index\n    for (int i = 0; i < n; ++i) {\n        if (i > farthest) return false;  // If current index is unreachable, return false\n\n        // Update the farthest index we can reach\n        farthest = std::max(farthest, i + nums[i]);\n\n        // Check if we can reach or pass the last index\n        if (farthest >= n - 1) return true;\n    }\n\n    return false;\n    }\n    bool canJump(std::vector<int>& nums) { return canJumpGreedy(nums); }\n}"
+        }
+    ]
+}

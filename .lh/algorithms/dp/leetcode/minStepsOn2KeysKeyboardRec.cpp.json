@@ -1,0 +1,170 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/minStepsOn2KeysKeyboardRec.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 38,
+            "patches": [
+                {
+                    "date": 1720004747362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1720004863443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,11 +27,8 @@\n     {\n         if(n == 1)\n           return 0;\n \n-        if(isPrime(n))\n-          return n;\n-\n         return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : 10; \n     } \n \n     int minStepsOn2KeysKeyboard(int n) { return minStepsOn2KeysKeyboardRec(n); }\n"
+                },
+                {
+                    "date": 1720004905453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,12 @@\n     {\n         if(n == 1)\n           return 0;\n \n-        return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : 10; \n+        if(isPrime(n))\n+          return n;\n+\n+        return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : 10000; \n     } \n \n     int minStepsOn2KeysKeyboard(int n) { return minStepsOn2KeysKeyboardRec(n); }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720004919646,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n \n         if(isPrime(n))\n           return n;\n \n-        return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : 10000; \n+        return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : 10000;\n     } \n \n     int minStepsOn2KeysKeyboard(int n) { return minStepsOn2KeysKeyboardRec(n); }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720005420895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,10 @@\n             return false;\n         return true;\n     }\n \n+    \n+\n     // https://leetcode.com/problems/2-keys-keyboard\n     // There is only one character 'A' on the screen of a notepad. You can perform one of two operations on this notepad for each step:\n     // Copy All: You can copy all the characters present on the screen (a partial copy is not allowed).\n     // Paste: You can paste the characters which are copied last time.\n"
+                },
+                {
+                    "date": 1720005446430,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,12 @@\n             return false;\n         return true;\n     }\n \n-    \n+    int leastOddDivisor(int n)\n+    {\n+       odd_dividor & 1 == 0\n+    }\n \n     // https://leetcode.com/problems/2-keys-keyboard\n     // There is only one character 'A' on the screen of a notepad. You can perform one of two operations on this notepad for each step:\n     // Copy All: You can copy all the characters present on the screen (a partial copy is not allowed).\n"
+                },
+                {
+                    "date": 1720005462615,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,9 @@\n \n     int leastOddDivisor(int n)\n     {\n        odd_dividor & 1 == 0\n+       odd_divisor >>= 1\n     }\n \n     // https://leetcode.com/problems/2-keys-keyboard\n     // There is only one character 'A' on the screen of a notepad. You can perform one of two operations on this notepad for each step:\n"
+                },
+                {
+                    "date": 1720005469697,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n     }\n \n     int leastOddDivisor(int n)\n     {\n-       odd_dividor & 1 == 0\n+       while(odd_dividor & 1 == 0)\n        odd_divisor >>= 1\n     }\n \n     // https://leetcode.com/problems/2-keys-keyboard\n"
+                },
+                {
+                    "date": 1720005477439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,10 @@\n     }\n \n     int leastOddDivisor(int n)\n     {\n-       while(odd_dividor & 1 == 0)\n-       odd_divisor >>= 1\n+       while(n & 1 == 0)\n+         odd_divisor >>= 1\n     }\n \n     // https://leetcode.com/problems/2-keys-keyboard\n     // There is only one character 'A' on the screen of a notepad. You can perform one of two operations on this notepad for each step:\n"
+                },
+                {
+                    "date": 1720005485144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,10 @@\n \n     int leastOddDivisor(int n)\n     {\n        while(n & 1 == 0)\n-         odd_divisor >>= 1\n+         n >>= 1;\n+       return   \n     }\n \n     // https://leetcode.com/problems/2-keys-keyboard\n     // There is only one character 'A' on the screen of a notepad. You can perform one of two operations on this notepad for each step:\n"
+                },
+                {
+                    "date": 1720005494040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     int leastOddDivisor(int n)\n     {\n        while(n & 1 == 0)\n          n >>= 1;\n-       return   \n+       return n;  \n     }\n \n     // https://leetcode.com/problems/2-keys-keyboard\n     // There is only one character 'A' on the screen of a notepad. You can perform one of two operations on this notepad for each step:\n"
+                },
+                {
+                    "date": 1720005499987,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n     }\n \n     int leastOddDivisor(int n)\n     {\n-       while(n & 1 == 0)\n+       while(n & 1 == 0) \n          n >>= 1;\n        return n;  \n     }\n \n"
+                },
+                {
+                    "date": 1720005560420,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,40 @@\n+\n+\n+namespace algorithms::dp::leetcode\n+{\n+\n+    /*\n+      The following function prime checks if a given integer n is prime. The function\n+      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n+      n, then n is prime.\n+    */\n+    bool isPrime(int n)\n+    {\n+        if(n < 2)\n+          return true;\n+        for (int x = 2; x * x <= n; x++)\n+          if(n % x == 0)\n+            return false;\n+        return true;\n+    }\n+\n+    leastOddDivisor\n+\n+    // https://leetcode.com/problems/2-keys-keyboard\n+    // There is only one character 'A' on the screen of a notepad. You can perform one of two operations on this notepad for each step:\n+    // Copy All: You can copy all the characters present on the screen (a partial copy is not allowed).\n+    // Paste: You can paste the characters which are copied last time.\n+    // Given an integer n, return the minimum number of operations to get the character 'A' exactly n times on the screen.\n+    int minStepsOn2KeysKeyboardRec(int n)\n+    {\n+        if(n == 1)\n+          return 0;\n+\n+        if(isPrime(n))\n+          return n;\n+\n+        return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : 10000;\n+    } \n+\n+    int minStepsOn2KeysKeyboard(int n) { return minStepsOn2KeysKeyboardRec(n); }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720005568732,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,55 +17,23 @@\n             return false;\n         return true;\n     }\n \n-    leastOddDivisor\n-\n-    // https://leetcode.com/problems/2-keys-keyboard\n-    // There is only one character 'A' on the screen of a notepad. You can perform one of two operations on this notepad for each step:\n-    // Copy All: You can copy all the characters present on the screen (a partial copy is not allowed).\n-    // Paste: You can paste the characters which are copied last time.\n-    // Given an integer n, return the minimum number of operations to get the character 'A' exactly n times on the screen.\n-    int minStepsOn2KeysKeyboardRec(int n)\n-    {\n-        if(n == 1)\n-          return 0;\n-\n-        if(isPrime(n))\n-          return n;\n-\n-        return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : 10000;\n-    } \n-\n-    int minStepsOn2KeysKeyboard(int n) { return minStepsOn2KeysKeyboardRec(n); }\n-}\n-\n-\n-namespace algorithms::dp::leetcode\n+    int smallestDivisor(int n)\n {\n-\n-    /*\n-      The following function prime checks if a given integer n is prime. The function\n-      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n-      n, then n is prime.\n-    */\n-    bool isPrime(int n)\n-    {\n-        if(n < 2)\n-          return true;\n-        for (int x = 2; x * x <= n; x++)\n-          if(n % x == 0)\n-            return false;\n-        return true;\n+    // if divisible by 2\n+    if (n % 2 == 0)\n+        return 2;\n+ \n+    // iterate from 3 to sqrt(n)\n+    for (int i = 3; i * i <= n; i += 2) {\n+        if (n % i == 0)\n+            return i;\n     }\n+ \n+    return n;\n+}\n \n-    int leastOddDivisor(int n)\n-    {\n-       while(n & 1 == 0) \n-         n >>= 1;\n-       return n;  \n-    }\n-\n     // https://leetcode.com/problems/2-keys-keyboard\n     // There is only one character 'A' on the screen of a notepad. You can perform one of two operations on this notepad for each step:\n     // Copy All: You can copy all the characters present on the screen (a partial copy is not allowed).\n     // Paste: You can paste the characters which are copied last time.\n"
+                },
+                {
+                    "date": 1720005578571,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,11 +19,9 @@\n     }\n \n     int smallestDivisor(int n)\n {\n-    // if divisible by 2\n-    if (n % 2 == 0)\n-        return 2;\n+\n  \n     // iterate from 3 to sqrt(n)\n     for (int i = 3; i * i <= n; i += 2) {\n         if (n % i == 0)\n"
+                },
+                {
+                    "date": 1720005587086,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,13 +18,11 @@\n         return true;\n     }\n \n     int smallestDivisor(int n)\n-{\n-\n- \n-    // iterate from 3 to sqrt(n)\n-    for (int i = 3; i * i <= n; i += 2) {\n+    {\n+       // iterate from 3 to sqrt(n)\n+       for (int i = 3; i * i <= n; i += 2) {\n         if (n % i == 0)\n             return i;\n     }\n  \n"
+                },
+                {
+                    "date": 1720005615391,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,11 +21,11 @@\n     int smallestDivisor(int n)\n     {\n        // iterate from 3 to sqrt(n)\n        for (int i = 3; i * i <= n; i += 2) {\n-        if (n % i == 0)\n+          if (n % i == 0)\n             return i;\n-    }\n+       }\n  \n     return n;\n }\n \n"
+                },
+                {
+                    "date": 1720005621242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n        for (int i = 3; i * i <= n; i += 2) {\n           if (n % i == 0)\n             return i;\n        }\n- \n+    }\n     return n;\n }\n \n     // https://leetcode.com/problems/2-keys-keyboard\n"
+                },
+                {
+                    "date": 1720005626698,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,8 @@\n           if (n % i == 0)\n             return i;\n        }\n     }\n-    return n;\n }\n \n     // https://leetcode.com/problems/2-keys-keyboard\n     // There is only one character 'A' on the screen of a notepad. You can perform one of two operations on this notepad for each step:\n"
+                },
+                {
+                    "date": 1720005634976,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n     }\n \n     int smallestDivisor(int n)\n     {\n+       int x;\n        // iterate from 3 to sqrt(n)\n        for (int i = 3; i * i <= n; i += 2) {\n           if (n % i == 0)\n             return i;\n"
+                },
+                {
+                    "date": 1720005673262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n        int x;\n        // iterate from 3 to sqrt(n)\n        for (int i = 3; i * i <= n; i += 2) {\n           if (n % i == 0)\n+            x = i\n             return i;\n        }\n     }\n }\n"
+                },
+                {
+                    "date": 1720005678677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n     }\n \n     int smallestDivisor(int n)\n     {\n-       int x;\n+       int ld;\n        // iterate from 3 to sqrt(n)\n        for (int i = 3; i * i <= n; i += 2) {\n           if (n % i == 0)\n             x = i\n"
+                },
+                {
+                    "date": 1720005684557,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,10 @@\n        int ld;\n        // iterate from 3 to sqrt(n)\n        for (int i = 3; i * i <= n; i += 2) {\n           if (n % i == 0)\n-            x = i\n+            ld = i\n+            \n             return i;\n        }\n     }\n }\n"
+                },
+                {
+                    "date": 1720005691054,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,10 +23,11 @@\n        int ld;\n        // iterate from 3 to sqrt(n)\n        for (int i = 3; i * i <= n; i += 2) {\n           if (n % i == 0)\n-            ld = i\n-            \n+            ld = i;\n+            break;\n+\n             return i;\n        }\n     }\n }\n"
+                },
+                {
+                    "date": 1720005699521,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n        int ld;\n        // iterate from 3 to sqrt(n)\n        for (int i = 3; i * i <= n; i += 2) {\n           if (n % i == 0)\n+          {\n             ld = i;\n             break;\n \n             return i;\n"
+                },
+                {
+                    "date": 1720005707175,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,10 +26,9 @@\n           if (n % i == 0)\n           {\n             ld = i;\n             break;\n-\n-            return i;\n+          }\n        }\n     }\n }\n \n"
+                },
+                {
+                    "date": 1720005731872,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n             return false;\n         return true;\n     }\n \n-    int smallestDivisor(int n)\n+    int leastOddDivisor(int n)\n     {\n        int ld;\n        // iterate from 3 to sqrt(n)\n        for (int i = 3; i * i <= n; i += 2) {\n@@ -28,8 +28,9 @@\n             ld = i;\n             break;\n           }\n        }\n+       return ld;\n     }\n }\n \n     // https://leetcode.com/problems/2-keys-keyboard\n"
+                },
+                {
+                    "date": 1720005743696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,52 @@\n+\n+\n+namespace algorithms::dp::leetcode\n+{\n+\n+    /*\n+      The following function prime checks if a given integer n is prime. The function\n+      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n+      n, then n is prime.\n+    */\n+    bool isPrime(int n)\n+    {\n+        if(n < 2)\n+          return true;\n+        for (int x = 2; x * x <= n; x++)\n+          if(n % x == 0)\n+            return false;\n+        return true;\n+    }\n+\n+    int leastOddDivisor(int n)\n+    {\n+       int ld;\n+       // iterate from 3 to sqrt(n)\n+       for (int i = 3; i * i <= n; i += 2) {\n+          if (n % i == 0)\n+          {\n+            ld = i;\n+            break;\n+          }\n+       }\n+       return ld;\n+    }\n+\n+    // https://leetcode.com/problems/2-keys-keyboard\n+    // There is only one character 'A' on the screen of a notepad. You can perform one of two operations on this notepad for each step:\n+    // Copy All: You can copy all the characters present on the screen (a partial copy is not allowed).\n+    // Paste: You can paste the characters which are copied last time.\n+    // Given an integer n, return the minimum number of operations to get the character 'A' exactly n times on the screen.\n+    int minStepsOn2KeysKeyboardRec(int n)\n+    {\n+        if(n == 1)\n+          return 0;\n+\n+        if(isPrime(n))\n+          return n;\n+\n+        return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : 10000;\n+    } \n+\n+    int minStepsOn2KeysKeyboard(int n) { return minStepsOn2KeysKeyboardRec(n); }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720005748884,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n     int leastOddDivisor(int n)\n     {\n        int ld;\n        // iterate from 3 to sqrt(n)\n-       for (int i = 3; i * i <= n; i += 2) {\n+       for (int i = 3; i * i <= n; i += 2)\n           if (n % i == 0)\n           {\n             ld = i;\n             break;\n@@ -48,58 +48,5 @@\n         return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : 10000;\n     } \n \n     int minStepsOn2KeysKeyboard(int n) { return minStepsOn2KeysKeyboardRec(n); }\n-}\n-\n-\n-namespace algorithms::dp::leetcode\n-{\n-\n-    /*\n-      The following function prime checks if a given integer n is prime. The function\n-      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n-      n, then n is prime.\n-    */\n-    bool isPrime(int n)\n-    {\n-        if(n < 2)\n-          return true;\n-        for (int x = 2; x * x <= n; x++)\n-          if(n % x == 0)\n-            return false;\n-        return true;\n-    }\n-\n-    int leastOddDivisor(int n)\n-    {\n-       int ld;\n-       // iterate from 3 to sqrt(n)\n-       for (int i = 3; i * i <= n; i += 2) {\n-          if (n % i == 0)\n-          {\n-            ld = i;\n-            break;\n-          }\n-       }\n-       return ld;\n-    }\n-}\n-\n-    // https://leetcode.com/problems/2-keys-keyboard\n-    // There is only one character 'A' on the screen of a notepad. You can perform one of two operations on this notepad for each step:\n-    // Copy All: You can copy all the characters present on the screen (a partial copy is not allowed).\n-    // Paste: You can paste the characters which are copied last time.\n-    // Given an integer n, return the minimum number of operations to get the character 'A' exactly n times on the screen.\n-    int minStepsOn2KeysKeyboardRec(int n)\n-    {\n-        if(n == 1)\n-          return 0;\n-\n-        if(isPrime(n))\n-          return n;\n-\n-        return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : 10000;\n-    } \n-\n-    int minStepsOn2KeysKeyboard(int n) { return minStepsOn2KeysKeyboardRec(n); }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720005760325,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n             return false;\n         return true;\n     }\n \n-    int leastOddDivisor(int n)\n+    int leastDivisor(int n)\n     {\n        int ld;\n        // iterate from 3 to sqrt(n)\n        for (int i = 3; i * i <= n; i += 2)\n@@ -27,9 +27,8 @@\n           {\n             ld = i;\n             break;\n           }\n-       }\n        return ld;\n     }\n \n     // https://leetcode.com/problems/2-keys-keyboard\n"
+                },
+                {
+                    "date": 1720005769614,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n             return false;\n         return true;\n     }\n \n-    int leastDivisor(int n)\n+    int leastDivisorFor(int n)\n     {\n        int ld;\n        // iterate from 3 to sqrt(n)\n        for (int i = 3; i * i <= n; i += 2)\n"
+                },
+                {
+                    "date": 1720005802124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n             return false;\n         return true;\n     }\n \n-    int leastDivisorFor(int n)\n+    int leastDivisorForOdd(int n)\n     {\n        int ld;\n        // iterate from 3 to sqrt(n)\n        for (int i = 3; i * i <= n; i += 2)\n@@ -43,9 +43,9 @@\n \n         if(isPrime(n))\n           return n;\n \n-        return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : 10000;\n+        return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : ;\n     } \n \n     int minStepsOn2KeysKeyboard(int n) { return minStepsOn2KeysKeyboardRec(n); }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720005811613,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,8 +43,10 @@\n \n         if(isPrime(n))\n           return n;\n \n+        leastDivisorForOdd\n+\n         return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : ;\n     } \n \n     int minStepsOn2KeysKeyboard(int n) { return minStepsOn2KeysKeyboardRec(n); }\n"
+                },
+                {
+                    "date": 1720005835175,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,10 @@\n \n         if(isPrime(n))\n           return n;\n \n-        leastDivisorForOdd\n+        n % 2 == 0\n+        leastDivisorForOdd(n)\n \n         return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : ;\n     } \n \n"
+                },
+                {
+                    "date": 1720005841459,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n \n         if(isPrime(n))\n           return n;\n \n-        n % 2 == 0\n+        n & 1\n         leastDivisorForOdd(n)\n \n         return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : ;\n     } \n"
+                },
+                {
+                    "date": 1720005848620,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n \n         if(isPrime(n))\n           return n;\n \n-        n & 1\n+        n & 1 == 0)\n         leastDivisorForOdd(n)\n \n         return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : ;\n     } \n"
+                },
+                {
+                    "date": 1720005859420,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,11 +43,9 @@\n \n         if(isPrime(n))\n           return n;\n \n-        n & 1 == 0)\n-        leastDivisorForOdd(n)\n-\n+        if(n & 1 == 0\n         return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : ;\n     } \n \n     int minStepsOn2KeysKeyboard(int n) { return minStepsOn2KeysKeyboardRec(n); }\n"
+                },
+                {
+                    "date": 1720005864801,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n         if(isPrime(n))\n           return n;\n \n         if(n & 1 == 0)\n-        return minStepsOn2KeysKeyboardRec(n / 2) + 2 : ;\n+          return minStepsOn2KeysKeyboardRec(n / 2) + 2 : ;\n     } \n \n     int minStepsOn2KeysKeyboard(int n) { return minStepsOn2KeysKeyboardRec(n); }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720005883422,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n             return false;\n         return true;\n     }\n \n-    int v(int n)\n+    int leastDivisorForOdd(int n)\n     {\n        int ld;\n        // iterate from 3 to sqrt(n)\n        for (int i = 3; i * i <= n; i += 2)\n"
+                }
+            ],
+            "date": 1720004747362,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::dp::leetcode\n{\n\n    /*\n      The following function prime checks if a given integer n is prime. The function\n      attempts to divide n by all integers between 2 and ⌊√n⌋, and if none of them divides\n      n, then n is prime.\n    */\n    bool isPrime(int n)\n    {\n        if(n < 2)\n          return true;\n        for (int x = 2; x * x <= n; x++)\n          if(n % x == 0)\n            return false;\n        return true;\n    }\n\n    // https://leetcode.com/problems/2-keys-keyboard\n    // There is only one character 'A' on the screen of a notepad. You can perform one of two operations on this notepad for each step:\n    // Copy All: You can copy all the characters present on the screen (a partial copy is not allowed).\n    // Paste: You can paste the characters which are copied last time.\n    // Given an integer n, return the minimum number of operations to get the character 'A' exactly n times on the screen.\n    int minStepsOn2KeysKeyboardRec(int n)\n    {\n        if(n == 1)\n          return 0;\n\n        if(isPrime(n))\n          return n;\n\n        return n % 2 == 0 ? minStepsOn2KeysKeyboardRec(n / 2) + 2 : 10; \n    } \n\n    int minStepsOn2KeysKeyboard(int n) { return minStepsOn2KeysKeyboardRec(n); }\n}"
+        }
+    ]
+}

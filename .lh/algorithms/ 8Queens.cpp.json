@@ -1,0 +1,98 @@
+{
+    "sourceFile": "algorithms/ 8Queens.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 20,
+            "patches": [
+                {
+                    "date": 1720170231002,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1720170239437,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-namespace al\n\\ No newline at end of file\n+namespace algorithms::\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720170256497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,4 @@\n-namespace algorithms::\n\\ No newline at end of file\n+namespace algorithms::rcs\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720170271553,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,7 @@\n+\n+\n+// recursive complete search \n namespace algorithms::rcs\n {\n-    \n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720171034314,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,42 @@\n \n \n-// recursive complete search \n+// recursive complete search\n namespace algorithms::rcs\n {\n \n+ /* 8 Queens Chess Problem */\n+#include <cstdlib>                       // we use the int version of 'abs'\n+#include <cstdio>\n+#include <cstring>\n+using namespace std;\n+\n+int row[8], TC, a, b, lineCounter;            // ok to use global variables\n+\n+bool place(int r, int c) {\n+  for (int prev = 0; prev < c; prev++)    // check previously placed queens\n+    if (row[prev] == r || (abs(row[prev] - r) == abs(prev - c)))\n+      return false;        // share same row or same diagonal -> infeasible\n+  return true; }\n+\n+void backtrack(int c) {\n+  if (c == 8 && row[b] == a) {         // candidate sol, (a, b) has 1 queen\n+    printf(\"%2d      %d\", ++lineCounter, row[0] + 1);\n+    for (int j = 1; j < 8; j++) printf(\" %d\", row[j] + 1);\n+    printf(\"\\n\"); }\n+  for (int r = 0; r < 8; r++)                       // try all possible row\n+    if (place(r, c)) {          // if can place a queen at this col and row\n+      row[c] = r; backtrack(c + 1);      // put this queen here and recurse\n+}   }\n+\n+int main() {\n+  scanf(\"%d\", &TC);\n+  while (TC--) {\n+    scanf(\"%d %d\", &a, &b); a--; b--;         // switch to 0-based indexing\n+    memset(row, 0, sizeof row); lineCounter = 0;\n+    printf(\"SOLN       COLUMN\\n\");\n+    printf(\" #      1 2 3 4 5 6 7 8\\n\\n\");\n+    backtrack(0);           // generate all possible 8! candidate solutions\n+    if (TC) printf(\"\\n\");\n+} } // return 0;\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720171050875,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,14 +3,8 @@\n // recursive complete search\n namespace algorithms::rcs\n {\n \n- /* 8 Queens Chess Problem */\n-#include <cstdlib>                       // we use the int version of 'abs'\n-#include <cstdio>\n-#include <cstring>\n-using namespace std;\n-\n int row[8], TC, a, b, lineCounter;            // ok to use global variables\n \n bool place(int r, int c) {\n   for (int prev = 0; prev < c; prev++)    // check previously placed queens\n"
+                },
+                {
+                    "date": 1720171082884,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,9 @@\n+ /* 8 Queens Chess Problem */\n+#include <cstdlib>                       // we use the int version of 'abs'\n+#include <cstdio>\n+#include <cstring>\n+using namespace std;\n \n \n // recursive complete search\n namespace algorithms::rcs\n@@ -21,9 +26,9 @@\n     if (place(r, c)) {          // if can place a queen at this col and row\n       row[c] = r; backtrack(c + 1);      // put this queen here and recurse\n }   }\n \n-int main() {\n+int solve() {\n   scanf(\"%d\", &TC);\n   while (TC--) {\n     scanf(\"%d %d\", &a, &b); a--; b--;         // switch to 0-based indexing\n     memset(row, 0, sizeof row); lineCounter = 0;\n"
+                },
+                {
+                    "date": 1720171095992,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,14 +4,14 @@\n #include <cstring>\n using namespace std;\n \n \n+int row[8], TC, a, b, lineCounter;            // ok to use global variables\n+\n // recursive complete search\n namespace algorithms::rcs\n {\n \n-int row[8], TC, a, b, lineCounter;            // ok to use global variables\n-\n bool place(int r, int c) {\n   for (int prev = 0; prev < c; prev++)    // check previously placed queens\n     if (row[prev] == r || (abs(row[prev] - r) == abs(prev - c)))\n       return false;        // share same row or same diagonal -> infeasible\n"
+                },
+                {
+                    "date": 1720171101506,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,13 +10,13 @@\n // recursive complete search\n namespace algorithms::rcs\n {\n \n-bool place(int r, int c) {\n-  for (int prev = 0; prev < c; prev++)    // check previously placed queens\n-    if (row[prev] == r || (abs(row[prev] - r) == abs(prev - c)))\n-      return false;        // share same row or same diagonal -> infeasible\n-  return true; }\n+    bool place(int r, int c) {\n+    for (int prev = 0; prev < c; prev++)    // check previously placed queens\n+        if (row[prev] == r || (abs(row[prev] - r) == abs(prev - c)))\n+        return false;        // share same row or same diagonal -> infeasible\n+    return true; }\n \n void backtrack(int c) {\n   if (c == 8 && row[b] == a) {         // candidate sol, (a, b) has 1 queen\n     printf(\"%2d      %d\", ++lineCounter, row[0] + 1);\n"
+                },
+                {
+                    "date": 1720171112568,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,11 +9,11 @@\n \n // recursive complete search\n namespace algorithms::rcs\n {\n-\n-    bool place(int r, int c) {\n-    for (int prev = 0; prev < c; prev++)    // check previously placed queens\n+    bool place(int r, int c) \n+    {\n+        for (int prev = 0; prev < c; prev++)    // check previously placed queens\n         if (row[prev] == r || (abs(row[prev] - r) == abs(prev - c)))\n         return false;        // share same row or same diagonal -> infeasible\n     return true; }\n \n"
+                },
+                {
+                    "date": 1720171122877,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n {\n     bool place(int r, int c) \n     {\n         for (int prev = 0; prev < c; prev++)    // check previously placed queens\n-        if (row[prev] == r || (abs(row[prev] - r) == abs(prev - c)))\n+          if (row[prev] == r || (abs(row[prev] - r) == abs(prev - c)))\n         return false;        // share same row or same diagonal -> infeasible\n     return true; }\n \n void backtrack(int c) {\n"
+                },
+                {
+                    "date": 1720171132583,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,10 @@\n {\n     bool place(int r, int c) \n     {\n         for (int prev = 0; prev < c; prev++)    // check previously placed queens\n-          if (row[prev] == r || (abs(row[prev] - r) == abs(prev - c)))\n+          if (row[prev] == r || \n+              (abs(row[prev] - r) == abs(prev - c)))\n         return false;        // share same row or same diagonal -> infeasible\n     return true; }\n \n void backtrack(int c) {\n"
+                },
+                {
+                    "date": 1720171138980,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,10 +14,10 @@\n     {\n         for (int prev = 0; prev < c; prev++)    // check previously placed queens\n           if (row[prev] == r || \n               (abs(row[prev] - r) == abs(prev - c)))\n-        return false;        // share same row or same diagonal -> infeasible\n-    return true; }\n+            return false;        // share same row or same diagonal -> infeasible\n+        return true; }\n \n void backtrack(int c) {\n   if (c == 8 && row[b] == a) {         // candidate sol, (a, b) has 1 queen\n     printf(\"%2d      %d\", ++lineCounter, row[0] + 1);\n"
+                },
+                {
+                    "date": 1720171151702,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,10 @@\n         for (int prev = 0; prev < c; prev++)    // check previously placed queens\n           if (row[prev] == r || \n               (abs(row[prev] - r) == abs(prev - c)))\n             return false;        // share same row or same diagonal -> infeasible\n-        return true; }\n+        return true; \n+    }\n \n void backtrack(int c) {\n   if (c == 8 && row[b] == a) {         // candidate sol, (a, b) has 1 queen\n     printf(\"%2d      %d\", ++lineCounter, row[0] + 1);\n"
+                },
+                {
+                    "date": 1720171160284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,16 +18,16 @@\n             return false;        // share same row or same diagonal -> infeasible\n         return true; \n     }\n \n-void backtrack(int c) {\n-  if (c == 8 && row[b] == a) {         // candidate sol, (a, b) has 1 queen\n-    printf(\"%2d      %d\", ++lineCounter, row[0] + 1);\n-    for (int j = 1; j < 8; j++) printf(\" %d\", row[j] + 1);\n-    printf(\"\\n\"); }\n-  for (int r = 0; r < 8; r++)                       // try all possible row\n-    if (place(r, c)) {          // if can place a queen at this col and row\n-      row[c] = r; backtrack(c + 1);      // put this queen here and recurse\n+    void backtrack(int c) {\n+    if (c == 8 && row[b] == a) {         // candidate sol, (a, b) has 1 queen\n+        printf(\"%2d      %d\", ++lineCounter, row[0] + 1);\n+        for (int j = 1; j < 8; j++) printf(\" %d\", row[j] + 1);\n+        printf(\"\\n\"); }\n+    for (int r = 0; r < 8; r++)                       // try all possible row\n+        if (place(r, c)) {          // if can place a queen at this col and row\n+        row[c] = r; backtrack(c + 1);      // put this queen here and recurse\n }   }\n \n int solve() {\n   scanf(\"%d\", &TC);\n"
+                },
+                {
+                    "date": 1720171166646,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,10 +18,11 @@\n             return false;        // share same row or same diagonal -> infeasible\n         return true; \n     }\n \n-    void backtrack(int c) {\n-    if (c == 8 && row[b] == a) {         // candidate sol, (a, b) has 1 queen\n+    void backtrack(int c) \n+    {\n+        if (c == 8 && row[b] == a) {         // candidate sol, (a, b) has 1 queen\n         printf(\"%2d      %d\", ++lineCounter, row[0] + 1);\n         for (int j = 1; j < 8; j++) printf(\" %d\", row[j] + 1);\n         printf(\"\\n\"); }\n     for (int r = 0; r < 8; r++)                       // try all possible row\n"
+                },
+                {
+                    "date": 1720171172954,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,10 @@\n     }\n \n     void backtrack(int c) \n     {\n-        if (c == 8 && row[b] == a) {         // candidate sol, (a, b) has 1 queen\n+        if (c == 8 && \n+            row[b] == a) {         // candidate sol, (a, b) has 1 queen\n         printf(\"%2d      %d\", ++lineCounter, row[0] + 1);\n         for (int j = 1; j < 8; j++) printf(\" %d\", row[j] + 1);\n         printf(\"\\n\"); }\n     for (int r = 0; r < 8; r++)                       // try all possible row\n"
+                },
+                {
+                    "date": 1720171180211,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,10 +21,11 @@\n \n     void backtrack(int c) \n     {\n         if (c == 8 && \n-            row[b] == a) {         // candidate sol, (a, b) has 1 queen\n-        printf(\"%2d      %d\", ++lineCounter, row[0] + 1);\n+            row[b] == a) \n+       {         // candidate sol, (a, b) has 1 queen\n+          printf(\"%2d      %d\", ++lineCounter, row[0] + 1);\n         for (int j = 1; j < 8; j++) printf(\" %d\", row[j] + 1);\n         printf(\"\\n\"); }\n     for (int r = 0; r < 8; r++)                       // try all possible row\n         if (place(r, c)) {          // if can place a queen at this col and row\n"
+                },
+                {
+                    "date": 1720171194295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n         if (c == 8 && \n             row[b] == a) \n        {         // candidate sol, (a, b) has 1 queen\n           printf(\"%2d      %d\", ++lineCounter, row[0] + 1);\n-        for (int j = 1; j < 8; j++) printf(\" %d\", row[j] + 1);\n+          for (int j = 1; j < 8; j++) printf(\" %d\", row[j] + 1);\n         printf(\"\\n\"); }\n     for (int r = 0; r < 8; r++)                       // try all possible row\n         if (place(r, c)) {          // if can place a queen at this col and row\n         row[c] = r; backtrack(c + 1);      // put this queen here and recurse\n"
+                },
+                {
+                    "date": 1720171202799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n           printf(\"%2d      %d\", ++lineCounter, row[0] + 1);\n           for (int j = 1; j < 8; j++) \n             printf(\" %d\", row[j] + 1);\n           printf(\"\\n\"); }\n-    for (int r = 0; r < 8; r++)                       // try all possible row\n+          for (int r = 0; r < 8; r++)                       // try all possible row\n         if (place(r, c)) {          // if can place a queen at this col and row\n         row[c] = r; backtrack(c + 1);      // put this queen here and recurse\n }   }\n \n"
+                },
+                {
+                    "date": 1720171213831,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n           for (int j = 1; j < 8; j++) \n             printf(\" %d\", row[j] + 1);\n           printf(\"\\n\"); }\n           for (int r = 0; r < 8; r++)                       // try all possible row\n-             if (place(r, c)) {          // if can place a queen at this col and row\n+             if (place(r, c))          // if can place a queen at this col and row\n               row[c] = r; backtrack(c + 1);      // put this queen here and recurse\n }   }\n \n int solve() {\n"
+                }
+            ],
+            "date": 1720170231002,
+            "name": "Commit-0",
+            "content": "namespace al"
+        }
+    ]
+}

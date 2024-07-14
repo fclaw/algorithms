@@ -10,7 +10,7 @@ namespace algorithms::dp::leetcode
       The unfairness of a distribution is defined as the maximum total cookies obtained by a single child in the distribution.
       Return the minimum unfairness of all distributions.
     */
-    int distributeCookies(std::vector<int>& cookies, int k)
+    int distributeCookies(std::vector<int> cookies, int k)
     {   
     }
 }

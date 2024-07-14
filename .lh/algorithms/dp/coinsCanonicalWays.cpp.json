@@ -1,0 +1,34 @@
+{
+    "sourceFile": "algorithms/dp/coinsCanonicalWays.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1720687427885,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1720687433707,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n #include <vector>\n-#include <iostream>\n \n-namespace algorithms::dp\n\\ No newline at end of file\n+namespace algorithms::dp\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720687442908,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n \n namespace algorithms::dp\n {\n-    \n+    waysTo\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720687448021,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n \n namespace algorithms::dp\n {\n-    waysToCollect\n+    waysToCollectTarget\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720687483141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,10 @@\n #include <vector>\n \n namespace algorithms::dp\n {\n-    \n+    A variant of this problem is to count the number of possible (canonical) ways to get value V cents using a list of denominations of n coins. For example 1 above, the answer is 3: {1+1+1+1+1 + 1+1+1+1+1, 5 + 1+1+1+1+1, 5 + 5}.\n+Solution: Use these Complete Search recurrence relation: ways(type, value), where value is the same as above but we now have one more parameter type for the index of the coin type that we are currently considering. This second parameter type is important as this solution considers the coin types sequentially. Once we choose to ignore a certain coin type, we should not consider it again to avoid double-counting:\n     int waysToCollectTarget(std::vector<int>  coins)\n     {\n \n     }\n"
+                }
+            ],
+            "date": 1720687427885,
+            "name": "Commit-0",
+            "content": "#include <vector>\n#include <iostream>\n\nnamespace algorithms::dp"
+        }
+    ]
+}

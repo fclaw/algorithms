@@ -1,0 +1,50 @@
+{
+    "sourceFile": "algorithms/codeforces/cornerTwist.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1720363910094,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1720363923276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,8 @@\n \n+namespace algorithms::codeforces\n+{\n+    \n+}\n \n+Corner Twist\n+\n"
+                },
+                {
+                    "date": 1720363934249,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n \n namespace algorithms::codeforces\n {\n-    \n+    Can\n }\n \n-Corner Twist\n \n"
+                },
+                {
+                    "date": 1720363942568,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n \n namespace algorithms::codeforces\n {\n-    Can\n+    CanBeConverted\n }\n \n \n"
+                },
+                {
+                    "date": 1720363949055,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n \n namespace algorithms::codeforces\n {\n-    CanBeConverted\n+    bool CanBeConverted\n }\n \n \n"
+                },
+                {
+                    "date": 1720363984684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,10 @@\n \n+using Square = std::\n+\n+\n namespace algorithms::codeforces\n {\n-    bool CanBeConverted\n+    bool canBeConverted()\n }\n \n \n"
+                },
+                {
+                    "date": 1720363994453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n-using Square = std::\n+using Square = std::vector<std::vector<int>>;\n \n \n namespace algorithms::codeforces\n {\n"
+                },
+                {
+                    "date": 1720364003126,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+#include <vector>\n \n using Square = std::vector<std::vector<int>>;\n \n \n"
+                },
+                {
+                    "date": 1720364013093,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n #include <vector>\n \n-using Square = std::vector<std::vector<int>>;\n+using square = std::vector<std::vector<int>>;\n \n namespace algorithms::codeforces\n {\n     bool canBeConverted()\n"
+                }
+            ],
+            "date": 1720363910094,
+            "name": "Commit-0",
+            "content": "\n\n"
+        }
+    ]
+}

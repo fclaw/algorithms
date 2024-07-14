@@ -9,6 +9,8 @@
 #include <set>
 #include <stack>
 #include <climits>
+#include <cstdio>
+
 
 // algorithms folder
 #include "algorithms/uniquePathsWithObstacles.cpp"
@@ -22,8 +24,6 @@
 #include "algorithms/nthNode.cpp"
 #include "algorithms/swapPairs.cpp"
 #include "algorithms/threeSumClosest.cpp"
-#include "algorithms/burstBalloons.cpp"
-#include "algorithms/jumpGame.cpp"
 #include "algorithms/coinChangeII.cpp"
 #include "algorithms/longestPalindrome.cpp"
 #include "algorithms/pascalTriangle.cpp"
@@ -56,59 +56,49 @@
 #include "algorithms/array/leetcode/dailyTemperatures.cpp"
 #include "algorithms/primesAndFactors.cpp"
 #include "algorithms/dp/leetcode/longestPalindromeSubseq.cpp"
+#include "algorithms/dp/leetcode/minStepsOn2KeysKeyboardRec.cpp"
+#include "algorithms/dp/leetcode/burstBalloons.cpp"
+#include "algorithms/tree/leetcode/distanceK.cpp"
+#include "algorithms/bitsManipulation.cpp"
+#include "algorithms/subsetToTarget.cpp"
+#include "algorithms/ 8Queens.cpp"
+#include "algorithms/dp/leetcode/canPartition.cpp"
+#include "algorithms/dp/leetcode/minimizeTheDifference.cpp"
+#include "algorithms/dp/leetcode/lengthOfLIS.cpp"
+#include "algorithms/dp/leetcode/deleteAndEarn.cpp"
+#include "algorithms/dp/coinsCanonicalWays.cpp"
+#include "algorithms/dp/tsp.cpp"
+#include "algorithms/dp/leetcode/maxSatisfaction.cpp"
+#include "algorithms/array/leetcode/mergeSortedArray.cpp"
+#include "algorithms/array/leetcode/canonicalSubsets.cpp"
+#include "algorithms/array/leetcode/subsetsWithDup.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
+#include "algorithms/codeforces/hitTheLottery.cpp"
+#include "algorithms/codeforces/fairDivision.cpp"
+#include "algorithms/codeforces/twoArraysAndSwaps.cpp"
+#include "algorithms/codeforces/redAndBlue.cpp"
+// online judge
+#include "algorithms/onlinejudge/dp/wedding.cpp"
+#include "algorithms/onlinejudge/dp/sdi.cpp"
+#include "algorithms/onlinejudge/dp/howDoYouAdd.cpp"
+#include "algorithms/onlinejudge/dp/chestOfDrawers.cpp"
 
 
 int main()
 {
     std::cout << std::endl;
     std::cout << std::endl;
-    std::cout << "--- Paint fence ---\n";
+    std::cout << "--- subset with dup---\n";
 
-    std::cout << algorithms::dp::countWaysToPaintFence(2, 4);
+    std::vector<int> set = {1,9,8,3,-1,0};
+    auto ans = algorithms::array::leetcode::subsetsWithDup(set);
 
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << "--- longest palindrome subsequence ---\n";
-    std::string case1 = 
-       "ibvjkmpyzsifuxcabqqpahjdeuzaybqsrsmbfplxycsafogotliyvhxjtkrbzqxlyfwujzhkdafheb"
-        "vsdhkkdbhlhmaoxmbkqiwiusngkbdhlvxdyvnjrzvxmukvdfobzlmvnbnilnsyrgoygfdzjlymhprc"
-        "pxsnxpcafctikxxybcusgjwmfklkffehbvlhvxfiddznwumxosomfbgxoruoqrhezgsgidgcfzbtdft"
-        "jxeahriirqgxbhicoxavquhbkaomrroghdnfkknyigsluqebaqrtcwgmlnvmxoagisdmsokeznjsnwp"
-        "xygjjptvyjjkbmkxvlivinmpnpxgmmorkasebngirckqcawgevljplkkgextudqaodwqmfljljhrujo"
-        "erycoojwwgtklypicgkyaboqjfivbeqdlonxeidgxsyzugkntoevwfuxovazcyayvwbcqswzhytlmtm"
-        "rtwpikgacnpkbwgfmpavzyjoxughwhvlsxsgttbcyrlkaarngeoaldsdtjncivhcfsaohmdhgbwkuem"
-        "cembmlwbwquxfaiukoqvzmgoeppieztdacvwngbkcxknbytvztodbfnjhbtwpjlzuajnlzfmmujhcggp"
-        "dcwdquutdiubgcvnxvgspmfumeqrofewynizvynavjzkbpkuxxvkjujectdyfwygnfsukvzf";
-    std::string case2 = 
-       "xm9btf9vhsagz2okvlab1yhz8apkxuor5v42yewdpjo5ie0wjtvuvrjdnx05kajr7z4hw54airzej1pcfq"
-       "sf4r7gboae3u09t9u0hcl8np5c3oof3tan6trns9vcxp2rwo3pde0wkiwhz24oe2a3w5wtcl8bed3fms32h"
-       "11pqot4hw25lc5p9dtjwwbe2i9x6hyacrxzvs827kjh5iuep32fj9kvsr9ro5emfi274gwf70vtaaqzu03x"
-       "hfralqphamgnqpwzuakg9o9ha9p0xm49wpit4ty8p4mfahnmgsojn5ir9dak1xce191cax393nsiujnct8u"
-       "9wtibsdbqb5i7gion4b2pw5v4hzmszyo5xxm2ekasqtsusdunccrtcx92m3igdie7mbatanoazmrl6dogqf"
-       "ioghmza3vg0i76td8rvc2lcb6oi5kpyd4izyxamc4q218f7vv6khkcdtshie9nb3is32r8zopht43b7dajk"
-       "p5bapy0ye9acjgjmegc4xfu1662lhm69zia521ujaiy605w7l5qm57out6qhumd89ck7k2knogpg1zhvbnn"
-       "omna1ype7buyjyr1dgqqidbo0wtxkxkfkcotenpx45ttu9zne7qtk7zx26wv5p27xfu3ebwt5c3s9kgosbx"
-       "dbft6477nfhzwp4y6n4220lt56b7fpeb4a2j1anuxktanofiemd8n7st2bon6h97v6lj6ewa7v8w12mgsbn"
-       "68o7df33g89wd45oz4xkd3fxe2up3cs4bneo3snf91fbcpjoyq0ssz8w7973ro44524qtjtujlfdgek7wq6"
-       "b2w2b3fd6s0x2mrpmvsyr5z0c7stges7wl0cigqbqjki106tp1z6yu0mzjt1zpolkw4yw584au9jlg2dn5k"
-       "5dgka2kgcaqz1fyatzjw0i743gf0tyvp22dvfdwius4uq3vli8ie1cotl3ezams5bd8ygxd55vyp5hc89hwupltd";
-    std::string case3 = "xabay";
-    std::string case4 = 
-       "jrjnbctoqgzimtoklkxcknwmhiztomaofwwzjnhrijwkgmwwuazcowsk"
-       "jhitejnvtblqyepxispasrgvgzqlvrmvhxusiqqzzibcyhpnruhrgbzs"
-       "mlsuacwptmzxuewnjzmwxbdzqyvsjzxiecsnkdibudtvthzlizralpao"
-       "wsbakzconeuwwpsqynaxqmgngzpovauxsqgypinywwtmekzhhlzaeatb"
-       "zryreuttgwfqmmpeywtvpssznkwhzuqewuqtfuflttjcxrhwexvtxjih"
-       "unpywerkktbvlsyomkxuwrqqmbmzjbfytdddnkasmdyukawrzrnhdmae"
-       "fzltddipcrhuchvdcoegamlfifzistnplqabtazunlelslicrkuuhoso"
-       "yduhootlwsbtxautewkvnvlbtixkmxhngidxecehslqjpcdrtlqswmyg"
-       "hmwlttjecvbueswsixoxmymcepbmuwtzanmvujmalyghzkvtoxynyusb"
-       "pzpolaplsgrunpfgdbbtvtkahqmmlbxzcfznvhxsiytlsxmmtqiudyjl"
-       "nbkzvtbqdsknsrknsykqzucevgmmcoanilsyyklpbxqosoquolvytefh"
-       "vozwtwcrmbnyijbammlzrgalrymyfpysbqpjwzirsfknnyseiujadovn"
-       "gogvptphuyzkrwgjqwdhtvgxnmxuheofplizpxijfytfabx";
-    std::cout << algorithms::leetcode::dp::longestSubstringPalindrome(case2) << std::endl;
+    for ( const auto &row : ans )
+    {
+        for ( const auto &s : row ) 
+          std::cout << std::setw(5) << s << ' ';
+        std::cout << std::endl;
+    }  
 }

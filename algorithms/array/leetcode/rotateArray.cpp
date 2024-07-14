@@ -1,6 +1,6 @@
 #include <vector>
 
-namespace algorithms::leetcode::array
+namespace algorithms::array::leetcode
 {
     // https://leetcode.com/problems/rotate-array
     void rotateArray(std::vector<int>& xs, int k) 

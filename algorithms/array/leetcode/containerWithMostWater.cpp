@@ -1,7 +1,7 @@
 #include <vector>
 #include <algorithm>
 
-namespace leetcode::array
+namespace algorithms::array::leetcode
 {
     // https://leetcode.com/problems/container-with-most-water
     int maxAreaHelper(std::vector<int>& xs, int left, int right, int volume)

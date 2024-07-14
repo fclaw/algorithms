@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1719644681573,
@@ -20,6 +20,10 @@
                 {
                     "date": 1719644721037,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::leetcode::array\n {\n     // https://leetcode.com/problems/rotate-array\n-    void rotateArray(vector<int>& xs, int k) \n+    void rotateArray(std::vector<int>& xs, int k) \n     {\n         auto r = k > xs.size() ? k % xs.size() : k;\n \n         std::reverse(xs.begin(), xs.end());\n"
+                },
+                {
+                    "date": 1720071415778,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,30 @@\n+#include <vector>\n+\n+namespace algorithms::leetcode\n+{\n+    // https://leetcode.com/problems/rotate-array\n+    void rotateArray(std::vector<int>& xs, int k) \n+    {\n+        auto r = k > xs.size() ? k % xs.size() : k;\n+\n+        std::reverse(xs.begin(), xs.end());\n+        // left part \n+        int left = 0;\n+        int right = r - 1;\n+        while(left < right)\n+        {\n+            std::swap(xs[left], xs[right]);\n+            left++;\n+            right--;\n+        }\n+        // right part\n+        left = r;\n+        right = xs.size() - 1;\n+        while(left < right)\n+        {\n+            std::swap(xs[left], xs[right]);\n+            left++;\n+            right--;\n+        }\n+    }\n+}\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1719644681573,

@@ -1,7 +1,7 @@
 #include <vector>
 #include <algorithm>
 
-namespace leetcode::array
+namespace algorithms::array::leetcode
 {
     // https://leetcode.com/problems/gas-station
     /*

@@ -1,0 +1,98 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/canPartitionKSubsets.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 20,
+            "patches": [
+                {
+                    "date": 1720160235584,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1720160241347,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n #include <vector>\n \n namespace leetcode::dp::leetcode\n {\n-    \n+    bool canPartitionKSubsets(vector<int>& nums, int k) {   \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720160249800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n #include <vector>\n \n namespace leetcode::dp::leetcode\n {\n-    bool canPartitionKSubsets(vector<int>& nums, int k) {   \n-    }\n+    bool canPartitionKSubsets(std::vector<int>& nums, int k) {  return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720160271252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,9 @@\n #include <vector>\n \n namespace leetcode::dp::leetcode\n {\n+    /*\n+      Given an integer array nums and an integer k, return true if it is possible to divide this array into k non-empty subsets whose sums are all equal.\n+    */\n     bool canPartitionKSubsets(std::vector<int>& nums, int k) {  return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720160284271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace leetcode::dp::leetcode\n {\n     /*\n-      Given an integer array nums and an integer k, return true if it is possible to divide this array into k non-empty subsets whose sums are all equal.\n+      Given an integer array nums and an integer k, \n+      return true if it is possible to divide this array into k non-empty subsets whose sums are all equal.\n     */\n     bool canPartitionKSubsets(std::vector<int>& nums, int k) {  return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720160289613,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n namespace leetcode::dp::leetcode\n {\n     /*\n       Given an integer array nums and an integer k, \n-      return true if it is possible to divide this array into k non-empty subsets whose sums are all equal.\n+      return true if it is possible to divide this array \n+      into k non-empty subsets whose sums are all equal.\n     */\n     bool canPartitionKSubsets(std::vector<int>& nums, int k) {  return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720160298596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace leetcode::dp::leetcode\n {\n     /*\n+      https://leetcode.com/problems/partition-to-k-equal-sum-subsets\n       Given an integer array nums and an integer k, \n       return true if it is possible to divide this array \n       into k non-empty subsets whose sums are all equal.\n     */\n"
+                },
+                {
+                    "date": 1720182611928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,6 +7,6 @@\n       Given an integer array nums and an integer k, \n       return true if it is possible to divide this array \n       into k non-empty subsets whose sums are all equal.\n     */\n-    bool canPartitionKSubsets(std::vector<int>& nums, int k) {  return false; }\n+    bool canPartitionKSubsets(std::vector<int> nums, int k) {  return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720182618243,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,6 +7,8 @@\n       Given an integer array nums and an integer k, \n       return true if it is possible to divide this array \n       into k non-empty subsets whose sums are all equal.\n     */\n-    bool canPartitionKSubsets(std::vector<int> nums, int k) {  return false; }\n+    bool canPartitionKSubsets(std::vector<int> nums, int k) \n+    {  \n+        return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720182624839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,7 +8,9 @@\n       return true if it is possible to divide this array \n       into k non-empty subsets whose sums are all equal.\n     */\n     bool canPartitionKSubsets(std::vector<int> nums, int k) \n-    {  \n-        return false; }\n+    {\n+          \n+        return false; \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720182641092,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n       into k non-empty subsets whose sums are all equal.\n     */\n     bool canPartitionKSubsets(std::vector<int> nums, int k) \n     {\n-          \n+        int mask = 0;\n+        for  \n         return false; \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720182656848,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n     */\n     bool canPartitionKSubsets(std::vector<int> nums, int k) \n     {\n         int mask = 0;\n-        for  \n+        \n+        for(int )  \n         return false; \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720182661866,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n     */\n     bool canPartitionKSubsets(std::vector<int> nums, int k) \n     {\n         int mask = 0;\n-        \n+        mask \n         for(int )  \n         return false; \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720182667152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n     */\n     bool canPartitionKSubsets(std::vector<int> nums, int k) \n     {\n         int mask = 0;\n-        mask \n+        mask |= (1 << )\n         for(int )  \n         return false; \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720182673501,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n       into k non-empty subsets whose sums are all equal.\n     */\n     bool canPartitionKSubsets(std::vector<int> nums, int k) \n     {\n+        int \n         int mask = 0;\n         mask |= (1 << )\n         for(int )  \n         return false; \n"
+                },
+                {
+                    "date": 1720182682347,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,19 @@\n+#include <vector>\n+\n+namespace leetcode::dp::leetcode\n+{\n+    /*\n+      https://leetcode.com/problems/partition-to-k-equal-sum-subsets\n+      Given an integer array nums and an integer k, \n+      return true if it is possible to divide this array \n+      into k non-empty subsets whose sums are all equal.\n+    */\n+    bool canPartitionKSubsets(std::vector<int> nums, int k) \n+    {\n+        int nums.size();\n+        int mask = 0;\n+        mask |= (1 << )\n+        for(int )  \n+        return false; \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720182692232,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,30 +9,11 @@\n       into k non-empty subsets whose sums are all equal.\n     */\n     bool canPartitionKSubsets(std::vector<int> nums, int k) \n     {\n-        int nums.size();\n+        int n = nums.size();\n         int mask = 0;\n-        mask |= (1 << )\n+        mask |= (1 << 0)\n         for(int )  \n         return false; \n     }\n-}\n-#include <vector>\n-\n-namespace leetcode::dp::leetcode\n-{\n-    /*\n-      https://leetcode.com/problems/partition-to-k-equal-sum-subsets\n-      Given an integer array nums and an integer k, \n-      return true if it is possible to divide this array \n-      into k non-empty subsets whose sums are all equal.\n-    */\n-    bool canPartitionKSubsets(std::vector<int> nums, int k) \n-    {\n-        int \n-        int mask = 0;\n-        mask |= (1 << )\n-        for(int )  \n-        return false; \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720182703846,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n     bool canPartitionKSubsets(std::vector<int> nums, int k) \n     {\n         int n = nums.size();\n         int mask = 0;\n-        mask |= (1 << 0)\n-        for(int )  \n+        mask |= (1 << 0);\n+        if()\n         return false; \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720182715314,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,8 @@\n     {\n         int n = nums.size();\n         int mask = 0;\n         mask |= (1 << 0);\n-        if()\n+        if(mask & (1 << 2))\n         return false; \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720182726982,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     {\n         int n = nums.size();\n         int mask = 0;\n         mask |= (1 << 0);\n-        for()\n+        for(int i = 0; i < nl)\n         if(mask & (1 << 2))\n         return false; \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720182775788,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,26 @@\n+#include <vector>\n+#include <iostream>\n+\n+namespace leetcode::dp::leetcode\n+{\n+    /*\n+      https://leetcode.com/problems/partition-to-k-equal-sum-subsets\n+      Given an integer array nums and an integer k, \n+      return true if it is possible to divide this array \n+      into k non-empty subsets whose sums are all equal.\n+    */\n+    bool canPartitionKSubsets(std::vector<int> nums, int k) \n+    {\n+        int n = nums.size();\n+        int mask = 0;\n+        mask |= (1 << 0);\n+\n+        for(int i = 0; i < n; i++)\n+        {\n+            if(mask & (1 << i))\n+              std::cout << nums[i] << std::end\n+              \n+        }\n+        return false; \n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1720160235584,
+            "name": "Commit-0",
+            "content": "#include <vector>\n\nnamespace leetcode::dp::leetcode\n{\n    \n}"
+        }
+    ]
+}

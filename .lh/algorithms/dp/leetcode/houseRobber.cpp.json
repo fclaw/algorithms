@@ -1,0 +1,18 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/houseRobber.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1720851932710,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1720851932710,
+            "name": "Commit-0",
+            "content": "#include <vector>\n#include <algorithm>\n\nnamespace algorithms::leetcode::dp\n{\n    // https://leetcode.com/problems/house-robber\n    int robHelper(std::vector<int>& xs, int i, std::vector<int>& memo)\n    {\n        if(i >= xs.size())\n        return 0;\n        if(memo[i] != -1)\n        return memo[i]; \n        int maxBooty = 0;\n        for (size_t j = i + 2; j < xs.size(); j++) {\n        int local = robHelper(xs, j, memo);\n        memo[j] = local;\n        maxBooty = std::max(maxBooty, local);\n        }\n        return xs[i] + maxBooty;\n    }\n\n    int solveHouseRobber(std::vector<int>& nums) \n    {\n        std::vector<int> memo = std::vector<int>(nums.size() + 1, -1);\n        int maxBooty = 0;\n        for (size_t i = 0; i < nums.size(); i++)\n        maxBooty = std::max(maxBooty, robHelper(nums, i, memo));\n        return maxBooty;\n    }\n\n    // https://leetcode.com/problems/house-robber-ii\n    // Since House[1] and House[n] are adjacent, they cannot be robbed together. \n    // Therefore, the problem becomes to rob either House[1]-House[n-1] or House[2]-House[n], \n    // depending on which choice offers more money.\n    int solveHouseRobber2(std::vector<int>& nums) \n    {\n        if(nums.size() == 1)\n            return nums[0];\n\n        auto last_house = *(nums.end() - 1);\n        nums.pop_back();\n        int maxBootyNoLast = solveHouseRobber(nums);\n        nums.erase(nums.begin());\n        nums.push_back(last_house);\n        int maxBootyNoFirst = solveHouseRobber(nums);\n        return std::max(maxBootyNoLast, maxBootyNoFirst);\n    }\n}"
+        }
+    ]
+}

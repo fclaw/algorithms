@@ -1,0 +1,26 @@
+{
+    "sourceFile": "algorithms/onlinejudge/dp/chestOfDrawers.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1720801949906,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1720801956272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n       For any positive integer N , N = a(1) ^ 2 + a(2) ^ 2 + . . . + a(n) ^ 2 that is, \n       any positive integer can be represented as sum of squares of other numbers.\n       Your task is to print the smallest ‘n’ such that N = a(1) ^ 2 + a(2) ^ 2 + . . . + a(n) ^ 2\n     */\n-    int waysToSecureDrawers(int n)\n+    int waysToSecureDrawers(int n )\n     {\n         return 0;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720802024276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,11 +2,11 @@\n \n namespace algorithms::onlinejudge::dp\n {\n     /* \n-      For any positive integer N , N = a(1) ^ 2 + a(2) ^ 2 + . . . + a(n) ^ 2 that is, \n-      any positive integer can be represented as sum of squares of other numbers.\n-      Your task is to print the smallest ‘n’ such that N = a(1) ^ 2 + a(2) ^ 2 + . . . + a(n) ^ 2\n+     Eachlinecontainstwointegersnands(1≤n≤65and0≤s≤65). Herenisthetotalnumber\n+of drawers and s is the number of drawers that needs to be secured.\n+Input is terminated by a line containing two negative numbers. This input should not be processed.\n     */\n     int waysToSecureDrawers(int n, int s)\n     {\n         return 0;\n"
+                }
+            ],
+            "date": 1720801949906,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::onlinejudge::dp\n{\n    /* \n      For any positive integer N , N = a(1) ^ 2 + a(2) ^ 2 + . . . + a(n) ^ 2 that is, \n      any positive integer can be represented as sum of squares of other numbers.\n      Your task is to print the smallest ‘n’ such that N = a(1) ^ 2 + a(2) ^ 2 + . . . + a(n) ^ 2\n    */\n    int waysToSecure(int n)\n    {\n        return 0;\n    }\n}"
+        }
+    ]
+}

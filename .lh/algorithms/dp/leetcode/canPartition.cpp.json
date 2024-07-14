@@ -1,0 +1,82 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/canPartition.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 16,
+            "patches": [
+                {
+                    "date": 1720191115357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1720191122987,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n #include <vector>\n-#include <iostream>\n \n namespace algorithms::dp::leetcode\n-{\n\\ No newline at end of file\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720191128700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n #include <vector>\n \n namespace algorithms::dp::leetcode\n {\n-    \n+    bool canPartition(vector<int>& nums) {   \n+}\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720191143006,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,6 @@\n #include <vector>\n \n namespace algorithms::dp::leetcode\n {\n-    bool canPartition(vector<int>& nums) {   \n-}\n+    bool canPartition(vector<int>& nums) { return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720191159209,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n #include <vector>\n \n namespace algorithms::dp::leetcode\n {\n-    bool canPartition(vector<int>& nums) { return false; }\n+    \n+    bool canPartition(std::vector<int>& nums) { return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720191166335,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,15 @@\n #include <vector>\n \n namespace algorithms::dp::leetcode\n {\n-    \n+    std::vector<int> makePrefixSum(std::vector<int> nums)\n+    { \n+        int n = nums.size();\n+        std::vector<int> prefixSum(n, 0);\n+        prefixSum[0] = nums[0];\n+        for (int i = 1; i < n; i++)\n+          prefixSum[i] = prefixSum[i - 1] + nums[i];\n+        return prefixSum;\n+    }\n     bool canPartition(std::vector<int>& nums) { return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720191175694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,6 +10,7 @@\n         for (int i = 1; i < n; i++)\n           prefixSum[i] = prefixSum[i - 1] + nums[i];\n         return prefixSum;\n     }\n+    Given an integer array nums, return true if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or false otherwise.\n     bool canPartition(std::vector<int>& nums) { return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720191181872,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,7 +10,8 @@\n         for (int i = 1; i < n; i++)\n           prefixSum[i] = prefixSum[i - 1] + nums[i];\n         return prefixSum;\n     }\n-    Given an integer array nums, return true if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or false otherwise.\n+    /*\n+       Given an integer array nums, return true if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or false otherwise.\n     bool canPartition(std::vector<int>& nums) { return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720191189510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,7 +11,8 @@\n           prefixSum[i] = prefixSum[i - 1] + nums[i];\n         return prefixSum;\n     }\n     /*\n-       Given an integer array nums, return true if you can partition the array into two subsets such that the sum of the elements in both subsets is equal or false otherwise.\n+       Given an integer array nums, return true if you can partition the array into two subsets \n+       such that the sum of the elements in both subsets is equal or false otherwise.\n     bool canPartition(std::vector<int>& nums) { return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720191229577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,6 +13,7 @@\n     }\n     /*\n        Given an integer array nums, return true if you can partition the array into two subsets \n        such that the sum of the elements in both subsets is equal or false otherwise.\n+    */\n     bool canPartition(std::vector<int>& nums) { return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720191262878,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,11 @@\n         for (int i = 1; i < n; i++)\n           prefixSum[i] = prefixSum[i - 1] + nums[i];\n         return prefixSum;\n     }\n+\n+\n+    \n     /*\n        Given an integer array nums, return true if you can partition the array into two subsets \n        such that the sum of the elements in both subsets is equal or false otherwise.\n     */\n"
+                },
+                {
+                    "date": 1720191269240,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,10 +11,10 @@\n           prefixSum[i] = prefixSum[i - 1] + nums[i];\n         return prefixSum;\n     }\n \n+    bool solve()\n \n-    \n     /*\n        Given an integer array nums, return true if you can partition the array into two subsets \n        such that the sum of the elements in both subsets is equal or false otherwise.\n     */\n"
+                },
+                {
+                    "date": 1720191287901,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,12 +11,12 @@\n           prefixSum[i] = prefixSum[i - 1] + nums[i];\n         return prefixSum;\n     }\n \n-    bool solve()\n+    bool solve(std::vector<int> nums, std::vector<int> prefixSum)\n \n     /*\n        Given an integer array nums, return true if you can partition the array into two subsets \n        such that the sum of the elements in both subsets is equal or false otherwise.\n     */\n-    bool canPartition(std::vector<int>& nums) { return false; }\n+    bool canPartition(std::vector<int> nums) { return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720191299129,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,6 +17,9 @@\n     /*\n        Given an integer array nums, return true if you can partition the array into two subsets \n        such that the sum of the elements in both subsets is equal or false otherwise.\n     */\n-    bool canPartition(std::vector<int> nums) { return false; }\n+    bool canPartition(std::vector<int> nums) \n+    { \n+        makePrefixSum(nums);\n+        return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720191305474,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,7 +19,7 @@\n        such that the sum of the elements in both subsets is equal or false otherwise.\n     */\n     bool canPartition(std::vector<int> nums) \n     { \n-        makePrefixSum(nums);\n+        auto premakePrefixSum(nums);\n         return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720191317313,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,6 +20,7 @@\n     */\n     bool canPartition(std::vector<int> nums) \n     { \n         auto prefixSum = makePrefixSum(nums);\n+        return solve()\n         return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720191323307,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,7 +20,7 @@\n     */\n     bool canPartition(std::vector<int> nums) \n     { \n         auto prefixSum = makePrefixSum(nums);\n-        return solve(nums, prefi)\n+        return solve(nums, makePrefixSum)\n         return false; }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1720191115357,
+            "name": "Commit-0",
+            "content": "#include <vector>\n#include <iostream>\n\nnamespace algorithms::dp::leetcode\n{"
+        }
+    ]
+}

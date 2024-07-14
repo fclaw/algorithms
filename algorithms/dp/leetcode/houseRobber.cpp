@@ -1,7 +1,7 @@
 #include <vector>
 #include <algorithm>
 
-namespace leetcode::dp
+namespace algorithms::leetcode::dp
 {
     // https://leetcode.com/problems/house-robber
     int robHelper(std::vector<int>& xs, int i, std::vector<int>& memo)

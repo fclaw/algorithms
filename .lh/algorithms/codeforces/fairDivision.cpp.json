@@ -1,0 +1,34 @@
+{
+    "sourceFile": "algorithms/codeforces/fairDivision.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1720009446025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1720009458044,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n namespace algorithms::codeforces\n {\n+    /*\n     \n+    */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720009463113,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,11 @@\n namespace algorithms::codeforces\n {\n     /*\n-    \n+      Alice and Bob received 𝑛\n+ candies from their parents. Each candy weighs either 1 gram or 2 grams. Now they want to divide all candies among themselves fairly so that the total weight of Alice's candies is equal to the total weight of Bob's candies.\n+\n+Check if they can do that.\n+\n+Note that candies are not allowed to be cut in half.\n     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720009476048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n namespace algorithms::codeforces\n {\n     /*\n-      Alice and Bob received candies from their parents. Each candy weighs either 1 gram or 2 grams. Now they want to divide all candies among themselves fairly so that the total weight of Alice's candies is equal to the total weight of Bob's candies.\n+      Alice and Bob received candies from their parents. \n+      Each candy weighs either 1 gram or 2 grams. Now they want to divide all candies among themselves fairly so that the total weight of Alice's candies is equal to the total weight of Bob's candies.\n \n Check if they can do that.\n \n Note that candies are not allowed to be cut in half.\n"
+                },
+                {
+                    "date": 1720009715097,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,12 @@\n+namespace algorithms::codeforces\n+{\n+    /*\n+      Alice and Bob received candies from their parents. \n+      Each candy weighs either 1 gram or 2 grams. \n+      Now they want to divide all candies among themselves fairly \n+      so that the total weight of Alice's candies is equal to the total weight of Bob's candies.\n+      Check if they can do that. Note that candies are not allowed to be cut in half.\n+    */\n+\n+     bool canBeSharedOutFairly(int )\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1720009446025,
+            "name": "Commit-0",
+            "content": "namespace algorithms::codeforces\n{\n    \n}"
+        }
+    ]
+}

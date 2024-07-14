@@ -1,0 +1,38 @@
+{
+    "sourceFile": "algorithms/array/leetcode/singleNumber.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1720899695483,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1720899700895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n namespace algorithms::array::leetcode\n {\n-    \n+    int singleNumber(vector<int>& nums) {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720899709245,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,4 @@\n namespace algorithms::array::leetcode\n {\n-    int singleNumber(vector<int>& nums) {\n-        \n-    }\n+    int singleNumber(vector<int>& nums) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720899718977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,6 @@\n+#include <vector>\n+\n+namespace algorithms::array::leetcode\n+{\n+    int singleNumber(vector<int>& nums) { return 0; }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720899728301,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,6 @@\n #include <vector>\n \n namespace algorithms::array::leetcode\n {\n-    int singleNumber(vector<int>& nums) { return 0; }\n-}\n-namespace algorithms::array::leetcode\n-{\n-    int singleNumber(vector<int>& nums) { return 0; }\n+    int singleNumber(std::vector<int>& nums) { return 0; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720899784759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n #include <vector>\n \n namespace algorithms::array::leetcode\n {\n+    // https://leetcode.com/problems/single-number\n     int singleNumber(std::vector<int>& nums) { return 0; }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1720899695483,
+            "name": "Commit-0",
+            "content": "namespace algorithms::array::leetcode\n{\n    \n}"
+        }
+    ]
+}

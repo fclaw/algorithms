@@ -6,14 +6,20 @@
 
 using SubstringPalindromeMemo = std::vector<std::vector<std::string>>;
 using SubstringPalindromeDp = std::vector<std::vector<std::string>>;
-using SubstringPalindromeTupleDp = std::vector<std::vector<std::pair<int, int>>>;
+using SubstringPalindromeTupleDp = std::vector<std::vector<std::tuple<int, int, std::optional<bool>>>>;
+  
 
-void printSubstringPalindromeDp(SubstringPalindromeDp dp)
+void printSubstringPalindromeDp(SubstringPalindromeTupleDp dp)
 {
     for ( const auto &row : dp )
     {
-        for ( const auto &s : row ) 
-          std::cout << std::setw(5) << s << ' ';
+        for ( const auto &s : row )
+        {
+            int f, l;
+            std::optional<bool> isPal;
+            std::tie(f, l, isPal) = s;
+            std::cout << std::setw(7) << "{ i: " << f << ", j: " <<  l << " }" << ' ';
+        }
         std::cout << std::endl;
     }
 }
@@ -59,27 +65,44 @@ namespace algorithms::leetcode::dp
     std::string longestSubstringPalindromeDp(std::string s)
     {
         int n = s.size();
-        SubstringPalindromeTupleDp dp(n, std::vector<std::pair<int, int>>(n, {-1, -1}));
+        SubstringPalindromeTupleDp dp(n, std::vector<std::tuple<int, int, std::optional<bool>>>(n, {-1, -1, std::nullopt}));
 
         for (int i = 0; i < n; i++)
-          dp[i][i] = {i, i};
-        
+          dp[i][i] = {i, i, true};
+
         for(int i = n - 2; i >= 0; i--)
           for(int j = i + 1; j < n; j++)
           {
-               if(s[i] == s[j] &&
-                  isPalindrome(s, i + 1, j - 1))
-                 dp[i][j] = {i, j};
+               int f, l;
+               std::optional<bool> isP;
+               std::tie(f, l, isP) = dp[i + 1][j - 1];
+               
+               if(!isP.has_value())
+               {
+                  auto r = l - f == (j - 1) - (i + 1) + 1;
+                  dp[i + 1][j - 1] = {f, l, r};
+                  isP = r;
+               }
+
+               if(s[i] == s[j] && isP.value())
+                 dp[i][j] = {i, j, true};
                else
-                 if(dp[i][j - 1].second - dp[i][j - 1].first > dp[i + 1][j].second - dp[i + 1][j].first)
-                   dp[i][j] = dp[i][j - 1];
-                 else dp[i][j] = dp[i + 1][j];
+               {
+                   int li, lj, di, dj;
+                   std::optional<bool> left_is_p, down_is_p;
+                   std::tie(li, lj, left_is_p) = dp[i][j - 1];
+                   std::tie(di, dj, down_is_p) = dp[i + 1][j]; 
+                   if(lj - li > dj - di)
+                      dp[i][j] = {li, lj, false};
+                   else dp[i][j] = {di, dj, false};
+                }
           }
+
         auto res = dp[0][n - 1];
         
-        int f = res.first;
-        int l = res.second;
-
+        int f, l;
+        std::optional<bool> isP;
+        std::tie(f, l, isP) = res;
         return s.substr(f, l - f + 1);
     }
 

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 10,
+            "activePatchIndex": 11,
             "patches": [
                 {
                     "date": 1719692658813,
@@ -48,6 +48,10 @@
                 {
                     "date": 1719727011644,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n       You are given an integer array cookies, where cookies[i] denotes the number of cookies in the ith bag. \n       You are also given an integer k that denotes the number of children to distribute all the bags of cookies to. \n       All the cookies in the same bag must go to the same child and cannot be split up.\n       The unfairness of a distribution is defined as the maximum total cookies obtained by a single child in the distribution.\n-Return the minimum unfairness of all distributions.\n+      Return the minimum unfairness of all distributions.\n     */\n-    int distributeCookies(std::vector<int>& cookies, int k) \n+    int distributeCookies(std::vector<int>& cookies, int k)\n     {   \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720000261393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,8 @@\n       All the cookies in the same bag must go to the same child and cannot be split up.\n       The unfairness of a distribution is defined as the maximum total cookies obtained by a single child in the distribution.\n       Return the minimum unfairness of all distributions.\n     */\n-    int distributeCookies(std::vector<int>& cookies, int k)\n+    int distributeCookies(std::vector<int> cookies, int k)\n     {   \n     }\n }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1719692658813,

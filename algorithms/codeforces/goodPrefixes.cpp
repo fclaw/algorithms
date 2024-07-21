@@ -36,7 +36,7 @@ namespace algorithms::codeforces
          return res;
     } 
 
-    int main()
+    void submit_1985()
     {
          int n;
          std::cin >> n;
@@ -54,7 +54,5 @@ namespace algorithms::codeforces
              std::cout << countGoodPrefixes(xs) << std::endl;
              n--;
          };
-         
-         return 0;
     }
 }

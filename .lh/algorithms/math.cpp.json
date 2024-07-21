@@ -1,0 +1,26 @@
+{
+    "sourceFile": "algorithms/math.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1721312503643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1721312511481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace algorithms::mathematics\n {\n-\n+    \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721312650356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n \n \n namespace algorithms::mathematics\n {\n-    int (int x, int y)\n+    int multiplyRec(int x, int y)\n     {\n \n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1721312503643,
+            "name": "Commit-0",
+            "content": "namespace algorithms::mathematics\n{\n    \n}"
+        }
+    ]
+}

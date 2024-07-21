@@ -1,0 +1,150 @@
+{
+    "sourceFile": "algorithms/codeforces/elephant.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 33,
+            "patches": [
+                {
+                    "date": 1721382330080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1721382340576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,6 @@\n-namespace algorithms::codeforces\n\\ No newline at end of file\n+\n+\n+namespace algorithms::codeforces\n+{\n+    // https://codeforces.com/problemset/problem/617/A\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721382391159,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,14 @@\n \n namespace algorithms::codeforces\n {\n     // https://codeforces.com/problemset/problem/617/A\n+         void submit_455_a()\n+     {\n+         int n;\n+         scanf(\"%d\", &n);\n+         std::vector<int> xs(n);\n+         for (int i = 0; i < n; i++)\n+           scanf(\"%d\", &xs[i]);\n+         printf(\"%llu\\n\", solve_455_a(xs));  \n+     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721382401016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,11 @@\n+#include <cstdio>\n \n \n namespace algorithms::codeforces\n {\n     // https://codeforces.com/problemset/problem/617/A\n-         void submit_455_a()\n+     void submit_455_a()\n      {\n          int n;\n          scanf(\"%d\", &n);\n          std::vector<int> xs(n);\n"
+                },
+                {
+                    "date": 1721382408956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,7 @@\n      void submit_455_a()\n      {\n          int n;\n          scanf(\"%d\", &n);\n-         std::vector<int> xs(n);\n-         for (int i = 0; i < n; i++)\n-           scanf(\"%d\", &xs[i]);\n          printf(\"%llu\\n\", solve_455_a(xs));  \n      }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721382418274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,7 @@\n      void submit_455_a()\n      {\n          int n;\n          scanf(\"%d\", &n);\n-         printf(\"%llu\\n\", solve_455_a(xs));  \n+         printf(\"%llu\\n\", solve_617_a(xs));  \n      }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721382427316,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,11 +3,11 @@\n \n namespace algorithms::codeforces\n {\n     // https://codeforces.com/problemset/problem/617/A\n-     void submit_455_a()\n+     void submit_617_a()\n      {\n          int n;\n          scanf(\"%d\", &n);\n-         printf(\"%llu\\n\", solve_617_a(xs));  \n+         printf(\"%llu\\n\", solve_617_a(n));  \n      }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721382443393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n #include <cstdio>\n \n+using ll = long long;\n \n namespace algorithms::codeforces\n {\n     // https://codeforces.com/problemset/problem/617/A\n"
+                },
+                {
+                    "date": 1721382456107,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,13 @@\n \n namespace algorithms::codeforces\n {\n     // https://codeforces.com/problemset/problem/617/A\n+    int solve_617_a(int n)\n+    {\n+        \n+    }\n+\n      void submit_617_a()\n      {\n          int n;\n          scanf(\"%d\", &n);\n"
+                },
+                {
+                    "date": 1721382468053,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,12 @@\n #include <cstdio>\n \n-using ll = long long;\n-\n namespace algorithms::codeforces\n {\n     // https://codeforces.com/problemset/problem/617/A\n     int solve_617_a(int n)\n     {\n-        \n+\n     }\n \n      void submit_617_a()\n      {\n"
+                },
+                {
+                    "date": 1721382475369,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,14 +4,14 @@\n {\n     // https://codeforces.com/problemset/problem/617/A\n     int solve_617_a(int n)\n     {\n-\n+        \n     }\n \n      void submit_617_a()\n      {\n          int n;\n          scanf(\"%d\", &n);\n-         printf(\"%llu\\n\", solve_617_a(n));  \n+         printf(\"%d\\n\", solve_617_a(n));  \n      }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721382574653,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace algorithms::codeforces\n {\n     // https://codeforces.com/problemset/problem/617/A\n+    std:\n     int solve_617_a(int n)\n     {\n         \n     }\n"
+                },
+                {
+                    "date": 1721382583021,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,18 @@\n+#include <cstdio>\n+\n+namespace algorithms::codeforces\n+{\n+    // https://codeforces.com/problemset/problem/617/A\n+    std::vector<int> moves\n+    int solve_617_a(int n)\n+    {\n+        \n+    }\n+\n+     void submit_617_a()\n+     {\n+         int n;\n+         scanf(\"%d\", &n);\n+         printf(\"%d\\n\", solve_617_a(n));  \n+     }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721382594188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::codeforces\n {\n     // https://codeforces.com/problemset/problem/617/A\n-    std::vector<int> moves\n+    std::vector<int> moves = {1, 2, 3, 4, 5};\n     int solve_617_a(int n)\n     {\n         \n     }\n@@ -14,23 +14,5 @@\n          int n;\n          scanf(\"%d\", &n);\n          printf(\"%d\\n\", solve_617_a(n));  \n      }\n-}\n-#include <cstdio>\n-\n-namespace algorithms::codeforces\n-{\n-    // https://codeforces.com/problemset/problem/617/A\n-    std:\n-    int solve_617_a(int n)\n-    {\n-        \n-    }\n-\n-     void submit_617_a()\n-     {\n-         int n;\n-         scanf(\"%d\", &n);\n-         printf(\"%d\\n\", solve_617_a(n));  \n-     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721382604012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n #include <cstdio>\n+#include <vector>\n \n namespace algorithms::codeforces\n {\n     // https://codeforces.com/problemset/problem/617/A\n"
+                },
+                {
+                    "date": 1721382784842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n     // https://codeforces.com/problemset/problem/617/A\n     std::vector<int> moves = {1, 2, 3, 4, 5};\n     int solve_617_a(int n)\n     {\n-        \n+           \n     }\n \n      void submit_617_a()\n      {\n"
+                },
+                {
+                    "date": 1721382790017,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,10 @@\n     // https://codeforces.com/problemset/problem/617/A\n     std::vector<int> moves = {1, 2, 3, 4, 5};\n     int solve_617_a(int n)\n     {\n-           \n+        int ans = 0;\n+        int    \n     }\n \n      void submit_617_a()\n      {\n"
+                },
+                {
+                    "date": 1721382797508,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     std::vector<int> moves = {1, 2, 3, 4, 5};\n     int solve_617_a(int n)\n     {\n         int ans = 0;\n-        int    \n+        int steps_left =    \n     }\n \n      void submit_617_a()\n      {\n"
+                },
+                {
+                    "date": 1721382803534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,10 @@\n     std::vector<int> moves = {1, 2, 3, 4, 5};\n     int solve_617_a(int n)\n     {\n         int ans = 0;\n-        int steps_left =    \n+        int steps_left = n;\n+        int    \n     }\n \n      void submit_617_a()\n      {\n"
+                },
+                {
+                    "date": 1721382819893,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,13 +4,14 @@\n namespace algorithms::codeforces\n {\n     // https://codeforces.com/problemset/problem/617/A\n     std::vector<int> moves = {1, 2, 3, 4, 5};\n+    const int n = \n     int solve_617_a(int n)\n     {\n         int ans = 0;\n         int steps_left = n;\n-        int    \n+        int i =    \n     }\n \n      void submit_617_a()\n      {\n"
+                },
+                {
+                    "date": 1721382825144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n namespace algorithms::codeforces\n {\n     // https://codeforces.com/problemset/problem/617/A\n     std::vector<int> moves = {1, 2, 3, 4, 5};\n-    const int n = \n+    const int n = 5;\n     int solve_617_a(int n)\n     {\n         int ans = 0;\n         int steps_left = n;\n"
+                },
+                {
+                    "date": 1721382833777,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,23 @@\n+#include <cstdio>\n+#include <vector>\n+\n+namespace algorithms::codeforces\n+{\n+    // https://codeforces.com/problemset/problem/617/A\n+    std::vector<int> moves = {1, 2, 3, 4, 5};\n+    const int n = 5;\n+    int solve_617_a(int n)\n+    {\n+        int ans = 0;\n+        int steps_left = n;\n+        int i = n - 1;\n+        while()\n+    }\n+\n+     void submit_617_a()\n+     {\n+         int n;\n+         scanf(\"%d\", &n);\n+         printf(\"%d\\n\", solve_617_a(n));  \n+     }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721382841193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,26 @@\n+#include <cstdio>\n+#include <vector>\n+\n+namespace algorithms::codeforces\n+{\n+    // https://codeforces.com/problemset/problem/617/A\n+    std::vector<int> moves = {1, 2, 3, 4, 5};\n+    const int n = 5;\n+    int solve_617_a(int n)\n+    {\n+        int ans = 0;\n+        int steps_left = n;\n+        int i = n - 1;\n+        while(i >= 0)\n+        {\n+            \n+        }\n+    }\n+\n+     void submit_617_a()\n+     {\n+         int n;\n+         scanf(\"%d\", &n);\n+         printf(\"%d\\n\", solve_617_a(n));  \n+     }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721382856211,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n         int steps_left = n;\n         int i = n - 1;\n         while(i >= 0)\n         {\n-            \n+                \n         }\n     }\n \n      void submit_617_a()\n@@ -22,50 +22,5 @@\n          int n;\n          scanf(\"%d\", &n);\n          printf(\"%d\\n\", solve_617_a(n));  \n      }\n-}\n-#include <cstdio>\n-#include <vector>\n-\n-namespace algorithms::codeforces\n-{\n-    // https://codeforces.com/problemset/problem/617/A\n-    std::vector<int> moves = {1, 2, 3, 4, 5};\n-    const int n = 5;\n-    int solve_617_a(int n)\n-    {\n-        int ans = 0;\n-        int steps_left = n;\n-        int i = n - 1;\n-        while()\n-    }\n-\n-     void submit_617_a()\n-     {\n-         int n;\n-         scanf(\"%d\", &n);\n-         printf(\"%d\\n\", solve_617_a(n));  \n-     }\n-}\n-#include <cstdio>\n-#include <vector>\n-\n-namespace algorithms::codeforces\n-{\n-    // https://codeforces.com/problemset/problem/617/A\n-    std::vector<int> moves = {1, 2, 3, 4, 5};\n-    const int n = 5;\n-    int solve_617_a(int n)\n-    {\n-        int ans = 0;\n-        int steps_left = n;\n-        int i =    \n-    }\n-\n-     void submit_617_a()\n-     {\n-         int n;\n-         scanf(\"%d\", &n);\n-         printf(\"%d\\n\", solve_617_a(n));  \n-     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721382872810,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n         int steps_left = n;\n         int i = n - 1;\n         while(i >= 0)\n         {\n-                \n+            ans +=     \n         }\n     }\n \n      void submit_617_a()\n"
+                },
+                {
+                    "date": 1721382883708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,10 @@\n         int steps_left = n;\n         int i = n - 1;\n         while(i >= 0)\n         {\n-            ans +=     \n+            ans += steps_left / moves[i];\n+                \n         }\n     }\n \n      void submit_617_a()\n"
+                },
+                {
+                    "date": 1721382888949,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n         int i = n - 1;\n         while(i >= 0)\n         {\n             ans += steps_left / moves[i];\n-                \n+            rem =     \n         }\n     }\n \n      void submit_617_a()\n"
+                },
+                {
+                    "date": 1721382894307,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n         int i = n - 1;\n         while(i >= 0)\n         {\n             ans += steps_left / moves[i];\n-            rem =     \n+            rem = steps_left / moves[i]    \n         }\n     }\n \n      void submit_617_a()\n"
+                },
+                {
+                    "date": 1721382899693,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n         int i = n - 1;\n         while(i >= 0)\n         {\n             ans += steps_left / moves[i];\n-            rem = steps_left / moves[i]    \n+            rem = steps_left % moves[i];    \n         }\n     }\n \n      void submit_617_a()\n"
+                },
+                {
+                    "date": 1721382905349,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,28 @@\n+#include <cstdio>\n+#include <vector>\n+\n+namespace algorithms::codeforces\n+{\n+    // https://codeforces.com/problemset/problem/617/A\n+    std::vector<int> moves = {1, 2, 3, 4, 5};\n+    const int n = 5;\n+    int solve_617_a(int n)\n+    {\n+        int ans = 0;\n+        int steps_left = n;\n+        int i = n - 1;\n+        while(i >= 0)\n+        {\n+            ans += steps_left / moves[i];\n+            int rem = steps_left % moves[i];\n+\n+        }\n+    }\n+\n+     void submit_617_a()\n+     {\n+         int n;\n+         scanf(\"%d\", &n);\n+         printf(\"%d\\n\", solve_617_a(n));  \n+     }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721382914201,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         while(i >= 0)\n         {\n             ans += steps_left / moves[i];\n             int rem = steps_left % moves[i];\n-\n+            if()\n         }\n     }\n \n      void submit_617_a()\n@@ -24,32 +24,5 @@\n          int n;\n          scanf(\"%d\", &n);\n          printf(\"%d\\n\", solve_617_a(n));  \n      }\n-}\n-#include <cstdio>\n-#include <vector>\n-\n-namespace algorithms::codeforces\n-{\n-    // https://codeforces.com/problemset/problem/617/A\n-    std::vector<int> moves = {1, 2, 3, 4, 5};\n-    const int n = 5;\n-    int solve_617_a(int n)\n-    {\n-        int ans = 0;\n-        int steps_left = n;\n-        int i = n - 1;\n-        while(i >= 0)\n-        {\n-            ans += steps_left / moves[i];\n-            rem = steps_left % moves[i];    \n-        }\n-    }\n-\n-     void submit_617_a()\n-     {\n-         int n;\n-         scanf(\"%d\", &n);\n-         printf(\"%d\\n\", solve_617_a(n));  \n-     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721382922668,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,10 @@\n         while(i >= 0)\n         {\n             ans += steps_left / moves[i];\n             int rem = steps_left % moves[i];\n-            if()\n+            if(rem == 0)\n+              break\n         }\n     }\n \n      void submit_617_a()\n"
+                },
+                {
+                    "date": 1721382929558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,10 +16,10 @@\n             ans += steps_left / moves[i];\n             int rem = steps_left % moves[i];\n             if(rem == 0)\n               break;\n-            \n-              \n+\n+            steps_left =   \n         }\n     }\n \n      void submit_617_a()\n"
+                },
+                {
+                    "date": 1721382942653,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,33 @@\n+#include <cstdio>\n+#include <vector>\n+\n+namespace algorithms::codeforces\n+{\n+    // https://codeforces.com/problemset/problem/617/A\n+    std::vector<int> moves = {1, 2, 3, 4, 5};\n+    const int n = 5;\n+    int solve_617_a(int n)\n+    {\n+        int ans = 0;\n+        int steps_left = n;\n+        int i = n - 1;\n+        while(i >= 0)\n+        {\n+            ans += steps_left / moves[i];\n+            int rem = steps_left % moves[i];\n+            if(rem == 0)\n+              break;\n+\n+            steps_left = rem;\n+            i--;  \n+        }\n+        return \n+    }\n+\n+     void submit_617_a()\n+     {\n+         int n;\n+         scanf(\"%d\", &n);\n+         printf(\"%d\\n\", solve_617_a(n));  \n+     }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1721382330080,
+            "name": "Commit-0",
+            "content": "namespace algorithms::codeforces"
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/minCost.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1721210258142,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1721210266804,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,21 @@\n #include <vector>\n \n namespace algorithms::leetcode::dp\n {\n-    \n+        int minCost(int stick, vector<int>& cuts) {\n+       int n = cuts.size();\n+        std::vector<std::vector<int>> dp(stick + 1, std::vector<int>(stick + 1, INT32_MAX));\n+        \n+         for(int r = 1; r <= stick; r++)\n+          for(int l = r - 1; l >= 0; l--)\n+          {\n+              int cost = INT32_MAX;\n+              for (int i = 0; i < n; i++)\n+                if(cuts[i] > l && cuts[i] < r)\n+                  cost = std::min(cost, r - l + dp[l][cuts[i]] + dp[cuts[i]][r]);\n+              dp[l][r] = cost == INT32_MAX ? 0 : cost;\n+          }\n+\n+          return dp[0][stick];      \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721210278042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n #include <vector>\n \n namespace algorithms::leetcode::dp\n {\n-        int minCost(int stick, vector<int>& cuts) {\n-       int n = cuts.size();\n-        std::vector<std::vector<int>> dp(stick + 1, std::vector<int>(stick + 1, INT32_MAX));\n+    int minCost(int stick, std::vector<int>& cuts) {\n+    int n = cuts.size();\n+    std::vector<std::vector<int>> dp(stick + 1, std::vector<int>(stick + 1, INT32_MAX));\n         \n          for(int r = 1; r <= stick; r++)\n           for(int l = r - 1; l >= 0; l--)\n           {\n"
+                },
+                {
+                    "date": 1721210284374,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,22 @@\n+#include <vector>\n+\n+namespace algorithms::leetcode::dp\n+{\n+    int minCost(int stick, std::vector<int> cuts) \n+    {\n+        int n = cuts.size();\n+        std::vector<std::vector<int>> dp(stick + 1, std::vector<int>(stick + 1, INT32_MAX));\n+        \n+         for(int r = 1; r <= stick; r++)\n+          for(int l = r - 1; l >= 0; l--)\n+          {\n+              int cost = INT32_MAX;\n+              for (int i = 0; i < n; i++)\n+                if(cuts[i] > l && cuts[i] < r)\n+                  cost = std::min(cost, r - l + dp[l][cuts[i]] + dp[cuts[i]][r]);\n+              dp[l][r] = cost == INT32_MAX ? 0 : cost;\n+          }\n+\n+          return dp[0][stick];      \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721210289626,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,38 +6,17 @@\n     {\n         int n = cuts.size();\n         std::vector<std::vector<int>> dp(stick + 1, std::vector<int>(stick + 1, INT32_MAX));\n         \n-         for(int r = 1; r <= stick; r++)\n+        for(int r = 1; r <= stick; r++)\n           for(int l = r - 1; l >= 0; l--)\n           {\n-              int cost = INT32_MAX;\n-              for (int i = 0; i < n; i++)\n+            int cost = INT32_MAX;\n+            for (int i = 0; i < n; i++)\n                 if(cuts[i] > l && cuts[i] < r)\n                   cost = std::min(cost, r - l + dp[l][cuts[i]] + dp[cuts[i]][r]);\n               dp[l][r] = cost == INT32_MAX ? 0 : cost;\n           }\n \n           return dp[0][stick];      \n     }\n-}\n-#include <vector>\n-\n-namespace algorithms::leetcode::dp\n-{\n-    int minCost(int stick, std::vector<int>& cuts) {\n-    int n = cuts.size();\n-    std::vector<std::vector<int>> dp(stick + 1, std::vector<int>(stick + 1, INT32_MAX));\n-        \n-         for(int r = 1; r <= stick; r++)\n-          for(int l = r - 1; l >= 0; l--)\n-          {\n-              int cost = INT32_MAX;\n-              for (int i = 0; i < n; i++)\n-                if(cuts[i] > l && cuts[i] < r)\n-                  cost = std::min(cost, r - l + dp[l][cuts[i]] + dp[cuts[i]][r]);\n-              dp[l][r] = cost == INT32_MAX ? 0 : cost;\n-          }\n-\n-          return dp[0][stick];      \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721210297389,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n           {\n              int cost = INT32_MAX;\n              for (int i = 0; i < n; i++)\n                if(cuts[i] > l && cuts[i] < r)\n-                  cost = std::min(cost, r - l + dp[l][cuts[i]] + dp[cuts[i]][r]);\n+                 cost = std::min(cost, r - l + dp[l][cuts[i]] + dp[cuts[i]][r]);\n               dp[l][r] = cost == INT32_MAX ? 0 : cost;\n           }\n \n           return dp[0][stick];      \n"
+                },
+                {
+                    "date": 1721210372095,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,23 @@\n+#include <vector>\n+\n+namespace algorithms::leetcode::dp\n+{\n+    // https://leetcode.com/problems/minimum-cost-to-cut-a-stick\n+    int minCost(int stick, std::vector<int> cuts) \n+    {\n+        int n = cuts.size();\n+        std::vector<std::vector<int>> dp(stick + 1, std::vector<int>(stick + 1, INT32_MAX));\n+        \n+        for(int r = 1; r <= stick; r++)\n+          for(int l = r - 1; l >= 0; l--)\n+          {\n+             int cost = INT32_MAX;\n+             for (int i = 0; i < n; i++)\n+               if(cuts[i] > l && cuts[i] < r)\n+                 cost = std::min(cost, r - l + dp[l][cuts[i]] + dp[cuts[i]][r]);\n+             dp[l][r] = cost == INT32_MAX ? 0 : cost;\n+          }\n+\n+        return dp[0][stick];\n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1721210258142,
+            "name": "Commit-0",
+            "content": "#include <vector>\n\nnamespace algorithms::leetcode::dp\n{\n    \n}"
+        }
+    ]
+}

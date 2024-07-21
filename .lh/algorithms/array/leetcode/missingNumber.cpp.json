@@ -1,0 +1,62 @@
+{
+    "sourceFile": "algorithms/array/leetcode/missingNumber.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 11,
+            "patches": [
+                {
+                    "date": 1721287795179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1721287801213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/single-number\n-    int singleNumber(std::vector<int>& nums) \n+    int missingNumber(std::vector<int>& nums) \n     {\n         int ans = 0;\n         for(auto n : nums)\n           ans ^= n;\n"
+                },
+                {
+                    "date": 1721287807941,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+#include <vector>\n+\n+namespace algorithms::array::leetcode\n+{\n+    // https://leetcode.com/problems/missing-number\n+    int missingNumber(std::vector<int>& nums) \n+    {\n+        int ans = 0;\n+        for(auto n : nums)\n+          ans ^= n;\n+        return ans;  \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721287824126,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,25 +2,12 @@\n \n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/missing-number\n-    int missingNumber(std::vector<int>& nums) \n+    int missingNumber(std::vector<int> nums)\n     {\n         int ans = 0;\n         for(auto n : nums)\n           ans ^= n;\n-        return ans;  \n+        return ans;\n     }\n-}\n-#include <vector>\n-\n-namespace algorithms::array::leetcode\n-{\n-    // https://leetcode.com/problems/single-number\n-    int missingNumber(std::vector<int>& nums) \n-    {\n-        int ans = 0;\n-        for(auto n : nums)\n-          ans ^= n;\n-        return ans;  \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721287849914,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,8 @@\n {\n     // https://leetcode.com/problems/missing-number\n     int missingNumber(std::vector<int> nums)\n     {\n-        int ans = 0;\n-        for(auto n : nums)\n-          ans ^= n;\n-        return ans;\n+        int n = nums.size();\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721287857462,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,8 @@\n     // https://leetcode.com/problems/missing-number\n     int missingNumber(std::vector<int> nums)\n     {\n         int n = nums.size();\n-        \n+        int i = 0;\n+        while(i)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721287868489,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,12 @@\n+#include <vector>\n+\n+namespace algorithms::array::leetcode\n+{\n+    // https://leetcode.com/problems/missing-number\n+    int missingNumber(std::vector<int> nums)\n+    {\n+        int n = nums.size();\n+        int i = 0;\n+        while(i <)\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721287875268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,19 +6,10 @@\n     int missingNumber(std::vector<int> nums)\n     {\n         int n = nums.size();\n         int i = 0;\n-        while(i <)\n+        while(i <= 9)\n+        {\n+            \n+        }\n     }\n-}\n-#include <vector>\n-\n-namespace algorithms::array::leetcode\n-{\n-    // https://leetcode.com/problems/missing-number\n-    int missingNumber(std::vector<int> nums)\n-    {\n-        int n = nums.size();\n-        int i = 0;\n-        while(i)\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721287881592,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,15 @@\n+#include <vector>\n+\n+namespace algorithms::array::leetcode\n+{\n+    // https://leetcode.com/problems/missing-number\n+    int missingNumber(std::vector<int> nums)\n+    {\n+        int n = nums.size();\n+        int i = 0;\n+        while(i <= n)\n+        {\n+            \n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721287889760,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,23 +8,8 @@\n         int n = nums.size();\n         int i = 0;\n         while(i <= n)\n         {\n-            \n+            nums\n         }\n     }\n-}\n-#include <vector>\n-\n-namespace algorithms::array::leetcode\n-{\n-    // https://leetcode.com/problems/missing-number\n-    int missingNumber(std::vector<int> nums)\n-    {\n-        int n = nums.size();\n-        int i = 0;\n-        while(i <= 9)\n-        {\n-            \n-        }\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721287906901,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n     int missingNumber(std::vector<int> nums)\n     {\n         int n = nums.size();\n         int i = 0;\n+        int \n         while(i <= n)\n         {\n             \n         }\n"
+                },
+                {
+                    "date": 1721287945617,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,8 @@\n         int n = nums.size();\n         int i = 0;\n         int ans;\n         while(i < n)\n-            ans *= i ^ nums[i]; \n+            ans *= (i ^ nums[i]; \n         }\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1721287795179,
+            "name": "Commit-0",
+            "content": "#include <vector>\n\nnamespace algorithms::array::leetcode\n{\n    // https://leetcode.com/problems/single-number\n    int singleNumber(std::vector<int>& nums) \n    {\n        int ans = 0;\n        for(auto n : nums)\n          ans ^= n;\n        return ans;  \n    }\n}"
+        }
+    ]
+}

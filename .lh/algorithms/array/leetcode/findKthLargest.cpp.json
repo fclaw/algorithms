@@ -1,0 +1,38 @@
+{
+    "sourceFile": "algorithms/array/leetcode/findKthLargest.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1720936172200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1720936178238,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,6 @@\n+namespace algorithms::array::leetcode\n+{\n+    int findKthLargest(vector<int>& nums, int k) {\n+        return 1;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720936190302,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,9 @@\n+#include <vector>\n+\n namespace algorithms::array::leetcode\n {\n-    int findKthLargest(vector<int>& nums, int k) {\n+    int findKthLargest(vector<int>& nums, int k) \n+    {\n         return 1;\n     }\n-}\n-namespace algorithms::array::leetcode\n-{\n-    \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720936198339,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n #include <vector>\n \n namespace algorithms::array::leetcode\n {\n+    // https://leetcode.com/problems/kth-largest-element-in-an-array\n     int findKthLargest(vector<int>& nums, int k) \n     {\n         return 1;\n     }\n"
+                },
+                {
+                    "date": 1720936204276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/kth-largest-element-in-an-array\n-    int findKthLargest(vector<int>& nums, int k) \n+    int findKthLargest(std::vector<int>& nums, int k) \n     {\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1720936238609,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/kth-largest-element-in-an-array\n-    int findKthLargest(std::vector<int>& nums, int k) \n+    int findKthLargest(std::vector<int> nums, int k) \n     {\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1720936172200,
+            "name": "Commit-0",
+            "content": "namespace algorithms::array::leetcode\n{\n    \n}"
+        }
+    ]
+}

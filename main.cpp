@@ -10,6 +10,7 @@
 #include <stack>
 #include <climits>
 #include <cstdio>
+#include <bitset>
 
 
 // algorithms folder
@@ -72,6 +73,10 @@
 #include "algorithms/array/leetcode/mergeSortedArray.cpp"
 #include "algorithms/array/leetcode/canonicalSubsets.cpp"
 #include "algorithms/array/leetcode/subsetsWithDup.cpp"
+#include "algorithms/array/leetcode/sortedSquares.cpp"
+#include "algorithms/dp/leetcode/minFallingPathSum.cpp"
+#include "algorithms/dp/leetcode/cuttingSticks.cpp"
+#include "algorithms/dp/leetcode/numDecodings.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
@@ -79,26 +84,28 @@
 #include "algorithms/codeforces/fairDivision.cpp"
 #include "algorithms/codeforces/twoArraysAndSwaps.cpp"
 #include "algorithms/codeforces/redAndBlue.cpp"
+#include "algorithms/codeforces/boredom.cpp"
+#include "algorithms/codeforces/elephant.cpp"
+#include "algorithms/codeforces/fillingShapes.cpp"
+#include "algorithms/codeforces/brokenKeyboard.cpp"
 // online judge
 #include "algorithms/onlinejudge/dp/wedding.cpp"
 #include "algorithms/onlinejudge/dp/sdi.cpp"
 #include "algorithms/onlinejudge/dp/howDoYouAdd.cpp"
 #include "algorithms/onlinejudge/dp/chestOfDrawers.cpp"
+#include "algorithms/onlinejudge/dp/luggage.cpp"
+#include "algorithms/onlinejudge/graph/dominator.cpp"
+#include "algorithms/onlinejudge/dp/cuttingSticks.cpp"
 
+#include "algorithms/math.cpp"
 
 int main()
 {
+
     std::cout << std::endl;
     std::cout << std::endl;
-    std::cout << "--- subset with dup---\n";
+    std::cout << "--- decoding ways ---\n";
 
-    std::vector<int> set = {1,9,8,3,-1,0};
-    auto ans = algorithms::array::leetcode::subsetsWithDup(set);
+    std::cout << algorithms::dp::leetcode::viaDp("121212121211");
 
-    for ( const auto &row : ans )
-    {
-        for ( const auto &s : row ) 
-          std::cout << std::setw(5) << s << ' ';
-        std::cout << std::endl;
-    }  
 }

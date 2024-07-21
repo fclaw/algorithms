@@ -1,7 +1,10 @@
 #include <vector>
 #include <iostream>
-#include <iomanip>
+#include <unordered_map>
 
+
+const int ROW = 70;
+const int COL = 70;
 
 namespace algorithms::dp::leetcode
 {
@@ -19,14 +22,33 @@ namespace algorithms::dp::leetcode
         only keep those that can be a candidate, 
         not exceeding the target by too much.
     */
-    //  std::vector<int> rec(std::vector<std::vector<int>> rect, int r, int c)
-    //  {
-    //      // ???
-    //  }
+     int memo[ROW][COL];
+     int n;
+     int m;
+     int t;
+     int rec(std::vector<std::vector<int>>& matrix, int r, int sum)
+     {
+        if(r == n)
+          return std::abs(t - sum);
 
-    // F(i, j, prev) = n
-    int minimizeTheDifference(std::vector<std::vector<int>> xxs, int target) 
+        int &ans = memo[r][sum];
+        if(~ans) return ans;
+
+        ans = INT32_MAX;
+        for (int c = 0; c < m; c++)
+          ans = std::min(ans, rec(matrix, r + 1, sum + matrix[r][c]));
+        return ans;
+     }
+
+    int minimizeTheDifference(std::vector<std::vector<int>> matrix, int target) 
     {
-        return 0;
+        for(auto &x:memo)
+          for(auto &y:x)
+            y = -1;
+
+        n = matrix.size();
+        m = matrix[0].size();
+        t = target;
+        return rec(matrix, 0, 0);
     }
 }

@@ -2,18 +2,7 @@
 #include <unordered_map>
 #include <iostream>
 
-
-void printViaDp(std::vector<std::vector<int>> dp)
-{
-    for ( const auto &row : dp )
-    {
-        for ( const auto &s : row ) 
-          std::cout << std::setw(5) << s << ' ';
-        std::cout << std::endl;
-    }
-}
-
-namespace algorithms::dp::leetcode
+namespace algorithms::dp::leetcode::delete_and_earn
 {
     // https://leetcode.com/problems/delete-and-earn
     /*
@@ -22,15 +11,21 @@ namespace algorithms::dp::leetcode
        Pick any nums[i] and delete it to earn nums[i] points. 
        Afterwards, you must delete every element equal to nums[i] - 1 and every element equal to nums[i] + 1.
        Return the maximum number of points you can earn by applying the above operation some number of times
-    */   
-    int rec(std::vector<int> xs, int first, int last, std::unordered_map<int, int> freq, std::vector<std::vector<int>>& memo)
+    */
+    std::unordered_map<int, std::unordered_map<int, int>> memo;
+    std::unordered_map<int, int> l_memo;
+    std::unordered_map<int, int> freq;
+    int rec(std::vector<int>& xs, int first, int last)
     {
         // boundary case
         if(first >= last)
           return 0;
 
-        if(memo[first][last] != -1)
-          return memo[first][last];
+        if(auto i = memo.find(first); 
+           i != memo.end())
+          if(auto j = (*i).second.find(last);
+             j != (*i).second.end())
+            return (*j).second;
 
         int reward = 0;
         int is_taken = 0;
@@ -45,48 +40,107 @@ namespace algorithms::dp::leetcode
             int left_cnt = freq[xs[i] - 1];
             int right_cnt = freq[xs[i] + 1];
 
-            int left_reward = rec(xs, first, i - left_cnt, freq, memo);
-            int right_reward = rec(xs, i + cnt + right_cnt + 1, last, freq, memo);
+            int left_reward = rec(xs, first, i - left_cnt);
+            int right_reward = rec(xs, i + cnt + right_cnt + 1, last);
             reward = std::max(reward, left_reward + cnt * xs[i] + right_reward);
         }
         return memo[first][last] = reward;
     }
 
-    int viaDp(std::vector<int> xs)
+    int deleteAndEarnDp(std::vector<int>& xs)
     {
-        int n = xs.size();
-        std::vector<std::vector<int>> dp(n + 2, std::vector<int>(n + 2, 0));
+         int n = xs.size();
+         std::vector<std::vector<int>> dp(n, std::vector<int>(n + 1, 0));
 
-        for(int i = 1; i <= n; i++)
-          dp[i][i] = xs[i - 1];
-
-        for(int left = 1; left <= n - 1; left++) // left
-          for(int right = left; right <= n; right++)
+         for(int right = 1; right <= n; right++)
+           for(int left = right - 1; left >= 0; left--)
+           {
+              int reward = 0;
+              int is_taken = 0;
               for(int i = left; i < right; i++)
               {
-                  std::cout << "i: " << i << 
-                    "left: " << left << ", right: " << right <<
-                  ", xs[i]: " << xs[i] << ", dp[left][i - 2]: " << dp[left][i - 2] << ", dp[i + 2][right]: " << dp[i + 2][right] << std::endl;
-                  dp[left][right] = std::max(dp[left][right], dp[left][i - 2] + xs[i] + dp[i + 2][right]);
+                 if(is_taken == xs[i])
+                    continue;
+                 is_taken = xs[i];
+
+                 int cnt = freq[xs[i]];
+                 int left_cnt = freq[xs[i] - 1];
+                 int right_cnt = freq[xs[i] + 1];
+
+                 int left_reward = i - left_cnt >= 0 ? dp[left][i - left_cnt] : 0;
+                 int right_reward = i + cnt + right_cnt + 1 < n ? dp[i + cnt + right_cnt + 1][right] : 0;
+                 reward = std::max(reward, left_reward + cnt * xs[i] + right_reward);   
+              }  
+              dp[left][right] = reward;
+           }
+
+         return dp[0][n];
+    }
+ 
+    
+    // time complexity must be linear to meet the constraint of 10 ^ 4
+    int deleteAndEarnDpOpt(std::vector<int>& xs)
+    {
+        int n = xs.size();
+        // answer should be in (1, n)
+        std::vector<std::vector<int>> dp(n + 1, std::vector<int>(n + 1, 0));
+         
+        for(int r = 1; r <= n; r++)
+          for(int l = r - 1; l >= 1; l--)
+          {
+              int reward = 0;
+              for(int i = l; i < r; i++)
+              {
+                  int left = i - 1 >= 0 ? dp[l][i - 1] : 0;
+                  int right = i + 2 < n ? dp[i + 2][r] : 0;
+                  reward = std::max(reward, left + i * xs[i] + right);
               }
+              dp[l][r] = reward;
+          }
 
-        printViaDp(dp);      
+          return dp[1][n];
+    }
 
-        return dp[1][n];
+    int linearRec(int s, std::vector<int>& xs)
+    {
+        int n = xs.size();
+        if(s >= n)
+          return 0;
+          
+        if(auto i = l_memo.find(s); 
+           i != l_memo.end())
+            return (*i).second;
+
+        int reward = 0; 
+        for(int i = s; i < n; i++)
+          reward = std::max(reward, i * xs[i] + linearRec(i + 2, xs));
+        return l_memo[s] = reward;
+    }
+
+    int linearDp(std::vector<int>& xs)
+    {
+        int n = xs.size();
+        std::vector<int> dp(n, 0);
+        dp[1] = xs[1];
+        for(int i = 2; i < n; i++)
+          dp[i] = std::max(dp[i - 1], i * xs[i] + dp[i - 2]);
+
+        return dp[n - 1];
     }
 
     int deleteAndEarn(std::vector<int> nums)
     { 
-        std::sort(nums.begin(), nums.end()); // n * log(n)
-        std::unordered_map<int, int> freq;
         int n = nums.size();
-
-        std::vector<std::vector<int>> memo(n + 1, std::vector<int>(n + 1, -1));
-
+        std::sort(nums.begin(), nums.end()); // n * log(n)
+        std::vector<int> xs(nums[n - 1] + 1);
+ 
         for(auto n : nums) // n
           freq[n]++;
 
-        // return rec(nums, 0, n, freq, memo);
-        return viaDp(nums);
+        for(int i = 1; i < xs.size(); i++)
+          xs[i] = freq[i];
+ 
+        // return deleteAndEarnDpOpt(xs);
+        return linearDp(xs);
     }
 }

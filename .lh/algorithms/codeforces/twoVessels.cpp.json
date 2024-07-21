@@ -1,0 +1,42 @@
+{
+    "sourceFile": "algorithms/codeforces/twoVessels.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1721106954015,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1721106959936,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n namespace algorithms::codeforces\n {\n-    \n+    // https://codeforces.com/problemset/problem/1872/A\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721107066576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n namespace algorithms::codeforces\n {\n     // https://codeforces.com/problemset/problem/1872/A\n+    /*\n+    */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721107071716,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,17 @@\n namespace algorithms::codeforces\n {\n     // https://codeforces.com/problemset/problem/1872/A\n     /*\n+       You have two vessels with water. The first vessel contains 𝑎\n+ grams of water, and the second vessel contains 𝑏\n+ grams of water. Both vessels are very large and can hold any amount of water.\n+\n+You also have an empty cup that can hold up to 𝑐\n+ grams of water.\n+\n+In one move, you can scoop up to 𝑐\n+ grams of water from any vessel and pour it into the other vessel. Note that the mass of water poured in one move does not have to be an integer.\n+\n+What is the minimum number of moves required to make the masses of water in the vessels equal? Note that you cannot perform any actions other than the described moves.\n     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721107076924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,9 @@\n {\n     // https://codeforces.com/problemset/problem/1872/A\n     /*\n        You have two vessels with water. The first vessel contains 𝑎\n- grams of water, and the second vessel contains 𝑏\n- grams of water. Both vessels are very large and can hold any amount of water.\n+       grams of water, and the second vessel contains 𝑏grams of water. Both vessels are very large and can hold any amount of water.\n \n You also have an empty cup that can hold up to 𝑐\n  grams of water.\n \n"
+                },
+                {
+                    "date": 1721107090091,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n        You have two vessels with water. The first vessel contains 𝑎\n        grams of water, and the second vessel contains 𝑏 grams of water. \n        Both vessels are very large and can hold any amount of water.\n \n-You also have an empty cup that can hold up to 𝑐\n+       You also have an empty cup that can hold up to 𝑐\n  grams of water.\n \n In one move, you can scoop up to 𝑐\n  grams of water from any vessel and pour it into the other vessel. Note that the mass of water poured in one move does not have to be an integer.\n"
+                },
+                {
+                    "date": 1721107101433,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+namespace algorithms::codeforces\n+{\n+    // https://codeforces.com/problemset/problem/1872/A\n+    /*\n+       You have two vessels with water. The first vessel contains 𝑎\n+       grams of water, and the second vessel contains 𝑏 grams of water. \n+       Both vessels are very large and can hold any amount of water.\n+\n+       You also have an empty cup that can hold up to 𝑐 grams of water.\n+       In one move, you can scoop up to 𝑐 grams of water from any vessel and pour it into the other vessel. Note that the mass of water poured in one move does not have to be an integer.\n+\n+What is the minimum number of moves required to make the masses of water in the vessels equal? Note that you cannot perform any actions other than the described moves.\n+    */\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1721106954015,
+            "name": "Commit-0",
+            "content": "namespace algorithms::codeforces\n{\n    \n}"
+        }
+    ]
+}

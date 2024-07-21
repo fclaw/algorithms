@@ -1,0 +1,58 @@
+{
+    "sourceFile": "algorithms/onlinejudge/graph/dominator.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1721037749090,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1721037755995,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,11 @@\n namespace algorithms::onlinejudge::graph\n {\n      // https://onlinejudge.org/external/119/11902.pdf\n \n+      \n      void submit_11902()\n      {\n-          \n+\n      }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721037767479,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,12 @@\n #include <cstdio>\n \n namespace algorithms::onlinejudge::graph\n {\n-     // https://onlinejudge.org/external/119/11902.pdf\n-\n-      \n+     // https://onlinejudge.org/external/119/11902.pdf \n      void submit_11902()\n      {\n-\n+          int TC;\n+          \n      }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721037779186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,8 @@\n      // https://onlinejudge.org/external/119/11902.pdf \n      void submit_11902()\n      {\n           int TC;\n-          \n+          scanf\n      }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721037791675,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n      // https://onlinejudge.org/external/119/11902.pdf \n      void submit_11902()\n      {\n           int TC;\n-          scanf\n+          scanf(\"%d\", &TC);\n+          while()\n      }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721037798667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,11 @@\n      void submit_11902()\n      {\n           int TC;\n           scanf(\"%d\", &TC);\n-          while()\n+          while(--TC > 0)\n+          {\n+               \n+          }\n      }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721037860152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n           int TC;\n           scanf(\"%d\", &TC);\n           while(--TC > 0)\n           {\n-               \n+               int v\n           }\n      }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721037872242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,10 @@\n           int TC;\n           scanf(\"%d\", &TC);\n           while(--TC > 0)\n           {\n-               int v\n+               int v;\n+               scanf(\"%d\", &TC);\n           }\n      }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721037882276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,10 @@\n           scanf(\"%d\", &TC);\n           while(--TC > 0)\n           {\n                int v;\n-               scanf(\"%d\", &TC);\n+               scanf(\"%d\", &v);\n+               while()\n           }\n      }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721038013702,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n #include <cstdio>\n \n+\n+\n namespace algorithms::onlinejudge::graph\n {\n      // https://onlinejudge.org/external/119/11902.pdf \n      void submit_11902()\n@@ -12,9 +14,9 @@\n                int v;\n                scanf(\"%d\", &v);\n                while(--v > 0)\n                {\n-                    \n+\n                }\n           }\n      }\n \n"
+                },
+                {
+                    "date": 1721038040986,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,24 @@\n+#include <cstdio>\n+\n+\n+using std\n+\n+namespace algorithms::onlinejudge::graph\n+{\n+     // https://onlinejudge.org/external/119/11902.pdf \n+     void submit_11902()\n+     {\n+          int TC;\n+          scanf(\"%d\", &TC);\n+          while(--TC > 0)\n+          {\n+               int v;\n+               scanf(\"%d\", &v);\n+               while(--v > 0)\n+               {\n+\n+               }\n+          }\n+     }\n+\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1721037749090,
+            "name": "Commit-0",
+            "content": "#include <cstdio>\n\nnamespace algorithms::onlinejudge::graph\n{\n     // https://onlinejudge.org/external/119/11902.pdf\n\n     void submit_11902()\n     {\n          \n     }\n\n}"
+        }
+    ]
+}

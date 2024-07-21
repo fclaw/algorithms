@@ -25,23 +25,21 @@ namespace algorithms::codeforces
           return false;
      }
 
-    //  int TS;
-
-    //  int main()
-    //  {
-    //       scanf("%d", &TS);
-    //       while(TS--)
-    //       {
-    //           int N;
-    //           scanf("%d", &N);
-    //           std::vector<int> xs(N);
-    //           for (int i = 0; i < N; i++)
-    //             std::cin >> xs[i];
+     int main()
+     {
+        int TS;
+        scanf("%d", &TS);
+        while(TS-- > 0)
+        {
+            int N;
+            scanf("%d", &N);
+            std::vector<int> xs(N);
+            for (int i = 0; i < N; i++)
+              scanf("%d", &xs[i]);
               
-    //           auto ans = canBeSharedOutFairly(N, xs) ? "YES" : "NO";
-
-    //           std::cout << ans << std::endl;
-    //       }
-    //       return 0;
-    //  }
+            auto ans = canBeSharedOutFairly(N, xs) ? "YES" : "NO";
+            printf("%s\n", ans);
+          }
+          return 0;
+     }
 }

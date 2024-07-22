@@ -4,6 +4,6 @@ let
 in
 pkgs.mkShell {
 
-  buildInputs = [ clang ];
+  buildInputs = [ clang pkgs.boost ];
   NIX_PATH = "nixpkgs=" + pkgs.path;
   }

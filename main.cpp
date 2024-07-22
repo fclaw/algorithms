@@ -77,6 +77,8 @@
 #include "algorithms/dp/leetcode/minFallingPathSum.cpp"
 #include "algorithms/dp/leetcode/cuttingSticks.cpp"
 #include "algorithms/dp/leetcode/numDecodings.cpp"
+#include "algorithms/dp/leetcode/jumpGame2.cpp"
+#include "algorithms/dp/leetcode/combinationSum4.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
@@ -88,6 +90,7 @@
 #include "algorithms/codeforces/elephant.cpp"
 #include "algorithms/codeforces/fillingShapes.cpp"
 #include "algorithms/codeforces/brokenKeyboard.cpp"
+#include "algorithms/codeforces/vitamins.cpp"
 // online judge
 #include "algorithms/onlinejudge/dp/wedding.cpp"
 #include "algorithms/onlinejudge/dp/sdi.cpp"
@@ -104,8 +107,23 @@ int main()
 
     std::cout << std::endl;
     std::cout << std::endl;
-    std::cout << "--- decoding ways ---\n";
+    std::cout << "--- vitamins ---\n";
+    algorithms::codeforces::submit_1042_b();
+    // std::cout << algorithms::codeforces::solve_1042_b({{10, 0}, {9, 6}, {11, 5}, {4, 0}, {5, 1}}, 0);
+    // auto x = algorithms::codeforces::EVitamins::A | algorithms::codeforces::EVitamins::B;
 
-    std::cout << algorithms::dp::leetcode::viaDp("121212121211");
+    // int t = 0;
+    // t |= (1 << 0) | (1 << 1);
+ 
+    // std::cout << "x: " << x << ", t: " << t;
+
+    // int x = 0;
+    // int y = 0;
+    // x |= (1 << 0);
+    // y |= (1 << 2) | (1 << 0);
+    // std::cout << y;
+
+    // std::cout << "x: " << x << ", y: " << y << ", or:" << (x | y)  << std::endl;
+
 
 }

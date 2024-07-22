@@ -55,7 +55,9 @@
         "list": "cpp",
         "unordered_set": "cpp",
         "iomanip": "cpp",
-        "climits": "cpp"
+        "climits": "cpp",
+        "source_location": "cpp",
+        "strstream": "cpp"
     },
     "cSpell.words": [
         "centimetre",

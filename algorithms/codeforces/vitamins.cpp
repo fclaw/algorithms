@@ -18,7 +18,7 @@ namespace algorithms::codeforces
 
     //https://codeforces.com/problemset/problem/1042/B
     std::vector<int> memo(8, -1);
-    int solve_1042_b(std::vector<std::tuple<int, EVitamins>> xs, int mask)
+    int solve_1042_b(std::vector<std::tuple<int, int>> xs, int mask)
     {
         if(__builtin_popcount(mask) == 3)
           return 0;
@@ -45,7 +45,7 @@ namespace algorithms::codeforces
      {
          int n;
          scanf("%d", &n);
-         std::vector<std::tuple<int, EVitamins>> xs;
+         std::vector<std::tuple<int, int>> xs;
          while(--n >= 0)
          {
             int i;
@@ -56,22 +56,16 @@ namespace algorithms::codeforces
             if(s.size() > 1)
               for(auto t : s)
               {
-                if(t == 'A')
-                  d |= (1 << 0);
-                else if(t == 'B')
-                  d |= (1 << 1);
-                else if(t == 'C')
-                  d |= (1 << 2);
+                if(t == 'A') d |= A;
+                else if(t == 'B') d |= B;
+                else if(t == 'C') d |= C;
               }
             else
-               if(s == "A")
-                 d = 0;
-               else if(s == "B")
-                 d = 1;
-               else if(s == "C")
-                 d = 2;
+               if(s == "A") d = 0;
+               else if(s == "B") d = 1;
+               else if(s == "C") d = 2;
     
-            xs.push_back({i, static_cast<EVitamins>(d)});
+            xs.push_back({i, d});
          };
 
          int ans = solve_1042_b(xs, 0);

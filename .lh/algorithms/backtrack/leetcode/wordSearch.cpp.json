@@ -1,0 +1,138 @@
+{
+    "sourceFile": "algorithms/backtrack/leetcode/wordSearch.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 30,
+            "patches": [
+                {
+                    "date": 1721802055560,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1721802064200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,8 @@\n+\n+\n namespace algorithms::backtrack::leetcode\n {\n-    \n+bool exist(vector<vector<char>>& board, string word) {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721802070106,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n \n \n namespace algorithms::backtrack::leetcode\n {\n-bool exist(vector<vector<char>>& board, string word) {\n+    bool (vector<vector<char>>& board, string word) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721802086421,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n+#include <vector>\n \n-\n namespace algorithms::backtrack::leetcode\n {\n-    bool (vector<vector<char>>& board, string word) {\n+    bool search(vector<vector<char>>& board, string word) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721802092928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,9 @@\n #include <vector>\n+#include <string>\n \n+\n+\n namespace algorithms::backtrack::leetcode\n {\n     bool search(vector<vector<char>>& board, string word) {\n         \n"
+                },
+                {
+                    "date": 1721802102754,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,11 @@\n+#include <vector>\n+#include <string>\n+\n+using mx = vector<vector<char>>;\n+\n+namespace algorithms::backtrack::leetcode\n+{\n+    bool search(vector<vector<char>>& board, string word) {\n+        \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721802109435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,22 +1,11 @@\n #include <vector>\n #include <string>\n \n-using mx = vector<vector<char>>;\n+using mx = std::vector<std::vector<char>>;\n \n namespace algorithms::backtrack::leetcode\n {\n     bool search(vector<vector<char>>& board, string word) {\n         \n     }\n-}\n-#include <vector>\n-#include <string>\n-\n-\n-\n-namespace algorithms::backtrack::leetcode\n-{\n-    bool search(vector<vector<char>>& board, string word) {\n-        \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721802116566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,11 @@\n+#include <vector>\n+#include <string>\n+\n+using mx = std::vector<std::vector<char>>;\n+\n+namespace algorithms::backtrack::leetcode\n+{\n+    bool search(mx& board, string word) {\n+        \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721802125375,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,19 +4,9 @@\n using mx = std::vector<std::vector<char>>;\n \n namespace algorithms::backtrack::leetcode\n {\n-    bool search(mx& board, string word) {\n-        \n+    bool search(mx& board, std::string word) \n+    {\n+            \n     }\n-}\n-#include <vector>\n-#include <string>\n-\n-using mx = std::vector<std::vector<char>>;\n-\n-namespace algorithms::backtrack::leetcode\n-{\n-    bool search(vector<vector<char>>& board, string word) {\n-        \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721802133840,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,10 @@\n using mx = std::vector<std::vector<char>>;\n \n namespace algorithms::backtrack::leetcode\n {\n+    // https://leetcode.com/problems/word-search\n+    // \n     bool search(mx& board, std::string word) \n     {\n             \n     }\n"
+                },
+                {
+                    "date": 1721802150098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,10 @@\n \n namespace algorithms::backtrack::leetcode\n {\n     // https://leetcode.com/problems/word-search\n-    // \n+    /*\n+    */\n     bool search(mx& board, std::string word) \n     {\n             \n     }\n"
+                },
+                {
+                    "date": 1721802175819,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,10 @@\n namespace algorithms::backtrack::leetcode\n {\n     // https://leetcode.com/problems/word-search\n     /*\n+      Given an m x n grid of characters board and a string word, return true if word exists in the grid\n+      The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.\n     */\n     bool search(mx& board, std::string word) \n     {\n             \n"
+                },
+                {
+                    "date": 1721802186137,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,11 @@\n {\n     // https://leetcode.com/problems/word-search\n     /*\n       Given an m x n grid of characters board and a string word, return true if word exists in the grid\n-      The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.\n+      The word can be constructed from letters of sequentially adjacent cells, \n+      where adjacent cells are horizontally or vertically neighboring. \n+      The same letter cell may not be used more than once.\n     */\n     bool search(mx& board, std::string word) \n     {\n             \n"
+                },
+                {
+                    "date": 1721802191947,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,20 @@\n+#include <vector>\n+#include <string>\n+\n+using mx = std::vector<std::vector<char>>;\n+\n+namespace algorithms::backtrack::leetcode\n+{\n+    // https://leetcode.com/problems/word-search\n+    /*\n+      Given an m x n grid of characters board and a string word, \n+      return true if word exists in the grid\n+      The word can be constructed from letters of sequentially adjacent cells, \n+      where adjacent cells are horizontally or vertically neighboring. \n+      The same letter cell may not be used more than once.\n+    */\n+    bool search(mx& board, std::string word) \n+    {\n+\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721802336001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,20 @@\n+#include <vector>\n+#include <string>\n+\n+using mx = std::vector<std::vector<char>>;\n+\n+namespace algorithms::backtrack::leetcode\n+{\n+    // https://leetcode.com/problems/word-search\n+    /*\n+      Given an m x n grid of characters board and a string word, \n+      return true if word exists in the grid\n+      The word can be constructed from letters of sequentially adjacent cells, \n+      where adjacent cells are horizontally or vertically neighboring. \n+      The same letter cell may not be used more than once.\n+    */\n+    bool search(mx& board, std::string word) \n+    {\n+        \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721802860480,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,48 +12,10 @@\n       The word can be constructed from letters of sequentially adjacent cells, \n       where adjacent cells are horizontally or vertically neighboring. \n       The same letter cell may not be used more than once.\n     */\n+    bool ans = false;\n     bool search(mx& board, std::string word) \n     {\n-        \n-    }\n-}\n-#include <vector>\n-#include <string>\n \n-using mx = std::vector<std::vector<char>>;\n-\n-namespace algorithms::backtrack::leetcode\n-{\n-    // https://leetcode.com/problems/word-search\n-    /*\n-      Given an m x n grid of characters board and a string word, \n-      return true if word exists in the grid\n-      The word can be constructed from letters of sequentially adjacent cells, \n-      where adjacent cells are horizontally or vertically neighboring. \n-      The same letter cell may not be used more than once.\n-    */\n-    bool search(mx& board, std::string word) \n-    {\n-\n     }\n-}\n-#include <vector>\n-#include <string>\n-\n-using mx = std::vector<std::vector<char>>;\n-\n-namespace algorithms::backtrack::leetcode\n-{\n-    // https://leetcode.com/problems/word-search\n-    /*\n-      Given an m x n grid of characters board and a string word, return true if word exists in the grid\n-      The word can be constructed from letters of sequentially adjacent cells, \n-      where adjacent cells are horizontally or vertically neighboring. \n-      The same letter cell may not be used more than once.\n-    */\n-    bool search(mx& board, std::string word) \n-    {\n-            \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721802987423,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,7 +15,7 @@\n     */\n     bool ans = false;\n     bool search(mx& board, std::string word) \n     {\n-\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721802997749,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,9 @@\n       where adjacent cells are horizontally or vertically neighboring. \n       The same letter cell may not be used more than once.\n     */\n     bool ans = false;\n+    void backtrack()\n     bool search(mx& board, std::string word) \n     {\n         \n     }\n"
+                },
+                {
+                    "date": 1721803003601,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n       where adjacent cells are horizontally or vertically neighboring. \n       The same letter cell may not be used more than once.\n     */\n     bool ans = false;\n-    void backtrack()\n+    void backtrack(mx& board, )\n     bool search(mx& board, std::string word) \n     {\n         \n     }\n"
+                },
+                {
+                    "date": 1721803010016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n       where adjacent cells are horizontally or vertically neighboring. \n       The same letter cell may not be used more than once.\n     */\n     bool ans = false;\n-    void backtrack(mx& board, )\n+    void backtrack(mx& board, int i, int j, int )\n     bool search(mx& board, std::string word) \n     {\n         \n     }\n"
+                },
+                {
+                    "date": 1721803015423,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n       where adjacent cells are horizontally or vertically neighboring. \n       The same letter cell may not be used more than once.\n     */\n     bool ans = false;\n-    void backtrack(mx& board, int i, int j, int )\n+    void backtrack(mx& board, int i, int j, int idx)\n     bool search(mx& board, std::string word) \n     {\n         \n     }\n"
+                },
+                {
+                    "date": 1721803021554,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n       where adjacent cells are horizontally or vertically neighboring. \n       The same letter cell may not be used more than once.\n     */\n     bool ans = false;\n-    void backtrack(mx& board, int i, int j, int idx)\n+    void backtrack(mx& board, std::string word, int i, int j, int idx)\n     bool search(mx& board, std::string word) \n     {\n         \n     }\n"
+                },
+                {
+                    "date": 1721803026766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,11 @@\n       The same letter cell may not be used more than once.\n     */\n     bool ans = false;\n     void backtrack(mx& board, std::string word, int i, int j, int idx)\n+    {\n+        if()\n+    }\n     bool search(mx& board, std::string word) \n     {\n         \n     }\n"
+                },
+                {
+                    "date": 1721803036410,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     */\n     bool ans = false;\n     void backtrack(mx& board, std::string word, int i, int j, int idx)\n     {\n-        if()\n+        if(idx =)\n     }\n     bool search(mx& board, std::string word) \n     {\n         \n"
+                },
+                {
+                    "date": 1721803042648,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     */\n     bool ans = false;\n     void backtrack(mx& board, std::string word, int i, int j, int idx)\n     {\n-        if(idx =)\n+        if(idx == word.)\n     }\n     bool search(mx& board, std::string word) \n     {\n         \n"
+                },
+                {
+                    "date": 1721803050427,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,12 @@\n     */\n     bool ans = false;\n     void backtrack(mx& board, std::string word, int i, int j, int idx)\n     {\n-        if(idx == word.)\n+        if(idx == word.size())\n+        {\n+            \n+        }\n     }\n     bool search(mx& board, std::string word) \n     {\n         \n"
+                },
+                {
+                    "date": 1721803057044,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,10 @@\n     void backtrack(mx& board, std::string word, int i, int j, int idx)\n     {\n         if(idx == word.size())\n         {\n-            \n+            ans = true;\n+            return\n         }\n     }\n     bool search(mx& board, std::string word) \n     {\n"
+                },
+                {
+                    "date": 1721803066841,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,10 +18,12 @@\n     {\n         if(idx == word.size())\n         {\n             ans = true;\n-            return\n+            return;\n         }\n+\n+        if(boa)\n     }\n     bool search(mx& board, std::string word) \n     {\n         \n"
+                },
+                {
+                    "date": 1721803074259,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n             ans = true;\n             return;\n         }\n \n-        if(boa)\n+        if(board[i][j] == )\n     }\n     bool search(mx& board, std::string word) \n     {\n         \n"
+                },
+                {
+                    "date": 1721803081042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,11 @@\n             return;\n         }\n \n         if(board[i][j] == word[idx])\n+        {\n+            \n+        }\n     }\n     bool search(mx& board, std::string word) \n     {\n         \n"
+                },
+                {
+                    "date": 1721803088174,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n         }\n \n         if(board[i][j] == word[idx])\n         {\n-            backtrack(mx& board, std::string word, int i, int j, int idx)\n+            backtrack(board, std::string word, int i, int j, int idx)\n         }\n     }\n     bool search(mx& board, std::string word) \n     {\n"
+                }
+            ],
+            "date": 1721802055560,
+            "name": "Commit-0",
+            "content": "namespace algorithms::backtrack::leetcode\n{\n    \n}"
+        }
+    ]
+}

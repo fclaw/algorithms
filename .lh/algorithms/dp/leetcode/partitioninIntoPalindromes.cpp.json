@@ -1,0 +1,26 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/partitioninIntoPalindromes.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1721736687209,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1721736695254,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     {\n         return {}; \n     }\n \n-    vvs partition(std::string s) \n+    vvp partition(std::string s) \n     {\n         xxs ans = {};\n         rec(s, 0, ans);\n         return ans;\n"
+                },
+                {
+                    "date": 1721739784434,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,11 +10,11 @@\n        Given a string s, partition s such that \n        every substring of the partition is a palindrome\n        Return all possible palindrome partitioning of s\n     */\n-    std::vector<std::string> rec(std::string s, int idx, vvs& ans)\n+    std::vector<std::string> rec(std::string s, int idx, vvp& ans)\n     {\n-        return {}; \n+        return {};\n     }\n \n     vvp partition(std::string s) \n     {\n"
+                }
+            ],
+            "date": 1721736687209,
+            "name": "Commit-0",
+            "content": "#include <vector>\n#include <string>\n\nusing vvp = std::vector<std::vector<std::string>>;\n\nnamespace algorithms::dp::leetcode\n{\n    // https://leetcode.com/problems/palindrome-partitioning\n    /* \n       Given a string s, partition s such that \n       every substring of the partition is a palindrome\n       Return all possible palindrome partitioning of s\n    */\n    std::vector<std::string> rec(std::string s, int idx, vvs& ans)\n    {\n        return {}; \n    }\n\n    vvs partition(std::string s) \n    {\n        xxs ans = {};\n        rec(s, 0, ans);\n        return ans;\n    }\n    \n}"
+        }
+    ]
+}

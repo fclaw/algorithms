@@ -79,6 +79,10 @@
 #include "algorithms/dp/leetcode/numDecodings.cpp"
 #include "algorithms/dp/leetcode/jumpGame2.cpp"
 #include "algorithms/dp/leetcode/combinationSum4.cpp"
+#include "algorithms/backtrack/leetcode/combine.cpp"
+#include "algorithms/backtrack/leetcode/permute.cpp"
+#include "algorithms/backtrack/leetcode/combinationSum3.cpp"
+#include "algorithms/backtrack/leetcode/wordSearch.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
@@ -107,23 +111,14 @@ int main()
 
     std::cout << std::endl;
     std::cout << std::endl;
-    std::cout << "--- vitamins ---\n";
-    algorithms::codeforces::submit_1042_b();
-    // std::cout << algorithms::codeforces::solve_1042_b({{10, 0}, {9, 6}, {11, 5}, {4, 0}, {5, 1}}, 0);
-    // auto x = algorithms::codeforces::EVitamins::A | algorithms::codeforces::EVitamins::B;
-
-    // int t = 0;
-    // t |= (1 << 0) | (1 << 1);
- 
-    // std::cout << "x: " << x << ", t: " << t;
-
-    // int x = 0;
-    // int y = 0;
-    // x |= (1 << 0);
-    // y |= (1 << 2) | (1 << 0);
-    // std::cout << y;
-
-    // std::cout << "x: " << x << ", y: " << y << ", or:" << (x | y)  << std::endl;
-
-
+    std::cout << "--- ... ---\n";
+    
+    mx case1 = 
+      {{'a', 'a', 'a', 'a', 'a', 'a'}, 
+       {'a', 'a', 'a', 'a', 'a', 'a'}, 
+       {'a', 'a', 'a', 'a', 'a', 'a'}, 
+       {'a', 'a', 'a', 'a', 'a', 'a'},
+       {'a', 'a', 'a', 'a', 'a', 'a'},
+       {'a', 'a', 'a', 'a', 'a', 'a'}};
+    std::cout << algorithms::backtrack::leetcode::search(case1, "aaaaaa");
 }

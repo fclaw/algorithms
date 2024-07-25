@@ -1,0 +1,54 @@
+{
+    "sourceFile": "algorithms/backtrack/leetcode/countNumbersWithUniqueDigits.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1721763936841,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1721797986544,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,2 @@\n-// https://leetcode.com/problems/count-numbers-with-unique-digits\n\\ No newline at end of file\n+// https://leetcode.com/problems/count-numbers-with-unique-digits\n+\n"
+                },
+                {
+                    "date": 1721798018854,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,6 @@\n // https://leetcode.com/problems/count-numbers-with-unique-digits\n \n+namespace algorithms::backtrack::leetcode\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721798041695,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n // https://leetcode.com/problems/count-numbers-with-unique-digits\n \n namespace algorithms::backtrack::leetcode\n {\n-    \n+       int countNumbersWithUniqueDigits(int n) {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721798048567,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n // https://leetcode.com/problems/count-numbers-with-unique-digits\n \n namespace algorithms::backtrack::leetcode\n {\n-       int countNumbersWithUniqueDigits(int n) {\n-        \n+    int countNumbersWithUniqueDigits(int n) \n+    {\n+            \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721798056444,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n-// https://leetcode.com/problems/count-numbers-with-unique-digits\n \n+\n namespace algorithms::backtrack::leetcode\n {\n     int countNumbersWithUniqueDigits(int n) \n     {\n-            \n+\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721798068480,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,10 @@\n \n \n namespace algorithms::backtrack::leetcode\n {\n+    // https://leetcode.com/problems/count-numbers-with-unique-digits\n+    // Given an integer n, return the count of all numbers with unique digits, x, where 0 <= x < 10n\n     int countNumbersWithUniqueDigits(int n) \n     {\n \n     }\n"
+                },
+                {
+                    "date": 1721798104360,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,10 @@\n namespace algorithms::backtrack::leetcode\n {\n     // https://leetcode.com/problems/count-numbers-with-unique-digits\n     // Given an integer n, return the count of all numbers with unique digits, x, where 0 <= x < 10n\n+    /*\n+    */\n     int countNumbersWithUniqueDigits(int n) \n     {\n \n     }\n"
+                },
+                {
+                    "date": 1721798111118,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n {\n     // https://leetcode.com/problems/count-numbers-with-unique-digits\n     // Given an integer n, return the count of all numbers with unique digits, x, where 0 <= x < 10n\n     /*\n-     Backtracking should contains three states which are (the current number, number of steps to get that number and a bitmask which represent which number is marked as visited so far in the current number). Start with state (0,0,0) and count all valid number till we reach number of steps equals to 10n.\n+        Backtracking should contains three states which are (the current number, number of steps to get that number and a bitmask which represent which number is marked as visited so far in the current number). Start with state (0,0,0) and count all valid number till we reach number of steps equals to 10n.\n     */\n     int countNumbersWithUniqueDigits(int n) \n     {\n \n"
+                },
+                {
+                    "date": 1721798146150,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,10 @@\n \n namespace algorithms::backtrack::leetcode\n {\n     // https://leetcode.com/problems/count-numbers-with-unique-digits\n-    // Given an integer n, return the count of all numbers with unique digits, x, where 0 <= x < 10n\n     /*\n+    Given an integer n, return the count of all numbers with unique digits, x, where 0 <= x < 10n\n         Backtracking should contains three states which are (the current number, \n         number of steps to get that number and a bitmask which represent which number is marked as visited so far in the current number). \n         Start with state (0,0,0) and count all valid number till we reach number of steps equals to 10n.\n     */\n"
+                }
+            ],
+            "date": 1721763936841,
+            "name": "Commit-0",
+            "content": "// https://leetcode.com/problems/count-numbers-with-unique-digits"
+        }
+    ]
+}

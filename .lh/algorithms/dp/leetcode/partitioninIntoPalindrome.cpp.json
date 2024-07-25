@@ -1,0 +1,38 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/partitioninIntoPalindrome.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1721727883370,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1721727896579,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n namespace algorithms::dp::leetcode\n {\n-    // https://leetcode.com/problems/remove-boxes\n+    // https://leetcode.com/problems/palindrome-partitioning\n     /*\n        You are given several boxes with different colors represented by different positive numbers.\n        You may experience several rounds to remove boxes until there is no box left. \n        Each time you can choose some continuous boxes with the same color (i.e., composed of k boxes, k >= 1), \n"
+                },
+                {
+                    "date": 1721727908426,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,14 +2,13 @@\n \n namespace algorithms::dp::leetcode\n {\n     // https://leetcode.com/problems/palindrome-partitioning\n-    /*\n-       You are given several boxes with different colors represented by different positive numbers.\n-       You may experience several rounds to remove boxes until there is no box left. \n-       Each time you can choose some continuous boxes with the same color (i.e., composed of k boxes, k >= 1), \n-       remove them and get k * k points.\n-       Return the maximum points you can get.\n+    /* Given a string s, partition s such that every \n+substring\n+ of the partition is a \n+palindrome\n+. Return all possible palindrome partitioning of s\n     */\n     int removeBoxes(std::vector<int> boxes) \n     {\n         return 1;\n"
+                },
+                {
+                    "date": 1721727914311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,9 @@\n \n namespace algorithms::dp::leetcode\n {\n     // https://leetcode.com/problems/palindrome-partitioning\n-    /* Given a string s, partition s such that every \n-substring\n+    /* Given a string s, partition s such that every substring\n  of the partition is a \n palindrome\n . Return all possible palindrome partitioning of s\n     */\n"
+                },
+                {
+                    "date": 1721727920162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,9 @@\n \n namespace algorithms::dp::leetcode\n {\n     // https://leetcode.com/problems/palindrome-partitioning\n-    /* Given a string s, partition s such that every substring of the partition is a \n-palindrome\n+    /* Given a string s, partition s such that every substring of the partition is a palindrome\n . Return all possible palindrome partitioning of s\n     */\n     int removeBoxes(std::vector<int> boxes) \n     {\n"
+                },
+                {
+                    "date": 1721727951065,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n        Given a string s, partition s such that \n        every substring of the partition is a palindrome\n        Return all possible palindrome partitioning of s\n     */\n-    std::vector<vector<string>> partition(string s) {\n+    std::vector<std::vector<string>> partition(string s) {\n         \n     }\n     \n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1721727883370,
+            "name": "Commit-0",
+            "content": "#include <vector>\n\nnamespace algorithms::dp::leetcode\n{\n    // https://leetcode.com/problems/remove-boxes\n    /*\n       You are given several boxes with different colors represented by different positive numbers.\n       You may experience several rounds to remove boxes until there is no box left. \n       Each time you can choose some continuous boxes with the same color (i.e., composed of k boxes, k >= 1), \n       remove them and get k * k points.\n       Return the maximum points you can get.\n    */\n    int removeBoxes(std::vector<int> boxes) \n    {\n        return 1;\n    }\n    \n}"
+        }
+    ]
+}

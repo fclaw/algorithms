@@ -17,22 +17,40 @@ namespace algorithms::leetcode::dp
       Note that any room can contain threats or power-ups, 
       even the first room the knight enters and the bottom-right room where the princess is imprisoned.
     */
-    int calculateMinimumHPRec(std::vector<std::vector<int>> dungeon, int i, int j)
-    {
-        if(i == 0 && j == 0)
-          return dungeon[0][0] >= 0 ? 1 : 1 + std::abs(dungeon[0][0]);
-
-        int hp = calculateMinimumHPRec(dungeon, i, j - 1);
-        std::cout << "hp: " << hp << std::endl;
-        if(dungeon[i][j] >= 0)
-          return 1;
-        else return std::max(hp, 1 + std::abs(dungeon[i][j]));
-    }
     int calculateMinimumHP(std::vector<std::vector<int>> dungeon)
     {
-        int m = dungeon.size();
-        int n = dungeon[0].size();
-        
-        return calculateMinimumHPRec(dungeon, m - 1, n - 1);
+        int M = dungeon.size();
+        int N = dungeon[0].size();
+        std::vector<std::vector<int>> dp(M + 1, std::vector<int>(N + 1, 5 * 1e+05));
+        dp[M - 1][N] = 1;
+        dp[M][N - 1] = 1;
+
+        for (int r = M - 1; r >= 0; r--)
+          for(int c = N - 1; c >= 0; c--)
+           {
+               int below;
+               // 
+               if(dungeon[r][c] < 0)
+                  below = std::abs(dungeon[r][c]) + dp[r + 1][c];
+               if(dungeon[r][c] > 0 && dungeon[r][c] >= dp[r + 1][c])
+                  below = 1;
+               if(dungeon[r][c] > 0 && dungeon[r][c] < dp[r + 1][c])
+                  below = dp[r + 1][c] - dungeon[r][c];
+               if(dungeon[r][c] == 0)
+                  below = dp[r + 1][c];   
+               int right;
+               if(dungeon[r][c] < 0)
+                 right = std::abs(dungeon[r][c]) + dp[r][c + 1];
+               if(dungeon[r][c] > 0 && dungeon[r][c] >= dp[r][c + 1])
+                 right = 1;
+               if(dungeon[r][c] > 0 && dungeon[r][c] < dp[r][c + 1])
+                 right = dp[r][c + 1] - dungeon[r][c];
+               if(dungeon[r][c] == 0)
+                 right = dp[r][c + 1];
+
+               dp[r][c] = std::min(below, right);
+           }
+
+        return dp[0][0];
     }
 }

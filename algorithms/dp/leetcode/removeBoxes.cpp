@@ -10,9 +10,8 @@ namespace algorithms::dp::leetcode
        remove them and get k * k points.
        Return the maximum points you can get.
     */
-    int removeBoxes(std::vector<int> boxes) 
+    int removeBoxes(std::vector<int> boxes)
     {
         return 1;
     }
-    
 }

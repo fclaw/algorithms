@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 15,
+            "activePatchIndex": 16,
             "patches": [
                 {
                     "date": 1720377510669,
@@ -68,6 +68,10 @@
                 {
                     "date": 1720378067765,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,7 +20,7 @@\n        Both robots should reach the bottom row in grid\n     */\n     int cherryPickup(std::vector<std::vector<int>>& grid) \n     {\n-\n+        return 0;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722163728098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n        When both robots stay in the same cell, only one takes the cherries.\n        Both robots cannot move outside of the grid at any moment.\n        Both robots should reach the bottom row in grid\n     */\n-    int cherryPickup(std::vector<std::vector<int>>& grid) \n+    int cherryPickup(std::vector<std::vector<int>>& grid)\n     {\n         return 0;\n     }\n }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1720377510669,

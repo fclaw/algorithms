@@ -1,0 +1,50 @@
+{
+    "sourceFile": "algorithms/codeforces/legs.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1722004998609,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1722005007914,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,4 @@\n+namespace algorithms::codeforces\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722005021475,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+\n+\n namespace algorithms::codeforces\n {\n-    \n+    void submit_\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722005031486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,9 @@\n \n \n namespace algorithms::codeforces\n {\n-    void submit_\n+    void submit_1996_a()\n+    {\n+        int N\n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722005038908,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,8 @@\n namespace algorithms::codeforces\n {\n     void submit_1996_a()\n     {\n-        int N\n+        int TC;\n+        scan\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722005052626,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,7 +4,8 @@\n {\n     void submit_1996_a()\n     {\n         int TC;\n-        scan\n+        scanf(\"%d\", &TC);\n+        while(TC-- >= 0)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722005058408,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,10 @@\n     void submit_1996_a()\n     {\n         int TC;\n         scanf(\"%d\", &TC);\n-        while(TC-- >= 0)\n+        while(--TC > 0)\n+        {\n+            \n+        }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722005069546,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n+#include <cst\n \n \n-\n namespace algorithms::codeforces\n {\n     void submit_1996_a()\n     {\n"
+                },
+                {
+                    "date": 1722005088577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n         int TC;\n         scanf(\"%d\", &TC);\n         while(--TC > 0)\n         {\n+            int legs;\n             scanf()\n         }\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1722004998609,
+            "name": "Commit-0",
+            "content": ""
+        }
+    ]
+}

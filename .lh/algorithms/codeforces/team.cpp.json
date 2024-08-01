@@ -1,0 +1,178 @@
+{
+    "sourceFile": "algorithms/codeforces/team.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 40,
+            "patches": [
+                {
+                    "date": 1721994596869,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1721994641928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+\n+\n namespace algorithms::codeforces\n {\n-    \n+    void \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994650882,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,9 @@\n \n \n namespace algorithms::codeforces\n {\n-    void \n+    void submit_231_a()\n+    {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994659820,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,8 @@\n namespace algorithms::codeforces\n {\n     void submit_231_a()\n     {\n-        \n+        int n;\n+        scanf(\"\")\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994665768,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,7 +4,8 @@\n {\n     void submit_231_a()\n     {\n         int n;\n-        scanf(\"\")\n+        scanf(\"%d\", &n);\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994670988,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n \n \n+\n namespace algorithms::codeforces\n {\n     void submit_231_a()\n     {\n"
+                },
+                {
+                    "date": 1721994677573,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n+#include <\n \n \n-\n namespace algorithms::codeforces\n {\n     void submit_231_a()\n     {\n"
+                },
+                {
+                    "date": 1721994710144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-#include <\n+#include <cstdio>\n \n \n namespace algorithms::codeforces\n {\n@@ -7,6 +7,7 @@\n     {\n         int n;\n         scanf(\"%d\", &n);\n         \n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994727000,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,13 @@\n #include <cstdio>\n+#include <vector>\n \n-\n namespace algorithms::codeforces\n {\n     void submit_231_a()\n     {\n         int n;\n         scanf(\"%d\", &n);\n+\n         \n-        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994737020,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,8 @@\n     void submit_231_a()\n     {\n         int n;\n         scanf(\"%d\", &n);\n-\n+        std::vector<>\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994744521,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,8 @@\n     void submit_231_a()\n     {\n         int n;\n         scanf(\"%d\", &n);\n-        std::vector<>\n+        std::vector<int> xs()\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994750013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n     void submit_231_a()\n     {\n         int n;\n         scanf(\"%d\", &n);\n-        std::vector<int> xs()\n+        std::vector<int> xs(n);\n+        while(n )\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994758017,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,8 @@\n     {\n         int n;\n         scanf(\"%d\", &n);\n         std::vector<int> xs(n);\n-        while(n )\n+        while(n >=)\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994763295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,8 @@\n     {\n         int n;\n         scanf(\"%d\", &n);\n         std::vector<int> xs(n);\n-        while(n >=)\n+        while(n >= 0)\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994768332,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,10 @@\n     {\n         int n;\n         scanf(\"%d\", &n);\n         std::vector<int> xs(n);\n-        while(n >= 0)\n-        \n+        while(n-- >= 0)\n+        {\n+            \n+        }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994781003,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n         scanf(\"%d\", &n);\n         std::vector<int> xs(n);\n         while(n-- >= 0)\n         {\n-            \n+            int x, y, z;\n+            scanf\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994791573,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,8 @@\n         std::vector<int> xs(n);\n         while(n-- >= 0)\n         {\n             int x, y, z;\n-            scanf\n+            scanf(\"%d %d %d\", )\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994799766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,8 @@\n         std::vector<int> xs(n);\n         while(n-- >= 0)\n         {\n             int x, y, z;\n-            scanf(\"%d %d %d\", )\n+            scanf(\"%d %d %d\", x, y, z)\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994806409,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n         std::vector<int> xs(n);\n         while(n-- >= 0)\n         {\n             int x, y, z;\n-            scanf(\"%d %d %d\", x, y, z)\n+            scanf(\"%d %d %d\", &x, &y, &z);\n+            \n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994818763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,8 @@\n         while(n-- >= 0)\n         {\n             int x, y, z;\n             scanf(\"%d %d %d\", &x, &y, &z);\n-            \n+            xs.push_back()\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994825999,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,8 @@\n         while(n-- >= 0)\n         {\n             int x, y, z;\n             scanf(\"%d %d %d\", &x, &y, &z);\n-            xs.push_back()\n+            xs.push_back((0 | (1 << x)))\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994972591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n         while(n-- >= 0)\n         {\n             int x, y, z;\n             scanf(\"%d %d %d\", &x, &y, &z);\n+            if()\n             xs.push_back((0 | (1 << x)))\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994981319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,10 @@\n         while(n-- >= 0)\n         {\n             int x, y, z;\n             scanf(\"%d %d %d\", &x, &y, &z);\n-            if()\n+            if(x == 1)\n+              x = 0;\n             xs.push_back((0 | (1 << x)))\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994987276,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,11 @@\n             int x, y, z;\n             scanf(\"%d %d %d\", &x, &y, &z);\n             if(x == 1)\n               x = 0;\n+            if(x == 1)\n+              x = 0;\n+              \n             xs.push_back((0 | (1 << x)))\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721994994888,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,11 +13,13 @@\n             int x, y, z;\n             scanf(\"%d %d %d\", &x, &y, &z);\n             if(x == 1)\n               x = 0;\n+            else   \n             if(x == 1)\n               x = 0;\n-              \n+            if(x == 1)\n+              x = 0;  \n             xs.push_back((0 | (1 << x)))\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721995003175,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n             int x, y, z;\n             scanf(\"%d %d %d\", &x, &y, &z);\n             if(x == 1)\n               x = 0;\n-            else   \n+            else x = 0;  \n             if(x == 1)\n               x = 0;\n             if(x == 1)\n               x = 0;  \n"
+                },
+                {
+                    "date": 1721995063882,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,15 +11,8 @@\n         while(n-- >= 0)\n         {\n             int x, y, z;\n             scanf(\"%d %d %d\", &x, &y, &z);\n-            if(x == 1)\n-              x = 0;\n-            else x = 0;  \n-            if(x == 1)\n-              x = 0;\n-            if(x == 1)\n-              x = 0;  \n             xs.push_back((0 | (1 << x)))\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721995180317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,25 @@\n+#include <cstdio>\n+#include <vector>\n+\n+namespace algorithms::codeforces\n+{\n+    void submit_231_a()\n+    {\n+        int n;\n+        scanf(\"%d\", &n);\n+        std::vector<int> xs(n);\n+        while(n-- >= 0)\n+        {\n+            int x, y, z;\n+            scanf(\"%d %d %d\", &x, &y, &z);\n+            if(x == 1)\n+              x = 0;\n+            else x = 0;  \n+            if(x == 1)\n+              x = 0;\n+            if(x == 1)\n+              x = 0;  \n+            xs.push_back((0 | (1 << x)))\n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721995186714,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,32 +12,13 @@\n         {\n             int x, y, z;\n             scanf(\"%d %d %d\", &x, &y, &z);\n             if(x == 1)\n+              x = 0;  \n+            if(y == 1)\n               x = 0;\n-            else x = 0;  \n             if(x == 1)\n-              x = 0;\n-            if(x == 1)\n               x = 0;  \n             xs.push_back((0 | (1 << x)))\n         }\n     }\n-}\n-#include <cstdio>\n-#include <vector>\n-\n-namespace algorithms::codeforces\n-{\n-    void submit_231_a()\n-    {\n-        int n;\n-        scanf(\"%d\", &n);\n-        std::vector<int> xs(n);\n-        while(n-- >= 0)\n-        {\n-            int x, y, z;\n-            scanf(\"%d %d %d\", &x, &y, &z);\n-            xs.push_back((0 | (1 << x)))\n-        }\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721995199123,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,8 @@\n         {\n             int x, y, z;\n             scanf(\"%d %d %d\", &x, &y, &z);\n             if(x == 1)\n-              x = 0;  \n-            if(y == 1)\n               x = 0;\n             if(x == 1)\n               x = 0;  \n             xs.push_back((0 | (1 << x)))\n"
+                },
+                {
+                    "date": 1721995204338,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,10 @@\n             int x, y, z;\n             scanf(\"%d %d %d\", &x, &y, &z);\n             if(x == 1)\n               x = 0;\n-            if(x == 1)\n-              x = 0;  \n+            if(z == 1)\n+              z = 2;  \n             xs.push_back((0 | (1 << x)))\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721995210048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n             if(x == 1)\n               x = 0;\n             if(z == 1)\n               z = 2;  \n-            xs.push_back((0 | (1 << x)))\n+            xs.push_back((0 | (1 << x) ) )\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721995217189,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n             if(x == 1)\n               x = 0;\n             if(z == 1)\n               z = 2;  \n-            xs.push_back((0 | (1 << x) ) )\n+            xs.push_back((0 | (1 << x) | (1 << y) | (1 << x)) )\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721995223941,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n             scanf(\"%d %d %d\", &x, &y, &z);\n             if(x == 1)\n               x = 0;\n             if(z == 1)\n-              z = 2;  \n-            xs.push_back((0 | (1 << x) | (1 << y) | (1 << x)) )\n+              z = 2;\n+            xs.push_back((0 | (1 << x) | (1 << y) | (1 << z)));\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721995233208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n             if(x == 1)\n               x = 0;\n             if(z == 1)\n               z = 2;\n+            \n             xs.push_back((0 | (1 << x) | (1 << y) | (1 << z)));\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721995241007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,12 +9,12 @@\n         scanf(\"%d\", &n);\n         std::vector<int> xs(n);\n         while(n-- >= 0)\n         {\n-            int x, y, z;\n+            int x, y, z, v;\n             scanf(\"%d %d %d\", &x, &y, &z);\n             if(x == 1)\n-              x = 0;\n+            \n             if(z == 1)\n               z = 2;\n             \n             xs.push_back((0 | (1 << x) | (1 << y) | (1 << z)));\n"
+                },
+                {
+                    "date": 1721995246448,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,23 @@\n+#include <cstdio>\n+#include <vector>\n+\n+namespace algorithms::codeforces\n+{\n+    void submit_231_a()\n+    {\n+        int n;\n+        scanf(\"%d\", &n);\n+        std::vector<int> xs(n);\n+        while(n-- >= 0)\n+        {\n+            int x, y, z, v;\n+            scanf(\"%d %d %d\", &x, &y, &z);\n+            if(x == 1)\n+              \n+            if(z == 1)\n+              z = 2;\n+            \n+            xs.push_back((0 | (1 << x) | (1 << y) | (1 << z)));\n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721995257150,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,38 +9,16 @@\n         scanf(\"%d\", &n);\n         std::vector<int> xs(n);\n         while(n-- >= 0)\n         {\n-            int x, y, z, v;\n+            int x, y, z;\n+            int v = 0;\n             scanf(\"%d %d %d\", &x, &y, &z);\n             if(x == 1)\n-              \n+              v |= ()\n             if(z == 1)\n               z = 2;\n             \n             xs.push_back((0 | (1 << x) | (1 << y) | (1 << z)));\n         }\n     }\n-}\n-#include <cstdio>\n-#include <vector>\n-\n-namespace algorithms::codeforces\n-{\n-    void submit_231_a()\n-    {\n-        int n;\n-        scanf(\"%d\", &n);\n-        std::vector<int> xs(n);\n-        while(n-- >= 0)\n-        {\n-            int x, y, z, v;\n-            scanf(\"%d %d %d\", &x, &y, &z);\n-            if(x == 1)\n-            \n-            if(z == 1)\n-              z = 2;\n-            \n-            xs.push_back((0 | (1 << x) | (1 << y) | (1 << z)));\n-        }\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1721995293044,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,10 @@\n             int x, y, z;\n             int v = 0;\n             scanf(\"%d %d %d\", &x, &y, &z);\n             if(x == 1)\n-              v |= ()\n-            if(z == 1)\n+              v |= (1 << 0);\n+            if(y == 1)\n               z = 2;\n             \n             xs.push_back((0 | (1 << x) | (1 << y) | (1 << z)));\n         }\n"
+                },
+                {
+                    "date": 1721995301352,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,10 @@\n             scanf(\"%d %d %d\", &x, &y, &z);\n             if(x == 1)\n               v |= (1 << 0);\n             if(y == 1)\n-              v \n+              v |= (1 << 1);\n+              \n             \n             xs.push_back((0 | (1 << x) | (1 << y) | (1 << z)));\n         }\n     }\n"
+                },
+                {
+                    "date": 1721995324696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,26 @@\n+#include <cstdio>\n+#include <vector>\n+\n+namespace algorithms::codeforces\n+{\n+    void submit_231_a()\n+    {\n+        int n;\n+        scanf(\"%d\", &n);\n+        std::vector<int> xs(n);\n+        while(n-- >= 0)\n+        {\n+            int x, y, z;\n+            int v = 0;\n+            scanf(\"%d %d %d\", &x, &y, &z);\n+            if(x == 1)\n+              v |= (1 << 0);\n+            if(y == 1)\n+              v |= (1 << 1);\n+            if(z == 1)\n+              v |= (1 << 2);\n+            xs.push_back(v);\n+            \n+        };\n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1721994596869,
+            "name": "Commit-0",
+            "content": "namespace algorithms::codeforces\n{\n    \n}"
+        }
+    ]
+}

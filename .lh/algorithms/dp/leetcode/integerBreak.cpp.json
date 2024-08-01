@@ -1,0 +1,34 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/integerBreak.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1722244086005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1722244098004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+\n+\n namespace algorithms::leetcode::dp\n {\n-    \n+    // https://leetcode.com/problems/integer-break\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722244107958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,7 @@\n \n namespace algorithms::leetcode::dp\n {\n     // https://leetcode.com/problems/integer-break\n+    int integerBreak(int n) {   \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722244125236,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace algorithms::leetcode::dp\n {\n     // https://leetcode.com/problems/integer-break\n+    \n     int integerBreak(int n) \n     {   \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722244139655,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,8 @@\n namespace algorithms::leetcode::dp\n {\n     // https://leetcode.com/problems/integer-break\n     // Given an integer n, break it into the sum of k positive integers, where k >= 2, and maximize the product of those integers.\n-\n Return the maximum product you can get.\n     int integerBreak(int n) \n     {   \n     }\n"
+                }
+            ],
+            "date": 1722244086005,
+            "name": "Commit-0",
+            "content": "namespace algorithms::leetcode::dp\n{\n    \n}"
+        }
+    ]
+}

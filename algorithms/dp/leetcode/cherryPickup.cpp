@@ -19,7 +19,7 @@ namespace  algorithms::dp::leetcode
        Both robots cannot move outside of the grid at any moment.
        Both robots should reach the bottom row in grid
     */
-    int cherryPickup(std::vector<std::vector<int>>& grid) 
+    int cherryPickup(std::vector<std::vector<int>>& grid)
     {
         return 0;
     }

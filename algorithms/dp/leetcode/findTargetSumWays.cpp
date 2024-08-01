@@ -3,15 +3,6 @@
 
 using Memo = std::unordered_map<int, std::unordered_map<int, int>>;
 
-void printFindTargetSumWaysDp(std::vector<std::vector<int>> dp)
-{
-    for ( const auto &row : dp )
-    {
-        for ( const auto &s : row ) 
-          std::cout << std::setw(5) << s << ' ';
-        std::cout << std::endl;
-    }
-}
 
 namespace algorithms::leetcode::dp
 {

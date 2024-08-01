@@ -1,0 +1,30 @@
+{
+    "sourceFile": "algorithms/dp/josephus.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1722260706173,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1722260711641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n \n \n /**\n- * Legend has it that Josephus wouldn't have lived to become famous without his math- ematical talents. During the Jewish{Roman war, he was among a band of 41 Jewish rebels trapped in a cave by the Romans. Preferring suicide to capture, the rebels decided to form a circle and, proceeding around it, to kill every third remaining person until no one was left. But Josephus, along with an unindicted co-conspirator, wanted none of this suicide nonsense; so he quickly calculated where he and his friend should stand in the vicious circle\n+ *   Legend has it that Josephus wouldn't have lived to become famous without his math- ematical talents. During the Jewish{Roman war, he was among a band of 41 Jewish rebels trapped in a cave by the Romans. Preferring suicide to capture, the rebels decided to form a circle and, proceeding around it, to kill every third remaining person until no one was left. But Josephus, along with an unindicted co-conspirator, wanted none of this suicide nonsense; so he quickly calculated where he and his friend should stand in the vicious circle\n */\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722260718823,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n \n \n /**\n- *   Legend has it that Josephus wouldn't have lived to become famous without his mathematical talents. During the Jewish{Roman war, he was among a band of 41 Jewish rebels trapped in a cave by the Romans. Preferring suicide to capture, the rebels decided to form a circle and, proceeding around it, to kill every third remaining person until no one was left. But Josephus, along with an unindicted co-conspirator, wanted none of this suicide nonsense; so he quickly calculated where he and his friend should stand in the vicious circle\n+ *   Legend has it that Josephus wouldn't have lived to become famous \n+ *   without his mathematical talents. During the Jewish{Roman war, he was among a band of 41 Jewish rebels trapped in a cave by the Romans. Preferring suicide to capture, the rebels decided to form a circle and, proceeding around it, to kill every third remaining person until no one was left. But Josephus, along with an unindicted co-conspirator, wanted none of this suicide nonsense; so he quickly calculated where he and his friend should stand in the vicious circle\n */\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722260730497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,7 @@\n /**\n  *   Legend has it that Josephus wouldn't have lived to become famous \n  *   without his mathematical talents. During the Jewish{Roman war, \n  *   he was among a band of 41 Jewish rebels trapped in a cave by the Romans. \n- *   Preferring suicide to capture, the rebels decided to form a circle and, proceeding around it, to kill every third remaining person until no one was left. But Josephus, along with an unindicted co-conspirator, wanted none of this suicide nonsense; so he quickly calculated where he and his friend should stand in the vicious circle\n+ *   Preferring suicide to capture, the rebels decided to form a circle and, \n+ *   proceeding around it, to kill every third remaining person until no one was left. But Josephus, along with an unindicted co-conspirator, wanted none of this suicide nonsense; so he quickly calculated where he and his friend should stand in the vicious circle\n */\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1722260706173,
+            "name": "Commit-0",
+            "content": "\n\n/**\n * Legend has it that Josephus wouldn't have lived to become famous without his math- ematical talents. During the Jewish{Roman war, he was among a band of 41 Jewish rebels trapped in a cave by the Romans. Preferring suicide to capture, the rebels decided to form a circle and, proceeding around it, to kill every third remaining person until no one was left. But Josephus, along with an unindicted co-conspirator, wanted none of this suicide nonsense; so he quickly calculated where he and his friend should stand in the vicious circle\n*/"
+        }
+    ]
+}

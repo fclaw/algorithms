@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 15,
+            "activePatchIndex": 24,
             "patches": [
                 {
                     "date": 1720336368092,
@@ -68,6 +68,42 @@
                 {
                     "date": 1720858951175,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n        You should not break any stick, but you can link them up, \n        and each matchstick must be used exactly one time.\n        Return true if you can make this square and false otherwise\n     */\n-    bool makeSquare(std::vector<int> matchsticks) \n+    bool makeSquare(std::vector<int> matchsticks)\n     {\n         return false;\n     }\n }\n"
+                },
+                {
+                    "date": 1722171317576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,18 @@\n+#include <vector>\n+\n+namespace algorithms::leetcode::dp\n+{\n+    // https://leetcode.com/problems/matchsticks-to-square\n+    /*\n+       You are given an integer array matchsticks where matchsticks[i] \n+       is the length of the ith matchstick. \n+       You want to use all the matchsticks to make one square. \n+       You should not break any stick, but you can link them up, \n+       and each matchstick must be used exactly one time.\n+       Return true if you can make this square and false otherwise\n+    */\n+    bool makeSquare(std::vector<int> matchsticks)\n+    {\n+        return false;\n+    }\n+}\n"
+                },
+                {
+                    "date": 1722171756572,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,11 @@\n        You want to use all the matchsticks to make one square. \n        You should not break any stick, but you can link them up, \n        and each matchstick must be used exactly one time.\n        Return true if you can make this square and false otherwise\n+\n+       []\n+\n     */\n     bool makeSquare(std::vector<int> matchsticks)\n     {\n         return false;\n"
+                },
+                {
+                    "date": 1722171763585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,30 +10,12 @@\n        You should not break any stick, but you can link them up, \n        and each matchstick must be used exactly one time.\n        Return true if you can make this square and false otherwise\n \n-       []\n+       suppose \n \n     */\n     bool makeSquare(std::vector<int> matchsticks)\n     {\n         return false;\n     }\n }\n-#include <vector>\n-\n-namespace algorithms::leetcode::dp\n-{\n-    // https://leetcode.com/problems/matchsticks-to-square\n-    /*\n-       You are given an integer array matchsticks where matchsticks[i] \n-       is the length of the ith matchstick. \n-       You want to use all the matchsticks to make one square. \n-       You should not break any stick, but you can link them up, \n-       and each matchstick must be used exactly one time.\n-       Return true if you can make this square and false otherwise\n-    */\n-    bool makeSquare(std::vector<int> matchsticks)\n-    {\n-        return false;\n-    }\n-}\n"
+                },
+                {
+                    "date": 1722171774664,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n        You should not break any stick, but you can link them up, \n        and each matchstick must be used exactly one time.\n        Return true if you can make this square and false otherwise\n \n-       suppose \n+       suppose we \n \n     */\n     bool makeSquare(std::vector<int> matchsticks)\n     {\n"
+                },
+                {
+                    "date": 1722171788186,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n        You should not break any stick, but you can link them up, \n        and each matchstick must be used exactly one time.\n        Return true if you can make this square and false otherwise\n \n-       suppose we \n+       suppose we had two arrays: \n \n     */\n     bool makeSquare(std::vector<int> matchsticks)\n     {\n"
+                },
+                {
+                    "date": 1722171794271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n        You should not break any stick, but you can link them up, \n        and each matchstick must be used exactly one time.\n        Return true if you can make this square and false otherwise\n \n-       suppose we had two arrays: \n+       suppose we had two arrays: a[x1, ]\n \n     */\n     bool makeSquare(std::vector<int> matchsticks)\n     {\n"
+                },
+                {
+                    "date": 1722171800782,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n        You should not break any stick, but you can link them up, \n        and each matchstick must be used exactly one time.\n        Return true if you can make this square and false otherwise\n \n-       suppose we had two arrays: a[x1, ]\n+       suppose we had two arrays: a[x1, x2,  ...,]\n \n     */\n     bool makeSquare(std::vector<int> matchsticks)\n     {\n"
+                },
+                {
+                    "date": 1722171812263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n        You should not break any stick, but you can link them up, \n        and each matchstick must be used exactly one time.\n        Return true if you can make this square and false otherwise\n \n-       suppose we had two arrays: a[x1, x2,  ... , xn] \n+       suppose we had two arrays: a[x1, x2,  ... , xn] and  \n \n     */\n     bool makeSquare(std::vector<int> matchsticks)\n     {\n"
+                },
+                {
+                    "date": 1722171820538,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n        You should not break any stick, but you can link them up, \n        and each matchstick must be used exactly one time.\n        Return true if you can make this square and false otherwise\n \n-       suppose we had two arrays: a[x1, x2,  ... , xn] and b[] \n+       suppose we had two arrays: a[x1, x2,  ... , xn] and b[y1, .. yk] \n \n     */\n     bool makeSquare(std::vector<int> matchsticks)\n     {\n"
                 }
             ],
             "date": 1720336368092,

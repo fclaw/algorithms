@@ -2,7 +2,6 @@
 #include <iostream>
 #include <unordered_map>
 
-
 const int ROW = 70;
 const int COL = 70;
 

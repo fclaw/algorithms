@@ -83,6 +83,10 @@
 #include "algorithms/backtrack/leetcode/permute.cpp"
 #include "algorithms/backtrack/leetcode/combinationSum3.cpp"
 #include "algorithms/backtrack/leetcode/wordSearch.cpp"
+#include "algorithms/backtrack/leetcode/findSubsequences.cpp"
+#include "algorithms/backtrack/leetcode/isAdditiveNumber.cpp"
+#include "algorithms/dp/leetcode/integerBreak.cpp"
+#include "algorithms/dp/leetcode/makeSquare.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
@@ -95,6 +99,9 @@
 #include "algorithms/codeforces/fillingShapes.cpp"
 #include "algorithms/codeforces/brokenKeyboard.cpp"
 #include "algorithms/codeforces/vitamins.cpp"
+#include "algorithms/codeforces/boyOrGirl.cpp"
+#include "algorithms/codeforces/legs.cpp"
+#include "algorithms/codeforces/youngExplorers.cpp"
 // online judge
 #include "algorithms/onlinejudge/dp/wedding.cpp"
 #include "algorithms/onlinejudge/dp/sdi.cpp"
@@ -105,6 +112,7 @@
 #include "algorithms/onlinejudge/dp/cuttingSticks.cpp"
 
 #include "algorithms/math.cpp"
+#include "algorithms/dp/josephus.cpp"
 
 int main()
 {
@@ -113,12 +121,9 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
     
-    mx case1 = 
-      {{'a', 'a', 'a', 'a', 'a', 'a'}, 
-       {'a', 'a', 'a', 'a', 'a', 'a'}, 
-       {'a', 'a', 'a', 'a', 'a', 'a'}, 
-       {'a', 'a', 'a', 'a', 'a', 'a'},
-       {'a', 'a', 'a', 'a', 'a', 'a'},
-       {'a', 'a', 'a', 'a', 'a', 'a'}};
-    std::cout << algorithms::backtrack::leetcode::search(case1, "aaaaaa");
+    // std::vector<int> xs = {10,6,5,5,5,3,3,3,2,2,2,2}; // extras = 8 , [10,2],[5,5,2],[5,3,2,2],[6,3,3] // 1100110111
+   
+    // std::vector<int> xs = { 5,5,5,5,16,4,4,4,4,4,3,3,3,3,4 };
+
+    std::cout << algorithms::leetcode::dp::makeSquare(xs);
 }

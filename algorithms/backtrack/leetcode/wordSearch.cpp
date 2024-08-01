@@ -2,6 +2,7 @@
 #include <string>
 
 using mx = std::vector<std::vector<char>>;
+using vis = std::vector<std::vector<bool>>;
 
 namespace algorithms::backtrack::leetcode
 {
@@ -15,7 +16,7 @@ namespace algorithms::backtrack::leetcode
     */
     int M;
     int N;
-    void dfs(mx& board, const std::string& word, bool& ans, int i, int j, int idx)
+    void dfs(mx& board, const std::string& word, bool& ans, int i, int j, int idx, vis& visited)
     {
         if(idx == word.size())
         {
@@ -25,14 +26,15 @@ namespace algorithms::backtrack::leetcode
 
         if(i == M || j == N || j < 0 || i < 0) return;
         
-        if(board[i][j] == word[idx])
+        if(!visited[i][j] && board[i][j] == word[idx])
         {
-            board[i][j] = '*';
-            dfs(board, word, ans, i, j + 1, idx); 
-            dfs(board, word, ans, i + 1, j, idx);
-            dfs(board, word, ans, i, j - 1, idx);
-            dfs(board, word, ans, i - 1, j, idx);
-            board[i][j] = word[idx];
+            visited[i][j] = true;
+            dfs(board, word, ans, i, j + 1, idx, visited); 
+            dfs(board, word, ans, i + 1, j, idx, visited);
+            dfs(board, word, ans, i, j - 1, idx, visited);
+            dfs(board, word, ans, i - 1, j, idx, visited);
+            visited[i][j] = false;
+
         }
     }
     bool search(mx board, std::string word) 
@@ -40,10 +42,11 @@ namespace algorithms::backtrack::leetcode
         M = board.size();
         N = board[0].size();
         bool ans = false;
+        vis visited(M, std::vector<bool>(N, false));
         for(int i = 0; i < M; i++)
           for(int j = 0; j < N; j++)
             if(!ans)
-              dfs(board, word, ans, i, j, 0);
+              dfs(board, word, ans, i, j, 0, visited);
         return ans;
     }
 }

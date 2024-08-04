@@ -1,0 +1,42 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/orangesRotting.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1722526665680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1722526677353,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n-#include <string>\n \n-using vvp = std::vector<std::vector<std::string>>;\n \n+using vvp = std::vector<std::vector<iint>>;\n+\n namespace algorithms::dp::leetcode\n {\n     // https://leetcode.com/problems/palindrome-partitioning\n     /* \n"
+                },
+                {
+                    "date": 1722526682536,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n #include <vector>\n \n \n-using vvp = std::vector<std::vector<iint>>;\n+using mx = std::vector<std::vector<int>>;\n \n namespace algorithms::dp::leetcode\n {\n     // https://leetcode.com/problems/palindrome-partitioning\n"
+                },
+                {
+                    "date": 1722526692221,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,25 @@\n+#include <vector>\n+\n+using mx = std::vector<std::vector<int>>;\n+\n+namespace algorithms::dp::leetcode\n+{\n+    // https://leetcode.com/problems/rotting-oranges/\n+    /* \n+       Given a string s, partition s such that \n+       every substring of the partition is a palindrome\n+       Return all possible palindrome partitioning of s\n+    */\n+    std::vector<std::string> rec(std::string s, int idx, vvp& ans)\n+    {\n+        return {};\n+    }\n+\n+    vvp partition(std::string s) \n+    {\n+        xxs ans = {};\n+        rec(s, 0, ans);\n+        return ans;\n+    }\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722526704725,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,13 +4,9 @@\n \n namespace algorithms::dp::leetcode\n {\n     // https://leetcode.com/problems/rotting-oranges/\n-    /* \n-       Given a string s, partition s such that \n-       every substring of the partition is a palindrome\n-       Return all possible palindrome partitioning of s\n-    */\n+   /\n     std::vector<std::string> rec(std::string s, int idx, vvp& ans)\n     {\n         return {};\n     }\n@@ -21,31 +17,5 @@\n         rec(s, 0, ans);\n         return ans;\n     }\n     \n-}\n-#include <vector>\n-\n-\n-using mx = std::vector<std::vector<int>>;\n-\n-namespace algorithms::dp::leetcode\n-{\n-    // https://leetcode.com/problems/palindrome-partitioning\n-    /* \n-       Given a string s, partition s such that \n-       every substring of the partition is a palindrome\n-       Return all possible palindrome partitioning of s\n-    */\n-    std::vector<std::string> rec(std::string s, int idx, vvp& ans)\n-    {\n-        return {};\n-    }\n-\n-    vvp partition(std::string s) \n-    {\n-        xxs ans = {};\n-        rec(s, 0, ans);\n-        return ans;\n-    }\n-    \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722526711056,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,8 @@\n {\n     // https://leetcode.com/problems/rotting-oranges/\n    /** \n     * You are given an m x n grid where each cell can have one of three values:\n-\n 0 representing an empty cell,\n 1 representing a fresh orange, or\n 2 representing a rotten orange.\n Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.\n"
+                },
+                {
+                    "date": 1722526723002,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,8 @@\n     * 0 representing an empty cell,\n     * 1 representing a fresh orange, or\n     * 2 representing a rotten orange.\n     * Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.\n-\n Return the minimum number of minutes that must elapse until no cell has a fresh orange. If this is impossible, return -1\n    */\n     std::vector<std::string> rec(std::string s, int idx, vvp& ans)\n     {\n"
+                }
+            ],
+            "date": 1722526665680,
+            "name": "Commit-0",
+            "content": "#include <vector>\n#include <string>\n\nusing vvp = std::vector<std::vector<std::string>>;\n\nnamespace algorithms::dp::leetcode\n{\n    // https://leetcode.com/problems/palindrome-partitioning\n    /* \n       Given a string s, partition s such that \n       every substring of the partition is a palindrome\n       Return all possible palindrome partitioning of s\n    */\n    std::vector<std::string> rec(std::string s, int idx, vvp& ans)\n    {\n        return {};\n    }\n\n    vvp partition(std::string s) \n    {\n        xxs ans = {};\n        rec(s, 0, ans);\n        return ans;\n    }\n    \n}"
+        }
+    ]
+}

@@ -12,6 +12,10 @@ namespace algorithms::dp::leetcode
       Constraints:
         1 <= k <= jobs.length <= 12
         1 <= jobs[i] <= 107
+      hint: We can select a subset of tasks and assign it to a worker then solve the subproblem on the remaining tasks  
     */
-    int minimumTimeRequired(std::vector<int>& jobs, int k) { return 0; }
+    int minimumTimeRequired(std::vector<int> jobs, int k) 
+    { 
+        return 0; 
+    }
 }

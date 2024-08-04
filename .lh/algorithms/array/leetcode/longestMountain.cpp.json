@@ -1,0 +1,30 @@
+{
+    "sourceFile": "algorithms/array/leetcode/longestMountain.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1722527912152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1722527922868,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace algorithms::array::leetcode\n {\n-    \n+    //https://leetcode.com/problems/longest-mountain-in-array\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722527931896,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,8 @@\n \n namespace algorithms::array::leetcode\n {\n     //https://leetcode.com/problems/longest-mountain-in-array\n-    \n+    nt longestMountain(vector<int>& arr) {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722527940772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,8 @@\n \n namespace algorithms::array::leetcode\n {\n     //https://leetcode.com/problems/longest-mountain-in-array\n-    int longestMountain(vector<int>& arr) \n+    int longestMountain(std::vector<int>& arr) \n     {   \n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1722527912152,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::array::leetcode\n{\n    \n}"
+        }
+    ]
+}

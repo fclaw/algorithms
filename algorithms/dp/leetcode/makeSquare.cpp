@@ -2,7 +2,7 @@
 #include <bitset>
 #include <unordered_map>
 
-namespace algorithms::leetcode::dp
+namespace algorithms::dp::leetcode
 {
     // https://leetcode.com/problems/matchsticks-to-square
     /**

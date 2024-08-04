@@ -84,9 +84,13 @@
 #include "algorithms/backtrack/leetcode/combinationSum3.cpp"
 #include "algorithms/backtrack/leetcode/wordSearch.cpp"
 #include "algorithms/backtrack/leetcode/findSubsequences.cpp"
+#include "algorithms/backtrack/uv/cd.cpp"
 #include "algorithms/backtrack/leetcode/isAdditiveNumber.cpp"
 #include "algorithms/dp/leetcode/integerBreak.cpp"
-#include "algorithms/dp/leetcode/makeSquare.cpp"
+// #include "algorithms/dp/leetcode/makeSquare.cpp"
+#include "algorithms/dp/leetcode/canPartitionKSubsets.cpp"
+#include "algorithms/dp/leetcode/countBits.cpp"
+#include "algorithms/dp/leetcode/canCross.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
@@ -120,10 +124,4 @@ int main()
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
-    
-    // std::vector<int> xs = {10,6,5,5,5,3,3,3,2,2,2,2}; // extras = 8 , [10,2],[5,5,2],[5,3,2,2],[6,3,3] // 1100110111
-   
-    // std::vector<int> xs = { 5,5,5,5,16,4,4,4,4,4,3,3,3,3,4 };
-
-    std::cout << algorithms::leetcode::dp::makeSquare(xs);
 }

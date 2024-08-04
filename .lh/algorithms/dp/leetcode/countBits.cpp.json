@@ -1,0 +1,74 @@
+{
+    "sourceFile": "algorithms/dp/leetcode/countBits.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 14,
+            "patches": [
+                {
+                    "date": 1722573356327,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1722573364282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,4 @@\n+namespace algorithms::dp::leetcode\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722573372032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+\n+\n namespace algorithms::dp::leetcode\n {\n-    \n+    // https://leetcode.com/problems/counting-bits\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722573381638,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,9 @@\n+\n+\n+namespace algorithms::dp::leetcode\n+{\n+    // https://leetcode.com/problems/counting-bits\n+    vector<int> countBits(int n) \n+    {   \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722573395426,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,10 @@\n+#include <vector>\n \n-\n namespace algorithms::dp::leetcode\n {\n     // https://leetcode.com/problems/counting-bits\n-    vector<int> countBits(int n) \n-    {   \n+    std::vector<int> countBits(int n) \n+    {\n+\n     }\n-}\n-\n-\n-namespace algorithms::dp::leetcode\n-{\n-    // https://leetcode.com/problems/counting-bits\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722573442379,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace algorithms::dp::leetcode\n {\n     // https://leetcode.com/problems/counting-bits\n+    // Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.\n     std::vector<int> countBits(int n) \n     {\n \n     }\n"
+                },
+                {
+                    "date": 1722573452012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,10 @@\n \n namespace algorithms::dp::leetcode\n {\n     // https://leetcode.com/problems/counting-bits\n-    // Given an integer n, return an array ans of length n + 1 such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.\n+    // Given an integer n, return an array ans of length n + 1 \n+    // such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.\n     std::vector<int> countBits(int n) \n     {\n \n     }\n"
+                },
+                {
+                    "date": 1722573459587,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,10 @@\n namespace algorithms::dp::leetcode\n {\n     // https://leetcode.com/problems/counting-bits\n     // Given an integer n, return an array ans of length n + 1 \n-    // such that for each i (0 <= i <= n), ans[i] is the number of 1's in the binary representation of i.\n+    // such that for each i (0 <= i <= n), ans[i] \n+    // is the number of 1's in the binary representation of i.\n     std::vector<int> countBits(int n) \n     {\n \n     }\n"
+                },
+                {
+                    "date": 1722573468469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,7 @@\n     // such that for each i (0 <= i <= n), ans[i] \n     // is the number of 1's in the binary representation of i.\n     std::vector<int> countBits(int n) \n     {\n-\n+        return {};\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722573475413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n #include <vector>\n \n namespace algorithms::dp::leetcode\n {\n+    \n     // https://leetcode.com/problems/counting-bits\n     // Given an integer n, return an array ans of length n + 1 \n     // such that for each i (0 <= i <= n), ans[i] \n     // is the number of 1's in the binary representation of i.\n"
+                },
+                {
+                    "date": 1722573482757,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n namespace algorithms::dp::leetcode\n {\n-    \n+    bool \n     // https://leetcode.com/problems/counting-bits\n     // Given an integer n, return an array ans of length n + 1 \n     // such that for each i (0 <= i <= n), ans[i] \n     // is the number of 1's in the binary representation of i.\n"
+                },
+                {
+                    "date": 1722573487850,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n namespace algorithms::dp::leetcode\n {\n-    bool \n+    bool is\n     // https://leetcode.com/problems/counting-bits\n     // Given an integer n, return an array ans of length n + 1 \n     // such that for each i (0 <= i <= n), ans[i] \n     // is the number of 1's in the binary representation of i.\n"
+                },
+                {
+                    "date": 1722573496353,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n namespace algorithms::dp::leetcode\n {\n-    bool is\n+    bool isPowerof2(int n)\n     // https://leetcode.com/problems/counting-bits\n     // Given an integer n, return an array ans of length n + 1 \n     // such that for each i (0 <= i <= n), ans[i] \n     // is the number of 1's in the binary representation of i.\n"
+                },
+                {
+                    "date": 1722573501447,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n namespace algorithms::dp::leetcode\n {\n-    bool isPowerof2(int n) { return  }\n+    bool isPowerof2(int n) { return n  }\n     // https://leetcode.com/problems/counting-bits\n     // Given an integer n, return an array ans of length n + 1 \n     // such that for each i (0 <= i <= n), ans[i] \n     // is the number of 1's in the binary representation of i.\n"
+                },
+                {
+                    "date": 1722573542885,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,8 @@\n     // such that for each i (0 <= i <= n), ans[i] \n     // is the number of 1's in the binary representation of i.\n     std::vector<int> countBits(int n) \n     {\n-        \n+        if()\n         return {};\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1722573356327,
+            "name": "Commit-0",
+            "content": ""
+        }
+    ]
+}

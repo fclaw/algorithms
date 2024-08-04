@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1720071300586,
@@ -16,6 +16,10 @@
                 {
                     "date": 1720182878216,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         std::cout << std::endl;\n     }\n }\n \n-namespace algorithms::leetcode::dp\n+namespace algorithms::dp::leetcode\n {\n     // https://leetcode.com/problems/burst-balloons\n     /*\n       The optimal strategy can be found using dynamic programming by considering all possible ways \n"
+                },
+                {
+                    "date": 1722666808169,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,18 +4,8 @@\n #include <iomanip>  // for std::setw\n \n using DP = std::vector<std::vector<int>>;\n \n-void printDPTable(DP dp)\n-{\n-    for ( const auto &row : dp )\n-    {\n-        for ( const auto &s : row ) \n-          std::cout << std::setw(5) << s << ' ';\n-        std::cout << std::endl;\n-    }\n-}\n-\n namespace algorithms::dp::leetcode\n {\n     // https://leetcode.com/problems/burst-balloons\n     /*\n"
                 }
             ],
             "date": 1720071300586,

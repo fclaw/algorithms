@@ -85,12 +85,14 @@
 #include "algorithms/backtrack/leetcode/wordSearch.cpp"
 #include "algorithms/backtrack/leetcode/findSubsequences.cpp"
 #include "algorithms/backtrack/uv/cd.cpp"
+#include "algorithms/backtrack/leetcode/solveNQueens.cpp"
 #include "algorithms/backtrack/leetcode/isAdditiveNumber.cpp"
 #include "algorithms/dp/leetcode/integerBreak.cpp"
 // #include "algorithms/dp/leetcode/makeSquare.cpp"
 #include "algorithms/dp/leetcode/canPartitionKSubsets.cpp"
 #include "algorithms/dp/leetcode/countBits.cpp"
 #include "algorithms/dp/leetcode/canCross.cpp"
+#include "algorithms/array/leetcode/numRescueBoats.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
@@ -106,6 +108,7 @@
 #include "algorithms/codeforces/boyOrGirl.cpp"
 #include "algorithms/codeforces/legs.cpp"
 #include "algorithms/codeforces/youngExplorers.cpp"
+#include "algorithms/dp/codeforces/ribbon.cpp"
 // online judge
 #include "algorithms/onlinejudge/dp/wedding.cpp"
 #include "algorithms/onlinejudge/dp/sdi.cpp"
@@ -124,4 +127,13 @@ int main()
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
+
+    auto xxs = algorithms::backtrack::leetcode::solveNQueens(4);
+
+    for(auto xs : xxs)
+    {
+        for(auto x : xs)
+          cout << x << "\n";
+        cout << "\n";
+    }    
 }

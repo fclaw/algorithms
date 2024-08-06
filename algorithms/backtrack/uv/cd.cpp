@@ -1,6 +1,7 @@
 #include <vector>
 #include <cstdio>
 #include <numeric>
+#include <iostream>
 
 namespace algorithms::backtrack::uv
 {
@@ -19,35 +20,47 @@ namespace algorithms::backtrack::uv
      * the tracks are stored on the CD
      */
     int SIZE;
-    void rec(std::vector<int> cd, int start, int c, std::vector<int>& songs, bool& finished)
+    int CAPACITY;
+    int songs;
+    int mask;
+    void dfs(const std::vector<int>& cd, int pos, int c, int m)
     {
-        
-    }
-    std::vector<int> fillCd(std::vector<int> cd, int capacity)
-    {
-        SIZE = cd.size();
-        std::vector<int> songs;
-        bool finished = false;
-        rec(cd, 0, capacity, songs, finished);
-        return songs;
-    }
+        if(c > CAPACITY)
+          return;
 
+        if(c > songs)
+        {
+            songs = c;
+            mask = m; 
+        }
+
+        if(pos >= SIZE)
+          return;
+
+        dfs(cd, pos + 1, c + cd[pos], m | (1 << pos));
+        dfs(cd, pos + 1, c, m);  
+    }
+ 
     void submit_uv_624()
     {
-        int capacity, n;
-        scanf("%d %d", &capacity, &n);
-        std::vector<int> cd(n);
-        for(int i = 0; i < n; i++)
-          scanf("%d", &cd[i]);
-        auto xs = fillCd(cd, capacity);
-        int res = std::reduce(xs.begin(), xs.end());
-        std::string ans;
-        for(auto x : xs)
+        int capacity, s, v;
+        while(std::cin >> capacity)
         {
-          ans += std::to_string(x);
-          ans += " ";
+            std::cin >> s;
+            std::vector<int> cd;
+            for(int i = 0; i < s; i++)
+            {
+                std::cin >> v;
+                cd.push_back(v);
+            }
+            CAPACITY = capacity;
+            SIZE = cd.size(); 
+            dfs(cd, 0, 0, 0);
+            
+            for(auto c : cd)
+              if(mask & (1 << c))
+                printf("%d ", c);
+            printf("sum:%d\n", songs);
         }
-        ans += "sum:" + std::to_string(res);
-        printf("%s", ans.c_str());
     }
 }

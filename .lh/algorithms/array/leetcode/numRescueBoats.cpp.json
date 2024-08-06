@@ -1,0 +1,42 @@
+{
+    "sourceFile": "algorithms/array/leetcode/numRescueBoats.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1722880898339,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1722880906795,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n \n \n namespace algorithms::array::leetcode\n {\n-    \n+    int numRescueBoats(vector<int>& people, int limit) \n+    {   \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722880912823,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n \n \n namespace algorithms::array::leetcode\n {\n-    int numRescueBoats(vector<int>& people, int limit) \n+    int numRescueBoats(std::vector<int>& people, int limit) \n     {   \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722880925358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+#include <vector>\n \n-\n namespace algorithms::array::leetcode\n {\n     int numRescueBoats(std::vector<int>& people, int limit) \n     {   \n"
+                },
+                {
+                    "date": 1722880931002,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n #include <vector>\n \n namespace algorithms::array::leetcode\n {\n-    int numRescueBoats(std::vector<int>& people, int limit) \n+    int numRescueBoats(std::vector<int> people, int limit) \n     {   \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722880940154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n #include <vector>\n \n namespace algorithms::array::leetcode\n {\n+    // https://leetcode.com/problems/boats-to-save-people\n     int numRescueBoats(std::vector<int> people, int limit) \n     {\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722880948310,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,13 @@\n \n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/boats-to-save-people\n+    /**\n+     * You are given an array people where people[i] is the weight of the ith person, and an infinite number of boats where each boat can carry a maximum weight of limit. Each boat carries at most two people at the same time, provided the sum of the weight of those people is at most limit.\n+\n+Return the minimum number of boats to carry every given person.\n+     */\n     int numRescueBoats(std::vector<int> people, int limit) \n     {\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1722880898339,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::array::leetcode\n{\n    \n}"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "sourceFile": "algorithms/backtrack/uv/marcus.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1722836980125,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1722837098591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n namespace algorithms::backtrack::uv\n {\n-    \n+    // \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722837128638,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n namespace algorithms::backtrack::uv\n {\n-    // \n+    // https://onlinejudge.org/external/104/10452.pdf\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722837162776,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,15 @@\n namespace algorithms::backtrack::uv\n {\n     // https://onlinejudge.org/external/104/10452.pdf\n-    \n+    /**\n+     * The first line of the input contains a single number indicating the number of test cases that follow.\n+Each test case starts with a line containing two numbers m and n (2 ≤ m, n ≤ 8), the length m\n+and the width n of the cobblestone path. Then follow m lines, each containing n characters (‘A’ to ‘Z’,\n+‘@’, ‘#’), the engravement of the respective cobblestone. Indy’s starting position is marked with the ‘@’\n+character in the last line, the destination with the character ‘#’ in the first line of the cobblestone path.\n+Each of the letters in ‘IEHOVA’ and the characters ‘@’ and ‘#’ appear exactly once in each test case.\n+There will always be exactly one path from Indy’s starting position via the stones with the letters\n+‘IEHOVA’ engraved on (in that order) to the destination. There will be no other way to safely reach the\n+destination.\n+     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722837197964,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,7 @@\n         ‘@’, ‘#’), the engravement of the respective cobblestone. Indy’s starting position is marked with the ‘@’\n         character in the last line, the destination with the character ‘#’ in the first line of the cobblestone path.\n         Each of the letters in ‘IEHOVA’ and the characters ‘@’ and ‘#’ appear exactly once in each test case.\n         There will always be exactly one path from Indy’s starting position via the stones with the letters\n-        ‘IEHOVA’ engraved on (in that order) to the destination. There will be no other way to safely reach the\n-destination.\n+        ‘IEHOVA’ engraved on (in that order) to the destination. There will be no other way to safely reach the destination.\n      */\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1722836980125,
+            "name": "Commit-0",
+            "content": "namespace algorithms::backtrack::uv\n{\n    \n}"
+        }
+    ]
+}

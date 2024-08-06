@@ -1,0 +1,42 @@
+{
+    "sourceFile": "algorithms/backtrack/leetcode/minSessions.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1722861948305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1722861959155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace algorithms::backtrack::leetcode\n {\n-    \n+    // https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722861996254,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,8 @@\n \n namespace algorithms::backtrack::leetcode\n {\n     // https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks\n+       int minSessions(vector<int>& tasks, int sessionTime) {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722862003884,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,8 @@\n \n namespace algorithms::backtrack::leetcode\n {\n     // https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks\n-       int minSessions(vector<int>& tasks, int sessionTime) {\n+    int minSessions(vector<int> tasks, int session) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722862009438,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,8 @@\n \n namespace algorithms::backtrack::leetcode\n {\n     // https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks\n-    int minSessions(vector<int> tasks, int session) {\n+    int minSessions(std::vector<int> tasks, int session) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722862017133,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+#include <vector>\n \n-\n namespace algorithms::backtrack::leetcode\n {\n     // https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks\n     int minSessions(std::vector<int> tasks, int session) {\n"
+                },
+                {
+                    "date": 1722862026543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,10 @@\n+#include <vector>\n+\n+namespace algorithms::backtrack::leetcode\n+{\n+    // https://leetcode.com/problems/minimum-number-of-work-sessions-to-finish-the-tasks\n+    int minSessions(std::vector<int> tasks, int session) \n+    {\n+        return 0;    \n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1722861948305,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::backtrack::leetcode\n{\n    \n}"
+        }
+    ]
+}

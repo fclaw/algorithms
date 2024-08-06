@@ -34,29 +34,24 @@ namespace algorithms::dp::leetcode
         if(pos == STONES_SIZE - 1)
           return true;
         
-        if(auto i = stone_memo.find(pos); i != stone_memo.end())
-          if(auto j = (*i).second.find(jump); j != (*i).second.end())
-            return (*j).second;
+        if(stone_memo[pos][jump])
+          return stone_memo[pos][jump];
 
         bool ans = false;
-        auto max_pos = stones_existence.find(stones[pos] + jump + 1);
-        if(max_pos != stones_existence.end())
-          ans |= dfs(stones, (*max_pos).second, jump + 1);
+        int max_pos = stones_existence[stones[pos] + jump + 1];
+        if(max_pos) ans |= dfs(stones, max_pos, jump + 1);
 
-        auto no_pos = stones_existence.find(stones[pos] + jump);
-        if(no_pos != stones_existence.end())
-          ans |= dfs(stones, (*no_pos).second, jump);
+        int no_pos = stones_existence[stones[pos] + jump];
+        if(no_pos) ans |= dfs(stones, no_pos, jump);
 
-        auto neg_pos = stones_existence.find(stones[pos] + jump - 1);
-        if(neg_pos != stones_existence.end() && (*neg_pos).second != pos)
-          ans |= dfs(stones, (*neg_pos).second, jump - 1);
+        int neg_pos = stones_existence[stones[pos] + jump - 1];
+        if(neg_pos) ans |= dfs(stones, neg_pos, jump - 1);
 
         return stone_memo[pos][jump] = ans;  
     }
     bool canCross(std::vector<int> stones) 
     {
         STONES_SIZE = stones.size();
-        bool finished = false;
         for(int i = 0; i < STONES_SIZE; i++)
           stones_existence.insert({stones[i], i});
         return dfs(stones, 1, 1);

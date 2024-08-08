@@ -1,0 +1,78 @@
+{
+    "sourceFile": "algorithms/onlinejudge/graph/wetlandsOfFlorida.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 15,
+            "patches": [
+                {
+                    "date": 1723135246576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1723135267632,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n     int m;\n     int n;\n     int measureWaterArea(grid& wt, int x, int y)\n     {\n-        m = wt.;\n+        m = wt.size();\n         n = wt[0].size();\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723135277759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n using grid = std::vector<std::vector<Cell>>;\n \n     int m;\n     int n;\n-    int measureWaterArea(grid& wt, int x, int y)\n+    int measureWaterArea(grid& , int x, int y)\n     {\n         m = wt.size();\n         n = wt[0].size();\n         return 1;\n"
+                },
+                {
+                    "date": 1723135283180,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n namespace algorithms::onlinejudge::graph::wetlands\n {\n \n enum Cell { Water = 0, Land = 1 };\n-using grid = std::vector<std::vector<Cell>>;\n+using wt = std::vector<std::vector<Cell>>;\n \n     int m;\n     int n;\n     int measureWaterArea(grid& , int x, int y)\n"
+                },
+                {
+                    "date": 1723135290028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n using wt = std::vector<std::vector<Cell>>;\n \n     int m;\n     int n;\n-    int measureWaterArea(grid& , int x, int y)\n+    int measureWaterArea(const wt& , int x, int y)\n     {\n         m = wt.size();\n         n = wt[0].size();\n         return 1;\n"
+                },
+                {
+                    "date": 1723135300076,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,11 +23,11 @@\n using wt = std::vector<std::vector<Cell>>;\n \n     int m;\n     int n;\n-    int measureWaterArea(const wt& , int x, int y)\n+    int measureWaterArea(const wt& lands, int x, int y)\n     {\n-        m = wt.size();\n+        m = lands.\n         n = wt[0].size();\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723135309825,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n #include <iostream>\n #include <string>\n+#include <vector>\n \n // https://onlinejudge.org/external/4/469.pdf\n /**\n  * The engineers divided the construction site by a grid into uniform square cells such that each square\n@@ -25,9 +26,9 @@\n     int m;\n     int n;\n     int measureWaterArea(const wt& lands, int x, int y)\n     {\n-        m = lands.\n+        m = lands\n         n = wt[0].size();\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723135315943,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n     int m;\n     int n;\n     int measureWaterArea(const wt& lands, int x, int y)\n     {\n-        m = lands\n+        m = lands.size();\n         n = wt[0].size();\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723135323367,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,34 @@\n+#include <iostream>\n+#include <string>\n+#include <vector>\n+\n+// https://onlinejudge.org/external/4/469.pdf\n+/**\n+ * The engineers divided the construction site by a grid into uniform square cells such that each square\n+ * cell entirely contained either water or land. (How they did it, of course, is anybody’s guess.) Now, the\n+ * question that the engineers are to answer is the following: “Given the row and column number of a\n+ * grid cell that contains water, what is the area of the lake containing that cell.” (an area is measured by\n+ * number of grid cells it contains. Diagonal cells are considered to be adjacent.)\n+ * \n+ * The input consists of 0 < n ≤ 99 lines each containing 0 < m ≤ 99 character long sequence of\n+ * ‘L’s and ‘W’s followed by k > 0 lines each containing a pair of integers i and j. The first n lines will\n+ * represent the n×m grid covering the land where a ‘W’/‘L’ at the c-th character of the r-th line indicates\n+ * water/land within the cell at row r and column c of the grid. The pairs of integers on the last k lines,\n+ * each represent the row and column numbers of some grid cell that contains water\n+ * \n+ */\n+namespace algorithms::onlinejudge::graph::wetlands\n+{\n+\n+enum Cell { Water = 0, Land = 1 };\n+using wt = std::vector<std::vector<Cell>>;\n+\n+    int m;\n+    int n;\n+    int measureWaterArea(const wt& wetlands, int x, int y)\n+    {\n+        m = lands.size();\n+        n = wt[0].size();\n+        return 1;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723135328940,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,43 +26,9 @@\n     int m;\n     int n;\n     int measureWaterArea(const wt& wetlands, int x, int y)\n     {\n-        m = lands.size();\n-        n = wt[0].size();\n+        m = wetlands.size();\n+        n = wetlands[0].size();\n         return 1;\n     }\n-}\n-#include <iostream>\n-#include <string>\n-#include <vector>\n-\n-// https://onlinejudge.org/external/4/469.pdf\n-/**\n- * The engineers divided the construction site by a grid into uniform square cells such that each square\n- * cell entirely contained either water or land. (How they did it, of course, is anybody’s guess.) Now, the\n- * question that the engineers are to answer is the following: “Given the row and column number of a\n- * grid cell that contains water, what is the area of the lake containing that cell.” (an area is measured by\n- * number of grid cells it contains. Diagonal cells are considered to be adjacent.)\n- * \n- * The input consists of 0 < n ≤ 99 lines each containing 0 < m ≤ 99 character long sequence of\n- * ‘L’s and ‘W’s followed by k > 0 lines each containing a pair of integers i and j. The first n lines will\n- * represent the n×m grid covering the land where a ‘W’/‘L’ at the c-th character of the r-th line indicates\n- * water/land within the cell at row r and column c of the grid. The pairs of integers on the last k lines,\n- * each represent the row and column numbers of some grid cell that contains water\n- * \n- */\n-namespace algorithms::onlinejudge::graph::wetlands\n-{\n-\n-enum Cell { Water = 0, Land = 1 };\n-using wt = std::vector<std::vector<Cell>>;\n-\n-    int m;\n-    int n;\n-    int measureWaterArea(const wt& lands, int x, int y)\n-    {\n-        m = lands.size();\n-        n = wt[0].size();\n-        return 1;\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723135361606,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n using wt = std::vector<std::vector<Cell>>;\n \n     int m;\n     int n;\n-    int measureWaterArea(const wt& wetlands, int x, int y)\n+    int measureWaterArea(const wt& grid, int x, int y)\n     {\n         m = wetlands.size();\n         n = wetlands[0].size();\n         return 1;\n"
+                },
+                {
+                    "date": 1723135368315,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n     int m;\n     int n;\n     int measureWaterArea(const wt& grid, int x, int y)\n     {\n-        m = wetlands.size();\n+        m = grid.size();\n         n = wetlands[0].size();\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723135383453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,8 +27,9 @@\n     int n;\n     int measureWaterArea(const wt& grid, int x, int y)\n     {\n         m = grid.size();\n-        n = wetlands[0].size();\n+        n = grid[0].size();\n+        \n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723135389791,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,8 +28,8 @@\n     int measureWaterArea(const wt& grid, int x, int y)\n     {\n         m = grid.size();\n         n = grid[0].size();\n-        \n+        dfs()\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723135395127,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,8 +28,8 @@\n     int measureWaterArea(const wt& grid, int x, int y)\n     {\n         m = grid.size();\n         n = grid[0].size();\n-        return dfs()\n+        return dfs(grid, )\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723135407600,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,8 +28,8 @@\n     int measureWaterArea(const wt& grid, int x, int y)\n     {\n         m = grid.size();\n         n = grid[0].size();\n-        return dfs(grid, x, y, 0)\n+        return dfs(grid, x, y, 0);\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1723135246576,
+            "name": "Commit-0",
+            "content": "#include <iostream>\n#include <string>\n\n// https://onlinejudge.org/external/4/469.pdf\n/**\n * The engineers divided the construction site by a grid into uniform square cells such that each square\n * cell entirely contained either water or land. (How they did it, of course, is anybody’s guess.) Now, the\n * question that the engineers are to answer is the following: “Given the row and column number of a\n * grid cell that contains water, what is the area of the lake containing that cell.” (an area is measured by\n * number of grid cells it contains. Diagonal cells are considered to be adjacent.)\n * \n * The input consists of 0 < n ≤ 99 lines each containing 0 < m ≤ 99 character long sequence of\n * ‘L’s and ‘W’s followed by k > 0 lines each containing a pair of integers i and j. The first n lines will\n * represent the n×m grid covering the land where a ‘W’/‘L’ at the c-th character of the r-th line indicates\n * water/land within the cell at row r and column c of the grid. The pairs of integers on the last k lines,\n * each represent the row and column numbers of some grid cell that contains water\n * \n */\nnamespace algorithms::onlinejudge::graph::wetlands\n{\n\nenum Cell { Water = 0, Land = 1 };\nusing grid = std::vector<std::vector<Cell>>;\n\n    int m;\n    int n;\n    int measureWaterArea(grid& wt, int x, int y)\n    {\n        m = wt.;\n        n = wt[0].size();\n        return 1;\n    }\n}"
+        }
+    ]
+}

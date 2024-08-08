@@ -85,6 +85,7 @@
 #include "algorithms/backtrack/leetcode/wordSearch.cpp"
 #include "algorithms/backtrack/leetcode/findSubsequences.cpp"
 #include "algorithms/backtrack/uv/cd.cpp"
+#include "algorithms/backtrack/uv/marcus.cpp"
 #include "algorithms/backtrack/leetcode/solveNQueens.cpp"
 #include "algorithms/backtrack/leetcode/isAdditiveNumber.cpp"
 #include "algorithms/dp/leetcode/integerBreak.cpp"
@@ -93,6 +94,8 @@
 #include "algorithms/dp/leetcode/countBits.cpp"
 #include "algorithms/dp/leetcode/canCross.cpp"
 #include "algorithms/array/leetcode/numRescueBoats.cpp"
+#include "algorithms/graph/leetcode/numIslands.cpp"
+#include "algorithms/graph/leetcode/orangesRotting.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
@@ -117,9 +120,7 @@
 #include "algorithms/onlinejudge/dp/luggage.cpp"
 #include "algorithms/onlinejudge/graph/dominator.cpp"
 #include "algorithms/onlinejudge/dp/cuttingSticks.cpp"
-
-#include "algorithms/math.cpp"
-#include "algorithms/dp/josephus.cpp"
+#include "algorithms/onlinejudge/graph/wetlandsOfFlorida.cpp"
 
 int main()
 {
@@ -128,12 +129,5 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    auto xxs = algorithms::backtrack::leetcode::solveNQueens(4);
-
-    for(auto xs : xxs)
-    {
-        for(auto x : xs)
-          cout << x << "\n";
-        cout << "\n";
-    }    
+    algorithms::onlinejudge::graph::wetlands::submit_469();
 }

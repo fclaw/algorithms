@@ -1,0 +1,42 @@
+{
+    "sourceFile": "algorithms/graph/leetcode/numIslands.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1723052139346,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1723052150878,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n enum Cell { Empty = 0, FreshOrange, RottenOrange };\n \n-using mx = std::vector<std::vector<Cell>>;\n+using ocean = std::vector<std::vector<Cell>>;\n \n namespace algorithms::graph::leetcode\n {\n     // https://leetcode.com/problems/rotting-oranges/\n"
+                },
+                {
+                    "date": 1723052158177,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n enum Cell { Empty = 0, FreshOrange, RottenOrange };\n \n-using ocean = std::vector<std::vector<Cell>>;\n+using ocean = std::vector<std::vector<int>>;\n \n namespace algorithms::graph::leetcode\n {\n     // https://leetcode.com/problems/rotting-oranges/\n"
+                },
+                {
+                    "date": 1723052178564,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n #include <vector>\n \n-enum Cell { Empty = 0, FreshOrange, RottenOrange };\n+enum Cell { Water = 0, FreshOrange, RottenOrange };\n \n using ocean = std::vector<std::vector<int>>;\n \n namespace algorithms::graph::leetcode\n"
+                },
+                {
+                    "date": 1723052184358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,23 @@\n+#include <vector>\n+\n+enum Cell { Water = 0, Land, RottenOrange };\n+\n+using ocean = std::vector<std::vector<int>>;\n+\n+namespace algorithms::graph::leetcode\n+{\n+    // https://leetcode.com/problems/rotting-oranges/\n+   /** \n+    * You are given an m x n grid where each cell can have one of three values:\n+    * 0 representing an empty cell,\n+    * 1 representing a fresh orange, or\n+    * 2 representing a rotten orange.\n+    * Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.\n+    * Return the minimum number of minutes that must elapse until no cell has a fresh orange. \n+    * If this is impossible, return -1\n+   */\n+    int timeToSpoilAllOranges(mx grid)\n+    {\n+        return 0;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723052193555,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <vector>\n \n enum Cell { Water = 0, Land };\n \n-using ocean = std::vector<std::vector<int>>;\n+using ocean = std::vector<std::vector<Cell>>;\n \n namespace algorithms::graph::leetcode\n {\n     // https://leetcode.com/problems/rotting-oranges/\n"
+                },
+                {
+                    "date": 1723052199560,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,6 @@\n #include <vector>\n \n-enum Cell { Water = 0, Land };\n-\n-using ocean = std::vector<std::vector<Cell>>;\n-\n namespace algorithms::graph::leetcode\n {\n     // https://leetcode.com/problems/rotting-oranges/\n    /** \n"
+                }
+            ],
+            "date": 1723052139346,
+            "name": "Commit-0",
+            "content": "#include <vector>\n\nenum Cell { Empty = 0, FreshOrange, RottenOrange };\n\nusing mx = std::vector<std::vector<Cell>>;\n\nnamespace algorithms::graph::leetcode\n{\n    // https://leetcode.com/problems/rotting-oranges/\n   /** \n    * You are given an m x n grid where each cell can have one of three values:\n    * 0 representing an empty cell,\n    * 1 representing a fresh orange, or\n    * 2 representing a rotten orange.\n    * Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.\n    * Return the minimum number of minutes that must elapse until no cell has a fresh orange. \n    * If this is impossible, return -1\n   */\n    int timeToSpoilAllOranges(mx grid)\n    {\n        return 0;\n    }\n}"
+        }
+    ]
+}

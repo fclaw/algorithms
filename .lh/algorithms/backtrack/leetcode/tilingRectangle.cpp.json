@@ -1,0 +1,34 @@
+{
+    "sourceFile": "algorithms/backtrack/leetcode/tilingRectangle.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1722964712723,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1722964732118,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace algorithms::backtrack::leetcode\n {\n-    \n+    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722964738505,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,8 @@\n \n namespace algorithms::backtrack::leetcode\n {\n     // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n+    int tilingRectangle(int n, int m) {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722964764930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,10 @@\n \n namespace algorithms::backtrack::leetcode\n {\n     // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n-    int tilingRectangle(int n, int m) {\n-        \n+    // Given a rectangle of size n x m, return the minimum number of integer-sided squares that tile the rectangle.\n+    int tilingRectangle(int n, int m) \n+    {\n+        return 0;   \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1722964772864,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,11 @@\n \n namespace algorithms::backtrack::leetcode\n {\n     // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n-    // Given a rectangle of size n x m, return the minimum number of integer-sided squares that tile the rectangle.\n+    // Given a rectangle of size n x m, \n+    // return the minimum number of integer-sided squares that tile the rectangle.\n     int tilingRectangle(int n, int m) \n     {\n-        return 0;   \n+        return 0;\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1722964712723,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::backtrack::leetcode\n{\n    \n}"
+        }
+    ]
+}

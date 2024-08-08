@@ -11,7 +11,7 @@ namespace algorithms::graph::leetcode
         A province is a group of directly or indirectly 
         connected cities and no other cities outside of the group
     */
-    int findCircleNum(std::vector<std::vector<int>> isConnected) 
+    int findCircleNum(std::vector<std::vector<int>> isConnected)
     {
         return 0;    
     }

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "algorithms/graph/leetcode/findCircleNum.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1723121542078,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1723121542078,
+            "name": "Commit-0",
+            "content": "#include <vector>\n\nnamespace algorithms::graph::leetcode\n{\n    // https://leetcode.com/problems/number-of-provinces\n    /*\n       There are n cities. Some of them are connected, while some are not. \n       If city a is connected directly with city b, \n       and city b is connected directly with city c, \n       then city a is connected indirectly with city c.\n        A province is a group of directly or indirectly \n        connected cities and no other cities outside of the group\n    */\n    int findCircleNum(std::vector<std::vector<int>> isConnected)\n    {\n        return 0;    \n    }\n}"
+        }
+    ]
+}

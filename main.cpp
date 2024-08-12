@@ -87,6 +87,7 @@
 #include "algorithms/backtrack/uv/cd.cpp"
 #include "algorithms/backtrack/uv/marcus.cpp"
 #include "algorithms/backtrack/leetcode/solveNQueens.cpp"
+#include "algorithms/backtrack/leetcode/tilingRectangle.cpp"
 #include "algorithms/backtrack/leetcode/isAdditiveNumber.cpp"
 #include "algorithms/dp/leetcode/integerBreak.cpp"
 // #include "algorithms/dp/leetcode/makeSquare.cpp"
@@ -96,6 +97,10 @@
 #include "algorithms/array/leetcode/numRescueBoats.cpp"
 #include "algorithms/graph/leetcode/numIslands.cpp"
 #include "algorithms/graph/leetcode/orangesRotting.cpp"
+#include "algorithms/graph/leetcode/floodFill.cpp"
+#include "algorithms/graph/leetcode/canFinish.cpp"
+#include "algorithms/graph/leetcode/isBipartite.cpp"
+#include "algorithms/graph/leetcode/pacificAtlantic.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
@@ -128,6 +133,16 @@ int main()
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
+    
+    // algorithms::graph::leetcode::pacificAtlantic::heights xs = 
+    //   {{1,2,2,3,5}, {3,2,3,4,4}, {2,4,5,3,1}, {6,7,1,4,5}, {5,1,1,2,4}};
+    algorithms::graph::leetcode::pacificAtlantic::heights xs = {{1,2,3}, {8,9,4}, {7,6,5}};    
+    auto xxs = algorithms::graph::leetcode::pacificAtlantic::flowToPacificAtlantic(xs);
 
-    algorithms::onlinejudge::graph::wetlands::submit_469();
+    for(auto xs : xxs)
+    {
+        for(auto x : xs)
+          cout << x << " ";
+        cout << "\n";   
+    }
 }

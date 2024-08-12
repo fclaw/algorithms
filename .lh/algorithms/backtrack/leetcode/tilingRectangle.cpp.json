@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 66,
             "patches": [
                 {
                     "date": 1722964712723,
@@ -24,6 +24,254 @@
                 {
                     "date": 1722964772864,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,11 @@\n \n namespace algorithms::backtrack::leetcode\n {\n     // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n-    // Given a rectangle of size n x m, return the minimum number of integer-sided squares that tile the rectangle.\n+    // Given a rectangle of size n x m, \n+    // return the minimum number of integer-sided squares that tile the rectangle.\n     int tilingRectangle(int n, int m) \n     {\n-        return 0;   \n+        return 0;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723313961338,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n {\n     // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n     // Given a rectangle of size n x m, \n     // return the minimum number of integer-sided squares that tile the rectangle.\n+    // hint\n     int tilingRectangle(int n, int m) \n     {\n         return 0;\n     }\n"
+                },
+                {
+                    "date": 1723313983016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,10 @@\n {\n     // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n     // Given a rectangle of size n x m, \n     // return the minimum number of integer-sided squares that tile the rectangle.\n-    // hint\n+    // hints:\n+    //   Suppose you've placed a bunch of squares. Where is the natural spot to place the next square ?.\n     int tilingRectangle(int n, int m) \n     {\n         return 0;\n     }\n"
+                },
+                {
+                    "date": 1723313988391,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n     // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n     // Given a rectangle of size n x m, \n     // return the minimum number of integer-sided squares that tile the rectangle.\n     // hints:\n-    //   Suppose you've placed a bunch of squares. Where is the natural spot to place the next square ?.\n+    //  Suppose you've placed a bunch of squares. Where is the natural spot to place the next square ?.\n     int tilingRectangle(int n, int m) \n     {\n         return 0;\n     }\n"
+                },
+                {
+                    "date": 1723313994049,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,10 @@\n     // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n     // Given a rectangle of size n x m, \n     // return the minimum number of integer-sided squares that tile the rectangle.\n     // hints:\n-    //  Suppose you've placed a bunch of squares. Where is the natural spot to place the next square ?.\n+    //  Suppose you've placed a bunch of squares. Where is the natural spot to place the next square?\n+    // \n     int tilingRectangle(int n, int m) \n     {\n         return 0;\n     }\n"
+                },
+                {
+                    "date": 1723314009684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n     // Given a rectangle of size n x m, \n     // return the minimum number of integer-sided squares that tile the rectangle.\n     // hints:\n     //  Suppose you've placed a bunch of squares. Where is the natural spot to place the next square?\n-    // \n+    // The maximum number of squares to be placed will be ≤ max(n,m)\n     int tilingRectangle(int n, int m) \n     {\n         return 0;\n     }\n"
+                },
+                {
+                    "date": 1723314014930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n     // Given a rectangle of size n x m, \n     // return the minimum number of integer-sided squares that tile the rectangle.\n     // hints:\n     //  Suppose you've placed a bunch of squares. Where is the natural spot to place the next square?\n-    // The maximum number of squares to be placed will be ≤ max(n,m)\n+    // The maximum number of squares to be placed will be <= max(n,m)\n     int tilingRectangle(int n, int m) \n     {\n         return 0;\n     }\n"
+                },
+                {
+                    "date": 1723314021700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n     // Given a rectangle of size n x m, \n     // return the minimum number of integer-sided squares that tile the rectangle.\n     // hints:\n     //  Suppose you've placed a bunch of squares. Where is the natural spot to place the next square?\n-    // The maximum number of squares to be placed will be <= max(n,m)\n+    //  The maximum number of squares to be placed will be <= max(n, m)\n     int tilingRectangle(int n, int m) \n     {\n         return 0;\n     }\n"
+                },
+                {
+                    "date": 1723314027079,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,10 @@\n     // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n     // Given a rectangle of size n x m, \n     // return the minimum number of integer-sided squares that tile the rectangle.\n     // hints:\n-    //  Suppose you've placed a bunch of squares. Where is the natural spot to place the next square?\n+    //  Suppose you've placed a bunch of squares. \n+        Where is the natural spot to place the next square?\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     int tilingRectangle(int n, int m) \n     {\n         return 0;\n"
+                },
+                {
+                    "date": 1723314032506,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n     // Given a rectangle of size n x m, \n     // return the minimum number of integer-sided squares that tile the rectangle.\n     // hints:\n     //  Suppose you've placed a bunch of squares. \n-        Where is the natural spot to place the next square?\n+    //    Where is the natural spot to place the next square?\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     int tilingRectangle(int n, int m) \n     {\n         return 0;\n"
+                },
+                {
+                    "date": 1723314037857,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,16 @@\n+\n+\n+namespace algorithms::backtrack::leetcode\n+{\n+    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n+    // Given a rectangle of size n x m, \n+    // return the minimum number of integer-sided squares that tile the rectangle.\n+    // hints:\n+    //  Suppose you've placed a bunch of squares. \n+    //    Where is the natural spot to place the next square?\n+    //  The maximum number of squares to be placed will be <= max(n, m)\n+    int tilingRectangle(int n, int m)\n+    {\n+        return 0;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357521715,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n \n \n-namespace algorithms::backtrack::leetcode\n+namespace algorithms::backtrack::leetcode:\n {\n     // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n     // Given a rectangle of size n x m, \n     // return the minimum number of integer-sided squares that tile the rectangle.\n@@ -12,21 +12,5 @@\n     int tilingRectangle(int n, int m)\n     {\n         return 0;\n     }\n-}\n-\n-\n-namespace algorithms::backtrack::leetcode\n-{\n-    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n-    // Given a rectangle of size n x m, \n-    // return the minimum number of integer-sided squares that tile the rectangle.\n-    // hints:\n-    //  Suppose you've placed a bunch of squares. \n-    //    Where is the natural spot to place the next square?\n-    //  The maximum number of squares to be placed will be <= max(n, m)\n-    int tilingRectangle(int n, int m) \n-    {\n-        return 0;\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357526967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n \n \n-namespace algorithms::backtrack::leetcode:\n+namespace algorithms::backtrack::leetcode::tiling\n {\n     // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n     // Given a rectangle of size n x m, \n     // return the minimum number of integer-sided squares that tile the rectangle.\n"
+                },
+                {
+                    "date": 1723369202096,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,7 +10,7 @@\n     //    Where is the natural spot to place the next square?\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     int tilingRectangle(int n, int m)\n     {\n-        return 0;\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723369210428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,10 @@\n     // hints:\n     //  Suppose you've placed a bunch of squares. \n     //    Where is the natural spot to place the next square?\n     //  The maximum number of squares to be placed will be <= max(n, m)\n+    int ans = 0;\n     int tilingRectangle(int n, int m)\n     {\n-        \n+\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723369216632,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,7 +11,7 @@\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     int ans = 0;\n     int tilingRectangle(int n, int m)\n     {\n-\n+        if()\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723369225104,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,13 @@\n     //  Suppose you've placed a bunch of squares. \n     //    Where is the natural spot to place the next square?\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     int ans = 0;\n+    void \n     int tilingRectangle(int n, int m)\n     {\n-        if()\n+        if(n == m)\n+        {\n+\n+        }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723369230683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     //  Suppose you've placed a bunch of squares. \n     //    Where is the natural spot to place the next square?\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     int ans = 0;\n-    void \n+    void dfs(int n)\n     int tilingRectangle(int n, int m)\n     {\n         if(n == m)\n         {\n"
+                },
+                {
+                    "date": 1723369236326,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     //  Suppose you've placed a bunch of squares. \n     //    Where is the natural spot to place the next square?\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     int ans = 0;\n-    void dfs(int n)\n+    void dfs(int r, int m)\n     int tilingRectangle(int n, int m)\n     {\n         if(n == m)\n         {\n"
+                },
+                {
+                    "date": 1723369247634,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     //  Suppose you've placed a bunch of squares. \n     //    Where is the natural spot to place the next square?\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     int ans = 0;\n-    void dfs(int r, int m)\n+    void dfs(int r, int c, int c)\n     int tilingRectangle(int n, int m)\n     {\n         if(n == m)\n         {\n"
+                },
+                {
+                    "date": 1723369253813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,11 @@\n     //    Where is the natural spot to place the next square?\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     int ans = 0;\n     void dfs(int r, int c, int c)\n+    {\n+        if(r == c)\n+    }\n     int tilingRectangle(int n, int m)\n     {\n         if(n == m)\n         {\n"
+                },
+                {
+                    "date": 1723369261261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,11 @@\n     int ans = 0;\n     void dfs(int r, int c, int c)\n     {\n         if(r == c)\n+        {\n+            ans = std::max\n+        }\n     }\n     int tilingRectangle(int n, int m)\n     {\n         if(n == m)\n"
+                },
+                {
+                    "date": 1723369277302,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,13 @@\n     void dfs(int r, int c, int c)\n     {\n         if(r == c)\n         {\n-            ans = std::max\n+            ans = std::max(ans, c);\n+            return;\n         }\n+\n+        for()\n     }\n     int tilingRectangle(int n, int m)\n     {\n         if(n == m)\n"
+                },
+                {
+                    "date": 1723369290627,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n             ans = std::max(ans, c);\n             return;\n         }\n \n-        for()\n+        for(int )\n     }\n     int tilingRectangle(int n, int m)\n     {\n         if(n == m)\n"
+                },
+                {
+                    "date": 1723369307066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n             ans = std::max(ans, c);\n             return;\n         }\n \n-        for(int )\n+        for(int i = 0; i < std::min() )\n     }\n     int tilingRectangle(int n, int m)\n     {\n         if(n == m)\n"
+                },
+                {
+                    "date": 1723369318023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n             ans = std::max(ans, c);\n             return;\n         }\n \n-        for(int i = 0; i < std::min() )\n+        for(int i = 0; i < std::min(r, c) )\n     }\n     int tilingRectangle(int n, int m)\n     {\n         if(n == m)\n"
+                },
+                {
+                    "date": 1723369324282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,12 @@\n             ans = std::max(ans, c);\n             return;\n         }\n \n-        for(int i = 0; i < std::min(r, c) )\n+        for(int i = 0; i < std::min(r, c); i++)\n+        {\n+            \n+        }\n     }\n     int tilingRectangle(int n, int m)\n     {\n         if(n == m)\n"
+                },
+                {
+                    "date": 1723369337423,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n         }\n \n         for(int i = 0; i < std::min(r, c); i++)\n         {\n-            \n+            1 \n         }\n     }\n     int tilingRectangle(int n, int m)\n     {\n"
+                },
+                {
+                    "date": 1723369349443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,15 +13,15 @@\n     void dfs(int r, int c, int c)\n     {\n         if(r == c)\n         {\n-            ans = std::max(ans, c);\n+            ans = 1 + std::max(ans, c);\n             return;\n         }\n \n         for(int i = 0; i < std::min(r, c); i++)\n         {\n-            1 \n+            \n         }\n     }\n     int tilingRectangle(int n, int m)\n     {\n"
+                },
+                {
+                    "date": 1723369383098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n         }\n \n         for(int i = 0; i < std::min(r, c); i++)\n         {\n-            \n+               \n         }\n     }\n     int tilingRectangle(int n, int m)\n     {\n"
+                },
+                {
+                    "date": 1723369427202,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     //  Suppose you've placed a bunch of squares. \n     //    Where is the natural spot to place the next square?\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     int ans = 0;\n-    void dfs(int r, int c, int c)\n+    void dfs(int r, int c)\n     {\n         if(r == c)\n         {\n             ans = 1 + std::max(ans, c);\n@@ -19,9 +19,9 @@\n         }\n \n         for(int i = 0; i < std::min(r, c); i++)\n         {\n-               \n+\n         }\n     }\n     int tilingRectangle(int n, int m)\n     {\n"
+                },
+                {
+                    "date": 1723369438385,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,13 +9,12 @@\n     //  Suppose you've placed a bunch of squares. \n     //    Where is the natural spot to place the next square?\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     int ans = 0;\n-    void dfs(int r, int c)\n+    int dfs(int r, int c)\n     {\n         if(r == c)\n         {\n-            ans = 1 + std::max(ans, c);\n             return;\n         }\n \n         for(int i = 0; i < std::min(r, c); i++)\n"
+                },
+                {
+                    "date": 1723369444383,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,11 +12,9 @@\n     int ans = 0;\n     int dfs(int r, int c)\n     {\n         if(r == c)\n-        {\n-            return;\n-        }\n+            return 1;\n \n         for(int i = 0; i < std::min(r, c); i++)\n         {\n \n"
+                },
+                {
+                    "date": 1723369451587,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,11 @@\n     int ans = 0;\n     int dfs(int r, int c)\n     {\n         if(r == c)\n-            return 1;\n+          return 1;\n \n+        int ans = 0;\n         for(int i = 0; i < std::min(r, c); i++)\n         {\n \n         }\n"
+                },
+                {
+                    "date": 1723369466444,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,11 @@\n \n         int ans = 0;\n         for(int i = 0; i < std::min(r, c); i++)\n         {\n-\n+            ans = std::max()\n         }\n+        return ans;\n     }\n     int tilingRectangle(int n, int m)\n     {\n         if(n == m)\n"
+                },
+                {
+                    "date": 1723369564105,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,10 @@\n \n         int ans = 0;\n         for(int i = 0; i < std::min(r, c); i++)\n         {\n-            ans = std::max()\n+            \n+            ans = std::max(ans, )\n         }\n         return ans;\n     }\n     int tilingRectangle(int n, int m)\n"
+                },
+                {
+                    "date": 1723369578062,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \n         int ans = 0;\n         for(int i = 0; i < std::min(r, c); i++)\n         {\n-            \n+            int \n             ans = std::max(ans, )\n         }\n         return ans;\n     }\n"
+                },
+                {
+                    "date": 1723369584958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \n         int ans = 0;\n         for(int i = 0; i < std::min(r, c); i++)\n         {\n-            int \n+            int partition3 = \n             ans = std::max(ans, )\n         }\n         return ans;\n     }\n"
+                },
+                {
+                    "date": 1723369602585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \n         int ans = 0;\n         for(int i = 0; i < std::min(r, c); i++)\n         {\n-            int partition3 = \n+            int partition3 = dfs(i, m) + dfs \n             ans = std::max(ans, )\n         }\n         return ans;\n     }\n"
+                },
+                {
+                    "date": 1723369615798,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \n         int ans = 0;\n         for(int i = 0; i < std::min(r, c); i++)\n         {\n-            int partition3 = dfs(i, m) + dfs \n+            int partition3 = dfs(i, m) + dfs(n - i, i) + dfs()\n             ans = std::max(ans, )\n         }\n         return ans;\n     }\n"
+                },
+                {
+                    "date": 1723369622734,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \n         int ans = 0;\n         for(int i = 0; i < std::min(r, c); i++)\n         {\n-            int partition3 = dfs(i, m) + dfs(n - i, i) + dfs()\n+            int partition3 = dfs(i, m) + dfs(n - i, i) + dfs(n - )\n             ans = std::max(ans, )\n         }\n         return ans;\n     }\n"
+                },
+                {
+                    "date": 1723369628257,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,33 @@\n+\n+\n+namespace algorithms::backtrack::leetcode::tiling\n+{\n+    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n+    // Given a rectangle of size n x m, \n+    // return the minimum number of integer-sided squares that tile the rectangle.\n+    // hints:\n+    //  Suppose you've placed a bunch of squares. \n+    //    Where is the natural spot to place the next square?\n+    //  The maximum number of squares to be placed will be <= max(n, m)\n+    int ans = 0;\n+    int dfs(int r, int c)\n+    {\n+        if(r == c)\n+          return 1;\n+\n+        int ans = 0;\n+        for(int i = 0; i < std::min(r, c); i++)\n+        {\n+            int partition3 = dfs(i, m) + dfs(n - i, i) + dfs(n - i, m - i);\n+            ans = std::max(ans, )\n+        }\n+        return ans;\n+    }\n+    int tilingRectangle(int n, int m)\n+    {\n+        if(n == m)\n+        {\n+\n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723369643397,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,39 +1,8 @@\n \n \n-namespace algorithms::backtrack::leetcode::tiling\n-{\n-    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n-    // Given a rectangle of size n x m, \n-    // return the minimum number of integer-sided squares that tile the rectangle.\n-    // hints:\n-    //  Suppose you've placed a bunch of squares. \n-    //    Where is the natural spot to place the next square?\n-    //  The maximum number of squares to be placed will be <= max(n, m)\n-    int ans = 0;\n-    int dfs(int r, int c)\n-    {\n-        if(r == c)\n-          return 1;\n \n-        int ans = 0;\n-        for(int i = 0; i < std::min(r, c); i++)\n-        {\n-            int partition3 = dfs(i, m) + dfs(n - i, i) + dfs(n - i, m - i);\n-            ans = std::max(ans, )\n-        }\n-        return ans;\n-    }\n-    int tilingRectangle(int n, int m)\n-    {\n-        if(n == m)\n-        {\n \n-        }\n-    }\n-}\n-\n-\n namespace algorithms::backtrack::leetcode::tiling\n {\n     // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n     // Given a rectangle of size n x m, \n@@ -50,9 +19,9 @@\n \n         int ans = 0;\n         for(int i = 0; i < std::min(r, c); i++)\n         {\n-            int partition3 = dfs(i, m) + dfs(n - i, i) + dfs(n - )\n+            int partition3 = dfs(i, m) + dfs(n - i, i) + dfs(n - i, m - i);\n             ans = std::max(ans, )\n         }\n         return ans;\n     }\n"
+                },
+                {
+                    "date": 1723369654511,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n+#include <algorithm\n \n \n-\n-\n namespace algorithms::backtrack::leetcode::tiling\n {\n     // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n     // Given a rectangle of size n x m, \n"
+                },
+                {
+                    "date": 1723369677491,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-#include <algorithm\n+#include <algorithm>\n \n \n namespace algorithms::backtrack::leetcode::tiling\n {\n@@ -18,9 +18,9 @@\n \n         int ans = 0;\n         for(int i = 0; i < std::min(r, c); i++)\n         {\n-            int partition3 = dfs(i, m) + dfs(n - i, i) + dfs(n - i, m - i);\n+            int partition3 = dfs(i, c) + dfs(n - i, i) + dfs(n - i, m - i);\n             ans = std::max(ans, )\n         }\n         return ans;\n     }\n"
+                },
+                {
+                    "date": 1723369683769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \n         int ans = 0;\n         for(int i = 0; i < std::min(r, c); i++)\n         {\n-            int partition3 = dfs(i, c) + dfs(n - i, i) + dfs(n - i, m - i);\n+            int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n             ans = std::max(ans, )\n         }\n         return ans;\n     }\n"
+                },
+                {
+                    "date": 1723369715392,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n         if(r == c)\n           return 1;\n \n         int ans = 0;\n-        for(int i = 0; i < std::min(r, c); i++)\n+        for(int i = 0; i < min(r, c); i++)\n         {\n             int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n             ans = std::max(ans, )\n         }\n"
+                },
+                {
+                    "date": 1723369723928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n         if(r == c)\n           return 1;\n \n         int ans = 0;\n-        for(int i = 0; i < min(r, c); i++)\n+        for(int i = 0; i < std::min(r, c); i++)\n         {\n             int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n             ans = std::max(ans, )\n         }\n"
+                },
+                {
+                    "date": 1723369730352,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,34 @@\n+#include <algorithm>\n+\n+\n+namespace algorithms::backtrack::leetcode::tiling\n+{\n+    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n+    // Given a rectangle of size n x m, \n+    // return the minimum number of integer-sided squares that tile the rectangle.\n+    // hints:\n+    //  Suppose you've placed a bunch of squares. \n+    //    Where is the natural spot to place the next square?\n+    //  The maximum number of squares to be placed will be <= max(n, m)\n+    int ans = 0;\n+    int dfs(int r, int c)\n+    {\n+        if(r == c)\n+          return 1;\n+\n+        int ans = 0;\n+        // for(int i = 0; i < std::min(r, c); i++)\n+        // {\n+        //     int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n+        //     ans = std::max(ans, )\n+        // }\n+        return ans;\n+    }\n+    int tilingRectangle(int n, int m)\n+    {\n+        if(n == m)\n+        {\n+\n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723369736551,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,44 +25,6 @@\n         return ans;\n     }\n     int tilingRectangle(int n, int m)\n     {\n-        if(n == m)\n-        {\n-\n-        }\n     }\n-}\n-#include <algorithm>\n-\n-\n-namespace algorithms::backtrack::leetcode::tiling\n-{\n-    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n-    // Given a rectangle of size n x m, \n-    // return the minimum number of integer-sided squares that tile the rectangle.\n-    // hints:\n-    //  Suppose you've placed a bunch of squares. \n-    //    Where is the natural spot to place the next square?\n-    //  The maximum number of squares to be placed will be <= max(n, m)\n-    int ans = 0;\n-    int dfs(int r, int c)\n-    {\n-        if(r == c)\n-          return 1;\n-\n-        int ans = 0;\n-        for(int i = 0; i < std::min(r, c); i++)\n-        {\n-            int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n-            ans = std::max(ans, )\n-        }\n-        return ans;\n-    }\n-    int tilingRectangle(int n, int m)\n-    {\n-        if(n == m)\n-        {\n-\n-        }\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723369767666,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,12 +12,12 @@\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     int ans = 0;\n     int dfs(int r, int c)\n     {\n-        if(r == c)\n-          return 1;\n+        // if(r == c)\n+        //   return 1;\n \n-        int ans = 0;\n+        // int ans = 0;\n         // for(int i = 0; i < std::min(r, c); i++)\n         // {\n         //     int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n         //     ans = std::max(ans, )\n@@ -25,6 +25,7 @@\n         return ans;\n     }\n     int tilingRectangle(int n, int m)\n     {\n+        return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723369774145,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     // hints:\n     //  Suppose you've placed a bunch of squares. \n     //    Where is the natural spot to place the next square?\n     //  The maximum number of squares to be placed will be <= max(n, m)\n-    int ans = 0;\n+    // int ans = 0;\n     int dfs(int r, int c)\n     {\n         // if(r == c)\n         //   return 1;\n@@ -21,9 +21,9 @@\n         // {\n         //     int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n         //     ans = std::max(ans, )\n         // }\n-        return ans;\n+        return 1;\n     }\n     int tilingRectangle(int n, int m)\n     {\n         return 1;\n"
+                },
+                {
+                    "date": 1723369783054,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n     //  Suppose you've placed a bunch of squares. \n     //    Where is the natural spot to place the next square?\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     // int ans = 0;\n-    int dfs(int r, int c)\n+    int f(int r, int c)\n     {\n         // if(r == c)\n         //   return 1;\n \n"
+                },
+                {
+                    "date": 1723369826016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,31 @@\n+#include <algorithm>\n+\n+\n+namespace algorithms::backtrack::leetcode::tiling\n+{\n+    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n+    // Given a rectangle of size n x m, \n+    // return the minimum number of integer-sided squares that tile the rectangle.\n+    // hints:\n+    //  Suppose you've placed a bunch of squares. \n+    //    Where is the natural spot to place the next square?\n+    //  The maximum number of squares to be placed will be <= max(n, m)\n+    // int ans = 0;\n+    int dfs(int r, int c)\n+    {\n+        // if(r == c)\n+        //   return 1;\n+\n+        // int ans = 0;\n+        // for(int i = 0; i < std::min(r, c); i++)\n+        // {\n+        //     int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n+        //     ans = std::max(ans, )\n+        // }\n+        return 1;\n+    }\n+    int tilingRectangle(int n, int m)\n+    {\n+        return 1;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723369837187,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,31 @@\n+#include <algorithm>\n+\n+\n+namespace algorithms::backtrack::leetcode::tiling\n+{\n+    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n+    // Given a rectangle of size n x m, \n+    // return the minimum number of integer-sided squares that tile the rectangle.\n+    // hints:\n+    //  Suppose you've placed a bunch of squares. \n+    //    Where is the natural spot to place the next square?\n+    //  The maximum number of squares to be placed will be <= max(n, m)\n+    // int ans = 0;\n+    int dfs(int r, int c)\n+    {\n+        // if(r == c)\n+        //   return 1;\n+\n+        // int ans = 0;\n+        // for(int i = 0; i < std::min(r, c); i++)\n+        // {\n+        //     int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n+        //     ans = std::max(ans, )\n+        // }\n+        return 1;\n+    }\n+    int tilingRectangle(int n, int m)\n+    {\n+        return 1;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723369849473,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n     //  Suppose you've placed a bunch of squares. \n     //    Where is the natural spot to place the next square?\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     // int ans = 0;\n-    int dfs(int r, int c)\n+    int backtrack(int r, int c)\n     {\n         // if(r == c)\n         //   return 1;\n \n@@ -27,67 +27,5 @@\n     int tilingRectangle(int n, int m)\n     {\n         return 1;\n     }\n-}\n-#include <algorithm>\n-\n-\n-namespace algorithms::backtrack::leetcode::tiling\n-{\n-    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n-    // Given a rectangle of size n x m, \n-    // return the minimum number of integer-sided squares that tile the rectangle.\n-    // hints:\n-    //  Suppose you've placed a bunch of squares. \n-    //    Where is the natural spot to place the next square?\n-    //  The maximum number of squares to be placed will be <= max(n, m)\n-    // int ans = 0;\n-    int dfs(int r, int c)\n-    {\n-        // if(r == c)\n-        //   return 1;\n-\n-        // int ans = 0;\n-        // for(int i = 0; i < std::min(r, c); i++)\n-        // {\n-        //     int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n-        //     ans = std::max(ans, )\n-        // }\n-        return 1;\n-    }\n-    int tilingRectangle(int n, int m)\n-    {\n-        return 1;\n-    }\n-}\n-#include <algorithm>\n-\n-\n-namespace algorithms::backtrack::leetcode::tiling\n-{\n-    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n-    // Given a rectangle of size n x m, \n-    // return the minimum number of integer-sided squares that tile the rectangle.\n-    // hints:\n-    //  Suppose you've placed a bunch of squares. \n-    //    Where is the natural spot to place the next square?\n-    //  The maximum number of squares to be placed will be <= max(n, m)\n-    // int ans = 0;\n-    int f(int r, int c)\n-    {\n-        // if(r == c)\n-        //   return 1;\n-\n-        // int ans = 0;\n-        // for(int i = 0; i < std::min(r, c); i++)\n-        // {\n-        //     int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n-        //     ans = std::max(ans, )\n-        // }\n-        return 1;\n-    }\n-    int tilingRectangle(int n, int m)\n-    {\n-        return 1;\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723369855040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,10 @@\n     //  The maximum number of squares to be placed will be <= max(n, m)\n     // int ans = 0;\n     int backtrack(int r, int c)\n     {\n-        // if(r == c)\n-        //   return 1;\n+        if(r == c)\n+          return 1;\n \n         // int ans = 0;\n         // for(int i = 0; i < std::min(r, c); i++)\n         // {\n"
+                },
+                {
+                    "date": 1723369860608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,15 +15,15 @@\n     {\n         if(r == c)\n           return 1;\n \n-        // int ans = 0;\n+        int ans = 0;\n         // for(int i = 0; i < std::min(r, c); i++)\n         // {\n         //     int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n         //     ans = std::max(ans, )\n         // }\n-        return 1;\n+        return ans;\n     }\n     int tilingRectangle(int n, int m)\n     {\n         return 1;\n"
+                },
+                {
+                    "date": 1723369869198,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,4 @@\n-#include <algorithm>\n \n \n namespace algorithms::backtrack::leetcode::tiling\n {\n@@ -16,9 +15,9 @@\n         if(r == c)\n           return 1;\n \n         int ans = 0;\n-        // for(int i = 0; i < std::min(r, c); i++)\n+        for(int i = 0; i < std::min(r, c); i++)\n         // {\n         //     int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n         //     ans = std::max(ans, )\n         // }\n"
+                },
+                {
+                    "date": 1723369875389,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,30 @@\n+\n+\n+namespace algorithms::backtrack::leetcode::tiling\n+{\n+    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n+    // Given a rectangle of size n x m, \n+    // return the minimum number of integer-sided squares that tile the rectangle.\n+    // hints:\n+    //  Suppose you've placed a bunch of squares. \n+    //    Where is the natural spot to place the next square?\n+    //  The maximum number of squares to be placed will be <= max(n, m)\n+    // int ans = 0;\n+    int backtrack(int r, int c)\n+    {\n+        if(r == c)\n+          return 1;\n+\n+        int ans = 0;\n+        for(int i = 0; i < min(r, c); i++)\n+        // {\n+        //     int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n+        //     ans = std::max(ans, )\n+        // }\n+        return ans;\n+    }\n+    int tilingRectangle(int n, int m)\n+    {\n+        return 1;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723369906451,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+#include <algorithm>\n \n \n namespace algorithms::backtrack::leetcode::tiling\n {\n@@ -26,35 +27,5 @@\n     int tilingRectangle(int n, int m)\n     {\n         return 1;\n     }\n-}\n-\n-\n-namespace algorithms::backtrack::leetcode::tiling\n-{\n-    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n-    // Given a rectangle of size n x m, \n-    // return the minimum number of integer-sided squares that tile the rectangle.\n-    // hints:\n-    //  Suppose you've placed a bunch of squares. \n-    //    Where is the natural spot to place the next square?\n-    //  The maximum number of squares to be placed will be <= max(n, m)\n-    // int ans = 0;\n-    int backtrack(int r, int c)\n-    {\n-        if(r == c)\n-          return 1;\n-\n-        int ans = 0;\n-        for(int i = 0; i < std::min(r, c); i++)\n-        // {\n-        //     int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n-        //     ans = std::max(ans, )\n-        // }\n-        return ans;\n-    }\n-    int tilingRectangle(int n, int m)\n-    {\n-        return 1;\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723369916698,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n           return 1;\n \n         int ans = 0;\n         for(int i = 0; i < std::min(r, c); i++)\n-        // {\n+        {\n         //     int partition3 = dfs(i, c) + dfs(r - i, i) + dfs(r - i, c - i);\n         //     ans = std::max(ans, )\n         // }\n         return ans;\n"
+                },
+                {
+                    "date": 1723369935878,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,31 @@\n+#include <algorithm>\n+\n+namespace algorithms::backtrack::leetcode::tiling\n+{\n+    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n+    // Given a rectangle of size n x m, \n+    // return the minimum number of integer-sided squares that tile the rectangle.\n+    // hints:\n+    //  Suppose you've placed a bunch of squares. \n+    //    Where is the natural spot to place the next square?\n+    //  The maximum number of squares to be placed will be <= max(n, m)\n+    // int ans = 0;\n+    int backtrack(int r, int c)\n+    {\n+        if(r == c)\n+          return 1;\n+\n+        int ans = 0;\n+        for(int i = 0; i < std::min(r, c); i++)\n+        {\n+            int partition3 = backtrack(i, c) + backtrack(r - i, i) + backtrack(r - i, c - i);\n+            int \n+            ans = std::max(ans, )\n+        }\n+        return ans;\n+    }\n+    int tilingRectangle(int n, int m)\n+    {\n+        return 1;\n+    }\n+}\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1722964712723,

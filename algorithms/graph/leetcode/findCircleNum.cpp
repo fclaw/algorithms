@@ -13,6 +13,6 @@ namespace algorithms::graph::leetcode
     */
     int findCircleNum(std::vector<std::vector<int>> isConnected)
     {
-        return 0;    
+        return 0;
     }
 }

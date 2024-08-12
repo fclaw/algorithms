@@ -21,6 +21,10 @@ using tm = std::vector<std::pair<Cell, int>>;
    */
     int m;
     int n;
+    std::vector<std::pair<int, int>> dirs = 
+    { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+    bool checkBoundary(int r, int c) 
+    { return r >= 0 && r < m && c >= 0 && c < n; }
     bool visited(const tm& times, int x, int y)
     {
         bool res = false;
@@ -53,40 +57,17 @@ using tm = std::vector<std::pair<Cell, int>>;
                  t.first.second == x.second)
                  d = t.second;
 
-            if(x.first - 1 >= 0 &&
-               grid[x.first - 1][x.second] != Empty &&
-               grid[x.first - 1][x.second] != Rotten &&
-               !visited(times, x.first - 1, x.second))
+            for(auto dr : dirs)
             {
-                q.push({x.first - 1, x.second});
-                setVisited(times, d, {x.first - 1, x.second});
-            }
-            // right
-            if(x.second + 1 < n &&
-               grid[x.first][x.second + 1] != Empty &&
-               grid[x.first][x.second + 1] != Rotten &&
-               !visited(times, x.first, x.second + 1))
-            {
-                q.push({x.first, x.second + 1});
-                setVisited(times, d, {x.first, x.second + 1});
-            }
-            // below
-            if(x.first + 1 < m && 
-               grid[x.first + 1][x.second] != Empty &&
-               grid[x.first + 1][x.second] != Rotten &&
-               !visited(times, x.first + 1, x.second))
-            {
-                q.push({x.first + 1, x.second});
-                setVisited(times, d, {x.first + 1, x.second});
-            }
-            // left
-            if(x.second - 1 >= 0 &&
-               grid[x.first][x.second - 1] == Fresh &&
-               grid[x.first][x.second - 1] != Rotten &&
-               !visited(times, x.first, x.second - 1))
-            {
-                q.push({x.first, x.second - 1});
-                setVisited(times, d, {x.first, x.second - 1});
+                int r = x.first + dr.first;
+                int c = x.second + dr.second;
+                if(checkBoundary(r, c) && 
+                   grid[r][c] == Fresh &&
+                   !visited(times, r, c))
+                {
+                    q.push({r, c});
+                    setVisited(times, d, {r, c});
+                }
             }
         }
     }

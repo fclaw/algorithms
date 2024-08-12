@@ -18,6 +18,8 @@ using vv = std::vector<std::vector<bool>>;
    */
     int m;
     int n;
+    std::vector<std::pair<int, int>> dirs = 
+    { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
     void dfs(const ocean& grid, int r, int c, std::vector<std::vector<bool>>& visited)
     {
         if(r >= m || c >= n || c < 0 || r < 0)
@@ -26,10 +28,8 @@ using vv = std::vector<std::vector<bool>>;
           return;    
         if(visited[r][c]) return;
         visited[r][c] = true;
-        dfs(grid, r, c + 1, visited);
-        dfs(grid, r, c - 1, visited);
-        dfs(grid, r + 1, c, visited);
-        dfs(grid, r - 1, c, visited); 
+        for(auto d : dirs)
+          dfs(grid, r + d.first, c + d.second, visited);
     }
     int numIslands(ocean grid)
     {

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 5,
+            "activePatchIndex": 11,
             "patches": [
                 {
                     "date": 1720936172200,
@@ -28,6 +28,30 @@
                 {
                     "date": 1720936238609,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/kth-largest-element-in-an-array\n-    int findKthLargest(std::vector<int>& nums, int k) \n+    int findKthLargest(std::vector<int> nums, int k) \n     {\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723282350023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,10 @@\n+#include <vector>\n+\n+namespace algorithms::array::leetcode\n+{\n+    // https://leetcode.com/problems/kth-largest-element-in-an-array\n+    int findKthLargest(std::vector<int> nums, int k) \n+    {\n+        return 1;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723282362414,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,18 +2,13 @@\n \n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/kth-largest-element-in-an-array\n-    int findKthLargest(std::vector<int> nums, int k) \n-    {\n-        return 1;\n-    }\n-}\n-#include <vector>\n+    Given an integer array nums and an integer k, return the kth largest element in the array.\n \n-namespace algorithms::array::leetcode\n-{\n-    // https://leetcode.com/problems/kth-largest-element-in-an-array\n+Note that it is the kth largest element in the sorted order, not the kth distinct element.\n+\n+Can you solve it without sorting?\n     int findKthLargest(std::vector<int> nums, int k) \n     {\n         return 1;\n     }\n"
+                },
+                {
+                    "date": 1723282373234,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,12 +2,10 @@\n \n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/kth-largest-element-in-an-array\n-    Given an integer array nums and an integer k, return the kth largest element in the array.\n-\n-Note that it is the kth largest element in the sorted order, not the kth distinct element.\n-\n+    // Given an integer array nums and an integer k, return the kth largest element in the array.\n+   // Note that it is the kth largest element in the sorted order, not the kth distinct element.\n Can you solve it without sorting?\n     int findKthLargest(std::vector<int> nums, int k) \n     {\n         return 1;\n"
+                },
+                {
+                    "date": 1723282393286,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,10 @@\n namespace algorithms::array::leetcode\n {\n     // https://leetcode.com/problems/kth-largest-element-in-an-array\n     // Given an integer array nums and an integer k, return the kth largest element in the array.\n-   // Note that it is the kth largest element in the sorted order, not the kth distinct element.\n-Can you solve it without sorting?\n+    // Note that it is the kth largest element in the sorted order, not the kth distinct element.\n+    // it must be done in li?\n     int findKthLargest(std::vector<int> nums, int k) \n     {\n         return 1;\n     }\n"
+                },
+                {
+                    "date": 1723282402208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n {\n     // https://leetcode.com/problems/kth-largest-element-in-an-array\n     // Given an integer array nums and an integer k, return the kth largest element in the array.\n     // Note that it is the kth largest element in the sorted order, not the kth distinct element.\n-    // it must be done in li?\n+    // it must be done in linear time ?\n     int findKthLargest(std::vector<int> nums, int k) \n     {\n         return 1;\n     }\n"
+                },
+                {
+                    "date": 1723282411038,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n {\n     // https://leetcode.com/problems/kth-largest-element-in-an-array\n     // Given an integer array nums and an integer k, return the kth largest element in the array.\n     // Note that it is the kth largest element in the sorted order, not the kth distinct element.\n-    // it must be done in linear time ?\n+    // it must be done in linear time without resort to ?\n     int findKthLargest(std::vector<int> nums, int k) \n     {\n         return 1;\n     }\n"
                 }
             ],
             "date": 1720936172200,

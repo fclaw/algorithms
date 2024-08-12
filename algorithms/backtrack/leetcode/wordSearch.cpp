@@ -4,7 +4,7 @@
 using mx = std::vector<std::vector<char>>;
 using vis = std::vector<std::vector<bool>>;
 
-namespace algorithms::backtrack::leetcode
+namespace algorithms::backtrack::leetcode::word_search
 {
     // https://leetcode.com/problems/word-search
     /*

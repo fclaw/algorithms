@@ -1,0 +1,118 @@
+{
+    "sourceFile": "algorithms/backtrack/leetcode/solveSudoku.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 25,
+            "patches": [
+                {
+                    "date": 1723357424172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1723357435463,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,10 @@\n+\n+\n+namespace algorithms::backtrack::leetcode::sudoku\n+{\n+    \n+    int tilingRectangle(int n, int m)\n+    {\n+        return 0;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357445548,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+\n+\n+namespace algorithms::backtrack::leetcode::sudoku\n+{\n+\n+    /**\n+     * https://leetcode.com/problems/sudoku-solver/\n+     */\n+    int tilingRectangle(int n, int m)\n+    {\n+        return 0;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357457725,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,37 +3,18 @@\n namespace algorithms::backtrack::leetcode::sudoku\n {\n \n     /**\n-     * https://leetcode.com/problems/sudoku-solver/\n-     */\n-    int tilingRectangle(int n, int m)\n-    {\n-        return 0;\n-    }\n-}\n+     * https://leetcode.com/problems/sudoku-solver\n+     * Write a program to solve a Sudoku puzzle by filling the empty cells.\n \n+A sudoku solution must satisfy all of the following rules:\n \n-namespace algorithms::backtrack::leetcode::sudoku\n-{\n-    \n+Each of the digits 1-9 must occur exactly once in each row.\n+Each of the digits 1-9 must occur exactly once in each column.\n+Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n+     */\n     int tilingRectangle(int n, int m)\n     {\n         return 0;\n     }\n-}\n-\n-\n-namespace algorithms::backtrack::leetcode\n-{\n-    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n-    // Given a rectangle of size n x m, \n-    // return the minimum number of integer-sided squares that tile the rectangle.\n-    // hints:\n-    //  Suppose you've placed a bunch of squares. \n-    //    Where is the natural spot to place the next square?\n-    //  The maximum number of squares to be placed will be <= max(n, m)\n-    int tilingRectangle(int n, int m)\n-    {\n-        return 0;\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357463776,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,11 +5,10 @@\n \n     /**\n      * https://leetcode.com/problems/sudoku-solver\n      * Write a program to solve a Sudoku puzzle by filling the empty cells.\n+     * A sudoku solution must satisfy all of the following rules:\n \n-A sudoku solution must satisfy all of the following rules:\n-\n Each of the digits 1-9 must occur exactly once in each row.\n Each of the digits 1-9 must occur exactly once in each column.\n Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n"
+                },
+                {
+                    "date": 1723357489793,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,9 @@\n     /**\n      * https://leetcode.com/problems/sudoku-solver\n      * Write a program to solve a Sudoku puzzle by filling the empty cells.\n      * A sudoku solution must satisfy all of the following rules:\n-\n-Each of the digits 1-9 must occur exactly once in each row.\n+     * Each of the digits 1-9 must occur exactly once in each row.\n Each of the digits 1-9 must occur exactly once in each column.\n Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n     int tilingRectangle(int n, int m)\n"
+                },
+                {
+                    "date": 1723357495222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n      * https://leetcode.com/problems/sudoku-solver\n      * Write a program to solve a Sudoku puzzle by filling the empty cells.\n      * A sudoku solution must satisfy all of the following rules:\n      * Each of the digits 1-9 must occur exactly once in each row.\n-Each of the digits 1-9 must occur exactly once in each column.\n-Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n+     * Each of the digits 1-9 must occur exactly once in each column.\n+     * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n     int tilingRectangle(int n, int m)\n     {\n         return 0;\n"
+                },
+                {
+                    "date": 1723357513590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,8 @@\n      * Each of the digits 1-9 must occur exactly once in each row.\n      * Each of the digits 1-9 must occur exactly once in each column.\n      * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n-    int tilingRectangle(int n, int m)\n-    {\n-        return 0;\n+    void solveSudoku(vector<vector<char>>& board) {\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357538456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+#include <vector>\n \n-\n namespace algorithms::backtrack::leetcode::sudoku\n {\n \n     /**\n"
+                },
+                {
+                    "date": 1723357543885,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,8 @@\n      * Each of the digits 1-9 must occur exactly once in each row.\n      * Each of the digits 1-9 must occur exactly once in each column.\n      * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n-    void solveSudoku(vector<vector<char>>& board) {\n+    void solveSudoku(std::vector<vector<char>>& board) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357572520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,18 @@\n+#include <vector>\n+\n+namespace algorithms::backtrack::leetcode::sudoku\n+{\n+\n+    /**\n+     * https://leetcode.com/problems/sudoku-solver\n+     * Write a program to solve a Sudoku puzzle by filling the empty cells.\n+     * A sudoku solution must satisfy all of the following rules:\n+     * Each of the digits 1-9 must occur exactly once in each row.\n+     * Each of the digits 1-9 must occur exactly once in each column.\n+     * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n+     */\n+    enum \n+    void solveSudoku(std::vector<std::vector<char>>& board) {\n+        \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357578529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n      * Each of the digits 1-9 must occur exactly once in each row.\n      * Each of the digits 1-9 must occur exactly once in each column.\n      * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n-    enum \n+    enum Cell { }\n     void solveSudoku(std::vector<std::vector<char>>& board) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357584439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,26 +10,9 @@\n      * Each of the digits 1-9 must occur exactly once in each row.\n      * Each of the digits 1-9 must occur exactly once in each column.\n      * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n-    enum Cell { }\n+    enum Cell { One , Two, }\n     void solveSudoku(std::vector<std::vector<char>>& board) {\n         \n     }\n-}\n-#include <vector>\n-\n-namespace algorithms::backtrack::leetcode::sudoku\n-{\n-\n-    /**\n-     * https://leetcode.com/problems/sudoku-solver\n-     * Write a program to solve a Sudoku puzzle by filling the empty cells.\n-     * A sudoku solution must satisfy all of the following rules:\n-     * Each of the digits 1-9 must occur exactly once in each row.\n-     * Each of the digits 1-9 must occur exactly once in each column.\n-     * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n-     */\n-    void solveSudoku(std::vector<vector<char>>& board) {\n-        \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357591115,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n      * Each of the digits 1-9 must occur exactly once in each row.\n      * Each of the digits 1-9 must occur exactly once in each column.\n      * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n-    enum Cell { One , Two, }\n+    enum Cell { One , Two, Three, Four, }\n     void solveSudoku(std::vector<std::vector<char>>& board) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357603525,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n      * Each of the digits 1-9 must occur exactly once in each row.\n      * Each of the digits 1-9 must occur exactly once in each column.\n      * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n-    enum Cell { One , Two, Three, Four, }\n+    enum Cell { One , Two, Three, Four, Five, Six, Seven, eight}\n     void solveSudoku(std::vector<std::vector<char>>& board) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357616552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n      * Each of the digits 1-9 must occur exactly once in each row.\n      * Each of the digits 1-9 must occur exactly once in each column.\n      * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n-    enum Cell { One , Two, Three, Four, Five, Six, Seven, eight}\n+    enum Cell { Empty = 0, One , Two, Three, Four, Five, Six, Seven, Eight, Nine}\n     void solveSudoku(std::vector<std::vector<char>>& board) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357622450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n      * Each of the digits 1-9 must occur exactly once in each row.\n      * Each of the digits 1-9 must occur exactly once in each column.\n      * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n-    enum Cell { Empty = 0, One , Two, Three, Four, Five, Six, Seven, Eight, Nine}\n+    enum Cell { Empty = 0, One , Two, Three, Four, Five, Six, Seven, Eight, Nine };\n     void solveSudoku(std::vector<std::vector<char>>& board) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357629077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n      * Each of the digits 1-9 must occur exactly once in each row.\n      * Each of the digits 1-9 must occur exactly once in each column.\n      * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n-    enum Cell { Empty = 0, One , Two, Three, Four, Five, Six, Seven, Eight, Nine };\n+    enum Cell { Empty = 0, One, Two, Three, Four, Five, Six, Seven, Eight, Nine };\n     void solveSudoku(std::vector<std::vector<char>>& board) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357637383,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,8 @@\n      * Each of the digits 1-9 must occur exactly once in each column.\n      * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n     enum Cell { Empty = 0, One, Two, Three, Four, Five, Six, Seven, Eight, Nine };\n-    void solveSudoku(std::vector<std::vector<char>>& board) {\n-        \n+    void solveSudoku(std::vector<std::vector<Cell>>& board) \n+    {\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723357658358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,18 @@\n+#include <vector>\n+\n+namespace algorithms::backtrack::leetcode::sudoku\n+{\n+\n+    /**\n+     * https://leetcode.com/problems/sudoku-solver\n+     * Write a program to solve a Sudoku puzzle by filling the empty cells.\n+     * A sudoku solution must satisfy all of the following rules:\n+     * Each of the digits 1-9 must occur exactly once in each row.\n+     * Each of the digits 1-9 must occur exactly once in each column.\n+     * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n+     */\n+    enum Cell { Empty = 0, One, Two, Three, Four, Five, Six, Seven, Eight, Nine };\n+    void solveSudoku(std::vector<std::vector<Cell>>& board) \n+    {\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723359425881,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,10 @@\n \n namespace algorithms::backtrack::leetcode::sudoku\n {\n \n+using \n+\n     /**\n      * https://leetcode.com/problems/sudoku-solver\n      * Write a program to solve a Sudoku puzzle by filling the empty cells.\n      * A sudoku solution must satisfy all of the following rules:\n"
+                },
+                {
+                    "date": 1723359435782,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::backtrack::leetcode::sudoku\n {\n \n-using \n+using sudoku = std::vector<std::vector<Cell>>;\n \n     /**\n      * https://leetcode.com/problems/sudoku-solver\n      * Write a program to solve a Sudoku puzzle by filling the empty cells.\n@@ -16,23 +16,5 @@\n     enum Cell { Empty = 0, One, Two, Three, Four, Five, Six, Seven, Eight, Nine };\n     void solveSudoku(std::vector<std::vector<Cell>>& board) \n     {\n     }\n-}\n-#include <vector>\n-\n-namespace algorithms::backtrack::leetcode::sudoku\n-{\n-\n-    /**\n-     * https://leetcode.com/problems/sudoku-solver\n-     * Write a program to solve a Sudoku puzzle by filling the empty cells.\n-     * A sudoku solution must satisfy all of the following rules:\n-     * Each of the digits 1-9 must occur exactly once in each row.\n-     * Each of the digits 1-9 must occur exactly once in each column.\n-     * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n-     */\n-    enum Cell { Empty = 0, One, Two, Three, Four, Five, Six, Seven, Eight, Nine };\n-    void solveSudoku(std::vector<std::vector<Cell>>& board) \n-    {\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723359441394,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,8 @@\n      * Each of the digits 1-9 must occur exactly once in each row.\n      * Each of the digits 1-9 must occur exactly once in each column.\n      * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n-    enum Cell { Empty = 0, One, Two, Three, Four, Five, Six, Seven, Eight, Nine };\n     void solveSudoku(std::vector<std::vector<Cell>>& board) \n     {\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723359450966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace algorithms::backtrack::leetcode::sudoku\n {\n \n+enum Cell { Empty = 0, One, Two, Three, Four, Five, Six, Seven, Eight, Nine };\n using sudoku = std::vector<std::vector<Cell>>;\n \n     /**\n      * https://leetcode.com/problems/sudoku-solver\n@@ -12,8 +13,8 @@\n      * Each of the digits 1-9 must occur exactly once in each row.\n      * Each of the digits 1-9 must occur exactly once in each column.\n      * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n      */\n-    void solveSudoku(std::vector<std::vector<Cell>>& board) \n+    void solveSudoku(sudoku& board) \n     {\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723359458000,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,20 @@\n+#include <vector>\n+\n+namespace algorithms::backtrack::leetcode::sudoku\n+{\n+\n+enum Cell { Empty = 0, One, Two, Three, Four, Five, Six, Seven, Eight, Nine };\n+using sudoku = std::vector<std::vector<Cell>>;\n+\n+    /**\n+     * https://leetcode.com/problems/sudoku-solver\n+     * Write a program to solve a Sudoku puzzle by filling the empty cells.\n+     * A sudoku solution must satisfy all of the following rules:\n+     * Each of the digits 1-9 must occur exactly once in each row.\n+     * Each of the digits 1-9 must occur exactly once in each column.\n+     * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n+     */\n+    void solveSudoku(sudoku& board)\n+    {\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723359463532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,20 @@\n+#include <vector>\n+\n+namespace algorithms::backtrack::leetcode::sudoku\n+{\n+\n+enum Cell { Empty = 0, One, Two, Three, Four, Five, Six, Seven, Eight, Nine };\n+using sudoku = std::vector<std::vector<Cell>>;\n+\n+    /**\n+     * https://leetcode.com/problems/sudoku-solver\n+     * Write a program to solve a Sudoku puzzle by filling the empty cells.\n+     * A sudoku solution must satisfy all of the following rules:\n+     * Each of the digits 1-9 must occur exactly once in each row.\n+     * Each of the digits 1-9 must occur exactly once in each column.\n+     * Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.\n+     */\n+    void solveSudoku(sudoku& board)\n+    {\n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1723357424172,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::backtrack::leetcode\n{\n    // https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares\n    // Given a rectangle of size n x m, \n    // return the minimum number of integer-sided squares that tile the rectangle.\n    // hints:\n    //  Suppose you've placed a bunch of squares. \n    //    Where is the natural spot to place the next square?\n    //  The maximum number of squares to be placed will be <= max(n, m)\n    int tilingRectangle(int n, int m)\n    {\n        return 0;\n    }\n}"
+        }
+    ]
+}

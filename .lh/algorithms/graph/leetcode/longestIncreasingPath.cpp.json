@@ -1,0 +1,86 @@
+{
+    "sourceFile": "algorithms/graph/leetcode/longestIncreasingPath.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 17,
+            "patches": [
+                {
+                    "date": 1723488552883,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1723488559468,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n #include <vector>\n #include <unordered_map>\n \n-namespace algorithms::graph::leetcode::pacificAtlantic\n+namespace algorithms::graph::leetcode::lip\n {\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723488566758,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,7 @@\n #include <vector>\n #include <unordered_map>\n \n namespace algorithms::graph::leetcode::lip\n-{\n\\ No newline at end of file\n+{\n+    /** */\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723488576039,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,9 @@\n #include <unordered_map>\n \n namespace algorithms::graph::leetcode::lip\n {\n-    /** */\n+    /**\n+     * https://leetcode.com/problems/longest-increasing-path-in-a-matrix\n+     * \n+    */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723488585393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,7 +4,9 @@\n namespace algorithms::graph::leetcode::lip\n {\n     /**\n      * https://leetcode.com/problems/longest-increasing-path-in-a-matrix\n-     * \n+     * Given an m x n integers matrix, return the length of the longest increasing path in matrix.\n+\n+From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723488592403,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,7 @@\n {\n     /**\n      * https://leetcode.com/problems/longest-increasing-path-in-a-matrix\n      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.\n-\n From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723488598002,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,7 @@\n {\n     /**\n      * https://leetcode.com/problems/longest-increasing-path-in-a-matrix\n      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.\n-From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n+     * From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723488603824,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,8 @@\n {\n     /**\n      * https://leetcode.com/problems/longest-increasing-path-in-a-matrix\n      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.\n-     * From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n+     * From each cell, you can either move in four directions: left, right, up, or down. \n+     * You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723488608970,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,5 +8,6 @@\n      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.\n      * From each cell, you can either move in four directions: left, right, up, or down. \n      * You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n     */\n+   \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723488616027,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,6 +8,8 @@\n      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.\n      * From each cell, you can either move in four directions: left, right, up, or down. \n      * You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n     */\n-   \n+   int longestIncreasingPath(vector<vector<int>>& matrix) {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723488636613,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,5 @@\n #include <vector>\n-#include <unordered_map>\n \n namespace algorithms::graph::leetcode::lip\n {\n     /**\n@@ -8,8 +7,8 @@\n      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.\n      * From each cell, you can either move in four directions: left, right, up, or down. \n      * You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n     */\n-   int longestIncreasingPath(vector<vector<int>>& matrix) {\n-        \n+    int longestIncreasingPath(vector<vector<int>>& matrix) \n+    {    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723488645835,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,11 @@\n #include <vector>\n \n namespace algorithms::graph::leetcode::lip\n {\n+\n+using matrix = \n+\n     /**\n      * https://leetcode.com/problems/longest-increasing-path-in-a-matrix\n      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.\n      * From each cell, you can either move in four directions: left, right, up, or down. \n"
+                },
+                {
+                    "date": 1723488652527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::graph::leetcode::lip\n {\n \n-using matrix = \n+using matrix = std::vector<vector<int>>\n \n     /**\n      * https://leetcode.com/problems/longest-increasing-path-in-a-matrix\n      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.\n"
+                },
+                {
+                    "date": 1723488663922,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,16 +2,16 @@\n \n namespace algorithms::graph::leetcode::lip\n {\n \n-using matrix = std::vector<vector<int>>\n+using matrix = std::vector<std::vector<int>>;\n \n     /**\n      * https://leetcode.com/problems/longest-increasing-path-in-a-matrix\n      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.\n      * From each cell, you can either move in four directions: left, right, up, or down. \n      * You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n     */\n-    int longestIncreasingPath(vector<vector<int>>& matrix) \n+    int longestIncreasingPath(const matrix& matrix) \n     {    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723488670726,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.\n      * From each cell, you can either move in four directions: left, right, up, or down. \n      * You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n     */\n-    int longestIncreasingPath(const matrix& matrix) \n-    {    \n+    int longestIncreasingPath(const matrix& m) \n+    {\n+        return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723535762088,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.\n      * From each cell, you can either move in four directions: left, right, up, or down. \n      * You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n     */\n+     \n     int longestIncreasingPath(const matrix& m) \n     {\n         return 1;\n     }\n"
+                },
+                {
+                    "date": 1723535769395,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,12 @@\n      * Given an m x n integers matrix, return the length of the longest increasing path in matrix.\n      * From each cell, you can either move in four directions: left, right, up, or down. \n      * You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).\n     */\n-    int M\n+    int M;\n+    int N;\n     int longestIncreasingPath(const matrix& m) \n     {\n+        M\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723535779602,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n     int M;\n     int N;\n     int longestIncreasingPath(const matrix& m) \n     {\n-        M = m.\n+        M = m.size();\n+        N = mp[]\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1723488552883,
+            "name": "Commit-0",
+            "content": "#include <vector>\n#include <unordered_map>\n\nnamespace algorithms::graph::leetcode::pacificAtlantic\n{"
+        }
+    ]
+}

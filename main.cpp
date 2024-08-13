@@ -101,6 +101,7 @@
 #include "algorithms/graph/leetcode/canFinish.cpp"
 #include "algorithms/graph/leetcode/isBipartite.cpp"
 #include "algorithms/graph/leetcode/pacificAtlantic.cpp"
+#include "algorithms/graph/leetcode/longestIncreasingPath.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
@@ -134,15 +135,7 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
     
-    // algorithms::graph::leetcode::pacificAtlantic::heights xs = 
-    //   {{1,2,2,3,5}, {3,2,3,4,4}, {2,4,5,3,1}, {6,7,1,4,5}, {5,1,1,2,4}};
-    algorithms::graph::leetcode::pacificAtlantic::heights xs = {{1,2,3}, {8,9,4}, {7,6,5}};    
-    auto xxs = algorithms::graph::leetcode::pacificAtlantic::flowToPacificAtlantic(xs);
-
-    for(auto xs : xxs)
-    {
-        for(auto x : xs)
-          cout << x << " ";
-        cout << "\n";   
-    }
+    algorithms::graph::leetcode::lip::matrix xs = {{1}};
+    // algorithms::graph::leetcode::lip::matrix xs = {{9, 9, 4}, {6, 6, 8}, {2, 1, 1}};
+    cout << algorithms::graph::leetcode::lip::longestIncreasingPath(xs);
 }

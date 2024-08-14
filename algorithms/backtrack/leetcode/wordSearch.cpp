@@ -3,6 +3,7 @@
 
 using mx = std::vector<std::vector<char>>;
 using vis = std::vector<std::vector<bool>>;
+using dir = std::vector<std::pair<int, int>>;
 
 namespace algorithms::backtrack::leetcode::word_search
 {
@@ -16,6 +17,7 @@ namespace algorithms::backtrack::leetcode::word_search
     */
     int M;
     int N;
+    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};
     void dfs(mx& board, const std::string& word, bool& ans, int i, int j, int idx, vis& visited)
     {
         if(idx == word.size())
@@ -26,15 +28,16 @@ namespace algorithms::backtrack::leetcode::word_search
 
         if(i == M || j == N || j < 0 || i < 0) return;
         
-        if(!visited[i][j] && board[i][j] == word[idx])
+        for(auto d : dirs)
         {
-            visited[i][j] = true;
-            dfs(board, word, ans, i, j + 1, idx, visited); 
-            dfs(board, word, ans, i + 1, j, idx, visited);
-            dfs(board, word, ans, i, j - 1, idx, visited);
-            dfs(board, word, ans, i - 1, j, idx, visited);
-            visited[i][j] = false;
-
+            int y = i + d.first;
+            int x = j + d.second;
+            if(!visited[i][j] && board[i][j] == word[idx])
+            {
+                visited[i][j] = true;
+                dfs(board, word, ans, y, x, idx, visited);
+                visited[i][j] = false;
+            }
         }
     }
     bool search(mx board, std::string word) 

@@ -89,6 +89,7 @@
 #include "algorithms/backtrack/leetcode/solveNQueens.cpp"
 #include "algorithms/backtrack/leetcode/tilingRectangle.cpp"
 #include "algorithms/backtrack/leetcode/isAdditiveNumber.cpp"
+#include "algorithms/backtrack/leetcode/getMaximumGold.cpp"
 #include "algorithms/dp/leetcode/integerBreak.cpp"
 // #include "algorithms/dp/leetcode/makeSquare.cpp"
 #include "algorithms/dp/leetcode/canPartitionKSubsets.cpp"
@@ -135,7 +136,7 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
     
-    algorithms::graph::leetcode::lip::matrix xs = {{1}};
-    // algorithms::graph::leetcode::lip::matrix xs = {{9, 9, 4}, {6, 6, 8}, {2, 1, 1}};
-    cout << algorithms::graph::leetcode::lip::longestIncreasingPath(xs);
+
+    algorithms::backtrack::leetcode::maximum_gold::grid mine = {{0,6,0}, {5,8,7}, {0,9,0}};
+    cout << algorithms::backtrack::leetcode::maximum_gold::getMaximumGold(mine);
 }

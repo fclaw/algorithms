@@ -1,0 +1,142 @@
+{
+    "sourceFile": "algorithms/graph/dfs.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 31,
+            "patches": [
+                {
+                    "date": 1723716469106,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1723716474953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,7 @@\n \n \n-namespace algorithms::graph::\n\\ No newline at end of file\n+\n+namespace algorithms::graph::dfs\n+{\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716485220,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n+#include <vector>\n+#include <stack>\n \n \n-\n namespace algorithms::graph::dfs\n {\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716493959,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,7 @@\n+#include <vector>\n+#include <stack>\n+\n+namespace algorithms::graph::dfs\n+{\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716502833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,14 +2,5 @@\n #include <stack>\n \n namespace algorithms::graph::dfs\n {\n-\n-}\n-#include <vector>\n-#include <stack>\n-\n-\n-namespace algorithms::graph::dfs\n-{\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716513188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,10 @@\n #include <stack>\n \n namespace algorithms::graph::dfs\n {\n+\n+using graph = std::vector<std::vector<int>>;\n+\n+    void dfs\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716524026,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,10 @@\n {\n \n using graph = std::vector<std::vector<int>>;\n \n-    void dfs\n+    void dfs_stack(const graph& g)\n+    {\n+        \n+    }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716625558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,9 @@\n {\n \n using graph = std::vector<std::vector<int>>;\n \n-    void dfs_stack(const graph& g)\n+    void dfs_stack(int v, const graph& g)\n     {\n-        \n+\n     }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716642451,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n {\n \n using graph = std::vector<std::vector<int>>;\n \n-    void dfs_stack(int v, const graph& g)\n+    std::vector<int> dfs_stack(int v, const graph& g)\n     {\n \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716648568,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,7 @@\n using graph = std::vector<std::vector<int>>;\n \n     std::vector<int> dfs_stack(int v, const graph& g)\n     {\n-\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716658081,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,7 @@\n using graph = std::vector<std::vector<int>>;\n \n     std::vector<int> dfs_stack(int v, const graph& g)\n     {\n-        \n+        std::vector<bool> visited()\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716665106,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,8 @@\n using graph = std::vector<std::vector<int>>;\n \n     std::vector<int> dfs_stack(int v, const graph& g)\n     {\n-        std::vector<bool> visited()\n+        std::vector<bool> visited(v, false);\n+        std::sta\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716671266,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,7 +8,7 @@\n \n     std::vector<int> dfs_stack(int v, const graph& g)\n     {\n         std::vector<bool> visited(v, false);\n-        std::sta\n+        std::stack<\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716679144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,7 +8,8 @@\n \n     std::vector<int> dfs_stack(int v, const graph& g)\n     {\n         std::vector<bool> visited(v, false);\n-        std::stack<\n+        std::stack<int> s;\n+        s.\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716691752,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,7 +9,7 @@\n     std::vector<int> dfs_stack(int v, const graph& g)\n     {\n         std::vector<bool> visited(v, false);\n         std::stack<int> s;\n-        s.\n+        s.push(0)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716699175,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n {\n \n using graph = std::vector<std::vector<int>>;\n \n-    std::vector<int> dfs_stack(int v, const graph& g)\n+    std::vector<int> dfs_stack(int v, const graph& g, int )\n     {\n         std::vector<bool> visited(v, false);\n         std::stack<int> s;\n         s.push(0)\n"
+                },
+                {
+                    "date": 1723716704559,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,11 +5,11 @@\n {\n \n using graph = std::vector<std::vector<int>>;\n \n-    std::vector<int> dfs_stack(int v, const graph& g, int )\n+    std::vector<int> dfs_stack(int v, const graph& g, int start)\n     {\n         std::vector<bool> visited(v, false);\n         std::stack<int> s;\n-        s.push(0)\n+        s.push(start)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716715578,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,6 +10,7 @@\n     {\n         std::vector<bool> visited(v, false);\n         std::stack<int> s;\n         s.push(start)\n+        while(s.)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716721686,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,8 @@\n     std::vector<int> dfs_stack(int v, const graph& g, int start)\n     {\n         std::vector<bool> visited(v, false);\n         std::stack<int> s;\n-        s.push(start)\n+        s.push(start);\n         while(s.)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716726796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,7 +10,7 @@\n     {\n         std::vector<bool> visited(v, false);\n         std::stack<int> s;\n         s.push(start);\n-        while(s.)\n+        while(s.empty())\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716732043,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,7 +10,10 @@\n     {\n         std::vector<bool> visited(v, false);\n         std::stack<int> s;\n         s.push(start);\n-        while(s.empty())\n+        while(!s.empty())\n+        {\n+            s.\n+        }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716741897,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,8 @@\n         std::stack<int> s;\n         s.push(start);\n         while(!s.empty())\n         {\n-            s.\n+            s.top();\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716750367,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n         std::stack<int> s;\n         s.push(start);\n         while(!s.empty())\n         {\n-            s.top();\n+            int u = s.top();\n+            s.pop();\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716776687,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,21 @@\n+#include <vector>\n+#include <stack>\n+\n+namespace algorithms::graph::dfs\n+{\n+\n+using graph = std::vector<std::vector<int>>;\n+\n+    std::vector<int> dfs_stack(int v, const graph& g, int start)\n+    {\n+        std::vector<bool> visited(v, false);\n+        std::stack<int> s;\n+        s.push(start);\n+        while(!s.empty())\n+        {\n+            int u = s.top();\n+            s.pop();\n+            visited[]\n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716783529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,28 +14,9 @@\n         while(!s.empty())\n         {\n             int u = s.top();\n             s.pop();\n-            visited[]\n+            visited[u] = true;\n+            for()\n         }\n     }\n-}\n-#include <vector>\n-#include <stack>\n-\n-namespace algorithms::graph::dfs\n-{\n-\n-using graph = std::vector<std::vector<int>>;\n-\n-    std::vector<int> dfs_stack(int v, const graph& g, int start)\n-    {\n-        std::vector<bool> visited(v, false);\n-        std::stack<int> s;\n-        s.push(start);\n-        while(!s.empty())\n-        {\n-            int u = s.top();\n-            s.pop();\n-        }\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716789332,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n         {\n             int u = s.top();\n             s.pop();\n             visited[u] = true;\n-            for()\n+            for(auto v : g[u])\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716817192,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,7 +16,10 @@\n             int u = s.top();\n             s.pop();\n             visited[u] = true;\n             for(auto v : g[u])\n+            {\n+                s.\n+            }\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716824854,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,25 @@\n+#include <vector>\n+#include <stack>\n+\n+namespace algorithms::graph::dfs\n+{\n+\n+using graph = std::vector<std::vector<int>>;\n+\n+    std::vector<int> dfs_stack(int v, const graph& g, int start)\n+    {\n+        std::vector<bool> visited(v, false);\n+        std::stack<int> s;\n+        s.push(start);\n+        while(!s.empty())\n+        {\n+            int u = s.top();\n+            s.pop();\n+            visited[u] = true;\n+            for(auto v : g[u])\n+            {\n+                s.push(v);\n+            }\n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716863033,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,37 +14,13 @@\n         while(!s.empty())\n         {\n             int u = s.top();\n             s.pop();\n+            if()\n             visited[u] = true;\n             for(auto v : g[u])\n             {\n                 s.push(v);\n             }\n         }\n     }\n-}\n-#include <vector>\n-#include <stack>\n-\n-namespace algorithms::graph::dfs\n-{\n-\n-using graph = std::vector<std::vector<int>>;\n-\n-    std::vector<int> dfs_stack(int v, const graph& g, int start)\n-    {\n-        std::vector<bool> visited(v, false);\n-        std::stack<int> s;\n-        s.push(start);\n-        while(!s.empty())\n-        {\n-            int u = s.top();\n-            s.pop();\n-            visited[u] = true;\n-            for(auto v : g[u])\n-            {\n-                s.\n-            }\n-        }\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723716869355,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         while(!s.empty())\n         {\n             int u = s.top();\n             s.pop();\n-            if()\n+            if(!visited[u])\n             visited[u] = true;\n             for(auto v : g[u])\n             {\n                 s.push(v);\n"
+                },
+                {
+                    "date": 1723716876190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,10 @@\n         {\n             int u = s.top();\n             s.pop();\n             if(!visited[u])\n-            visited[u] = true;\n+            {\n+                visited[u] = true;\n             for(auto v : g[u])\n             {\n                 s.push(v);\n             }\n"
+                },
+                {
+                    "date": 1723716881529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,11 +17,10 @@\n             s.pop();\n             if(!visited[u])\n             {\n                 visited[u] = true;\n-            for(auto v : g[u])\n-            {\n-                s.push(v);\n+                for(auto v : g[u])\n+                  s.push(v);\n             }\n         }\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1723716469106,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::graph::"
+        }
+    ]
+}

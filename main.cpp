@@ -90,6 +90,7 @@
 #include "algorithms/backtrack/leetcode/tilingRectangle.cpp"
 #include "algorithms/backtrack/leetcode/isAdditiveNumber.cpp"
 #include "algorithms/backtrack/leetcode/getMaximumGold.cpp"
+#include "algorithms/backtrack/leetcode/uniquePaths.cpp"
 #include "algorithms/dp/leetcode/integerBreak.cpp"
 // #include "algorithms/dp/leetcode/makeSquare.cpp"
 #include "algorithms/dp/leetcode/canPartitionKSubsets.cpp"
@@ -103,6 +104,7 @@
 #include "algorithms/graph/leetcode/isBipartite.cpp"
 #include "algorithms/graph/leetcode/pacificAtlantic.cpp"
 #include "algorithms/graph/leetcode/longestIncreasingPath.cpp"
+#include "algorithms/graph/connectedComponents.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
@@ -135,8 +137,6 @@ int main()
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
-    
 
-    algorithms::backtrack::leetcode::maximum_gold::grid mine = {{0,6,0}, {5,8,7}, {0,9,0}};
-    cout << algorithms::backtrack::leetcode::maximum_gold::getMaximumGold(mine);
+    cout << algorithms::backtrack::leetcode::unique_paths::uniquePaths({{1,0,0,0}, {0,0,0,0}, {0,0,2,-1}});
 }

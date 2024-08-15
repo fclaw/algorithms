@@ -12,9 +12,7 @@ namespace algorithms::backtrack::leetcode::tiling
     // int ans = 0;
     int N;
     int M;
-    int ans;
-    bool checkBoundary(int r, int c) 
-      { return r >= 0 && r < N && c >= 0 && c < M; }  
+    int ans = 0;
     void backtrack(int r, int c, int squares)
     {
     }

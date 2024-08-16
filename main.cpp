@@ -91,6 +91,7 @@
 #include "algorithms/backtrack/leetcode/isAdditiveNumber.cpp"
 #include "algorithms/backtrack/leetcode/getMaximumGold.cpp"
 #include "algorithms/backtrack/leetcode/uniquePaths.cpp"
+#include "algorithms/backtrack/leetcode/solveSudoku.cpp"
 #include "algorithms/dp/leetcode/integerBreak.cpp"
 // #include "algorithms/dp/leetcode/makeSquare.cpp"
 #include "algorithms/dp/leetcode/canPartitionKSubsets.cpp"
@@ -131,6 +132,9 @@
 #include "algorithms/onlinejudge/dp/cuttingSticks.cpp"
 #include "algorithms/onlinejudge/graph/wetlandsOfFlorida.cpp"
 
+
+using board = algorithms::backtrack::leetcode::sudoku::board;
+
 int main()
 {
 
@@ -138,5 +142,22 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    cout << algorithms::backtrack::leetcode::unique_paths::uniquePaths({{1,0,0,0}, {0,0,0,0}, {0,0,2,-1}});
+    board xxs = 
+      {{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
+       {'6', '.', '.', '1', '9', '5', '.', '.', '.'},
+       {'.', '9', '8', '.', '.', '.', '.', '6', '.'},
+       {'8', '.', '.', '.', '6', '.', '.', '.', '3'},
+       {'4', '.', '.', '8', '.', '3', '.', '.', '1'},
+       {'7', '.', '.', '.', '2', '.', '.', '.', '6'},
+       {'.', '6', '.', '.', '.', '.', '2', '8', '.'},
+       {'.', '.', '.', '4', '1', '9', '.', '.', '5'},
+       {'.', '.', '.', '.', '8', '.', '.', '7', '9'}};
+    algorithms::backtrack::leetcode::sudoku::solveSudoku(xxs);
+
+    for(auto xs : xxs)
+    {
+        for(auto x : xs)
+          cout << x << " ";
+        cout << "\n";  
+    }
 }

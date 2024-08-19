@@ -11,6 +11,7 @@
 #include <climits>
 #include <cstdio>
 #include <bitset>
+#include <limits>
 
 
 // algorithms folder
@@ -106,6 +107,9 @@
 #include "algorithms/graph/leetcode/pacificAtlantic.cpp"
 #include "algorithms/graph/leetcode/longestIncreasingPath.cpp"
 #include "algorithms/graph/connectedComponents.cpp"
+#include "algorithms/graph/articulationPoints.cpp"
+#include "algorithms/graph/leetcode/criticalConnections.cpp"
+#include "algorithms/graph/leetcode/findCheapestPrice.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
@@ -133,7 +137,6 @@
 #include "algorithms/onlinejudge/graph/wetlandsOfFlorida.cpp"
 
 
-using board = algorithms::backtrack::leetcode::sudoku::board;
 
 int main()
 {
@@ -142,22 +145,6 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    board xxs = 
-      {{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
-       {'6', '.', '.', '1', '9', '5', '.', '.', '.'},
-       {'.', '9', '8', '.', '.', '.', '.', '6', '.'},
-       {'8', '.', '.', '.', '6', '.', '.', '.', '3'},
-       {'4', '.', '.', '8', '.', '3', '.', '.', '1'},
-       {'7', '.', '.', '.', '2', '.', '.', '.', '6'},
-       {'.', '6', '.', '.', '.', '.', '2', '8', '.'},
-       {'.', '.', '.', '4', '1', '9', '.', '.', '5'},
-       {'.', '.', '.', '.', '8', '.', '.', '7', '9'}};
-    algorithms::backtrack::leetcode::sudoku::solveSudoku(xxs);
+    cout << algorithms::graph::leetcode::cheapest_flight::findCheapestPrice(4, {{0,1,1}, {0,2,5}, {1,2,1}, {2,3,1}}, 0, 3, 1);
 
-    for(auto xs : xxs)
-    {
-        for(auto x : xs)
-          cout << x << " ";
-        cout << "\n";  
-    }
 }

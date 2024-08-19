@@ -1,0 +1,74 @@
+{
+    "sourceFile": "algorithms/graph/leetcode/criticalConnections.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 14,
+            "patches": [
+                {
+                    "date": 1723874859095,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1723874871881,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-namespace algorithms::graph::leetcode::cc\n\\ No newline at end of file\n+namespace algorithms::graph::leetcode::bridge\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723874879298,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,6 @@\n-namespace algorithms::graph::leetcode::bridge\n\\ No newline at end of file\n+\n+\n+namespace algorithms::graph::leetcode::dag_bridge\n+{\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723874898474,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+#include <vector>\n \n-\n namespace algorithms::graph::leetcode::dag_bridge\n {\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723874916774,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,7 @@\n \n namespace algorithms::graph::leetcode::dag_bridge\n {\n \n+using graph = std::vector<std::vector<int>>;\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723874923500,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,5 +4,9 @@\n {\n \n using graph = std::vector<std::vector<int>>;\n \n+    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {\n+        \n+    }\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723874932240,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n namespace algorithms::graph::leetcode::dag_bridge\n {\n \n using graph = std::vector<std::vector<int>>;\n+using edges = std::vector<std::vector<int>>;\n \n     vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {\n         \n     }\n"
+                },
+                {
+                    "date": 1723874940543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n \n using graph = std::vector<std::vector<int>>;\n using edges = std::vector<std::vector<int>>;\n \n-    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {\n+    edges criticalConnections(int n, vector<vector<int>>& connections) {\n         \n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723874946408,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n \n using graph = std::vector<std::vector<int>>;\n using edges = std::vector<std::vector<int>>;\n \n-    edges criticalConnections(int n, vector<vector<int>>& connections) {\n+    edges criticalConnections(int n, graph& connections) {\n         \n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723874952507,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n \n using graph = std::vector<std::vector<int>>;\n using edges = std::vector<std::vector<int>>;\n \n-    edges criticalConnections(int n, graph& connections) {\n-        \n+    edges criticalConnections(int n, const graph& connections) \n+    {\n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723874964878,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,10 @@\n \n using graph = std::vector<std::vector<int>>;\n using edges = std::vector<std::vector<int>>;\n \n+    // https://leetcode.com/problems/critical-connections-in-a-network\n     edges criticalConnections(int n, const graph& connections) \n     {\n+        return {};\n     }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723874970605,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,10 @@\n \n using graph = std::vector<std::vector<int>>;\n using edges = std::vector<std::vector<int>>;\n \n-    // https://leetcode.com/problems/critical-connections-in-a-network\n+    /** https://leetcode.com/problems/critical-connections-in-a-network\n+\n     edges criticalConnections(int n, const graph& connections) \n     {\n         return {};\n     }\n"
+                },
+                {
+                    "date": 1723874976521,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,11 @@\n using graph = std::vector<std::vector<int>>;\n using edges = std::vector<std::vector<int>>;\n \n     /** https://leetcode.com/problems/critical-connections-in-a-network\n+     * \n+     * \n+     */\n \n     edges criticalConnections(int n, const graph& connections) \n     {\n         return {};\n"
+                },
+                {
+                    "date": 1723875013778,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,14 @@\n using edges = std::vector<std::vector<int>>;\n \n     /** \n      * https://leetcode.com/problems/critical-connections-in-a-network\n+     * There are n servers numbered from 0 to n - 1 connected by undirected server-to-server connections forming a network where connections[i] = [ai, bi] represents a connection between servers ai and bi. Any server can reach other servers directly or indirectly through the network.\n+\n+A critical connection is a connection that, if removed, will make some servers unable to reach some other server.\n+\n+Return all critical connections in the network in any order.\n      * \n-     * \n      */\n     edges criticalConnections(int n, const graph& connections) \n     {\n         return {};\n"
+                },
+                {
+                    "date": 1723875026877,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,10 @@\n     /** \n      * https://leetcode.com/problems/critical-connections-in-a-network\n      * \n      * There are n servers numbered from 0 to n - 1 connected by undirected server-to-server connections \n-     * forming a network where connections[i] = [ai, bi] represents a connection between servers ai and bi. Any server can reach other servers directly or indirectly through the network.\n+     * forming a network where connections[i] = [ai, bi] represents a connection between servers ai and bi. \n+     * Any server can reach other servers directly or indirectly through the network.\n A critical connection is a connection that, if removed, will make some servers unable to reach some other server.\n \n Return all critical connections in the network in any order.\n      * \n"
+                }
+            ],
+            "date": 1723874859095,
+            "name": "Commit-0",
+            "content": "namespace algorithms::graph::leetcode::cc"
+        }
+    ]
+}

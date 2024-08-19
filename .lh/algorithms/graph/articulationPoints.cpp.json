@@ -1,0 +1,78 @@
+{
+    "sourceFile": "algorithms/graph/articulationPoints.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 15,
+            "patches": [
+                {
+                    "date": 1723971649494,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1723971656636,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,1 @@\n-namespace algorithms::graph::\n\\ No newline at end of file\n+namespace algorithms::graph::articulation_points\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723971662651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,6 @@\n-namespace algorithms::graph::articulation_points\n\\ No newline at end of file\n+\n+\n+namespace algorithms::graph::articulation_points\n+{\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723971748135,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,9 @@\n \n \n namespace algorithms::graph::articulation_points\n {\n-\n+    /**\n+     * \n+     * \n+     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723971753503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,31 @@\n+\n+\n+namespace algorithms::graph::articulation_points\n+{\n+    /**\n+     * Let's say there is a node 𝑉 in some graph 𝐺\n+ that can be reached by a node 𝑈\n+ through some intermediate nodes (maybe non intermediate nodes) following some DFS traversal, if 𝑉\n+ can also be reached by 𝐴\n+ = \"ancestor of 𝑈\n+\" without passing through 𝑈\n+ then, 𝑈\n+ is NOT an articulation point because it means that if we remove 𝑈\n+ from 𝐺\n+ we can still reach 𝑉\n+ from 𝐴\n+, hence, the number of connected components will remain the same.\n+\n+So, we can conclude that the only 2 conditions for 𝑈\n+ to be an articulation point are:\n+\n+If all paths from 𝐴\n+ to 𝑉\n+ require 𝑈\n+ to be in the graph.\n+\n+If 𝑈\n+ is the root of the DFS traversal with at least 2 children subgraphs disconnected from each other.\n+     * \n+     */\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723971758930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,9 @@\n \n namespace algorithms::graph::articulation_points\n {\n     /**\n-     * Let's say there is a node 𝑉 in some graph 𝐺\n- that can be reached by a node 𝑈\n+     * Let's say there is a node 𝑉 in some graph 𝐺 that can be reached by a node 𝑈\n  through some intermediate nodes (maybe non intermediate nodes) following some DFS traversal, if 𝑉\n  can also be reached by 𝐴\n  = \"ancestor of 𝑈\n \" without passing through 𝑈\n"
+                },
+                {
+                    "date": 1723971767423,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,10 @@\n namespace algorithms::graph::articulation_points\n {\n     /**\n      * Let's say there is a node 𝑉 in some graph 𝐺 that can be reached by a node 𝑈\n- through some intermediate nodes (maybe non intermediate nodes) following some DFS traversal, if 𝑉\n+     * through some intermediate nodes (maybe non intermediate nodes) following some DFS traversal, \n+     * if 𝑉\n  can also be reached by 𝐴\n  = \"ancestor of 𝑈\n \" without passing through 𝑈\n  then, 𝑈\n@@ -26,14 +27,5 @@\n If 𝑈\n  is the root of the DFS traversal with at least 2 children subgraphs disconnected from each other.\n      * \n      */\n-}\n-\n-\n-namespace algorithms::graph::articulation_points\n-{\n-    /**\n-     * \n-     * \n-     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1723971774390,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,11 +4,9 @@\n {\n     /**\n      * Let's say there is a node 𝑉 in some graph 𝐺 that can be reached by a node 𝑈\n      * through some intermediate nodes (maybe non intermediate nodes) following some DFS traversal, \n-     * if 𝑉\n- can also be reached by 𝐴\n- = \"ancestor of 𝑈\n+     * if 𝑉 can also be reached by 𝐴 = \"ancestor of 𝑈\n \" without passing through 𝑈\n  then, 𝑈\n  is NOT an articulation point because it means that if we remove 𝑈\n  from 𝐺\n"
+                },
+                {
+                    "date": 1723971781857,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,11 +4,9 @@\n {\n     /**\n      * Let's say there is a node 𝑉 in some graph 𝐺 that can be reached by a node 𝑈\n      * through some intermediate nodes (maybe non intermediate nodes) following some DFS traversal, \n-     * if 𝑉 can also be reached by 𝐴 = \"ancestor of 𝑈\n-\" without passing through 𝑈\n- then, 𝑈\n+     * if 𝑉 can also be reached by 𝐴 = \"ancestor of 𝑈 \" without passing through 𝑈 then, 𝑈\n  is NOT an articulation point because it means that if we remove 𝑈\n  from 𝐺\n  we can still reach 𝑉\n  from 𝐴\n"
+                },
+                {
+                    "date": 1723971788697,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,9 @@\n     /**\n      * Let's say there is a node 𝑉 in some graph 𝐺 that can be reached by a node 𝑈\n      * through some intermediate nodes (maybe non intermediate nodes) following some DFS traversal, \n      * if 𝑉 can also be reached by 𝐴 = \"ancestor of 𝑈 \" without passing through 𝑈 then, 𝑈\n- is NOT an articulation point because it means that if we remove 𝑈\n- from 𝐺\n+ is NOT an articulation point because it means that if we remove 𝑈 from 𝐺\n  we can still reach 𝑉\n  from 𝐴\n , hence, the number of connected components will remain the same.\n \n"
+                },
+                {
+                    "date": 1723971795581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,10 @@\n     /**\n      * Let's say there is a node 𝑉 in some graph 𝐺 that can be reached by a node 𝑈\n      * through some intermediate nodes (maybe non intermediate nodes) following some DFS traversal, \n      * if 𝑉 can also be reached by 𝐴 = \"ancestor of 𝑈 \" without passing through 𝑈 then, 𝑈\n- is NOT an articulation point because it means that if we remove 𝑈 from 𝐺\n- we can still reach 𝑉\n+     * is NOT an articulation point because it means that if we remove 𝑈 from 𝐺\n+     * we can still reach 𝑉\n  from 𝐴\n , hence, the number of connected components will remain the same.\n \n So, we can conclude that the only 2 conditions for 𝑈\n"
+                },
+                {
+                    "date": 1723971801993,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,11 +6,9 @@\n      * Let's say there is a node 𝑉 in some graph 𝐺 that can be reached by a node 𝑈\n      * through some intermediate nodes (maybe non intermediate nodes) following some DFS traversal, \n      * if 𝑉 can also be reached by 𝐴 = \"ancestor of 𝑈 \" without passing through 𝑈 then, 𝑈\n      * is NOT an articulation point because it means that if we remove 𝑈 from 𝐺\n-     * we can still reach 𝑉\n- from 𝐴\n-, hence, the number of connected components will remain the same.\n+     * we can still reach 𝑉 from , hence, the number of connected components will remain the same.\n \n So, we can conclude that the only 2 conditions for 𝑈\n  to be an articulation point are:\n \n"
+                },
+                {
+                    "date": 1723971808870,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,11 +6,10 @@\n      * Let's say there is a node 𝑉 in some graph 𝐺 that can be reached by a node 𝑈\n      * through some intermediate nodes (maybe non intermediate nodes) following some DFS traversal, \n      * if 𝑉 can also be reached by 𝐴 = \"ancestor of 𝑈 \" without passing through 𝑈 then, 𝑈\n      * is NOT an articulation point because it means that if we remove 𝑈 from 𝐺\n-     * we can still reach 𝑉 from , hence, the number of connected components will remain the same.\n-\n-So, we can conclude that the only 2 conditions for 𝑈\n+     * we can still reach 𝑉 from A, hence, the number of connected components will remain the same.\n+     * So, we can conclude that the only 2 conditions for 𝑈\n  to be an articulation point are:\n \n If all paths from 𝐴\n  to 𝑉\n"
+                },
+                {
+                    "date": 1723971818431,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,12 +7,10 @@\n      * through some intermediate nodes (maybe non intermediate nodes) following some DFS traversal, \n      * if 𝑉 can also be reached by 𝐴 = \"ancestor of 𝑈 \" without passing through 𝑈 then, 𝑈\n      * is NOT an articulation point because it means that if we remove 𝑈 from 𝐺\n      * we can still reach 𝑉 from A, hence, the number of connected components will remain the same.\n-     * So, we can conclude that the only 2 conditions for 𝑈\n- to be an articulation point are:\n-\n-If all paths from 𝐴\n+     * So, we can conclude that the only 2 conditions for 𝑈 to be an articulation point are:\n+     *   1 - If all paths from 𝐴\n  to 𝑉\n  require 𝑈\n  to be in the graph.\n \n"
+                },
+                {
+                    "date": 1723971825527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,10 +8,9 @@\n      * if 𝑉 can also be reached by 𝐴 = \"ancestor of 𝑈 \" without passing through 𝑈 then, 𝑈\n      * is NOT an articulation point because it means that if we remove 𝑈 from 𝐺\n      * we can still reach 𝑉 from A, hence, the number of connected components will remain the same.\n      * So, we can conclude that the only 2 conditions for 𝑈 to be an articulation point are:\n-     * 1 - If all paths from 𝐴 to 𝑉\n- require 𝑈\n+     * 1 - If all paths from 𝐴 to 𝑉 require 𝑈\n  to be in the graph.\n \n If 𝑈\n  is the root of the DFS traversal with at least 2 children subgraphs disconnected from each other.\n"
+                },
+                {
+                    "date": 1723973352381,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,21 @@\n+\n+\n+namespace algorithms::graph::articulation_point\n+{\n+\n+using \n+\n+    /**\n+     * https://codeforces.com/blog/entry/71146\n+     * Let's say there is a node 𝑉 in some graph 𝐺 that can be reached by a node 𝑈\n+     * through some intermediate nodes (maybe non intermediate nodes) following some DFS traversal, \n+     * if 𝑉 can also be reached by 𝐴 = \"ancestor of 𝑈 \" without passing through 𝑈 then, 𝑈\n+     * is NOT an articulation point because it means that if we remove 𝑈 from 𝐺\n+     * we can still reach 𝑉 from A, hence, the number of connected components will remain the same.\n+     * So, we can conclude that the only 2 conditions for 𝑈 to be an articulation point are:\n+     * 1 - If all paths from 𝐴 to 𝑉 require 𝑈 to be in the graph.\n+     * 2 - If 𝑈 is the root of the DFS traversal with at least 2 children subgraphs disconnected from each other.\n+     */\n+\n+    ap = low = disc = vector<int>(adj.size());\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1723971649494,
+            "name": "Commit-0",
+            "content": "namespace algorithms::graph::"
+        }
+    ]
+}

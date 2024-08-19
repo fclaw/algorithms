@@ -29,16 +29,14 @@ using cells = std::vector<std::tuple<int, int, int>>;
     clues rows(MAX_NUMBER, 0);
     clues cols(MAX_NUMBER, 0);
     clues square(MAX_NUMBER, 0);
-    int getSquare(int r, int c) { return SQUARE_SIZE * (r / SQUARE_SIZE) + c / SQUARE_SIZE; }
-    bool finished = false;
-    void backtrack(const board& sudoku, cells& xs, int pos)
+    int getSquare(int r, int c) 
+      { return SQUARE_SIZE * (r / SQUARE_SIZE) + c / SQUARE_SIZE; }
+    bool backtrack(const board& sudoku, cells& xs, int pos)
     {
         if(pos == xs.size())
-        {
-            finished = true;
-            return;
-        }
+          return true;
 
+        bool res = false;
         for(int k = 1; k <= MAX_NUMBER; k++)
         {
             int r, c;
@@ -52,8 +50,8 @@ using cells = std::vector<std::tuple<int, int, int>>;
             rows[r] |= (1 << k);
             cols[c] |= (1 << k);
             square[getSquare(r, c)] |= (1 << k);
-            backtrack(sudoku, xs, pos + 1);
-            if(!finished)
+            res |= backtrack(sudoku, xs, pos + 1);
+            if(!res)
             {
                 rows[r] &= ~(1 << k);
                 cols[c] &= ~(1 << k);
@@ -61,6 +59,7 @@ using cells = std::vector<std::tuple<int, int, int>>;
                 xs[pos] = {r, c, -1};
             }
         }
+        return res;
     }
     void solveSudoku(board& sudoku)
     {
@@ -78,7 +77,7 @@ using cells = std::vector<std::tuple<int, int, int>>;
              else xs.push_back({r, c, -1});
           }
 
-        backtrack(sudoku, xs, 0);
+        auto _ = backtrack(sudoku, xs, 0);
         for(auto x : xs)
         {
             int r, c;

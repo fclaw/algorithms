@@ -110,6 +110,7 @@
 #include "algorithms/graph/articulationPoints.cpp"
 #include "algorithms/graph/leetcode/criticalConnections.cpp"
 #include "algorithms/graph/leetcode/findCheapestPrice.cpp"
+#include "algorithms/graph/leetcode/networkDelayTime.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
@@ -145,6 +146,5 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    cout << algorithms::graph::leetcode::cheapest_flight::findCheapestPrice(4, {{0,1,1}, {0,2,5}, {1,2,1}, {2,3,1}}, 0, 3, 1);
-
+    cout << algorithms::graph::leetcode::network_delay_time::networkDelayTime({{2,1,1}, {2,3,1}, {3,4,1}}, 4, 2);
 }

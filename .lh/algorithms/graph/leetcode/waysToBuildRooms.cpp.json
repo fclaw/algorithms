@@ -1,0 +1,54 @@
+{
+    "sourceFile": "algorithms/graph/leetcode/waysToBuildRooms.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1724133739437,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1724133747766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,4 @@\n-namespace algorithms::graph::leetcode::ways\n\\ No newline at end of file\n+namespace algorithms::graph::leetcode::ant\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724133771012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n namespace algorithms::graph::leetcode::ant\n {\n-    \n+    int waysToBuildRooms(vector<int>& prevRoom) {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724133776217,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n namespace algorithms::graph::leetcode::ant\n {\n-    int waysToBuildRooms(vector<int>& prevRoom) {\n+    int waysToBuildRooms(std::vector<int>& prevRoom) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724133785743,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n+\n+\n namespace algorithms::graph::leetcode::ant\n {\n-    int waysToBuildRooms(std::vector<int>& prevRoom) {\n+    int waysToBuildRooms(const std::vector<int>& prevRoom) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724133793634,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+#include <vec\n \n-\n namespace algorithms::graph::leetcode::ant\n {\n     int waysToBuildRooms(const std::vector<int>& prevRoom) {\n         \n"
+                },
+                {
+                    "date": 1724133800727,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n-#include <vec\n+#include <vector>\n \n namespace algorithms::graph::leetcode::ant\n {\n-    int waysToBuildRooms(const std::vector<int>& prevRoom) {\n-        \n+    int waysToBuildRooms(const std::vector<int>& prevRoom) \n+    {\n+        return 1;    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724133811309,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n #include <vector>\n \n namespace algorithms::graph::leetcode::ant\n {\n+    /** */\n     int waysToBuildRooms(const std::vector<int>& prevRoom) \n     {\n         return 1;    \n     }\n"
+                },
+                {
+                    "date": 1724133816404,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n namespace algorithms::graph::leetcode::ant\n {\n     /** \n      * https://leetcode.com/problems/count-ways-to-build-rooms-in-an-ant-colony\n+     * \n     */\n     int waysToBuildRooms(const std::vector<int>& prevRoom) \n     {\n         return 1;    \n"
+                },
+                {
+                    "date": 1724133829176,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,10 @@\n namespace algorithms::graph::leetcode::ant\n {\n     /** \n      * https://leetcode.com/problems/count-ways-to-build-rooms-in-an-ant-colony\n-     * You are an ant tasked with adding n new rooms numbered 0 to n-1 to your colony. You are given the expansion plan as a 0-indexed integer array of length n, prevRoom, where prevRoom[i] indicates that you must build room prevRoom[i] before building room i, and these two rooms must be connected directly. Room 0 is already built, so prevRoom[0] = -1. The expansion plan is given such that once all the rooms are built, every room will be reachable from room 0.\n+     * You are an ant tasked with adding n new rooms numbered 0 to n-1 to your colony. \n+     * You are given the expansion plan as a 0-indexed integer array of length n, prevRoom, where prevRoom[i] indicates that you must build room prevRoom[i] before building room i, and these two rooms must be connected directly. Room 0 is already built, so prevRoom[0] = -1. The expansion plan is given such that once all the rooms are built, every room will be reachable from room 0.\n \n You can only build one room at a time, and you can travel freely between rooms you have already built only if they are connected. You can choose to build any room as long as its previous room is already built.\n \n Return the number of different orders you can build all the rooms in. Since the answer may be large, return it modulo 109 + 7.\n"
+                }
+            ],
+            "date": 1724133739437,
+            "name": "Commit-0",
+            "content": "namespace algorithms::graph::leetcode::ways"
+        }
+    ]
+}

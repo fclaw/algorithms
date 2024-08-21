@@ -1,0 +1,42 @@
+{
+    "sourceFile": "algorithms/graph/vjudge/callingCircles.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1724251373515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1724251380763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,5 @@\n \n namespace name\n {\n     \n-} // namespace name\n+}\n"
+                },
+                {
+                    "date": 1724251388327,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n-namespace name\n+namespace namespace algorithms::graph::\n {\n-    \n+\n }\n"
+                },
+                {
+                    "date": 1724251394145,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n-namespace namespace algorithms::graph::\n+namespace namespace algorithms::graph::vjudge::\n {\n \n }\n"
+                },
+                {
+                    "date": 1724251405721,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n-namespace namespace algorithms::graph::vjudge::\n+namespace namespace algorithms::graph::vjudge::UVA-247\n {\n \n }\n"
+                },
+                {
+                    "date": 1724251414937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n-namespace namespace algorithms::graph::vjudge::uva_247\n+namespace algorithms::graph::vjudge::uva_247\n {\n \n }\n"
+                },
+                {
+                    "date": 1724251424741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace algorithms::graph::vjudge::uva_247\n {\n-    \n+        \n }\n"
+                }
+            ],
+            "date": 1724251373515,
+            "name": "Commit-0",
+            "content": "\n\nnamespace name\n{\n    \n} // namespace name\n"
+        }
+    ]
+}

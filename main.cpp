@@ -82,6 +82,7 @@
 #include "algorithms/dp/leetcode/combinationSum4.cpp"
 #include "algorithms/backtrack/leetcode/combine.cpp"
 #include "algorithms/backtrack/leetcode/permute.cpp"
+#include "algorithms/backtrack/leetcode/palindrome.cpp"
 #include "algorithms/backtrack/leetcode/combinationSum3.cpp"
 #include "algorithms/backtrack/leetcode/wordSearch.cpp"
 #include "algorithms/backtrack/leetcode/findSubsequences.cpp"
@@ -108,9 +109,11 @@
 #include "algorithms/graph/leetcode/longestIncreasingPath.cpp"
 #include "algorithms/graph/connectedComponents.cpp"
 #include "algorithms/graph/articulationPoints.cpp"
+#include "algorithms/graph/sf_dijkstra.cpp"
 #include "algorithms/graph/leetcode/criticalConnections.cpp"
 #include "algorithms/graph/leetcode/findCheapestPrice.cpp"
 #include "algorithms/graph/leetcode/networkDelayTime.cpp"
+#include "algorithms/graph/scc.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
@@ -134,6 +137,7 @@
 #include "algorithms/onlinejudge/dp/chestOfDrawers.cpp"
 #include "algorithms/onlinejudge/dp/luggage.cpp"
 #include "algorithms/onlinejudge/graph/dominator.cpp"
+#include "algorithms/onlinejudge/graph/callingCircles.cpp"
 #include "algorithms/onlinejudge/dp/cuttingSticks.cpp"
 #include "algorithms/onlinejudge/graph/wetlandsOfFlorida.cpp"
 
@@ -146,5 +150,6 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    cout << algorithms::graph::leetcode::network_delay_time::networkDelayTime({{2,1,1}, {2,3,1}, {3,4,1}}, 4, 2);
+    algorithms::onlinejudge::graph::uva_247::submit();
+
 }

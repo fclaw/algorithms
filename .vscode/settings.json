@@ -57,7 +57,8 @@
         "iomanip": "cpp",
         "climits": "cpp",
         "source_location": "cpp",
-        "strstream": "cpp"
+        "strstream": "cpp",
+        "iterator": "cpp"
     },
     "cSpell.words": [
         "centimetre",
@@ -70,6 +71,7 @@
         "Loowater",
         "modpow",
         "onlinejudge",
+        "vjudge",
         "warshall"
     ]
 }

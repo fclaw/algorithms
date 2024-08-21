@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 19,
+            "activePatchIndex": 21,
             "patches": [
                 {
                     "date": 1716403736238,
@@ -84,6 +84,14 @@
                 {
                     "date": 1722837182106,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,8 +62,9 @@\n     \"cSpell.words\": [\n         \"centimetre\",\n         \"centimetres\",\n         \"codeforces\",\n+        \"engravement\",\n         \"Kadane's\",\n         \"leetcode\",\n         \"linkedlist\",\n         \"Loowater\",\n"
+                },
+                {
+                    "date": 1724251421686,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,76 @@\n+{\n+    \"files.associations\": {\n+        \"iostream\": \"cpp\",\n+        \"ostream\": \"cpp\",\n+        \"bitset\": \"cpp\",\n+        \"vector\": \"cpp\",\n+        \"optional\": \"cpp\",\n+        \"__bit_reference\": \"cpp\",\n+        \"__config\": \"cpp\",\n+        \"__locale\": \"cpp\",\n+        \"__split_buffer\": \"cpp\",\n+        \"__threading_support\": \"cpp\",\n+        \"__verbose_abort\": \"cpp\",\n+        \"array\": \"cpp\",\n+        \"cctype\": \"cpp\",\n+        \"clocale\": \"cpp\",\n+        \"cmath\": \"cpp\",\n+        \"complex\": \"cpp\",\n+        \"cstdarg\": \"cpp\",\n+        \"cstddef\": \"cpp\",\n+        \"cstdint\": \"cpp\",\n+        \"cstdio\": \"cpp\",\n+        \"cstdlib\": \"cpp\",\n+        \"cstring\": \"cpp\",\n+        \"ctime\": \"cpp\",\n+        \"cwchar\": \"cpp\",\n+        \"cwctype\": \"cpp\",\n+        \"execution\": \"cpp\",\n+        \"initializer_list\": \"cpp\",\n+        \"ios\": \"cpp\",\n+        \"iosfwd\": \"cpp\",\n+        \"istream\": \"cpp\",\n+        \"limits\": \"cpp\",\n+        \"locale\": \"cpp\",\n+        \"mutex\": \"cpp\",\n+        \"new\": \"cpp\",\n+        \"ratio\": \"cpp\",\n+        \"sstream\": \"cpp\",\n+        \"stdexcept\": \"cpp\",\n+        \"streambuf\": \"cpp\",\n+        \"string\": \"cpp\",\n+        \"string_view\": \"cpp\",\n+        \"tuple\": \"cpp\",\n+        \"typeinfo\": \"cpp\",\n+        \"variant\": \"cpp\",\n+        \"algorithm\": \"cpp\",\n+        \"unordered_map\": \"cpp\",\n+        \"__hash_table\": \"cpp\",\n+        \"__node_handle\": \"cpp\",\n+        \"__tree\": \"cpp\",\n+        \"set\": \"cpp\",\n+        \"stack\": \"cpp\",\n+        \"deque\": \"cpp\",\n+        \"queue\": \"cpp\",\n+        \"list\": \"cpp\",\n+        \"unordered_set\": \"cpp\",\n+        \"iomanip\": \"cpp\",\n+        \"climits\": \"cpp\",\n+        \"source_location\": \"cpp\",\n+        \"strstream\": \"cpp\"\n+    },\n+    \"cSpell.words\": [\n+        \"centimetre\",\n+        \"centimetres\",\n+        \"codeforces\",\n+        \"engravement\",\n+        \"Kadane's\",\n+        \"leetcode\",\n+        \"linkedlist\",\n+        \"Loowater\",\n+        \"modpow\",\n+        \"onlinejudge\",\n+        \"vjudge\",\n+        \"warshall\"\n+    ]\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724252899411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,10 @@\n         \"unordered_set\": \"cpp\",\n         \"iomanip\": \"cpp\",\n         \"climits\": \"cpp\",\n         \"source_location\": \"cpp\",\n-        \"strstream\": \"cpp\"\n+        \"strstream\": \"cpp\",\n+        \"iterator\": \"cpp\"\n     },\n     \"cSpell.words\": [\n         \"centimetre\",\n         \"centimetres\",\n"
                 }
             ],
             "date": 1716403736238,

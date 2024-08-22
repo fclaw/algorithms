@@ -1,0 +1,50 @@
+{
+    "sourceFile": "algorithms/onlinejudge/graph/comeGo.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1724261149326,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1724261158080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n \n \n-namespace algorithms::onlinejudge::graph::uva_\n\\ No newline at end of file\n+namespace algorithms::onlinejudge::graph::uva_11838\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724261168198,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,8 @@\n \n \n-namespace algorithms::onlinejudge::graph::uva_11838\n\\ No newline at end of file\n+namespace algorithms::onlinejudge::graph::uva_11838\n+{\n+    /**\n+     * https://onlinejudge.org/external/118/11838.pdf\n+     */\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724261175331,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,8 @@\n \n namespace algorithms::onlinejudge::graph::uva_11838\n {\n     /**\n-     * https://onlinejudge.org/external/118/11838.pdf\n+     *  https://onlinejudge.org/external/118/11838.pdf\n+     *  \n      */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724261201017,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,15 @@\n namespace algorithms::onlinejudge::graph::uva_11838\n {\n     /**\n      *  https://onlinejudge.org/external/118/11838.pdf\n-     *  \n+     *  The input contains several test cases. The first line of a test case contains two integers N and M,\n+separated by a space, indicating the number of intersections (2 ≤ N ≤ 2000) and number of streets\n+(2 ≤ M ≤ N(N − 1)/2). The next M lines describe the city street system, with each line describing\n+one street. A street description consists of three integers V , W and P, separated by a blank space,\n+where V and W are distinct identifiers for intersections (1 ≤ V , W ≤ N, V ̸= W ) and P can be 1 or\n+2; if P = 1 the street is one-way, and traffic goes from V to W; if P = 2 then the street is two-way and\n+links V and W. A pair of intersections is connected by at most one street.\n+The last test case is followed by a line that contains only two zero numbers separated by a blank\n+space.\n      */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724261207230,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n {\n     /**\n      *  https://onlinejudge.org/external/118/11838.pdf\n      *  The input contains several test cases. The first line of a test case contains two integers N and M,\n-separated by a space, indicating the number of intersections (2 ≤ N ≤ 2000) and number of streets\n-(2 ≤ M ≤ N(N − 1)/2). The next M lines describe the city street system, with each line describing\n+     * separated by a space, indicating the number of intersections (2 ≤ N ≤ 2000) and number of streets\n+     * (2 ≤ M ≤ N(N − 1)/2). The next M lines describe the city street system, with each line describing\n one street. A street description consists of three integers V , W and P, separated by a blank space,\n where V and W are distinct identifiers for intersections (1 ≤ V , W ≤ N, V ̸= W ) and P can be 1 or\n 2; if P = 1 the street is one-way, and traffic goes from V to W; if P = 2 then the street is two-way and\n links V and W. A pair of intersections is connected by at most one street.\n"
+                },
+                {
+                    "date": 1724261213313,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,11 +6,11 @@\n      *  https://onlinejudge.org/external/118/11838.pdf\n      *  The input contains several test cases. The first line of a test case contains two integers N and M,\n      * separated by a space, indicating the number of intersections (2 ≤ N ≤ 2000) and number of streets\n      * (2 ≤ M ≤ N(N − 1)/2). The next M lines describe the city street system, with each line describing\n-one street. A street description consists of three integers V , W and P, separated by a blank space,\n-where V and W are distinct identifiers for intersections (1 ≤ V , W ≤ N, V ̸= W ) and P can be 1 or\n-2; if P = 1 the street is one-way, and traffic goes from V to W; if P = 2 then the street is two-way and\n+     * one street. A street description consists of three integers V , W and P, separated by a blank space,\n+     * where V and W are distinct identifiers for intersections (1 ≤ V , W ≤ N, V ̸= W ) and P can be 1 or\n+     * 2; if P = 1 the street is one-way, and traffic goes from V to W; if P = 2 then the street is two-way and\n links V and W. A pair of intersections is connected by at most one street.\n The last test case is followed by a line that contains only two zero numbers separated by a blank\n space.\n      */\n"
+                },
+                {
+                    "date": 1724261218786,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,7 @@\n      * one street. A street description consists of three integers V , W and P, separated by a blank space,\n      * where V and W are distinct identifiers for intersections (1 ≤ V , W ≤ N, V ̸= W ) and P can be 1 or\n      * 2; if P = 1 the street is one-way, and traffic goes from V to W; if P = 2 then the street is two-way and\n      * links V and W. A pair of intersections is connected by at most one street.\n-     * The last test case is followed by a line that contains only two zero numbers separated by a blank\n-space.\n+     * The last test case is followed by a line that contains only two zero numbers separated by a blank space.\n      */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724305190195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n+#include <cst\n \n \n-\n namespace algorithms::onlinejudge::graph::uva_11838\n {\n     /**\n      *  https://onlinejudge.org/external/118/11838.pdf\n"
+                }
+            ],
+            "date": 1724261149326,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::onlinejudge::graph::uva_"
+        }
+    ]
+}

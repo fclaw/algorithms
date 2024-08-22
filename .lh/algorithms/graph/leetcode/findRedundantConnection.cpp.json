@@ -1,0 +1,30 @@
+{
+    "sourceFile": "algorithms/graph/leetcode/findRedundantConnection.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1724317350985,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1724317364964,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,4 @@\n \n \n+\n+namespace algorithms::graph::leetcode\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724317370358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,8 @@\n \n \n namespace algorithms::graph::leetcode\n {\n-    /** */\n+    /**\n+     * \n+     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724317498716,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,10 @@\n+\n+\n+\n+namespace algorithms::graph::leetcode\n+{\n+    /**\n+     *  https://leetcode.com/problems/redundant-connection\n+     * seems \n+     */\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1724317350985,
+            "name": "Commit-0",
+            "content": "\n\n"
+        }
+    ]
+}

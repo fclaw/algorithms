@@ -113,6 +113,7 @@
 #include "algorithms/graph/leetcode/criticalConnections.cpp"
 #include "algorithms/graph/leetcode/findCheapestPrice.cpp"
 #include "algorithms/graph/leetcode/networkDelayTime.cpp"
+#include "algorithms/graph/leetcode/findRedundantConnection.cpp"
 #include "algorithms/graph/scc.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
@@ -140,7 +141,7 @@
 #include "algorithms/onlinejudge/graph/callingCircles.cpp"
 #include "algorithms/onlinejudge/dp/cuttingSticks.cpp"
 #include "algorithms/onlinejudge/graph/wetlandsOfFlorida.cpp"
-
+#include "algorithms/onlinejudge/graph/comeGo.cpp"
 
 
 int main()
@@ -150,6 +151,12 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    algorithms::onlinejudge::graph::uva_247::submit();
+    // output = [["a","a","a"],["a","aa"],["aa","a"],["aaa"]]
 
+    // algorithms::graph::leetcode::redundant_connection::edges g = {{1,4}, {3,4}, {1,3}, {1,2}, {4,5}};
+     algorithms::graph::leetcode::redundant_connection::edges g = {{1,2}, {2,3}, {1,5}, {3,4}, {1,4}};
+    auto ans = algorithms::graph::leetcode::redundant_connection::findRedundantConnection(g);
+
+    for(auto x : ans)
+      cout << x << " ";
 }

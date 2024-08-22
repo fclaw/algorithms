@@ -6,7 +6,7 @@ namespace algorithms::backtrack::leetcode::palindrome
 {
 
 using palindromes = std::vector<std::vector<std::string>>;
-using st = std::vector<std::string>;
+using vc = std::vector<char>;
 
     // https://leetcode.com/problems/palindrome-partitioning
     /* 
@@ -14,55 +14,34 @@ using st = std::vector<std::string>;
        every substring of the partition is a palindrome
        Return all possible palindrome partitioning of s
     */
-    int S;
     const std::string empty_s = "";
+    int S;
     palindromes ans;
-    bool isPalindrome(std::string s) 
+    bool isPalindrome(std::string s)
     {
-        std::string r = s;
-        std::reverse(r.begin(), r.end());
-        return r == s;
+        bool res = true;
+        int n = s.length();
+        for (int i = 0; i < n / 2; i++)
+          if (s[i] != s[n - i - 1])
+          {
+             res = false;
+             break;
+          }
+        return res;
     }
-    void dfs(std::string s, int idx, st& storage)
+    void dfs(const vc& xs, int idx, std::vector<std::string>& st)
     {
-        if(idx == S)
-        {
-            auto tmp = storage;
-            ans.push_back(tmp);
-            return;
-        }
-
-        for(int i = idx; i < S; i++)
-        {
-            auto prev = storage.back();
-            if(isPalindrome(prev + s[i]))
-            {
-                storage.pop_back();
-                prev.push_back(s[i]);
-                storage.push_back(prev);
-            } else storage.push_back(s.substr(i, 1));
-            dfs(s, i + 1, storage);
-          
-            if(!storage.empty())
-            {
-                auto tmp = storage.back();
-                storage.pop_back();
-                if(tmp.size() > 1)
-                {
-                    auto n = std::string(1, tmp.back());
-                    tmp.pop_back();
-                    storage.push_back(tmp);
-                    storage.push_back(n);
-                } else break;
-            }
-        }
     }
 
     palindromes partition(std::string s) 
     {
-        S = s.size();
-        st storage(1, empty_s);
-        dfs(s, 0, storage);
+        vc xs;
+        for(auto c : s)
+          xs.push_back(c);
+        S = xs.size();  
+        std::vector<std::string> st;
+        st.push_back(empty_s);
+        dfs(xs, 0, st);
         return ans;
     }    
 }

@@ -1,0 +1,154 @@
+{
+    "sourceFile": "algorithms/backtrack/leetcode/generateParentheses.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 34,
+            "patches": [
+                {
+                    "date": 1724429671060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1724429736357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,9 @@\n     void backtrack(int n, std::string tmp) \n     {\n         if(n == N)\n         {\n+            \n             ans.push_back(tmp);\n             return;\n         }\n         for(int i = n; i < N; i++)\n"
+                },
+                {
+                    "date": 1724429743446,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n     void backtrack(int n, std::string tmp) \n     {\n         if(n == N)\n         {\n-            \n+            cout << \"\"\n             ans.push_back(tmp);\n             return;\n         }\n         for(int i = n; i < N; i++)\n"
+                },
+                {
+                    "date": 1724429764384,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n     void backtrack(int n, std::string tmp) \n     {\n         if(n == N)\n         {\n-            cout << \"\"\n+            cout << tmp << \"\\n\";\n             ans.push_back(tmp);\n             return;\n         }\n         for(int i = n; i < N; i++)\n@@ -35,9 +35,9 @@\n         }\n     }\n     parenthesis generateParentheses(int n) \n     {\n-        N = 2 * n;\n+        N = n;\n         parenthesis ans;\n         backtrack(0, {});\n         return ans;\n     }\n"
+                },
+                {
+                    "date": 1724429791250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n         }\n     }\n     parenthesis generateParentheses(int n) \n     {\n-        N = n;\n+        N = 2 * n;\n         parenthesis ans;\n         backtrack(0, {});\n         return ans;\n     }\n"
+                },
+                {
+                    "date": 1724429799174,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n             return;\n         }\n         for(int i = n; i < N; i++)\n         {\n-            tmp.push_back(l_unit + r_unit);\n+            tmp.push_back(l_unitr_unit);\n             backtrack(i + 1, tmp);\n             tmp.pop_back();\n         }\n     }\n"
+                },
+                {
+                    "date": 1724429808471,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,10 @@\n             return;\n         }\n         for(int i = n; i < N; i++)\n         {\n-            tmp.push_back(l_unitr_unit);\n+            tmp.push_back(l_unit)\n+            tmp.push_back(r_unit);\n             backtrack(i + 1, tmp);\n             tmp.pop_back();\n         }\n     }\n"
+                },
+                {
+                    "date": 1724429818464,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,10 @@\n             return;\n         }\n         for(int i = n; i < N; i++)\n         {\n-            tmp.push_back(l_unit)\n+            \n+            tmp.push_back(l_unit);\n             tmp.push_back(r_unit);\n             backtrack(i + 1, tmp);\n             tmp.pop_back();\n         }\n"
+                },
+                {
+                    "date": 1724429826600,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,10 +28,10 @@\n             return;\n         }\n         for(int i = n; i < N; i++)\n         {\n-            \n-            tmp.push_back(l_unit);\n+            auto r = tmp;\n+            r.push_back(l_unit);\n             tmp.push_back(r_unit);\n             backtrack(i + 1, tmp);\n             tmp.pop_back();\n         }\n"
+                },
+                {
+                    "date": 1724429832924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,10 +30,10 @@\n         for(int i = n; i < N; i++)\n         {\n             auto r = tmp;\n             r.push_back(l_unit);\n-            tmp.push_back(r_unit);\n-            backtrack(i + 1, tmp);\n+            r.push_back(r_unit);\n+            backtrack(i + 1, r);\n             tmp.pop_back();\n         }\n     }\n     parenthesis generateParentheses(int n) \n"
+                },
+                {
+                    "date": 1724429839004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n             auto r = tmp;\n             r.push_back(l_unit);\n             r.push_back(r_unit);\n             backtrack(i + 1, r);\n-            tmp.pop_back();\n+            r.pop_back();\n         }\n     }\n     parenthesis generateParentheses(int n) \n     {\n"
+                },
+                {
+                    "date": 1724429860892,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n         }\n     }\n     parenthesis generateParentheses(int n) \n     {\n-        N = 2 * n;\n+        N = n;\n         parenthesis ans;\n         backtrack(0, {});\n         return ans;\n     }\n"
+                },
+                {
+                    "date": 1724429880146,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,8 +28,9 @@\n             return;\n         }\n         for(int i = n; i < N; i++)\n         {\n+            \n             auto r = tmp;\n             r.push_back(l_unit);\n             r.push_back(r_unit);\n             backtrack(i + 1, r);\n"
+                },
+                {
+                    "date": 1724429886084,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,46 @@\n+#include <vector>\n+#include <string>\n+\n+namespace algorithms::backtrack::leetcode::gp\n+{\n+\n+using parenthesis = std::vector<std::string>;\n+\n+    /** \n+     * https://leetcode.com/problems/generate-parentheses\n+     * Given n pairs of parentheses, write a function \n+     * to generate all combinations of well-formed parentheses\n+     * Given N pairs of parentheses, find all solutions.\n+     * There are 2N characters we have to fill. For each character, we have two choices \"(\" or \")\".\n+     * The total number of nodes = 2^(2N) = 4^N Copy operation = O(2N) = O(N) => O(N * 4^N)\n+     * Again, we don't technically copy all combinations, just the valid ones, but we are certain it will never be worse than this \n+     * */\n+    int N;\n+    const char l_unit = '(';\n+    const char r_unit = ')';\n+    parenthesis ans;\n+    void backtrack(int n, std::string tmp) \n+    {\n+        if(n == N)\n+        {\n+            cout << tmp << \"\\n\";\n+            ans.push_back(tmp);\n+            return;\n+        }\n+        for(int i = n; i < N; i++)\n+        {\n+            auto r = tmp;\n+            r.push_back(l_unit);\n+            r.push_back(r_unit);\n+            backtrack(i + 1, r);\n+            r.pop_back();\n+        }\n+    }\n+    parenthesis generateParentheses(int n) \n+    {\n+        N = n;\n+        parenthesis ans;\n+        backtrack(0, {});\n+        return ans;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724429900688,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,55 +33,9 @@\n             r.push_back(l_unit);\n             r.push_back(r_unit);\n             backtrack(i + 1, r);\n             r.pop_back();\n-        }\n-    }\n-    parenthesis generateParentheses(int n) \n-    {\n-        N = n;\n-        parenthesis ans;\n-        backtrack(0, {});\n-        return ans;\n-    }\n-}\n-#include <vector>\n-#include <string>\n-\n-namespace algorithms::backtrack::leetcode::gp\n-{\n-\n-using parenthesis = std::vector<std::string>;\n-\n-    /** \n-     * https://leetcode.com/problems/generate-parentheses\n-     * Given n pairs of parentheses, write a function \n-     * to generate all combinations of well-formed parentheses\n-     * Given N pairs of parentheses, find all solutions.\n-     * There are 2N characters we have to fill. For each character, we have two choices \"(\" or \")\".\n-     * The total number of nodes = 2^(2N) = 4^N Copy operation = O(2N) = O(N) => O(N * 4^N)\n-     * Again, we don't technically copy all combinations, just the valid ones, but we are certain it will never be worse than this \n-     * */\n-    int N;\n-    const char l_unit = '(';\n-    const char r_unit = ')';\n-    parenthesis ans;\n-    void backtrack(int n, std::string tmp) \n-    {\n-        if(n == N)\n-        {\n-            cout << tmp << \"\\n\";\n-            ans.push_back(tmp);\n-            return;\n-        }\n-        for(int i = n; i < N; i++)\n-        {\n-            \n-            auto r = tmp;\n-            r.push_back(l_unit);\n-            r.push_back(r_unit);\n             backtrack(i + 1, r);\n-            r.pop_back();\n         }\n     }\n     parenthesis generateParentheses(int n) \n     {\n"
+                },
+                {
+                    "date": 1724429911130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,9 @@\n             r.push_back(l_unit);\n             r.push_back(r_unit);\n             backtrack(i + 1, r);\n             r.pop_back();\n+            auto t = \n             backtrack(i + 1, r);\n         }\n     }\n     parenthesis generateParentheses(int n) \n"
+                },
+                {
+                    "date": 1724429937809,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n             r.push_back(l_unit);\n             r.push_back(r_unit);\n             backtrack(i + 1, r);\n             r.pop_back();\n-            auto t = \n+            r.pop_back();\n             backtrack(i + 1, r);\n         }\n     }\n     parenthesis generateParentheses(int n) \n"
+                },
+                {
+                    "date": 1724429950083,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,8 @@\n             r.push_back(l_unit);\n             r.push_back(r_unit);\n             backtrack(i + 1, r);\n             r.pop_back();\n-            r.pop_back();\n             backtrack(i + 1, r);\n         }\n     }\n     parenthesis generateParentheses(int n) \n"
+                },
+                {
+                    "date": 1724429962257,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,8 @@\n         for(int i = n; i < N; i++)\n         {\n             auto r = tmp;\n             r.push_back(l_unit);\n-            r.push_back(r_unit);\n             backtrack(i + 1, r);\n             r.pop_back();\n             backtrack(i + 1, r);\n         }\n"
+                },
+                {
+                    "date": 1724429967679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,9 @@\n         {\n             auto r = tmp;\n             r.push_back(l_unit);\n             backtrack(i + 1, r);\n+            r.push_back(r_unit);\n             r.pop_back();\n             backtrack(i + 1, r);\n         }\n     }\n"
+                },
+                {
+                    "date": 1724429973476,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,8 +34,9 @@\n             backtrack(i + 1, r);\n             r.push_back(r_unit);\n             r.pop_back();\n             backtrack(i + 1, r);\n+            r.pop_back();\n         }\n     }\n     parenthesis generateParentheses(int n) \n     {\n"
+                },
+                {
+                    "date": 1724429988249,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,8 @@\n             auto r = tmp;\n             r.push_back(l_unit);\n             backtrack(i + 1, r);\n             r.push_back(r_unit);\n-            r.pop_back();\n             backtrack(i + 1, r);\n             r.pop_back();\n         }\n     }\n"
+                },
+                {
+                    "date": 1724430008358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,8 @@\n             r.push_back(l_unit);\n             backtrack(i + 1, r);\n             r.push_back(r_unit);\n             backtrack(i + 1, r);\n-            r.pop_back();\n         }\n     }\n     parenthesis generateParentheses(int n) \n     {\n"
+                },
+                {
+                    "date": 1724430037902,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,8 +32,9 @@\n             auto r = tmp;\n             r.push_back(l_unit);\n             backtrack(i + 1, r);\n             r.push_back(r_unit);\n+            \n             backtrack(i + 1, r);\n         }\n     }\n     parenthesis generateParentheses(int n) \n"
+                },
+                {
+                    "date": 1724430053207,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n             auto r = tmp;\n             r.push_back(l_unit);\n             backtrack(i + 1, r);\n             r.push_back(r_unit);\n-            \n+            r.pop_back();\n             backtrack(i + 1, r);\n         }\n     }\n     parenthesis generateParentheses(int n) \n"
+                },
+                {
+                    "date": 1724430074193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,9 @@\n             r.push_back(l_unit);\n             backtrack(i + 1, r);\n             r.push_back(r_unit);\n             r.pop_back();\n+                r.pop_back();\n             backtrack(i + 1, r);\n         }\n     }\n     parenthesis generateParentheses(int n) \n"
+                },
+                {
+                    "date": 1724430089461,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,10 +32,8 @@\n             auto r = tmp;\n             r.push_back(l_unit);\n             backtrack(i + 1, r);\n             r.push_back(r_unit);\n-            r.pop_back();\n-                r.pop_back();\n             backtrack(i + 1, r);\n         }\n     }\n     parenthesis generateParentheses(int n) \n"
+                },
+                {
+                    "date": 1724430101616,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,8 @@\n         {\n             auto r = tmp;\n             r.push_back(l_unit);\n             backtrack(i + 1, r);\n-            r.push_back(r_unit);\n             backtrack(i + 1, r);\n         }\n     }\n     parenthesis generateParentheses(int n) \n"
+                },
+                {
+                    "date": 1724430123624,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,10 @@\n         {\n             auto r = tmp;\n             r.push_back(l_unit);\n             backtrack(i + 1, r);\n+            auto t = r;\n+            r.push_back(r_unit);\n             backtrack(i + 1, r);\n         }\n     }\n     parenthesis generateParentheses(int n) \n"
+                },
+                {
+                    "date": 1724430129247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,10 +32,10 @@\n             auto r = tmp;\n             r.push_back(l_unit);\n             backtrack(i + 1, r);\n             auto t = r;\n-            r.push_back(r_unit);\n-            backtrack(i + 1, r);\n+            t.push_back(r_unit);\n+            backtrack(i + 1, t);\n         }\n     }\n     parenthesis generateParentheses(int n) \n     {\n"
+                },
+                {
+                    "date": 1724431707617,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,23 +20,9 @@\n     const char r_unit = ')';\n     parenthesis ans;\n     void backtrack(int n, std::string tmp) \n     {\n-        if(n == N)\n-        {\n-            cout << tmp << \"\\n\";\n-            ans.push_back(tmp);\n-            return;\n-        }\n-        for(int i = n; i < N; i++)\n-        {\n-            auto r = tmp;\n-            r.push_back(l_unit);\n-            backtrack(i + 1, r);\n-            auto t = r;\n-            t.push_back(r_unit);\n-            backtrack(i + 1, t);\n-        }\n+        \n     }\n     parenthesis generateParentheses(int n) \n     {\n         N = n;\n"
+                },
+                {
+                    "date": 1724431723185,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n     int N;\n     const char l_unit = '(';\n     const char r_unit = ')';\n     parenthesis ans;\n-    void backtrack(int n, std::string tmp) \n+    void backtrack(int n, std::string s) \n     {\n         \n     }\n     parenthesis generateParentheses(int n) \n"
+                },
+                {
+                    "date": 1724431728374,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n     const char r_unit = ')';\n     parenthesis ans;\n     void backtrack(int n, std::string s) \n     {\n-        \n+        a\n     }\n     parenthesis generateParentheses(int n) \n     {\n         N = n;\n"
+                },
+                {
+                    "date": 1724431734086,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,10 @@\n     const char r_unit = ')';\n     parenthesis ans;\n     void backtrack(int n, std::string s) \n     {\n-        auto \n+        auto ls = s;\n+        \n     }\n     parenthesis generateParentheses(int n) \n     {\n         N = n;\n"
+                },
+                {
+                    "date": 1724431746139,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,10 @@\n     parenthesis ans;\n     void backtrack(int n, std::string s) \n     {\n         auto ls = s;\n-        ls.push_back(l)\n+        ls.push_back(l_unit);\n+        \n     }\n     parenthesis generateParentheses(int n) \n     {\n         N = n;\n"
+                }
+            ],
+            "date": 1724429671060,
+            "name": "Commit-0",
+            "content": "#include <vector>\n#include <string>\n\nnamespace algorithms::backtrack::leetcode::gp\n{\n\nusing parenthesis = std::vector<std::string>;\n\n    /** \n     * https://leetcode.com/problems/generate-parentheses\n     * Given n pairs of parentheses, write a function \n     * to generate all combinations of well-formed parentheses\n     * Given N pairs of parentheses, find all solutions.\n     * There are 2N characters we have to fill. For each character, we have two choices \"(\" or \")\".\n     * The total number of nodes = 2^(2N) = 4^N Copy operation = O(2N) = O(N) => O(N * 4^N)\n     * Again, we don't technically copy all combinations, just the valid ones, but we are certain it will never be worse than this \n     * */\n    int N;\n    const char l_unit = '(';\n    const char r_unit = ')';\n    parenthesis ans;\n    void backtrack(int n, std::string tmp) \n    {\n        if(n == N)\n        {\n            ans.push_back(tmp);\n            return;\n        }\n        for(int i = n; i < N; i++)\n        {\n            tmp.push_back(l_unit + r_unit);\n            backtrack(i + 1, tmp);\n            tmp.pop_back();\n        }\n    }\n    parenthesis generateParentheses(int n) \n    {\n        N = 2 * n;\n        parenthesis ans;\n        backtrack(0, {});\n        return ans;\n    }\n}"
+        }
+    ]
+}

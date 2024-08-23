@@ -1,0 +1,66 @@
+{
+    "sourceFile": "algorithms/graph/kruskal.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 12,
+            "patches": [
+                {
+                    "date": 1724412800409,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1724412814839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,8 @@\n \n \n \n+namespace algorithms::graph::kruskal\n+{\n+    \n+}\n \n"
+                },
+                {
+                    "date": 1724412824245,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,7 @@\n \n \n namespace algorithms::graph::kruskal\n {\n-    \n+        \n }\n \n"
+                },
+                {
+                    "date": 1724412835832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,10 @@\n+\n+\n+\n+namespace algorithms::graph::kruskal\n+{\n+\n+using graph = std::vector<std::vector<int>>;\n+\n+}\n+\n"
+                },
+                {
+                    "date": 1724412842049,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,18 +1,10 @@\n+#include <ve\n \n \n-\n namespace algorithms::graph::kruskal\n {\n \n using graph = std::vector<std::vector<int>>;\n \n }\n \n-\n-\n-\n-namespace algorithms::graph::kruskal\n-{\n-        \n-}\n-\n"
+                },
+                {
+                    "date": 1724412861840,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,9 @@\n-#include <ve\n+#include <vector>\n \n-\n namespace algorithms::graph::kruskal\n {\n \n-using graph = std::vector<std::vector<int>>;\n+using graph = std::vector<std::>;\n \n }\n \n"
+                },
+                {
+                    "date": 1724412872306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,8 @@\n \n namespace algorithms::graph::kruskal\n {\n \n-using graph = std::vector<std::>;\n+using graph = std::vector<std::tuple<int, int, int>>;\n \n }\n \n"
+                },
+                {
+                    "date": 1724412877689,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,6 +4,11 @@\n {\n \n using graph = std::vector<std::tuple<int, int, int>>;\n \n+   \n+\n+   \n+\n+\n }\n \n"
+                },
+                {
+                    "date": 1724412946050,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,9 @@\n \n using graph = std::vector<std::tuple<int, int, int>>;\n \n    \n+   int \n \n-   \n \n-\n }\n \n"
+                },
+                {
+                    "date": 1724412952790,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n \n using graph = std::vector<std::tuple<int, int, int>>;\n \n    \n-   int \n+   int kruskal\n \n \n }\n \n"
+                },
+                {
+                    "date": 1724412957965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n \n using graph = std::vector<std::tuple<int, int, int>>;\n \n    \n-   int kruskal\n+   int kruskal_spanning_tree\n \n \n }\n \n"
+                },
+                {
+                    "date": 1724412964950,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n \n using graph = std::vector<std::tuple<int, int, int>>;\n \n    \n-   int kruskal_spanning_tree(const graph )\n+   int kruskal_spanning_tree(const graph)\n \n \n }\n \n"
+                },
+                {
+                    "date": 1724413066367,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,10 @@\n \n using graph = std::vector<std::tuple<int, int, int>>;\n \n    /**\n-    * The initial spanning tree only contains the nodes of the graph and does not contain any edges. Then the algorithm goes through the edges ordered by their weights, and always adds an edge to the tree if it does not create a cycle.\n+    * The initial spanning tree only contains the nodes of the graph and does not contain any edges. \n+    * Then the algorithm goes through the edges ordered by their weights, and always adds an edge to the tree if it does not create a cycle.\n The algorithm maintains the components of the tree. Initially, each node of the graph belongs to a separate component. Always when an edge is added to the tree, two components are joined. Finally, all nodes belong to the same component, and a minimum spanning tree has been found\n     */\n    int kruskal_spanning_tree(int v, const graph& edges)\n    {\n"
+                }
+            ],
+            "date": 1724412800409,
+            "name": "Commit-0",
+            "content": "\n\n\n\n"
+        }
+    ]
+}

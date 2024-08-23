@@ -1,0 +1,46 @@
+{
+    "sourceFile": "algorithms/dp/codeforces/redGreen.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1724346114247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1724346124807,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,16 +5,9 @@\n \n namespace algorithms::dp::codeforces\n {\n     /**\n-     * there is a ribbon, its length is n. it is to be cut in a way that fulfils the following two conditions:\n-     * 1 - After the cutting each ribbon piece should have length a, b or c.\n-     * 2 - After the cutting the number of ribbon pieces should be maximum.\n-     * determine the number of ribbon pieces after the required cutting.\n-     * The first line contains four space-separated integers n, a, b and c (1 ≤ n, a, b, c ≤ 4000) — t\n-     * he length of the original ribbon and \n-     * the acceptable lengths of the ribbon pieces after the cutting, correspondingly. \n-     * The numbers a, b and c can coincide.\n+     * https://codeforces.com/problemset/problem/478/D\n      */\n     const size_t MAX = 4000;\n     int size;\n     int ribbon;\n"
+                },
+                {
+                    "date": 1724346132458,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,5 @@\n     std::bitset<MAX> pieces;\n     void dfs(const std::vector<int>& cuts, int i, int p, std::bitset<MAX>& m)\n     {\n     }\n-\n-    void submit_189_a()\n-    {\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724346149307,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,12 +7,6 @@\n {\n     /**\n      * https://codeforces.com/problemset/problem/478/D\n      */\n-    const size_t MAX = 4000;\n-    int size;\n-    int ribbon;\n-    std::bitset<MAX> pieces;\n-    void dfs(const std::vector<int>& cuts, int i, int p, std::bitset<MAX>& m)\n-    {\n-    }\n+    int \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724346156505,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,6 +7,6 @@\n {\n     /**\n      * https://codeforces.com/problemset/problem/478/D\n      */\n-    int \n+    int built()\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724346164137,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,6 +7,6 @@\n {\n     /**\n      * https://codeforces.com/problemset/problem/478/D\n      */\n-    int built()\n+    int built(int r, )\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724346170211,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,6 +7,7 @@\n {\n     /**\n      * https://codeforces.com/problemset/problem/478/D\n      */\n-    int built(int red, )\n+    int built(int red, int green)\n+    \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724412629129,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,15 @@\n+#include <vector>\n+#include <cstdio>\n+#include <iostream>\n+#include <bitset>\n+\n+namespace algorithms::dp::codeforces\n+{\n+    /**\n+     * https://codeforces.com/problemset/problem/478/D\n+     */\n+    int built(int red, int green)\n+    {\n+        return 1;\n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1724346114247,
+            "name": "Commit-0",
+            "content": "#include <vector>\n#include <cstdio>\n#include <iostream>\n#include <bitset>\n\nnamespace algorithms::dp::codeforces\n{\n    /**\n     * there is a ribbon, its length is n. it is to be cut in a way that fulfils the following two conditions:\n     * 1 - After the cutting each ribbon piece should have length a, b or c.\n     * 2 - After the cutting the number of ribbon pieces should be maximum.\n     * determine the number of ribbon pieces after the required cutting.\n     * The first line contains four space-separated integers n, a, b and c (1 ≤ n, a, b, c ≤ 4000) — t\n     * he length of the original ribbon and \n     * the acceptable lengths of the ribbon pieces after the cutting, correspondingly. \n     * The numbers a, b and c can coincide.\n     */\n    const size_t MAX = 4000;\n    int size;\n    int ribbon;\n    std::bitset<MAX> pieces;\n    void dfs(const std::vector<int>& cuts, int i, int p, std::bitset<MAX>& m)\n    {\n    }\n\n    void submit_189_a()\n    {\n    }\n}"
+        }
+    ]
+}

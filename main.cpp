@@ -86,6 +86,7 @@
 #include "algorithms/backtrack/leetcode/combinationSum3.cpp"
 #include "algorithms/backtrack/leetcode/wordSearch.cpp"
 #include "algorithms/backtrack/leetcode/findSubsequences.cpp"
+#include "algorithms/backtrack/leetcode/generateParentheses.cpp"
 #include "algorithms/backtrack/uv/cd.cpp"
 #include "algorithms/backtrack/uv/marcus.cpp"
 #include "algorithms/backtrack/leetcode/solveNQueens.cpp"
@@ -115,6 +116,7 @@
 #include "algorithms/graph/leetcode/networkDelayTime.cpp"
 #include "algorithms/graph/leetcode/findRedundantConnection.cpp"
 #include "algorithms/graph/scc.cpp"
+#include "algorithms/graph/kruskal.cpp"
 // codeforces
 #include "algorithms/codeforces/erasingZeroes.cpp"
 #include "algorithms/codeforces/goodPrefixes.cpp"
@@ -130,7 +132,6 @@
 #include "algorithms/codeforces/boyOrGirl.cpp"
 #include "algorithms/codeforces/legs.cpp"
 #include "algorithms/codeforces/youngExplorers.cpp"
-#include "algorithms/dp/codeforces/ribbon.cpp"
 // online judge
 #include "algorithms/onlinejudge/dp/wedding.cpp"
 #include "algorithms/onlinejudge/dp/sdi.cpp"
@@ -152,11 +153,8 @@ int main()
     std::cout << "--- ... ---\n";
 
     // output = [["a","a","a"],["a","aa"],["aa","a"],["aaa"]]
-
-    // algorithms::graph::leetcode::redundant_connection::edges g = {{1,4}, {3,4}, {1,3}, {1,2}, {4,5}};
-     algorithms::graph::leetcode::redundant_connection::edges g = {{1,2}, {2,3}, {1,5}, {3,4}, {1,4}};
-    auto ans = algorithms::graph::leetcode::redundant_connection::findRedundantConnection(g);
-
-    for(auto x : ans)
-      cout << x << " ";
+    auto xs = algorithms::backtrack::leetcode::gp::generateParentheses(2);
+    for(auto x : xs)
+      cout << x << "\n";
+  
 }

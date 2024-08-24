@@ -87,6 +87,7 @@
 #include "algorithms/backtrack/leetcode/wordSearch.cpp"
 #include "algorithms/backtrack/leetcode/findSubsequences.cpp"
 #include "algorithms/backtrack/leetcode/generateParentheses.cpp"
+#include "algorithms/backtrack/leetcode/restoreIpAddresses.cpp"
 #include "algorithms/backtrack/uv/cd.cpp"
 #include "algorithms/backtrack/uv/marcus.cpp"
 #include "algorithms/backtrack/leetcode/solveNQueens.cpp"
@@ -153,7 +154,7 @@ int main()
     std::cout << "--- ... ---\n";
 
     // output = [["a","a","a"],["a","aa"],["aa","a"],["aaa"]]
-    auto xxs = algorithms::backtrack::leetcode::palindrome::partition("efe");
+    auto xxs = algorithms::backtrack::leetcode::palindrome::partition("babbbaaabb");
     for(auto xs : xxs)
     {
         for(auto x : xs)

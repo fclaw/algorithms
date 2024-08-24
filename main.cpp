@@ -153,8 +153,12 @@ int main()
     std::cout << "--- ... ---\n";
 
     // output = [["a","a","a"],["a","aa"],["aa","a"],["aaa"]]
-    auto xs = algorithms::backtrack::leetcode::gp::generateParentheses(2);
-    for(auto x : xs)
-      cout << x << "\n";
+    auto xxs = algorithms::backtrack::leetcode::palindrome::partition("efe");
+    for(auto xs : xxs)
+    {
+        for(auto x : xs)
+         cout << x << " ";
+        cout << "\n"; 
+    }
   
 }

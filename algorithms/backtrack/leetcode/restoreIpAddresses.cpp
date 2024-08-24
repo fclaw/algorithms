@@ -4,6 +4,9 @@
 
 namespace algorithms::backtrack::leetcode::ip
 {
+
+using ips = std::vector<std::string>;
+
     /**
      *  https://leetcode.com/problems/restore-ip-addresses
      *  A valid IP address consists of exactly four integers separated by single dots. 
@@ -15,7 +18,7 @@ namespace algorithms::backtrack::leetcode::ip
      *  You are not allowed to reorder or remove any digits in s. 
      *  You may return the valid IP addresses in any order.
      */
-     std::vector<std::string> restoreIpAddresses(std::string s) 
+     ips restoreIpAddresses(std::string s)
      {
           return {};
      }

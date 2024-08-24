@@ -14,6 +14,12 @@ namespace algorithms::backtrack::leetcode::word_search
       The word can be constructed from letters of sequentially adjacent cells, 
       where adjacent cells are horizontally or vertically neighboring. 
       The same letter cell may not be used more than once.
+      on time complexity:
+        Given a word of length L, we need to find if they exist in the board.
+        For each letter, we are expanding into 4 recursion calls (creating 4 branches), until it finds all letters.
+        So one round of DFS() = O(4 ^ L)
+        In the worst case, we may run DFS() for all cells (for inputs like board = [[A...A], [A...A], ... , [A...A]], word = "A...A")
+        => O(M * N * (4 ^ L))
     */
     int M;
     int N;

@@ -19,10 +19,11 @@ using parenthesis = std::vector<std::string>;
     int N;
     const char l_unit = '(';
     const char r_unit = ')';
-    bool isValid(std::string s)
+    bool isValid(const std::string& s)
     {
         std::stack<char> st;
-        for(int i =0; i < s.length(); i++)
+        bool res = true;
+        for(int i = 0; i < s.length(); i++)
         {
             if(s[i] == l_unit)
                 st.push(s[i]);
@@ -31,12 +32,14 @@ using parenthesis = std::vector<std::string>;
                 if(st.empty() || 
                    st.top() != l_unit || 
                    s[i] != r_unit)
-                    return false;
-                else
-                    st.pop();
+                   {
+                      res = false;
+                      break;
+                   }
+                else st.pop();
             }
         }
-        return st.empty();
+        return st.empty() && res;
     }    
     void backtrack(int n, std::string s, parenthesis& ans) 
     {
@@ -45,7 +48,7 @@ using parenthesis = std::vector<std::string>;
             if(isValid(s))
               ans.push_back(s);
             return;
-        } 
+        }
 
         auto ls = s;
         ls.push_back(l_unit);

@@ -6,7 +6,8 @@ namespace algorithms::backtrack::leetcode::palindrome
 {
 
 using palindromes = std::vector<std::vector<std::string>>;
-using vc = std::vector<char>;
+using st = std::vector<std::string>;
+
 
     // https://leetcode.com/problems/palindrome-partitioning
     /* 
@@ -14,34 +15,45 @@ using vc = std::vector<char>;
        every substring of the partition is a palindrome
        Return all possible palindrome partitioning of s
     */
-    const std::string empty_s = "";
-    int S;
     palindromes ans;
-    bool isPalindrome(std::string s)
+    bool isPalindrome(const std::string& s) 
     {
-        bool res = true;
-        int n = s.length();
-        for (int i = 0; i < n / 2; i++)
-          if (s[i] != s[n - i - 1])
-          {
-             res = false;
-             break;
-          }
-        return res;
+        int l = 0;
+        int r = s.size() - 1;
+        while (l < r)
+          if (s[l++] != s[r--])
+            return false;
+        return true;
     }
-    void dfs(const vc& xs, int idx, std::vector<std::string>& st)
+    void backtrack(const std::string& s, int idx, st xs, palindromes& ans)
     {
-    }
+        if(idx == s.size())
+        {
+            bool res = true;
+            for(auto x : xs)
+              res &= isPalindrome(x);
+            if(res) ans.push_back(xs);
+            return;
+        }
 
+        auto ys = xs;
+        ys.push_back(s.substr(idx, 1));
+        backtrack(s, idx + 1, ys, ans);
+        if(!ys.empty())
+        {
+            ys.pop_back();
+            if(ys.size() >= 1)
+            {
+                auto p = ys.back();
+                ys[ys.size() - 1] = p + s.substr(idx, 1);
+                backtrack(s, idx + 1, ys, ans);
+            }
+        }
+    }
     palindromes partition(std::string s) 
     {
-        vc xs;
-        for(auto c : s)
-          xs.push_back(c);
-        S = xs.size();  
-        std::vector<std::string> st;
-        st.push_back(empty_s);
-        dfs(xs, 0, st);
+        palindromes ans;
+        backtrack(s, 0, {}, ans);
         return ans;
     }    
 }

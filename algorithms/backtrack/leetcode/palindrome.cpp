@@ -25,7 +25,7 @@ using st = std::vector<std::string>;
             return false;
         return true;
     }
-    void backtrack(const std::string& s, int idx, st xs, palindromes& ans)
+    void backtrack(const std::string& s, int idx, st& xs, palindromes& ans)
     {
         if(idx == s.size())
         {
@@ -35,25 +35,24 @@ using st = std::vector<std::string>;
             if(res) ans.push_back(xs);
             return;
         }
-
-        auto ys = xs;
-        ys.push_back(s.substr(idx, 1));
-        backtrack(s, idx + 1, ys, ans);
-        if(!ys.empty())
+        xs.push_back(s.substr(idx, 1));
+        backtrack(s, idx + 1, xs, ans);
+        if(!xs.empty())
         {
-            ys.pop_back();
-            if(ys.size() >= 1)
+            xs.pop_back();
+            if(xs.size() >= 1)
             {
-                auto p = ys.back();
-                ys[ys.size() - 1] = p + s.substr(idx, 1);
-                backtrack(s, idx + 1, ys, ans);
+                auto p = xs.back();
+                xs[xs.size() - 1] = p + s.substr(idx, 1);
+                backtrack(s, idx + 1, xs, ans);
             }
         }
     }
     palindromes partition(std::string s) 
     {
         palindromes ans;
-        backtrack(s, 0, {}, ans);
+        std::vector<std::string> tmp;
+        backtrack(s, 0, tmp, ans);
         return ans;
     }    
 }

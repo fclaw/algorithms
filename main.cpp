@@ -85,6 +85,7 @@
 #include "algorithms/backtrack/leetcode/permuteUnique.cpp"
 #include "algorithms/backtrack/leetcode/palindrome.cpp"
 #include "algorithms/backtrack/leetcode/combinationSum3.cpp"
+#include "algorithms/backtrack/leetcode/combinationSum2.cpp"
 #include "algorithms/backtrack/leetcode/wordSearch.cpp"
 #include "algorithms/backtrack/leetcode/findSubsequences.cpp"
 #include "algorithms/backtrack/leetcode/generateParentheses.cpp"
@@ -154,7 +155,8 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    auto xxs = algorithms::backtrack::leetcode::unique_permutation::permuteUnique({1, 1, 2});
+    std::vector<int> xs = {2,5,2,1,2};
+    auto xxs = algorithms::backtrack::leetcode::combination_sum::combinationSum2(xs, 5);
     for(auto xs : xxs)
     {
         for(auto x : xs)

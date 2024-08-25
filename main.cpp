@@ -82,6 +82,7 @@
 #include "algorithms/dp/leetcode/combinationSum4.cpp"
 #include "algorithms/backtrack/leetcode/combine.cpp"
 #include "algorithms/backtrack/leetcode/permute.cpp"
+#include "algorithms/backtrack/leetcode/permuteUnique.cpp"
 #include "algorithms/backtrack/leetcode/palindrome.cpp"
 #include "algorithms/backtrack/leetcode/combinationSum3.cpp"
 #include "algorithms/backtrack/leetcode/wordSearch.cpp"
@@ -153,8 +154,7 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    // output = [["a","a","a"],["a","aa"],["aa","a"],["aaa"]]
-    auto xxs = algorithms::backtrack::leetcode::palindrome::partition("babbbaaabb");
+    auto xxs = algorithms::backtrack::leetcode::unique_permutation::permuteUnique({1, 1, 2});
     for(auto xs : xxs)
     {
         for(auto x : xs)

@@ -35,7 +35,8 @@ using st = std::vector<std::string>;
             if(res) ans.push_back(xs);
             return;
         }
-        xs.push_back(s.substr(idx, 1));
+        auto substr = s.substr(idx, 1);
+        xs.push_back(substr);
         backtrack(s, idx + 1, xs, ans);
         if(!xs.empty())
         {
@@ -43,7 +44,7 @@ using st = std::vector<std::string>;
             if(xs.size() >= 1)
             {
                 auto p = xs.back();
-                xs[xs.size() - 1] = p + s.substr(idx, 1);
+                xs[xs.size() - 1] = p + substr;
                 backtrack(s, idx + 1, xs, ans);
             }
         }

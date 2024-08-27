@@ -110,6 +110,7 @@
 #include "algorithms/graph/leetcode/floodFill.cpp"
 #include "algorithms/graph/leetcode/canFinish.cpp"
 #include "algorithms/graph/leetcode/isBipartite.cpp"
+#include "algorithms/graph/leetcode/shortestPath.cpp"
 #include "algorithms/graph/leetcode/pacificAtlantic.cpp"
 #include "algorithms/graph/leetcode/longestIncreasingPath.cpp"
 #include "algorithms/graph/connectedComponents.cpp"
@@ -119,6 +120,7 @@
 #include "algorithms/graph/leetcode/findCheapestPrice.cpp"
 #include "algorithms/graph/leetcode/networkDelayTime.cpp"
 #include "algorithms/graph/leetcode/findRedundantConnection.cpp"
+#include "algorithms/graph/leetcode/minCostConnectPoints.cpp"
 #include "algorithms/graph/scc.cpp"
 #include "algorithms/graph/kruskal.cpp"
 // codeforces
@@ -156,10 +158,8 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    // std::vector<int> xs = {2,5,2,1,2};
-    std::string s = "a1b2";
-    auto xs = algorithms::backtrack::leetcode::letter_case_permutation::letterCasePermutation(s);
-    for(auto x : xs)
-        cout << x << "\n";
+    algorithms::graph::leetcode::shortest_path::grid xs = 
+     {{0,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {0,0}, {0,1}, {0,1}, {0,1}, {0, 0}, {1, 0}, {1, 0}, {0, 0}};
+    cout << algorithms::graph::leetcode::shortest_path::shortestPath(xs, 4);
 
 }

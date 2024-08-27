@@ -1,0 +1,110 @@
+{
+    "sourceFile": "algorithms/graph/leetcode/shortestPath.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 23,
+            "patches": [
+                {
+                    "date": 1724757968553,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1724757985159,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,4 @@\n \n \n+\n+namespace algorithms::graph::leetcode::short\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724758001922,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,12 @@\n \n \n \n-namespace algorithms::graph::leetcode::short\n\\ No newline at end of file\n+namespace algorithms::graph::leetcode::shortest_path \n+{\n+\n+\n+\n+    int shortestPath(vector<vector<int>>& grid, int k) {\n+        \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724758007466,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,10 @@\n \n namespace algorithms::graph::leetcode::shortest_path \n {\n \n+using grid = \n \n-\n     int shortestPath(vector<vector<int>>& grid, int k) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724758012614,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,12 @@\n+#include <vector>\n+\n+\n+namespace algorithms::graph::leetcode::shortest_path \n+{\n+\n+using grid = \n+\n+    int shortestPath(vector<vector<int>>& grid, int k) {\n+        \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724758022525,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,24 +1,11 @@\n #include <vector>\n \n-\n namespace algorithms::graph::leetcode::shortest_path \n {\n \n-using grid = \n+using grid = std::vector<vector<int>>\n \n     int shortestPath(vector<vector<int>>& grid, int k) {\n         \n     }\n-}\n-\n-\n-\n-namespace algorithms::graph::leetcode::shortest_path \n-{\n-\n-using grid = \n-\n-    int shortestPath(vector<vector<int>>& grid, int k) {\n-        \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724758033170,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,10 @@\n \n namespace algorithms::graph::leetcode::shortest_path \n {\n \n-using grid = std::vector<vector<int>>\n+using grid = std::vector<std::vector<int>>;\n \n-    int shortestPath(vector<vector<int>>& grid, int k) {\n+    int shortestPath(const grid& grid, int k) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724758043366,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n {\n \n using grid = std::vector<std::vector<int>>;\n \n-    int shortestPath(const grid& grid, int k) {\n-        \n+    int shortestPath(const grid& g, int k) \n+    {\n+            \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724758049243,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,10 @@\n {\n \n using grid = std::vector<std::vector<int>>;\n \n+    \n     int shortestPath(const grid& g, int k) \n     {\n-            \n+\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724758061167,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n {\n \n using grid = std::vector<std::vector<int>>;\n \n-    \n+    https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/\n     int shortestPath(const grid& g, int k) \n     {\n \n     }\n"
+                },
+                {
+                    "date": 1724758069986,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n {\n \n using grid = std::vector<std::vector<int>>;\n \n-    https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/\n+    // https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination\n     int shortestPath(const grid& g, int k) \n     {\n-\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724758098232,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,11 @@\n {\n \n using grid = std::vector<std::vector<int>>;\n \n-    // https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination\n+    /** \n+     * https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination\n     int shortestPath(const grid& g, int k) \n     {\n-        \n+\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724758104272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,12 @@\n using grid = std::vector<std::vector<int>>;\n \n     /** \n      * https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination\n+     * You are given an m x n integer matrix grid where each cell is either 0 (empty) or 1 (obstacle). You can move up, down, left, or right from and to an empty cell in one step.\n+\n+Return the minimum number of steps to walk from the upper left corner (0, 0) to the lower right corner (m - 1, n - 1) given that you can eliminate at most k obstacles. If it is not possible to find such walk return -1.\n+*/\n     int shortestPath(const grid& g, int k) \n     {\n \n     }\n"
+                },
+                {
+                    "date": 1724758111986,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,10 @@\n using grid = std::vector<std::vector<int>>;\n \n     /** \n      * https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination\n-     * You are given an m x n integer matrix grid where each cell is either 0 (empty) or 1 (obstacle). You can move up, down, left, or right from and to an empty cell in one step.\n+     * You are given an m x n integer matrix grid where each cell is either 0 (empty) or 1 (obstacle). \n+     * You can move up, down, left, or right from and to an empty cell in one step.\n \n Return the minimum number of steps to walk from the upper left corner (0, 0) to the lower right corner (m - 1, n - 1) given that you can eliminate at most k obstacles. If it is not possible to find such walk return -1.\n */\n     int shortestPath(const grid& g, int k) \n"
+                },
+                {
+                    "date": 1724758120619,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,8 @@\n     /** \n      * https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination\n      * You are given an m x n integer matrix grid where each cell is either 0 (empty) or 1 (obstacle). \n      * You can move up, down, left, or right from and to an empty cell in one step.\n-\n Return the minimum number of steps to walk from the upper left corner (0, 0) to the lower right corner (m - 1, n - 1) given that you can eliminate at most k obstacles. If it is not possible to find such walk return -1.\n */\n     int shortestPath(const grid& g, int k) \n     {\n"
+                },
+                {
+                    "date": 1724758137554,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,10 @@\n     /** \n      * https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination\n      * You are given an m x n integer matrix grid where each cell is either 0 (empty) or 1 (obstacle). \n      * You can move up, down, left, or right from and to an empty cell in one step.\n-Return the minimum number of steps to walk from the upper left corner (0, 0) to the lower right corner (m - 1, n - 1) given that you can eliminate at most k obstacles. If it is not possible to find such walk return -1.\n+     * Return the minimum number of steps to walk from the upper left corner (0, 0) \n+     * to the lower right corner (m - 1, n - 1) given that you can eliminate at most k obstacles. If it is not possible to find such walk return -1.\n */\n     int shortestPath(const grid& g, int k) \n     {\n \n"
+                },
+                {
+                    "date": 1724758142993,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,10 +9,10 @@\n      * https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination\n      * You are given an m x n integer matrix grid where each cell is either 0 (empty) or 1 (obstacle). \n      * You can move up, down, left, or right from and to an empty cell in one step.\n      * Return the minimum number of steps to walk from the upper left corner (0, 0) \n-     * to the lower right corner (m - 1, n - 1) given that you can eliminate at most k obstacles. If it is not possible to find such walk return -1.\n-*/\n+     * to the lower right corner (m - 1, n - 1) given that you can eliminate at most k obstacles. \n+     * If it is not possible to find such walk return -1.*/\n     int shortestPath(const grid& g, int k) \n     {\n \n     }\n"
+                },
+                {
+                    "date": 1724758148744,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,10 @@\n      * You are given an m x n integer matrix grid where each cell is either 0 (empty) or 1 (obstacle). \n      * You can move up, down, left, or right from and to an empty cell in one step.\n      * Return the minimum number of steps to walk from the upper left corner (0, 0) \n      * to the lower right corner (m - 1, n - 1) given that you can eliminate at most k obstacles. \n-     * If it is not possible to find such walk return -1.*/\n-    int shortestPath(const grid& g, int k) \n+     * If it is not possible to find such walk return -1. */\n+    int shortestPath(const grid& g, int k)\n     {\n-\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724758157851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n namespace algorithms::graph::leetcode::shortest_path \n {\n \n using grid = std::vector<std::vector<int>>;\n+using \n \n     /** \n      * https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination\n      * You are given an m x n integer matrix grid where each cell is either 0 (empty) or 1 (obstacle). \n@@ -13,7 +14,7 @@\n      * to the lower right corner (m - 1, n - 1) given that you can eliminate at most k obstacles. \n      * If it is not possible to find such walk return -1. */\n     int shortestPath(const grid& g, int k)\n     {\n-        \n+\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724758170776,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n namespace algorithms::graph::leetcode::shortest_path \n {\n \n using grid = std::vector<std::vector<int>>;\n-using \n+using dist \n \n     /** \n      * https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination\n      * You are given an m x n integer matrix grid where each cell is either 0 (empty) or 1 (obstacle). \n"
+                },
+                {
+                    "date": 1724758178009,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n namespace algorithms::graph::leetcode::shortest_path \n {\n \n using grid = std::vector<std::vector<int>>;\n-using dist \n+using dist = std::vector<int>;\n \n     /** \n      * https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination\n      * You are given an m x n integer matrix grid where each cell is either 0 (empty) or 1 (obstacle). \n"
+                },
+                {
+                    "date": 1724758188536,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n {\n \n using grid = std::vector<std::vector<int>>;\n using dist = std::vector<int>;\n+using el = \n \n     /** \n      * https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination\n      * You are given an m x n integer matrix grid where each cell is either 0 (empty) or 1 (obstacle). \n"
+                },
+                {
+                    "date": 1724758193835,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n {\n \n using grid = std::vector<std::vector<int>>;\n using dist = std::vector<int>;\n-using el = std::\n+using el = std::tuple\n \n     /** \n      * https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination\n      * You are given an m x n integer matrix grid where each cell is either 0 (empty) or 1 (obstacle). \n"
+                },
+                {
+                    "date": 1724758407565,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,28 @@\n+#include <vector>\n+#include <unordered_map>\n+\n+namespace algorithms::graph::leetcode::shortest_path \n+{\n+\n+using grid = std::vector<std::vector<int>>;\n+using dist = std::vector<int>;\n+using el = std::tuple<int, int, int>;\n+using dir = std::vector<std::pair<int, int>>;\n+using visited = std::unordered_map<int, std::unordered_map<int, bool>>;\n+\n+    /** \n+     * https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination\n+     * You are given an m x n integer matrix grid where each cell is either 0 (empty) or 1 (obstacle). \n+     * You can move up, down, left, or right from and to an empty cell in one step.\n+     * Return the minimum number of steps to walk from the upper left corner (0, 0) \n+     * to the lower right corner (m - 1, n - 1) given that you can eliminate at most k obstacles. \n+     * If it is not possible to find such walk return -1. */\n+    int M, N;\n+    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};\n+    int shortestPath(const grid& g, int k)\n+    {\n+        visited mask;\n+        M = xs.size();\n+        N = xs[0].size();\n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1724757968553,
+            "name": "Commit-0",
+            "content": "\n\n"
+        }
+    ]
+}

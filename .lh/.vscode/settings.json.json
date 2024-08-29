@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 22,
+            "activePatchIndex": 23,
             "patches": [
                 {
                     "date": 1716403736238,
@@ -96,6 +96,10 @@
                 {
                     "date": 1724412821539,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,8 +65,9 @@\n         \"centimetres\",\n         \"codeforces\",\n         \"engravement\",\n         \"Kadane's\",\n+        \"kruskal\",\n         \"leetcode\",\n         \"linkedlist\",\n         \"Loowater\",\n         \"modpow\",\n"
+                },
+                {
+                    "date": 1724840264968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,10 @@\n         \"iomanip\": \"cpp\",\n         \"climits\": \"cpp\",\n         \"source_location\": \"cpp\",\n         \"strstream\": \"cpp\",\n-        \"iterator\": \"cpp\"\n+        \"iterator\": \"cpp\",\n+        \"map\": \"cpp\"\n     },\n     \"cSpell.words\": [\n         \"centimetre\",\n         \"centimetres\",\n"
                 }
             ],
             "date": 1716403736238,

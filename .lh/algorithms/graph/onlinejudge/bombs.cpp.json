@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 10,
+            "activePatchIndex": 11,
             "patches": [
                 {
                     "date": 1724752660472,
@@ -48,6 +48,10 @@
                 {
                     "date": 1724752825609,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,10 @@\n {\n \n using graph = std::vector<std::vector<int>>;\n \n+    // https://onlinejudge.org/external/106/10653.pdf\n     int minTime(const graph& g)\n     {\n-        \n+\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724774472794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,6 @@\n \n     // https://onlinejudge.org/external/106/10653.pdf\n     int minTime(const graph& g)\n     {\n-\n     }\n }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1724752660472,

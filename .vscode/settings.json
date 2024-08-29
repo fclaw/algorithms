@@ -58,7 +58,8 @@
         "climits": "cpp",
         "source_location": "cpp",
         "strstream": "cpp",
-        "iterator": "cpp"
+        "iterator": "cpp",
+        "map": "cpp"
     },
     "cSpell.words": [
         "centimetre",

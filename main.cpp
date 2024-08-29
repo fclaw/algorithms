@@ -121,6 +121,7 @@
 #include "algorithms/graph/leetcode/networkDelayTime.cpp"
 #include "algorithms/graph/leetcode/findRedundantConnection.cpp"
 #include "algorithms/graph/leetcode/minCostConnectPoints.cpp"
+#include "algorithms/graph/onlinejudge/dungeon.cpp"
 #include "algorithms/graph/scc.cpp"
 #include "algorithms/graph/kruskal.cpp"
 // codeforces
@@ -158,8 +159,23 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    algorithms::graph::leetcode::shortest_path::grid xs = 
-     {{0,0}, {1,0}, {1,0}, {1,0}, {1,0}, {1,0}, {0,0}, {0,1}, {0,1}, {0,1}, {0, 0}, {1, 0}, {1, 0}, {0, 0}};
-    cout << algorithms::graph::leetcode::shortest_path::shortestPath(xs, 4);
+    // std::vector<algorithms::graph::onlinejudge::dungeon_master::maze> m = 
+    //   {{{"S", ".", ".", ".", "."}, 
+    //     {".", "#", "#", "#", "."}, 
+    //     {".", "#", "#", ".", "."},
+    //     {"#", "#", "#", ".", "#"}},
+        
+    //    {{"#", "#", "#", "#", "#"}, 
+    //     {"#", "#", "#", "#", "."}, 
+    //     {"#", "#", ".", "#", "#"},
+    //     {"#", "#", ".", ".", "."}},
+
+    //    {{"#", "#", "#", "#", "#"}, 
+    //     {"#", "#", "#", "#", "#"}, 
+    //     {"#", ".", "#", "#", "#"},
+    //     {"#", "#", "#", "#", "E"}}
+    //     };
+    // cout << algorithms::graph::onlinejudge::dungeon_master::canEscape(4, 5, m);
+    algorithms::graph::onlinejudge::dungeon_master::submit();
 
 }

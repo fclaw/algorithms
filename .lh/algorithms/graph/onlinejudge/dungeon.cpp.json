@@ -1,0 +1,42 @@
+{
+    "sourceFile": "algorithms/graph/onlinejudge/dungeon.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1724774520801,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1724774557508,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,8 @@\n \n namespace algorithms::graph::onlinejudge::dungeon_master\n {\n \n-using graph = std::vector<std::vector<int>>;\n-\n     // https://onlinejudge.org/external/106/10653.pdf\n     int minTime(const graph& g)\n     {\n     }\n"
+                },
+                {
+                    "date": 1724774569450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,8 @@\n namespace algorithms::graph::onlinejudge::dungeon_master\n {\n \n     // https://onlinejudge.org/external/106/10653.pdf\n-    int minTime(const graph& g)\n+    int canEscape(const graph& g)\n     {\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724774578307,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,8 @@\n namespace algorithms::graph::onlinejudge::dungeon_master\n {\n \n     // https://onlinejudge.org/external/106/10653.pdf\n-    int canEscape(const graph& g)\n+    int canEscape(const std::vecgo& g)\n     {\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724774585033,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::graph::onlinejudge::dungeon_master\n {\n \n-    // https://onlinejudge.org/external/106/10653.pdf\n-    int canEscape(const std::vecgo& g)\n+    // \n+    int canEscape()\n     {\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724868652604,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,15 @@\n namespace algorithms::graph::onlinejudge::dungeon_master\n {\n \n     // https://onlinejudge.org/external/5/532.pdf\n+    /**\n+     * You are trapped in a 3D dungeon and need to find the quickest way out! The dungeon is composed\n+of unit cubes which may or may not be filled with rock. It takes one minute to move one unit north,\n+south, east, west, up or down. You cannot move diagonally and the maze is surrounded by solid rock\n+on all sides.\n+Is an escape possible? If yes, how long will it take?\n+     */\n     int canEscape()\n     {\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1724868663455,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n namespace algorithms::graph::onlinejudge::dungeon_master\n {\n \n     /**\n+     * https://onlinejudge.org/external/5/532.pdf\n      * You are trapped in a 3D dungeon and need to find the quickest way out! The dungeon is composed\n of unit cubes which may or may not be filled with rock. It takes one minute to move one unit north,\n south, east, west, up or down. You cannot move diagonally and the maze is surrounded by solid rock\n on all sides.\n"
+                }
+            ],
+            "date": 1724774520801,
+            "name": "Commit-0",
+            "content": "#include <vector>\n\nnamespace algorithms::graph::onlinejudge::dungeon_master\n{\n\nusing graph = std::vector<std::vector<int>>;\n\n    // https://onlinejudge.org/external/106/10653.pdf\n    int minTime(const graph& g)\n    {\n    }\n}"
+        }
+    ]
+}

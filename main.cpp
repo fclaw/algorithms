@@ -113,6 +113,7 @@
 #include "algorithms/graph/leetcode/shortestPath.cpp"
 #include "algorithms/graph/leetcode/pacificAtlantic.cpp"
 #include "algorithms/graph/leetcode/longestIncreasingPath.cpp"
+#include "algorithms/graph/leetcode/ladderLength.cpp"
 #include "algorithms/graph/connectedComponents.cpp"
 #include "algorithms/graph/articulationPoints.cpp"
 #include "algorithms/graph/sf_dijkstra.cpp"
@@ -158,24 +159,9 @@ int main()
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
-
-    // std::vector<algorithms::graph::onlinejudge::dungeon_master::maze> m = 
-    //   {{{"S", ".", ".", ".", "."}, 
-    //     {".", "#", "#", "#", "."}, 
-    //     {".", "#", "#", ".", "."},
-    //     {"#", "#", "#", ".", "#"}},
-        
-    //    {{"#", "#", "#", "#", "#"}, 
-    //     {"#", "#", "#", "#", "."}, 
-    //     {"#", "#", ".", "#", "#"},
-    //     {"#", "#", ".", ".", "."}},
-
-    //    {{"#", "#", "#", "#", "#"}, 
-    //     {"#", "#", "#", "#", "#"}, 
-    //     {"#", ".", "#", "#", "#"},
-    //     {"#", "#", "#", "#", "E"}}
-    //     };
-    // cout << algorithms::graph::onlinejudge::dungeon_master::canEscape(4, 5, m);
-    algorithms::graph::onlinejudge::dungeon_master::submit();
+    
+    
+    cout << algorithms::graph::leetcode::doublets::ladderLength("hit", "cog", {"hot","dot","dog","lot","log"});
+  
 
 }

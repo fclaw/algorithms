@@ -114,6 +114,8 @@
 #include "algorithms/graph/leetcode/pacificAtlantic.cpp"
 #include "algorithms/graph/leetcode/longestIncreasingPath.cpp"
 #include "algorithms/graph/leetcode/ladderLength.cpp"
+#include "algorithms/graph/leetcode/minimumEffortPath.cpp"
+#include "algorithms/graph/leetcode/findLadders.cpp"
 #include "algorithms/graph/connectedComponents.cpp"
 #include "algorithms/graph/articulationPoints.cpp"
 #include "algorithms/graph/sf_dijkstra.cpp"
@@ -160,8 +162,11 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
     
-    
-    cout << algorithms::graph::leetcode::doublets::ladderLength("hit", "cog", {"hot","dot","dog","lot","log"});
-  
-
+    algorithms::graph::leetcode::min_effort::heights xs = // {{1,5,12,34}};
+    {{4,3,4,10,5,5,9,2}, 
+     {10,8,2,10,9,7,5,6}, 
+     {5,8,10,10,10,7,4,2}, 
+     {5,1,3,1,1,3,1,9}, 
+     {6,4,10,6,10,9,4,6}}; // 5
+    cout << algorithms::graph::leetcode::min_effort::minimumEffortPath(xs);
 }

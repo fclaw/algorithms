@@ -125,6 +125,7 @@
 #include "algorithms/graph/leetcode/networkDelayTime.cpp"
 #include "algorithms/graph/leetcode/findRedundantConnection.cpp"
 #include "algorithms/graph/leetcode/minCostConnectPoints.cpp"
+#include "algorithms/graph/leetcode/maximumDetonation.cpp"
 #include "algorithms/graph/onlinejudge/dungeon.cpp"
 #include "algorithms/graph/scc.cpp"
 #include "algorithms/graph/kruskal.cpp"
@@ -163,12 +164,5 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
     
-    algorithms::graph::leetcode::min_effort::heights xs = // {{0,2}, {1, 3}};
-    // {{0,1,2,3,4}, 
-    //  {24,23,22,21,5}, 
-    //  {12,13,14,15,16}, 
-    //  {11,17,18,19,20}, 
-    //  {10,9,8,7,6}}; // 5
-    {{10,12,4,6}, {10,12,4,6}, {1,7,13,8}, {2,0,15,14}};
-    cout << algorithms::graph::leetcode::swim_in_water::swimInWater(xs);
+    cout << algorithms::graph::leetcode::bombs_detonation::maximumDetonation({{2,1,3}, {6,1,4}});
 }

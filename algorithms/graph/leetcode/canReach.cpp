@@ -9,6 +9,6 @@ namespace algorithms::graph::leetcode::can_reach
      * Notice that you can not jump outside of the array at any time. */
     bool canReach(const std::vector<int>& xs, int start)
     {
-        return false;    
+        return false;
     }
 }

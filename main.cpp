@@ -115,6 +115,7 @@
 #include "algorithms/graph/leetcode/longestIncreasingPath.cpp"
 #include "algorithms/graph/leetcode/ladderLength.cpp"
 #include "algorithms/graph/leetcode/minimumEffortPath.cpp"
+#include "algorithms/graph/leetcode/swimInWater.cpp"
 #include "algorithms/graph/leetcode/findLadders.cpp"
 #include "algorithms/graph/connectedComponents.cpp"
 #include "algorithms/graph/articulationPoints.cpp"
@@ -162,11 +163,12 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
     
-    algorithms::graph::leetcode::min_effort::heights xs = // {{1,5,12,34}};
-    {{4,3,4,10,5,5,9,2}, 
-     {10,8,2,10,9,7,5,6}, 
-     {5,8,10,10,10,7,4,2}, 
-     {5,1,3,1,1,3,1,9}, 
-     {6,4,10,6,10,9,4,6}}; // 5
-    cout << algorithms::graph::leetcode::min_effort::minimumEffortPath(xs);
+    algorithms::graph::leetcode::min_effort::heights xs = // {{0,2}, {1, 3}};
+    // {{0,1,2,3,4}, 
+    //  {24,23,22,21,5}, 
+    //  {12,13,14,15,16}, 
+    //  {11,17,18,19,20}, 
+    //  {10,9,8,7,6}}; // 5
+    {{10,12,4,6}, {10,12,4,6}, {1,7,13,8}, {2,0,15,14}};
+    cout << algorithms::graph::leetcode::swim_in_water::swimInWater(xs);
 }

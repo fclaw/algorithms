@@ -109,6 +109,7 @@
 #include "algorithms/graph/leetcode/orangesRotting.cpp"
 #include "algorithms/graph/leetcode/floodFill.cpp"
 #include "algorithms/graph/leetcode/canFinish.cpp"
+#include "algorithms/graph/leetcode/canReach.cpp"
 #include "algorithms/graph/leetcode/isBipartite.cpp"
 #include "algorithms/graph/leetcode/shortestPath.cpp"
 #include "algorithms/graph/leetcode/pacificAtlantic.cpp"
@@ -164,5 +165,5 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
     
-    cout << algorithms::graph::leetcode::bombs_detonation::maximumDetonation({{2,1,3}, {6,1,4}});
+    cout << algorithms::graph::leetcode::can_reach::canReach({4,2,3,0,3,1,2}, 5);
 }

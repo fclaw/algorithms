@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 11,
+            "activePatchIndex": 12,
             "patches": [
                 {
                     "date": 1724996635666,
@@ -52,6 +52,10 @@
                 {
                     "date": 1724996730637,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n      * https://leetcode.com/problems/jump-game-iii\n      * Given an array of non-negative integers arr, you are initially positioned at start index of the array. \n      * When you are at index i, you can jump to i + arr[i] or i - arr[i], check if you can reach any index with value 0.\n      * Notice that you can not jump outside of the array at any time. */\n-    bool canReach(const std::vector<int>& xs, int start) \n+    bool canReach(const std::vector<int>& xs, int start)\n     {\n         return false;    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725114508940,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n namespace algorithms::graph::leetcode::can_reach\n {\n \n \n-using graph = std::vector<std::vector>>;\n+using graph = std::vector<std::vector>;\n \n     /**\n      * https://leetcode.com/problems/jump-game-iii\n      * Given an array of non-negative integers arr, you are initially positioned at start index of the array. \n"
                 }
             ],
             "date": 1724996635666,

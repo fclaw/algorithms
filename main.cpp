@@ -91,6 +91,7 @@
 #include "algorithms/backtrack/leetcode/generateParentheses.cpp"
 #include "algorithms/backtrack/leetcode/restoreIpAddresses.cpp"
 #include "algorithms/backtrack/leetcode/letterCasePermutation.cpp"
+#include "algorithms/backtrack/leetcode/allPathsSourceTarget.cpp"
 #include "algorithms/backtrack/uv/cd.cpp"
 #include "algorithms/backtrack/uv/marcus.cpp"
 #include "algorithms/backtrack/leetcode/solveNQueens.cpp"
@@ -165,5 +166,11 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
     
-    cout << algorithms::graph::leetcode::can_reach::canReach({4,2,3,0,3,1,2}, 5);
+    auto xxs = algorithms::backtrack::leetcode::all_path::allPathsSourceTarget({{4,3,1}, {3,2,4}, {3}, {4}, {}});
+    for(auto xs : xxs)
+    {
+        for(auto x : xs)
+          cout << x << " ";
+        cout << "\n";  
+    }
 }

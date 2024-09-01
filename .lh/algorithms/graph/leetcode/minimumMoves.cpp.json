@@ -1,0 +1,98 @@
+{
+    "sourceFile": "algorithms/graph/leetcode/minimumMoves.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 20,
+            "patches": [
+                {
+                    "date": 1725118812204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1725118832410,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,4 @@\n \n \n+\n+algorithms::graph::leetcode::\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725118849162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,7 @@\n \n \n \n-algorithms::graph::leetcode::\n\\ No newline at end of file\n+algorithms::graph::leetcode::snake\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725118861409,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,10 @@\n \n \n \n-algorithms::graph::leetcode::snake\n+namespace algorithms::graph::leetcode::snake\n {\n-    \n+\n+int minimumMoves(vector<vector<int>>& grid) {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725118868567,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,10 @@\n \n namespace algorithms::graph::leetcode::snake\n {\n \n-int minimumMoves(vector<vector<int>>& grid) {\n-        \n+using \n+\n+    int minimumMoves(vector<vector<int>>& grid) \n+    {    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725118877304,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n+#include <ve\n \n \n-\n namespace algorithms::graph::leetcode::snake\n {\n \n-using \n+using grid = \n \n     int minimumMoves(vector<vector<int>>& grid) \n     {    \n     }\n"
+                },
+                {
+                    "date": 1725118886291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,11 @@\n-#include <ve\n+#include <vector>\n \n \n namespace algorithms::graph::leetcode::snake\n {\n \n-using grid = \n+using grid = vector<vector<int>>\n \n     int minimumMoves(vector<vector<int>>& grid) \n     {    \n     }\n"
+                },
+                {
+                    "date": 1725118892077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n namespace algorithms::graph::leetcode::snake\n {\n \n-using grid = vector<vector<int>>\n+using grid = std::vector<std::vector<int>>;\n \n     int minimumMoves(vector<vector<int>>& grid) \n     {    \n     }\n"
+                },
+                {
+                    "date": 1725118899363,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,8 @@\n {\n \n using grid = std::vector<std::vector<int>>;\n \n-    int minimumMoves(vector<vector<int>>& grid) \n+    int minimumMoves(const grid& grid) \n     {    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725118905275,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n {\n \n using grid = std::vector<std::vector<int>>;\n \n-    int minimumMoves(const grid& grid) \n-    {    \n+    int minimumMoves(const grid& g) \n+    {\n+        return 0;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725118914252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,12 @@\n {\n \n using grid = std::vector<std::vector<int>>;\n \n+    /**\n+     * https://leetcode.com/problems/minimum-moves-to-reach-target-with-rotations\n+     * \n+     */\n     int minimumMoves(const grid& g) \n     {\n         return 0;\n     }\n"
+                },
+                {
+                    "date": 1725118993657,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,15 @@\n using grid = std::vector<std::vector<int>>;\n \n     /**\n      * https://leetcode.com/problems/minimum-moves-to-reach-target-with-rotations\n-     * \n+     * In an n*n grid, there is a snake that spans 2 cells and starts moving from the top left corner at (0, 0) and (0, 1). The grid has empty cells represented by zeros and blocked cells represented by ones. The snake wants to reach the lower right corner at (n-1, n-2) and (n-1, n-1).\n+\n+In one move the snake can:\n+\n+Move one cell to the right if there are no blocked cells there. This move keeps the horizontal/vertical position of the snake as it is.\n+Move down one cell if there are no blocked cells there. This move keeps the horizontal/vertical position of the snake as it is.\n+Rotate clockwise if it's in a horizontal position and the two cells under it are both empty. In that case the snake moves from (r, c) and (r, c+1) to (r, c) and (r+1, c).\n      */\n     int minimumMoves(const grid& g) \n     {\n         return 0;\n"
+                },
+                {
+                    "date": 1725119002540,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,10 @@\n using grid = std::vector<std::vector<int>>;\n \n     /**\n      * https://leetcode.com/problems/minimum-moves-to-reach-target-with-rotations\n-     * In an n*n grid, there is a snake that spans 2 cells and starts moving from the top left corner at (0, 0) and (0, 1). The grid has empty cells represented by zeros and blocked cells represented by ones. The snake wants to reach the lower right corner at (n-1, n-2) and (n-1, n-1).\n+     * In an n * n grid, there is a snake that spans 2 cells and starts moving from the top left corner at (0, 0) and (0, 1). \n+     * The grid has empty cells represented by zeros and blocked cells represented by ones. The snake wants to reach the lower right corner at (n-1, n-2) and (n-1, n-1).\n \n In one move the snake can:\n \n Move one cell to the right if there are no blocked cells there. This move keeps the horizontal/vertical position of the snake as it is.\n"
+                },
+                {
+                    "date": 1725119007569,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,10 @@\n \n     /**\n      * https://leetcode.com/problems/minimum-moves-to-reach-target-with-rotations\n      * In an n * n grid, there is a snake that spans 2 cells and starts moving from the top left corner at (0, 0) and (0, 1). \n-     * The grid has empty cells represented by zeros and blocked cells represented by ones. The snake wants to reach the lower right corner at (n-1, n-2) and (n-1, n-1).\n+     * The grid has empty cells represented by zeros and blocked cells represented by ones. \n+     * The snake wants to reach the lower right corner at (n-1, n-2) and (n-1, n-1).\n \n In one move the snake can:\n \n Move one cell to the right if there are no blocked cells there. This move keeps the horizontal/vertical position of the snake as it is.\n"
+                },
+                {
+                    "date": 1725119013622,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,11 +10,9 @@\n      * https://leetcode.com/problems/minimum-moves-to-reach-target-with-rotations\n      * In an n * n grid, there is a snake that spans 2 cells and starts moving from the top left corner at (0, 0) and (0, 1). \n      * The grid has empty cells represented by zeros and blocked cells represented by ones. \n      * The snake wants to reach the lower right corner at (n-1, n-2) and (n-1, n-1).\n-\n-In one move the snake can:\n-\n+     * In one move the snake can:\n Move one cell to the right if there are no blocked cells there. This move keeps the horizontal/vertical position of the snake as it is.\n Move down one cell if there are no blocked cells there. This move keeps the horizontal/vertical position of the snake as it is.\n Rotate clockwise if it's in a horizontal position and the two cells under it are both empty. In that case the snake moves from (r, c) and (r, c+1) to (r, c) and (r+1, c).\n      */\n"
+                },
+                {
+                    "date": 1725119024726,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,10 @@\n      * In an n * n grid, there is a snake that spans 2 cells and starts moving from the top left corner at (0, 0) and (0, 1). \n      * The grid has empty cells represented by zeros and blocked cells represented by ones. \n      * The snake wants to reach the lower right corner at (n-1, n-2) and (n-1, n-1).\n      * In one move the snake can:\n-Move one cell to the right if there are no blocked cells there. This move keeps the horizontal/vertical position of the snake as it is.\n+     * Move one cell to the right if there are no blocked cells there. \n+     * This move keeps the horizontal/vertical position of the snake as it is.\n Move down one cell if there are no blocked cells there. This move keeps the horizontal/vertical position of the snake as it is.\n Rotate clockwise if it's in a horizontal position and the two cells under it are both empty. In that case the snake moves from (r, c) and (r, c+1) to (r, c) and (r+1, c).\n      */\n     int minimumMoves(const grid& g) \n"
+                },
+                {
+                    "date": 1725119032762,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n      * The snake wants to reach the lower right corner at (n-1, n-2) and (n-1, n-1).\n      * In one move the snake can:\n      * Move one cell to the right if there are no blocked cells there. \n      * This move keeps the horizontal/vertical position of the snake as it is.\n-Move down one cell if there are no blocked cells there. This move keeps the horizontal/vertical position of the snake as it is.\n+     * Move down one cell if there are no blocked cells there. This move keeps the horizontal/vertical position of the snake as it is.\n Rotate clockwise if it's in a horizontal position and the two cells under it are both empty. In that case the snake moves from (r, c) and (r, c+1) to (r, c) and (r+1, c).\n      */\n     int minimumMoves(const grid& g) \n     {\n"
+                },
+                {
+                    "date": 1725119040867,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,10 @@\n      * The snake wants to reach the lower right corner at (n-1, n-2) and (n-1, n-1).\n      * In one move the snake can:\n      * Move one cell to the right if there are no blocked cells there. \n      * This move keeps the horizontal/vertical position of the snake as it is.\n-     * Move down one cell if there are no blocked cells there. This move keeps the horizontal/vertical position of the snake as it is.\n+     * Move down one cell if there are no blocked cells there. \n+     * This move keeps the horizontal/vertical position of the snake as it is.\n Rotate clockwise if it's in a horizontal position and the two cells under it are both empty. In that case the snake moves from (r, c) and (r, c+1) to (r, c) and (r+1, c).\n      */\n     int minimumMoves(const grid& g) \n     {\n"
+                },
+                {
+                    "date": 1725119046973,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n      * Move one cell to the right if there are no blocked cells there. \n      * This move keeps the horizontal/vertical position of the snake as it is.\n      * Move down one cell if there are no blocked cells there. \n      * This move keeps the horizontal/vertical position of the snake as it is.\n-Rotate clockwise if it's in a horizontal position and the two cells under it are both empty. In that case the snake moves from (r, c) and (r, c+1) to (r, c) and (r+1, c).\n+     * Rotate clockwise if it's in a horizontal position and the two cells under it are both empty. In that case the snake moves from (r, c) and (r, c+1) to (r, c) and (r+1, c).\n      */\n     int minimumMoves(const grid& g) \n     {\n         return 0;\n"
+                },
+                {
+                    "date": 1725119055809,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,10 @@\n      * Move one cell to the right if there are no blocked cells there. \n      * This move keeps the horizontal/vertical position of the snake as it is.\n      * Move down one cell if there are no blocked cells there. \n      * This move keeps the horizontal/vertical position of the snake as it is.\n-     * Rotate clockwise if it's in a horizontal position and the two cells under it are both empty. In that case the snake moves from (r, c) and (r, c+1) to (r, c) and (r+1, c).\n+     * Rotate clockwise if it's in a horizontal position and the two cells under it are both empty. \n+     * In that case the snake moves from (r, c) and (r, c+1) to (r, c) and (r+1, c).\n      */\n     int minimumMoves(const grid& g) \n     {\n         return 0;\n"
+                },
+                {
+                    "date": 1725119063283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,10 +16,9 @@\n      * This move keeps the horizontal/vertical position of the snake as it is.\n      * Move down one cell if there are no blocked cells there. \n      * This move keeps the horizontal/vertical position of the snake as it is.\n      * Rotate clockwise if it's in a horizontal position and the two cells under it are both empty. \n-     * In that case the snake moves from (r, c) and (r, c+1) to (r, c) and (r+1, c).\n-     */\n+     * In that case the snake moves from (r, c) and (r, c+1) to (r, c) and (r+1, c). */\n     int minimumMoves(const grid& g) \n     {\n         return 0;\n     }\n"
+                }
+            ],
+            "date": 1725118812204,
+            "name": "Commit-0",
+            "content": "\n\n"
+        }
+    ]
+}

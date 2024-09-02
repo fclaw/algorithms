@@ -1,0 +1,302 @@
+{
+    "sourceFile": "algorithms/graph/leetcode/shortestPathBinaryMatrix.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 71,
+            "patches": [
+                {
+                    "date": 1725212326117,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1725212332781,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n \n \n-namespace algorithms::graph::leetcode::shortest_b\n\\ No newline at end of file\n+namespace algorithms::graph::leetcode::shortest_path_\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725212346071,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n \n \n-namespace algorithms::graph::leetcode::shortest_path_\n\\ No newline at end of file\n+namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725212357737,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,8 @@\n \n \n-namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n\\ No newline at end of file\n+namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n+{\n+    int shortestPathBinaryMatrix(vector<vector<int>>& grid) {\n+        \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725212364009,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n \n \n namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n {\n-    int shortestPathBinaryMatrix(vector<vector<int>>& grid) {\n-        \n+    int shortestPathBinaryMatrix(vector<vector<int>>& grid) \n+    {\n+        return 0;   \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725212372188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+#include <ve\n \n \n namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n {\n"
+                },
+                {
+                    "date": 1725212377303,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,12 @@\n-#include <ve\n+#include <vector>\n \n \n namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n {\n+\n+\n+\n     int shortestPathBinaryMatrix(vector<vector<int>>& grid) \n     {\n         return 0;   \n     }\n"
+                },
+                {
+                    "date": 1725212385100,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,10 @@\n \n namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n {\n \n+using matrix = \n \n-\n     int shortestPathBinaryMatrix(vector<vector<int>>& grid) \n     {\n         return 0;   \n     }\n"
+                },
+                {
+                    "date": 1725212391849,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n {\n \n-using matrix = \n+using matrix = std::vector<vector<int>>\n \n     int shortestPathBinaryMatrix(vector<vector<int>>& grid) \n     {\n         return 0;   \n"
+                },
+                {
+                    "date": 1725212402787,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,11 +3,11 @@\n \n namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n {\n \n-using matrix = std::vector<vector<int>>\n+using matrix = std::vector<std::vector<int>>;\n \n-    int shortestPathBinaryMatrix(vector<vector<int>>& grid) \n+    int shortestPathBinaryMatrix(const & grid) \n     {\n         return 0;   \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725212414061,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,10 @@\n {\n \n using matrix = std::vector<std::vector<int>>;\n \n-    int shortestPathBinaryMatrix(const & grid) \n+    /\n+    int shortestPathBinaryMatrix(const matrix& grid) \n     {\n-        return 0;   \n+        return 0;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725212427893,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,18 @@\n {\n \n using matrix = std::vector<std::vector<int>>;\n \n-    /\n+    /**\n+     * https://leetcode.com/problems/shortest-path-in-binary-matrix\n+     * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. If there is no clear path, return -1.\n+\n+A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n+\n+All the visited cells of the path are 0.\n+All the adjacent cells of the path are 8-directionally connected (i.e., they are different and they share an edge or a corner).\n+The length of a clear path is the number of visited cells of this path.\n+     */\n     int shortestPathBinaryMatrix(const matrix& grid) \n     {\n         return 0;\n     }\n"
+                },
+                {
+                    "date": 1725212435883,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,10 @@\n using matrix = std::vector<std::vector<int>>;\n \n     /**\n      * https://leetcode.com/problems/shortest-path-in-binary-matrix\n-     * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. If there is no clear path, return -1.\n+     * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n+     * If there is no clear path, return -1.\n \n A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n \n All the visited cells of the path are 0.\n"
+                },
+                {
+                    "date": 1725212447983,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,11 +9,11 @@\n     /**\n      * https://leetcode.com/problems/shortest-path-in-binary-matrix\n      * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n      * If there is no clear path, return -1.\n+     * A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) \n+     * to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n \n-A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n-\n All the visited cells of the path are 0.\n All the adjacent cells of the path are 8-directionally connected (i.e., they are different and they share an edge or a corner).\n The length of a clear path is the number of visited cells of this path.\n      */\n"
+                },
+                {
+                    "date": 1725212453546,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,10 +11,9 @@\n      * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n      * If there is no clear path, return -1.\n      * A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) \n      * to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n-\n-All the visited cells of the path are 0.\n+     * All the visited cells of the path are 0.\n All the adjacent cells of the path are 8-directionally connected (i.e., they are different and they share an edge or a corner).\n The length of a clear path is the number of visited cells of this path.\n      */\n     int shortestPathBinaryMatrix(const matrix& grid) \n"
+                },
+                {
+                    "date": 1725212458623,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n      * If there is no clear path, return -1.\n      * A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) \n      * to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n      * All the visited cells of the path are 0.\n-All the adjacent cells of the path are 8-directionally connected (i.e., they are different and they share an edge or a corner).\n+     * All the adjacent cells of the path are 8-directionally connected (i.e., they are different and they share an edge or a corner).\n The length of a clear path is the number of visited cells of this path.\n      */\n     int shortestPathBinaryMatrix(const matrix& grid) \n     {\n"
+                },
+                {
+                    "date": 1725212469151,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n      * A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) \n      * to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n      * All the visited cells of the path are 0.\n      * All the adjacent cells of the path are 8-directionally connected (i.e., they are different and they share an edge or a corner).\n-The length of a clear path is the number of visited cells of this path.\n+     * The length of a clear path is the number of visited cells of this path.\n      */\n     int shortestPathBinaryMatrix(const matrix& grid) \n     {\n         return 0;\n"
+                },
+                {
+                    "date": 1725212485262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,11 +12,11 @@\n      * If there is no clear path, return -1.\n      * A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) \n      * to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n      * All the visited cells of the path are 0.\n-     * All the adjacent cells of the path are 8-directionally connected (i.e., they are different and they share an edge or a corner).\n-     * The length of a clear path is the number of visited cells of this path.\n-     */\n+     * All the adjacent cells of the path are 8-directionally connected \n+     * (i.e., they are different and they share an edge or a corner).\n+     * The length of a clear path is the number of visited cells of this path. */\n     int shortestPathBinaryMatrix(const matrix& grid) \n     {\n         return 0;\n     }\n"
+                },
+                {
+                    "date": 1725212491933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n      * All the visited cells of the path are 0.\n      * All the adjacent cells of the path are 8-directionally connected \n      * (i.e., they are different and they share an edge or a corner).\n      * The length of a clear path is the number of visited cells of this path. */\n-    int shortestPathBinaryMatrix(const matrix& grid) \n+    int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         return 0;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725212502425,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,10 @@\n      * to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n      * All the visited cells of the path are 0.\n      * All the adjacent cells of the path are 8-directionally connected \n      * (i.e., they are different and they share an edge or a corner).\n-     * The length of a clear path is the number of visited cells of this path. */\n+     * The length of a clear path is the number of visited cells of this path.\n+     * Do a breadth first search to find the shortest path */\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         return 0;\n     }\n"
+                },
+                {
+                    "date": 1725212510556,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,24 @@\n+#include <vector>\n+\n+\n+namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n+{\n+\n+using matrix = std::vector<std::vector<int>>;\n+\n+    /**\n+     * https://leetcode.com/problems/shortest-path-in-binary-matrix\n+     * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n+     * If there is no clear path, return -1.\n+     * A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) \n+     * to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n+     * All the visited cells of the path are 0.\n+     * All the adjacent cells of the path are 8-directionally connected \n+     * (i.e., they are different and they share an edge or a corner).\n+     * The length of a clear path is the number of visited cells of this path.\n+     * hint: Do a breadth first search to find the shortest path */\n+    int shortestPathBinaryMatrix(const matrix& grid)\n+    {\n+        return 0;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725212518741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,29 +20,5 @@\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         return 0;\n     }\n-}\n-#include <vector>\n-\n-\n-namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n-{\n-\n-using matrix = std::vector<std::vector<int>>;\n-\n-    /**\n-     * https://leetcode.com/problems/shortest-path-in-binary-matrix\n-     * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n-     * If there is no clear path, return -1.\n-     * A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) \n-     * to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n-     * All the visited cells of the path are 0.\n-     * All the adjacent cells of the path are 8-directionally connected \n-     * (i.e., they are different and they share an edge or a corner).\n-     * The length of a clear path is the number of visited cells of this path.\n-     * Do a breadth first search to find the shortest path */\n-    int shortestPathBinaryMatrix(const matrix& grid)\n-    {\n-        return 0;\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278367478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,25 @@\n+#include <vector>\n+\n+\n+namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n+{\n+\n+using matrix = std::vector<std::vector<int>>;\n+\n+    /**\n+     * https://leetcode.com/problems/shortest-path-in-binary-matrix\n+     * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n+     * If there is no clear path, return -1.\n+     * A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) \n+     * to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n+     * All the visited cells of the path are 0.\n+     * All the adjacent cells of the path are 8-directionally connected \n+     * (i.e., they are different and they share an edge or a corner).\n+     * The length of a clear path is the number of visited cells of this path.\n+     * hint: Do a breadth first search to find the shortest path */\n+    \n+    int shortestPathBinaryMatrix(const matrix& grid)\n+    {\n+        return 0;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278373200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,34 +16,10 @@\n      * All the adjacent cells of the path are 8-directionally connected \n      * (i.e., they are different and they share an edge or a corner).\n      * The length of a clear path is the number of visited cells of this path.\n      * hint: Do a breadth first search to find the shortest path */\n-    \n+    const it \n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         return 0;\n     }\n-}\n-#include <vector>\n-\n-\n-namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n-{\n-\n-using matrix = std::vector<std::vector<int>>;\n-\n-    /**\n-     * https://leetcode.com/problems/shortest-path-in-binary-matrix\n-     * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n-     * If there is no clear path, return -1.\n-     * A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) \n-     * to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n-     * All the visited cells of the path are 0.\n-     * All the adjacent cells of the path are 8-directionally connected \n-     * (i.e., they are different and they share an edge or a corner).\n-     * The length of a clear path is the number of visited cells of this path.\n-     * hint: Do a breadth first search to find the shortest path */\n-    int shortestPathBinaryMatrix(const matrix& grid)\n-    {\n-        return 0;\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278386841,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,10 @@\n      * All the adjacent cells of the path are 8-directionally connected \n      * (i.e., they are different and they share an edge or a corner).\n      * The length of a clear path is the number of visited cells of this path.\n      * hint: Do a breadth first search to find the shortest path */\n-    const it \n+    const int Empty = 0;\n+    const int O\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         return 0;\n     }\n"
+                },
+                {
+                    "date": 1725278392109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,10 @@\n      * (i.e., they are different and they share an edge or a corner).\n      * The length of a clear path is the number of visited cells of this path.\n      * hint: Do a breadth first search to find the shortest path */\n     const int Empty = 0;\n-    const int O\n+    const int Block = 1;\n+    \n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         return 0;\n     }\n"
+                },
+                {
+                    "date": 1725278409149,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,12 @@\n      * The length of a clear path is the number of visited cells of this path.\n      * hint: Do a breadth first search to find the shortest path */\n     const int Empty = 0;\n     const int Block = 1;\n-    \n+        int M, N, K;\n+    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};\n+    bool checkBoundary(int r, int c) \n+    { return r >= 0 && r < M && c >= 0 && c < N; }\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         return 0;\n     }\n"
+                },
+                {
+                    "date": 1725278423310,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n {\n \n using matrix = std::vector<std::vector<int>>;\n+using dir = std::vector<std::pair<int, int>>;\n \n     /**\n      * https://leetcode.com/problems/shortest-path-in-binary-matrix\n      * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n@@ -18,9 +19,9 @@\n      * The length of a clear path is the number of visited cells of this path.\n      * hint: Do a breadth first search to find the shortest path */\n     const int Empty = 0;\n     const int Block = 1;\n-        int M, N, K;\n+    int M, N;\n     dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n     int shortestPathBinaryMatrix(const matrix& grid)\n"
+                },
+                {
+                    "date": 1725278433817,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n      * hint: Do a breadth first search to find the shortest path */\n     const int Empty = 0;\n     const int Block = 1;\n     int M, N;\n-    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}};\n+    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, };\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n"
+                },
+                {
+                    "date": 1725278482452,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n      * hint: Do a breadth first search to find the shortest path */\n     const int Empty = 0;\n     const int Block = 1;\n     int M, N;\n-    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, };\n+    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {}};\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n"
+                },
+                {
+                    "date": 1725278488113,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n      * hint: Do a breadth first search to find the shortest path */\n     const int Empty = 0;\n     const int Block = 1;\n     int M, N;\n-    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {}};\n+    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {1, 1}};\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n"
+                },
+                {
+                    "date": 1725278497003,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n      * hint: Do a breadth first search to find the shortest path */\n     const int Empty = 0;\n     const int Block = 1;\n     int M, N;\n-    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {1, 1}};\n+    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {1, 1}, {1, -1}, {}};\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n"
+                },
+                {
+                    "date": 1725278509596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n      * hint: Do a breadth first search to find the shortest path */\n     const int Empty = 0;\n     const int Block = 1;\n     int M, N;\n-    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {1, 1}, {1, -1}, {}};\n+    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {1, 1}, {1, -1}, {-1, -1}};\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n"
+                },
+                {
+                    "date": 1725278527197,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,7 +25,8 @@\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n+        \n         return 0;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278543807,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,9 @@\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n-        \n+        M = grid.size();\n+        N = grid[0].size();\n         return 0;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278559717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n {\n \n using matrix = std::vector<std::vector<int>>;\n using dir = std::vector<std::pair<int, int>>;\n+using vi = std::vector<std::vector<std::vector<bool>>>;\n \n     /**\n      * https://leetcode.com/problems/shortest-path-in-binary-matrix\n      * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n@@ -27,7 +28,8 @@\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n+\n         return 0;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278573388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n #include <vector>\n+#include <queue>\n \n-\n namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n {\n \n using matrix = std::vector<std::vector<int>>;\n"
+                },
+                {
+                    "date": 1725278583856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,8 +28,8 @@\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n-\n+        \n         return 0;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278589269,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n     int M, N;\n     dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {1, 1}, {1, -1}, {-1, -1}};\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n+    vi si\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n"
+                },
+                {
+                    "date": 1725278602486,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n     int M, N;\n     dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {1, 1}, {1, -1}, {-1, -1}};\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n-    vi si\n+    vi visited;\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n"
+                },
+                {
+                    "date": 1725278619193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n \n using matrix = std::vector<std::vector<int>>;\n using dir = std::vector<std::pair<int, int>>;\n using vi = std::vector<std::vector<std::vector<bool>>>;\n+using dist\n \n     /**\n      * https://leetcode.com/problems/shortest-path-in-binary-matrix\n      * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n@@ -25,8 +26,9 @@\n     dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {1, 1}, {1, -1}, {-1, -1}};\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n     vi visited;\n+\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n"
+                },
+                {
+                    "date": 1725278629813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n using matrix = std::vector<std::vector<int>>;\n using dir = std::vector<std::pair<int, int>>;\n using vi = std::vector<std::vector<std::vector<bool>>>;\n-using dist\n+using dist = std::vector<std::vector<std::vector<bool>>>;\n \n     /**\n      * https://leetcode.com/problems/shortest-path-in-binary-matrix\n      * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n"
+                },
+                {
+                    "date": 1725278651387,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n     dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {1, 1}, {1, -1}, {-1, -1}};\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n     vi visited;\n-\n+    \n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n"
+                },
+                {
+                    "date": 1725278656567,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n     dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {1, 1}, {1, -1}, {-1, -1}};\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n     vi visited;\n-    \n+    dist distance;\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n"
+                },
+                {
+                    "date": 1725278662434,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,7 +32,7 @@\n     {\n         M = grid.size();\n         N = grid[0].size();\n         \n-        return 0;\n+        return distanc[];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278670008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,7 +32,7 @@\n     {\n         M = grid.size();\n         N = grid[0].size();\n         \n-        return distanc[];\n+        return distanc - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278676320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,7 +32,7 @@\n     {\n         M = grid.size();\n         N = grid[0].size();\n         \n-        return distanc - 1][N - 1];\n+        return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278689662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n using matrix = std::vector<std::vector<int>>;\n using dir = std::vector<std::pair<int, int>>;\n using vi = std::vector<std::vector<std::vector<bool>>>;\n-using dist = std::vector<std::vector<std::vector<bool>>>;\n+using dist = std::vector<std::vector<std::vector<int>>>;\n \n     /**\n      * https://leetcode.com/problems/shortest-path-in-binary-matrix\n      * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n"
+                },
+                {
+                    "date": 1725278699035,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n using matrix = std::vector<std::vector<int>>;\n using dir = std::vector<std::pair<int, int>>;\n using vi = std::vector<std::vector<std::vector<bool>>>;\n-using dist = std::vector<std::vector<std::vector<int>>>;\n+using dist = std::vector<std::vectorint>>>;\n \n     /**\n      * https://leetcode.com/problems/shortest-path-in-binary-matrix\n      * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n"
+                },
+                {
+                    "date": 1725278707955,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,10 @@\n {\n \n using matrix = std::vector<std::vector<int>>;\n using dir = std::vector<std::pair<int, int>>;\n-using vi = std::vector<std::vector<std::vector<bool>>>;\n-using dist = std::vector<std::vectorint>>>;\n+using vi = std::vector<std::vector<bool>>;\n+using dist = std::vector<std::vector<int>>;\n \n     /**\n      * https://leetcode.com/problems/shortest-path-in-binary-matrix\n      * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n"
+                },
+                {
+                    "date": 1725278736792,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,8 @@\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n-        \n+        visited = \n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278749845,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,8 @@\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n-        visited = \n+        visited = vi(M, std::vector<bool>)\n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278757784,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,8 @@\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n-        visited = vi(M, std::vector<bool>)\n+        visited = vi(M, std::vector<bool>(N), false)\n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278766391,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,8 @@\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n-        visited = vi(M, std::vector<bool>(N), false)\n+        visited = vi(M, std::vector<bool>(N), false));\n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278773099,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,8 @@\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n-        visited = vi(M, std::vector<bool>(N), false));\n+        visited = vi(M, std::vector<bool>(N, false));\n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278781295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,7 +32,8 @@\n     {\n         M = grid.size();\n         N = grid[0].size();\n         visited = vi(M, std::vector<bool>(N, false));\n+        visited = vi(M, std::vector<bool>(N, false));\n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278796491,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n      * All the adjacent cells of the path are 8-directionally connected \n      * (i.e., they are different and they share an edge or a corner).\n      * The length of a clear path is the number of visited cells of this path.\n      * hint: Do a breadth first search to find the shortest path */\n+    const int inf = 5 * 1e+05;\n     const int Empty = 0;\n     const int Block = 1;\n     int M, N;\n     dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {1, 1}, {1, -1}, {-1, -1}};\n@@ -32,8 +33,8 @@\n     {\n         M = grid.size();\n         N = grid[0].size();\n         visited = vi(M, std::vector<bool>(N, false));\n-        visited = vi(M, std::vector<bool>(N, false));\n+        dist = vi(M, std::vector<bool>(N, false));\n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278801803,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,8 @@\n     {\n         M = grid.size();\n         N = grid[0].size();\n         visited = vi(M, std::vector<bool>(N, false));\n-        dist = vi(M, std::vector<bool>(N, false));\n+        dist = v(M, std::vector<bool>(N, false));\n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278808908,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,8 @@\n     {\n         M = grid.size();\n         N = grid[0].size();\n         visited = vi(M, std::vector<bool>(N, false));\n-        dist = v(M, std::vector<bool>(N, false));\n+        distance = dist(M, std::vector<bool>(N, false));\n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278813933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,8 @@\n     {\n         M = grid.size();\n         N = grid[0].size();\n         visited = vi(M, std::vector<bool>(N, false));\n-        distance = dist(M, std::vector<bool>(N, false));\n+        distance = dist(M, std::vector<int>(N, false));\n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278820362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,8 +33,9 @@\n     {\n         M = grid.size();\n         N = grid[0].size();\n         visited = vi(M, std::vector<bool>(N, false));\n-        distance = dist(M, std::vector<int>(N, false));\n+        distance = dist(M, std::vector<int>(N, inf));\n+        \n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278831271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,8 +34,9 @@\n         M = grid.size();\n         N = grid[0].size();\n         visited = vi(M, std::vector<bool>(N, false));\n         distance = dist(M, std::vector<int>(N, inf));\n+        visited[0][0] = true;\n         \n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278839573,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,8 +35,8 @@\n         N = grid[0].size();\n         visited = vi(M, std::vector<bool>(N, false));\n         distance = dist(M, std::vector<int>(N, inf));\n         visited[0][0] = true;\n-        \n+        distance[0][0] = 0;\n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278852935,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,7 +36,8 @@\n         visited = vi(M, std::vector<bool>(N, false));\n         distance = dist(M, std::vector<int>(N, inf));\n         visited[0][0] = true;\n         distance[0][0] = 0;\n+        bfs(grid, )\n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278858026,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,12 +32,13 @@\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n+        \n         visited = vi(M, std::vector<bool>(N, false));\n         distance = dist(M, std::vector<int>(N, inf));\n         visited[0][0] = true;\n         distance[0][0] = 0;\n-        bfs(grid, )\n+        bfs(grid, q);\n         return distance[M - 1][N - 1];\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278863815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n-        \n+        std::queue<i>\n         visited = vi(M, std::vector<bool>(N, false));\n         distance = dist(M, std::vector<int>(N, inf));\n         visited[0][0] = true;\n         distance[0][0] = 0;\n"
+                },
+                {
+                    "date": 1725278868873,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,44 @@\n+#include <vector>\n+#include <queue>\n+\n+namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n+{\n+\n+using matrix = std::vector<std::vector<int>>;\n+using dir = std::vector<std::pair<int, int>>;\n+using vi = std::vector<std::vector<bool>>;\n+using dist = std::vector<std::vector<int>>;\n+\n+    /**\n+     * https://leetcode.com/problems/shortest-path-in-binary-matrix\n+     * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n+     * If there is no clear path, return -1.\n+     * A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) \n+     * to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n+     * All the visited cells of the path are 0.\n+     * All the adjacent cells of the path are 8-directionally connected \n+     * (i.e., they are different and they share an edge or a corner).\n+     * The length of a clear path is the number of visited cells of this path.\n+     * hint: Do a breadth first search to find the shortest path */\n+    const int inf = 5 * 1e+05;\n+    const int Empty = 0;\n+    const int Block = 1;\n+    int M, N;\n+    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {1, 1}, {1, -1}, {-1, -1}};\n+    bool checkBoundary(int r, int c) \n+    { return r >= 0 && r < M && c >= 0 && c < N; }\n+    vi visited;\n+    dist distance;\n+    int shortestPathBinaryMatrix(const matrix& grid)\n+    {\n+        M = grid.size();\n+        N = grid[0].size();\n+        std::queue<int> q;\n+        visited = vi(M, std::vector<bool>(N, false));\n+        distance = dist(M, std::vector<int>(N, inf));\n+        visited[0][0] = true;\n+        distance[0][0] = 0;\n+        bfs(grid, q);\n+        return distance[M - 1][N - 1];\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278875005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,8 +28,9 @@\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n     vi visited;\n     dist distance;\n+    void \n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n@@ -40,49 +41,5 @@\n         distance[0][0] = 0;\n         bfs(grid, q);\n         return distance[M - 1][N - 1];\n     }\n-}\n-#include <vector>\n-#include <queue>\n-\n-namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n-{\n-\n-using matrix = std::vector<std::vector<int>>;\n-using dir = std::vector<std::pair<int, int>>;\n-using vi = std::vector<std::vector<bool>>;\n-using dist = std::vector<std::vector<int>>;\n-\n-    /**\n-     * https://leetcode.com/problems/shortest-path-in-binary-matrix\n-     * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n-     * If there is no clear path, return -1.\n-     * A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) \n-     * to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n-     * All the visited cells of the path are 0.\n-     * All the adjacent cells of the path are 8-directionally connected \n-     * (i.e., they are different and they share an edge or a corner).\n-     * The length of a clear path is the number of visited cells of this path.\n-     * hint: Do a breadth first search to find the shortest path */\n-    const int inf = 5 * 1e+05;\n-    const int Empty = 0;\n-    const int Block = 1;\n-    int M, N;\n-    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {1, 1}, {1, -1}, {-1, -1}};\n-    bool checkBoundary(int r, int c) \n-    { return r >= 0 && r < M && c >= 0 && c < N; }\n-    vi visited;\n-    dist distance;\n-    int shortestPathBinaryMatrix(const matrix& grid)\n-    {\n-        M = grid.size();\n-        N = grid[0].size();\n-        std::queue<i>\n-        visited = vi(M, std::vector<bool>(N, false));\n-        distance = dist(M, std::vector<int>(N, inf));\n-        visited[0][0] = true;\n-        distance[0][0] = 0;\n-        bfs(grid, q);\n-        return distance[M - 1][N - 1];\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278887750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n     vi visited;\n     dist distance;\n-    void \n+    void bfs(const )\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n"
+                },
+                {
+                    "date": 1725278893875,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,45 @@\n+#include <vector>\n+#include <queue>\n+\n+namespace algorithms::graph::leetcode::shortest_path_in_binary_matrix\n+{\n+\n+using matrix = std::vector<std::vector<int>>;\n+using dir = std::vector<std::pair<int, int>>;\n+using vi = std::vector<std::vector<bool>>;\n+using dist = std::vector<std::vector<int>>;\n+\n+    /**\n+     * https://leetcode.com/problems/shortest-path-in-binary-matrix\n+     * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix. \n+     * If there is no clear path, return -1.\n+     * A clear path in a binary matrix is a path from the top-left cell (i.e., (0, 0)) \n+     * to the bottom-right cell (i.e., (n - 1, n - 1)) such that:\n+     * All the visited cells of the path are 0.\n+     * All the adjacent cells of the path are 8-directionally connected \n+     * (i.e., they are different and they share an edge or a corner).\n+     * The length of a clear path is the number of visited cells of this path.\n+     * hint: Do a breadth first search to find the shortest path */\n+    const int inf = 5 * 1e+05;\n+    const int Empty = 0;\n+    const int Block = 1;\n+    int M, N;\n+    dir dirs = {{0, -1}, {-1, 0}, {0, 1}, {1, 0}, {-1, 1}, {1, 1}, {1, -1}, {-1, -1}};\n+    bool checkBoundary(int r, int c) \n+    { return r >= 0 && r < M && c >= 0 && c < N; }\n+    vi visited;\n+    dist distance;\n+    void bfs(const matrix& grid, )\n+    int shortestPathBinaryMatrix(const matrix& grid)\n+    {\n+        M = grid.size();\n+        N = grid[0].size();\n+        std::queue<int> q;\n+        visited = vi(M, std::vector<bool>(N, false));\n+        distance = dist(M, std::vector<int>(N, inf));\n+        visited[0][0] = true;\n+        distance[0][0] = 0;\n+        bfs(grid, q);\n+        return distance[M - 1][N - 1];\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725278900070,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n     bool checkBoundary(int r, int c) \n     { return r >= 0 && r < M && c >= 0 && c < N; }\n     vi visited;\n     dist distance;\n-    void bfs(const matrix& grid, std::q)\n+    void bfs(const matrix& grid, std::queue<int>&)\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n         N = grid[0].size();\n"
+                },
+                {
+                    "date": 1725278918393,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,11 @@\n     dist distance;\n     void bfs(const matrix& grid, std::queue<int>& q)\n     {\n         while(!q.empty())\n+        {\n+            \n+        }\n     }\n     int shortestPathBinaryMatrix(const matrix& grid)\n     {\n         M = grid.size();\n"
+                }
+            ],
+            "date": 1725212326117,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::graph::leetcode::shortest_b"
+        }
+    ]
+}

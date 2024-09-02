@@ -128,6 +128,7 @@
 #include "algorithms/graph/leetcode/findRedundantConnection.cpp"
 #include "algorithms/graph/leetcode/minCostConnectPoints.cpp"
 #include "algorithms/graph/leetcode/maximumDetonation.cpp"
+#include "algorithms/graph/leetcode/shortestPathBinaryMatrix.cpp"
 #include "algorithms/graph/onlinejudge/dungeon.cpp"
 #include "algorithms/graph/scc.cpp"
 #include "algorithms/graph/kruskal.cpp"
@@ -166,11 +167,5 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
     
-    auto xxs = algorithms::backtrack::leetcode::all_path::allPathsSourceTarget({{4,3,1}, {3,2,4}, {3}, {4}, {}});
-    for(auto xs : xxs)
-    {
-        for(auto x : xs)
-          cout << x << " ";
-        cout << "\n";  
-    }
+    cout << algorithms::graph::leetcode::shortest_path_in_binary_matrix::shortestPathBinaryMatrix({{1,0,0}, {1,1,0}, {1,1,0}});
 }

@@ -121,6 +121,7 @@
 #include "algorithms/graph/leetcode/findLadders.cpp"
 #include "algorithms/graph/connectedComponents.cpp"
 #include "algorithms/graph/leetcode/minimumMoves.cpp"
+#include "algorithms/graph/leetcode/slidingPuzzle.cpp"
 #include "algorithms/graph/articulationPoints.cpp"
 #include "algorithms/graph/sf_dijkstra.cpp"
 #include "algorithms/graph/leetcode/criticalConnections.cpp"
@@ -167,36 +168,6 @@ int main()
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
-    
-    // algorithms::graph::leetcode::snake::grid g = 
-    // {{0,0,0,0,,1}, 
-    //  {1,1,0,0,1,0}, 
-    //  {0,0,0,0,1,1}, 
-    //  {0,0,1,0,1,0}, 
-    //  {0,1,1,0,0,0}, 
-    //  {0,1,1,0,0,0}};
-    algorithms::graph::leetcode::snake::grid g = 
-    {{0,0,0,0,1,1}, 
-     {1,1,0,0,0,1}, 
-     {1,1,1,0,0,1}, 
-     {1,1,1,0,1,1}, 
-     {1,1,1,0,0,1}, 
-     {1,1,1,0,0,0}};
-    // algorithms::graph::leetcode::snake::grid g = 
-    // {{0,0,1,0,0,0,0,0,0,0,0,0,0,0,0}, 
-    //  {0,1,0,1,1,0,0,1,0,0,0,0,1,0,0}, 
-    //  {0,1,0,0,0,0,1,0,0,1,0,0,0,0,0},
-    //  {0,0,0,0,0,0,1,0,0,0,0,0,0,0,0},
-    //  {0,0,0,0,0,0,1,1,0,0,0,0,0,0,0},
-    //  {0,0,0,0,0,0,0,0,0,1,0,1,0,0,0},
-    //  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    //  {0,0,0,1,0,1,0,0,1,0,0,0,1,0,0},
-    //  {0,0,0,0,1,0,0,0,0,0,0,0,0,1,0},
-    //  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    //  {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0},
-    //  {1,0,1,1,0,0,0,0,0,0,0,0,0,0,0},
-    //  {0,0,0,0,0,0,0,0,0,0,0,0,0,1,0},
-    //  {1,0,0,0,0,0,1,0,0,0,1,0,0,0,1},
-    //  {0,0,1,0,1,0,0,0,0,0,0,0,0,0,0}};
-    cout << algorithms::graph::leetcode::snake::minimumMoves(g);
+
+    cout << algorithms::graph::leetcode::sliding_puzzle::slidingPuzzle({{0,2,4}, {1,5,3}}); // 9
 }

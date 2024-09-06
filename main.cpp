@@ -123,6 +123,7 @@
 #include "algorithms/graph/leetcode/minimumMoves.cpp"
 #include "algorithms/graph/leetcode/slidingPuzzle.cpp"
 #include "algorithms/graph/articulationPoints.cpp"
+#include "algorithms/graph/leetcode/containsCycle.cpp"
 #include "algorithms/graph/sf_dijkstra.cpp"
 #include "algorithms/graph/leetcode/criticalConnections.cpp"
 #include "algorithms/graph/leetcode/findCheapestPrice.cpp"
@@ -169,5 +170,23 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    cout << algorithms::graph::leetcode::sliding_puzzle::slidingPuzzle({{0,2,4}, {1,5,3}}); // 9
+    // algorithms::graph::leetcode::grid_cycles::grid g =
+    // {{'b', 'a', 'c'},
+    //   {'c', 'a', 'c'},
+    //   {'d', 'd', 'c'},
+    //   {'b', 'c', 'c'} };
+    // algorithms::graph::leetcode::grid_cycles::grid g =
+    // {{'c', 'c', 'c', 'a'},
+    //   {'c', 'd', 'c', 'c'},
+    //   {'c', 'c', 'e', 'c'},
+    //   {'f', 'c', 'c', 'c'} };
+    // algorithms::graph::leetcode::grid_cycles::grid g =
+    // {{'f', 'a', 'a', 'u'},
+    //   {'d', 'a', 'a', 'g'}};
+    // algorithms::graph::leetcode::grid_cycles::grid g =
+    // {{'f', 'a', 'a', 'c', 'b'},
+    //   {'e', 'a', 'a', 'e', 'c'}};
+    // algorithms::graph::leetcode::grid_cycles::grid g = {{{'a'}, {'a'}, {'a'}}};
+    // algorithms::graph::leetcode::grid_cycles::grid g = {{'a', 'a'}, {'a', 'a'}};
+    cout << algorithms::graph::leetcode::grid_cycles::containsCycle(g);
 }

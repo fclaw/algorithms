@@ -124,6 +124,7 @@
 #include "algorithms/graph/leetcode/slidingPuzzle.cpp"
 #include "algorithms/graph/articulationPoints.cpp"
 #include "algorithms/graph/leetcode/containsCycle.cpp"
+#include "algorithms/graph/leetcode/minPushBox.cpp"
 #include "algorithms/graph/sf_dijkstra.cpp"
 #include "algorithms/graph/leetcode/criticalConnections.cpp"
 #include "algorithms/graph/leetcode/findCheapestPrice.cpp"
@@ -170,23 +171,29 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    // algorithms::graph::leetcode::grid_cycles::grid g =
-    // {{'b', 'a', 'c'},
-    //   {'c', 'a', 'c'},
-    //   {'d', 'd', 'c'},
-    //   {'b', 'c', 'c'} };
-    // algorithms::graph::leetcode::grid_cycles::grid g =
-    // {{'c', 'c', 'c', 'a'},
-    //   {'c', 'd', 'c', 'c'},
-    //   {'c', 'c', 'e', 'c'},
-    //   {'f', 'c', 'c', 'c'} };
-    // algorithms::graph::leetcode::grid_cycles::grid g =
-    // {{'f', 'a', 'a', 'u'},
-    //   {'d', 'a', 'a', 'g'}};
-    // algorithms::graph::leetcode::grid_cycles::grid g =
-    // {{'f', 'a', 'a', 'c', 'b'},
-    //   {'e', 'a', 'a', 'e', 'c'}};
-    // algorithms::graph::leetcode::grid_cycles::grid g = {{{'a'}, {'a'}, {'a'}}};
-    // algorithms::graph::leetcode::grid_cycles::grid g = {{'a', 'a'}, {'a', 'a'}};
-    cout << algorithms::graph::leetcode::grid_cycles::containsCycle(g);
+    algorithms::graph::leetcode::push_box::grid g = 
+    {{"#",".",".","#","#","#","#","#"},
+     {"#",".",".","T","#",".",".","#"},
+     {"#",".",".",".","#","B",".","#"},
+     {"#",".",".",".",".",".",".","#"},
+     {"#",".",".",".","#",".","S","#"},
+     {"#",".",".","#","#","#","#","#"}};
+    // algorithms::graph::leetcode::push_box::grid g = 
+    // {{"#",".",".",".",".",".",".",".",".","."},
+    //  {".",".",".",".",".","#",".",".",".","#"},
+    //  {"#",".","#",".",".","T",".",".",".","."},
+    //  {".","#",".",".",".",".",".",".",".","."},
+    //  {".",".",".",".",".",".","#",".",".","."},
+    //  {".",".",".","#","#","S",".","B",".","."},
+    //  {"#",".",".",".",".",".",".","#",".","."},
+    //  {".","#",".",".",".",".",".",".",".","."},
+    //  {".",".",".",".",".",".",".",".",".","."},
+    //  {".",".",".",".",".","#",".",".",".","."}};
+    // algorithms::graph::leetcode::push_box::grid g = 
+    // {{".",".","."},
+    //  {".",".","."},
+    //  {"#","B","."},
+    //  {"S","T","#"}};
+    cout << algorithms::graph::leetcode::push_box::minPushBox(g);
+
 }

@@ -1,0 +1,82 @@
+{
+    "sourceFile": "algorithms/graph/leetcode/shortestPathLength.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 16,
+            "patches": [
+                {
+                    "date": 1725631747284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1725631757662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n \n \n-namespace \n\\ No newline at end of file\n+namespace algorithms::graph::leetcode::\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725631770717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n \n \n-namespace algorithms::graph::leetcode::\n\\ No newline at end of file\n+namespace algorithms::graph::leetcode::sp_all_nodes\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725631790570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,8 @@\n \n \n-namespace algorithms::graph::leetcode::sp_all_nodes\n\\ No newline at end of file\n+namespace algorithms::graph::leetcode::sp_all_nodes\n+{\n+    /** https://leetcode.com/problems/shortest-path-visiting-all-nodes\n+     * \n+     */\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725631799958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,12 @@\n \n \n namespace algorithms::graph::leetcode::sp_all_nodes\n {\n-    /** https://leetcode.com/problems/shortest-path-visiting-all-nodes\n+    /** \n+     * https://leetcode.com/problems/shortest-path-visiting-all-nodes\n      * \n      */\n+    int shortestPathLength(vector<vector<int>>& graph) {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725631805014,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n     /** \n      * https://leetcode.com/problems/shortest-path-visiting-all-nodes\n      * \n      */\n-    int shortestPathLength(vector<vector<int>>& graph) {\n-        \n+    int shortestPathLength(vector<vector<int>>& graph) \n+    {\n+        return 1;    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725631816135,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,11 @@\n \n \n namespace algorithms::graph::leetcode::sp_all_nodes\n {\n+\n+using graph = \n+\n     /** \n      * https://leetcode.com/problems/shortest-path-visiting-all-nodes\n      * \n      */\n"
+                },
+                {
+                    "date": 1725631830501,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::graph::leetcode::sp_all_nodes\n {\n \n-using graph = \n+using graph = std::vector<vector<int>>;\n \n     /** \n      * https://leetcode.com/problems/shortest-path-visiting-all-nodes\n      * \n"
+                },
+                {
+                    "date": 1725631835529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::graph::leetcode::sp_all_nodes\n {\n \n-using graph = std::vector<vector<int>>;\n+using graph = std::vector<std::vector<int>>;\n \n     /** \n      * https://leetcode.com/problems/shortest-path-visiting-all-nodes\n      * \n"
+                },
+                {
+                    "date": 1725631844130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+#include <vector>\n \n-\n namespace algorithms::graph::leetcode::sp_all_nodes\n {\n \n using graph = std::vector<std::vector<int>>;\n"
+                },
+                {
+                    "date": 1725631979360,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,11 @@\n using graph = std::vector<std::vector<int>>;\n \n     /** \n      * https://leetcode.com/problems/shortest-path-visiting-all-nodes\n-     * \n+     * You have an undirected, connected graph of n nodes labeled from 0 to n - 1. You are given an array graph where graph[i] is a list of all the nodes connected with node i by an edge.\n+\n+Return the length of the shortest path that visits every node. You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.\n      */\n     int shortestPathLength(vector<vector<int>>& graph) \n     {\n         return 1;    \n"
+                },
+                {
+                    "date": 1725631994582,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,10 @@\n using graph = std::vector<std::vector<int>>;\n \n     /** \n      * https://leetcode.com/problems/shortest-path-visiting-all-nodes\n-     * You have an undirected, connected graph of n nodes labeled from 0 to n - 1. You are given an array graph where graph[i] is a list of all the nodes connected with node i by an edge.\n+     * You have an undirected, connected graph of n nodes labeled from 0 to n - 1. \n+     * You are given an array graph where graph[i] is a list of all the nodes connected with node i by an edge.\n \n Return the length of the shortest path that visits every node. You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.\n      */\n     int shortestPathLength(vector<vector<int>>& graph) \n"
+                },
+                {
+                    "date": 1725632000458,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,8 @@\n     /** \n      * https://leetcode.com/problems/shortest-path-visiting-all-nodes\n      * You have an undirected, connected graph of n nodes labeled from 0 to n - 1. \n      * You are given an array graph where graph[i] is a list of all the nodes connected with node i by an edge.\n-\n Return the length of the shortest path that visits every node. You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.\n      */\n     int shortestPathLength(vector<vector<int>>& graph) \n     {\n"
+                },
+                {
+                    "date": 1725632006558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n     /** \n      * https://leetcode.com/problems/shortest-path-visiting-all-nodes\n      * You have an undirected, connected graph of n nodes labeled from 0 to n - 1. \n      * You are given an array graph where graph[i] is a list of all the nodes connected with node i by an edge.\n-Return the length of the shortest path that visits every node. You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.\n+     * Return the length of the shortest path that visits every node. You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.\n      */\n     int shortestPathLength(vector<vector<int>>& graph) \n     {\n         return 1;    \n"
+                },
+                {
+                    "date": 1725632011686,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,10 @@\n     /** \n      * https://leetcode.com/problems/shortest-path-visiting-all-nodes\n      * You have an undirected, connected graph of n nodes labeled from 0 to n - 1. \n      * You are given an array graph where graph[i] is a list of all the nodes connected with node i by an edge.\n-     * Return the length of the shortest path that visits every node. You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.\n+     * Return the length of the shortest path that visits every node. \n+     * You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.\n      */\n     int shortestPathLength(vector<vector<int>>& graph) \n     {\n         return 1;    \n"
+                },
+                {
+                    "date": 1725632021525,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n      * You are given an array graph where graph[i] is a list of all the nodes connected with node i by an edge.\n      * Return the length of the shortest path that visits every node. \n      * You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.\n      */\n-    int shortestPathLength(vector<vector<int>>& graph) \n+    int shortestPathLength(const graph& graph) \n     {\n         return 1;    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725632027510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n      * You are given an array graph where graph[i] is a list of all the nodes connected with node i by an edge.\n      * Return the length of the shortest path that visits every node. \n      * You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.\n      */\n-    int shortestPathLength(const graph& graph) \n+    int shortestPathLength(const graph& g) \n     {\n-        return 1;    \n+        return 1;\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1725631747284,
+            "name": "Commit-0",
+            "content": "\n\nnamespace "
+        }
+    ]
+}

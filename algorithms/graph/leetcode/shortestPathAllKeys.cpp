@@ -7,11 +7,24 @@
 namespace algorithms::graph::leetcode::shortest_path_all_keys
 {
 
+struct cell_hash {
+    size_t operator()(const std::pair<int, int>& p) const
+    {
+        // Hash the first element
+        size_t first_hash = std::hash<int>{}(p.first);
+        // Hash the second element
+        size_t second_hash = std::hash<int>{}(p.second);
+        // Combine the two hash values
+        return first_hash ^ (second_hash + 0x9e3779b9 + (first_hash << 6) + (second_hash >> 2));
+    }
+};
+
 using grid = std::vector<std::string>;
 using cell = std::pair<int, int>;
 using dir = std::vector<std::pair<int, int>>;
 using vi = std::vector<std::vector<bool>>;
 using dist = std::vector<std::vector<int>>;
+using memo = std::unordered_map<cell, std::unordered_map<int, int>, cell_hash>;
 
     /**
      * https://leetcode.com/problems/shortest-path-to-get-all-keys
@@ -39,7 +52,8 @@ using dist = std::vector<std::vector<int>>;
     { return r >= 0 && r < M && c >= 0 && c < N; }
     bool isLock(const char& c) { return std::isalpha(c) && std::isupper(c); }
     int keyToInt(const char& key) { return (int)key - 97; }
-    int lockToInt(const char& lock) { return (int)lock - 65; } 
+    int lockToInt(const char& lock) { return (int)lock - 65; }
+ 
     int bfs(const grid& g, const cell& source, const cell& sink, int obtained_keys)
     {
         dist distance = dist(M, std::vector<int>(N, inf));
@@ -79,10 +93,15 @@ using dist = std::vector<std::vector<int>>;
         }
         return distance[sink.first][sink.second];
     }
-    int calculateMinPath(const grid& g, const cell& source, const std::unordered_map<int, cell>& keys, int mask) 
+    int calculateMinPath(const grid& g, const cell& source, const std::unordered_map<int, cell>& keys, int mask, memo& mt) 
     {
         if(mask == ((1 << K) - 1))
             return 0;
+
+        if(auto it_f = mt.find(source); it_f != mt.end())
+          if(auto it_s = (*it_f).second.find(mask); 
+             it_s != (*it_f).second.end())
+            return (*it_s).second;
 
         int path = inf;
         for(int k = 0; k < K; k++)
@@ -94,10 +113,10 @@ using dist = std::vector<std::vector<int>>;
             {
                 int res = bfs(g, source, (*it).second, mask);
                 if(res != inf)
-                  path = std::min(path, res + calculateMinPath(g, (*it).second, keys, (mask | (1 << k))));
+                  path = std::min(path, res + calculateMinPath(g, (*it).second, keys, (mask | (1 << k)), mt));
             }
         }
-        return path;
+        return mt[source][mask] = path;
     }
     int shortestPathAllKeys(const grid& g)
     {
@@ -117,7 +136,8 @@ using dist = std::vector<std::vector<int>>;
              if(g[r][c] == PLAYER)
                player = {r, c};  
           }
-        int ans = calculateMinPath(g, player, keys, 0);
+        memo mt;
+        int ans = calculateMinPath(g, player, keys, 0, mt);
         return ans == inf ? -1 : ans;
     }
 }

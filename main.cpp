@@ -173,7 +173,7 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    cout << algorithms::graph::leetcode::shortest_path_all_keys::shortestPathAllKeys({"@.a..","###.#","b.A.B"});
+    cout << algorithms::graph::leetcode::shortest_path_all_keys::shortestPathAllKeys({"@...a",".###A","b.BCc"});
 
 
 }

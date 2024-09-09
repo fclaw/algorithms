@@ -61,6 +61,7 @@
 #include "algorithms/dp/leetcode/minStepsOn2KeysKeyboardRec.cpp"
 #include "algorithms/dp/leetcode/burstBalloons.cpp"
 #include "algorithms/tree/leetcode/distanceK.cpp"
+#include "algorithms/tree/leetcode/levelOrder.cpp"
 #include "algorithms/bitsManipulation.cpp"
 #include "algorithms/subsetToTarget.cpp"
 #include "algorithms/ 8Queens.cpp"
@@ -171,29 +172,6 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    algorithms::graph::leetcode::push_box::grid g = 
-    {{"#",".",".","#","#","#","#","#"},
-     {"#",".",".","T","#",".",".","#"},
-     {"#",".",".",".","#","B",".","#"},
-     {"#",".",".",".",".",".",".","#"},
-     {"#",".",".",".","#",".","S","#"},
-     {"#",".",".","#","#","#","#","#"}};
-    // algorithms::graph::leetcode::push_box::grid g = 
-    // {{"#",".",".",".",".",".",".",".",".","."},
-    //  {".",".",".",".",".","#",".",".",".","#"},
-    //  {"#",".","#",".",".","T",".",".",".","."},
-    //  {".","#",".",".",".",".",".",".",".","."},
-    //  {".",".",".",".",".",".","#",".",".","."},
-    //  {".",".",".","#","#","S",".","B",".","."},
-    //  {"#",".",".",".",".",".",".","#",".","."},
-    //  {".","#",".",".",".",".",".",".",".","."},
-    //  {".",".",".",".",".",".",".",".",".","."},
-    //  {".",".",".",".",".","#",".",".",".","."}};
-    // algorithms::graph::leetcode::push_box::grid g = 
-    // {{".",".","."},
-    //  {".",".","."},
-    //  {"#","B","."},
-    //  {"S","T","#"}};
-    cout << algorithms::graph::leetcode::push_box::minPushBox(g);
+    auto xs = algorithms::tree::leetcode::level_order::levelOrder(nullptr); 
 
 }

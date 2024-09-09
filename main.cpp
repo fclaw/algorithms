@@ -120,6 +120,7 @@
 #include "algorithms/graph/leetcode/minimumEffortPath.cpp"
 #include "algorithms/graph/leetcode/swimInWater.cpp"
 #include "algorithms/graph/leetcode/findLadders.cpp"
+#include "algorithms/graph/leetcode/shortestPathAllKeys.cpp"
 #include "algorithms/graph/connectedComponents.cpp"
 #include "algorithms/graph/leetcode/minimumMoves.cpp"
 #include "algorithms/graph/leetcode/slidingPuzzle.cpp"
@@ -172,6 +173,7 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    auto xs = algorithms::tree::leetcode::level_order::levelOrder(nullptr); 
+    cout << algorithms::graph::leetcode::shortest_path_all_keys::shortestPathAllKeys({"@.a..","###.#","b.A.B"});
+
 
 }

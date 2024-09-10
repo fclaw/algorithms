@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 16,
+            "activePatchIndex": 24,
             "patches": [
                 {
                     "date": 1725631747284,
@@ -72,6 +72,38 @@
                 {
                     "date": 1725632027510,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n      * You are given an array graph where graph[i] is a list of all the nodes connected with node i by an edge.\n      * Return the length of the shortest path that visits every node. \n      * You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.\n      */\n-    int shortestPathLength(const graph& graph) \n+    int shortestPathLength(const graph& g) \n     {\n-        return 1;    \n+        return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725946653070,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,9 @@\n      * You are given an array graph where graph[i] is a list of all the nodes connected with node i by an edge.\n      * Return the length of the shortest path that visits every node. \n      * You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.\n      */\n+    int \n     int shortestPathLength(const graph& g) \n     {\n         return 1;\n     }\n"
+                },
+                {
+                    "date": 1725946667684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,10 +11,11 @@\n      * You are given an array graph where graph[i] is a list of all the nodes connected with node i by an edge.\n      * Return the length of the shortest path that visits every node. \n      * You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.\n      */\n-    int \n+    int N;\n     int shortestPathLength(const graph& g) \n     {\n+        N = g.size();\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725946676659,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,7 +15,8 @@\n     int N;\n     int shortestPathLength(const graph& g) \n     {\n         N = g.size();\n+        \n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725946682617,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n     int N;\n     int shortestPathLength(const graph& g) \n     {\n         N = g.size();\n-        \n+        calculate\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725946690439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n     int N;\n     int shortestPathLength(const graph& g) \n     {\n         N = g.size();\n-        calculate\n+        calculateMinPath()\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725946696268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n     int N;\n     int shortestPathLength(const graph& g) \n     {\n         N = g.size();\n-        calculateMinPath()\n+        return calculateMinPath()\n         return 1;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725946714616,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,7 +15,7 @@\n     int N;\n     int shortestPathLength(const graph& g) \n     {\n         N = g.size();\n-        return calculateMinPath()\n+        return calculateMinPath(g,)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725946719667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n      * Return the length of the shortest path that visits every node. \n      * You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.\n      */\n     int N;\n-    \n+    int \n     int shortestPathLength(const graph& g) \n     {\n         N = g.size();\n         return calculateMinPath(g);\n"
                 }
             ],
             "date": 1725631747284,

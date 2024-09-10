@@ -9,6 +9,7 @@ using graph = std::vector<std::vector<int>>;
 using vi = std::vector<bool>;
 using dist = std::vector<int>;
 using memo = std::unordered_map<int, std::unordered_map<int, int>>;
+using sp = std::vector<std::vector<int>>;
 
     /** 
      * https://leetcode.com/problems/shortest-path-visiting-all-nodes
@@ -17,35 +18,9 @@ using memo = std::unordered_map<int, std::unordered_map<int, int>>;
      * Return the length of the shortest path that visits every node. 
      * You may start and stop at any node, you may revisit nodes multiple times, and you may reuse edges.
      */
+    const int inf = 5 * 1e+05;
     int V;
-    int bfs(const graph& g, int source, int sink) 
-    {
-        vi visited = vi(V, false);
-        dist distance = dist(V, -1);
-        std::queue<int> q;
-        visited[source] = true;
-        distance[source] = 0;
-        q.push(source);
-        bool finished = false;
-        while(!q.empty() && !finished) 
-        {
-            int v = q.front();
-            q.pop();
-            if(v == sink)
-            {
-                finished = true;
-                break;
-            }
-            for(auto u : g[v])
-              if(!visited[u])
-              {
-                  visited[u] = true;
-                  distance[u] = distance[v] + 1;
-                  q.push(u);
-              }
-        }
-        return distance[sink];
-    }
+    sp adjMatrix;
     int calculateMinPath(const graph& g, int source, int mask, memo& mt)
     {
         if(mask == ((1 << V) - 1))
@@ -61,7 +36,7 @@ using memo = std::unordered_map<int, std::unordered_map<int, int>>;
         {
             if((mask & (1 << v)))
               continue;
-            int res = bfs(g, source, v);
+            int res = adjMatrix[source][v];
             path = std::min(path, res + calculateMinPath(g, v, (mask | (1 << v)), mt));
         }
         return mt[source][mask] = path;
@@ -70,6 +45,19 @@ using memo = std::unordered_map<int, std::unordered_map<int, int>>;
     {
         V = g.size();
         int ans = INT32_MAX;
+        
+        adjMatrix = sp(V, std::vector<int>(V, inf));
+
+        for(int u = 0; u < V; u++)
+          for(auto v : g[u])
+            adjMatrix[u][v] = 1;
+
+        // Floyd Warshall’s algorithm
+        for(int k = 0; k < V; k++)
+          for(int i = 0; i < V; i++)
+            for(int j = 0; j < V; j++)
+              adjMatrix[i][j] = std::min(adjMatrix[i][j], adjMatrix[i][k] + adjMatrix[k][j]);
+
         memo mt;
         for(int v = 0; v < V; v++)
           ans = std::min(ans, calculateMinPath(g, v, (0 | (1 << v)), mt));

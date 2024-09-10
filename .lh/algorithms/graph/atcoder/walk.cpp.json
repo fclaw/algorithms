@@ -1,0 +1,26 @@
+{
+    "sourceFile": "algorithms/graph/atcoder/walk.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1725962821370,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1725962837593,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace algorithms::graph::atcoder::walk\n {\n-    \n+       \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725962857837,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,6 @@\n+\n+\n+namespace algorithms::graph::atcoder::walk\n+{\n+    int pathKl   \n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1725962821370,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::graph::atcoder::"
+        }
+    ]
+}

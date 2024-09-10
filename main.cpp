@@ -136,6 +136,7 @@
 #include "algorithms/graph/leetcode/maximumDetonation.cpp"
 #include "algorithms/graph/leetcode/shortestPathBinaryMatrix.cpp"
 #include "algorithms/graph/leetcode/shortestPathLength.cpp"
+#include "algorithms/graph/leetcode/removeInvalidParentheses.cpp"
 #include "algorithms/graph/onlinejudge/dungeon.cpp"
 #include "algorithms/graph/scc.cpp"
 #include "algorithms/graph/kruskal.cpp"
@@ -174,5 +175,9 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    cout << algorithms::graph::leetcode::sp_all_nodes::shortestPathLength({{1}, {0, 2, 4}, {1, 3, 4}, {2}, {1, 2}});
+    auto xs = algorithms::graph::leetcode::invalid_parentheses::removeInvalidParentheses("(((a)");
+    for(auto s : xs)
+      cout << s << "\n";
+
+
 }

@@ -1,6 +1,6 @@
 #include <vector>
 
-namespace algorithms::array::leetcode
+namespace algorithms::array::leetcode::rectangle_area
 {
     // https://leetcode.com/problems/largest-rectangle-in-histogram
     // Given an array of integers heights representing the histogram's bar height 

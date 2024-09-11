@@ -12,6 +12,8 @@
 #include <cstdio>
 #include <bitset>
 #include <limits>
+#include <utility>
+
 
 
 // algorithms folder
@@ -137,6 +139,7 @@
 #include "algorithms/graph/leetcode/shortestPathBinaryMatrix.cpp"
 #include "algorithms/graph/leetcode/shortestPathLength.cpp"
 #include "algorithms/graph/leetcode/removeInvalidParentheses.cpp"
+#include "algorithms/graph/leetcode/minimumObstacles.cpp"
 #include "algorithms/graph/onlinejudge/dungeon.cpp"
 #include "algorithms/graph/scc.cpp"
 #include "algorithms/graph/kruskal.cpp"
@@ -175,9 +178,6 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    auto xs = algorithms::graph::leetcode::invalid_parentheses::removeInvalidParentheses("(((a)");
-    for(auto s : xs)
-      cout << s << "\n";
-
+    cout << algorithms::graph::leetcode::minimum_obstacles::minimumObstacles({{0,1,0,0,0}, {0,1,0,1,0}, {0,0,0,1,0}});
 
 }

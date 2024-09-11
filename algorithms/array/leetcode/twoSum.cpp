@@ -9,7 +9,8 @@ namespace algorithms::array::leetcode::two_sum
         std::vector<int> ans;
         for(int i = 0; i < nums.size(); i++)
         {
-            if(auto it = map.find(nums[i]); it != map.end())
+            if(auto it = map.find(nums[i]); 
+               it != map.end())
               ans = {i, (*it).second};
             else map[target - nums[i]] = i;
         }

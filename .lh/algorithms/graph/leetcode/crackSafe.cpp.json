@@ -1,0 +1,30 @@
+{
+    "sourceFile": "algorithms/graph/leetcode/crackSafe.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1725989144080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1725989151278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n \n \n namespace algorithms::graph::leetcode::safe\n {\n-    \n+        string crackSafe(int n, int k) {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725989159731,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n \n \n namespace algorithms::graph::leetcode::safe\n {\n-    std::string crackSafe(int n, int k) {\n-        \n+    std::string crackSafe(int n, int k) \n+    {\n+        return \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1725989167964,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n+#include <s\n \n \n-\n namespace algorithms::graph::leetcode::safe\n {\n     std::string crackSafe(int n, int k) \n     {\n"
+                }
+            ],
+            "date": 1725989144080,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::graph::leetcode::safe\n{\n    \n}"
+        }
+    ]
+}

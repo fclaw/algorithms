@@ -95,6 +95,7 @@
 #include "algorithms/backtrack/leetcode/restoreIpAddresses.cpp"
 #include "algorithms/backtrack/leetcode/letterCasePermutation.cpp"
 #include "algorithms/backtrack/leetcode/allPathsSourceTarget.cpp"
+#include "algorithms/backtrack/leetcode/letterCombinations.cpp"
 #include "algorithms/backtrack/uv/cd.cpp"
 #include "algorithms/backtrack/uv/marcus.cpp"
 #include "algorithms/backtrack/leetcode/solveNQueens.cpp"
@@ -178,6 +179,8 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    cout << algorithms::graph::leetcode::minimum_obstacles::minimumObstacles({{0,1,0,0,0}, {0,1,0,1,0}, {0,0,0,1,0}});
+    auto xs = algorithms::backtrack::leetcode::letter_combinations::letterCombinations("23");
+    for(auto s : xs)
+      cout << s << "\n";
 
 }

@@ -1,0 +1,58 @@
+{
+    "sourceFile": "algorithms/backtrack/leetcode/letterCombinations.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1726061410517,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726061417922,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,8 @@\n \n \n #include <vector>\n \n-namespace algorithms::backtrack::leetcode::l\n\\ No newline at end of file\n+namespace algorithms::backtrack::leetcode::letter_combination\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726061424123,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n+#include <vector>\n \n \n \n-#include <vector>\n-\n namespace algorithms::backtrack::leetcode::letter_combination\n {\n-    \n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726061431537,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n #include <vector>\n+#include <string>\n \n \n-\n namespace algorithms::backtrack::leetcode::letter_combination\n {\n-\n+    \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726061439206,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,8 @@\n \n \n namespace algorithms::backtrack::leetcode::letter_combination\n {\n-    \n+    std::vector<string> letterCombinations(string digits) {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726061451602,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,8 @@\n \n \n namespace algorithms::backtrack::leetcode::letter_combination\n {\n-    std::vector<string> letterCombinations(string digits) {\n+    std::vector<std::string> letterCombinations(std::string digits) {\n         \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726061459726,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,8 @@\n \n \n namespace algorithms::backtrack::leetcode::letter_combination\n {\n-    std::vector<std::string> letterCombinations(std::string digits) {\n-        \n+    std::vector<std::string> letterCombinations(std::string digits) \n+    {    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726061478640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,11 @@\n \n \n namespace algorithms::backtrack::leetcode::letter_combination\n {\n+    /**  \n+     * eetcode.com/problems/letter-combinations-of-a-phone-number\n+     */\n     std::vector<std::string> letterCombinations(std::string digits) \n     {    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726061488230,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n namespace algorithms::backtrack::leetcode::letter_combination\n {\n     /**  \n-     * eetcode.com/problems/letter-combinations-of-a-phone-number\n+     * https://leetcode.com/problems/letter-combinations-of-a-phone-number\n      */\n     std::vector<std::string> letterCombinations(std::string digits) \n     {    \n     }\n"
+                },
+                {
+                    "date": 1726061497453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,11 @@\n namespace algorithms::backtrack::leetcode::letter_combination\n {\n     /**  \n      * https://leetcode.com/problems/letter-combinations-of-a-phone-number\n-     * \n+     * Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.\n+\n+A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.\n      */\n     std::vector<std::string> letterCombinations(std::string digits) \n     {    \n     }\n"
+                },
+                {
+                    "date": 1726061504098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,8 @@\n     /**  \n      * https://leetcode.com/problems/letter-combinations-of-a-phone-number\n      * Given a string containing digits from 2-9 inclusive, return all possible letter combinations \n      * that the number could represent. Return the answer in any order.\n-\n A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.\n      */\n     std::vector<std::string> letterCombinations(std::string digits) \n     {    \n"
+                }
+            ],
+            "date": 1726061410517,
+            "name": "Commit-0",
+            "content": "\n\n\n#include <vector>\n\nnamespace algorithms::backtrack::leetcode::l"
+        }
+    ]
+}

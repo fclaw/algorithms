@@ -141,6 +141,7 @@
 #include "algorithms/graph/leetcode/shortestPathLength.cpp"
 #include "algorithms/graph/leetcode/removeInvalidParentheses.cpp"
 #include "algorithms/graph/leetcode/minimumObstacles.cpp"
+#include "algorithms/graph/atcoder/walk.cpp"
 #include "algorithms/graph/onlinejudge/dungeon.cpp"
 #include "algorithms/graph/scc.cpp"
 #include "algorithms/graph/kruskal.cpp"
@@ -174,13 +175,31 @@
 
 int main()
 {
-
+  
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    auto xs = algorithms::backtrack::leetcode::letter_combinations::letterCombinations("23");
-    for(auto s : xs)
-      cout << s << "\n";
+    // algorithms::graph::atcoder::walk::adjMatrix am = 
+    // {{0, 0, 1, 1, 0, 0, 0, 1, 1, 0},
+    //  {0, 0, 0, 0, 0, 1, 1, 1, 0, 0},
+    //  {0, 1, 0, 0, 0, 1, 0, 1, 0, 1},
+    //  {1, 1, 1, 0, 1, 1, 0, 1, 1, 0},
+    //  {0, 1, 1, 1, 0, 1, 0, 1, 1, 1},
+    //  {0, 0, 0, 1, 0, 0, 1, 0, 1, 0},
+    //  {0, 0, 0, 1, 1, 0, 0, 1, 0, 1},
+    //  {1, 0, 0, 0, 1, 0, 1, 0, 0, 0},
+    //  {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
+    //  {1, 0, 1, 1, 1, 0, 1, 1, 1, 0}};
+    // algorithms::graph::atcoder::walk::adjMatrix am = {{0, 1, 0}, {1, 0, 1}, {0, 0, 0}};
+    // algorithms::graph::atcoder::walk::adjMatrix am = 
+    // {{0, 0, 0, 0, 0, 0},
+    //  {0, 0, 1, 0, 0, 0},
+    //  {0, 0, 0, 0, 0, 0},
+    //  {0, 0, 0, 0, 1, 0},
+    //  {0, 0, 0, 0, 0, 1},
+    //  {0, 0, 0, 0, 0, 0}};
+    algorithms::graph::atcoder::walk::adjMatrix am = {{0, 1, 0, 0}, {0, 0, 1, 1}, {0, 0, 0, 1}, {1, 0, 0, 0}};
+    std::cout << algorithms::graph::atcoder::walk::pathsKLength(4, am, 2);
 
 }

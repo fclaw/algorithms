@@ -74,5 +74,5 @@ using table = std::vector<std::vector<ull>>;
         return ans % modulo;
     }
 
-    ull pathsKLength(int v, const adjMastrix& adj_matrix, ull k) { return dp(convert(adj_matrix), v, k); }
+    ull pathsKLength(int v, const adjMatrix& adj_matrix, ull k) { return dp(convert(adj_matrix), v, k); }
 }

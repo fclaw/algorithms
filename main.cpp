@@ -104,6 +104,7 @@
 #include "algorithms/backtrack/leetcode/getMaximumGold.cpp"
 #include "algorithms/backtrack/leetcode/uniquePaths.cpp"
 #include "algorithms/backtrack/leetcode/solveSudoku.cpp"
+#include "algorithms/backtrack/leetcode/addOperators.cpp"
 #include "algorithms/dp/leetcode/integerBreak.cpp"
 // #include "algorithms/dp/leetcode/makeSquare.cpp"
 #include "algorithms/dp/leetcode/canPartitionKSubsets.cpp"
@@ -180,26 +181,16 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    // algorithms::graph::atcoder::walk::adjMatrix am = 
-    // {{0, 0, 1, 1, 0, 0, 0, 1, 1, 0},
-    //  {0, 0, 0, 0, 0, 1, 1, 1, 0, 0},
-    //  {0, 1, 0, 0, 0, 1, 0, 1, 0, 1},
-    //  {1, 1, 1, 0, 1, 1, 0, 1, 1, 0},
-    //  {0, 1, 1, 1, 0, 1, 0, 1, 1, 1},
-    //  {0, 0, 0, 1, 0, 0, 1, 0, 1, 0},
-    //  {0, 0, 0, 1, 1, 0, 0, 1, 0, 1},
-    //  {1, 0, 0, 0, 1, 0, 1, 0, 0, 0},
-    //  {0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-    //  {1, 0, 1, 1, 1, 0, 1, 1, 1, 0}};
-    // algorithms::graph::atcoder::walk::adjMatrix am = {{0, 1, 0}, {1, 0, 1}, {0, 0, 0}};
-    // algorithms::graph::atcoder::walk::adjMatrix am = 
-    // {{0, 0, 0, 0, 0, 0},
-    //  {0, 0, 1, 0, 0, 0},
-    //  {0, 0, 0, 0, 0, 0},
-    //  {0, 0, 0, 0, 1, 0},
-    //  {0, 0, 0, 0, 0, 1},
-    //  {0, 0, 0, 0, 0, 0}};
-    algorithms::graph::atcoder::walk::adjMatrix am = {{0, 1, 0, 0}, {0, 0, 1, 1}, {0, 0, 0, 1}, {1, 0, 0, 0}};
-    std::cout << algorithms::graph::atcoder::walk::pathsKLength(4, am, 2);
+    // ["1+2*3+4*5","12*3-4-5"]
+    auto xs = algorithms::backtrack::leetcode::add_operators::addOperators("3456237490", 9191);
+    for(auto s : xs)
+      cout << s << "\n";
+    
+
+    // 1+2*3+4*5*6+7-89
+    // cout << algorithms::backtrack::leetcode::add_operators::evaluate(2, "1+2*3+4*5*6", 27); // should be 127 got 122
+
+
+
 
 }

@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
-#include <unordered_map>
+#include <chrono>
+#include <thread>
 
 
 namespace algorithms::backtrack::leetcode::add_operators
@@ -9,7 +10,11 @@ namespace algorithms::backtrack::leetcode::add_operators
 
 using ll = long long;
 using expressions = std::vector<std::string>;
-using ev = std::unordered_map<std::string, ll>;
+
+using std::chrono::high_resolution_clock;
+using std::chrono::duration_cast;
+using std::chrono::duration;
+using std::chrono::milliseconds;
 
     /**
      * https://leetcode.com/problems/expression-add-operators
@@ -25,98 +30,45 @@ using ev = std::unordered_map<std::string, ll>;
      * We simply need to keep track of the last operand in our expression and 
      * reverse it's effect on the expression's value while considering the multiply operator. */
     const std::vector<std::string> op = {"+", "-", "*"};
-    expressions ans = {};
-    ev evals;
-    std::pair<ll, int> findOp(const std::string& exp)
+    expressions ans;
+    std::pair<ll, ll> evaluate(const int& i, const int& eval, const int& prev_eval, const std::string& exp)
     {
-        ll p = std::string::npos;
-        int j = 0;
-        int k = exp.size();
-        while(--k >= 0)
-        {
-            if(exp[k] == '+')
-            {
-                p = k;
-                j = 0;
-                break;
-            }
-            if(exp[k] == '-')
-            {
-                p = k;
-                j = 1;
-                break;
-            }
-            if(exp[k] == '*')
-            {
-                p = k;
-                j = 2;
-                break;
-            }
-        }
-        return {p, j};
-    }
-    ll evaluate(int i, std::string exp)
-    {
-        if(auto it = evals.find(exp); 
-           it != evals.end())
-          return (*it).second;
-
         int p = exp.find_last_of(op[i]);
-        ll res = 0;
+        auto res = std::pair<ll, ll>();
         if(p == std::string::npos)
-          res = std::stol(exp);
+        {
+            res.first = std::stol(exp);
+            res.second = res.first;
+        }
         else 
         {
             auto x = std::stol(exp.substr(p + 1));
-            auto tmp = exp;
-            exp.erase(p);
-            auto eval = (*evals.find(exp)).second;
-            if(op[i] == "+") res = eval + x;
-            if(op[i] == "-") res = eval - x;
-            if(op[i] == "*")
-            {
-                auto r = findOp(exp);
-                ll prev = r.first;
-                int j = r.second;
-                if(prev == std::string::npos)
-                  res = eval * x;
-                else 
-                {
-                    int v = x * std::stol(exp.substr(prev + 1));
-                    exp.erase(prev);
-                    exp += op[j] + std::to_string(v);
-                    if(j == 0) res = evaluate(0, exp);
-                    if(j == 1) res = evaluate(1, exp);
-                    if(j == 2) res = evaluate(2, exp);
-                }
-            }
+            if(op[i] == "+") res = {eval + x, x};
+            if(op[i] == "-") res = {eval - x, -x};
+            if(op[i] == "*") res = {eval - prev_eval + x * prev_eval, x * prev_eval};
         }
         return res;
     }
-    void backtrack(const std::string& num, int i, int j, std::string exp, ll target)
+    void backtrack(const std::string& num, int i, int j, int eval, int prev_eval, std::string exp, const ll& target)
     {
         int S = num.size();
         if(i == S) return;
-        std::string local = exp;
-        local += num.substr(i, 1);
 
-        ll e = evaluate(j, local);
-        evals[local] = e;
-        
-        if(i == S - 1 && e == target)
+        auto r = evaluate(j, eval, prev_eval, exp);   
+        if(i == S - 1 && r.first == target)
         {
-           ans.push_back(local);
+           ans.push_back(exp);
            return;
         }
         // 4 branches, one for each operation
-        for(int k = 0; k < op.size(); k++)
-          backtrack(num, i + 1, k, local + op[k], target);
+        for(int k = 0; k < op.size() && i + 1 < S; k++)
+          backtrack(num, i + 1, k, r.first, r.second, exp + op[k] + num.substr(i + 1, 1), target);
         // no operation branch
-        auto s = local.substr(local.find_last_of(op[j]) + 1);
+        auto s = exp.substr(exp.find_last_of(op[j]) + 1);
         // determine whether a number has a leading zero
-        if(s.front() != '0') backtrack(num, i + 1, j, local, target);
+        if(s.front() != '0') backtrack(num, i + 1, j, eval, prev_eval, exp + num.substr(i + 1, 1), target);
     }
 
     expressions addOperators(const std::string& num, int target) 
-    { backtrack(num, 0, 0, {}, (ll)target); return ans; }
+    { ans.reserve(10000); backtrack(num, 0, 0, 0, 0, num.substr(0, 1), (ll)target); return ans; }
 }

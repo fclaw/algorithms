@@ -182,9 +182,11 @@ int main()
     std::cout << "--- ... ---\n";
 
     // ["1+2*3+4*5","12*3-4-5"]
-    auto xs = algorithms::backtrack::leetcode::add_operators::addOperators("3456237490", 9191);
-    for(auto s : xs)
+    auto r = algorithms::backtrack::leetcode::add_operators::addOperators("105", 5);
+    for(auto s : r.first)
       cout << s << "\n";
+
+    std::cout << "runtime: " << r.second << "ms\n";  
     
 
     // 1+2*3+4*5*6+7-89

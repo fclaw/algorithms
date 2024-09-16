@@ -59,7 +59,8 @@
         "source_location": "cpp",
         "strstream": "cpp",
         "iterator": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "charconv": "cpp"
     },
     "cSpell.words": [
         "atcoder",

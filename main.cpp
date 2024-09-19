@@ -96,6 +96,7 @@
 #include "algorithms/backtrack/leetcode/letterCasePermutation.cpp"
 #include "algorithms/backtrack/leetcode/allPathsSourceTarget.cpp"
 #include "algorithms/backtrack/leetcode/letterCombinations.cpp"
+#include "algorithms/backtrack/leetcode/judgePoint24.cpp"
 #include "algorithms/backtrack/uv/cd.cpp"
 #include "algorithms/backtrack/uv/marcus.cpp"
 #include "algorithms/backtrack/leetcode/solveNQueens.cpp"
@@ -172,7 +173,12 @@
 #include "algorithms/onlinejudge/dp/cuttingSticks.cpp"
 #include "algorithms/onlinejudge/graph/wetlandsOfFlorida.cpp"
 #include "algorithms/onlinejudge/graph/comeGo.cpp"
+#include "algorithms/graph/onlinejudge/softwareAllocation.cpp"
 
+#include "algorithms/rt.cpp"
+
+
+namespace sa = algorithms::graph::onlinejudge::sa;
 
 int main()
 {
@@ -181,18 +187,13 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    // ["1+2*3+4*5","12*3-4-5"]
-    auto r = algorithms::backtrack::leetcode::add_operators::addOperators("105", 5);
-    for(auto s : r.first)
-      cout << s << "\n";
-
-    std::cout << "runtime: " << r.second << "ms\n";  
-    
-
-    // 1+2*3+4*5*6+7-89
-    // cout << algorithms::backtrack::leetcode::add_operators::evaluate(2, "1+2*3+4*5*6", 27); // should be 127 got 122
-
-
-
-
+    // std::vector<sa::app> xs = 
+    //   {{'A', 4, {0, 1, 2, 3, 4}}, 
+    //    {'Q', 1, {5}}, 
+    //    {'P', 5, {5, 6, 7, 8, 9}}};
+    // auto fun = algorithms::graph::onlinejudge::sa::canAllocateApps;
+    // auto r = runtime::measure<std::string, const std::vector<sa::app>&>(xs, fun);
+    // std::cout << "ans: " << r.first << "\n";
+    // std::cout << "runtime: " << r.second << "ms\n";
+    submit_sa();
 }

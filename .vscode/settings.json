@@ -60,7 +60,12 @@
         "strstream": "cpp",
         "iterator": "cpp",
         "map": "cpp",
-        "charconv": "cpp"
+        "charconv": "cpp",
+        "thread": "cpp",
+        "chrono": "cpp",
+        "memory": "cpp",
+        "forward_list": "cpp",
+        "print": "cpp"
     },
     "cSpell.words": [
         "atcoder",

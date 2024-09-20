@@ -174,11 +174,12 @@
 #include "algorithms/onlinejudge/graph/wetlandsOfFlorida.cpp"
 #include "algorithms/onlinejudge/graph/comeGo.cpp"
 #include "algorithms/graph/onlinejudge/softwareAllocation.cpp"
+#include "algorithms/graph/onlinejudge/internetBandwidth.cpp"
 
 #include "algorithms/rt.cpp"
 
 
-namespace sa = algorithms::graph::onlinejudge::sa;
+namespace ib = algorithms::graph::onlinejudge::ib;
 
 int main()
 {
@@ -187,13 +188,11 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    // std::vector<sa::app> xs = 
-    //   {{'A', 4, {0, 1, 2, 3, 4}}, 
-    //    {'Q', 1, {5}}, 
-    //    {'P', 5, {5, 6, 7, 8, 9}}};
-    // auto fun = algorithms::graph::onlinejudge::sa::canAllocateApps;
-    // auto r = runtime::measure<std::string, const std::vector<sa::app>&>(xs, fun);
+    // ib::graph xs = {{1, 2, 20}, {1, 3, 10}, {2, 3, 5}, {2, 4, 10}, {3, 4, 20}};
+    // auto fun = ib::calculateBandwidth;
+    // auto r = runtime::measure<int, int, int, int, const ib::graph&>(5, 1, 4, xs, fun);
     // std::cout << "ans: " << r.first << "\n";
     // std::cout << "runtime: " << r.second << "ms\n";
-    submit_sa();
+
+    submit_ib();
 }

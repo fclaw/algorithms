@@ -43,24 +43,23 @@ typedef std::unordered_map<T_SHIRT, int> t_shirt_stock;
         return mf::max_flow == v;
     }
 
-    bool all = false;
+    bool all;
     int Max;
-    t_shirt_stock stock;
-    void backtrack(int i, int cnt, int c, const graph& g)
+    void backtrack(int i, int c, const graph& g, t_shirt_stock& stock)
     {
-        if(cnt < 0 || all) return;
-        if(c == Max)
+        if(all || i > Max) return;
+        if(!all && c == Max)
         {
             all = true;
             return;
         }
 
-        --stock[g[i][0]];
-        backtrack(i + 1, stock[g[i][0]], c + 1, g);
+        if(--stock[g[i][0]] >= 0)
+          backtrack(i + 1, c + 1, g, stock);
         ++stock[g[i][0]];
         
-        --stock[g[i][1]];
-        backtrack(i + 1, stock[g[i][1]], c + 1, g);
+        if(--stock[g[i][1]] >= 0)
+          backtrack(i + 1, c + 1, g, stock);
         ++stock[g[i][1]];
     }
 }
@@ -97,11 +96,14 @@ int submit_ts()
             sizes.push_back(toTShirt(s2));
             g.push_back(sizes);
         }
-        // for(int i = 1; i < 7; i++) 
-        //   ts::stock[(ts::T_SHIRT)i] = (t_shirts_c / 6);
-        // ts::Max = v;
-        // ts::backtrack(0, 0, 0, g);
-        bool ans = ts::canBeDistributedFairly(t_shirts_c / 6, v, g);
+
+        ts::t_shirt_stock stock;
+        for(int i = 1; i < 7; i++) 
+          stock[(ts::T_SHIRT)i] = (t_shirts_c / 6);
+        ts::Max = v;
+        ts::all = false;
+        ts::backtrack(0, 0, g, stock);
+        // bool ans = ts::canBeDistributedFairly(t_shirts_c / 6, v, g);
         printf("%s\n", ts::all ? "YES" : "NO");
     }
     return 0;

@@ -19,10 +19,6 @@ namespace mf = algorithms::graph::mf;
         for(auto& x : mf::residual_graph)
           x.resize(mf::MAX_V);
 
-        for(int i = 0; i < mf::MAX_V; i++)
-          for(int j = 0; j < mf::MAX_V; j++)
-            mf::residual_graph[i][j] = 0;  
-
         for(auto t : g)
         {
             int from = std::get<0>(t);
@@ -36,4 +32,27 @@ namespace mf = algorithms::graph::mf;
 
         return mf::max_flow;
     }
+}
+
+namespace ib = algorithms::graph::onlinejudge::ib;
+
+int submit_ib()
+{
+    int v, source, sink, c, tc = 1, from, to, w;
+    while(scanf("%d", &v), (bool)v)
+    {
+        scanf("%d %d %d", &source, &sink ,&c);
+        --source;
+        --sink;
+        ib::graph g;
+        while(--c >= 0)
+          scanf("%d %d %d", &from, &to, &w),
+          g.push_back({--from, --to, w});
+
+        int ans = ib::calculateBandwidth(v, source, sink, g);
+
+        printf("Network %d\n", tc++);
+        printf("The bandwidth is %d.\n\n", ans);
+    }
+    return 0;
 }

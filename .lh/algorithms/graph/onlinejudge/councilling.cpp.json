@@ -1,0 +1,78 @@
+{
+    "sourceFile": "algorithms/graph/onlinejudge/councilling.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 15,
+            "patches": [
+                {
+                    "date": 1726824816080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726824822823,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n-namespace algorithms::graph::onlinejudge::doublets\n+namespace algorithms::graph::onlinejudge::coun\n {\n     \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726824828554,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,6 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::councilling\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726824833679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,6 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::councilling\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726824840392,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,6 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::councilling\n+{\n+       \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726824850247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,24 +1,6 @@\n \n \n namespace algorithms::graph::onlinejudge::councilling\n {\n-       \n-}\n-\n-\n-namespace algorithms::graph::onlinejudge::councilling\n-{\n-    \n-}\n-\n-\n-namespace algorithms::graph::onlinejudge::councilling\n-{\n-    \n-}\n-\n-\n-namespace algorithms::graph::onlinejudge::coun\n-{\n-    \n+    /** https://onlinejudge.org/external/105/10511.pdf  */   \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726824906658,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n \n \n namespace algorithms::graph::onlinejudge::councilling\n {\n-    /** https://onlinejudge.org/external/105/10511.pdf  */   \n+    /** https://onlinejudge.org/external/105/10511.pdf */\n+      \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726824964671,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,6 @@\n \n namespace algorithms::graph::onlinejudge::councilling\n {\n     /** https://onlinejudge.org/external/105/10511.pdf */\n-      \n+    selectClub  \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726824971377,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,6 @@\n \n namespace algorithms::graph::onlinejudge::councilling\n {\n     /** https://onlinejudge.org/external/105/10511.pdf */\n-    selectClub  \n+    selectcouncil members  \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726824977819,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,6 @@\n \n namespace algorithms::graph::onlinejudge::councilling\n {\n     /** https://onlinejudge.org/external/105/10511.pdf */\n-    selectcouncil members  \n+     selectCouncilMembers  \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726824988718,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,10 @@\n \n \n namespace algorithms::graph::onlinejudge::councilling\n {\n+\n+typedef \n+\n     /** https://onlinejudge.org/external/105/10511.pdf */\n      selectCouncilMembers  \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726825003776,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,10 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::councilling\n+{\n+\n+typedef std::vector<std::pair<int, int>> \n+\n+    /** https://onlinejudge.org/external/105/10511.pdf */\n+     selectCouncilMembers  \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726825009478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::graph::onlinejudge::councilling\n {\n \n-typedef std::vector<std::pair<int, int>> \n+typedef std::vector<std::pair<int, int>> memb\n \n     /** https://onlinejudge.org/external/105/10511.pdf */\n      selectCouncilMembers  \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726825014864,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,19 +2,9 @@\n \n namespace algorithms::graph::onlinejudge::councilling\n {\n \n-typedef std::vector<std::pair<int, int>> memb\n+typedef std::vector<std::pair<int, int>> members;\n \n     /** https://onlinejudge.org/external/105/10511.pdf */\n      selectCouncilMembers  \n-}\n-\n-\n-namespace algorithms::graph::onlinejudge::councilling\n-{\n-\n-typedef \n-\n-    /** https://onlinejudge.org/external/105/10511.pdf */\n-     selectCouncilMembers  \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726825022238,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-#include <ve\n+#include <vector>\n \n \n namespace algorithms::graph::onlinejudge::councilling\n {\n"
+                },
+                {
+                    "date": 1726825030970,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,10 @@\n+#include <vector>\n+\n+namespace algorithms::graph::onlinejudge::councilling\n+{\n+\n+typedef std::vector<std::pair<int, int>> members;\n+\n+    /** https://onlinejudge.org/external/105/10511.pdf */\n+    members selectCouncilMembers  \n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1726824816080,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::graph::onlinejudge::doublets\n{\n    \n}"
+        }
+    ]
+}

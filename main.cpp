@@ -175,11 +175,13 @@
 #include "algorithms/onlinejudge/graph/comeGo.cpp"
 #include "algorithms/graph/onlinejudge/softwareAllocation.cpp"
 #include "algorithms/graph/onlinejudge/internetBandwidth.cpp"
+#include "algorithms/graph/onlinejudge/countWays.cpp"
+#include "algorithms/graph/onlinejudge/tshirt.cpp"
 
 #include "algorithms/rt.cpp"
 
 
-namespace ib = algorithms::graph::onlinejudge::ib;
+namespace ts = algorithms::graph::onlinejudge::t_shirt;
 
 int main()
 {
@@ -188,11 +190,7 @@ int main()
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
 
-    // ib::graph xs = {{1, 2, 20}, {1, 3, 10}, {2, 3, 5}, {2, 4, 10}, {3, 4, 20}};
-    // auto fun = ib::calculateBandwidth;
-    // auto r = runtime::measure<int, int, int, int, const ib::graph&>(5, 1, 4, xs, fun);
-    // std::cout << "ans: " << r.first << "\n";
-    // std::cout << "runtime: " << r.second << "ms\n";
-
-    submit_ib();
+    // ts::graph g = {{ts::L, ts::XL}, {ts::XL, ts::L}, {ts::XXL, ts::XL}, {ts::S, ts::XS}, {ts::M, ts::S}, {ts::M, ts::L}};
+    // ts::graph g = {{ts::S, ts::XL}, {ts::L, ts::S}, {ts::L, ts::XL}, {ts::L, ts::XL}};
+    submit_ts();
 }

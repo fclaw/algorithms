@@ -1,0 +1,82 @@
+{
+    "sourceFile": "algorithms/graph/onlinejudge/tshirt.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 16,
+            "patches": [
+                {
+                    "date": 1726913869430,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1726913876277,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,6 @@\n \n \n-namespace algorithms::graph::onlinejudge::t\n\\ No newline at end of file\n+namespace algorithms::graph::onlinejudge::t_shirt\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726913909434,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace algorithms::graph::onlinejudge::t_shirt\n {\n-    \n+    https://onlinejudge.org/external/110/11045.pdf\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726913917506,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace algorithms::graph::onlinejudge::t_shirt\n {\n-    https://onlinejudge.org/external/110/11045.pdf\n+    /** https://onlinejudge.org/external/110/11045.pdf */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726913925951,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,6 @@\n \n namespace algorithms::graph::onlinejudge::t_shirt\n {\n     /** https://onlinejudge.org/external/110/11045.pdf */\n+    bool fair\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726913931109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,7 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::t_shirt\n+{\n+    /** https://onlinejudge.org/external/110/11045.pdf */\n+    bool fairDistribution\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726913945199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,13 +2,6 @@\n \n namespace algorithms::graph::onlinejudge::t_shirt\n {\n     /** https://onlinejudge.org/external/110/11045.pdf */\n-    bool fairDistribution\n-}\n-\n-\n-namespace algorithms::graph::onlinejudge::t_shirt\n-{\n-    /** https://onlinejudge.org/external/110/11045.pdf */\n-    bool fair\n+    bool ()\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726913952300,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,7 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::t_shirt\n+{\n+    /** https://onlinejudge.org/external/110/11045.pdf */\n+    bool canBeD()\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726913958781,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,13 +2,6 @@\n \n namespace algorithms::graph::onlinejudge::t_shirt\n {\n     /** https://onlinejudge.org/external/110/11045.pdf */\n-    bool canBeD()\n-}\n-\n-\n-namespace algorithms::graph::onlinejudge::t_shirt\n-{\n-    /** https://onlinejudge.org/external/110/11045.pdf */\n-    bool ()\n+    bool canBeDisit()\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726913964236,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,7 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::t_shirt\n+{\n+    /** https://onlinejudge.org/external/110/11045.pdf */\n+    bool canBeDisit()\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726913970305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,7 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::t_shirt\n+{\n+    /** https://onlinejudge.org/external/110/11045.pdf */\n+    bool canBeDisitributedFairly()\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726913980510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,6 @@\n \n namespace algorithms::graph::onlinejudge::t_shirt\n {\n     /** https://onlinejudge.org/external/110/11045.pdf */\n-    bool canBeDisitributedFairly()\n+    bool canBeDistributedFairly()\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726913988968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,6 @@\n \n namespace algorithms::graph::onlinejudge::t_shirt\n {\n     /** https://onlinejudge.org/external/110/11045.pdf */\n-    bool canBeDistributedFairly()\n+    bool canBeDistributedFairly() { return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726914000566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,8 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::t_shirt\n+{\n+    /** https://onlinejudge.org/external/110/11045.pdf */\n+    bool canBeDistributedFairly() { return false; \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726914011855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,29 +1,10 @@\n \n \n namespace algorithms::graph::onlinejudge::t_shirt\n {\n-    /** https://onlinejudge.org/external/110/11045.pdf */\n+    /** https://onlinejudge.org/external/110/11045.pdf \n+     * assignment problem; but actually the input constraint is actually small enough for recursive backtracking)\n+    */\n     bool canBeDistributedFairly() { return false; \n     }\n-}\n-\n-\n-namespace algorithms::graph::onlinejudge::t_shirt\n-{\n-    /** https://onlinejudge.org/external/110/11045.pdf */\n-    bool canBeDistributedFairly() { return false; }\n-}\n-\n-\n-namespace algorithms::graph::onlinejudge::t_shirt\n-{\n-    /** https://onlinejudge.org/external/110/11045.pdf */\n-    bool canBeDisit()\n-}\n-\n-\n-namespace algorithms::graph::onlinejudge::t_shirt\n-{\n-    /** https://onlinejudge.org/external/110/11045.pdf */\n-    bool canBeDisit()\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726914019509,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,6 @@\n namespace algorithms::graph::onlinejudge::t_shirt\n {\n     /** https://onlinejudge.org/external/110/11045.pdf \n      * assignment problem; but actually the input constraint is actually small enough for recursive backtracking) */\n-    bool canBeDistributedFairly() { return false; \n-    }\n+    bool canBeDistributedFairly() { return false; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1726914577207,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,12 @@\n+#include \"../edmonds_karp.cpp\"\n+\n+\n+namespace algorithms::graph::onlinejudge::t_shirt\n+{\n+\n+namespace mf = algorithms::graph::mf;\n+\n+    /** https://onlinejudge.org/external/110/11045.pdf \n+     * assignment problem; but actually the input constraint is actually small enough for recursive backtracking) */\n+    bool canBeDistributedFairly() { return false; }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1726913869430,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::graph::onlinejudge::t"
+        }
+    ]
+}

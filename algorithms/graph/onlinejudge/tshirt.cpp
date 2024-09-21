@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <string>
 #include <iostream>
+#include <unordered_map>
 #include "../edmonds_karp.cpp"
 
 
@@ -11,6 +12,7 @@ namespace algorithms::graph::onlinejudge::t_shirt
 enum T_SHIRT { XXL = 1, XL, L, M, S, XS };
 typedef std::vector<std::vector<T_SHIRT>> graph;
 namespace mf = algorithms::graph::mf;
+typedef std::unordered_map<T_SHIRT, int> t_shirt_stock;
 
     /** https://onlinejudge.org/external/110/11045.pdf 
      * assignment problem; but actually the input constraint is actually small enough for recursive backtracking) */
@@ -39,6 +41,27 @@ namespace mf = algorithms::graph::mf;
         mf::edmonds_karp();
 
         return mf::max_flow == v;
+    }
+
+    bool all = false;
+    int Max;
+    t_shirt_stock stock;
+    void backtrack(int i, int cnt, int c, const graph& g)
+    {
+        if(cnt < 0 || all) return;
+        if(c == Max)
+        {
+            all = true;
+            return;
+        }
+
+        --stock[g[i][0]];
+        backtrack(i + 1, stock[g[i][0]], c + 1, g);
+        ++stock[g[i][0]];
+        
+        --stock[g[i][1]];
+        backtrack(i + 1, stock[g[i][1]], c + 1, g);
+        ++stock[g[i][1]];
     }
 }
 
@@ -74,8 +97,12 @@ int submit_ts()
             sizes.push_back(toTShirt(s2));
             g.push_back(sizes);
         }
-        bool ans = ts::canBeDistributedFairly(t_shirts_c / 3, v, g);
-        printf("%s\n", ans ? "YES" : "NO");
+        // for(int i = 1; i < 7; i++) 
+        //   ts::stock[(ts::T_SHIRT)i] = (t_shirts_c / 6);
+        // ts::Max = v;
+        // ts::backtrack(0, 0, 0, g);
+        bool ans = ts::canBeDistributedFairly(t_shirts_c / 6, v, g);
+        printf("%s\n", ts::all ? "YES" : "NO");
     }
     return 0;
 }

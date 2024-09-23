@@ -97,19 +97,16 @@ void submit_pt()
                 g.push_back({r, to, caps[r]});    
                 regs.push_back({r, caps[r]});
             }
-            if(i >= in) regs_sink.push_back(r);
-        }
-
-        // split the regulator=-sink vertex into v(int)/v(out)
-        for(int i = 0; i < regs_sink.size(); i++)
-        {
-            int from = regs_sink[i];
-            int to = ++start;
-            for(auto& t : g)
-              if(std::get<0>(t) == from)
-                 std::get<0>(t) = to;
-            g.push_back({from, to, caps[from]});
-            regs_sink[i] = to;
+            if(i >= in) 
+            {
+                int from = r;
+                int to = ++start;
+                for(auto& t : g)
+                if(std::get<0>(t) == from)
+                  std::get<0>(t) = to;
+                g.push_back({from, to, caps[from]});
+                regs_sink.push_back(to);
+            }
         }
 
         // all regulators except for ones incident to either source or sink
@@ -120,7 +117,7 @@ void submit_pt()
                int v = ++start;
                 for(auto& t : g)
                  if(std::get<0>(t) == i)
-                    std::get<0>(t) = v;
+                   std::get<0>(t) = v;
                  g.push_back({i, v, caps[i]});
           }    
 

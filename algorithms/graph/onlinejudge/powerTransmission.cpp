@@ -82,21 +82,32 @@ void submit_pt()
         pt::regulators regs;
         std::vector<int> regs_sink;
         std::unordered_set<int> regs_taken;
+        int start = cap_n;
         for(int i = 0; i < in + out; i++)
         {
             int r;
             scanf("%d", &r);
             regs_taken.insert(r);
-            if(i < in) regs.push_back({r, caps[r]});
+            if(i < in) 
+            {
+                int to = ++start;
+                for(auto& t : g)
+                if(std::get<0>(t) == r)
+                   std::get<0>(t) = to;
+                g.push_back({r, to, caps[r]});    
+                regs.push_back({r, caps[r]});
+            }
             if(i >= in) regs_sink.push_back(r);
         }
 
         // split the regulator=-sink vertex into v(int)/v(out)
-        int start = cap_n;
         for(int i = 0; i < regs_sink.size(); i++)
         {
             int from = regs_sink[i];
             int to = ++start;
+            for(auto& t : g)
+              if(std::get<0>(t) == from)
+                 std::get<0>(t) = to;
             g.push_back({from, to, caps[from]});
             regs_sink[i] = to;
         }

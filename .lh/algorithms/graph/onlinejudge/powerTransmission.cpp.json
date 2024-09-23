@@ -1,0 +1,74 @@
+{
+    "sourceFile": "algorithms/graph/onlinejudge/powerTransmission.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 14,
+            "patches": [
+                {
+                    "date": 1727085146906,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1727085718176,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace algorithms::graph::onlinejudge::pt\n {\n-    \n+    /** https://onlinejudge.org/external/103/10330.pdf */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727085735749,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n \n \n namespace algorithms::graph::onlinejudge::pt\n {\n-    /** https://onlinejudge.org/external/103/10330.pdf */\n+    /** https://onlinejudge.org/external/103/10330.pdf \n+     * max flow with vertex capacities\n+    */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727085832326,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,9 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::pt\n+{\n+    /** https://onlinejudge.org/external/103/10330.pdf \n+     * max flow with vertex capacities\n+     * \n+    */\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727085844585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,15 +3,14 @@\n namespace algorithms::graph::onlinejudge::pt\n {\n     /** https://onlinejudge.org/external/103/10330.pdf \n      * max flow with vertex capacities\n-     * \n+     * We can also have a Network Flow variant where the capacities are not just defined along the\n+edges but also on the vertices. To solve this variant, we can use vertex splitting technique\n+which (unfortunately) doubles the number of vertices in the flow graph. A weighted graph\n+with a vertex weight can be converted into a more familiar one without vertex weight by\n+splitting each weighted vertex v to vin and vout, reassigning its incoming/outgoing edges to\n+vin/vout, respectively and finally putting the original vertex v’s weight as the weight of edge\n+vin → vout. See Figure 4.28 for illustration. Now with all weights defined on edges, we can\n+run Edmonds Karp’s as per normal.\n     */\n-}\n-\n-\n-namespace algorithms::graph::onlinejudge::pt\n-{\n-    /** https://onlinejudge.org/external/103/10330.pdf \n-     * max flow with vertex capacities\n-    */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727085857372,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n namespace algorithms::graph::onlinejudge::pt\n {\n     /** https://onlinejudge.org/external/103/10330.pdf \n      * max flow with vertex capacities\n-     * We can also have a Network Flow variant where the capacities are not just defined along the\n+     * there is a Network Flow variant where the capacities are not just defined along the\n edges but also on the vertices. To solve this variant, we can use vertex splitting technique\n which (unfortunately) doubles the number of vertices in the flow graph. A weighted graph\n with a vertex weight can be converted into a more familiar one without vertex weight by\n splitting each weighted vertex v to vin and vout, reassigning its incoming/outgoing edges to\n"
+                },
+                {
+                    "date": 1727085862655,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n {\n     /** https://onlinejudge.org/external/103/10330.pdf \n      * max flow with vertex capacities\n      * there is a Network Flow variant where the capacities are not just defined along the\n-edges but also on the vertices. To solve this variant, we can use vertex splitting technique\n+     * edges but also on the vertices. To solve this variant, we can use vertex splitting technique\n which (unfortunately) doubles the number of vertices in the flow graph. A weighted graph\n with a vertex weight can be converted into a more familiar one without vertex weight by\n splitting each weighted vertex v to vin and vout, reassigning its incoming/outgoing edges to\n vin/vout, respectively and finally putting the original vertex v’s weight as the weight of edge\n"
+                },
+                {
+                    "date": 1727085867929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,16 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::pt\n+{\n+    /** https://onlinejudge.org/external/103/10330.pdf \n+     * max flow with vertex capacities\n+     * there is a Network Flow variant where the capacities are not just defined along the\n+     * edges but also on the vertices. To solve this variant, we can use vertex splitting technique\n+     * which (unfortunately) doubles the number of vertices in the flow graph. A weighted graph\n+with a vertex weight can be converted into a more familiar one without vertex weight by\n+splitting each weighted vertex v to vin and vout, reassigning its incoming/outgoing edges to\n+vin/vout, respectively and finally putting the original vertex v’s weight as the weight of edge\n+vin → vout. See Figure 4.28 for illustration. Now with all weights defined on edges, we can\n+run Edmonds Karp’s as per normal.\n+    */\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727085873378,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,27 +6,11 @@\n      * max flow with vertex capacities\n      * there is a Network Flow variant where the capacities are not just defined along the\n      * edges but also on the vertices. To solve this variant, we can use vertex splitting technique\n      * which (unfortunately) doubles the number of vertices in the flow graph. A weighted graph\n-with a vertex weight can be converted into a more familiar one without vertex weight by\n+     * with a vertex weight can be converted into a more familiar one without vertex weight by\n splitting each weighted vertex v to vin and vout, reassigning its incoming/outgoing edges to\n vin/vout, respectively and finally putting the original vertex v’s weight as the weight of edge\n vin → vout. See Figure 4.28 for illustration. Now with all weights defined on edges, we can\n run Edmonds Karp’s as per normal.\n     */\n-}\n-\n-\n-namespace algorithms::graph::onlinejudge::pt\n-{\n-    /** https://onlinejudge.org/external/103/10330.pdf \n-     * max flow with vertex capacities\n-     * there is a Network Flow variant where the capacities are not just defined along the\n-     * edges but also on the vertices. To solve this variant, we can use vertex splitting technique\n-which (unfortunately) doubles the number of vertices in the flow graph. A weighted graph\n-with a vertex weight can be converted into a more familiar one without vertex weight by\n-splitting each weighted vertex v to vin and vout, reassigning its incoming/outgoing edges to\n-vin/vout, respectively and finally putting the original vertex v’s weight as the weight of edge\n-vin → vout. See Figure 4.28 for illustration. Now with all weights defined on edges, we can\n-run Edmonds Karp’s as per normal.\n-    */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727085880550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n      * there is a Network Flow variant where the capacities are not just defined along the\n      * edges but also on the vertices. To solve this variant, we can use vertex splitting technique\n      * which (unfortunately) doubles the number of vertices in the flow graph. A weighted graph\n      * with a vertex weight can be converted into a more familiar one without vertex weight by\n-splitting each weighted vertex v to vin and vout, reassigning its incoming/outgoing edges to\n+     * splitting each weighted vertex v to vin and vout, reassigning its incoming/outgoing edges to\n vin/vout, respectively and finally putting the original vertex v’s weight as the weight of edge\n vin → vout. See Figure 4.28 for illustration. Now with all weights defined on edges, we can\n run Edmonds Karp’s as per normal.\n     */\n"
+                },
+                {
+                    "date": 1727085887144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n      * there is a Network Flow variant where the capacities are not just defined along the\n      * edges but also on the vertices. To solve this variant, we can use vertex splitting technique\n      * which (unfortunately) doubles the number of vertices in the flow graph. A weighted graph\n      * with a vertex weight can be converted into a more familiar one without vertex weight by\n-     * splitting each weighted vertex v to vin and vout, reassigning its incoming/outgoing edges to\n+     * splitting each weighted vertex v to v(in) and v)out, reassigning its incoming/outgoing edges to\n vin/vout, respectively and finally putting the original vertex v’s weight as the weight of edge\n vin → vout. See Figure 4.28 for illustration. Now with all weights defined on edges, we can\n run Edmonds Karp’s as per normal.\n     */\n"
+                },
+                {
+                    "date": 1727085894106,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n      * there is a Network Flow variant where the capacities are not just defined along the\n      * edges but also on the vertices. To solve this variant, we can use vertex splitting technique\n      * which (unfortunately) doubles the number of vertices in the flow graph. A weighted graph\n      * with a vertex weight can be converted into a more familiar one without vertex weight by\n-     * splitting each weighted vertex v to v(in) and v)out, reassigning its incoming/outgoing edges to\n-vin/vout, respectively and finally putting the original vertex v’s weight as the weight of edge\n+     * splitting each weighted vertex v to v(in) and v(out), reassigning its incoming/outgoing edges to\n+     * vin/vout, respectively and finally putting the original vertex v’s weight as the weight of edge\n vin → vout. See Figure 4.28 for illustration. Now with all weights defined on edges, we can\n run Edmonds Karp’s as per normal.\n     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727085908039,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n      * edges but also on the vertices. To solve this variant, we can use vertex splitting technique\n      * which (unfortunately) doubles the number of vertices in the flow graph. A weighted graph\n      * with a vertex weight can be converted into a more familiar one without vertex weight by\n      * splitting each weighted vertex v to v(in) and v(out), reassigning its incoming/outgoing edges to\n-     * vin/vout, respectively and finally putting the original vertex v’s weight as the weight of edge\n-vin → vout. See Figure 4.28 for illustration. Now with all weights defined on edges, we can\n+     * v(in)/v(out), respectively and finally putting the original vertex v’s weight as the weight of edge\n+v(in) → vout. See Figure 4.28 for illustration. Now with all weights defined on edges, we can\n run Edmonds Karp’s as per normal.\n     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727085913149,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,8 @@\n      * which (unfortunately) doubles the number of vertices in the flow graph. A weighted graph\n      * with a vertex weight can be converted into a more familiar one without vertex weight by\n      * splitting each weighted vertex v to v(in) and v(out), reassigning its incoming/outgoing edges to\n      * v(in)/v(out), respectively and finally putting the original vertex v’s weight as the weight of edge\n-v(in) → v(out). See Figure 4.28 for illustration. Now with all weights defined on edges, we can\n+     * v(in) → v(out). See Figure 4.28 for illustration. Now with all weights defined on edges, we can\n run Edmonds Karp’s as per normal.\n     */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727085929558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,15 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::pt\n+{\n+    /** https://onlinejudge.org/external/103/10330.pdf \n+     * max flow with vertex capacities\n+     * there is a Network Flow variant where the capacities are not just defined along the\n+     * edges but also on the vertices. To solve this variant, we can use vertex splitting technique\n+     * which (unfortunately) doubles the number of vertices in the flow graph. A weighted graph\n+     * with a vertex weight can be converted into a more familiar one without vertex weight by\n+     * splitting each weighted vertex v to v(in) and v(out), reassigning its incoming/outgoing edges to\n+     * v(in)/v(out), respectively and finally putting the original vertex v’s weight as the weight of edge\n+     * v(in) → v(out). Now with all weights defined on edges, we can run Edmonds Karp’s as per normal. */\n+    \n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1727085146906,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::graph::onlinejudge::pt\n{\n    \n}"
+        }
+    ]
+}

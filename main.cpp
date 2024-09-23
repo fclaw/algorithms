@@ -177,11 +177,12 @@
 #include "algorithms/graph/onlinejudge/internetBandwidth.cpp"
 #include "algorithms/graph/onlinejudge/countWays.cpp"
 #include "algorithms/graph/onlinejudge/tshirt.cpp"
+#include "algorithms/graph/onlinejudge/powerTransmission.cpp"
 
 #include "algorithms/rt.cpp"
 
 
-namespace ts = algorithms::graph::onlinejudge::t_shirt;
+namespace pt = algorithms::graph::onlinejudge::pt;
 
 int main()
 {
@@ -192,5 +193,5 @@ int main()
 
     // ts::graph g = {{ts::L, ts::XL}, {ts::XL, ts::L}, {ts::XXL, ts::XL}, {ts::S, ts::XS}, {ts::M, ts::S}, {ts::M, ts::L}};
     // ts::graph g = {{ts::S, ts::XL}, {ts::L, ts::S}, {ts::L, ts::XL}, {ts::L, ts::XL}};
-    submit_ts();
+    submit_pt();
 }

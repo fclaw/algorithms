@@ -97,8 +97,8 @@
 #include "algorithms/backtrack/leetcode/allPathsSourceTarget.cpp"
 #include "algorithms/backtrack/leetcode/letterCombinations.cpp"
 #include "algorithms/backtrack/leetcode/judgePoint24.cpp"
-#include "algorithms/backtrack/uv/cd.cpp"
-#include "algorithms/backtrack/uv/marcus.cpp"
+#include "algorithms/backtrack/onlinejudge/cd.cpp"
+// #include "algorithms/backtrack/uv/marcus.cpp"
 #include "algorithms/backtrack/leetcode/solveNQueens.cpp"
 #include "algorithms/backtrack/leetcode/tilingRectangle.cpp"
 #include "algorithms/backtrack/leetcode/isAdditiveNumber.cpp"
@@ -182,7 +182,7 @@
 #include "algorithms/rt.cpp"
 
 
-namespace pt = algorithms::graph::onlinejudge::pt;
+namespace cd = algorithms::backtrack::onlinejudge::cd;
 
 int main()
 {
@@ -193,5 +193,5 @@ int main()
 
     // ts::graph g = {{ts::L, ts::XL}, {ts::XL, ts::L}, {ts::XXL, ts::XL}, {ts::S, ts::XS}, {ts::M, ts::S}, {ts::M, ts::L}};
     // ts::graph g = {{ts::S, ts::XL}, {ts::L, ts::S}, {ts::L, ts::XL}, {ts::L, ts::XL}};
-    submit_pt();
+    submit();
 }

@@ -3,7 +3,7 @@
 #include <numeric>
 #include <iostream>
 
-namespace algorithms::backtrack::uv
+namespace algorithms::backtrack::onlinejudge::cd
 {
     // https://onlinejudge.org/external/6/624.pdf
     /**
@@ -21,46 +21,44 @@ namespace algorithms::backtrack::uv
      */
     int SIZE;
     int CAPACITY;
+    int length;
     int songs;
-    int mask;
-    void dfs(const std::vector<int>& cd, int pos, int c, int m)
+    void backtrack(const std::vector<int>& cd, int i, int l, int s)
     {
-        if(c > CAPACITY)
-          return;
+        if(l > CAPACITY) return;
 
-        if(c > songs)
+        if(length < l)
         {
-            songs = c;
-            mask = m; 
+            length = l;
+            songs = s;
         }
 
-        if(pos >= SIZE)
-          return;
-
-        dfs(cd, pos + 1, c + cd[pos], m | (1 << pos));
-        dfs(cd, pos + 1, c, m);  
+        if(i >= SIZE) return;
+        
+        backtrack(cd, i + 1, l + cd[i], s | (1 << i));
+        backtrack(cd, i + 1, l, s);
     }
- 
-    void submit_uv_624()
+}
+
+namespace cd = algorithms::backtrack::onlinejudge::cd;
+
+void submit()
+{
+    int capacity, s, v;
+    while(std::cin >> capacity)
     {
-        int capacity, s, v;
-        while(std::cin >> capacity)
-        {
-            std::cin >> s;
-            std::vector<int> cd;
-            for(int i = 0; i < s; i++)
-            {
-                std::cin >> v;
-                cd.push_back(v);
-            }
-            CAPACITY = capacity;
-            SIZE = cd.size(); 
-            dfs(cd, 0, 0, 0);
-            
-            for(auto c : cd)
-              if(mask & (1 << c))
-                printf("%d ", c);
-            printf("sum:%d\n", songs);
-        }
+        std::cin >> s;
+        std::vector<int> cd;
+        for(int i = 0; i < s; i++)
+            std::cin >> v,
+            cd.push_back(v);
+        cd::CAPACITY = capacity;
+        cd::SIZE = s;
+        cd::length = cd::songs = 0;
+        cd::backtrack(cd, 0, 0, 0);
+        for(int i = 0; i < cd::SIZE; i++)
+            if(cd::songs & (1 << i))
+            printf("%d ", cd[i]);
+        printf("sum:%d\n", cd::length);
     }
 }

@@ -181,6 +181,7 @@
 #include "algorithms/graph/onlinejudge/titanic.cpp"
 #include "algorithms/graph/onlinejudge/angryProgrammer.cpp"
 #include "algorithms/graph/onlinejudge/césar.cpp"
+#include "algorithms/graph/onlinejudge/projectScheduling.cpp"
 #include "algorithms/graph/lp_dag.cpp"
 
 #include "algorithms/rt.cpp"
@@ -189,7 +190,8 @@
 // namespace titanic = algorithms::graph::onlinejudge::titanic;
 // namespace mf = algorithms::graph::max_flow;
 // namespace ap = algorithms::graph::onlinejudge::angry_programmer;
-namespace lp = algorithms::graph::onlinejudge::césar;
+// namespace lp = algorithms::graph::onlinejudge::césar;
+namespace ps = algorithms::graph::onlinejudge::project_scheduling;
 
 int main(int argc, char* argv[])
 {
@@ -202,5 +204,5 @@ int main(int argc, char* argv[])
     if(argc > 1) file = std::make_optional(argv[1]);
 
     // Case 6: The longest path from 1 has length 3, finishing at 5.
-    lp::submit(file);
+    ps::submit(file);
 }

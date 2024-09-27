@@ -11,7 +11,7 @@ namespace algorithms::graph::onlinejudge::t_shirt
 
 enum T_SHIRT { XXL = 1, XL, L, M, S, XS };
 typedef std::vector<std::vector<T_SHIRT>> graph;
-namespace mf = algorithms::graph::mf;
+namespace mf = algorithms::graph::max_flow;
 typedef std::unordered_map<T_SHIRT, int> t_shirt_stock;
 
     /** https://onlinejudge.org/external/110/11045.pdf 

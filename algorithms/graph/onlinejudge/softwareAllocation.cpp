@@ -9,7 +9,7 @@ namespace algorithms::graph::onlinejudge::sa
 {
 
 typedef std::tuple<char, int, std::vector<int>> app;
-namespace mf = algorithms::graph::mf;
+namespace mf = algorithms::graph::max_flow;
 
 
     /**

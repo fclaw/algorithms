@@ -11,7 +11,7 @@ typedef int capacity;
 typedef std::tuple<int, int, capacity> node;
 typedef std::vector<std::tuple<int, int, capacity>> graph;
 typedef std::vector<std::pair<int, capacity>> regulators;
-namespace mf = algorithms::graph::mf;
+namespace mf = algorithms::graph::max_flow;
 
 const int inf = 5 * 1e+05;
 

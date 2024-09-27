@@ -1,13 +1,16 @@
 #include <vector>
 #include <cstdio>
+#include <cstdio>
+#include <iostream>
+#include <cassert>
+#include <optional>
+#include "../lp_dag.cpp"
 
 namespace algorithms::graph::onlinejudge::ways_to_live
 {
 
-
-typedef std::vector<std::vector<int>> graph;
 typedef std::vector<int> table;
-typedef std::vector<int> terminus;
+namespace lp = algorithms::graph::lp_dag;
 
 
     /** https://onlinejudge.org/external/9/988.pdf
@@ -26,32 +29,47 @@ typedef std::vector<int> terminus;
      * one by one according to the topological order. When processing a vertex u, we update each
      * neighbor v of u by setting num paths[v] += num paths[u]. After such O(V + E) steps, 
      * we will know the number of paths in num paths[n] */
-    int countWays(int sink, const graph& g) { return 1; }
+    int countWays(const lp::adj& graph, const std::vector<int>& sinks) 
+    {
+        lp::vs vertices = lp::topological_sort(graph.size(), std::nullopt, graph);
+        table dp(graph.size(), 0);
+        dp[0] = 1;
+        for(auto v : vertices)
+          for(auto u : graph[v])
+            dp[u] += dp[v];
+
+        int events = 0;
+        for(auto s : sinks)
+          events += dp[s];
+
+        return events;
+    }
 }
 
 namespace wl = algorithms::graph::onlinejudge::ways_to_live;
 
-int submit_wl()
+void submit_wl(std::optional<char*> file)
 {
+    if(file.has_value())
+      assert(freopen(file.value(), "r", stdin) != NULL);
     int v;
     bool line = false;
-    while((bool)scanf("%d", &v))
+    while((std::cin >> v))
     {
         if(v == 0) break;
-        wl::graph g(v, std::vector<int>());
+        wl::lp::adj graph(v);
+        std::vector<int> sinks;
         for(int i = 0; i < v; i++)
         {
             int m, x;
-            scanf("%d", &m);
+            std::cin >> m;
+            if(m == 0) sinks.push_back(i);
             for(int j = 0; j < m; j++)
-              scanf("%d", &x),
-              g[i].push_back(x);
+              std::cin >> x,
+              graph[i].push_back(x);
 
         }
         line ? printf("\n") : line = true;
-        int ans = 0;
-        ans = wl::countWays(--v, g);
-        printf("%d\n\n", ans);
+        printf("%d\n", wl::countWays(graph, sinks));
     }
-    return 0;
 }

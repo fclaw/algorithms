@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 27,
+            "activePatchIndex": 30,
             "patches": [
                 {
                     "date": 1716403736238,
@@ -116,6 +116,18 @@
                 {
                     "date": 1726745490378,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,13 @@\n         \"strstream\": \"cpp\",\n         \"iterator\": \"cpp\",\n         \"map\": \"cpp\",\n         \"charconv\": \"cpp\",\n-        \"thread\": \"cpp\"\n+        \"thread\": \"cpp\",\n+        \"chrono\": \"cpp\",\n+        \"memory\": \"cpp\",\n+        \"forward_list\": \"cpp\",\n+        \"print\": \"cpp\"\n     },\n     \"cSpell.words\": [\n         \"atcoder\",\n         \"centimetre\",\n"
+                },
+                {
+                    "date": 1727240776629,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,6 +81,7 @@\n         \"modpow\",\n         \"onlinejudge\",\n         \"vjudge\",\n         \"warshall\"\n-    ]\n+    ],\n+    \"C_Cpp.errorSquiggles\": \"disabled\"\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727348866013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,9 +64,10 @@\n         \"thread\": \"cpp\",\n         \"chrono\": \"cpp\",\n         \"memory\": \"cpp\",\n         \"forward_list\": \"cpp\",\n-        \"print\": \"cpp\"\n+        \"print\": \"cpp\",\n+        \"fstream\": \"cpp\"\n     },\n     \"cSpell.words\": [\n         \"atcoder\",\n         \"centimetre\",\n"
+                },
+                {
+                    "date": 1727438584112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,9 +65,10 @@\n         \"chrono\": \"cpp\",\n         \"memory\": \"cpp\",\n         \"forward_list\": \"cpp\",\n         \"print\": \"cpp\",\n-        \"fstream\": \"cpp\"\n+        \"fstream\": \"cpp\",\n+        \"cassert\": \"cpp\"\n     },\n     \"cSpell.words\": [\n         \"atcoder\",\n         \"centimetre\",\n"
                 }
             ],
             "date": 1716403736238,

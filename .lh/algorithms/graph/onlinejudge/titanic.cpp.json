@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 25,
             "patches": [
                 {
                     "date": 1727105764588,
@@ -24,6 +24,90 @@
                 {
                     "date": 1727105857570,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,6 @@\n \n namespace algorithms::graph::onlinejudge::titanic\n {\n     /** https://onlinejudge.org/external/113/11380.pdf */\n-    int maxSurvivors\n+    int maxSurvivors() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727178388724,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,9 @@\n \n namespace algorithms::graph::onlinejudge::titanic\n {\n     /** https://onlinejudge.org/external/113/11380.pdf */\n+    const char \n+ \n+\n     int maxSurvivors() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727178406763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::graph::onlinejudge::titanic\n {\n     /** https://onlinejudge.org/external/113/11380.pdf */\n-    const char \n+    const char people \n  \n \n     int maxSurvivors() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727178412944,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,10 @@\n \n namespace algorithms::graph::onlinejudge::titanic\n {\n     /** https://onlinejudge.org/external/113/11380.pdf */\n-    const char people \n+    const char people = '*';\n+    \n  \n \n     int maxSurvivors() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727178419491,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,12 @@\n namespace algorithms::graph::onlinejudge::titanic\n {\n     /** https://onlinejudge.org/external/113/11380.pdf */\n     const char people = '*';\n-    \n+    const char people = '*';\n+    const char people = '*';\n+    const char people = '*';\n+    const char people = '*';\n  \n \n     int maxSurvivors() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727178424933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,12 +3,12 @@\n namespace algorithms::graph::onlinejudge::titanic\n {\n     /** https://onlinejudge.org/external/113/11380.pdf */\n     const char people = '*';\n+    const char people = '';\n     const char people = '*';\n     const char people = '*';\n     const char people = '*';\n-    const char people = '*';\n  \n \n     int maxSurvivors() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727178432491,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n namespace algorithms::graph::onlinejudge::titanic\n {\n     /** https://onlinejudge.org/external/113/11380.pdf */\n     const char people = '*';\n-    const char people = '';\n+    const char water = '~';\n     const char people = '*';\n     const char people = '*';\n     const char people = '*';\n  \n"
+                },
+                {
+                    "date": 1727178438067,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::titanic\n+{\n+    /** https://onlinejudge.org/external/113/11380.pdf */\n+    const char people = '*';\n+    const char water = '~';\n+    const char people = '.';\n+    const char people = '*';\n+    const char people = '*';\n+ \n+\n+    int maxSurvivors() { return 1; }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727178487208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,25 +4,11 @@\n {\n     /** https://onlinejudge.org/external/113/11380.pdf */\n     const char people = '*';\n     const char water = '~';\n-    const char people = '.';\n+    const char floating_ice = '.';\n     const char people = '*';\n     const char people = '*';\n  \n \n     int maxSurvivors() { return 1; }\n-}\n-\n-\n-namespace algorithms::graph::onlinejudge::titanic\n-{\n-    /** https://onlinejudge.org/external/113/11380.pdf */\n-    const char people = '*';\n-    const char water = '~';\n-    const char people = '*';\n-    const char people = '*';\n-    const char people = '*';\n- \n-\n-    int maxSurvivors() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727178495043,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,10 @@\n     /** https://onlinejudge.org/external/113/11380.pdf */\n     const char people = '*';\n     const char water = '~';\n     const char floating_ice = '.';\n+    const char iceberg = '*';\n     const char people = '*';\n-    const char people = '*';\n  \n \n     int maxSurvivors() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727178500498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,10 @@\n     /** https://onlinejudge.org/external/113/11380.pdf */\n     const char people = '*';\n     const char water = '~';\n     const char floating_ice = '.';\n-    const char iceberg = '*';\n-    const char people = '*';\n+    const char iceberg = '';\n+    const char  = '*';\n  \n \n     int maxSurvivors() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727178506200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,10 +5,10 @@\n     /** https://onlinejudge.org/external/113/11380.pdf */\n     const char people = '*';\n     const char water = '~';\n     const char floating_ice = '.';\n-    const char iceberg = '';\n-    const char  = '*';\n+    const char iceberg = '@';\n+    const char  = '';\n  \n \n     int maxSurvivors() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727178519411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n     const char people = '*';\n     const char water = '~';\n     const char floating_ice = '.';\n     const char iceberg = '@';\n-    const char  = '';\n+    const char wood = '#';\n  \n \n     int maxSurvivors() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727178543978,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,11 @@\n \n namespace algorithms::graph::onlinejudge::titanic\n {\n     /** https://onlinejudge.org/external/113/11380.pdf */\n+    // People staying on floating ice. People want to move from here as the floating ice cannot carry\n+them for long time. Once a people move from here, the floating ice will get drowned. People can\n+move to any of the four directions (north, east, west and south)\n     const char people = '*';\n     const char water = '~';\n     const char floating_ice = '.';\n     const char iceberg = '@';\n"
+                },
+                {
+                    "date": 1727178550465,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::graph::onlinejudge::titanic\n {\n     /** https://onlinejudge.org/external/113/11380.pdf */\n-    // People staying on floating ice. People want to move from here as the floating ice cannot carry\n+    /** People staying on floating ice. People want to move from here as the floating ice cannot carry\n them for long time. Once a people move from here, the floating ice will get drowned. People can\n move to any of the four directions (north, east, west and south)\n     const char people = '*';\n     const char water = '~';\n"
+                },
+                {
+                    "date": 1727178557000,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,17 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::titanic\n+{\n+    /** https://onlinejudge.org/external/113/11380.pdf */\n+    /** People staying on floating ice. People want to move from here as the floating ice cannot carry\n+     *  them for long time. Once a people move from here, the floating ice will get drowned. People can\n+     * move to any of the four directions (north, east, west and south)\n+    const char people = '*';\n+    const char water = '~';\n+    const char floating_ice = '.';\n+    const char iceberg = '@';\n+    const char wood = '#';\n+ \n+\n+    int maxSurvivors() { return 1; }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727178562500,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,31 +4,15 @@\n {\n     /** https://onlinejudge.org/external/113/11380.pdf */\n     /** People staying on floating ice. People want to move from here as the floating ice cannot carry\n      *  them for long time. Once a people move from here, the floating ice will get drowned. People can\n-     * move to any of the four directions (north, east, west and south)\n+     * move to any of the four directions (north, east, west and south) */\n     const char people = '*';\n+    \n     const char water = '~';\n     const char floating_ice = '.';\n     const char iceberg = '@';\n     const char wood = '#';\n  \n \n     int maxSurvivors() { return 1; }\n-}\n-\n-\n-namespace algorithms::graph::onlinejudge::titanic\n-{\n-    /** https://onlinejudge.org/external/113/11380.pdf */\n-    /** People staying on floating ice. People want to move from here as the floating ice cannot carry\n-them for long time. Once a people move from here, the floating ice will get drowned. People can\n-move to any of the four directions (north, east, west and south)\n-    const char people = '*';\n-    const char water = '~';\n-    const char floating_ice = '.';\n-    const char iceberg = '@';\n-    const char wood = '#';\n- \n-\n-    int maxSurvivors() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727178574021,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,10 @@\n     /** People staying on floating ice. People want to move from here as the floating ice cannot carry\n      *  them for long time. Once a people move from here, the floating ice will get drowned. People can\n      * move to any of the four directions (north, east, west and south) */\n     const char people = '*';\n-    \n+    /** Water. People cannot go or move through them as water is extremely cold and not good enough\n+for swimming */\n     const char water = '~';\n     const char floating_ice = '.';\n     const char iceberg = '@';\n     const char wood = '#';\n"
+                },
+                {
+                    "date": 1727178582501,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,11 +6,11 @@\n     /** People staying on floating ice. People want to move from here as the floating ice cannot carry\n      *  them for long time. Once a people move from here, the floating ice will get drowned. People can\n      * move to any of the four directions (north, east, west and south) */\n     const char people = '*';\n-    /** Water. People cannot go or move through them as water is extremely cold and not good enough\n-for swimming */\n+    /** Water. People cannot go or move through them as water is extremely cold and not good enough for swimming */\n     const char water = '~';\n+    \n     const char floating_ice = '.';\n     const char iceberg = '@';\n     const char wood = '#';\n  \n"
+                },
+                {
+                    "date": 1727178603408,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,11 @@\n      * move to any of the four directions (north, east, west and south) */\n     const char people = '*';\n     /** Water. People cannot go or move through them as water is extremely cold and not good enough for swimming */\n     const char water = '~';\n-    \n+    /** Floating ice. People can move to a floating ice. But floating ices are so light that they cannot\n+float for long time, so people should move from here as soon as possible and once a people move\n+from here, the floating ice will get drowned. */\n     const char floating_ice = '.';\n     const char iceberg = '@';\n     const char wood = '#';\n  \n"
+                },
+                {
+                    "date": 1727178610492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,10 +9,10 @@\n     const char people = '*';\n     /** Water. People cannot go or move through them as water is extremely cold and not good enough for swimming */\n     const char water = '~';\n     /** Floating ice. People can move to a floating ice. But floating ices are so light that they cannot\n-     * float for long time, so people should move from here as soon as possible and once a people move\n-from here, the floating ice will get drowned. */\n+     * float for long time, so people should move from here as soon as possible and once a people move \n+     * from here, the floating ice will get drowned. */\n     const char floating_ice = '.';\n     const char iceberg = '@';\n     const char wood = '#';\n  \n"
+                },
+                {
+                    "date": 1727178658264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,26 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::titanic\n+{\n+    /** https://onlinejudge.org/external/113/11380.pdf */\n+    /** People staying on floating ice. People want to move from here as the floating ice cannot carry\n+     *  them for long time. Once a people move from here, the floating ice will get drowned. People can\n+     * move to any of the four directions (north, east, west and south) */\n+    const char people = '*';\n+    /** Water. People cannot go or move through them as water is extremely cold and not good enough for swimming */\n+    const char water = '~';\n+    /** Floating ice. People can move to a floating ice. But floating ices are so light that they cannot\n+     * float for long time, so people should move from here as soon as possible and once a people move \n+     * from here, the floating ice will get drowned. */\n+    const char floating_ice = '.';\n+    /** Large iceberg. People can move here but cannot stay here as they are extremely cold. These\n+     * icebergs will remain floating all the time. Note that, no two people can stay on floating ice or \n+     * large iceberg at the same time */\n+    const char iceberg = '@';\n+    /** Large wood. This place is safe. People can move and stay here until the helping ships arrive. A\n+large wood will get drowned if more than P people stay on it at the same time. */\n+    const char wood = '#';\n+ \n+\n+    int maxSurvivors() { return 1; }\n+}\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1727105764588,

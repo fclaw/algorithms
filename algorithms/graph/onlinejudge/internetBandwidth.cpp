@@ -7,7 +7,7 @@ namespace algorithms::graph::onlinejudge::ib
 {
 
 typedef std::vector<std::tuple<int, int, int>> graph;
-namespace mf = algorithms::graph::mf;
+namespace mf = algorithms::graph::max_flow;
 
     /** https://onlinejudge.org/external/8/820.pdf */
     int calculateBandwidth(int v, int source, int sink, const graph& g)

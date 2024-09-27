@@ -1,0 +1,378 @@
+{
+    "sourceFile": "algorithms/graph/lp_dag.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 90,
+            "patches": [
+                {
+                    "date": 1727345987467,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1727345997970,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n \n \n-name\n\\ No newline at end of file\n+namespace algorithms::graph::kruskal\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346009178,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n \n \n-namespace algorithms::graph::kruskal\n\\ No newline at end of file\n+namespace algorithms::graph::lp\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346019684,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,8 @@\n \n \n-namespace algorithms::graph::lp\n\\ No newline at end of file\n+namespace algorithms::graph::lp_dag\n+{\n+\n+\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346033611,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,9 @@\n+\n+\n+namespace algorithms::graph::lp_dag\n+{\n+\n+typedef std::vector<std::vector<>>\n+\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346043996,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,16 +2,8 @@\n \n namespace algorithms::graph::lp_dag\n {\n \n-typedef std::vector<std::vector<>>\n+typedef std::vector<std::vector<int>> adj\n \n \n-}\n-\n-\n-namespace algorithms::graph::lp_dag\n-{\n-\n-\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346053313,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n+#include <vector>\n \n \n namespace algorithms::graph::lp_dag\n {\n \n-typedef std::vector<std::vector<int>> adj\n+typedef std::vector<std::vector<int>> adj;\n \n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346059780,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,12 @@\n #include <vector>\n \n-\n namespace algorithms::graph::lp_dag\n {\n \n typedef std::vector<std::vector<int>> adj;\n \n+    \n+    \n+\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346077306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,8 @@\n \n typedef std::vector<std::vector<int>> adj;\n \n     \n-    \n+    int longestPath(const )\n \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346083336,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,8 @@\n \n typedef std::vector<std::vector<int>> adj;\n \n     \n-    int longestPath(const )\n+    int longestPath(const adj& graph)\n \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346093190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,10 @@\n \n typedef std::vector<std::vector<int>> adj;\n \n     \n+    void \n+\n     int longestPath(const adj& graph)\n-\n-\n+    {\n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346150045,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n \n typedef std::vector<std::vector<int>> adj;\n \n     \n-    void \n+    void dfs()\n \n     int longestPath(const adj& graph)\n     {\n     }\n"
+                },
+                {
+                    "date": 1727346156173,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,10 @@\n \n typedef std::vector<std::vector<int>> adj;\n \n     \n+    \n+\n     void dfs()\n \n     int longestPath(const adj& graph)\n     {\n"
+                },
+                {
+                    "date": 1727346166668,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,12 +3,12 @@\n namespace algorithms::graph::lp_dag\n {\n \n typedef std::vector<std::vector<int>> adj;\n-\n+int \n     \n-    \n \n+\n     void dfs()\n \n     int longestPath(const adj& graph)\n     {\n"
+                },
+                {
+                    "date": 1727346191975,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,11 @@\n namespace algorithms::graph::lp_dag\n {\n \n typedef std::vector<std::vector<int>> adj;\n-int \n+\n+\n+\n     \n \n \n     void dfs()\n"
+                },
+                {
+                    "date": 1727346212842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n {\n \n typedef std::vector<std::vector<int>> adj;\n \n+int V\n \n-\n     \n \n \n     void dfs()\n"
+                },
+                {
+                    "date": 1727346231204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n {\n \n typedef std::vector<std::vector<int>> adj;\n \n-int V\n-\n+int V;\n+a\n     \n \n \n     void dfs()\n"
+                },
+                {
+                    "date": 1727346242474,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,16 +3,12 @@\n namespace algorithms::graph::lp_dag\n {\n \n typedef std::vector<std::vector<int>> adj;\n-\n-int V;\n-a\n     \n \n-\n     void dfs()\n \n-    int longestPath(const adj& graph)\n+    int longestPath(int V, const adj& graph)\n     {\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346255408,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,6 +9,7 @@\n     void dfs()\n \n     int longestPath(int V, const adj& graph)\n     {\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346266358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,11 @@\n namespace algorithms::graph::lp_dag\n {\n \n typedef std::vector<std::vector<int>> adj;\n-    \n+typedef std::vector    \n \n+\n     void dfs()\n \n     int longestPath(int V, const adj& graph)\n     {\n"
+                },
+                {
+                    "date": 1727346275057,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n namespace algorithms::graph::lp_dag\n {\n \n typedef std::vector<std::vector<int>> adj;\n-typedef std::vector    \n+typedef std::vector<bool> vi;    \n \n \n     void dfs()\n \n"
+                },
+                {
+                    "date": 1727346283258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,11 +3,10 @@\n namespace algorithms::graph::lp_dag\n {\n \n typedef std::vector<std::vector<int>> adj;\n-typedef std::vector<bool> vi;    \n+typedef std::vector<bool> vi;\n \n-\n     void dfs()\n \n     int longestPath(int V, const adj& graph)\n     {\n"
+                },
+                {
+                    "date": 1727346288837,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,15 @@\n+#include <vector>\n+\n+namespace algorithms::graph::lp_dag\n+{\n+\n+typedef std::vector<std::vector<int>> adj;\n+typedef std::vector<bool> vi;\n+\n+    void dfs()\n+\n+    int longestPath(int V, const adj& graph)\n+    {\n+        vi visited \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346296683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,22 +9,7 @@\n     void dfs()\n \n     int longestPath(int V, const adj& graph)\n     {\n-        vi visited \n+        vi visited = vi(V, false);\n     }\n-}\n-#include <vector>\n-\n-namespace algorithms::graph::lp_dag\n-{\n-\n-typedef std::vector<std::vector<int>> adj;\n-typedef std::vector<bool> vi;\n-\n-    void dfs()\n-\n-    int longestPath(int V, const adj& graph)\n-    {\n-        \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346312504,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,16 @@\n+#include <vector>\n+\n+namespace algorithms::graph::lp_dag\n+{\n+\n+typedef std::vector<std::vector<int>> adj;\n+typedef std::vector<bool> vi;\n+\n+    void dfs()\n+\n+    int longestPath(int V, const adj& graph)\n+    {\n+        vi visited = vi(V, false);\n+        \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346325077,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,28 +4,14 @@\n {\n \n typedef std::vector<std::vector<int>> adj;\n typedef std::vector<bool> vi;\n+typedef std::vector<?\n \n     void dfs()\n \n     int longestPath(int V, const adj& graph)\n     {\n         vi visited = vi(V, false);\n         \n     }\n-}\n-#include <vector>\n-\n-namespace algorithms::graph::lp_dag\n-{\n-\n-typedef std::vector<std::vector<int>> adj;\n-typedef std::vector<bool> vi;\n-\n-    void dfs()\n-\n-    int longestPath(int V, const adj& graph)\n-    {\n-        vi visited = vi(V, false);\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346331140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n {\n \n typedef std::vector<std::vector<int>> adj;\n typedef std::vector<bool> vi;\n-typedef std::vector<?\n+typedef std::vector<in> dp;\n \n     void dfs()\n \n     int longestPath(int V, const adj& graph)\n"
+                },
+                {
+                    "date": 1727346337120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,7 +11,7 @@\n \n     int longestPath(int V, const adj& graph)\n     {\n         vi visited = vi(V, false);\n-        \n+        dp table = \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346346956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,14 +4,14 @@\n {\n \n typedef std::vector<std::vector<int>> adj;\n typedef std::vector<bool> vi;\n-typedef std::vector<in> dp;\n+typedef std::vector<in> dp_table;\n \n     void dfs()\n \n     int longestPath(int V, const adj& graph)\n     {\n         vi visited = vi(V, false);\n-        dp table = \n+        dp table = dp\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346353847,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,7 +11,7 @@\n \n     int longestPath(int V, const adj& graph)\n     {\n         vi visited = vi(V, false);\n-        dp table = dp\n+        dp_table table = dp\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346360113,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n {\n \n typedef std::vector<std::vector<int>> adj;\n typedef std::vector<bool> vi;\n-typedef std::vector<in> dp_table;\n+typedef std::vector<in> table;\n \n     void dfs()\n \n     int longestPath(int V, const adj& graph)\n"
+                },
+                {
+                    "date": 1727346367749,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,7 +11,7 @@\n \n     int longestPath(int V, const adj& graph)\n     {\n         vi visited = vi(V, false);\n-        dp_table table = dp\n+        table dp = table()\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346391672,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,7 +11,9 @@\n \n     int longestPath(int V, const adj& graph)\n     {\n         vi visited = vi(V, false);\n-        table dp = table()\n+        table dp = table(V, 0);\n+\n+        for(int i )\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346400143,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,7 +13,7 @@\n     {\n         vi visited = vi(V, false);\n         table dp = table(V, 0);\n \n-        for(int i )\n+        for(int i = 0; i < V)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346406463,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,7 +13,8 @@\n     {\n         vi visited = vi(V, false);\n         table dp = table(V, 0);\n \n-        for(int i = 0; i < V)\n+        for(int i = 0; i < V; i++)\n+          if()\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346413152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,7 +14,7 @@\n         vi visited = vi(V, false);\n         table dp = table(V, 0);\n \n         for(int i = 0; i < V; i++)\n-          if()\n+          if(!visited[i])\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346424986,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,6 +15,7 @@\n         table dp = table(V, 0);\n \n         for(int i = 0; i < V; i++)\n           if(!visited[i])\n+            dfs(graph, visited, )\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346431025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,7 +15,8 @@\n         table dp = table(V, 0);\n \n         for(int i = 0; i < V; i++)\n           if(!visited[i])\n-            dfs(graph, visited, )\n+            dfs(graph, visited, dp, i);\n+            \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346438720,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,7 +16,8 @@\n \n         for(int i = 0; i < V; i++)\n           if(!visited[i])\n             dfs(graph, visited, dp, i);\n-            \n+\n+        return std::max    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346444050,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,7 +17,7 @@\n         for(int i = 0; i < V; i++)\n           if(!visited[i])\n             dfs(graph, visited, dp, i);\n \n-        return std::max    \n+        return std::max_element(dp.)    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346451596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,7 +17,7 @@\n         for(int i = 0; i < V; i++)\n           if(!visited[i])\n             dfs(graph, visited, dp, i);\n \n-        return std::max_element(dp.)    \n+        return std::max_element(dp.begin(), dp.end());    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346459699,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,7 +17,7 @@\n         for(int i = 0; i < V; i++)\n           if(!visited[i])\n             dfs(graph, visited, dp, i);\n \n-        return std::max_element(dp.begin(), dp.end());    \n+        return *std::max_element(dp.begin(), dp.end());    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346473206,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n typedef std::vector<std::vector<int>> adj;\n typedef std::vector<bool> vi;\n typedef std::vector<in> table;\n \n-    void dfs()\n+    void dfs(const adj&)\n \n     int longestPath(int V, const adj& graph)\n     {\n         vi visited = vi(V, false);\n"
+                },
+                {
+                    "date": 1727346479064,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n typedef std::vector<std::vector<int>> adj;\n typedef std::vector<bool> vi;\n typedef std::vector<in> table;\n \n-    void dfs(const adj&)\n+    void dfs(const adj& g, vi)\n \n     int longestPath(int V, const adj& graph)\n     {\n         vi visited = vi(V, false);\n"
+                },
+                {
+                    "date": 1727346486067,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n typedef std::vector<std::vector<int>> adj;\n typedef std::vector<bool> vi;\n typedef std::vector<in> table;\n \n-    void dfs(const adj& g, vi)\n+    void dfs(const adj& g, vi& visited, table& )\n \n     int longestPath(int V, const adj& graph)\n     {\n         vi visited = vi(V, false);\n"
+                },
+                {
+                    "date": 1727346491415,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,12 @@\n typedef std::vector<std::vector<int>> adj;\n typedef std::vector<bool> vi;\n typedef std::vector<in> table;\n \n-    void dfs(const adj& g, vi& visited, table& )\n+    void dfs(const adj& g, vi& visited, table& dp, int v)\n+    {\n+        \n+    }\n \n     int longestPath(int V, const adj& graph)\n     {\n         vi visited = vi(V, false);\n"
+                },
+                {
+                    "date": 1727346506887,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n #include <vector>\n+include \n \n namespace algorithms::graph::lp_dag\n {\n \n@@ -8,9 +9,9 @@\n typedef std::vector<in> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n-        \n+\n     }\n \n     int longestPath(int V, const adj& graph)\n     {\n"
+                },
+                {
+                    "date": 1727346512242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n-include \n+#include <al\n \n namespace algorithms::graph::lp_dag\n {\n \n"
+                },
+                {
+                    "date": 1727346530037,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <vector>\n-#include <al\n+#include <algorithm>\n \n namespace algorithms::graph::lp_dag\n {\n \n"
+                },
+                {
+                    "date": 1727346535491,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n typedef std::vector<in> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n-\n+        \n     }\n \n     int longestPath(int V, const adj& graph)\n     {\n"
+                },
+                {
+                    "date": 1727346543541,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n typedef std::vector<in> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n-        \n+        if(visited[])\n     }\n \n     int longestPath(int V, const adj& graph)\n     {\n"
+                },
+                {
+                    "date": 1727346551887,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,10 @@\n typedef std::vector<in> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n-        if(visited[])\n+        if(visited[v]) return;\n+        vis\n     }\n \n     int longestPath(int V, const adj& graph)\n     {\n"
+                },
+                {
+                    "date": 1727346558358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n         if(visited[v]) return;\n-        vis\n+        visited[v] = true;\n     }\n \n     int longestPath(int V, const adj& graph)\n     {\n"
+                },
+                {
+                    "date": 1727346564421,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,10 @@\n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n         if(visited[v]) return;\n         visited[v] = true;\n+\n+        for(auto )\n     }\n \n     int longestPath(int V, const adj& graph)\n     {\n"
+                },
+                {
+                    "date": 1727346572822,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,12 @@\n     {\n         if(visited[v]) return;\n         visited[v] = true;\n \n-        for(auto )\n+        for(int u : g[v])\n+        {\n+            \n+        }\n     }\n \n     int longestPath(int V, const adj& graph)\n     {\n"
+                },
+                {
+                    "date": 1727346612458,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,15 +9,10 @@\n typedef std::vector<in> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n-        if(visited[v]) return;\n-        visited[v] = true;\n-\n         for(int u : g[v])\n-        {\n-            \n-        }\n+          if()\n     }\n \n     int longestPath(int V, const adj& graph)\n     {\n"
+                },
+                {
+                    "date": 1727346622233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n         for(int u : g[v])\n-          if()\n+          if(vistied[])\n     }\n \n     int longestPath(int V, const adj& graph)\n     {\n"
+                },
+                {
+                    "date": 1727346633102,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,12 @@\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n         for(int u : g[v])\n-          if(vistied[])\n+          if(!vistied[u])\n+          {\n+            \n+          }\n     }\n \n     int longestPath(int V, const adj& graph)\n     {\n"
+                },
+                {
+                    "date": 1727346639842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,11 +10,11 @@\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n         for(int u : g[v])\n-          if(!vistied[u])\n+          if(!v[u])\n           {\n-            \n+\n           }\n     }\n \n     int longestPath(int V, const adj& graph)\n"
+                },
+                {
+                    "date": 1727346647929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,11 +10,11 @@\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n         for(int u : g[v])\n-          if(!v[u])\n+          if(!visited[u])\n           {\n-\n+              visited[]\n           }\n     }\n \n     int longestPath(int V, const adj& graph)\n"
+                },
+                {
+                    "date": 1727346656900,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,32 @@\n+#include <vector>\n+#include <algorithm>\n+\n+namespace algorithms::graph::lp_dag\n+{\n+\n+typedef std::vector<std::vector<int>> adj;\n+typedef std::vector<bool> vi;\n+typedef std::vector<in> table;\n+\n+    void dfs(const adj& g, vi& visited, table& dp, int v)\n+    {\n+        for(int u : g[v])\n+          if(!visited[u])\n+          {\n+              visited[u] = true;\n+              dfs()\n+          }\n+    }\n+\n+    int longestPath(int V, const adj& graph)\n+    {\n+        vi visited = vi(V, false);\n+        table dp = table(V, 0);\n+\n+        for(int i = 0; i < V; i++)\n+          if(!visited[i])\n+            dfs(graph, visited, dp, i);\n+\n+        return *std::max_element(dp.begin(), dp.end());    \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346689990,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n         for(int u : g[v])\n           if(!visited[u])\n           {\n               visited[u] = true;\n-              dfs()\n+              dfs(g, dp, )\n           }\n     }\n \n     int longestPath(int V, const adj& graph)\n@@ -28,36 +28,5 @@\n             dfs(graph, visited, dp, i);\n \n         return *std::max_element(dp.begin(), dp.end());    \n     }\n-}\n-#include <vector>\n-#include <algorithm>\n-\n-namespace algorithms::graph::lp_dag\n-{\n-\n-typedef std::vector<std::vector<int>> adj;\n-typedef std::vector<bool> vi;\n-typedef std::vector<in> table;\n-\n-    void dfs(const adj& g, vi& visited, table& dp, int v)\n-    {\n-        for(int u : g[v])\n-          if(!visited[u])\n-          {\n-              visited[]\n-          }\n-    }\n-\n-    int longestPath(int V, const adj& graph)\n-    {\n-        vi visited = vi(V, false);\n-        table dp = table(V, 0);\n-\n-        for(int i = 0; i < V; i++)\n-          if(!visited[i])\n-            dfs(graph, visited, dp, i);\n-\n-        return *std::max_element(dp.begin(), dp.end());    \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346696326,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,10 @@\n         for(int u : g[v])\n           if(!visited[u])\n           {\n               visited[u] = true;\n-              dfs(g, dp, )\n+              dfs(g, dp, u);\n+              \n           }\n     }\n \n     int longestPath(int V, const adj& graph)\n"
+                },
+                {
+                    "date": 1727346707718,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n           if(!visited[u])\n           {\n               visited[u] = true;\n               dfs(g, dp, u);\n-              \n+              dp[v] = std::max(dp[v], 1 + )\n           }\n     }\n \n     int longestPath(int V, const adj& graph)\n"
+                },
+                {
+                    "date": 1727346715703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,33 @@\n+#include <vector>\n+#include <algorithm>\n+\n+namespace algorithms::graph::lp_dag\n+{\n+\n+typedef std::vector<std::vector<int>> adj;\n+typedef std::vector<bool> vi;\n+typedef std::vector<in> table;\n+\n+    void dfs(const adj& g, vi& visited, table& dp, int v)\n+    {\n+        for(int u : g[v])\n+          if(!visited[u])\n+          {\n+              visited[u] = true;\n+              dfs(g, dp, u);\n+              dp[v] = std::max(dp[v], 1 + dp[u]);\n+          }\n+    }\n+\n+    int longestPath(int V, const adj& graph)\n+    {\n+        vi visited = vi(V, false);\n+        table dp = table(V, 0);\n+\n+        for(int i = 0; i < V; i++)\n+          if(!visited[i])\n+            dfs(graph, visited, dp, i);\n+\n+        return *std::max_element(dp.begin(), dp.end());    \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727346731222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,38 +29,5 @@\n             dfs(graph, visited, dp, i);\n \n         return *std::max_element(dp.begin(), dp.end());    \n     }\n-}\n-#include <vector>\n-#include <algorithm>\n-\n-namespace algorithms::graph::lp_dag\n-{\n-\n-typedef std::vector<std::vector<int>> adj;\n-typedef std::vector<bool> vi;\n-typedef std::vector<in> table;\n-\n-    void dfs(const adj& g, vi& visited, table& dp, int v)\n-    {\n-        for(int u : g[v])\n-          if(!visited[u])\n-          {\n-              visited[u] = true;\n-              dfs(g, dp, u);\n-              dp[v] = std::max(dp[v], 1 + )\n-          }\n-    }\n-\n-    int longestPath(int V, const adj& graph)\n-    {\n-        vi visited = vi(V, false);\n-        table dp = table(V, 0);\n-\n-        for(int i = 0; i < V; i++)\n-          if(!visited[i])\n-            dfs(graph, visited, dp, i);\n-\n-        return *std::max_element(dp.begin(), dp.end());    \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727347313072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n {\n \n typedef std::vector<std::vector<int>> adj;\n typedef std::vector<bool> vi;\n-typedef std::vector<in> table;\n+typedef std::vector<int> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n         for(int u : g[v])\n"
+                },
+                {
+                    "date": 1727347335765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,33 @@\n+#include <vector>\n+#include <algorithm>\n+\n+namespace algorithms::graph::lp_dag\n+{\n+\n+typedef std::vector<std::vector<int>> adj;\n+typedef std::vector<bool> vi;\n+typedef std::vector<int> table;\n+\n+    void dfs(const adj& g, vi& visited, table& dp, int v)\n+    {\n+        for(int u : g[v])\n+          if(!visited[u])\n+          {\n+              visited[u] = true;\n+              dfs(g, visited, dp, u);\n+              dp[v] = std::max(dp[v], 1 + dp[u]);\n+          }\n+    }\n+\n+    int longestPath(int V, const adj& graph)\n+    {\n+        vi visited = vi(V, false);\n+        table dp = table(V, 0);\n+\n+        for(int i = 0; i < V; i++)\n+          if(!visited[i])\n+            dfs(graph, visited, dp, i);\n+\n+        return *std::max_element(dp.begin(), dp.end());    \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727347368845,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n typedef std::vector<int> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n+        if(visited[])\n         for(int u : g[v])\n           if(!visited[u])\n           {\n               visited[u] = true;\n@@ -29,38 +30,5 @@\n             dfs(graph, visited, dp, i);\n \n         return *std::max_element(dp.begin(), dp.end());    \n     }\n-}\n-#include <vector>\n-#include <algorithm>\n-\n-namespace algorithms::graph::lp_dag\n-{\n-\n-typedef std::vector<std::vector<int>> adj;\n-typedef std::vector<bool> vi;\n-typedef std::vector<int> table;\n-\n-    void dfs(const adj& g, vi& visited, table& dp, int v)\n-    {\n-        for(int u : g[v])\n-          if(!visited[u])\n-          {\n-              visited[u] = true;\n-              dfs(g, dp, u);\n-              dp[v] = std::max(dp[v], 1 + dp[u]);\n-          }\n-    }\n-\n-    int longestPath(int V, const adj& graph)\n-    {\n-        vi visited = vi(V, false);\n-        table dp = table(V, 0);\n-\n-        for(int i = 0; i < V; i++)\n-          if(!visited[i])\n-            dfs(graph, visited, dp, i);\n-\n-        return *std::max_element(dp.begin(), dp.end());    \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727347374968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,10 @@\n typedef std::vector<int> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n-        if(visited[])\n+        if(visited[v]) return;\n+\n         for(int u : g[v])\n           if(!visited[u])\n           {\n               visited[u] = true;\n"
+                },
+                {
+                    "date": 1727347450161,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n typedef std::vector<int> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n-        if(visited[v]) return;\n+        cout << \n \n         for(int u : g[v])\n           if(!visited[u])\n           {\n"
+                },
+                {
+                    "date": 1727347537103,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n typedef std::vector<int> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n-        cout << \n+        cout << v << \"\\n\";\n \n         for(int u : g[v])\n           if(!visited[u])\n           {\n"
+                },
+                {
+                    "date": 1727347543966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n typedef std::vector<int> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n-        cout << v << \"\\n\";\n+        if()\n \n         for(int u : g[v])\n           if(!visited[u])\n           {\n"
+                },
+                {
+                    "date": 1727347550601,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,35 @@\n+#include <vector>\n+#include <algorithm>\n+\n+namespace algorithms::graph::lp_dag\n+{\n+\n+typedef std::vector<std::vector<int>> adj;\n+typedef std::vector<bool> vi;\n+typedef std::vector<int> table;\n+\n+    void dfs(const adj& g, vi& visited, table& dp, int v)\n+    {\n+        if(v == g.size())\n+\n+        for(int u : g[v])\n+          if(!visited[u])\n+          {\n+              visited[u] = true;\n+              dfs(g, visited, dp, u);\n+              dp[v] = std::max(dp[v], 1 + dp[u]);\n+          }\n+    }\n+\n+    int longestPath(int V, const adj& graph)\n+    {\n+        vi visited = vi(V, false);\n+        table dp = table(V, 0);\n+\n+        for(int i = 0; i < V; i++)\n+          if(!visited[i])\n+            dfs(graph, visited, dp, i);\n+\n+        return *std::max_element(dp.begin(), dp.end());    \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727347556712,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n typedef std::vector<int> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n-        if(v == g.size())\n+        if(v  g.size()) return;\n \n         for(int u : g[v])\n           if(!visited[u])\n           {\n@@ -31,40 +31,5 @@\n             dfs(graph, visited, dp, i);\n \n         return *std::max_element(dp.begin(), dp.end());    \n     }\n-}\n-#include <vector>\n-#include <algorithm>\n-\n-namespace algorithms::graph::lp_dag\n-{\n-\n-typedef std::vector<std::vector<int>> adj;\n-typedef std::vector<bool> vi;\n-typedef std::vector<int> table;\n-\n-    void dfs(const adj& g, vi& visited, table& dp, int v)\n-    {\n-        if()\n-\n-        for(int u : g[v])\n-          if(!visited[u])\n-          {\n-              visited[u] = true;\n-              dfs(g, visited, dp, u);\n-              dp[v] = std::max(dp[v], 1 + dp[u]);\n-          }\n-    }\n-\n-    int longestPath(int V, const adj& graph)\n-    {\n-        vi visited = vi(V, false);\n-        table dp = table(V, 0);\n-\n-        for(int i = 0; i < V; i++)\n-          if(!visited[i])\n-            dfs(graph, visited, dp, i);\n-\n-        return *std::max_element(dp.begin(), dp.end());    \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727347561809,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,35 @@\n+#include <vector>\n+#include <algorithm>\n+\n+namespace algorithms::graph::lp_dag\n+{\n+\n+typedef std::vector<std::vector<int>> adj;\n+typedef std::vector<bool> vi;\n+typedef std::vector<int> table;\n+\n+    void dfs(const adj& g, vi& visited, table& dp, int v)\n+    {\n+        if(v  g.size()) return;\n+\n+        for(int u : g[v])\n+          if(!visited[u])\n+          {\n+              visited[u] = true;\n+              dfs(g, visited, dp, u);\n+              dp[v] = std::max(dp[v], 1 + dp[u]);\n+          }\n+    }\n+\n+    int longestPath(int V, const adj& graph)\n+    {\n+        vi visited = vi(V, false);\n+        table dp = table(V, 0);\n+\n+        for(int i = 0; i < V; i++)\n+          if(!visited[i])\n+            dfs(graph, visited, dp, i);\n+\n+        return *std::max_element(dp.begin(), dp.end());    \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727347570514,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n typedef std::vector<int> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n-        if(v  g.size()) return;\n+        if(v == g.size()) return;\n \n         for(int u : g[v])\n           if(!visited[u])\n           {\n@@ -31,40 +31,5 @@\n             dfs(graph, visited, dp, i);\n \n         return *std::max_element(dp.begin(), dp.end());    \n     }\n-}\n-#include <vector>\n-#include <algorithm>\n-\n-namespace algorithms::graph::lp_dag\n-{\n-\n-typedef std::vector<std::vector<int>> adj;\n-typedef std::vector<bool> vi;\n-typedef std::vector<int> table;\n-\n-    void dfs(const adj& g, vi& visited, table& dp, int v)\n-    {\n-        if(v  g.size()) return;\n-\n-        for(int u : g[v])\n-          if(!visited[u])\n-          {\n-              visited[u] = true;\n-              dfs(g, visited, dp, u);\n-              dp[v] = std::max(dp[v], 1 + dp[u]);\n-          }\n-    }\n-\n-    int longestPath(int V, const adj& graph)\n-    {\n-        vi visited = vi(V, false);\n-        table dp = table(V, 0);\n-\n-        for(int i = 0; i < V; i++)\n-          if(!visited[i])\n-            dfs(graph, visited, dp, i);\n-\n-        return *std::max_element(dp.begin(), dp.end());    \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727347652936,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n typedef std::vector<int> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n-        if(v == g.size()) return;\n+        if(v > g.size()) return;\n \n         for(int u : g[v])\n           if(!visited[u])\n           {\n"
+                },
+                {
+                    "date": 1727347671315,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n typedef std::vector<int> table;\n \n     void dfs(const adj& g, vi& visited, table& dp, int v)\n     {\n-        if(v > g.size()) return;\n+        if(v == g.size()) return;\n \n         for(int u : g[v])\n           if(!visited[u])\n           {\n"
+                },
+                {
+                    "date": 1727347676702,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,35 @@\n+#include <vector>\n+#include <algorithm>\n+\n+namespace algorithms::graph::lp_dag\n+{\n+\n+typedef std::vector<std::vector<int>> adj;\n+typedef std::vector<bool> vi;\n+typedef std::vector<int> table;\n+\n+    void dfs(const adj& g, vi& visited, table& dp, int v)\n+    {\n+        if(v == g.size()) return;\n+\n+        for(int u : g[v])\n+          if(!visited[u])\n+          {\n+              visited[u] = true;\n+              dfs(g, visited, dp, u);\n+              dp[v] = std::max(dp[v], 1 + dp[u]);\n+          }\n+    }\n+\n+    int longestPath(int V, const adj& graph)\n+    {\n+        vi visited = vi(V, false);\n+        table dp = table(V, 0);\n+\n+        for(int i = 0; i < V; i++)\n+          if(!visited[i])\n+            dfs(graph, visited, dp, i);\n+\n+        return *std::max_element(dp.begin(), dp.end());    \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727347721505,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,40 +31,5 @@\n             dfs(graph, visited, dp, i);\n \n         return *std::max_element(dp.begin(), dp.end());    \n     }\n-}\n-#include <vector>\n-#include <algorithm>\n-\n-namespace algorithms::graph::lp_dag\n-{\n-\n-typedef std::vector<std::vector<int>> adj;\n-typedef std::vector<bool> vi;\n-typedef std::vector<int> table;\n-\n-    void dfs(const adj& g, vi& visited, table& dp, int v)\n-    {\n-        if(v == g.size()) return;\n-\n-        for(int u : g[v])\n-          if(!visited[u])\n-          {\n-              visited[u] = true;\n-              dfs(g, visited, dp, u);\n-              dp[v] = std::max(dp[v], 1 + dp[u]);\n-          }\n-    }\n-\n-    int longestPath(int V, const adj& graph)\n-    {\n-        vi visited = vi(V, false);\n-        table dp = table(V, 0);\n-\n-        for(int i = 0; i < V; i++)\n-          if(!visited[i])\n-            dfs(graph, visited, dp, i);\n-\n-        return *std::max_element(dp.begin(), dp.end());    \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727348028317,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,7 +29,9 @@\n         for(int i = 0; i < V; i++)\n           if(!visited[i])\n             dfs(graph, visited, dp, i);\n \n+        for()\n+\n         return *std::max_element(dp.begin(), dp.end());    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727348034150,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         for(int i = 0; i < V; i++)\n           if(!visited[i])\n             dfs(graph, visited, dp, i);\n \n-        for()\n+        for(int i = 0; )\n \n         return *std::max_element(dp.begin(), dp.end());    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727348042821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,10 @@\n         for(int i = 0; i < V; i++)\n           if(!visited[i])\n             dfs(graph, visited, dp, i);\n \n-        for(int i = 0; )\n+        for(int i = 0; i < V; i++)\n+          cout << \"\"\n \n         return *std::max_element(dp.begin(), dp.end());    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727348051047,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n           if(!visited[i])\n             dfs(graph, visited, dp, i);\n \n         for(int i = 0; i < V; i++)\n-          cout << \"\"\n+          cout << \"vertex: \" << i << \", \"\n \n         return *std::max_element(dp.begin(), dp.end());    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727348057972,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n           if(!visited[i])\n             dfs(graph, visited, dp, i);\n \n         for(int i = 0; i < V; i++)\n-          cout << \"vertex: \" << i << \", \"\n+          cout << \"vertex: \" << i << \", lp: \" << dp[i] << \"\"\n \n         return *std::max_element(dp.begin(), dp.end());    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727348120524,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,11 +28,12 @@\n \n         for(int i = 0; i < V; i++)\n           if(!visited[i])\n             dfs(graph, visited, dp, i);\n+            \n \n         for(int i = 0; i < V; i++)\n-          cout << \"vertex: \" << i << \", lp: \" << dp[i] << \"\"\n+          cout << \"vertex: \" << i << \", lp: \" << dp[i] << \"\\n\";\n \n         return *std::max_element(dp.begin(), dp.end());    \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727348127273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \n         for(int i = 0; i < V; i++)\n           if(!visited[i])\n             dfs(graph, visited, dp, i);\n-            \n+            visited.clear\n \n         for(int i = 0; i < V; i++)\n           cout << \"vertex: \" << i << \", lp: \" << dp[i] << \"\\n\";\n \n"
+                },
+                {
+                    "date": 1727348133706,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,41 @@\n+#include <vector>\n+#include <algorithm>\n+\n+namespace algorithms::graph::lp_dag\n+{\n+\n+typedef std::vector<std::vector<int>> adj;\n+typedef std::vector<bool> vi;\n+typedef std::vector<int> table;\n+\n+    void dfs(const adj& g, vi& visited, table& dp, int v)\n+    {\n+        if(v == g.size()) return;\n+\n+        for(int u : g[v])\n+          if(!visited[u])\n+          {\n+              visited[u] = true;\n+              dfs(g, visited, dp, u);\n+              dp[v] = std::max(dp[v], 1 + dp[u]);\n+          }\n+    }\n+\n+    int longestPath(int V, const adj& graph)\n+    {\n+        vi visited = vi(V, false);\n+        table dp = table(V, 0);\n+\n+        for(int i = 0; i < V; i++)\n+        {\n+          if(!visited[i])\n+            dfs(graph, visited, dp, i);\n+            visited.clear();\n+        }\n+\n+        for(int i = 0; i < V; i++)\n+          cout << \"vertex: \" << i << \", lp: \" << dp[i] << \"\\n\";\n+\n+        return *std::max_element(dp.begin(), dp.end());    \n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727348167179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n         for(int i = 0; i < V; i++)\n         {\n            if(!visited[i])\n              dfs(graph, visited, dp, i);\n-            visited.clear();\n+            v\n         }\n \n         for(int i = 0; i < V; i++)\n           cout << \"vertex: \" << i << \", lp: \" << dp[i] << \"\\n\";\n"
+                },
+                {
+                    "date": 1727348792643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,42 @@\n+#pragma once\n+#include <vector>\n+#include <algorithm>\n+\n+namespace algorithms::graph::lp_dag\n+{\n+\n+typedef std::vector<std::vector<int>> adj;\n+typedef std::vector<bool> vi;\n+typedef std::vector<int> table;\n+table dp;\n+\n+    void dfs(const adj& g, vi& visited, table& dp, int v)\n+    {\n+        if(v == g.size()) return;\n+\n+        for(int u : g[v])\n+          if(!visited[u])\n+          {\n+              visited[u] = true;\n+              dfs(g, visited, dp, u);\n+              dp[v] = std::max(dp[v], 1 + dp[u]);\n+          }\n+    }\n+\n+    int longestPath(int V, const adj& graph)\n+    {\n+        table dp = table(V, 0);\n+\n+        for(int i = 0; i < V; i++)\n+        {\n+           vi visited = vi(V, false); \n+           if(!visited[i])\n+             dfs(graph, visited, dp, i);\n+        }\n+\n+        for(int i = 0; i < V; i++)\n+          cout << \"vertex: \" << i << \", lp: \" << dp[i] << \"\\n\";\n+\n+        return *std::max_element(dp.begin(), dp.end());    \n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1727345987467,
+            "name": "Commit-0",
+            "content": "\n\nname"
+        }
+    ]
+}

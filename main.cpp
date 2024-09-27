@@ -178,20 +178,29 @@
 #include "algorithms/graph/onlinejudge/countWays.cpp"
 #include "algorithms/graph/onlinejudge/tshirt.cpp"
 #include "algorithms/graph/onlinejudge/powerTransmission.cpp"
+#include "algorithms/graph/onlinejudge/titanic.cpp"
+#include "algorithms/graph/onlinejudge/angryProgrammer.cpp"
+#include "algorithms/graph/onlinejudge/césar.cpp"
+#include "algorithms/graph/lp_dag.cpp"
 
 #include "algorithms/rt.cpp"
 
 
-namespace cd = algorithms::backtrack::onlinejudge::cd;
+// namespace titanic = algorithms::graph::onlinejudge::titanic;
+// namespace mf = algorithms::graph::max_flow;
+// namespace ap = algorithms::graph::onlinejudge::angry_programmer;
+namespace lp = algorithms::graph::onlinejudge::césar;
 
-int main()
+int main(int argc, char* argv[])
 {
   
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "--- ... ---\n";
+    
+    std::optional<char*> file = std::nullopt;
+    if(argc > 1) file = std::make_optional(argv[1]);
 
-    // ts::graph g = {{ts::L, ts::XL}, {ts::XL, ts::L}, {ts::XXL, ts::XL}, {ts::S, ts::XS}, {ts::M, ts::S}, {ts::M, ts::L}};
-    // ts::graph g = {{ts::S, ts::XL}, {ts::L, ts::S}, {ts::L, ts::XL}, {ts::L, ts::XL}};
-    submit();
+    // Case 6: The longest path from 1 has length 3, finishing at 5.
+    lp::submit(file);
 }

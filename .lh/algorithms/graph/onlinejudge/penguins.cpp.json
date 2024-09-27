@@ -1,0 +1,22 @@
+{
+    "sourceFile": "algorithms/graph/onlinejudge/penguins.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1727329819064,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1727329833013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,6 @@\n \n \n-namespace algorithms::graph::onlinejudge::pe\n\\ No newline at end of file\n+namespace algorithms::graph::onlinejudge::penguins\n+{\n+    /**  https://onlinejudge.org/external/121/12125.pdf */\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1727329819064,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::graph::onlinejudge::pe"
+        }
+    ]
+}

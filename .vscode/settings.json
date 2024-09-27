@@ -65,7 +65,9 @@
         "chrono": "cpp",
         "memory": "cpp",
         "forward_list": "cpp",
-        "print": "cpp"
+        "print": "cpp",
+        "fstream": "cpp",
+        "cassert": "cpp"
     },
     "cSpell.words": [
         "atcoder",
@@ -82,5 +84,6 @@
         "onlinejudge",
         "vjudge",
         "warshall"
-    ]
+    ],
+    "C_Cpp.errorSquiggles": "disabled"
 }

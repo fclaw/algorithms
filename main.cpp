@@ -183,6 +183,7 @@
 #include "algorithms/graph/onlinejudge/césar.cpp"
 #include "algorithms/graph/onlinejudge/projectScheduling.cpp"
 #include "algorithms/graph/onlinejudge/snowboard.cpp"
+#include "algorithms/graph/onlinejudge/sabotage.cpp"
 #include "algorithms/graph/lp_dag.cpp"
 
 #include "algorithms/rt.cpp"
@@ -193,7 +194,10 @@
 // namespace ap = algorithms::graph::onlinejudge::angry_programmer;
 // namespace lp = algorithms::graph::onlinejudge::césar;
 // namespace ps = algorithms::graph::onlinejudge::project_scheduling;
-namespace sb = algorithms::graph::onlinejudge::snowboard;
+// namespace sb = algorithms::graph::onlinejudge::snowboard;
+namespace sb = algorithms::graph::onlinejudge::sabotage;
+
+
 
 int main(int argc, char* argv[])
 {

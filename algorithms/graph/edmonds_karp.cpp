@@ -1,8 +1,6 @@
 #pragma once
 #include <vector>
 #include <queue>
-#include <optional>
-#include <cassert>
 #include <limits>
 
 /**
@@ -74,51 +72,5 @@ res residual_graph;
              if (flow == 0) break;      // we cannot send any more flow (`f' = 0), terminate
              max_flow += flow;                 // we can still send a flow, increase the max flow!
          }
-    }
-
-typedef int cost;
-typedef std::tuple<int, int, cost> edge;
-typedef std::vector<edge> graph;
-
-    void test(std::optional<char*> file)
-    {
-        if(!file.has_value())
-          std::cout << "the file must be provided!\n";
-
-        assert(freopen(file.value(), "r", stdin) != NULL);
-        graph g;
-        int V, edges, s, t, touchstone;
-        std::cin >> V >> edges >> s >> t >> touchstone;
-        while(--edges >= 0)
-        {
-            int from, to, w;
-            std::cin >> from >> to >> w;
-            --from; --to;
-            g.push_back({from, to, w});
-            g.push_back({to, from, w});
-        }
-
-        MAX_V = V;
-        source = --s;
-        sink = --t;
-        residual_graph.resize(MAX_V);
-        for(auto& x : residual_graph)
-          x.resize(MAX_V);
-
-        for(int i = 0; i < MAX_V; i++)
-          for(int j = 0; j < MAX_V; j++)
-            residual_graph[i][j] = 0;
-        
-        for(edge t : g)
-        {
-            int from = std::get<0>(t);
-            int to = std::get<1>(t);
-            cost c = std::get<2>(t);
-            residual_graph[from][to] = c;
-        }
-
-        edmonds_karp();
-        assert(max_flow == touchstone);
-        std::cout << "ok!";
     }
 }

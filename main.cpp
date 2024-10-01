@@ -184,6 +184,7 @@
 #include "algorithms/graph/onlinejudge/projectScheduling.cpp"
 #include "algorithms/graph/onlinejudge/snowboard.cpp"
 #include "algorithms/graph/onlinejudge/sabotage.cpp"
+#include "algorithms/graph/onlinejudge/checkers.cpp"
 #include "algorithms/graph/lp_dag.cpp"
 
 #include "algorithms/rt.cpp"
@@ -195,7 +196,8 @@
 // namespace lp = algorithms::graph::onlinejudge::césar;
 // namespace ps = algorithms::graph::onlinejudge::project_scheduling;
 // namespace sb = algorithms::graph::onlinejudge::snowboard;
-namespace sb = algorithms::graph::onlinejudge::sabotage;
+// namespace sb = algorithms::graph::onlinejudge::sabotage;
+namespace ck = algorithms::graph::onlinejudge::checkers;
 
 
 
@@ -209,5 +211,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    sb::submit(file);
+    ck::submit(file);
 }

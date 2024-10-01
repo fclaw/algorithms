@@ -1,21 +1,26 @@
+/** https://onlinejudge.org/external/115/11506.pdf */
+
 #include <vector>
 #include <tuple>
 #include <cstdio>
 #include <unordered_map>
 #include <cassert>
+#include <unordered_set>
 #include "../edmonds_karp.cpp"
 
 namespace algorithms::graph::onlinejudge::angry_programmer
 {
 
 typedef int cost;
-typedef std::tuple<int, int, cost> edge;
-typedef std::vector<edge> graph;
 typedef std::vector<std::vector<std::pair<int, int>>> adj;
-typedef std::vector<bool> vi;
 typedef std::vector<std::vector<int>> adj_matrix;
+typedef std::vector<int> vv;
+typedef std::unordered_set<int> sv;
+typedef std::unordered_map<int, int> mi;
 
 namespace mf = algorithms::graph::max_flow;
+
+
 
    /** Minimum Cut problem
     *  Let’s define an s-t cut C = (S-component, T-component) as a partition of V ∈ G such that
@@ -25,7 +30,7 @@ namespace mf = algorithms::graph::max_flow;
     * from source s again. All reachable vertices from source s using positive weighted edges in 
     * the residual graph belong to the S-component. All other unreachable vertices belong to the T-component (i.e. vertex 1 and 3). 
     * All edges connecting the S-component to the T-component belong to the cut-set of C */
-   void performEdmondsKarp(int V, int director, int server, const graph& g)
+   void performEdmondsKarp(int V, int director, int server, const adj_matrix& graph)
    {
         mf::MAX_V = V;
         mf::source = director;
@@ -36,15 +41,7 @@ namespace mf = algorithms::graph::max_flow;
 
         for(int i = 0; i < mf::MAX_V; i++)
           for(int j = 0; j < mf::MAX_V; j++)
-            mf::residual_graph[i][j] = 0;
-        
-        for(edge t : g)
-        {
-            int from = std::get<0>(t);
-            int to = std::get<1>(t);
-            cost c = std::get<2>(t);
-            mf::residual_graph[from][to] = c;
-        }
+            mf::residual_graph[i][j] = graph[i][j];
 
         mf::edmonds_karp();
    }
@@ -53,82 +50,42 @@ namespace mf = algorithms::graph::max_flow;
      *  The function marks visited[i] as true if i is reachable from s. 
      *  The initial values in visited[] must be false. 
      * We can also use BFS to find reachable vertices */
-    void reachableVertices(int V, int s, vi visited)
+    void reachableVertices(int V, int s, sv& visited)
     {
-        visited[s] = true;
+        visited.insert(s);
         for (int i = 0; i < V; i++)
-          if(mf::residual_graph[s][i] && 
-             !visited[i])
+          if(mf::residual_graph[s][i] > 0 && 
+             visited.find(i) == visited.end())
             reachableVertices(V, i, visited);
     }
-
-   typedef std::unordered_map<int, std::pair<int, int>> mc;
-   namespace ap = algorithms::graph::onlinejudge::angry_programmer;
 
    void submit(std::optional<char*> file)
    {
       if(file.has_value())
         assert(freopen(file.value(), "r", stdin) != NULL);
-      int vertices, w;
+      int vertices, edges;
       while(true)
       {
-          std::cin >> vertices >> w;
-          if(vertices == 0 && w == 0) break;
+          std::cin >> vertices >> edges;
+          if(vertices == 0 && edges == 0) break;
           
-          int server = vertices - 1;
           int director = 0;
-          mc machines;
-          int c = vertices - 2;
-          while(--c >= 0)
+          int server = vertices - 1;
+          // machine number
+          int mn = vertices - 2;
+          // overall vertices in the network amount to two times the number of machines plus director and server
+          int V = mn * 2 + 2 + 1;
+          adj_matrix graph = adj_matrix(V, vv(V, 0));
+          graph[server][server] = graph[director][director] = INT32_MAX;
+          int ans = 0;
+          while(--mn >= 0)
           {
               int i, cost;
               std::cin >> i >> cost;
-              if(cost > 0) 
-                machines.insert({--i, {vertices++, cost}});
+              int from = --i;
+              int to = vertices + from;
+              graph[from][to] = cost;
           }
-
-          ap::graph graph;
-          adj_matrix mtx = adj_matrix(51, std::vector<int>(51, 0));
-          while(--w >= 0)
-          {
-              int from, to, w;
-              std::cin >> from >> to >> w;
-              --from; --to;
-    
-              if(auto it = machines.find(from); 
-                it != machines.end())
-              {
-                  int aux = (*it).second.first;
-                  int cost = (*it).second.second;
-                  graph.push_back({from, aux, cost});
-                  graph.push_back({aux, from, cost});
-                  graph.push_back({aux, to, w});
-                  graph.push_back({to, aux, w});
-                  mtx[from][aux] = cost;
-                  mtx[aux][from] = cost;
-                  mtx[aux][to] = w;
-                  mtx[to][aux] = w;
-
-              }
-              else
-              {
-                 graph.push_back({from, to, w});
-                 graph.push_back({to, from, w});
-                 mtx[from][to] = w;
-                 mtx[to][from] = w;
-              }
-          }
-
-          ap::performEdmondsKarp(vertices, director, server, graph);
-          vi visited(vertices);
-          reachableVertices(vertices, director, visited);
-
-          int ans = INT32_MAX;
-          for (int i = 0; i < vertices; i++)
-            for (int j = 0; j < vertices; j++)
-              if (visited[i] && !visited[j])
-                ans = std::min(ans, mtx[i][j]);
-
           printf("%d\n", ans);
       }
    }

@@ -185,19 +185,13 @@
 #include "algorithms/graph/onlinejudge/snowboard.cpp"
 #include "algorithms/graph/onlinejudge/sabotage.cpp"
 #include "algorithms/graph/onlinejudge/checkers.cpp"
+#include "algorithms/graph/onlinejudge/injuredQueen.cpp"
 #include "algorithms/graph/lp_dag.cpp"
 
 #include "algorithms/rt.cpp"
 
 
-// namespace titanic = algorithms::graph::onlinejudge::titanic;
-// namespace mf = algorithms::graph::max_flow;
-// namespace ap = algorithms::graph::onlinejudge::angry_programmer;
-// namespace lp = algorithms::graph::onlinejudge::césar;
-// namespace ps = algorithms::graph::onlinejudge::project_scheduling;
-// namespace sb = algorithms::graph::onlinejudge::snowboard;
-// namespace sb = algorithms::graph::onlinejudge::sabotage;
-namespace ck = algorithms::graph::onlinejudge::checkers;
+namespace iq = algorithms::graph::onlinejudge::injured_queen;
 
 
 
@@ -211,5 +205,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    ck::submit(file);
+    iq::submit(file);
 }

@@ -1,0 +1,278 @@
+{
+    "sourceFile": "algorithms/backtrack/template.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 65,
+            "patches": [
+                {
+                    "date": 1727948509042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1727948522137,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,9 @@\n \n \n namespace algorithms::backtrack::template\n {\n-    \n+\n+\n+\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948527721,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,8 @@\n \n namespace algorithms::backtrack::template\n {\n \n+bool finished = false;\n \n \n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948543791,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace algorithms::backtrack::template\n {\n \n+// global flag allows for premature termination\n bool finished = false;\n \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948563981,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,6 +5,8 @@\n \n // global flag allows for premature termination\n bool finished = false;\n \n+  void backtrack()\n+  \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948608772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n \n \n+\n namespace algorithms::backtrack::template\n {\n \n // global flag allows for premature termination\n"
+                },
+                {
+                    "date": 1727948615583,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+#include <>\n+\n+\n+namespace algorithms::backtrack::template\n+{\n+\n+// global flag allows for premature termination\n+bool finished = false;\n+\n+  void backtrack()\n+  \n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948622731,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,13 @@\n+#include <vector>\n+\n+\n+namespace algorithms::backtrack::template\n+{\n+\n+// global flag allows for premature termination\n+bool finished = false;\n+\n+  void backtrack()\n+  \n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948631379,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,16 @@\n+#include <vector>\n+\n+\n+namespace algorithms::backtrack::template\n+{\n+\n+typedef \n+\n+\n+// global flag allows for premature termination\n+bool finished = false;\n+\n+  void backtrack()\n+  \n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948637644,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,53 +3,14 @@\n \n namespace algorithms::backtrack::template\n {\n \n-typedef \n+typedef std::vector<T>\n \n \n // global flag allows for premature termination\n bool finished = false;\n \n   void backtrack()\n   \n \n-}\n-#include <vector>\n-\n-\n-namespace algorithms::backtrack::template\n-{\n-\n-// global flag allows for premature termination\n-bool finished = false;\n-\n-  void backtrack()\n-  \n-\n-}\n-#include <>\n-\n-\n-namespace algorithms::backtrack::template\n-{\n-\n-// global flag allows for premature termination\n-bool finished = false;\n-\n-  void backtrack()\n-  \n-\n-}\n-\n-\n-\n-namespace algorithms::backtrack::template\n-{\n-\n-// global flag allows for premature termination\n-bool finished = false;\n-\n-  void backtrack()\n-  \n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948680746,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n \n namespace algorithms::backtrack::template\n {\n \n+templa\n typedef std::vector<T>\n \n \n // global flag allows for premature termination\n"
+                },
+                {
+                    "date": 1727948687788,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,17 @@\n+#include <vector>\n+\n+\n+namespace algorithms::backtrack::template\n+{\n+\n+template<typename T>\n+typedef std::vector<T>\n+\n+\n+// global flag allows for premature termination\n+bool finished = false;\n+\n+  void backtrack()\n+  \n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948695533,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,32 +3,14 @@\n \n namespace algorithms::backtrack::template\n {\n \n-template<typename T>\n-typedef std::vector<T>\n+template<typename T> typedef std::vector<T> vt;\n \n \n // global flag allows for premature termination\n bool finished = false;\n \n   void backtrack()\n   \n \n-}\n-#include <vector>\n-\n-\n-namespace algorithms::backtrack::template\n-{\n-\n-templa\n-typedef std::vector<T>\n-\n-\n-// global flag allows for premature termination\n-bool finished = false;\n-\n-  void backtrack()\n-  \n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948738852,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,12 +5,10 @@\n {\n \n template<typename T> typedef std::vector<T> vt;\n \n-\n // global flag allows for premature termination\n bool finished = false;\n \n-  void backtrack()\n-  \n+  void backtrack() {}\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948780643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n #include <vector>\n \n \n-namespace algorithms::backtrack::template\n+namespace algorithms::backtrack::tm\n {\n \n template<typename T> typedef std::vector<T> vt;\n \n"
+                },
+                {
+                    "date": 1727948787191,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n #include <vector>\n \n \n-namespace algorithms::backtrack::tm\n+namespace algorithms::backtrack::\n {\n \n template<typename T> typedef std::vector<T> vt;\n \n"
+                },
+                {
+                    "date": 1727948794029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+#include <vector>\n+\n+\n+namespace algorithms::backtrack::framework\n+{\n+\n+template<typename T> typedef std::vector<T> vt;\n+\n+// global flag allows for premature termination\n+bool finished = false;\n+\n+  void backtrack() {}\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948809291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n namespace algorithms::backtrack::framework\n {\n \n-template<typename T> typedef std::vector<T> vt;\n+template<typename T> std::vector<T> vt;\n \n // global flag allows for premature termination\n bool finished = false;\n \n"
+                },
+                {
+                    "date": 1727948817527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,26 +3,12 @@\n \n namespace algorithms::backtrack::framework\n {\n \n-template<typename T> std::vector<T> vt;\n+typedef template<typename T> std::vector<T> vt;\n \n // global flag allows for premature termination\n bool finished = false;\n \n   void backtrack() {}\n \n-}\n-#include <vector>\n-\n-\n-namespace algorithms::backtrack::\n-{\n-\n-template<typename T> typedef std::vector<T> vt;\n-\n-// global flag allows for premature termination\n-bool finished = false;\n-\n-  void backtrack() {}\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948826395,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n namespace algorithms::backtrack::framework\n {\n \n-typedef template<typename T> std::vector<T> vt;\n+using template<typename T> std::vector<T> vt;\n \n // global flag allows for premature termination\n bool finished = false;\n \n"
+                },
+                {
+                    "date": 1727948834532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+#include <vector>\n+\n+\n+namespace algorithms::backtrack::framework\n+{\n+\n+using vt = template<typename T> std::vector<T>;\n+\n+// global flag allows for premature termination\n+bool finished = false;\n+\n+  void backtrack() {}\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948893126,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,26 +3,12 @@\n \n namespace algorithms::backtrack::framework\n {\n \n-using vt = template<typename T> std::vector<T>;\n+typedef template<typename T> std::vector<T> vt;\n \n // global flag allows for premature termination\n bool finished = false;\n \n   void backtrack() {}\n \n-}\n-#include <vector>\n-\n-\n-namespace algorithms::backtrack::framework\n-{\n-\n-using template<typename T> std::vector<T> vt;\n-\n-// global flag allows for premature termination\n-bool finished = false;\n-\n-  void backtrack() {}\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948901494,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n namespace algorithms::backtrack::framework\n {\n \n-typedef template<typename T> std::vector<T> vt;\n+typedef std::vector<int> vt;\n \n // global flag allows for premature termination\n bool finished = false;\n \n"
+                },
+                {
+                    "date": 1727948910089,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,12 +3,12 @@\n \n namespace algorithms::backtrack::framework\n {\n \n-typedef std::vector<int> vt;\n+typedef std::vector<int> vi;\n \n // global flag allows for premature termination\n bool finished = false;\n \n-  void backtrack() {}\n+  void backtrack(const vi& ) {}\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948917472,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,7 +8,7 @@\n \n // global flag allows for premature termination\n bool finished = false;\n \n-  void backtrack(const vi& ) {}\n+  void backtrack(const vi& a) {}\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948923294,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,7 +8,7 @@\n \n // global flag allows for premature termination\n bool finished = false;\n \n-  void backtrack(const vi& a) {}\n+  void backtrack(const vi& in) {}\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948928781,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,7 +8,7 @@\n \n // global flag allows for premature termination\n bool finished = false;\n \n-  void backtrack(const vi& in) {}\n+  void backtrack(const vi& vs, int ) {}\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948952235,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,7 +8,7 @@\n \n // global flag allows for premature termination\n bool finished = false;\n \n-  void backtrack(const vi& vs, int ) {}\n+  void backtrack(const vi& vs, int k, ) {}\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948960593,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,10 @@\n {\n \n typedef std::vector<int> vi;\n \n+\n+\n // global flag allows for premature termination\n bool finished = false;\n \n   void backtrack(const vi& vs, int k, ) {}\n"
+                },
+                {
+                    "date": 1727948970420,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,11 @@\n {\n \n typedef std::vector<int> vi;\n \n+struct Input\n+{\n+};\n \n \n // global flag allows for premature termination\n bool finished = false;\n"
+                },
+                {
+                    "date": 1727948987167,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,19 @@\n+#include <vector>\n+\n+\n+namespace algorithms::backtrack::framework\n+{\n+\n+typedef std::vector<int> vi;\n+\n+struct Input\n+{\n+};\n+\n+\n+// global flag allows for premature termination\n+bool finished = false;\n+\n+  void backtrack(const vi& vs, int k, Intput& input) {}\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727948993622,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,24 +15,5 @@\n bool finished = false;\n \n   void backtrack(const vi& vs, int k, Intput& input) {}\n \n-}\n-#include <vector>\n-\n-\n-namespace algorithms::backtrack::framework\n-{\n-\n-typedef std::vector<int> vi;\n-\n-struct Input\n-{\n-};\n-\n-\n-// global flag allows for premature termination\n-bool finished = false;\n-\n-  void backtrack(const vi& vs, int k, ) {}\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727949003460,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,19 @@\n+#include <vector>\n+\n+\n+namespace algorithms::backtrack::framework\n+{\n+\n+typedef std::vector<int> vi;\n+\n+struct Input\n+{\n+};\n+\n+\n+// global flag allows for premature termination\n+bool finished = false;\n+\n+  void backtrack(const vi& vs, int k, Input& input) {}\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727949009908,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,24 +15,5 @@\n bool finished = false;\n \n   void backtrack(const vi& vs, int k, Input& input) {}\n \n-}\n-#include <vector>\n-\n-\n-namespace algorithms::backtrack::framework\n-{\n-\n-typedef std::vector<int> vi;\n-\n-struct Input\n-{\n-};\n-\n-\n-// global flag allows for premature termination\n-bool finished = false;\n-\n-  void backtrack(const vi& vs, int k, Intput& input) {}\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727949042928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,7 +13,22 @@\n \n // global flag allows for premature termination\n bool finished = false;\n \n-  void backtrack(const vi& vs, int k, Input& input) {}\n+  void backtrack(const vi& vs, int k, Input& input) \n+  {\n+    if (is_a_solution(a,k,input))\n+process_solution(a,k,input);\n+else {\n+k = k+1;\n+construct_candidates(a,k,input,c,&ncandidates);\n+for (i=0; i<ncandidates; i++) {\n+a[k] = c[i];\n+make_move(a,k,input);\n+backtrack(a,k,input);\n+unmake_move(a,k,input);\n+if (finished) return; /* terminate early */\n+}\n+}\n+  }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727949055111,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,11 +13,13 @@\n \n // global flag allows for premature termination\n bool finished = false;\n \n+  bool is_a_solution \n+\n   void backtrack(const vi& vs, int k, Input& input) \n   {\n-    if (is_a_solution(a,k,input))\n+       if (is_a_solution(a,k,input))\n process_solution(a,k,input);\n else {\n k = k+1;\n construct_candidates(a,k,input,c,&ncandidates);\n"
+                },
+                {
+                    "date": 1727949060552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,13 +13,13 @@\n \n // global flag allows for premature termination\n bool finished = false;\n \n-  bool is_a_solution \n+  bool is_a_solution() \n \n   void backtrack(const vi& vs, int k, Input& input) \n   {\n-       if (is_a_solution(a,k,input))\n+       if (is_a_solution())\n process_solution(a,k,input);\n else {\n k = k+1;\n construct_candidates(a,k,input,c,&ncandidates);\n"
+                },
+                {
+                    "date": 1727949085680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,10 @@\n   bool is_a_solution() \n \n   void backtrack(const vi& vs, int k, Input& input) \n   {\n-       if (is_a_solution())\n-process_solution(a,k,input);\n+       if (is_a_solution(vs, k, input))\n+         process_solution(a,k,input);\n else {\n k = k+1;\n construct_candidates(a,k,input,c,&ncandidates);\n for (i=0; i<ncandidates; i++) {\n"
+                },
+                {
+                    "date": 1727949097405,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n // global flag allows for premature termination\n bool finished = false;\n \n-  bool is_a_solution() \n+  bool is_a_solution(const vi& vs, int k, Input& input) \n \n   void backtrack(const vi& vs, int k, Input& input) \n   {\n        if (is_a_solution(vs, k, input))\n"
+                },
+                {
+                    "date": 1727949105280,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n \n // global flag allows for premature termination\n bool finished = false;\n \n-  bool is_a_solution(const vi& vs, int k, Input& input) \n+  bool is_a_solution(const vi& vs, int k, const Input& input) { return false; }\n \n   void backtrack(const vi& vs, int k, Input& input) \n   {\n        if (is_a_solution(vs, k, input))\n"
+                },
+                {
+                    "date": 1727949110518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n // global flag allows for premature termination\n bool finished = false;\n \n   bool is_a_solution(const vi& vs, int k, const Input& input) { return false; }\n-\n+  \n   void backtrack(const vi& vs, int k, Input& input) \n   {\n        if (is_a_solution(vs, k, input))\n          process_solution(a,k,input);\n"
+                },
+                {
+                    "date": 1727949120728,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n // global flag allows for premature termination\n bool finished = false;\n \n   bool is_a_solution(const vi& vs, int k, const Input& input) { return false; }\n-  \n+  void process_solution(const vi& vs, int k, const Input& input)\n   void backtrack(const vi& vs, int k, Input& input) \n   {\n        if (is_a_solution(vs, k, input))\n          process_solution(a,k,input);\n"
+                },
+                {
+                    "date": 1727949132399,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,14 +14,14 @@\n // global flag allows for premature termination\n bool finished = false;\n \n   bool is_a_solution(const vi& vs, int k, const Input& input) { return false; }\n-  void process_solution(const vi& vs, int k, const Input& input)\n+  void process_solution(const vi& vs, int k, Input& input) {}\n   void backtrack(const vi& vs, int k, Input& input) \n   {\n        if (is_a_solution(vs, k, input))\n          process_solution(a,k,input);\n-else {\n+       else {\n k = k+1;\n construct_candidates(a,k,input,c,&ncandidates);\n for (i=0; i<ncandidates; i++) {\n a[k] = c[i];\n"
+                },
+                {
+                    "date": 1727949138919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,11 @@\n   void backtrack(const vi& vs, int k, Input& input) \n   {\n        if (is_a_solution(vs, k, input))\n          process_solution(a,k,input);\n-       else {\n-k = k+1;\n+       else \n+       {\n+          k;\n construct_candidates(a,k,input,c,&ncandidates);\n for (i=0; i<ncandidates; i++) {\n a[k] = c[i];\n make_move(a,k,input);\n"
+                },
+                {
+                    "date": 1727949151204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,16 +15,17 @@\n bool finished = false;\n \n   bool is_a_solution(const vi& vs, int k, const Input& input) { return false; }\n   void process_solution(const vi& vs, int k, Input& input) {}\n+  void construct_candidates()\n   void backtrack(const vi& vs, int k, Input& input) \n   {\n        if (is_a_solution(vs, k, input))\n          process_solution(a,k,input);\n        else \n        {\n-          k;\n-construct_candidates(a,k,input,c,&ncandidates);\n+          ++k;\n+          construct_candidates(a,k,input,c,&ncandidates);\n for (i=0; i<ncandidates; i++) {\n a[k] = c[i];\n make_move(a,k,input);\n backtrack(a,k,input);\n"
+                },
+                {
+                    "date": 1727949268417,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n bool finished = false;\n \n   bool is_a_solution(const vi& vs, int k, const Input& input) { return false; }\n   void process_solution(const vi& vs, int k, Input& input) {}\n-  void construct_candidates()\n+  void construct_candidates() {}\n   void backtrack(const vi& vs, int k, Input& input) \n   {\n        if (is_a_solution(vs, k, input))\n          process_solution(a,k,input);\n"
+                },
+                {
+                    "date": 1727949274778,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,10 +23,10 @@\n          process_solution(a,k,input);\n        else \n        {\n           ++k;\n-          construct_candidates(a,k,input,c,&ncandidates);\n-for (i=0; i<ncandidates; i++) {\n+          construct_candidates();\n+          for (i=0; i<ncandidates; i++) {\n a[k] = c[i];\n make_move(a,k,input);\n backtrack(a,k,input);\n unmake_move(a,k,input);\n"
+                },
+                {
+                    "date": 1727949293881,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,11 @@\n \n \n // global flag allows for premature termination\n bool finished = false;\n+ncandidates\n \n+\n   bool is_a_solution(const vi& vs, int k, const Input& input) { return false; }\n   void process_solution(const vi& vs, int k, Input& input) {}\n   void construct_candidates() {}\n   void backtrack(const vi& vs, int k, Input& input) \n@@ -24,9 +26,9 @@\n        else \n        {\n           ++k;\n           construct_candidates();\n-          for (i=0; i<ncandidates; i++) {\n+          for (i = 0; i < ncandidates; i++) {\n a[k] = c[i];\n make_move(a,k,input);\n backtrack(a,k,input);\n unmake_move(a,k,input);\n"
+                },
+                {
+                    "date": 1727949304251,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n \n \n // global flag allows for premature termination\n bool finished = false;\n-ncandidates\n+int N;\n \n \n   bool is_a_solution(const vi& vs, int k, const Input& input) { return false; }\n   void process_solution(const vi& vs, int k, Input& input) {}\n"
+                },
+                {
+                    "date": 1727949309698,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n        else \n        {\n           ++k;\n           construct_candidates();\n-          for (i = 0; i < ncandidates; i++) {\n+          for (i = 0; i < N; i++) {\n a[k] = c[i];\n make_move(a,k,input);\n backtrack(a,k,input);\n unmake_move(a,k,input);\n"
+                },
+                {
+                    "date": 1727949316750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,10 +26,11 @@\n        else \n        {\n           ++k;\n           construct_candidates();\n-          for (i = 0; i < N; i++) {\n-a[k] = c[i];\n+          for (i = 0; i < N; i++) \n+          {\n+            a[k] = c[i];\n make_move(a,k,input);\n backtrack(a,k,input);\n unmake_move(a,k,input);\n if (finished) return; /* terminate early */\n"
+                },
+                {
+                    "date": 1727949324771,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,10 +28,10 @@\n           ++k;\n           construct_candidates();\n           for (i = 0; i < N; i++) \n           {\n-            a[k] = c[i];\n-make_move(a,k,input);\n+            // a[k] = c[i];\n+make_move();\n backtrack(a,k,input);\n unmake_move(a,k,input);\n if (finished) return; /* terminate early */\n }\n"
+                },
+                {
+                    "date": 1727949329977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n           construct_candidates();\n           for (i = 0; i < N; i++) \n           {\n             // a[k] = c[i];\n-make_move();\n+            do_move();\n backtrack(a,k,input);\n unmake_move(a,k,input);\n if (finished) return; /* terminate early */\n }\n"
+                },
+                {
+                    "date": 1727949335539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,10 +28,10 @@\n           ++k;\n           construct_candidates();\n           for (i = 0; i < N; i++) \n           {\n-            // a[k] = c[i];\n-            do_move();\n+             // a[k] = c[i];\n+             make_move();\n backtrack(a,k,input);\n unmake_move(a,k,input);\n if (finished) return; /* terminate early */\n }\n"
+                },
+                {
+                    "date": 1727949345080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,41 @@\n+#include <vector>\n+\n+\n+namespace algorithms::backtrack::framework\n+{\n+\n+typedef std::vector<int> vi;\n+\n+struct Input\n+{\n+};\n+\n+\n+// global flag allows for premature termination\n+bool finished = false;\n+int N;\n+\n+\n+  bool is_a_solution(const vi& vs, int k, const Input& input) { return false; }\n+  void process_solution(const vi& vs, int k, Input& input) {}\n+  void construct_candidates() {}\n+  void backtrack(const vi& vs, int k, Input& input) \n+  {\n+       if (is_a_solution(vs, k, input))\n+         process_solution(a,k,input);\n+       else \n+       {\n+          ++k;\n+          construct_candidates();\n+          for (i = 0; i < N; i++) \n+          {\n+             // a[k] = c[i];\n+             make_move();\n+             backtrack(vs, k,input);\n+unmake_move(a,k,input);\n+if (finished) return; /* terminate early */\n+}\n+}\n+  }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727949353550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,41 @@\n+#include <vector>\n+\n+\n+namespace algorithms::backtrack::framework\n+{\n+\n+typedef std::vector<int> vi;\n+\n+struct Input\n+{\n+};\n+\n+\n+// global flag allows for premature termination\n+bool finished = false;\n+int N;\n+\n+\n+  bool is_a_solution(const vi& vs, int k, const Input& input) { return false; }\n+  void process_solution(const vi& vs, int k, Input& input) {}\n+  void construct_candidates() {}\n+  void backtrack(const vi& vs, int k, Input& input) \n+  {\n+       if (is_a_solution(vs, k, input))\n+         process_solution(a,k,input);\n+       else \n+       {\n+          ++k;\n+          construct_candidates();\n+          for (i = 0; i < N; i++) \n+          {\n+             // a[k] = c[i];\n+             make_move();\n+             backtrack(vs, k, input);\n+reverse_move(a,k,input);\n+if (finished) return; /* terminate early */\n+}\n+}\n+  }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727949360621,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,93 +31,11 @@\n           {\n              // a[k] = c[i];\n              make_move();\n              backtrack(vs, k, input);\n-reverse_move(a,k,input);\n+             reverse_move(vs, k, input);\n if (finished) return; /* terminate early */\n }\n }\n   }\n \n-}\n-#include <vector>\n-\n-\n-namespace algorithms::backtrack::framework\n-{\n-\n-typedef std::vector<int> vi;\n-\n-struct Input\n-{\n-};\n-\n-\n-// global flag allows for premature termination\n-bool finished = false;\n-int N;\n-\n-\n-  bool is_a_solution(const vi& vs, int k, const Input& input) { return false; }\n-  void process_solution(const vi& vs, int k, Input& input) {}\n-  void construct_candidates() {}\n-  void backtrack(const vi& vs, int k, Input& input) \n-  {\n-       if (is_a_solution(vs, k, input))\n-         process_solution(a,k,input);\n-       else \n-       {\n-          ++k;\n-          construct_candidates();\n-          for (i = 0; i < N; i++) \n-          {\n-             // a[k] = c[i];\n-             make_move();\n-             backtrack(vs, k,input);\n-unmake_move(a,k,input);\n-if (finished) return; /* terminate early */\n-}\n-}\n-  }\n-\n-}\n-#include <vector>\n-\n-\n-namespace algorithms::backtrack::framework\n-{\n-\n-typedef std::vector<int> vi;\n-\n-struct Input\n-{\n-};\n-\n-\n-// global flag allows for premature termination\n-bool finished = false;\n-int N;\n-\n-\n-  bool is_a_solution(const vi& vs, int k, const Input& input) { return false; }\n-  void process_solution(const vi& vs, int k, Input& input) {}\n-  void construct_candidates() {}\n-  void backtrack(const vi& vs, int k, Input& input) \n-  {\n-       if (is_a_solution(vs, k, input))\n-         process_solution(a,k,input);\n-       else \n-       {\n-          ++k;\n-          construct_candidates();\n-          for (i = 0; i < N; i++) \n-          {\n-             // a[k] = c[i];\n-             make_move();\n-backtrack(a,k,input);\n-unmake_move(a,k,input);\n-if (finished) return; /* terminate early */\n-}\n-}\n-  }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727949366629,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n              // a[k] = c[i];\n              make_move();\n              backtrack(vs, k, input);\n              reverse_move(vs, k, input);\n-if (finished) return; /* terminate early */\n+             if (finished) return; /* terminate early */\n }\n }\n   }\n \n"
+                },
+                {
+                    "date": 1727949372595,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n              // a[k] = c[i];\n              make_move();\n              backtrack(vs, k, input);\n              reverse_move(vs, k, input);\n-             if (finished) return; /* terminate early */\n+             if (finished) return;\n }\n }\n   }\n \n"
+                },
+                {
+                    "date": 1727949377840,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,10 +32,11 @@\n              // a[k] = c[i];\n              make_move();\n              backtrack(vs, k, input);\n              reverse_move(vs, k, input);\n+             /* terminate early */\n              if (finished) return;\n+        }\n }\n-}\n   }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727949383659,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,8 @@\n              backtrack(vs, k, input);\n              reverse_move(vs, k, input);\n              /* terminate early */\n              if (finished) return;\n-        }\n-}\n-  }\n+          }\n+      }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727949389645,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,7 +35,8 @@\n              reverse_move(vs, k, input);\n              /* terminate early */\n              if (finished) return;\n           }\n-      }\n+       }\n+  }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727949400792,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,43 @@\n+#include <vector>\n+\n+\n+namespace algorithms::backtrack::framework\n+{\n+\n+typedef std::vector<int> vi;\n+\n+struct Input\n+{\n+};\n+\n+\n+// global flag allows for premature termination\n+bool finished = false;\n+int N;\n+\n+\n+  bool is_a_solution(const vi& vs, int k, const Input& input) \n+  { return false; }\n+  void process_solution(const vi& vs, int k, Input& input) {}\n+  void construct_candidates() {}\n+  void backtrack(const vi& vs, int k, Input& input) \n+  {\n+       if (is_a_solution(vs, k, input))\n+         process_solution(a,k,input);\n+       else \n+       {\n+          ++k;\n+          construct_candidates();\n+          for (i = 0; i < N; i++) \n+          {\n+             // a[k] = c[i];\n+             make_move();\n+             backtrack(vs, k, input);\n+             reverse_move(vs, k, input);\n+             /* terminate early */\n+             if (finished) return;\n+          }\n+       }\n+  }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727949445224,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n // global flag allows for premature termination\n bool finished = false;\n int N;\n \n+ \n \n   bool is_a_solution(const vi& vs, int k, const Input& input) \n   { return false; }\n   void process_solution(const vi& vs, int k, Input& input) {}\n@@ -39,47 +40,5 @@\n           }\n        }\n   }\n \n-}\n-#include <vector>\n-\n-\n-namespace algorithms::backtrack::framework\n-{\n-\n-typedef std::vector<int> vi;\n-\n-struct Input\n-{\n-};\n-\n-\n-// global flag allows for premature termination\n-bool finished = false;\n-int N;\n-\n-\n-  bool is_a_solution(const vi& vs, int k, const Input& input) { return false; }\n-  void process_solution(const vi& vs, int k, Input& input) {}\n-  void construct_candidates() {}\n-  void backtrack(const vi& vs, int k, Input& input) \n-  {\n-       if (is_a_solution(vs, k, input))\n-         process_solution(a,k,input);\n-       else \n-       {\n-          ++k;\n-          construct_candidates();\n-          for (i = 0; i < N; i++) \n-          {\n-             // a[k] = c[i];\n-             make_move();\n-             backtrack(vs, k, input);\n-             reverse_move(vs, k, input);\n-             /* terminate early */\n-             if (finished) return;\n-          }\n-       }\n-  }\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727949452337,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,11 +15,9 @@\n bool finished = false;\n int N;\n \n  \n-  /**\n-   * \n-   * This Boolean function tests whether the first k\n+  /** This Boolean function tests whether the first k\n elements of vector a from a complete solution for the given problem. The last\n argument, input, allows us to pass general information into the routine. We\n can use it to specify n—the size of a target solution. This makes sense when\n constructing permutations or subsets of n elements, but other data may be\n"
+                },
+                {
+                    "date": 1727949515396,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,10 +24,9 @@\n    *  relevant when constructing variable-sized objects such as sequences of moves in a game. */\n   bool is_a_solution(const vi& vs, int k, const Input& input) \n   { return false; }\n   void process_solution(const vi& vs, int k, Input& input) {}\n-  /** This routine fills in an\n-array c with the complete set of possible candidates for the kth position of\n+  /** This routine fills in an array c with the complete set of possible candidates for the kth position of\n a, given the contents of the first k− 1 positions. The number of candidates\n returned in this array is denoted by ncandidates. Again, input may be used\n to pass auxiliary information.  \n    * \n"
+                }
+            ],
+            "date": 1727948509042,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::backtrack::template\n{\n    \n}"
+        }
+    ]
+}

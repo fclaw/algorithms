@@ -1,0 +1,30 @@
+{
+    "sourceFile": "algorithms/graph/onlinejudge/thief.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1727958735583,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1727958741193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,6 @@\n \n \n-namespace algorithms::graph::onlinejudge::thief\n\\ No newline at end of file\n+namespace algorithms::graph::onlinejudge::thief\n+{\n+    /**    */\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727958747067,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace algorithms::graph::onlinejudge::thief\n {\n-    /**    */\n+    /**  https://onlinejudge.org/external/5/590.pdf  */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1727959046415,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,6 @@\n \n namespace algorithms::graph::onlinejudge::thief\n {\n     /**  https://onlinejudge.org/external/5/590.pdf  */\n+    \n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1727958735583,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::graph::onlinejudge::thief"
+        }
+    ]
+}

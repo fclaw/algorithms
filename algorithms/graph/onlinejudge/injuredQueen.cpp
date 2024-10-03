@@ -48,7 +48,6 @@ namespace lp = algorithms::graph::lp_dag;
 
     dirs ds = { {-1, 1}, {0, 1}, {1, 1} };
     int convertToInt(char c) { return !std::isdigit(c) ? (int)c - 55 : int(c) - 48; }
-    bool isSafe(int s, int t) { return s - 1 != t && s != t && s + 1 != t; }
     bool checkBoundary(int r, int c) { return r >= 0 && r < S && c >= 0 && c < S; }
     
     void submit(std::optional<char*> file)

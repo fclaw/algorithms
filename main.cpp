@@ -106,6 +106,7 @@
 #include "algorithms/backtrack/leetcode/uniquePaths.cpp"
 #include "algorithms/backtrack/leetcode/solveSudoku.cpp"
 #include "algorithms/backtrack/leetcode/addOperators.cpp"
+#include "algorithms/backtrack/template.cpp"
 #include "algorithms/dp/leetcode/integerBreak.cpp"
 // #include "algorithms/dp/leetcode/makeSquare.cpp"
 #include "algorithms/dp/leetcode/canPartitionKSubsets.cpp"
@@ -186,12 +187,14 @@
 #include "algorithms/graph/onlinejudge/sabotage.cpp"
 #include "algorithms/graph/onlinejudge/checkers.cpp"
 #include "algorithms/graph/onlinejudge/injuredQueen.cpp"
+#include "algorithms/graph/onlinejudge/winterim.cpp"
 #include "algorithms/graph/lp_dag.cpp"
 
 #include "algorithms/rt.cpp"
 
 
-namespace iq = algorithms::graph::onlinejudge::injured_queen;
+// namespace iq = algorithms::graph::onlinejudge::injured_queen;
+namespace wm = algorithms::graph::onlinejudge::winterim;
 
 
 
@@ -205,5 +208,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    iq::submit(file);
+    wm::submit(file);
 }

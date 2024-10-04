@@ -2,31 +2,20 @@
 #include <cassert>
 #include <optional>
 #include <iostream>
-#include <unordered_map>
-#include <string>
-#include <utility>
 
 namespace algorithms::graph::onlinejudge::winterim
 {
 
 
-struct pair_hash 
-{
-    std::size_t operator () (const std::pair<int, int> &p) const 
-    {
-        auto first = std::hash<int>{}(p.first);
-        auto second = std::hash<int>{}(p.second);
-        // Mainly for demonstration purposes, i.e. works but is overly simple
-        // In the real world, use sth. like boost.hash_combine
-       return first ^ (second + 0x9e3779b9 + (first << 6) + (first >> 2));
-    }
-};
+const int C = 605;
+const int K = 305;
 
 // x - counter. s - start point, n - boundary 
 #define loop(x, s, n) for(int x = s; x < n; x++)
 typedef std::vector<int> vi;
-typedef std::pair<int, int> state;
-typedef std::unordered_map<state, int, pair_hash> table; 
+typedef std::pair<int, int> state; 
+typedef std::vector<vi> vvi;
+
 
     /** https://onlinejudge.org/external/9/907.pdf. 
      * closely resemble  https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs
@@ -41,7 +30,7 @@ typedef std::unordered_map<state, int, pair_hash> table;
      * Another schedule that involves walking 9, 6, 9 miles on each day has cost 9.
      * hints (Converting General Graph to DAG): state(pos, night left)
      * an implicit dag (tree) of partial solutions */
-    int backtrack(const vi& camps, int p, int nights, table& memo)
+    int backtrack(const vi& camps, int p, int nights, vvi& memo)
     {
         int S = camps.size();
         if(p < S && nights < 0)
@@ -49,21 +38,20 @@ typedef std::unordered_map<state, int, pair_hash> table;
 
         if(p == S && nights < 0)
             return 0;
-
-        if(auto it = memo.find({p, nights}); 
-           it != memo.end())
-          return memo[{p, nights}];   
+        
+        int &ans = memo[p][nights];
+        if(~ans) return memo[p][nights];
 
         int acc = 0;
-        int ans = INT32_MAX;
+        ans = INT32_MAX;
         loop(i, p, S)
           acc += camps[i],
           ans = std::min(ans, std::max(acc, backtrack(camps, i + 1, nights - 1, memo)));
-        return memo[{p, nights}] = ans;
+        return memo[p][nights] = ans;
     }
 
     int deviseCampingStrategy(const vi& camps, int nights)
-    { table memo; return backtrack(camps, 0, nights, memo); }
+    { vvi memo(C, vi(K, -1)); return backtrack(camps, 0, nights, memo); }
 
     void submit(std::optional<char*> file)
     {

@@ -1,0 +1,62 @@
+{
+    "sourceFile": "algorithms/graph/onlinejudge/politician.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 11,
+            "patches": [
+                {
+                    "date": 1728038386698,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1728038393437,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace algorithms::graph::onlinejudge::politician\n {\n-    \n+    /**  https://onlinejudge.org/external/105/10543.pdf */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728038412155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n \n \n namespace algorithms::graph::onlinejudge::politician\n {\n-    /**  https://onlinejudge.org/external/105/10543.pdf */\n+    /** https://onlinejudge.org/external/105/10543.pdf */\n+    int minSpeeches\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728038426907,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,7 @@\n+\n+\n+namespace algorithms::graph::onlinejudge::politician\n+{\n+    /** https://onlinejudge.org/external/105/10543.pdf */\n+    int determineMinSpeeches\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728038472649,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,7 @@\n \n \n namespace algorithms::graph::onlinejudge::politician\n {\n-    /** https://onlinejudge.org/external/105/10543.pdf */\n-    int determineMinSpeeches\n-}\n-\n-\n-namespace algorithms::graph::onlinejudge::politician\n-{\n-    /** https://onlinejudge.org/external/105/10543.pdf */\n-    int minSpeeches\n+    /** https://onlinejudge.org/external/105/10543.pdf , topic: Converting General Graph to DAG */\n+    int determineMinSpeeches() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728038478566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n \n \n namespace algorithms::graph::onlinejudge::politician\n {\n-    /** https://onlinejudge.org/external/105/10543.pdf , topic: Converting General Graph to DAG */\n+    /** https://onlinejudge.org/external/105/10543.pdf , \n+     * topic: Converting General Graph to DAG\n+     *  */\n     int determineMinSpeeches() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728038486681,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n namespace algorithms::graph::onlinejudge::politician\n {\n     /** https://onlinejudge.org/external/105/10543.pdf , \n      * topic: Converting General Graph to DAG\n-     *  */\n+     * state: posm   */\n     int determineMinSpeeches() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728038498429,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n namespace algorithms::graph::onlinejudge::politician\n {\n     /** https://onlinejudge.org/external/105/10543.pdf , \n      * topic: Converting General Graph to DAG\n-     * state: posm   */\n+     * state: pos, given speech   */\n     int determineMinSpeeches() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728038504582,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,7 +3,7 @@\n namespace algorithms::graph::onlinejudge::politician\n {\n     /** https://onlinejudge.org/external/105/10543.pdf , \n      * topic: Converting General Graph to DAG\n-     * state: pos, given speech   */\n+     * state: pos, given speech */\n     int determineMinSpeeches() { return 1; }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728038582852,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,10 @@\n \n \n namespace algorithms::graph::onlinejudge::politician\n {\n+\n+    \n     /** https://onlinejudge.org/external/105/10543.pdf , \n      * topic: Converting General Graph to DAG\n      * state: pos, given speech */\n     int determineMinSpeeches() { return 1; }\n"
+                },
+                {
+                    "date": 1728038599577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::graph::onlinejudge::politician\n {\n \n-#define FOR( i, L, U ) for(int i=(int)L ; i<=(int)U ; i++ )\n+#define loop(x, s, n) for(int x = s; x < n; x++)\n #define FORD( i, U, L ) for(int i=(int)U ; i>=(int)L ; i-- )\n \n \n     /** https://onlinejudge.org/external/105/10543.pdf , \n"
+                },
+                {
+                    "date": 1728038616247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n namespace algorithms::graph::onlinejudge::politician\n {\n \n #define loop(x, s, n) for(int x = s; x < n; x++)\n-#define back_loop()\n+#define back_loop(x, s, n) \n \n \n     /** https://onlinejudge.org/external/105/10543.pdf , \n      * topic: Converting General Graph to DAG\n"
+                }
+            ],
+            "date": 1728038386698,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::graph::onlinejudge::politician\n{\n    \n}"
+        }
+    ]
+}

@@ -67,7 +67,8 @@
         "forward_list": "cpp",
         "print": "cpp",
         "fstream": "cpp",
-        "cassert": "cpp"
+        "cassert": "cpp",
+        "atomic": "cpp"
     },
     "cSpell.words": [
         "atcoder",

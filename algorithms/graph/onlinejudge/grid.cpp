@@ -18,6 +18,7 @@ namespace algorithms::graph::onlinejudge::grid_walking
 {
 
 #define loop(x, s, n) for(int x = s; x < n; x++)
+typedef std::pair<int, int> cell;
 typedef std::vector<std::pair<int, int>> dirs; 
 typedef std::vector<std::vector<int>> matrix;
 typedef std::vector<int> vi;
@@ -40,32 +41,32 @@ const int inf = 5 * 1e+05;
     { return r >= 0 && r < N && c >= 0 && c < N; }
     // You have to make sure the sum of integers of the path is maximized
     // how to convert to DAG? 
-    int backtrack(const matrix& mtx, int r, int c, int k, int d, vvb& visited, vvvvi& memo)
+    int backtrack(const matrix& mtx, cell c, int k, int d, cell p, vvvvi& memo)
     {
+        int y = c.first;
+        int x = c.second;
         if(k > K) return -inf;
 
-        if(r == N - 1 && c == N - 1)
-          return mtx[r][c];
+        if(y == N - 1 && x == N - 1)
+          return mtx[y][x];
 
 
-        int &local_max = memo[r][c][k][d];
-        if(~local_max) return memo[r][c][k][d];
+        int &local_max = memo[y][x][k][d];
+        if(~local_max) return memo[y][x][k][d];
 
         local_max = -inf; 
         loop(i, 0, ds.size())
         {
-            int n_r = r + ds[i].first;
-            int n_c = c + ds[i].second;
-            if(checkBoundary(n_r, n_c) &&
-               !visited[n_r][n_c])
+            int n_y = y + ds[i].first;
+            int n_x = x + ds[i].second;
+            if(checkBoundary(n_y, n_x) &&
+               p != std::make_pair(n_y, n_x))
             {
-                visited[n_r][n_c] = true; // lock
-                int res = backtrack(mtx, n_r, n_c, k + (int)(mtx[n_r][n_c] < 0), i, visited, memo);
-                if(res != -inf) local_max = std::max(local_max, mtx[r][c] + res);
-                visited[n_r][n_c] = false; // release
+                int res = backtrack(mtx, {n_y, n_x}, k + (int)(mtx[n_y][n_x] < 0), i, c, memo);
+                if(res != -inf) local_max = std::max(local_max, mtx[y][x] + res);
             }
         }
-        return memo[r][c][k][d] = local_max;
+        return memo[y][x][k][d] = local_max;
     }
     void submit(std::optional<char*> file)
     {
@@ -90,10 +91,8 @@ const int inf = 5 * 1e+05;
               xs.clear();
             }
 
-            vvb visited(n, vb(n, false));
-            visited[0][0] = true;
             vvvvi memo(n, vvvi(n, vvi(k + 1, vi(ds.size(), -1))));
-            int max_sum = backtrack(mtx, 0, 0, (int)(mtx[0][0] < 0), 0, visited, memo);
+            int max_sum = backtrack(mtx, {0, 0}, (int)(mtx[0][0] < 0), 0, {-1, -1}, memo);
             std::string ans = max_sum != -inf ? std::to_string(max_sum) : "impossible";
             printf("Case %d: %s\n", c++, ans.c_str());
         }

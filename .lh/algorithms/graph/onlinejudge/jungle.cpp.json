@@ -1,0 +1,170 @@
+{
+    "sourceFile": "algorithms/graph/onlinejudge/jungle.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 38,
+            "patches": [
+                {
+                    "date": 1728387592089,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1728387597817,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,4 @@\n \n \n+\n+algorithms::graph::onlinejudge::salesman\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728387604668,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n \n \n \n-algorithms::graph::onlinejudge::salesman\n\\ No newline at end of file\n+namespace algorithms::graph::onlinejudge::salesman\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728387613832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,7 @@\n \n \n \n-namespace algorithms::graph::onlinejudge::salesman\n\\ No newline at end of file\n+namespace algorithms::graph::onlinejudge::salesman\n+{\n+    /** https://onlinejudge.org/external/115/11545.pdf */\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388107615,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,6 @@\n \n \n namespace algorithms::graph::onlinejudge::salesman\n {\n-    /** https://onlinejudge.org/external/115/11545.pdf */\n+    /** https://onlinejudge.org/external/115/11545.pdf, states: cPos, cTime, cWTime; t: move forward/rest */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388117918,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,6 @@\n \n \n namespace algorithms::graph::onlinejudge::salesman\n {\n-    /** https://onlinejudge.org/external/115/11545.pdf, states: cPos, cTime, cWTime; t: move forward/rest */\n+    /** https://onlinejudge.org/external/115/11545.pdf, state: cPos, cTime, cWTime; transition: move forward/rest */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388285122,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,7 @@\n \n \n namespace algorithms::graph::onlinejudge::salesman\n {\n-    /** https://onlinejudge.org/external/115/11545.pdf, state: cPos, cTime, cWTime; transition: move forward/rest */\n+    /** https://onlinejudge.org/external/115/11545.pdf, \n+     * state: cPos, cTime, cWTime; transition: move forward/rest */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388308447,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n+#include <cassert>\n+#include <optional>\n \n \n \n namespace algorithms::graph::onlinejudge::salesman\n"
+                },
+                {
+                    "date": 1728388314715,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n #include <cassert>\n #include <optional>\n+#include <string>\n \n \n-\n namespace algorithms::graph::onlinejudge::salesman\n {\n     /** https://onlinejudge.org/external/115/11545.pdf, \n      * state: cPos, cTime, cWTime; transition: move forward/rest */\n"
+                },
+                {
+                    "date": 1728388323029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,5 +6,9 @@\n namespace algorithms::graph::onlinejudge::salesman\n {\n     /** https://onlinejudge.org/external/115/11545.pdf, \n      * state: cPos, cTime, cWTime; transition: move forward/rest */\n+\n+    \n+    \n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388333797,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,7 +8,10 @@\n     /** https://onlinejudge.org/external/115/11545.pdf, \n      * state: cPos, cTime, cWTime; transition: move forward/rest */\n \n     \n-    \n+    void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value()) \n+          assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388340488,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,12 +6,13 @@\n namespace algorithms::graph::onlinejudge::salesman\n {\n     /** https://onlinejudge.org/external/115/11545.pdf, \n      * state: cPos, cTime, cWTime; transition: move forward/rest */\n-\n     \n+    \n+    \n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) \n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n-\n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388370140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,11 +6,11 @@\n namespace algorithms::graph::onlinejudge::salesman\n {\n     /** https://onlinejudge.org/external/115/11545.pdf, \n      * state: cPos, cTime, cWTime; transition: move forward/rest */\n+    int minTimeRequired() { return 1; }\n+\n     \n-    \n-    \n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) \n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n"
+                },
+                {
+                    "date": 1728388377241,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,6 +13,8 @@\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) \n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n+\n+        std::string   \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388384498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,7 +14,7 @@\n     {\n         if(file.has_value()) \n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n-        std::string   \n+        std::string journ  \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388389524,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,7 +14,7 @@\n     {\n         if(file.has_value()) \n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n-        std::string journ  \n+        std::string journey;  \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388396327,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,7 +14,8 @@\n     {\n         if(file.has_value()) \n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n+        int c;\n         std::string journey;  \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388407229,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,7 +15,8 @@\n         if(file.has_value()) \n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n         int c;\n-        std::string journey;  \n+        std::string journey;\n+        while() \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388412912,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,7 +16,10 @@\n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n         int c;\n         std::string journey;\n-        while() \n+        while(--c >= 0)\n+        {\n+            \n+        } \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388418861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,8 @@\n         int c;\n         std::string journey;\n         while(--c >= 0)\n         {\n-            \n+            std::cin >> \n         } \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388425044,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,9 @@\n         int c;\n         std::string journey;\n         while(--c >= 0)\n         {\n-            std::cin >> \n+            std::cin >> journey;\n+            cout << \n         } \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388432263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,8 @@\n         std::string journey;\n         while(--c >= 0)\n         {\n             std::cin >> journey;\n-            cout << \n+            cout << journey << \"\\n\";\n         } \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388459878,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n #include <optional>\n #include <string>\n \n \n-namespace algorithms::graph::onlinejudge::salesman\n+namespace algorithms::graph::onlinejudge::jungle\n {\n     /** https://onlinejudge.org/external/115/11545.pdf, \n      * state: cPos, cTime, cWTime; transition: move forward/rest */\n     int minTimeRequired() { return 1; }\n"
+                },
+                {
+                    "date": 1728388466078,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n #include <cassert>\n #include <optional>\n #include <string>\n+#include <iostream>\n \n \n namespace algorithms::graph::onlinejudge::jungle\n {\n"
+                },
+                {
+                    "date": 1728388521870,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,9 @@\n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n         int c;\n         std::string journey;\n+        \n         while(--c >= 0)\n         {\n             std::cin >> journey;\n             cout << journey << \"\\n\";\n"
+                },
+                {
+                    "date": 1728388529779,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n         int c;\n         std::string journey;\n-        \n+        std::cin >> c;\n         while(--c >= 0)\n         {\n             std::cin >> journey;\n             cout << journey << \"\\n\";\n"
+                },
+                {
+                    "date": 1728388540817,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,12 +15,12 @@\n     {\n         if(file.has_value()) \n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n-        int c;\n+        int tc;\n         std::string journey;\n-        std::cin >> c;\n-        while(--c >= 0)\n+        std::cin >> tc;\n+        while(--tc >= 0)\n         {\n             std::cin >> journey;\n             cout << journey << \"\\n\";\n         } \n"
+                },
+                {
+                    "date": 1728388570871,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n namespace algorithms::graph::onlinejudge::jungle\n {\n     /** https://onlinejudge.org/external/115/11545.pdf, \n      * state: cPos, cTime, cWTime; transition: move forward/rest */\n+     \n     int minTimeRequired() { return 1; }\n \n     \n     void submit(std::optional<char*> file)\n@@ -21,8 +22,7 @@\n         std::cin >> tc;\n         while(--tc >= 0)\n         {\n             std::cin >> journey;\n-            cout << journey << \"\\n\";\n         } \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728388587955,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,17 +7,24 @@\n namespace algorithms::graph::onlinejudge::jungle\n {\n     /** https://onlinejudge.org/external/115/11545.pdf, \n      * state: cPos, cTime, cWTime; transition: move forward/rest */\n-     \n+\n     int minTimeRequired() { return 1; }\n \n     \n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) \n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n+        The first line of input contains a positive integer T ≤ 100. Each of the next T lines contains a string\n+of length at least 2 and at most 1000. The string will always begin with an S and end with a D. The\n+characters in between will be either a ‘.’ or ‘*’, quotes for clarity. Here a ‘.’ represents a plain land\n+and ‘*’ a jungle. It takes exactly one hour to travel from one position to the next and the Pilgrim\n+never travels backward. Note that he is always located at the left most position of a particular land\n+and when he travels to the next land, he travels for a full hour to the reach the left most position of\n+the next land\n         int tc;\n         std::string journey;\n         std::cin >> tc;\n         while(--tc >= 0)\n"
+                },
+                {
+                    "date": 1728388595988,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,10 +16,10 @@\n     {\n         if(file.has_value()) \n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n-        The first line of input contains a positive integer T ≤ 100. Each of the next T lines contains a string\n-of length at least 2 and at most 1000. The string will always begin with an S and end with a D. The\n+        /** The first line of input contains a positive integer T ≤ 100. Each of the next T lines contains a string\n+         *  of length at least 2 and at most 1000. The string will always begin with an S and end with a D. The\n characters in between will be either a ‘.’ or ‘*’, quotes for clarity. Here a ‘.’ represents a plain land\n and ‘*’ a jungle. It takes exactly one hour to travel from one position to the next and the Pilgrim\n never travels backward. Note that he is always located at the left most position of a particular land\n and when he travels to the next land, he travels for a full hour to the reach the left most position of\n"
+                },
+                {
+                    "date": 1728388603364,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,10 +18,10 @@\n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n         /** The first line of input contains a positive integer T ≤ 100. Each of the next T lines contains a string\n          *  of length at least 2 and at most 1000. The string will always begin with an S and end with a D. The\n-characters in between will be either a ‘.’ or ‘*’, quotes for clarity. Here a ‘.’ represents a plain land\n-and ‘*’ a jungle. It takes exactly one hour to travel from one position to the next and the Pilgrim\n+         *  characters in between will be either a ‘.’ or ‘*’, quotes for clarity. Here a ‘.’ represents a plain land\n+         * and ‘*’ a jungle. It takes exactly one hour to travel from one position to the next and the Pilgrim\n never travels backward. Note that he is always located at the left most position of a particular land\n and when he travels to the next land, he travels for a full hour to the reach the left most position of\n the next land\n         int tc;\n"
+                },
+                {
+                    "date": 1728388608999,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,10 @@\n \n         /** The first line of input contains a positive integer T ≤ 100. Each of the next T lines contains a string\n          *  of length at least 2 and at most 1000. The string will always begin with an S and end with a D. The\n          *  characters in between will be either a ‘.’ or ‘*’, quotes for clarity. Here a ‘.’ represents a plain land\n-         * and ‘*’ a jungle. It takes exactly one hour to travel from one position to the next and the Pilgrim\n-never travels backward. Note that he is always located at the left most position of a particular land\n+         *  and ‘*’ a jungle. It takes exactly one hour to travel from one position to the next and the Pilgrim\n+         *  never travels backward. Note that he is always located at the left most position of a particular land\n and when he travels to the next land, he travels for a full hour to the reach the left most position of\n the next land\n         int tc;\n         std::string journey;\n"
+                },
+                {
+                    "date": 1728388614711,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,10 +21,9 @@\n          *  of length at least 2 and at most 1000. The string will always begin with an S and end with a D. The\n          *  characters in between will be either a ‘.’ or ‘*’, quotes for clarity. Here a ‘.’ represents a plain land\n          *  and ‘*’ a jungle. It takes exactly one hour to travel from one position to the next and the Pilgrim\n          *  never travels backward. Note that he is always located at the left most position of a particular land\n-and when he travels to the next land, he travels for a full hour to the reach the left most position of\n-the next land\n+         * and when he travels to the next land, he travels for a full hour to the reach the left most position of the next land\n         int tc;\n         std::string journey;\n         std::cin >> tc;\n         while(--tc >= 0)\n"
+                },
+                {
+                    "date": 1728388622866,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,13 +17,13 @@\n         if(file.has_value()) \n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n         /** The first line of input contains a positive integer T ≤ 100. Each of the next T lines contains a string\n-         *  of length at least 2 and at most 1000. The string will always begin with an S and end with a D. The\n+         *  of length at least 2 and at most 1000. The string will always begin with an S and end with a D.\n          *  characters in between will be either a ‘.’ or ‘*’, quotes for clarity. Here a ‘.’ represents a plain land\n          *  and ‘*’ a jungle. It takes exactly one hour to travel from one position to the next and the Pilgrim\n          *  never travels backward. Note that he is always located at the left most position of a particular land\n-         * and when he travels to the next land, he travels for a full hour to the reach the left most position of the next land\n+         * and when he travels to the next land, he travels for a full hour to the reach the left most position of the next land */\n         int tc;\n         std::string journey;\n         std::cin >> tc;\n         while(--tc >= 0)\n"
+                },
+                {
+                    "date": 1728388645988,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,10 @@\n namespace algorithms::graph::onlinejudge::jungle\n {\n     /** https://onlinejudge.org/external/115/11545.pdf, \n      * state: cPos, cTime, cWTime; transition: move forward/rest */\n-\n+     \n+     \n     int minTimeRequired() { return 1; }\n \n     \n     void submit(std::optional<char*> file)\n@@ -18,9 +19,9 @@\n           assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n         /** The first line of input contains a positive integer T ≤ 100. Each of the next T lines contains a string\n          *  of length at least 2 and at most 1000. The string will always begin with an S and end with a D.\n-         *  characters in between will be either a ‘.’ or ‘*’, quotes for clarity. Here a ‘.’ represents a plain land\n+         *  The characters in between will be either a ‘.’ or ‘*’, quotes for clarity. Here a ‘.’ represents a plain land\n          *  and ‘*’ a jungle. It takes exactly one hour to travel from one position to the next and the Pilgrim\n          *  never travels backward. Note that he is always located at the left most position of a particular land\n          * and when he travels to the next land, he travels for a full hour to the reach the left most position of the next land */\n         int tc;\n"
+                },
+                {
+                    "date": 1728388653204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n namespace algorithms::graph::onlinejudge::jungle\n {\n     /** https://onlinejudge.org/external/115/11545.pdf, \n      * state: cPos, cTime, cWTime; transition: move forward/rest */\n-     \n-     \n+    const char  \n+\n     int minTimeRequired() { return 1; }\n \n     \n     void submit(std::optional<char*> file)\n"
+                },
+                {
+                    "date": 1728388666472,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,10 @@\n namespace algorithms::graph::onlinejudge::jungle\n {\n     /** https://onlinejudge.org/external/115/11545.pdf, \n      * state: cPos, cTime, cWTime; transition: move forward/rest */\n-    const char  \n+    const char plain = '.';\n+    const char jungle  \n \n     int minTimeRequired() { return 1; }\n \n     \n"
+                },
+                {
+                    "date": 1728388673109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,10 @@\n {\n     /** https://onlinejudge.org/external/115/11545.pdf, \n      * state: cPos, cTime, cWTime; transition: move forward/rest */\n     const char plain = '.';\n-    const char jungle = '' \n+    const char jungle = '*';\n+    const char d \n \n     int minTimeRequired() { return 1; }\n \n     \n"
+                },
+                {
+                    "date": 1728388727786,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,10 +25,9 @@\n          *  The characters in between will be either a ‘.’ or ‘*’, quotes for clarity. Here a ‘.’ represents a plain land\n          *  and ‘*’ a jungle. It takes exactly one hour to travel from one position to the next and the Pilgrim\n          *  never travels backward. Note that he is always located at the left most position of a particular land\n          * and when he travels to the next land, he travels for a full hour to the reach the left most position of the next land.\n-         * Note that he starts his journey from the position marked S and finishes at D. On the first\n-day of his journey, he is located on S at 6 AM. Dark hours are considered to be the time between 6\n+         * Note that he starts his journey from the position marked S and finishes at D. On the first day of his journey, he is located on S at 6 AM. Dark hours are considered to be the time between 6\n PM to 6 AM inclusive\n          *  */\n         int tc;\n         std::string journey;\n"
+                }
+            ],
+            "date": 1728387592089,
+            "name": "Commit-0",
+            "content": "\n\n"
+        }
+    ]
+}

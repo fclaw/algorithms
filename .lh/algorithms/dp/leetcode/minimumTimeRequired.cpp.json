@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 21,
+            "activePatchIndex": 31,
             "patches": [
                 {
                     "date": 1720093481060,
@@ -92,6 +92,46 @@
                 {
                     "date": 1722602713862,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n       Return the minimum possible maximum working time of any assignment.\n       Constraints:\n         1 <= k <= jobs.length <= 12\n         1 <= jobs[i] <= 107\n-        \n+      hint: We can select a subset of tasks and assign it to a worker then solve the subproblem on the remaining tasks  \n     */\n     int minimumTimeRequired(std::vector<int> jobs, int k) \n     { \n         return 0; \n"
+                },
+                {
+                    "date": 1728361316230,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,12 @@\n #include <vector>\n \n namespace algorithms::dp::leetcode\n {\n+\n+\n+ \n+  \n     /*\n       https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs\n       You are given an integer array jobs, where jobs[i] is the amount of time it takes to complete the ith job.\n       There are k workers that you can assign jobs to. Each job should be assigned to exactly one worker. \n"
+                },
+                {
+                    "date": 1728361327273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,11 +2,11 @@\n \n namespace algorithms::dp::leetcode\n {\n \n+typedef std::vector<int> vi;\n \n- \n-  \n+\n     /*\n       https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs\n       You are given an integer array jobs, where jobs[i] is the amount of time it takes to complete the ith job.\n       There are k workers that you can assign jobs to. Each job should be assigned to exactly one worker. \n"
+                },
+                {
+                    "date": 1728361334717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n         1 <= k <= jobs.length <= 12\n         1 <= jobs[i] <= 107\n       hint: We can select a subset of tasks and assign it to a worker then solve the subproblem on the remaining tasks  \n     */\n-    int minimumTimeRequired(std::vector<int> jobs, int k) \n+    int minimumTimeRequired(const vi jobs, int k) \n     { \n         return 0; \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728361340603,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n         1 <= k <= jobs.length <= 12\n         1 <= jobs[i] <= 107\n       hint: We can select a subset of tasks and assign it to a worker then solve the subproblem on the remaining tasks  \n     */\n-    int minimumTimeRequired(const vi jobs, int k) \n+    int minimumTimeRequired(const vi& jobs, int k) \n     { \n         return 0; \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728361347183,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n         1 <= k <= jobs.length <= 12\n         1 <= jobs[i] <= 107\n       hint: We can select a subset of tasks and assign it to a worker then solve the subproblem on the remaining tasks  \n     */\n-    int minimumTimeRequired(const vi& jobs, int k) \n+    int minimumTimeRequired(const vi& jobs, int assignees) \n     { \n         return 0; \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728361355063,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,10 @@\n       Return the minimum possible maximum working time of any assignment.\n       Constraints:\n         1 <= k <= jobs.length <= 12\n         1 <= jobs[i] <= 107\n-      hint: We can select a subset of tasks and assign it to a worker then solve the subproblem on the remaining tasks  \n+      hint: We can select a subset of tasks and assign it to a worker then solve the subproblem on the remaining tasks\n+      \n     */\n     int minimumTimeRequired(const vi& jobs, int assignees) \n     { \n         return 0; \n"
+                },
+                {
+                    "date": 1728361361399,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n       Constraints:\n         1 <= k <= jobs.length <= 12\n         1 <= jobs[i] <= 107\n       hint: We can select a subset of tasks and assign it to a worker then solve the subproblem on the remaining tasks\n-      \n+      convert into \n     */\n     int minimumTimeRequired(const vi& jobs, int assignees) \n     { \n         return 0; \n"
+                },
+                {
+                    "date": 1728361401603,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n       Constraints:\n         1 <= k <= jobs.length <= 12\n         1 <= jobs[i] <= 107\n       hint: We can select a subset of tasks and assign it to a worker then solve the subproblem on the remaining tasks\n-      convert into \n+      convert into DAG, state s: pos, night left \n     */\n     int minimumTimeRequired(const vi& jobs, int assignees) \n     { \n         return 0; \n"
+                },
+                {
+                    "date": 1728361410157,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n       Constraints:\n         1 <= k <= jobs.length <= 12\n         1 <= jobs[i] <= 107\n       hint: We can select a subset of tasks and assign it to a worker then solve the subproblem on the remaining tasks\n-      convert into DAG, state: pos, night left \n+      convert into DAG, state: pos,  left \n     */\n     int minimumTimeRequired(const vi& jobs, int assignees) \n     { \n         return 0; \n"
+                },
+                {
+                    "date": 1728361421473,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,25 @@\n+#include <vector>\n+\n+namespace algorithms::dp::leetcode\n+{\n+\n+typedef std::vector<int> vi;\n+\n+\n+    /*\n+      https://leetcode.com/problems/find-minimum-time-to-finish-all-jobs\n+      You are given an integer array jobs, where jobs[i] is the amount of time it takes to complete the ith job.\n+      There are k workers that you can assign jobs to. Each job should be assigned to exactly one worker. \n+      The working time of a worker is the sum of the time it takes to complete all jobs assigned to them. \n+      Your goal is to devise an optimal assignment such that the maximum working time of any worker is minimized.\n+      Return the minimum possible maximum working time of any assignment.\n+      Constraints:\n+        1 <= k <= jobs.length <= 12\n+        1 <= jobs[i] <= 107\n+      hint: We can select a subset of tasks and assign it to a worker then solve the subproblem on the remaining tasks\n+      convert into DAG, state: pos, assignee left */\n+    int minimumTimeRequired(const vi& jobs, int assignees) \n+    { \n+        return 0; \n+    }\n+}\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1720093481060,

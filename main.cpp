@@ -191,13 +191,14 @@
 #include "algorithms/graph/onlinejudge/grid.cpp"
 #include "algorithms/graph/onlinejudge/politician.cpp"
 #include "algorithms/graph/onlinejudge/gatheringFood.cpp"
+#include "algorithms/graph/onlinejudge/salesman.cpp"
 #include "algorithms/graph/lp_dag.cpp"
 
 #include "algorithms/rt.cpp"
 
 
 // namespace iq = algorithms::graph::onlinejudge::injured_queen;
-namespace pl = algorithms::graph::onlinejudge::politician;
+namespace salesman = algorithms::graph::onlinejudge::salesman;
 
 
 
@@ -211,5 +212,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    pl::submit(file);
+    salesman::submit(file);
 }

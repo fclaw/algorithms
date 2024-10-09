@@ -23,28 +23,26 @@ const char jungle = '*';
      * state: cPos, cTime, cWTime; transition: move forward/rest */
     bool isNight(int t) { return t >= 0 && t <= 6 || t >= 18 && t <= 23; }
     int adjustTime(int t) { return t <= Max_Hour - 1 ? t : t % Max_Hour; }
-    int minTimeRequired(const std::string& s, int i, int t, int wt) 
+    int minTimeRequired(const std::string& s, int i, int t, int wt, table& memo) 
     {
-
         if(s[i] == 'D')
           return 0;
          
-        int time = 0;
-        loop(j, i + 1, s.size())
-        {  
-            if(isNight(wt + j - i) &&
-               s[j] == jungle)
-            {
-                time = 0;
-                break;
-            }
-            
-            int local = 0;
-            if(t + j - i <= Max_Rest)
-              local = j - i + minTimeRequired(s, j + 1, t + j - i, adjustTime(wt + j - i));
-            time = std::max(time, local);
+        if(isNight(wt) && s[i] == jungle)
+          return inf;
+
+        int &time = memo[i][t][wt];
+        if(~time) return memo[i][t][wt];
+
+        time = inf;
+        if(t < Max_Rest)
+        {
+            int move = 1 + minTimeRequired(s, i + 1, t + 1, adjustTime(wt + 1), memo);
+            int rest = 8 + minTimeRequired(s, i, 0, adjustTime(wt + 8), memo);
+            time = std::min(move, rest);
         }
-        return time;
+        else time = 8 + minTimeRequired(s, i, 0, adjustTime(wt + 8), memo);
+        return memo[i][t][wt] = time;
     }
     
     void submit(std::optional<char*> file)
@@ -67,8 +65,9 @@ const char jungle = '*';
         while(--tc >= 0)
         {
             std::cin >> journey;
-            cout << "l: " << journey.length() << ", s: " << journey.size() << "\n";
-            printf("Case %d#: %d\n", ++c, minTimeRequired(journey, 0, 0, start_at));
+            table memo(1020, vvi(20, vi(30, -1)));
+            int ans = minTimeRequired(journey, 0, 0, start_at, memo);
+            printf("Case #%d: %d\n", ++c, ans >= inf ? -1 : ans);
         } 
     }
 }

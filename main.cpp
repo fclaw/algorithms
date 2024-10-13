@@ -62,6 +62,7 @@
 #include "algorithms/dp/leetcode/longestPalindromeSubseq.cpp"
 #include "algorithms/dp/leetcode/minStepsOn2KeysKeyboardRec.cpp"
 #include "algorithms/dp/leetcode/burstBalloons.cpp"
+#include "algorithms/dp/leetcode/minimumTimeRequired.cpp"
 #include "algorithms/tree/leetcode/distanceK.cpp"
 #include "algorithms/tree/leetcode/levelOrder.cpp"
 #include "algorithms/bitsManipulation.cpp"
@@ -203,9 +204,10 @@
 
 // namespace iq = algorithms::graph::onlinejudge::injured_queen;
 // namespace river = algorithms::maths::onlinejudge::cross_river;
-namespace food = algorithms::graph::onlinejudge::food;
+// namespace food = algorithms::graph::onlinejudge::food;
 // namespace sub = algorithms::backtrack::framework::subset;
 
+namespace jobs = algorithms::dp::leetcode::jobs;
 
 
 int main(int argc, char* argv[])
@@ -218,5 +220,7 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    food::submit(file);
+    // food::submit(file);
+    cout << jobs::minimumTimeRequired({1, 2, 4, 7, 8}, 3);
+    cout << "\n" << jobs::cnt << "\n";
 }

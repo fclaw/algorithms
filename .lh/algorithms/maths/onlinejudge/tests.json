@@ -1,0 +1,18 @@
+{
+    "sourceFile": "algorithms/maths/onlinejudge/tests",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1728471544791,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1728471544791,
+            "name": "Commit-0",
+            "content": "6\n8 5 6\n1 2 3\n1 5 6\n1 6 5\n1 5 5\n1 0 5"
+        }
+    ]
+}

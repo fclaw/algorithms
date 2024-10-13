@@ -1,0 +1,54 @@
+{
+    "sourceFile": "algorithms/backtrack/template/subset.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1728552837717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1728552845598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,3 @@\n \n \n+namespace algorithms::backtrack::framewor\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728552850771,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n \n \n-namespace algorithms::backtrack::framewor\n\\ No newline at end of file\n+namespace algorithms::backtrack::template\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728552864844,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,65 @@\n \n \n-namespace algorithms::backtrack::template\n\\ No newline at end of file\n+namespace algorithms::backtrack::template::subset\n+{\n+\n+\n+    #pragma once\n+#include <vector>\n+\n+\n+namespace algorithms::backtrack::framework\n+{\n+\n+\n+#define loop(x, s, n) for(int x = s; x < n; x++)\n+typedef std::vector<int> vi;\n+\n+struct Aux {};\n+\n+\n+// global flag allows for premature termination\n+bool finished = false;\n+int N;\n+\n+ \n+  /** This Boolean function tests whether the first k\n+   *  elements of vector a from a complete solution for the given problem. The last\n+   *  argument, input, allows us to pass general information into the routine. We\n+   *  can use it to specify n—the size of a target solution. This makes sense when\n+   *  constructing permutations or subsets of n elements, but other data may be\n+   *  relevant when constructing variable-sized objects such as sequences of moves in a game. */\n+  bool is_a_solution(const vi& vs, int k, const Input& input) \n+  { return false; }\n+  /** This routine prints, counts, or however processes a complete solution once it is constructed */\n+  void process_solution(const vi& vs, int k, Input& input) {}\n+  /** This routine fills in an array c with the complete set of possible candidates for the kth position of\n+   *  a, given the contents of the first k− 1 positions. The number of candidates\n+   *  returned in this array is denoted by N. Again, input may be used to pass auxiliary information */\n+  void construct_candidates(const vi& vs, int k, const Aux& aux, vi& candidates) {}\n+  void make_move(vi& vs, int k, const Aux& aux) {}\n+  void reverse_move() {}\n+  void backtrack(vi& vs, int k, Aux& in) \n+  {\n+      vi candidates; /* candidates for next position */\n+      int n_candidates = 0; /* next position candidate count */ \n+       if (is_a_solution(vs, k, aux)) \n+         process_solution(vs, k, aux);\n+       else \n+       {\n+          k += 1;\n+          construct_candidates(vs, k, aux, candidates);\n+          loop(i, 0, candidates.size())\n+          {\n+             vs.push_back(c[i]);\n+             make_move(vs, k, aux);\n+             backtrack(vs, k, aux);\n+             reverse_move(vs, k, aux);\n+             /* terminate early */\n+             if (finished) return;\n+          }\n+       }\n+  }\n+\n+}\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1728552878020,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,12 +16,10 @@\n typedef std::vector<int> vi;\n \n struct Aux {};\n \n-\n // global flag allows for premature termination\n bool finished = false;\n-int N;\n \n  \n   /** This Boolean function tests whether the first k\n    *  elements of vector a from a complete solution for the given problem. The last\n"
+                },
+                {
+                    "date": 1728552886851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,5 @@\n+#include <vector>\n \n \n namespace algorithms::backtrack::template::subset\n {\n"
+                },
+                {
+                    "date": 1728552922984,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,22 +3,12 @@\n \n namespace algorithms::backtrack::template::subset\n {\n \n-\n-    #pragma once\n-#include <vector>\n-\n-\n-namespace algorithms::backtrack::framework\n-{\n-\n-\n #define loop(x, s, n) for(int x = s; x < n; x++)\n typedef std::vector<int> vi;\n+typedef std::vector<int> vi;\n \n-struct Aux {};\n-\n // global flag allows for premature termination\n bool finished = false;\n \n  \n"
+                },
+                {
+                    "date": 1728552929165,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,13 +5,15 @@\n {\n \n #define loop(x, s, n) for(int x = s; x < n; x++)\n typedef std::vector<int> vi;\n-typedef std::vector<int> vi;\n+typedef std::vector<vi> vvi;\n \n // global flag allows for premature termination\n bool finished = false;\n \n+\n+\n  \n   /** This Boolean function tests whether the first k\n    *  elements of vector a from a complete solution for the given problem. The last\n    *  argument, input, allows us to pass general information into the routine. We\n"
+                },
+                {
+                    "date": 1728552934888,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n \n // global flag allows for premature termination\n bool finished = false;\n \n-vvi \n+vvi subsets;\n \n  \n   /** This Boolean function tests whether the first k\n    *  elements of vector a from a complete solution for the given problem. The last\n"
+                },
+                {
+                    "date": 1728552966184,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n \n // global flag allows for premature termination\n bool finished = false;\n \n+\n vvi subsets;\n \n  \n   /** This Boolean function tests whether the first k\n"
+                }
+            ],
+            "date": 1728552837717,
+            "name": "Commit-0",
+            "content": "\n\n"
+        }
+    ]
+}

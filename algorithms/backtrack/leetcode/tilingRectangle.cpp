@@ -9,18 +9,7 @@ namespace algorithms::backtrack::leetcode::tiling
     //  Suppose you've placed a bunch of squares. 
     //    Where is the natural spot to place the next square?
     //  The maximum number of squares to be placed will be <= max(n, m)
-    // int ans = 0;
-    int N;
-    int M;
-    int ans = 0;
-    void backtrack(int r, int c, int squares)
-    {
-    }
-    int tilingRectangle(int n, int m) 
-    { 
-        N = n;
-        M = m;
-        backtrack(0, 0, 0);
-        return ans;
-    }
+    // int ans = 0
+    int backtrack() { return 1; }
+    int tilingRectangle(int n, int m) { return backtrack(); }
 }

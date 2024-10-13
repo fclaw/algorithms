@@ -1,21 +1,30 @@
-
 #include <cassert>
 #include <optional>
 #include <vector>
 #include <cctype>
+#include <queue>
+#include <iostream>
+#include <tuple>
 #include <unordered_map>
+
 
 namespace algorithms::graph::onlinejudge::food
 {
 
 #define loop(x, s, n) for(int x = s; x < n; x++)
+typedef unsigned long long ll;
 typedef std::pair<int, int> cell;
 typedef std::vector<char> vc;
 typedef std::vector<std::vector<char>> vvc;
 typedef std::vector<std::pair<int, int>> dirs;
 typedef std::vector<bool> vb;
 typedef std::vector<vb> vvb;
-
+typedef std::vector<vvb> vvvb;
+typedef std::vector<int> vi;
+typedef std::vector<vi> vvi;
+typedef std::vector<vvi> vvvi;
+typedef std::queue<std::tuple<cell, int, int>> qs;
+typedef std::unordered_map<int, cell> mi;
 
 
     /** https://onlinejudge.org/external/114/11487.pdf, 
@@ -36,47 +45,64 @@ typedef std::vector<vb> vvb;
      * Constraints: collect foods in alphabetical order, if a food is met it must be collected */
     int N;
     int foodToInt(char c) { return (int)c - 65; }
-    bool isBlockedFood(int x, char y) 
-    { return !(x + 1 == foodToInt(y)) && x < foodToInt(y); }
     const char start = 'A';
     const char obstacle = '#';
     const int modulo = 20437;
-    char curr_food;
-    int length = 0;
-    std::unordered_map<int, int> foods_length;
-    dirs ds = { {0, 1}, /* left */ {0, -1}, /* right */  {1, 0}, /* down */ {-1, 0} /* up */ };
+    bool canPass(int cf, int gf) { return cf + 1 == gf || cf >= gf; }
+    dirs ds = { {0, -1}, /* right */ {-1, 0}, /* up */ {0, 1}, /* left */ {1, 0} /* down */ };
     bool checkBoundary(int r, int c)
     { return r >= 0 && r < N && c >= 0 && c < N; }
-    void collectAllFoods(const vvc& grid, cell c, int cf, int l, vvb& visited) 
+    int n_ways;
+    vvvi ways;
+    mi food_coords;
+    vi food_dist;
+    void bfs(const vvc& grid, qs& state, int target, vvvb& visited) 
     {
+
+        if(state.empty()) return;
+        std::tuple<cell, int, int> s = state.front(); state.pop();
+        int c_r = std::get<0>(s).first;
+        int c_c = std::get<0>(s).second;
+        int dist = std::get<2>(s);
+        int cf = std::get<1>(s);
+
+        visited[c_r][c_c][cf] = true;
         for(auto d : ds)
         {
-            int y = c.first + d.first;
-            int x = c.second + d.second;
-            if(!checkBoundary(y, x) || 
-               visited[y][x])
-              continue;
-            if(grid[y][x] == obstacle ||
-               (std::isalpha(grid[y][x]) && 
-                isBlockedFood(cf, grid[y][x])))
-              continue;
+            int r = c_r + d.first;
+            int c = c_c + d.second; 
 
-            visited[y][x] = true;
+            if(!checkBoundary(r, c) ||
+                visited[r][c][cf] ||
+                grid[r][c] == obstacle)
+              continue;
             
-            int new_cf = cf;
-            if(std::isalpha(grid[y][x]) && 
-               foodToInt(grid[y][x]) != cf)
+            if(std::isalpha(grid[r][c]) &&
+               !canPass(cf, foodToInt(grid[r][c])))
             {
-                if(auto it = foods_length.find(foodToInt(grid[y][x]));
-                  it == foods_length.end())
-                  foods_length[foodToInt(grid[y][x])] = l;
-                else foods_length[foodToInt(grid[y][x])] = 
-                       std::min(foods_length[foodToInt(grid[y][x])], l);   
-                new_cf = foodToInt(grid[y][x]);  
+                int food = foodToInt(grid[r][c]) - 1;
+                cell coord = (*food_coords.find(food)).second;
+                if(!visited[coord.first][coord.second][food])
+                  visited[coord.first][coord.second][food] = true,
+                  state.push({coord, food, 0});
             }
-            collectAllFoods(grid, {y, x}, new_cf, l + 1, visited);
-            visited[y][x] = false;
+            else if(cf + 1 == foodToInt(grid[r][c]))
+            {
+                food_dist[cf + 1] = dist + 1;
+                if(!visited[r][c][cf + 1] && 
+                   cf + 1 != target)
+                  visited[r][c][cf + 1] = true, 
+                  state.push({{r, c}, cf + 1, 0});
+                visited[r][c][cf] = true;
+            }
+            else 
+            {
+                if(food_dist[cf + 1] == INT32_MAX || (food_dist[cf + 1] != INT32_MAX && dist < food_dist[cf + 1]))
+                  ways[cf][r][c] += 1;
+                state.push({{r, c}, cf, dist + 1});
+            }
         }
+        bfs(grid, state, target, visited);
     }
 
     void submit(std::optional<char*> file)
@@ -85,34 +111,61 @@ typedef std::vector<vb> vvb;
           assert(std::freopen(file.value(), "r", stdin) != nullptr);
 
         int c = 0;
-        while(std::cin >> N)
+        while(std::cin >> N && N)
         {
-            if(N == 0) break;
             vvc grid;
-            vc col;
             char v;
             cell s;
-            char last_food;
+            char last_food = 'A';
+            food_coords.clear();
+            food_dist.clear();
             loop(i, 0, N)
             {
+                vc col;
                 loop(j, 0, N)
                 {
                     std::cin >> v,
                     col.push_back(v);
                     if(v == start)
                     { s.first = i; s.second = j; }
-                    if(std::isalpha(v)) 
+                    if(std::isalpha(v))
+                      food_coords.insert({foodToInt(v), {i, j}}),
                       last_food = std::max(last_food, v);
                 }
                 grid.push_back(col);
-                col.clear();
             }
-            vvb visited(N, vb(N, false));
-            visited[s.first][s.second] = true;
-            collectAllFoods(grid, s, foodToInt('A'), 0, visited);
-            for(auto x : foods_length) cout << "food: " << x.first << ", dist: " << x.second << "\n";
-            // std::string ans = curr_food == last_food ? std::to_string(collectAllFoods(grid, s, s)) : "Impossible";
-            // printf("Case %d: %s\n", ++c, ans.c_str());
+
+            n_ways = 1;
+            int MAX_FOOD = foodToInt(last_food);
+            ways = vvvi(MAX_FOOD + 1, vvi(N, vi(N, 0)));
+            vvvb visited = vvvb(N, vvb(N, vb(MAX_FOOD + 1, false)));
+            visited[s.first][s.second][foodToInt(start)] = true;
+            food_dist = vi(MAX_FOOD + 1, INT32_MAX);
+            qs state;
+            state.push({s, foodToInt(start), 0});
+            bfs(grid, state, foodToInt(last_food), visited);
+
+            int path = 0;
+            loop(i, 1, MAX_FOOD + 1)
+              if(food_dist[i] != INT32_MAX) 
+                path += food_dist[i];
+              else { path = INT32_MAX; break; }
+  
+            if(path != INT32_MAX)
+              loop(i, 0, MAX_FOOD)
+              {
+                 int w = 0;
+                 cell dest = (*food_coords.find(i + 1)).second;
+                 for(auto d : ds)
+                   if(checkBoundary(dest.first + d.first, dest.second + d.second))
+                      w += ways[i][dest.first + d.first][dest.second + d.second];
+                 n_ways *= (w != 0 ? w : 1);
+                 n_ways %= modulo;
+              }
+
+            std::string ans = "Impossible";
+            if(path != INT32_MAX) ans = std::to_string(path) + " " + std::to_string(n_ways);
+            printf("Case %d: %s\n", ++c, ans.c_str());
         }
     }
 }

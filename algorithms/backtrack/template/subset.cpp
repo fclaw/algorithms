@@ -1,20 +1,18 @@
-#pragma once
 #include <vector>
 
 
-namespace algorithms::backtrack::framework
+namespace algorithms::backtrack::framework::subset
 {
-
 
 #define loop(x, s, n) for(int x = s; x < n; x++)
 typedef std::vector<int> vi;
-
-struct Aux {};
-
+typedef std::vector<vi> vvi;
 
 // global flag allows for premature termination
-bool finished = false;
+// bool finished = false;
+
 int N;
+vvi subsets;
 
  
   /** This Boolean function tests whether the first k
@@ -23,36 +21,36 @@ int N;
    *  can use it to specify n—the size of a target solution. This makes sense when
    *  constructing permutations or subsets of n elements, but other data may be
    *  relevant when constructing variable-sized objects such as sequences of moves in a game. */
-  bool is_a_solution(const vi& vs, int k, const Aux& aux) 
-  { return false; }
+  bool is_a_solution(const vi& vs, int k) { return k == N; }
   /** This routine prints, counts, or however processes a complete solution once it is constructed */
-  void process_solution(const vi& vs, int k, Aux& aux) {}
+  void process_solution(const vi& in, const vi& vs) 
+  {
+      vi tmp;
+      loop(i, 0, vs.size())
+        if((bool)vs[i]) 
+          tmp.push_back(in[i]); 
+      subsets.push_back(tmp); 
+  }
   /** This routine fills in an array c with the complete set of possible candidates for the kth position of
    *  a, given the contents of the first k− 1 positions. The number of candidates
    *  returned in this array is denoted by N. Again, input may be used to pass auxiliary information */
-  void construct_candidates(const vi& vs, int k, const Aux& aux, vi& candidates) {}
-  void make_move(vi& vs, int k, const Aux& aux) {}
-  void reverse_move() {}
-  void backtrack(vi& vs, int k, Aux& aux) 
+  void construct_candidates(vi& candidates) 
   {
-      vi candidates; /* candidates for next position */
-      int n_candidates = 0; /* next position candidate count */ 
-       if (is_a_solution(vs, k, aux)) 
-         process_solution(vs, k, aux);
-       else 
-       {
-          k += 1;
-          construct_candidates(vs, k, aux, candidates);
-          loop(i, 0, candidates.size())
-          {
-             vs.push_back(candidates[i]);
-             make_move(vs, k, aux);
-             backtrack(vs, k, aux);
-             reverse_move();
-             /* terminate early */
-             if (finished) return;
-          }
-       }
+       candidates.push_back(1);
+       candidates.push_back(0);
   }
 
+  void backtrack(const vi& in, vi& vs, int k) 
+  {
+       vi candidates; /* candidates for next position */
+       if (is_a_solution(vs, k)) 
+         process_solution(in, vs);
+       else 
+       {
+          construct_candidates(candidates);
+          loop(i, 0, candidates.size())
+            vs[k] = candidates[i],
+            backtrack(in, vs, k + 1);
+       }
+  }
 }

@@ -107,6 +107,7 @@
 #include "algorithms/backtrack/leetcode/solveSudoku.cpp"
 #include "algorithms/backtrack/leetcode/addOperators.cpp"
 #include "algorithms/backtrack/template.cpp"
+#include "algorithms/backtrack/template/subset.cpp"
 #include "algorithms/dp/leetcode/integerBreak.cpp"
 // #include "algorithms/dp/leetcode/makeSquare.cpp"
 #include "algorithms/dp/leetcode/canPartitionKSubsets.cpp"
@@ -193,13 +194,17 @@
 #include "algorithms/graph/onlinejudge/gatheringFood.cpp"
 #include "algorithms/graph/onlinejudge/salesman.cpp"
 #include "algorithms/graph/onlinejudge/jungle.cpp"
+// math
+#include "algorithms/maths/onlinejudge/crossRiver.cpp"
 #include "algorithms/graph/lp_dag.cpp"
 
 #include "algorithms/rt.cpp"
 
 
 // namespace iq = algorithms::graph::onlinejudge::injured_queen;
-namespace jungle = algorithms::graph::onlinejudge::jungle;
+// namespace river = algorithms::maths::onlinejudge::cross_river;
+namespace food = algorithms::graph::onlinejudge::food;
+// namespace sub = algorithms::backtrack::framework::subset;
 
 
 
@@ -213,5 +218,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    jungle::submit(file);
+    food::submit(file);
 }

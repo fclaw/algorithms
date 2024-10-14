@@ -221,6 +221,5 @@ int main(int argc, char* argv[])
     if(argc > 1) file = std::make_optional(argv[1]);
 
     // food::submit(file);
-    cout << jobs::minimumTimeRequired({1, 2, 4, 7, 8}, 3);
-    cout << "\n" << jobs::cnt << "\n";
+    cout << jobs::minimumTimeRequired({1, 2, 4, 7, 8}, 2);
 }

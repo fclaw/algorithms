@@ -25,27 +25,16 @@ const double inf = std::numeric_limits<double>::max();
      * hint: We can select a subset of tasks and assign it to a worker then solve the subproblem on the remaining tasks
      * convert into DAG, state: pos, assignee left */
     int K, T;
-    int cnt = 0;
-    pi backtrack(const vi& jobs, int pos, int mask, vi& assignees_times, int avg_time, table& memo)
+    pi dfs(const vi& jobs, int pos, vi assignees_times, int avg_time)
     {
         if(pos == jobs.size())
         {
-            int all = std::reduce(assignees_times.begin(), assignees_times.end());
-            if(all != T) return {inf, 0};
-            cnt++;
-            double res = 0;
+            double cmp = 0;
             for(int t : assignees_times)
-              res += std::abs(t - avg_time) / (double)avg_time;
+              cmp += std::abs(t - avg_time) / (double)avg_time;
             int max_time = *std::max_element(assignees_times.begin(), assignees_times.end());
-            return {res, max_time};
-        }
-
-        if(auto it_pos = memo.find(pos);
-           it_pos != memo.end())
-        {
-            auto it_m = (*it_pos).second.find(mask);
-            if(it_m != (*it_pos).second.end())
-              return (*it_m).second;
+            cmp = std::ceil(cmp * 100.0) / 100.0;
+            return {cmp, max_time};
         }
 
         pi res = {inf, 0};
@@ -53,11 +42,8 @@ const double inf = std::numeric_limits<double>::max();
         {
             vi local = assignees_times;
             local[i] += jobs[pos];
-            pi assign_job = backtrack(jobs, pos + 1, mask, local, avg_time, memo);
-            local[i] -= jobs[pos];
-            pi skip_job = backtrack(jobs, pos + 1, mask, local, avg_time, memo);
-            pi min = assign_job.first < skip_job.first ? assign_job : skip_job;
-            if(min.first < res.first) res = min;
+            pi next = dfs(jobs, pos + 1, local, avg_time);
+            if(next.first < res.first) res = next;
         }
 
         return res;
@@ -69,6 +55,6 @@ const double inf = std::numeric_limits<double>::max();
         int avg_job_time = std::floor(T / assignees);
         vi assignees_times = vi(K, 0);
         table memo;
-        return backtrack(jobs, 0, 0, assignees_times, avg_job_time, memo).second;
+        return dfs(jobs, 0, assignees_times, avg_job_time).second;
     }
 }

@@ -32,7 +32,7 @@ typedef std::vector<std::vector<int>> table;
         return {cnt + cnt_r + cnt_l, i, j};
     }
 
-    std::optional<std::tuple<int, int, int>> getCountLeft(const vi& boxes, int v, int s, int l) 
+    std::optional<std::tuple<int, int, int>> getCountBind(const vi& boxes, int v, int s, int l) 
     {
         int low = l, upper = s;
         while(s >= low && boxes[s] != v) --s;
@@ -61,17 +61,27 @@ typedef std::vector<std::vector<int>> table;
             int left = getMax(boxes, l, nl, memo);
             int right = getMax(boxes, nr, r, memo);
 
-            auto ol = getCountLeft(boxes, boxes[i], nl, l);
+            auto obl = getCountBind(boxes, boxes[i], nl, l);
             int rl = nl + 1, lb_cnt = 0;
-            if(ol.has_value())
+            if(obl.has_value())
             {
-                auto tpl = ol.value();
+                auto tpl = obl.value();
                 int c = (cnt + std::get<0>(tpl));
                 lb_cnt = c * c + getMax(boxes, std::get<2>(tpl), nl + 1, memo);
                 rl = std::get<1>(tpl);
             }
 
-            int bind = lb_cnt + getMax(boxes, l, rl, memo);
+            auto obr = getCountBind(boxes, boxes[i], r, nr);
+            int rr = nr, rb_cnt = 0;
+            if(obr.has_value()) 
+            {
+                auto tpl = obr.value();
+                int c = (cnt + std::get<0>(tpl));
+                rb_cnt = c * c + getMax(boxes, nr, std::get<1>(tpl), memo);
+                rr = std::get<2>(tpl);
+            }
+
+            int bind = lb_cnt + rb_cnt + std::max(getMax(boxes, rr, r, memo), getMax(boxes, l, rl, memo));
             int separate = cnt * cnt + std::max(left, right);
             res = std::max(res, std::max(separate, bind));
         }

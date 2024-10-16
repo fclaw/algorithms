@@ -225,13 +225,5 @@ int main(int argc, char* argv[])
 
     // food::submit(file);
     // cout << jobs::minimumTimeRequired({1,2,4,7,8}, 2);
-    // 
-    cout << boxes::removeBoxes({1, 5, 1, 2, 2, 2, 2, 7, 2});
-
-    // auto t = boxes::getCount({2, 7, 2}, 2, 0, 3);
-    // auto o = boxes::getCountLeft({2, 7, 2}, 2, 2, 0);
-    // if(o.has_value()) cout << "cnt: " << std::get<0>(o.value()) << ", l: " << std::get<1>(o.value()) << ", r: " << std::get<2>(o.value()) << "\n";
-    // cout << "cnt: " << std::get<0>(t) << ", l: " << std::get<1>(t) << ", r: " << std::get<2>(t) << "\n";
-
- 
+    cout << boxes::removeBoxes({3,2,2,2,3,1,3});
 }

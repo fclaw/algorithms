@@ -1,14 +1,16 @@
 #include <vector>
 #include <numeric>
 #include <unordered_map>
+#include <string>
 
 namespace algorithms::dp::leetcode::jobs
 {
 
 #define loop(x, s, n) for(int x = s; x < n; x++)
+typedef unsigned long long ll;
 typedef std::vector<int> vi;
 typedef std::pair<double, int> pi;
-typedef std::unordered_map<int, std::unordered_map<int, pi>> table;
+typedef std::unordered_map<ll, pi> table;
 
 const double inf = std::numeric_limits<double>::max();
 
@@ -25,9 +27,9 @@ const double inf = std::numeric_limits<double>::max();
      * hint: We can select a subset of tasks and assign it to a worker then solve the subproblem on the remaining tasks
      * convert into DAG, state: pos, assignee left */
     int K, T;
-    pi dfs(const vi& jobs, int pos, vi assignees_times, int avg_time)
+    pi assign(const vi& jobs, int pos, vi assignees_times, int avg_time)
     {
-        if(pos == jobs.size())
+        if(pos == T)
         {
             double cmp = 0;
             for(int t : assignees_times)
@@ -42,19 +44,19 @@ const double inf = std::numeric_limits<double>::max();
         {
             vi local = assignees_times;
             local[i] += jobs[pos];
-            pi next = dfs(jobs, pos + 1, local, avg_time);
+            pi next = assign(jobs, pos + 1, local, avg_time);
             if(next.first < res.first) res = next;
         }
 
         return res;
     }
-    int minimumTimeRequired(const vi& jobs, int assignees) 
+    int minimumTimeRequired(const vi& jobs, int assignees)
     {
         K = assignees;
-        T = std::reduce(jobs.begin(), jobs.end());
-        int avg_job_time = std::floor(T / assignees);
+        T =  jobs.size();
+        int sum = std::reduce(jobs.begin(), jobs.end());
+        int avg_job_time = std::floor(sum / assignees);
         vi assignees_times = vi(K, 0);
-        table memo;
-        return dfs(jobs, 0, assignees_times, avg_job_time).second;
+        return assign(jobs, 0, assignees_times, avg_job_time).second;
     }
 }

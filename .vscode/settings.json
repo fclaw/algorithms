@@ -68,7 +68,8 @@
         "print": "cpp",
         "fstream": "cpp",
         "cassert": "cpp",
-        "atomic": "cpp"
+        "atomic": "cpp",
+        "numeric": "cpp"
     },
     "cSpell.words": [
         "atcoder",

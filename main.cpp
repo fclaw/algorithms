@@ -225,5 +225,20 @@ int main(int argc, char* argv[])
 
     // food::submit(file);
     // cout << jobs::minimumTimeRequired({1,2,4,7,8}, 2);
-    cout << boxes::removeBoxes({3,2,2,2,3,1,3});
+    cout << boxes::removeBoxes({1,2,3,4,4,4,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,1,1,5,9});
+    // auto t = boxes::getCountBind({3,2,2,2,3,1,5,3,7, 7,3}, 3, 10, 0);
+    // if(t.has_value()) 
+    // {
+    //    cout << "cnt: " << std::get<0>(t.value()) << ", l: " << std::get<1>(t.value()) << ", r: " << std::get<2>(t.value()) << "\n";
+    //    cout << "intervals: \n";
+    //    for(auto t : std::get<3>(t.value()))
+    //      cout << "(" << t.first << ", " << t.second << ")\n";
+    // }
+
+    // auto t = boxes::getCount({2, 2, 2, 2, 7, 2}, 5, 0, 6);
+    // cout << "l: " << std::get<1>(t)  << ", r: " << std::get<2>(t) << "\n";
+
+    // auto t = boxes::getBindRight({2, 7, 2, 2, 2, 1, 4, 2, 2}, 2, 9, 1);
+    // cout << std::get<1>(t) << "\n";
+    // for(auto t : std::get<2>(t)) cout << t.first << " " << t.second << "\n";
 }

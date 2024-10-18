@@ -28,9 +28,9 @@ typedef std::vector<Box> vbox;
      *  remove them and get k * k points. Return the maximum points you can get. 
      *  objective function: f(i, j) = n 
      *  some shrewd observation drawn from https://medium.com/@haohsiangchung/leetcode-remove-boxes-ae7f2d1e1c90 */
-     Box getBox(const vi& boxes, int p)
+    Box getBox(const vi& boxes, int p, int r)
     {
-        int l = 0, r = boxes.size();
+        int l = 0;
         int cnt_l = 0, cnt_r = 0;
         int i = p - 1;
         // left
@@ -46,9 +46,10 @@ typedef std::vector<Box> vbox;
         vbox xs;
         int target = boxes[pos];
         back_loop(i, r, pos)
-          if(boxes[i] == target)
+          if(i < boxes.size() && 
+             boxes[i] == target)
           {
-             Box b = getBox(boxes, i);
+             Box b = getBox(boxes, i, r);
              i = b.left;
              xs.push_back(b);
           }
@@ -65,17 +66,20 @@ typedef std::vector<Box> vbox;
         points = 0;
         loop(i, l, r)
         {
-            Box box = getBox(boxes, i);
-            int cnt = 0, streak = 0;
+            Box box = getBox(boxes, i, r);
+            int cnt = box.count, streak = 0, acc = 0;
             vbox xs = getBoxes(boxes, box.right, r);
             xs.push_back(box);
-            loop(j, 0, xs.size())
+            loop(j, 0, xs.size() - 1)
             {
+                int curr_cnt = xs[j].count + xs.back().count;
+                int curr_max = getMax(boxes, xs.back().right + 1, xs[j].left, memo);
+                int rest = getMax(boxes, xs[j].right + 1, r, memo);
+                int acc_rest = getMax(boxes, xs.front().right + 1, r, memo);
                 cnt += xs[j].count;
-                if(j + 1 < xs.size()) 
-                  streak += getMax(boxes, xs[j + 1].right + 1, xs[j].left, memo);
+                streak = std::max(streak, std::max(curr_cnt * curr_cnt + curr_max + rest, cnt * cnt + curr_max + acc + acc_rest));
+                if(j + 1 < xs.size()) acc += getMax(boxes, xs[j + 1].right + 1, xs[j].left, memo);
             }
-            streak += cnt * cnt + getMax(boxes, xs.front().right + 1, r, memo);
             points = std::max( points, std::max(streak, box.count * box.count + getMax(boxes, box.right + 1, r, memo)));
             i = box.right + 1;
         }

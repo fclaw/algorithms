@@ -225,20 +225,17 @@ int main(int argc, char* argv[])
 
     // food::submit(file);
     // cout << jobs::minimumTimeRequired({1,2,4,7,8}, 2);
-    cout << boxes::removeBoxes({1,2,3,4,4,4,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,1,1,5,9});
-    // auto t = boxes::getCountBind({3,2,2,2,3,1,5,3,7, 7,3}, 3, 10, 0);
-    // if(t.has_value()) 
-    // {
-    //    cout << "cnt: " << std::get<0>(t.value()) << ", l: " << std::get<1>(t.value()) << ", r: " << std::get<2>(t.value()) << "\n";
-    //    cout << "intervals: \n";
-    //    for(auto t : std::get<3>(t.value()))
-    //      cout << "(" << t.first << ", " << t.second << ")\n";
-    // }
+    // boxes::vi xs = {3,9,2,4,4,6,5,8,4,8,6,9,6,2,8,6,4,1,9,5,3,10,5,3,3,9,8,8,6};
+    // boxes::vi xs  = {8,4,8,6,9,6,2,8,6,4,1,9,5,3,10,5,3,3,9,8};
+    // boxes::vi xs = {4,4,4,9,4,5,4,4,1};
+    // boxes::vi xs = {1,2,1,2,3,9,4,4}; // should be 19
+    // boxes::vi xs = {1, 2, 3, 1, 1, 5, 6, 7, 1, 1, 1};
+    boxes::vi xs = {4,4,6,5,8,4,8,6,9,6,2,8,6,4}; // 41
+    cout << boxes::removeBoxes(xs);
+    // cout << "cnt: " << b.count << "\n"; 
 
-    // auto t = boxes::getCount({2, 2, 2, 2, 7, 2}, 5, 0, 6);
-    // cout << "l: " << std::get<1>(t)  << ", r: " << std::get<2>(t) << "\n";
+    // boxes::vbox boxes = boxes::getBoxes(xs, 4, xs.size()); 
+    // for(auto bx : xs)
+    //   cout << "cnt: " << bx.count << ", l: " << bx.left << ", r: " << bx.right << "\n";
 
-    // auto t = boxes::getBindRight({2, 7, 2, 2, 2, 1, 4, 2, 2}, 2, 9, 1);
-    // cout << std::get<1>(t) << "\n";
-    // for(auto t : std::get<2>(t)) cout << t.first << " " << t.second << "\n";
 }

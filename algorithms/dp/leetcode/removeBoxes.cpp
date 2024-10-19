@@ -20,8 +20,6 @@ typedef std::vector<vi> vvi;
 typedef std::vector<std::pair<int, int>> vp;
 typedef std::vector<std::vector<int>> table;
 typedef std::vector<Box> vbox;
-typedef std::vector<vbox> vvbox;
-typedef std::unordered_map<int, std::unordered_map<int, vvbox>> mvvbox;
 
     // https://leetcode.com/problems/remove-boxes
     /** You are given several boxes with different colors represented by different positive numbers.
@@ -31,8 +29,6 @@ typedef std::unordered_map<int, std::unordered_map<int, vvbox>> mvvbox;
      *  objective function: f(i, j) = n 
      *  some shrewd observation drawn from https://medium.com/@haohsiangchung/leetcode-remove-boxes-ae7f2d1e1c90 */
     int BOX_SIZE;
-    mvvbox ways;     
-
     Box getBox(const vi& boxes, int p, int r)
     {
         int l = 0;
@@ -48,69 +44,49 @@ typedef std::unordered_map<int, std::unordered_map<int, vvbox>> mvvbox;
 
     vbox getBoxes(const vi& boxes, int pos, int r)
     {
-        Box box = getBox(boxes, pos, r);
         vbox xs;
         int target = boxes[pos];
-        back_loop(i, r, pos)
-          if(i < BOX_SIZE && 
-             boxes[i] == target)
+        loop(i, pos + 1, r) 
+          if(boxes[i] == target)
           {
              Box b = getBox(boxes, i, r);
-             i = b.left;
+             i = b.right + 1;
              xs.push_back(b);
           }
         return xs;
-    }
-
-    vvbox getCombinations(const vi& boxes, int pos, int r)
-    {
-        if(auto it_pos = ways.find(pos);
-           it_pos != ways.end())
-          if(auto it_r = (*it_pos).second.find(r);
-             it_r != (*it_pos).second.end())
-            return ways[pos][r];
-
-        Box box = getBox(boxes, pos, r);
-        vvbox acc;
-        for(auto b : getBoxes(boxes, box.right, r))
-        {
-           vvbox xxs = getCombinations(boxes, b.left, r);
-           for(auto& xs : xxs) { xs.push_back(box); acc.push_back(xs); }
-        }
-        if(acc.size() == 0) acc.push_back({box});
-        return ways[pos][r] = acc;
     }
 
     int getMax(const vi& boxes, int l, int r, table& memo)
     {
         if(l >= r) return 0;
 
-        int &points = memo[l][r];
-        if(~points) return memo[l][r];
+        int &streak = memo[l][r];
+        if(~streak) return memo[l][r];
 
-        points = 0;
+        streak = 0;
         loop(i, l, r)
         {
             Box box = getBox(boxes, i, r);
-            int streak = 0;
-            vvbox xxs = getCombinations(boxes, i, r);
-            for(auto xs : xxs) 
+            int local = 0;
+            int acc_in = 0;
+            int acc_cnt = box.count;
+            Box prev = box;
+            vbox bs = getBoxes(boxes, box.right, r);
+            for(auto b : bs)
             {
-                int cnt = xs[0].count, s = 0;
-                int rest = getMax(boxes, xs[0].right + 1, r, memo);
-                loop(j, 1, xs.size())
-                  cnt += xs[j].count,
-                  s += getMax(boxes, xs[j].right + 1, xs[j - 1].left, memo);
-                streak = std::max(streak, cnt * cnt + s + rest);  
+                int in = getMax(boxes, box.right + 1, b.left, memo);
+                int left = getMax(boxes, b.right + 1, r, memo);
+                int cnt = box.count + b.count;
+                acc_cnt += b.count;
+                acc_in += getMax(boxes, prev.right + 1, b.left, memo);
+                prev = b;
+                local = std::max(local, std::max(cnt * cnt + in + left, acc_cnt * acc_cnt + acc_in + left));
             }
-            points = std::max( points, std::max(streak, box.count * box.count + getMax(boxes, box.right + 1, r, memo)));
+            streak = std::max(streak, std::max(local, box.count * box.count + getMax(boxes, box.right + 1, r, memo)));
+            i = box.right + 1;
         }
-        return memo[l][r] = points;
+        return memo[l][r] = streak;
     }
     int removeBoxes(const vi& boxes) 
-    { 
-        BOX_SIZE = boxes.size(); 
-        table memo = vvi(BOX_SIZE + 1, vi(BOX_SIZE + 1, -1));
-        return getMax(boxes, 0, BOX_SIZE, memo); 
-    }
+    { BOX_SIZE = boxes.size(); table memo = vvi(BOX_SIZE + 1, vi(BOX_SIZE + 1, -1)); return getMax(boxes, 0, BOX_SIZE, memo); }
 }

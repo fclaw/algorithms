@@ -226,6 +226,6 @@ int main(int argc, char* argv[])
     // food::submit(file);
     // cout << jobs::minimumTimeRequired({1,2,4,7,8}, 2);
     // {3,9,2,3,7,8,3,3}
-    boxes::vi xs = {37,33,37,59,55,19,37,19,55,55,59,37}; // should be 28
+    boxes::vi xs = {3,45,6,7,1,1,1,1,1,5,5,5,5,4,4,3,35,5,5,5,5,1,1,1,1,3,3,6,6,6,9,9}; // should be 28
     cout << boxes::removeBoxes(xs);
 }

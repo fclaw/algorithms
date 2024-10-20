@@ -17,7 +17,7 @@ struct Box
 #define back_loop(x, s, n) for(int x = s; x > n; x--)
 typedef std::vector<int> vi;
 typedef std::vector<vi> vvi;
-typedef std::vector<std::vector<int>> table;
+typedef std::vector<vvi> table;
 typedef std::vector<Box> vbox;
 
     // https://leetcode.com/problems/remove-boxes
@@ -55,37 +55,35 @@ typedef std::vector<Box> vbox;
         return xs;
     }
 
-    int maxScore(const vi& boxes, int l, int r, table& memo)
+    int maxScore(const vi& boxes, int l, int r, int k, table& memo)
     {
         if(l >= r) return 0;
 
-        int &streak = memo[l][r];
-        if(~streak) return memo[l][r];
+        int &score = memo[l][r][k];
+        if(~score) return memo[l][r][k];
 
-        streak = 0;
+        score = 0;
+        int streak = 0;
         loop(i, l, r)
         {
             Box box = getBox(boxes, i, r);
+            int c = box.count;
             i = box.right + 1;
-            int local = 0;
-            int acc_in = 0;
-            int acc_cnt = box.count;
-            Box prev = box;
-            vbox bs = getBoxes(boxes, box.right, r);
+            Box next = getBox(boxes, box.right + 1, r);
             for(auto b : bs)
             {
-                int in = maxScore(boxes, box.right + 1, b.left, memo);
-                int left = maxScore(boxes, b.right + 1, r, memo);
-                int cnt = box.count + b.count;
-                acc_cnt += b.count;
-                acc_in += maxScore(boxes, prev.right + 1, b.left, memo);
-                prev = b;
-                local = std::max(local, std::max(cnt * cnt + in + left, acc_cnt * acc_cnt + acc_in + left));
+                int in = maxScore(boxes, box.right + 1, b.left, 0, memo);
+                int left = maxScore(boxes, b.right + 1, r, 0, memo);
+                streak = std::max(streak, std::max( (k + c + b.count) * (k + c + b.count) + left, in + maxScore(boxes, b.left, r, k + c, memo)));
             }
-            streak = std::max(streak, std::max(local, box.count * box.count + maxScore(boxes, box.right + 1, r, memo)));
+            score = std::max(score, std::max(streak, c * c + maxScore(boxes, box.right + 1, r, 0, memo)));
         }
-        return memo[l][r] = streak;
+        return memo[l][r][k] = score;
     }
     int removeBoxes(const vi& boxes) 
-    { BOX_SIZE = boxes.size(); table memo = vvi(BOX_SIZE + 1, vi(BOX_SIZE + 1, -1)); return maxScore(boxes, 0, BOX_SIZE, memo); }
+    { 
+        BOX_SIZE = boxes.size(); 
+        table memo = table(BOX_SIZE + 1, vvi(BOX_SIZE + 1, vi(BOX_SIZE + 1, -1))); 
+        return maxScore(boxes, 0, BOX_SIZE, 0, memo); 
+    }
 }

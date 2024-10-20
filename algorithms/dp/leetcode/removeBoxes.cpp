@@ -17,7 +17,6 @@ struct Box
 #define back_loop(x, s, n) for(int x = s; x > n; x--)
 typedef std::vector<int> vi;
 typedef std::vector<vi> vvi;
-typedef std::vector<std::pair<int, int>> vp;
 typedef std::vector<std::vector<int>> table;
 typedef std::vector<Box> vbox;
 
@@ -56,7 +55,7 @@ typedef std::vector<Box> vbox;
         return xs;
     }
 
-    int getMax(const vi& boxes, int l, int r, table& memo)
+    int maxScore(const vi& boxes, int l, int r, table& memo)
     {
         if(l >= r) return 0;
 
@@ -67,6 +66,7 @@ typedef std::vector<Box> vbox;
         loop(i, l, r)
         {
             Box box = getBox(boxes, i, r);
+            i = box.right + 1;
             int local = 0;
             int acc_in = 0;
             int acc_cnt = box.count;
@@ -74,19 +74,18 @@ typedef std::vector<Box> vbox;
             vbox bs = getBoxes(boxes, box.right, r);
             for(auto b : bs)
             {
-                int in = getMax(boxes, box.right + 1, b.left, memo);
-                int left = getMax(boxes, b.right + 1, r, memo);
+                int in = maxScore(boxes, box.right + 1, b.left, memo);
+                int left = maxScore(boxes, b.right + 1, r, memo);
                 int cnt = box.count + b.count;
                 acc_cnt += b.count;
-                acc_in += getMax(boxes, prev.right + 1, b.left, memo);
+                acc_in += maxScore(boxes, prev.right + 1, b.left, memo);
                 prev = b;
                 local = std::max(local, std::max(cnt * cnt + in + left, acc_cnt * acc_cnt + acc_in + left));
             }
-            streak = std::max(streak, std::max(local, box.count * box.count + getMax(boxes, box.right + 1, r, memo)));
-            i = box.right + 1;
+            streak = std::max(streak, std::max(local, box.count * box.count + maxScore(boxes, box.right + 1, r, memo)));
         }
         return memo[l][r] = streak;
     }
     int removeBoxes(const vi& boxes) 
-    { BOX_SIZE = boxes.size(); table memo = vvi(BOX_SIZE + 1, vi(BOX_SIZE + 1, -1)); return getMax(boxes, 0, BOX_SIZE, memo); }
+    { BOX_SIZE = boxes.size(); table memo = vvi(BOX_SIZE + 1, vi(BOX_SIZE + 1, -1)); return maxScore(boxes, 0, BOX_SIZE, memo); }
 }

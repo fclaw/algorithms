@@ -1,0 +1,38 @@
+{
+    "sourceFile": "algorithms/maths/leetocde/reverseNumber.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1729517255929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729517264193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n \n \n-namespace algorithms::math::leetcode::perfect_square\n-{\n\\ No newline at end of file\n+namespace algorithms::math::leetcode:\n+{\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729517270006,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n-namespace algorithms::math::leetcode:\n+namespace algorithms::math::leetcode::reverse\n {\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729517278249,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n-namespace algorithms::math::leetcode::reverse\n+namespace algorithms::math::leetcode::reverse_number\n {\n-\n+    /**/\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729517286735,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace algorithms::math::leetcode::reverse_number\n {\n-    /**   */\n+    /** https://leetcode.com/problems/reverse-integer/?envType=problem-list-v2&envId=math  */\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729517325377,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,9 @@\n \n namespace algorithms::math::leetcode::reverse_number\n {\n     /** https://leetcode.com/problems/reverse-integer  */\n-    int reverse(int x) {  }\n+    int reverse(int x) \n+    {\n+        \n+    }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1729517255929,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::math::leetcode::perfect_square\n{"
+        }
+    ]
+}

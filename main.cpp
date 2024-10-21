@@ -200,6 +200,9 @@
 #include "algorithms/maths/onlinejudge/crossRiver.cpp"
 #include "algorithms/maths/onlinejudge/carryBit.cpp"
 #include "algorithms/maths/onlinejudge/numberingRoads.cpp"
+#include "algorithms/maths/onlinejudge/brickGame.cpp"
+#include "algorithms/maths/onlinejudge/feynman.cpp"
+#include "algorithms/maths/leetcode/reverse.cpp"
 #include "algorithms/graph/lp_dag.cpp"
 
 #include "algorithms/rt.cpp"
@@ -211,7 +214,7 @@
 // namespace sub = algorithms::backtrack::framework::subset;
 
 // namespace jobs = algorithms::dp::leetcode::jobs;
-namespace nr = algorithms::maths::onlinejudge::numbering_roads;
+namespace feynman = algorithms::maths::onlinejudge::feynman;
 
 
 
@@ -225,5 +228,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    nr::submit(file);
+    feynman::submit(file);
 }

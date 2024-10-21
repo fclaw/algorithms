@@ -1,0 +1,30 @@
+{
+    "sourceFile": "algorithms/maths/leetcode/reverse.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1729517950441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729517957531,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n      *   Shift the result to the left (to make room for the new bit).\n      *   Add the extracted bit to the result.\n      *   Shift the original number to the right.\n      *   Continue the process for all the bits. */\n+    const int \n     int reverse(int x) \n     {\n         for()\n     }\n"
+                },
+                {
+                    "date": 1729517973888,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n      *   Shift the result to the left (to make room for the new bit).\n      *   Add the extracted bit to the result.\n      *   Shift the original number to the right.\n      *   Continue the process for all the bits. */\n-    const int 32_bit;\n+    const int range = 32;\n     int reverse(int x) \n     {\n         for()\n     }\n"
+                },
+                {
+                    "date": 1729518008977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,26 @@\n+\n+\n+namespace algorithms::math::leetcode::reverse_number\n+{\n+    /** https://leetcode.com/problems/reverse-integer  \n+     *  bit manipulation. General delineation\n+     *  1 Extract the least significant bit (LSB) of the number using bitwise AND with 1 (n & 1).\n+     *  2 Shift the extracted bit to the correct position in the reversed number.\n+     *  3 Shift the original number to the right to process the next bit.\n+     *  4 Repeat until all bits are processed.\n+     * \n+     *   Start with a result initialized to 0. \n+     *   For each bit in the original number:\n+     *   Extract the least significant bit (n & 1).\n+     *   Shift the result to the left (to make room for the new bit).\n+     *   Add the extracted bit to the result.\n+     *   Shift the original number to the right.\n+     *   Continue the process for all the bits. */\n+    const int range = 32;\n+    int reverse(int x) \n+    {\n+        int ans = 0;\n+        for(int b = 0; b < range; b++)\n+          \n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1729517950441,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::math::leetcode::reverse_number\n{\n    /** https://leetcode.com/problems/reverse-integer  \n     *  bit manipulation. General delineation\n     *  1 Extract the least significant bit (LSB) of the number using bitwise AND with 1 (n & 1).\n     *  2 Shift the extracted bit to the correct position in the reversed number.\n     *  3 Shift the original number to the right to process the next bit.\n     *  4 Repeat until all bits are processed.\n     * \n     *   Start with a result initialized to 0. \n     *   For each bit in the original number:\n     *   Extract the least significant bit (n & 1).\n     *   Shift the result to the left (to make room for the new bit).\n     *   Add the extracted bit to the result.\n     *   Shift the original number to the right.\n     *   Continue the process for all the bits. */\n    int reverse(int x) \n    {\n        for()\n    }\n}"
+        }
+    ]
+}

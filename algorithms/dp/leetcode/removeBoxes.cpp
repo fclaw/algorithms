@@ -25,14 +25,12 @@ typedef std::vector<vvi> table;
         if(~score) return memo[l][r][k];
 
         score = INT32_MIN;
-        int colour = boxes[l], cnt = 1;
-        while(++l < r && boxes[l] == colour) { ++cnt; }
-        --l;
-        score = (cnt + k) * (cnt + k) + maxScore(boxes, l + 1, r, 0, memo);
+        int colour = boxes[l];
+        score = (k + 1) * (k + 1) + maxScore(boxes, l + 1, r, 0, memo);
         loop(j, l + 1, r)
           if(boxes[j] == colour)
-            score = std::max(score, maxScore(boxes, l + 1, j, 0, memo) + maxScore(boxes, j, r, k + cnt, memo));  
-        return score;
+            score = std::max(score, maxScore(boxes, l + 1, j, 0, memo) + maxScore(boxes, j, r, k + 1, memo));  
+        return memo[l][r][k] = score;
     }
     int removeBoxes(const vi& boxes) 
     { table memo = table(boxes.size() + 1, vvi(boxes.size() + 1, vi(boxes.size() + 1, -1))); return maxScore(boxes, 0, boxes.size(), 0, memo); }

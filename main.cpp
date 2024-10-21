@@ -199,6 +199,7 @@
 // math
 #include "algorithms/maths/onlinejudge/crossRiver.cpp"
 #include "algorithms/maths/onlinejudge/carryBit.cpp"
+#include "algorithms/maths/onlinejudge/numberingRoads.cpp"
 #include "algorithms/graph/lp_dag.cpp"
 
 #include "algorithms/rt.cpp"
@@ -210,7 +211,7 @@
 // namespace sub = algorithms::backtrack::framework::subset;
 
 // namespace jobs = algorithms::dp::leetcode::jobs;
-namespace cb = algorithms::maths::onlinejudge::carry_bit;
+namespace nr = algorithms::maths::onlinejudge::numbering_roads;
 
 
 
@@ -224,5 +225,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    cb::submit(file);
+    nr::submit(file);
 }

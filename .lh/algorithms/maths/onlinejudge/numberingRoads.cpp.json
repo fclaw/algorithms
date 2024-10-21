@@ -1,0 +1,46 @@
+{
+    "sourceFile": "algorithms/maths/onlinejudge/numberingRoads.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1729507817743,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729507824283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,4 @@\n \n \n+\n+namespace algorithms::maths::onlinejudge::carry_bit\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729507835124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n \n \n \n-namespace algorithms::maths::onlinejudge::carry_bit\n\\ No newline at end of file\n+namespace algorithms::maths::onlinejudge::numbering_roads\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729507842015,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,7 @@\n \n \n \n-namespace algorithms::maths::onlinejudge::numbering_roads\n\\ No newline at end of file\n+namespace algorithms::maths::onlinejudge::numbering_roads\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729507849581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,6 +2,6 @@\n \n \n namespace algorithms::maths::onlinejudge::numbering_roads\n {\n-    \n+    // https://onlinejudge.org/external/117/11723.pdf\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729507862428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,12 @@\n+#include <cassert>\n+#include <optional>\n+#include <iostream>\n+#include <cstdio>\n \n \n \n namespace algorithms::maths::onlinejudge::numbering_roads\n {\n     // https://onlinejudge.org/external/117/11723.pdf\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729507876038,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,7 +6,12 @@\n \n namespace algorithms::maths::onlinejudge::numbering_roads\n {\n     // https://onlinejudge.org/external/117/11723.pdf\n-    \n+    void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n+        int x, y;\n+        while(std::cin >> x >> y) { printf(\"%d\\n\", add(x, y)); }\n+    }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729509656700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,8 +11,8 @@\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int roads, nums;\n-        while(std::cin >> )\n+        while(std::cin >> roads >> nums)\n     }\n \n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1729507817743,
+            "name": "Commit-0",
+            "content": "\n\n"
+        }
+    ]
+}

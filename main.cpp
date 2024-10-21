@@ -198,6 +198,7 @@
 #include "algorithms/graph/onlinejudge/jungle.cpp"
 // math
 #include "algorithms/maths/onlinejudge/crossRiver.cpp"
+#include "algorithms/maths/onlinejudge/carryBit.cpp"
 #include "algorithms/graph/lp_dag.cpp"
 
 #include "algorithms/rt.cpp"
@@ -209,7 +210,7 @@
 // namespace sub = algorithms::backtrack::framework::subset;
 
 // namespace jobs = algorithms::dp::leetcode::jobs;
-namespace boxes = algorithms::dp::leetcode::boxes;
+namespace cb = algorithms::maths::onlinejudge::carry_bit;
 
 
 
@@ -223,10 +224,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    // food::submit(file);
-    // cout << jobs::minimumTimeRequired({1,2,4,7,8}, 2);
-    // {3,9,2,3,7,8,3,3}
-    // 1,2,1,3,4,5,1,5,4,4,3,1 // should be 28 
-    boxes::vi xs = {1,2,2,1,1,1,2,1,1,2,1,2,1,1,2,2,1,1,2,2,1,1,1,2,2,2,2,1,2,1,1,2,2,1,2,1,2,2,2,2,2,1,2,1,2,2,1,1,1,2,2,1,2,1,2,2,1,2,1,1,1,2,2,2,2,2,1,2,2,2,2,2,1,1,1,1,1,2,2,2,2,2,1,1,1,1,2,2,1,1,1,1,1,1,1,2,1,2,2,1};
-    cout << boxes::removeBoxes(xs);
+    cb::submit(file);
 }

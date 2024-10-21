@@ -1,0 +1,78 @@
+{
+    "sourceFile": "algorithms/maths/onlinejudge/carryBit.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 15,
+            "patches": [
+                {
+                    "date": 1729506860301,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729506868747,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n-namespace algorithms::maths::onlinejudge::cross_river\n+namespace algorithms::maths::onlinejudge::carry_bit\n {\n-    \n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729506875655,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace algorithms::maths::onlinejudge::carry_bit\n {\n-\n+    // https://onlinejudge.org/external/104/10469.pdf\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729506893280,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,11 @@\n+#include <cassert>\n+#include <optional>\n+#include <iostream>\n+#include <cstdio>\n \n \n namespace algorithms::maths::onlinejudge::carry_bit\n {\n     // https://onlinejudge.org/external/104/10469.pdf\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729506907545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,5 +7,20 @@\n namespace algorithms::maths::onlinejudge::carry_bit\n {\n     // https://onlinejudge.org/external/104/10469.pdf\n \n+    void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n+\n+        int tc, c = 0;\n+        std::cin >> tc;\n+        while(--tc >= 0)\n+        {\n+            int width, flow, boat;\n+            std::cin >> width >> flow >> boat;\n+            int ans = diffOf2Ways(width, flow, boat);\n+            printf(\"Case %d: %s\\n\", ++c, std::to_string(ans).c_str());\n+        }\n+    }\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729506913989,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n-        int tc, c = 0;\n+        int \n         std::cin >> tc;\n         while(--tc >= 0)\n         {\n             int width, flow, boat;\n"
+                },
+                {
+                    "date": 1729506923987,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n-        int \n+        int n1, n2\n         std::cin >> tc;\n         while(--tc >= 0)\n         {\n             int width, flow, boat;\n"
+                },
+                {
+                    "date": 1729506930024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n         int n1, n2\n-        std::cin >> tc;\n+        std::cin >> n1 ;\n         while(--tc >= 0)\n         {\n             int width, flow, boat;\n             std::cin >> width >> flow >> boat;\n"
+                },
+                {
+                    "date": 1729506941655,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,10 +12,9 @@\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n \n         int n1, n2\n-        std::cin >> n1 ;\n-        while(--tc >= 0)\n+        while(std::cin << n1 >> n2)\n         {\n             int width, flow, boat;\n             std::cin >> width >> flow >> boat;\n             int ans = diffOf2Ways(width, flow, boat);\n"
+                },
+                {
+                    "date": 1729506946751,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,11 +14,9 @@\n \n         int n1, n2\n         while(std::cin << n1 >> n2)\n         {\n-            int width, flow, boat;\n-            std::cin >> width >> flow >> boat;\n-            int ans = diffOf2Ways(width, flow, boat);\n+           \n             printf(\"Case %d: %s\\n\", ++c, std::to_string(ans).c_str());\n         }\n     }\n \n"
+                },
+                {
+                    "date": 1729506958941,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         int n1, n2\n         while(std::cin << n1 >> n2)\n         {\n            \n-            printf(\"Case %d: %s\\n\", ++c, std::to_string(ans).c_str());\n+            printf(\"%d: %s\\n\", ++c, std::to_string(ans).c_str());\n         }\n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729506964435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         int n1, n2\n         while(std::cin << n1 >> n2)\n         {\n            \n-            printf(\"%d: %s\\n\", ++c, std::to_string(ans).c_str());\n+            printf(\"%d\\n\", std::to_string(ans).c_str());\n         }\n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729506995643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         int n1, n2\n         while(std::cin << n1 >> n2)\n         {\n            \n-            printf(\"%d\\n\", std::to_string(ans).c_str());\n+            printf(\"%d\\n\", );\n         }\n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729507002271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         int n1, n2\n         while(std::cin << n1 >> n2)\n         {\n            \n-            printf(\"%d\\n\", );\n+            printf(\"%d\\n\", add());\n         }\n     }\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729507013817,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,8 @@\n \n         int n1, n2\n         while(std::cin << n1 >> n2)\n         {\n-           \n             printf(\"%d\\n\", add(n1, n2));\n         }\n     }\n \n"
+                },
+                {
+                    "date": 1729507170141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,19 @@\n+#include <cassert>\n+#include <optional>\n+#include <iostream>\n+#include <cstdio>\n+\n+\n+namespace algorithms::maths::onlinejudge::carry_bit\n+{\n+    // https://onlinejudge.org/external/104/10469.pdf\n+    int add(int n1, int n2) { return 1; }\n+\n+    void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n+        int n1, n2;\n+        while(std::cin >> n1 >> n2) { printf(\"%d\\n\", add(n1, n2)); }\n+    }\n+\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1729506860301,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::maths::onlinejudge::cross_river\n{\n    \n}"
+        }
+    ]
+}

@@ -203,6 +203,7 @@
 #include "algorithms/maths/onlinejudge/brickGame.cpp"
 #include "algorithms/maths/onlinejudge/feynman.cpp"
 #include "algorithms/maths/onlinejudge/collatz.cpp"
+#include "algorithms/maths/onlinejudge/perfection.cpp"
 #include "algorithms/maths/leetcode/reverse.cpp"
 #include "algorithms/graph/lp_dag.cpp"
 
@@ -215,7 +216,7 @@
 // namespace sub = algorithms::backtrack::framework::subset;
 
 // namespace jobs = algorithms::dp::leetcode::jobs;
-namespace collatz = algorithms::maths::onlinejudge::collatz;
+namespace perfection = algorithms::maths::onlinejudge::perfection;
 
 
 
@@ -229,5 +230,8 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    collatz::submit(file);
+    perfection::submit(file);
+    // perfection::vi xs = perfection::doTrialDivision(28);
+    // for(int x : xs) cout << x << " ";
+    // cout << "\n";
 }

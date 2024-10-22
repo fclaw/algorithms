@@ -216,7 +216,7 @@
 // namespace sub = algorithms::backtrack::framework::subset;
 
 // namespace jobs = algorithms::dp::leetcode::jobs;
-namespace perfection = algorithms::maths::onlinejudge::perfection;
+namespace rn = algorithms::math::leetcode::reverse_number;
 
 
 
@@ -230,8 +230,6 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    perfection::submit(file);
-    // perfection::vi xs = perfection::doTrialDivision(28);
-    // for(int x : xs) cout << x << " ";
-    // cout << "\n";
+    // perfection::submit(file);
+    cout << rn::reverse(123);
 }

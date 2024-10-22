@@ -1,23 +1,39 @@
-
+#include <functional>
 
 namespace algorithms::math::leetcode::reverse_number
 {
-    /** https://leetcode.com/problems/reverse-integer  
-     *  bit manipulation. General delineation
-     *  1 Extract the least significant bit (LSB) of the number using bitwise AND with 1 (n & 1).
-     *  2 Shift the extracted bit to the correct position in the reversed number.
-     *  3 Shift the original number to the right to process the next bit.
-     *  4 Repeat until all bits are processed.
-     * 
-     *   Start with a result initialized to 0. 
-     *   For each bit in the original number:
-     *   Extract the least significant bit (n & 1).
-     *   Shift the result to the left (to make room for the new bit).
-     *   Add the extracted bit to the result.
-     *   Shift the original number to the right.
-     *   Continue the process for all the bits. */
-    int reverse(int x) 
+    /** https://leetcode.com/problems/reverse-integer */
+    void doReverse(int n, int& reversed_n)
     {
-        return 1;
+        if(n == 0) return;
+        int d = n % 10;
+        // Check for overflow conditions before appending the digit. 
+        // first condition stands for multiplication by 10, second for addition
+        // Overflow if the number is about to go beyond the positive range
+        if (reversed_n > (std::pow(2, 31) / 10) || 
+            reversed_n == (std::pow(2, 31) / 10) && d > 7)
+        {
+            reversed_n  = 0;
+            return;
+        }
+        // Underflow if the number is about to go beyond the negative range
+        if (reversed_n < (std::pow(-2, 31) / 10) || 
+            reversed_n == (std::pow(-2, 31) / 10) && d < -8)
+        {
+            reversed_n  = 0;
+            return;
+        }
+        reversed_n = reversed_n * 10 + d;
+        doReverse(n / 10, reversed_n);
+    }
+    int reverse(int n) 
+    { 
+        if(n == INT32_MIN)
+          return 0;
+        int reversed_n = 0;
+        bool isNegative = n < 0;
+        if(isNegative) n *= (-1);
+        doReverse(n, reversed_n);
+        return isNegative ? (-1) * reversed_n : reversed_n;
     }
 }

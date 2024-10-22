@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 32,
+            "activePatchIndex": 33,
             "patches": [
                 {
                     "date": 1716403736238,
@@ -136,6 +136,10 @@
                 {
                     "date": 1728986171661,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,10 @@\n         \"forward_list\": \"cpp\",\n         \"print\": \"cpp\",\n         \"fstream\": \"cpp\",\n         \"cassert\": \"cpp\",\n-        \"atomic\": \"cpp\"\n+        \"atomic\": \"cpp\",\n+        \"numeric\": \"cpp\"\n     },\n     \"cSpell.words\": [\n         \"atcoder\",\n         \"centimetre\",\n"
+                },
+                {
+                    "date": 1729609763075,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,9 +68,10 @@\n         \"print\": \"cpp\",\n         \"fstream\": \"cpp\",\n         \"cassert\": \"cpp\",\n         \"atomic\": \"cpp\",\n-        \"numeric\": \"cpp\"\n+        \"numeric\": \"cpp\",\n+        \"functional\": \"cpp\"\n     },\n     \"cSpell.words\": [\n         \"atcoder\",\n         \"centimetre\",\n"
                 }
             ],
             "date": 1716403736238,

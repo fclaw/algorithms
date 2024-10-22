@@ -1,0 +1,26 @@
+{
+    "sourceFile": "algorithms/dp/onlinejudge/square.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1729573871365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729573887450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n \n \n-algorithms::dp\n\\ No newline at end of file\n+namespace algorithms::dp::onlinejudge::squ\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729573899368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n namespace algorithms::dp::onlinejudge::square\n {\n-    /**  */\n+    /** https://onlinejudge.org/external/103/10364.pdf */\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1729573871365,
+            "name": "Commit-0",
+            "content": "\n\nalgorithms::dp"
+        }
+    ]
+}

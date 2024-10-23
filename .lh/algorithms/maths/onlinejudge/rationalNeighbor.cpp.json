@@ -1,0 +1,42 @@
+{
+    "sourceFile": "algorithms/maths/onlinejudge/rationalNeighbor.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1729660669147,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729660676206,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n \n \n-namespace algorithms::maths::onlinejudge::\n\\ No newline at end of file\n+namespace algorithms::maths::onlinejudge::rational_ne\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729660681470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n \n \n-namespace algorithms::maths::onlinejudge::rational_ne\n\\ No newline at end of file\n+namespace algorithms::maths::onlinejudge::rational_neighbour\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729660692666,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,8 @@\n \n \n-namespace algorithms::maths::onlinejudge::rational_neighbour\n\\ No newline at end of file\n+namespace algorithms::maths::onlinejudge::rational_neighbour\n+{\n+      void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729660706936,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,11 @@\n+#include <cassert>\n+#include <optional>\n \n \n namespace algorithms::maths::onlinejudge::rational_neighbour\n {\n-      void submit(std::optional<char*> file)\n+    void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n+    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729660713244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n #include <cassert>\n #include <optional>\n \n-\n namespace algorithms::maths::onlinejudge::rational_neighbour\n {\n     void submit(std::optional<char*> file)\n     {\n"
+                },
+                {
+                    "date": 1729660724224,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,6 +5,7 @@\n {\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n+        \n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1729660669147,
+            "name": "Commit-0",
+            "content": "\n\nnamespace algorithms::maths::onlinejudge::"
+        }
+    ]
+}

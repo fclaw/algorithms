@@ -205,6 +205,7 @@
 #include "algorithms/maths/onlinejudge/collatz.cpp"
 #include "algorithms/maths/onlinejudge/perfection.cpp"
 #include "algorithms/maths/leetcode/reverse.cpp"
+#include "algorithms/maths/onlinejudge/digitCounting.cpp"
 #include "algorithms/graph/lp_dag.cpp"
 
 #include "algorithms/rt.cpp"
@@ -216,7 +217,7 @@
 // namespace sub = algorithms::backtrack::framework::subset;
 
 // namespace jobs = algorithms::dp::leetcode::jobs;
-namespace rn = algorithms::math::leetcode::reverse_number;
+namespace dc = algorithms::maths::onlinejudge::digit_counting;
 
 
 
@@ -230,6 +231,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    // perfection::submit(file);
-    cout << rn::reverse(123);
+    dc::submit(file);
 }

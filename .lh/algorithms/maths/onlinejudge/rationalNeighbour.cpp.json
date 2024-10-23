@@ -1,0 +1,126 @@
+{
+    "sourceFile": "algorithms/maths/onlinejudge/rationalNeighbour.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 27,
+            "patches": [
+                {
+                    "date": 1729671888006,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729671897360,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,11 +2,9 @@\n #include <optional>\n \n namespace algorithms::maths::onlinejudge::rational_neighbour\n {\n-    /** compute c, from d = 1 until a\n-b < c\n-d)  */\n+    /** compute c, from d = 1 until a / b < c / d)  */\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         \n"
+                },
+                {
+                    "date": 1729671921668,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,10 @@\n #include <optional>\n \n namespace algorithms::maths::onlinejudge::rational_neighbour\n {\n-    /** compute c, from d = 1 until a / b < c / d)  */\n+    /** https://onlinejudge.org/external/9/906.pdf, \n+     *  compute c, from d = 1 until a / b < c / d */\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         \n"
+                },
+                {
+                    "date": 1729672327160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,11 @@\n \n namespace algorithms::maths::onlinejudge::rational_neighbour\n {\n     /** https://onlinejudge.org/external/9/906.pdf, \n-     *  compute c, from d = 1 until a / b < c / d */\n+     *  compute c, from d = 1 until a / b < c / d \n+     * \n+     * */\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         \n"
+                },
+                {
+                    "date": 1729672356693,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,10 @@\n namespace algorithms::maths::onlinejudge::rational_neighbour\n {\n     /** https://onlinejudge.org/external/9/906.pdf, \n      *  compute c, from d = 1 until a / b < c / d \n-     * \n+     * Given a rational a/b and an upper bound n for the distance, the problem consists to find the rational\n+c/d such that:\n      * */\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n"
+                },
+                {
+                    "date": 1729672363910,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,9 @@\n namespace algorithms::maths::onlinejudge::rational_neighbour\n {\n     /** https://onlinejudge.org/external/9/906.pdf, \n      *  compute c, from d = 1 until a / b < c / d \n-     * Given a rational a/b and an upper bound n for the distance, the problem consists to find the rational\n-c/d such that:\n+     * Given a rational a/b and an upper bound n for the distance, the problem consists to find the rational c/d such that:\n      * */\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n"
+                },
+                {
+                    "date": 1729672376023,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n {\n     /** https://onlinejudge.org/external/9/906.pdf, \n      *  compute c, from d = 1 until a / b < c / d \n      * Given a rational a/b and an upper bound n for the distance, the problem consists to find the rational c/d such that:\n+     * 1 a/b < c/d;\n      * */\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n"
+                },
+                {
+                    "date": 1729672386190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n     /** https://onlinejudge.org/external/9/906.pdf, \n      *  compute c, from d = 1 until a / b < c / d \n      * Given a rational a/b and an upper bound n for the distance, the problem consists to find the rational c/d such that:\n      * 1 a/b < c/d;\n+     * 2 the distance between the rationals a/b and c/d is smaller or equal than n;\n      * */\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n"
+                },
+                {
+                    "date": 1729672396444,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,10 @@\n     /** https://onlinejudge.org/external/9/906.pdf, \n      *  compute c, from d = 1 until a / b < c / d \n      * Given a rational a/b and an upper bound n for the distance, the problem consists to find the rational c/d such that:\n      * 1 a/b < c/d;\n-     * 2 the distance between the rationals a/b and c/d is smaller or equal than n;\n+     * 2 the distance between the rationals a/b and c/d is smaller or equal than n\n+     * 3 the denominator d is as small as possible\n      * */\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n"
+                },
+                {
+                    "date": 1729672403469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,12 +4,12 @@\n namespace algorithms::maths::onlinejudge::rational_neighbour\n {\n     /** https://onlinejudge.org/external/9/906.pdf, \n      *  compute c, from d = 1 until a / b < c / d \n-     * Given a rational a/b and an upper bound n for the distance, the problem consists to find the rational c/d such that:\n-     * 1 a/b < c/d;\n-     * 2 the distance between the rationals a/b and c/d is smaller or equal than n\n-     * 3 the denominator d is as small as possible\n+     *  Given a rational a/b and an upper bound n for the distance, the problem consists to find the rational c/d such that:\n+     *  1 a/b < c/d;\n+     *  2 the distance between the rationals a/b and c/d is smaller or equal than n\n+     *  3 the denominator d is as small as possible\n      * */\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n"
+                },
+                {
+                    "date": 1729672490591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,7 +12,7 @@\n      * */\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n-        \n+        int numerator, denom\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729672497252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,7 +12,8 @@\n      * */\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n-        int numerator, denom\n+        int numerator, denominator;\n+        double \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729672503519,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,7 +13,7 @@\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int numerator, denominator;\n-        double \n+        double n;\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729672642625,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,6 +14,7 @@\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int numerator, denominator;\n         double n;\n+        \n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729672692808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,7 +14,7 @@\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int numerator, denominator;\n         double n;\n-        \n+        while\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729672699937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,7 +14,7 @@\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int numerator, denominator;\n         double n;\n-        while\n+        while(s)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729672710592,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n #include <cassert>\n #include <optional>\n+#include <ios\n \n namespace algorithms::maths::onlinejudge::rational_neighbour\n {\n     /** https://onlinejudge.org/external/9/906.pdf, \n@@ -14,7 +15,7 @@\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int numerator, denominator;\n         double n;\n-        while(s)\n+        while(std::)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729672717831,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,21 @@\n+#include <cassert>\n+#include <optional>\n+#include <iostream>\n+\n+namespace algorithms::maths::onlinejudge::rational_neighbour\n+{\n+    /** https://onlinejudge.org/external/9/906.pdf, \n+     *  compute c, from d = 1 until a / b < c / d \n+     *  Given a rational a/b and an upper bound n for the distance, the problem consists to find the rational c/d such that:\n+     *  1 a/b < c/d;\n+     *  2 the distance between the rationals a/b and c/d is smaller or equal than n\n+     *  3 the denominator d is as small as possible\n+     * */\n+    void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n+        int numerator, denominator;\n+        double n;\n+        while(std::cin >> )\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729672723066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,30 +13,9 @@\n      * */\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n-        int numerator, denominator;\n+        int nume, denominator;\n         double n;\n         while(std::cin >> )\n     }\n-}\n-#include <cassert>\n-#include <optional>\n-#include <ios\n-\n-namespace algorithms::maths::onlinejudge::rational_neighbour\n-{\n-    /** https://onlinejudge.org/external/9/906.pdf, \n-     *  compute c, from d = 1 until a / b < c / d \n-     *  Given a rational a/b and an upper bound n for the distance, the problem consists to find the rational c/d such that:\n-     *  1 a/b < c/d;\n-     *  2 the distance between the rationals a/b and c/d is smaller or equal than n\n-     *  3 the denominator d is as small as possible\n-     * */\n-    void submit(std::optional<char*> file)\n-    {\n-        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n-        int numerator, denominator;\n-        double n;\n-        while(std::)\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729672730519,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n      * */\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n-        int nume, denominator;\n+        int num, denom;\n         double n;\n-        while(std::cin >> )\n+        while(std::cin >> num)\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729672741771,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,7 +15,10 @@\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int num, denom;\n         double n;\n-        while(std::cin >> num)\n+        while(std::cin >> num >> denom)\n+        {\n+            std::cin >> \n+        }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729672763542,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,15 +10,17 @@\n      *  1 a/b < c/d;\n      *  2 the distance between the rationals a/b and c/d is smaller or equal than n\n      *  3 the denominator d is as small as possible\n      * */\n+    \n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int num, denom;\n         double n;\n         while(std::cin >> num >> denom)\n         {\n-            std::cin >> \n+            std::cin >> n;\n+\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729672771432,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n      *  1 a/b < c/d;\n      *  2 the distance between the rationals a/b and c/d is smaller or equal than n\n      *  3 the denominator d is as small as possible\n      * */\n-    \n+    std::pair<int, int> \n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int num, denom;\n"
+                },
+                {
+                    "date": 1729672776743,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n      *  1 a/b < c/d;\n      *  2 the distance between the rationals a/b and c/d is smaller or equal than n\n      *  3 the denominator d is as small as possible\n      * */\n-    std::pair<int, int> \n+    std::pair<int, int> get\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int num, denom;\n"
+                },
+                {
+                    "date": 1729672783001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n      *  1 a/b < c/d;\n      *  2 the distance between the rationals a/b and c/d is smaller or equal than n\n      *  3 the denominator d is as small as possible\n      * */\n-    std::pair<int, int> get\n+    std::pair<int, int> getNeighbour()\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int num, denom;\n"
+                },
+                {
+                    "date": 1729672789908,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n      *  1 a/b < c/d;\n      *  2 the distance between the rationals a/b and c/d is smaller or equal than n\n      *  3 the denominator d is as small as possible\n      * */\n-    std::pair<int, int> getNeighbour()\n+    std::pair<int, int> getNeighbour(int num, int de)\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int num, denom;\n"
+                },
+                {
+                    "date": 1729672800587,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n      *  1 a/b < c/d;\n      *  2 the distance between the rationals a/b and c/d is smaller or equal than n\n      *  3 the denominator d is as small as possible\n      * */\n-    std::pair<int, int> getNeighbour(int num, int denom, d)\n+    std::pair<int, int> getNeighbour(int num, int denom, double n) { return {1} }\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int num, denom;\n"
+                },
+                {
+                    "date": 1729672838744,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,29 @@\n+#include <cassert>\n+#include <optional>\n+#include <iostream>\n+\n+namespace algorithms::maths::onlinejudge::rational_neighbour\n+{\n+\n+typedef neighbour = std::pair<int, int>;\n+\n+    /** https://onlinejudge.org/external/9/906.pdf, \n+     *  compute c, from d = 1 until a / b < c / d \n+     *  Given a rational a/b and an upper bound n for the distance, the problem consists to find the rational c/d such that:\n+     *  1 a/b < c/d;\n+     *  2 the distance between the rationals a/b and c/d is smaller or equal than n\n+     *  3 the denominator d is as small as possible\n+     * */\n+    std::pair<int, int> getNeighbour(int num, int denom, double n) { return {1, 1}; }\n+    void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n+        int num, denom;\n+        double n;\n+        while(std::cin >> num >> denom)\n+        {\n+            std::cin >> n;\n+            getNeighbour\n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1729671888006,
+            "name": "Commit-0",
+            "content": "#include <cassert>\n#include <optional>\n\nnamespace algorithms::maths::onlinejudge::rational_neighbour\n{\n    /** compute c, from d = 1 until a\nb < c\nd)  */\n    void submit(std::optional<char*> file)\n    {\n        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n        \n    }\n}"
+        }
+    ]
+}

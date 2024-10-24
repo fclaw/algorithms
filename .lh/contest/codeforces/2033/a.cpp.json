@@ -1,0 +1,110 @@
+{
+    "sourceFile": "contest/codeforces/2033/a.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 23,
+            "patches": [
+                {
+                    "date": 1729780946648,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729780957614,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n \n \n-namespace \n\\ No newline at end of file\n+namespace contest::codeforces::\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729780971932,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n \n \n-namespace contest::codeforces::\n\\ No newline at end of file\n+namespace contest::codeforces::20\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729780977094,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,6 @@\n+\n+\n+namespace contest::codeforces::2033::A\n+{\n+    \n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729780993278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,6 @@\n \n \n-namespace contest::codeforces::2033::A\n+namespace contest::codeforces::::A\n {\n-    \n-}\n \n-\n\\ No newline at end of file\n-namespace contest::codeforces::20\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729780999854,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n-namespace contest::codeforces::::A\n+namespace contest::codeforces::contest::A\n {\n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781005439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n \n \n-namespace contest::codeforces::contest::A\n+namespace contest::codeforces::contest2033::A\n {\n-\n+    \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781086827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,9 @@\n \n \n namespace contest::codeforces::contest2033::A\n {\n-    \n+\n+enum \n+\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781091884,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,8 @@\n \n namespace contest::codeforces::contest2033::A\n {\n \n-enum \n+enum Player {  }\n \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781098878,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,8 @@\n \n namespace contest::codeforces::contest2033::A\n {\n \n-enum Player {  }\n+enum Player {  Sakurako, }\n \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781103933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,7 @@\n \n namespace contest::codeforces::contest2033::A\n {\n \n-enum Player {  Sakurako, }\n+enum Player {  Sakurako, Kosuke };\n \n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781109067,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,5 +4,8 @@\n {\n \n enum Player {  Sakurako, Kosuke };\n \n+   \n+\n+\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781114245,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,8 @@\n {\n \n enum Player {  Sakurako, Kosuke };\n \n-   \n+   int main()\n \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781128480,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,19 @@\n {\n \n enum Player {  Sakurako, Kosuke };\n \n-   int main()\n+    void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n+        int num, denom;\n+        double n;\n+        while(std::cin >> num >> denom)\n+        {\n+            std::cin >> n;\n+            neighbour p = getNeighbour(num, denom, n);\n+            printf(\"%d %d\\n\", p.first, p.second);\n+        }\n+    }\n \n \n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781136770,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,8 @@\n+#include <cassert>\n+#include <optional>\n+#include <iostream>\n \n-\n namespace contest::codeforces::contest2033::A\n {\n \n enum Player {  Sakurako, Kosuke };\n"
+                },
+                {
+                    "date": 1729781144401,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,7 +18,5 @@\n             neighbour p = getNeighbour(num, denom, n);\n             printf(\"%d %d\\n\", p.first, p.second);\n         }\n     }\n-\n-\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781149465,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,14 @@\n+#include <cassert>\n+#include <optional>\n+#include <iostream>\n+\n+namespace contest::codeforces::contest2033::A\n+{\n+\n+enum Player {  Sakurako, Kosuke };\n+\n+    void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781160311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,28 +9,9 @@\n \n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n+        int tc;\n+        std::cin >> tc;\n+        \n     }\n-}\n-#include <cassert>\n-#include <optional>\n-#include <iostream>\n-\n-namespace contest::codeforces::contest2033::A\n-{\n-\n-enum Player {  Sakurako, Kosuke };\n-\n-    void submit(std::optional<char*> file)\n-    {\n-        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n-        int num, denom;\n-        double n;\n-        while(std::cin >> num >> denom)\n-        {\n-            std::cin >> n;\n-            neighbour p = getNeighbour(num, denom, n);\n-            printf(\"%d %d\\n\", p.first, p.second);\n-        }\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781168821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,20 @@\n+#include <cassert>\n+#include <optional>\n+#include <iostream>\n+\n+namespace contest::codeforces::contest2033::A\n+{\n+\n+enum Player {  Sakurako, Kosuke };\n+\n+    void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n+        int tc;\n+        std::cin >> tc;\n+        while(--tc >= 0)\n+        {\n+            \n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781173877,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,25 +13,9 @@\n         int tc;\n         std::cin >> tc;\n         while(--tc >= 0)\n         {\n-            \n+            int \n+            std::\n         }\n     }\n-}\n-#include <cassert>\n-#include <optional>\n-#include <iostream>\n-\n-namespace contest::codeforces::contest2033::A\n-{\n-\n-enum Player {  Sakurako, Kosuke };\n-\n-    void submit(std::optional<char*> file)\n-    {\n-        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n-        int tc;\n-        std::cin >> tc;\n-        \n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781187816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n         int tc;\n         std::cin >> tc;\n         while(--tc >= 0)\n         {\n-            int \n+            int boun\n             std::\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781196585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n         int tc;\n         std::cin >> tc;\n         while(--tc >= 0)\n         {\n-            int boun\n-            std::\n+            int boundary;\n+            std::cin >> boun\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781202816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,7 +15,8 @@\n         while(--tc >= 0)\n         {\n             int boundary;\n             std::cin >> boundary;\n+            w\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729781211729,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n         while(--tc >= 0)\n         {\n             int boundary;\n             std::cin >> boundary;\n-            \n+            determineWinner()\n         }\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1729780946648,
+            "name": "Commit-0",
+            "content": "\n\nnamespace "
+        }
+    ]
+}

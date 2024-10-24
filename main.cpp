@@ -206,7 +206,10 @@
 #include "algorithms/maths/onlinejudge/perfection.cpp"
 #include "algorithms/maths/leetcode/reverse.cpp"
 #include "algorithms/maths/onlinejudge/digitCounting.cpp"
+#include "algorithms/maths/onlinejudge/cola.cpp"
 #include "algorithms/graph/lp_dag.cpp"
+
+#include "contest/codeforces/2033/a.cpp"
 
 #include "algorithms/rt.cpp"
 
@@ -217,7 +220,7 @@
 // namespace sub = algorithms::backtrack::framework::subset;
 
 // namespace jobs = algorithms::dp::leetcode::jobs;
-namespace dc = algorithms::maths::onlinejudge::digit_counting;
+namespace cola = algorithms::maths::onlinejudge::cola;
 
 
 
@@ -231,5 +234,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    dc::submit(file);
+    cola::submit(file);
 }

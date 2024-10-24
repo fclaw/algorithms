@@ -207,6 +207,7 @@
 #include "algorithms/maths/leetcode/reverse.cpp"
 #include "algorithms/maths/onlinejudge/digitCounting.cpp"
 #include "algorithms/maths/onlinejudge/cola.cpp"
+#include "algorithms/maths/onlinejudge/cigarettes.cpp"
 #include "algorithms/graph/lp_dag.cpp"
 
 #include "contest/codeforces/2033/a.cpp"
@@ -220,7 +221,7 @@
 // namespace sub = algorithms::backtrack::framework::subset;
 
 // namespace jobs = algorithms::dp::leetcode::jobs;
-namespace cola = algorithms::maths::onlinejudge::cola;
+namespace cigarettes = algorithms::maths::onlinejudge::cigarettes;
 
 
 
@@ -234,5 +235,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    cola::submit(file);
+    cigarettes::submit(file);
 }

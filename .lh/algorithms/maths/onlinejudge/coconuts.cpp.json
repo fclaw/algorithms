@@ -1,0 +1,114 @@
+{
+    "sourceFile": "algorithms/maths/onlinejudge/coconuts.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 24,
+            "patches": [
+                {
+                    "date": 1729877789243,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729877795383,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,8 @@\n \n+\n+namespace \n+\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int c, b;\n"
+                },
+                {
+                    "date": 1729877801066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n \n \n-namespace \n+namespace algorithms::maths::onlinejudge::cigarettes\n \n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n"
+                },
+                {
+                    "date": 1729877807285,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n \n \n-namespace algorithms::maths::onlinejudge::cigarettes\n+namespace algorithms::maths::onlinejudge::coconuts\n \n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n"
+                },
+                {
+                    "date": 1729877813261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n \n \n namespace algorithms::maths::onlinejudge::coconuts\n-\n+{\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int c, b;\n"
+                },
+                {
+                    "date": 1729877822518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,10 @@\n namespace algorithms::maths::onlinejudge::coconuts\n {\n     void submit(std::optional<char*> file)\n     {\n-        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n+        if(file.has_value())\n+          std::freopen(file.value(), \"r\", stdin) != nullptr);\n         int c, b;\n         while(std::cin >> c >> b)\n         {\n             int total = 0;\n"
+                },
+                {
+                    "date": 1729877830540,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,14 +4,15 @@\n {\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value())\n-          std::freopen(file.value(), \"r\", stdin) != nullptr);\n-        int c, b;\n+          std::freopen(file.value(), \"r\", stdin);\n+\n         while(std::cin >> c >> b)\n         {\n             int total = 0;\n             BUTTS = b;\n             maxCigarettes(c, total);\n             printf(\"%d\\n\", total);\n\\ No newline at end of file\n         }\n-    }\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729877858196,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,10 @@\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value())\n           std::freopen(file.value(), \"r\", stdin);\n-\n+        \n+        int \n         while(std::cin >> c >> b)\n         {\n             int total = 0;\n             BUTTS = b;\n"
+                },
+                {
+                    "date": 1729877865227,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n     {\n         if(file.has_value())\n           std::freopen(file.value(), \"r\", stdin);\n         \n-        int \n-        while(std::cin >> c >> b)\n+        int coconuts;\n+        while(std::cin >> coconuts)\n         {\n             int total = 0;\n             BUTTS = b;\n             maxCigarettes(c, total);\n"
+                },
+                {
+                    "date": 1729877870769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n         \n         int coconuts;\n         while(std::cin >> coconuts)\n         {\n+            if(coconuts == )\n             int total = 0;\n             BUTTS = b;\n             maxCigarettes(c, total);\n             printf(\"%d\\n\", total);\n"
+                },
+                {
+                    "date": 1729877876794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n         \n         int coconuts;\n         while(std::cin >> coconuts)\n         {\n-            if(coconuts == )\n+            if(coconuts == -1) break;\n             int total = 0;\n             BUTTS = b;\n             maxCigarettes(c, total);\n             printf(\"%d\\n\", total);\n"
+                },
+                {
+                    "date": 1729877882577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,11 +10,7 @@\n         int coconuts;\n         while(std::cin >> coconuts)\n         {\n             if(coconuts == -1) break;\n-            int total = 0;\n-            BUTTS = b;\n-            maxCigarettes(c, total);\n-            printf(\"%d\\n\", total);\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729921963083,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,16 @@\n+\n+\n+namespace algorithms::maths::onlinejudge::coconuts\n+{\n+    void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value())\n+          std::freopen(file.value(), \"r\", stdin);\n+        \n+        int coconuts;\n+        while(std::cin >> coconuts)\n+        {\n+            if(coconuts == -1) break;\n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729921980869,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,24 +1,10 @@\n \n \n namespace algorithms::maths::onlinejudge::coconuts\n {\n-    void submit(std::optional<char*> file)\n-    {\n-        if(file.has_value())\n-          std::freopen(file.value(), \"r\", stdin);\n-        \n-        int coconuts;\n-        while(std::cin >> coconuts)\n-        {\n-            if(coconuts == -1) break;\n-        }\n-    }\n-}\n+    /** https://onlinejudge.org/external/6/616.pdf */\n \n-\n-namespace algorithms::maths::onlinejudge::coconuts\n-{\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value())\n           std::freopen(file.value(), \"r\", stdin);\n"
+                },
+                {
+                    "date": 1729922019287,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n \n \n namespace algorithms::maths::onlinejudge::coconuts\n {\n-    /** https://onlinejudge.org/external/6/616.pdf */\n+    /** https://onlinejudge.org/external/6/616.pdf, brute force up to √n, get pattern */\n \n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value())\n"
+                },
+                {
+                    "date": 1729922045223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace algorithms::maths::onlinejudge::coconuts\n {\n     /** https://onlinejudge.org/external/6/616.pdf, brute force up to √n, get pattern */\n+    max\n \n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value())\n"
+                },
+                {
+                    "date": 1729922108432,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::maths::onlinejudge::coconuts\n {\n     /** https://onlinejudge.org/external/6/616.pdf, brute force up to √n, get pattern */\n-    max\n+    maxcastaway\n \n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value())\n"
+                },
+                {
+                    "date": 1729922118239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n namespace algorithms::maths::onlinejudge::coconuts\n {\n     /** https://onlinejudge.org/external/6/616.pdf, brute force up to √n, get pattern */\n-    maxcastaway\n+    maxCastaways(int coc)\n \n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value())\n"
+                },
+                {
+                    "date": 1729922127413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,19 @@\n+\n+\n+namespace algorithms::maths::onlinejudge::coconuts\n+{\n+    /** https://onlinejudge.org/external/6/616.pdf, brute force up to √n, get pattern */\n+    int maxCastaways(int coconuts)\n+\n+    void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value())\n+          std::freopen(file.value(), \"r\", stdin);\n+        \n+        int coconuts;\n+        while(std::cin >> coconuts)\n+        {\n+            if(coconuts == -1) break;\n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729922135184,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,20 @@\n+\n+\n+namespace algorithms::maths::onlinejudge::coconuts\n+{\n+    /** https://onlinejudge.org/external/6/616.pdf, brute force up to √n, get pattern */\n+    int maxCastaways(int coconuts) { return 1; }\n+\n+    void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value())\n+          std::freopen(file.value(), \"r\", stdin);\n+        \n+        int coconuts;\n+        while(std::cin >> coconuts)\n+        {\n+            if(coconuts == -1) break;\n+            \n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729922214338,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,43 +16,5 @@\n             if(coconuts == -1) break;\n             \n         }\n     }\n-}\n-\n-\n-namespace algorithms::maths::onlinejudge::coconuts\n-{\n-    /** https://onlinejudge.org/external/6/616.pdf, brute force up to √n, get pattern */\n-    int maxCastaways(int coconuts)\n-\n-    void submit(std::optional<char*> file)\n-    {\n-        if(file.has_value())\n-          std::freopen(file.value(), \"r\", stdin);\n-        \n-        int coconuts;\n-        while(std::cin >> coconuts)\n-        {\n-            if(coconuts == -1) break;\n-        }\n-    }\n-}\n-\n-\n-namespace algorithms::maths::onlinejudge::coconuts\n-{\n-    /** https://onlinejudge.org/external/6/616.pdf, brute force up to √n, get pattern */\n-    maxCastaways(int coc)\n-\n-    void submit(std::optional<char*> file)\n-    {\n-        if(file.has_value())\n-          std::freopen(file.value(), \"r\", stdin);\n-        \n-        int coconuts;\n-        while(std::cin >> coconuts)\n-        {\n-            if(coconuts == -1) break;\n-        }\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729922225735,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,8 @@\n         int coconuts;\n         while(std::cin >> coconuts)\n         {\n             if(coconuts == -1) break;\n-            \n+            // 25 coconuts, 3 people and 1 monkey\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729922235310,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,10 @@\n         int coconuts;\n         while(std::cin >> coconuts)\n         {\n             if(coconuts == -1) break;\n+\n             // 25 coconuts, 3 people and 1 monkey\n+            printf(\"\")\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729922247640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n         {\n             if(coconuts == -1) break;\n \n             // 25 coconuts, 3 people and 1 monkey\n-            printf(\"%d \")\n+            printf(\"25 coconuts, 3 people and 1 monkey\")\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729922265361,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,9 @@\n         int coconuts;\n         while(std::cin >> coconuts)\n         {\n             if(coconuts == -1) break;\n+            \n             printf(\"%d coconuts, %d people and 1 monkey\")\n         }\n     }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1729877789243,
+            "name": "Commit-0",
+            "content": "\n    void submit(std::optional<char*> file)\n    {\n        if(file.has_value()) assert(std::freopen(file.value(), \"r\", stdin) != nullptr);\n        int c, b;\n        while(std::cin >> c >> b)\n        {\n            int total = 0;\n            BUTTS = b;\n            maxCigarettes(c, total);\n            printf(\"%d\\n\", total);\n        }\n    }"
+        }
+    ]
+}

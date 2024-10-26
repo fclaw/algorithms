@@ -208,6 +208,8 @@
 #include "algorithms/maths/onlinejudge/digitCounting.cpp"
 #include "algorithms/maths/onlinejudge/cola.cpp"
 #include "algorithms/maths/onlinejudge/cigarettes.cpp"
+#include "algorithms/maths/onlinejudge/Kproblem.cpp"
+#include "algorithms/maths/onlinejudge/coconuts.cpp"
 #include "algorithms/graph/lp_dag.cpp"
 
 #include "contest/codeforces/2033/a.cpp"
@@ -221,7 +223,7 @@
 // namespace sub = algorithms::backtrack::framework::subset;
 
 // namespace jobs = algorithms::dp::leetcode::jobs;
-namespace cigarettes = algorithms::maths::onlinejudge::cigarettes;
+namespace coconuts = algorithms::maths::onlinejudge::coconuts;
 
 
 
@@ -235,5 +237,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    cigarettes::submit(file);
+    coconuts::submit(file);
 }

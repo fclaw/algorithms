@@ -1,0 +1,90 @@
+{
+    "sourceFile": "algorithms/maths/onlinejudge/Kproblem.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 18,
+            "patches": [
+                {
+                    "date": 1729855030769,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1729855038869,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n #include <optional>\n #include <iostream>\n \n-namespace algorithms::maths::onlinejudge::steps\n+namespace algorithms::maths::onlinejudge::k_problem\n {\n     /** https://onlinejudge.org/external/8/846.pdf, \n      * uses the sum of arithmetic progression formula,\n      * What is the minimum number of steps in order to get from x to y? \n"
+                },
+                {
+                    "date": 1729855060958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,14 +2,9 @@\n #include <iostream>\n \n namespace algorithms::maths::onlinejudge::k_problem\n {\n-    /** https://onlinejudge.org/external/8/846.pdf, \n-     * uses the sum of arithmetic progression formula,\n-     * What is the minimum number of steps in order to get from x to y? \n-     * The length of the first and the last step must be 1.\n-     * The length of a step must be nonnegative and can be by one bigger than, equal to, or by one smaller \n-     * than the length of the previous step  */\n+    /** https://onlinejudge.org/external/8/846.pdf */\n     int minSteps(int s, int e) { return 0; }\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) \n"
+                },
+                {
+                    "date": 1729855072072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,10 @@\n #include <iostream>\n \n namespace algorithms::maths::onlinejudge::k_problem\n {\n-    /** https://onlinejudge.org/external/8/846.pdf */\n-    int minSteps(int s, int e) { return 0; }\n+    /** https://onlinejudge.org/external/100/10025.pdf */\n+    int min(int s, int e) { return 0; }\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) \n           std::freopen(file.value(), \"r\", stdin);\n"
+                },
+                {
+                    "date": 1729855091288,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n namespace algorithms::maths::onlinejudge::k_problem\n {\n     /** https://onlinejudge.org/external/100/10025.pdf */\n-    int min(int s, int e) { return 0; }\n+    int minN(int s, int e) { return 0; }\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) \n           std::freopen(file.value(), \"r\", stdin);\n"
+                },
+                {
+                    "date": 1729855097094,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n namespace algorithms::maths::onlinejudge::k_problem\n {\n     /** https://onlinejudge.org/external/100/10025.pdf */\n-    int minN(int s, int e) { return 0; }\n+    int minN() { return 0; }\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) \n           std::freopen(file.value(), \"r\", stdin);\n"
+                },
+                {
+                    "date": 1729855108331,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n namespace algorithms::maths::onlinejudge::k_problem\n {\n     /** https://onlinejudge.org/external/100/10025.pdf */\n-    int minN() { return 0; }\n+    int minN(int n, int target) { return 0; }\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) \n           std::freopen(file.value(), \"r\", stdin);\n"
+                },
+                {
+                    "date": 1729855114532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n namespace algorithms::maths::onlinejudge::k_problem\n {\n     /** https://onlinejudge.org/external/100/10025.pdf */\n-    int minN(int n, int target) { return 0; }\n+    int minN(int n, int target, int& sum) { return 0; }\n     void submit(std::optional<char*> file)\n     {\n         if(file.has_value()) \n           std::freopen(file.value(), \"r\", stdin);\n"
+                },
+                {
+                    "date": 1729855140639,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n         if(file.has_value()) \n           std::freopen(file.value(), \"r\", stdin);\n         int tc;\n         std::cin >> tc;\n+        \n         while(--tc >= 0)\n         {\n             int s, e;\n             std::cin >> e >> e;\n"
+                },
+                {
+                    "date": 1729855150636,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,8 @@\n         if(file.has_value()) \n           std::freopen(file.value(), \"r\", stdin);\n         int tc;\n         std::cin >> tc;\n-        \n         while(--tc >= 0)\n         {\n             int s, e;\n             std::cin >> e >> e;\n"
+                },
+                {
+                    "date": 1729855253920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,22 @@\n+#include <optional>\n+#include <iostream>\n+\n+namespace algorithms::maths::onlinejudge::k_problem\n+{\n+    /** https://onlinejudge.org/external/100/10025.pdf */\n+    int minN(int n, int target, int& sum) { return 0; }\n+    void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value()) \n+          std::freopen(file.value(), \"r\", stdin);\n+        int tc;\n+        std::cin >> tc;\n+        std::cin.\n+        while(--tc >= 0)\n+        {\n+            int s, e;\n+            std::cin >> e >> e;\n+            std::cout << minSteps(s, e) << std::endl;\n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729855259512,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,34 +10,13 @@\n         if(file.has_value()) \n           std::freopen(file.value(), \"r\", stdin);\n         int tc;\n         std::cin >> tc;\n-        std::cin.\n+        std::cin.ignore();\n         while(--tc >= 0)\n         {\n             int s, e;\n             std::cin >> e >> e;\n             std::cout << minSteps(s, e) << std::endl;\n         }\n     }\n-}\n-#include <optional>\n-#include <iostream>\n-\n-namespace algorithms::maths::onlinejudge::k_problem\n-{\n-    /** https://onlinejudge.org/external/100/10025.pdf */\n-    int minN(int n, int target, int& sum) { return 0; }\n-    void submit(std::optional<char*> file)\n-    {\n-        if(file.has_value()) \n-          std::freopen(file.value(), \"r\", stdin);\n-        int tc;\n-        std::cin >> tc;\n-        while(--tc >= 0)\n-        {\n-            int s, e;\n-            std::cin >> e >> e;\n-            std::cout << minSteps(s, e) << std::endl;\n-        }\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729855279223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n         std::cin >> tc;\n         std::cin.ignore();\n         while(--tc >= 0)\n         {\n-            int s, e;\n+            int k;\n             std::cin >> e >> e;\n             std::cout << minSteps(s, e) << std::endl;\n         }\n     }\n"
+                },
+                {
+                    "date": 1729855284248,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         std::cin.ignore();\n         while(--tc >= 0)\n         {\n             int k;\n-            std::cin >> e >> e;\n+            std::cin >> k;\n             std::cout << minSteps(s, e) << std::endl;\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729855291238,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,7 +16,8 @@\n         {\n             int k;\n             std::cin >> k;\n             std::cout << minSteps(s, e) << std::endl;\n+            std::cin.ignore();\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729855302936,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n         while(--tc >= 0)\n         {\n             int k;\n             std::cin >> k;\n-            std::cout << minSteps(s, e) << std::endl;\n+            std::cout << minN(k, e) << std::endl;\n             std::cin.ignore();\n         }\n     }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1729855308895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n         std::cin >> tc;\n         std::cin.ignore();\n         while(--tc >= 0)\n         {\n-            int k;\n+            int k, int ;\n             std::cin >> k;\n             std::cout << minN(k, e) << std::endl;\n             std::cin.ignore();\n         }\n"
+                },
+                {
+                    "date": 1729855319796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n         std::cin >> tc;\n         std::cin.ignore();\n         while(--tc >= 0)\n         {\n-            int k, int n;\n+            int k, ;\n             std::cin >> k;\n             std::cout << minN(k, e) << std::endl;\n             std::cin.ignore();\n         }\n"
+                },
+                {
+                    "date": 1729855392359,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,25 @@\n+#include <optional>\n+#include <iostream>\n+\n+namespace algorithms::maths::onlinejudge::k_problem\n+{\n+    /** https://onlinejudge.org/external/100/10025.pdf */\n+    int n;\n+    void minN(int n, int target, int& sum) { return 0; }\n+    void submit(std::optional<char*> file)\n+    {\n+        if(file.has_value()) \n+          std::freopen(file.value(), \"r\", stdin);\n+        int tc;\n+        std::cin >> tc;\n+        std::cin.ignore();\n+        while(--tc >= 0)\n+        {\n+            int k;\n+            std::cin >> k;\n+            minN(k, e);\n+            std::cout << n << std::endl;\n+            std::cin.ignore();\n+        }\n+    }\n+}\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1729855030769,
+            "name": "Commit-0",
+            "content": "#include <optional>\n#include <iostream>\n\nnamespace algorithms::maths::onlinejudge::steps\n{\n    /** https://onlinejudge.org/external/8/846.pdf, \n     * uses the sum of arithmetic progression formula,\n     * What is the minimum number of steps in order to get from x to y? \n     * The length of the first and the last step must be 1.\n     * The length of a step must be nonnegative and can be by one bigger than, equal to, or by one smaller \n     * than the length of the previous step  */\n    int minSteps(int s, int e) { return 0; }\n    void submit(std::optional<char*> file)\n    {\n        if(file.has_value()) \n          std::freopen(file.value(), \"r\", stdin);\n        int tc;\n        std::cin >> tc;\n        while(--tc >= 0)\n        {\n            int s, e;\n            std::cin >> e >> e;\n            std::cout << minSteps(s, e) << std::endl;\n        }\n    }\n}"
+        }
+    ]
+}

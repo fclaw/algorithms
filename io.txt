@@ -1,53 +1,22 @@
-NO
-divisa
-NE
-SO
-SO
-NO
-NE
-SO
-SO
-NO
-SO
-SO
-NE
-SO
-SO
-SO
-NO
-SO
-SE
-SO
-NO
-SO
-SO
-SO
-SO
-NO
-NO
-NO
-NO
-NO
-NO
-SE
-NO
-SO
-NE
-SE
-SO
-NE
-SE
-SE
-NE
-NE
-SE
-NO
-NE
-NE
-NE
-NO
-NO
-NE
-NE
-NO
-NE
+
+
+--- ... ---
+Case 1: 4560
+Case 2: 6698
+Case 3: 7304
+Case 4: 6191
+Case 5: 4192
+Case 6: 6170
+Case 7: 7724
+Case 8: 10000
+Case 9: 4979
+Case 10: 8715
+Case 11: 2036
+Case 12: 4975
+Case 13: 3705
+Case 14: 1530
+Case 15: 4025
+Case 16: 2122
+Case 17: 7109
+Case 18: 1000
+Case 19: 5887

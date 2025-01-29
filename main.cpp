@@ -167,16 +167,16 @@
 #include "algorithms/codeforces/legs.cpp"
 #include "algorithms/codeforces/youngExplorers.cpp"
 // online judge
-#include "algorithms/onlinejudge/dp/wedding.cpp"
-#include "algorithms/onlinejudge/dp/sdi.cpp"
-#include "algorithms/onlinejudge/dp/howDoYouAdd.cpp"
-#include "algorithms/onlinejudge/dp/chestOfDrawers.cpp"
-#include "algorithms/onlinejudge/dp/luggage.cpp"
-#include "algorithms/onlinejudge/graph/dominator.cpp"
-#include "algorithms/onlinejudge/graph/callingCircles.cpp"
-#include "algorithms/onlinejudge/dp/cuttingSticks.cpp"
-#include "algorithms/onlinejudge/graph/wetlandsOfFlorida.cpp"
-#include "algorithms/onlinejudge/graph/comeGo.cpp"
+// // #include "algorithms/onlinejudge/dp/wedding.cpp"
+// #include "algorithms/onlinejudge/dp/sdi.cpp"
+// #include "algorithms/onlinejudge/dp/howDoYouAdd.cpp"
+// #include "algorithms/onlinejudge/dp/chestOfDrawers.cpp"
+// #include "algorithms/onlinejudge/dp/luggage.cpp"
+// #include "algorithms/onlinejudge/graph/dominator.cpp"
+// #include "algorithms/onlinejudge/graph/callingCircles.cpp"
+// #include "algorithms/onlinejudge/dp/cuttingSticks.cpp"
+// #include "algorithms/onlinejudge/graph/wetlandsOfFlorida.cpp"
+// #include "algorithms/onlinejudge/graph/comeGo.cpp"
 #include "algorithms/graph/onlinejudge/softwareAllocation.cpp"
 #include "algorithms/graph/onlinejudge/internetBandwidth.cpp"
 #include "algorithms/graph/onlinejudge/countWays.cpp"
@@ -211,6 +211,8 @@
 #include "algorithms/maths/onlinejudge/Kproblem.cpp"
 #include "algorithms/maths/onlinejudge/coconuts.cpp"
 #include "algorithms/graph/lp_dag.cpp"
+#include "algorithms/onlinejudge/easy/relationalOperators.cpp"
+#include "algorithms/onlinejudge/easy/divisionNlogonia.cpp"
 
 #include "contest/codeforces/2033/a.cpp"
 
@@ -223,7 +225,7 @@
 // namespace sub = algorithms::backtrack::framework::subset;
 
 // namespace jobs = algorithms::dp::leetcode::jobs;
-namespace coconuts = algorithms::maths::onlinejudge::coconuts;
+// namespace coconuts = algorithms::maths::onlinejudge::coconuts;
 
 
 
@@ -237,5 +239,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    coconuts::submit(file);
+    algorithms::onlinejudge::easy::division_nlogonia::submit(file);
 }

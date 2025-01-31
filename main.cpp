@@ -215,6 +215,7 @@
 #include "algorithms/onlinejudge/easy/divisionNlogonia.cpp"
 #include "algorithms/onlinejudge/easy/costCutting.cpp"
 #include "algorithms/onlinejudge/easy/eventPlanning.cpp"
+#include "algorithms/onlinejudge/medium/snail.cpp"
 
 #include "contest/codeforces/2033/a.cpp"
 
@@ -241,5 +242,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::easy::event_planning::submit(file);
+    algorithms::onlinejudge::easy::snail::submit(file);
 }

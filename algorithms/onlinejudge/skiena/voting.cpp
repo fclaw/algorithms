@@ -8,8 +8,10 @@
 
 
 typedef std::vector<int> vi;
+typedef std::vector<bool> vb;
 typedef std::vector<vi> vvi;
 typedef std::vector<std::string> vs;
+#define loop(x, s, n) for(int x = s; x < n; x++)
 
 namespace algorithms::onlinejudge::skiena::voting
 {
@@ -22,22 +24,22 @@ namespace algorithms::onlinejudge::skiena::voting
      * ballot is counted in favour of its ranked non-eliminated candidate] until one candidate receives more
      * than 50% of the vote or until all candidates are tied */
     const int inf = 5 * (int)1e+05;
-    const size_t N = 1000;
-    std::pair<int, int> getBoundaries(const vi& xs, vi& eliminated)
+    std::pair<int, int> getBoundaries(const vi& xs, const vb& eliminated)
     {
         int j;
         for(int i = 0; i < xs.size(); i++)
-          if(eliminated[i] == -1) { j = i; break; }
+          if(!eliminated[i]) { j = i; break; }
 
         int max_idx = j;
-        int min_idx = j;  
+        int min_idx = j;
 
         for(int i = 0; i < xs.size(); i++)
         {
             if(i == j) continue;
             if(xs[i] > xs[max_idx]) max_idx = i;
-            if(xs[i] < xs[min_idx] && eliminated[i] == -1) 
-            { min_idx = i; eliminated[i] = 0; }
+            if(xs[i] < xs[min_idx] && 
+               !eliminated[i]) 
+              min_idx = i;
         }
         return {max_idx, min_idx};
     }
@@ -51,8 +53,37 @@ namespace algorithms::onlinejudge::skiena::voting
     {
         vs ans;
         bool finished = false;
+        vb eliminated = vb(candidates.size(), false);
         while(!finished)
         {
+            vi counts = vi(candidates.size(), 0);
+  
+            loop(i, 0, ballots.size())
+            {
+                int j = 0;
+                while(j < ballots[i].size() && 
+                      eliminated[ballots[i][j]]) ++j;
+                if (j < ballots[i].size()) 
+                  ++counts[ballots[i][j]];
+            }
+
+            auto p = getBoundaries(counts, eliminated);
+
+            if(counts[p.first] >= threshold)
+            { ans.push_back(candidates[p.first]); finished = true; }
+            else if(counts[p.first] == counts[p.second])
+            {
+                loop(i, 0, candidates.size())
+                  if(counts[i] == counts[p.first])
+                    ans.push_back(candidates[i]);
+                finished = true;
+            } 
+            else 
+            {
+                loop(i, 0, candidates.size())
+                  if(counts[i] == counts[p.second])
+                    eliminated[i] = true;
+            }
         }
         return ans;
     }
@@ -75,7 +106,7 @@ namespace algorithms::onlinejudge::skiena::voting
                 candidates[j] = c;
             }
 
-            vvi ballots = vvi(N, vi(n));
+            vvi ballots;
             
             std::string line;
             int threshold = 0;
@@ -91,17 +122,13 @@ namespace algorithms::onlinejudge::skiena::voting
                ++threshold;
             }
           
-            ballots.resize(threshold + 1);
 
             threshold = threshold / 2 + 1;
             vs ans = vote(candidates, ballots, threshold);
-            for(int i = 0; i < ans.size(); i++)
-            {
-                std::cout << ans[i];
-                if(i < ans.size() - 1)
-                  std::cout << std::endl;
-            }
-            if(tc) std::cout << std::endl;
+            for (int i = 0; i < ans.size(); i++)
+              std::cout << ans[i] << std::endl;  // Ensure each name is on a new line
+
+            if (tc) std::cout << std::endl;  // Single newline after each test case (not double)
         }
     }
 }

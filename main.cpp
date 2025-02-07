@@ -219,6 +219,10 @@
 #include "algorithms/onlinejudge/medium/requestforProposal.cpp"
 #include "algorithms/onlinejudge/medium/brainfuck.cpp"
 #include "algorithms/onlinejudge/skiena/trip.cpp"
+#include "algorithms/onlinejudge/skiena/voting.cpp"
+#include "algorithms/onlinejudge/skiena/primary.cpp"
+#include "algorithms/adhoc/card.cpp"
+
 
 #include "contest/codeforces/2033/a.cpp"
 
@@ -245,5 +249,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::skiena::trip::submit(file);
+    algorithms::onlinejudge::skiena::primary::submit(file);
 }

@@ -221,6 +221,8 @@
 #include "algorithms/onlinejudge/skiena/trip.cpp"
 #include "algorithms/onlinejudge/skiena/voting.cpp"
 #include "algorithms/onlinejudge/skiena/primary.cpp"
+#include "algorithms/onlinejudge/bits/grayCode.cpp"
+#include "algorithms/onlinejudge/arrays/jollyJumpers.cpp"
 #include "algorithms/adhoc/card.cpp"
 
 
@@ -249,6 +251,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::skiena::voting::submit(file);
-
+    algorithms::onlinejudge::arrays::jolly_jumpers::submit(file);
 }

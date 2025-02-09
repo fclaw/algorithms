@@ -20,7 +20,9 @@ namespace algorithms::onlinejudge::bits::gray_code
         scanf("%d", &tc);
         while(tc--)
         {
-            
+            int n, k;
+            std::cin >> n >> k;
+            std::cout << (k ^ (k >> 1)) << std::endl;
         }
     }
 }

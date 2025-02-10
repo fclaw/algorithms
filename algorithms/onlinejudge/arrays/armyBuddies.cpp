@@ -30,12 +30,8 @@ namespace algorithms::onlinejudge::arrays::army_buddies
             vi left_neighbours = vi(S);
             vi right_neighbours = vi(S);
 
-            // left neighbours
             for(int i = 0; i < S; i++)
-              left_neighbours[i] = i - 1;
-
-            // right neighbours
-            for(int i = 0; i < S; i++)
+              left_neighbours[i] = i - 1,
               right_neighbours[i] = i + 1 < S ? i + 1 : -1;
 
             while(R--)

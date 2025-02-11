@@ -228,6 +228,7 @@
 #include "algorithms/onlinejudge/arrays/newspaper.cpp"
 #include "algorithms/onlinejudge/arrays/armyBuddies.cpp"
 #include "algorithms/onlinejudge/arrays/alaska.cpp"
+#include "algorithms/onlinejudge/arrays/rotatedSquares.cpp"
 #include "algorithms/adhoc/card.cpp"
 
 
@@ -256,5 +257,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::skiena::light::submit(file);
+    algorithms::onlinejudge::arrays::rotated_squares::submit(file);
 }

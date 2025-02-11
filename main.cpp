@@ -220,6 +220,7 @@
 #include "algorithms/onlinejudge/medium/brainfuck.cpp"
 #include "algorithms/onlinejudge/skiena/trip.cpp"
 #include "algorithms/onlinejudge/skiena/voting.cpp"
+#include "algorithms/onlinejudge/skiena/light.cpp"
 #include "algorithms/onlinejudge/skiena/primary.cpp"
 #include "algorithms/onlinejudge/bits/grayCode.cpp"
 #include "algorithms/onlinejudge/arrays/jollyJumpers.cpp"
@@ -255,5 +256,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::arrays::alaska::submit(file);
+    algorithms::onlinejudge::skiena::light::submit(file);
 }

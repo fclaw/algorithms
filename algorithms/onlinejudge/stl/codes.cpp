@@ -4,19 +4,28 @@
 #include <cstdio>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 
 
-const int R = 4;
-typedef std::vector<int> vi;
-typedef std::vector<vi> vvi;
-#define loop(x, s, n) for(int x = s; x < n; x++)
+const std::string Terminate = "#";
 
-namespace algorithms::onlinejudge::arrays::rotated_squares
+namespace algorithms::onlinejudge::stl::codes
 {
-    // https://onlinejudge.org/external/115/11581.pdf, simulate the process
+    // https://onlinejudge.org/external/1/146.pdf, use next permutation
+    bool getNextCode(std::string& code) 
+    { return std::next_permutation(code.begin(), code.end()); }
     void submit(std::optional<char*> file)
     {
-        if(file.has_value()) 
+        if(file.has_value())
           assert(std::freopen(file.value(), "r", stdin) != nullptr);
+        
+        std::string code;
+        while(true)
+        {
+            std::cin >> code;
+            if(code == Terminate) break;
+            bool ok = getNextCode(code);
+            std::cout << (ok ? code : "No Successor") << std::endl;
+        }
     }
 }

@@ -229,10 +229,12 @@
 #include "algorithms/onlinejudge/arrays/armyBuddies.cpp"
 #include "algorithms/onlinejudge/arrays/alaska.cpp"
 #include "algorithms/onlinejudge/arrays/rotatedSquares.cpp"
+#include "algorithms/onlinejudge/arrays/gridSuccessors.cpp"
 #include "algorithms/onlinejudge/arrays/spiralTap.cpp"
 #include "algorithms/onlinejudge/arrays/bricks.cpp"
 #include "algorithms/onlinejudge/stl/codes.cpp"
 #include "algorithms/adhoc/card.cpp"
+#include "algorithms/onlinejudge/skiena/cryptKicker.cpp"
 
 
 #include "contest/codeforces/2033/a.cpp"
@@ -260,5 +262,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::stl::codes::submit(file);
+    algorithms::onlinejudge::arrays::grid_successors::submit(file);
 }

@@ -223,6 +223,7 @@
 #include "algorithms/onlinejudge/skiena/light.cpp"
 #include "algorithms/onlinejudge/skiena/primary.cpp"
 #include "algorithms/onlinejudge/bits/grayCode.cpp"
+#include "algorithms/onlinejudge/bits/endians.cpp"
 #include "algorithms/onlinejudge/arrays/jollyJumpers.cpp"
 #include "algorithms/onlinejudge/arrays/gasStations.cpp"
 #include "algorithms/onlinejudge/arrays/newspaper.cpp"
@@ -250,5 +251,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::stl::median::submit(file);
+    algorithms::onlinejudge::bits::endians::submit(file);
 }

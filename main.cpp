@@ -233,23 +233,11 @@
 #include "algorithms/onlinejudge/arrays/spiralTap.cpp"
 #include "algorithms/onlinejudge/arrays/bricks.cpp"
 #include "algorithms/onlinejudge/stl/codes.cpp"
+#include "algorithms/onlinejudge/stl/median.cpp"
 #include "algorithms/adhoc/card.cpp"
 #include "algorithms/onlinejudge/skiena/cryptKicker.cpp"
 
-
-#include "contest/codeforces/2033/a.cpp"
-
 #include "algorithms/rt.cpp"
-
-
-// namespace iq = algorithms::graph::onlinejudge::injured_queen;
-// namespace river = algorithms::maths::onlinejudge::cross_river;
-// namespace food = algorithms::graph::onlinejudge::food;
-// namespace sub = algorithms::backtrack::framework::subset;
-
-// namespace jobs = algorithms::dp::leetcode::jobs;
-// namespace coconuts = algorithms::maths::onlinejudge::coconuts;
-
 
 
 int main(int argc, char* argv[])
@@ -262,5 +250,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::arrays::grid_successors::submit(file);
+    algorithms::onlinejudge::stl::median::submit(file);
 }

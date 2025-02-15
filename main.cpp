@@ -224,6 +224,7 @@
 #include "algorithms/onlinejudge/skiena/primary.cpp"
 #include "algorithms/onlinejudge/bits/grayCode.cpp"
 #include "algorithms/onlinejudge/bits/endians.cpp"
+#include "algorithms/onlinejudge/bits/dateBugs.cpp"
 #include "algorithms/onlinejudge/arrays/jollyJumpers.cpp"
 #include "algorithms/onlinejudge/arrays/gasStations.cpp"
 #include "algorithms/onlinejudge/arrays/newspaper.cpp"
@@ -237,6 +238,7 @@
 #include "algorithms/onlinejudge/stl/median.cpp"
 #include "algorithms/adhoc/card.cpp"
 #include "algorithms/onlinejudge/skiena/cryptKicker.cpp"
+#include <bits/stdc++.h>
 
 #include "algorithms/rt.cpp"
 
@@ -251,5 +253,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::bits::endians::submit(file);
+    algorithms::onlinejudge::bits::date_bugs::submit(file);
 }

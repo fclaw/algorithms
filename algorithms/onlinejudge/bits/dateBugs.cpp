@@ -60,7 +60,7 @@ typedef std::vector<std::bitset<MAX_YEAR>> vb;
 
             std::bitset<MAX_YEAR> tmp = machines_years[0];
            
-            for(int i = 1; i < machines_years.size(); i++)
+            for(int i = 1; i < machines_years.size() && !tmp.none(); i++)
               tmp &= machines_years[i];
             
             actual_year = tmp._Find_first();

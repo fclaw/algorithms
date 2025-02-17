@@ -46,7 +46,7 @@ namespace algorithms::onlinejudge::bits::jollybee
                     { tmp.set(idx, false); }
                     idx++;
                 }
-                k /= 2;
+                k >>= 1;
                 participants = tmp;
             }
             std::cout << pushover << std::endl;

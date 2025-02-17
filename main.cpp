@@ -226,6 +226,7 @@
 #include "algorithms/onlinejudge/bits/endians.cpp"
 #include "algorithms/onlinejudge/bits/dateBugs.cpp"
 #include "algorithms/onlinejudge/bits/jollybee.cpp"
+#include "algorithms/onlinejudge/bits/potentCorner.cpp"
 #include "algorithms/onlinejudge/arrays/jollyJumpers.cpp"
 #include "algorithms/onlinejudge/arrays/gasStations.cpp"
 #include "algorithms/onlinejudge/arrays/newspaper.cpp"
@@ -254,5 +255,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::bits::jollybee::submit(file);
+    algorithms::onlinejudge::bits::potent_corner::submit(file);
 }

@@ -233,6 +233,7 @@
 #include "algorithms/onlinejudge/stack/anagrams.cpp"
 #include "algorithms/onlinejudge/stack/containers.cpp"
 #include "algorithms/onlinejudge/stack/uniqueFactorization.cpp"
+#include "algorithms/onlinejudge/queue/ferryLoading3.cpp"
 #include "algorithms/onlinejudge/arrays/jollyJumpers.cpp"
 #include "algorithms/onlinejudge/arrays/gasStations.cpp"
 #include "algorithms/onlinejudge/arrays/newspaper.cpp"
@@ -261,5 +262,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::stack::factorization::submit(file);
+    algorithms::onlinejudge::queue::ferry_3::submit(file);
 }

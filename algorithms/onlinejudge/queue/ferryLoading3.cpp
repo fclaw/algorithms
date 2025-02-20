@@ -57,12 +57,25 @@ namespace algorithms::onlinejudge::queue::ferry_3
                  * 3. Avoid crossing unnecessarily
                  * If both banks have cars at the same time, prefer to stay and load from the current bank.
                  * If both banks have future arrivals, pick the earlier one and go there.
+                 * adjust time when the ferry are obliged to wait car
                  */
-                int tm = std::min(
-                    leftBank.empty() ? INT_MAX : leftBank.front().first,
-                    rightBank.empty() ? INT_MAX : rightBank.front().first);
-                if(start < tm) start = tm;
-                 
+                int leftTm = leftBank.empty() ? INT_MAX : leftBank.front().first;
+                int rightTm = rightBank.empty() ? INT_MAX : rightBank.front().first;
+                int nextArrival = std::min(leftTm, rightTm);
+                if(start < nextArrival) { start = nextArrival; }
+                else if((start >= leftTm && bank == LEFT) || 
+                        (start >= rightTm && bank == RIGHT));
+                else if(leftTm > rightTm)
+                {
+                    if(start < rightTm) start = rightTm; 
+                    if(bank == LEFT) { start += cross_time; bank = RIGHT; } 
+                }
+                else if(rightTm > leftTm) 
+                { 
+                    if(start < leftTm) start = leftTm; 
+                    if(bank == RIGHT) { start += cross_time; bank = LEFT; } 
+                }
+
                 load = 0;
                 if(bank == LEFT && leftBank.front().first <= start)
                 {
@@ -77,6 +90,8 @@ namespace algorithms::onlinejudge::queue::ferry_3
                         leftBank.pop();
                         arrivals[idx] = start + cross_time;
                     }
+                    start += cross_time;
+                    bank = changeBank(bank);
                 }
                 else if(bank == RIGHT && rightBank.front().first <= start)
                 {
@@ -91,10 +106,9 @@ namespace algorithms::onlinejudge::queue::ferry_3
                         rightBank.pop();
                         arrivals[idx] = start + cross_time;
                     }
+                    start += cross_time;
+                    bank = changeBank(bank);
                 }
-                
-                start += cross_time;
-                bank = changeBank(bank);
             }
             for(auto t : arrivals) std::cout << t << std::endl;
             if(tc) std::cout << std::endl;

@@ -252,7 +252,8 @@
 // #include "algorithms/onlinejudge/bst/hardwoodSpecies.cpp"
 // #include "algorithms/onlinejudge/bst/fileFragmentation.cpp"
 // #include "algorithms/onlinejudge/bst/conformity.cpp"
-#include "algorithms/onlinejudge/bst/snowflakes.cpp"
+// #include "algorithms/onlinejudge/bst/snowflakes.cpp"
+#include "algorithms/onlinejudge/bst/lemmings.cpp"
 
 #include "algorithms/rt.cpp"
 
@@ -267,5 +268,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::bst::snow_flakes::submit(file);
+    algorithms::onlinejudge::bst::lemmings::submit(file);
 }

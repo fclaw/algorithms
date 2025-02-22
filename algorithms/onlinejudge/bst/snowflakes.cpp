@@ -48,7 +48,7 @@ namespace algorithms::onlinejudge::bst::snow_flakes
                       last_index.end())
                 { last_index[flakes[right_ptr]] = right_ptr; right_ptr++; }
 
-                auto it = last_index.find(flakes[right_ptr]); 
+                auto it = last_index.find(flakes[right_ptr]);
                 if(right_ptr < N &&
                     it != last_index.end() &&
                    (*it).second < left_ptr)

@@ -256,7 +256,8 @@
 // #include "algorithms/onlinejudge/bst/lemmings.cpp"
 // #include "algorithms/onlinejudge/bst/cd.cpp"
 // #include "algorithms/onlinejudge/bst/addAll.cpp"
-#include "algorithms/onlinejudge/advanced_ds/forrest.cpp"
+// #include "algorithms/onlinejudge/advanced_ds/forrest.cpp"
+#include "algorithms/onlinejudge/advanced_ds/neighbours.cpp"
 
 #include "algorithms/rt.cpp"
 
@@ -271,5 +272,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::advanced_ds::forrest::submit(file);
+    algorithms::onlinejudge::advanced_ds::neighbours::submit(file);
 }

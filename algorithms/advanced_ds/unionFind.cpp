@@ -17,7 +17,7 @@ typedef std::vector<int> vi;
               p.assign(N, 0); 
               for (int i = 0; i < N; i++) p[i] = i; 
           }
-          int findSet(int i) 
+          int findSet(int i)
           { return (p[i] == i) ? i : (p[i] = findSet(p[i])); }
           bool isSameSet(int i, int j) 
           { return findSet(i) == findSet(j); }

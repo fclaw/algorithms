@@ -29,6 +29,6 @@ typedef std::vector<int> vi;
                   if(rank[x] > rank[y]) p[y] = x; // rank keeps the tree short
                   else { p[x] = y; if (rank[x] == rank[y]) rank[y]++; }
               } 
-          } 
+          }
     };
 }

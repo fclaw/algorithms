@@ -12,7 +12,6 @@ namespace algorithms::onlinejudge::complete_search::hamming
 {
     /** https://onlinejudge.org/external/7/729.pdf, 
      * generate all possible bit strings  */
-    const size_t MAX = 16;
     void backtrack(int length, int diff, int i, int val, vs& strings) 
     {
         if(__builtin_popcount(val) == diff)
@@ -40,8 +39,7 @@ namespace algorithms::onlinejudge::complete_search::hamming
             vs strings;
             int length, diff;
             std::cin >> length >> diff;
-            int tmp = 0;
-            backtrack(length, diff, 0, tmp, strings);
+            backtrack(length, diff, 0, 0, strings);
             std::sort(strings.begin(), strings.end());
             for(auto s : strings) std::cout << s << std::endl;
             if(tc) std::cout << std::endl;

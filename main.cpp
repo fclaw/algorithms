@@ -263,7 +263,8 @@
 // #include "algorithms/onlinejudge/advanced_ds/brain.cpp"
 // #include "algorithms/onlinejudge/complete_search/cd.cpp"
 // #include "algorithms/onlinejudge/complete_search/settlers.cpp"
-#include "algorithms/onlinejudge/complete_search/passwords.cpp"
+// #include "algorithms/onlinejudge/complete_search/passwords.cpp"
+#include "algorithms/onlinejudge/complete_search/hamming.cpp"
 
 
 #include "algorithms/rt.cpp"
@@ -279,5 +280,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::complete_search::passwords::submit(file);
+    algorithms::onlinejudge::complete_search::hamming::submit(file);
 }

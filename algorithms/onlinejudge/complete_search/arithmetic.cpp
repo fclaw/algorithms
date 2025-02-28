@@ -43,6 +43,7 @@ namespace algorithms::onlinejudge::complete_search::arithmetic
             for (int j = 0; j < M; j++) 
             {
                 backtrack(nums, mask | (1 << i), eval(val, nums[i], ops[j]), ans);
+                // As a rule of thumb, the earlier you can prune the search space, the better
                 if(ans) return;
             }
     }

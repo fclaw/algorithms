@@ -99,7 +99,6 @@
 #include "algorithms/backtrack/leetcode/allPathsSourceTarget.cpp"
 #include "algorithms/backtrack/leetcode/letterCombinations.cpp"
 #include "algorithms/backtrack/leetcode/judgePoint24.cpp"
-#include "algorithms/backtrack/onlinejudge/cd.cpp"
 // #include "algorithms/backtrack/uv/marcus.cpp"
 #include "algorithms/backtrack/leetcode/solveNQueens.cpp"
 #include "algorithms/backtrack/leetcode/tilingRectangle.cpp"
@@ -266,7 +265,9 @@
 // #include "algorithms/onlinejudge/complete_search/passwords.cpp"
 // #include "algorithms/onlinejudge/complete_search/hamming.cpp"
 // #include "algorithms/onlinejudge/complete_search/arithmetic.cpp"
-#include "algorithms/onlinejudge/complete_search/hanoi.cpp"
+// #include "algorithms/onlinejudge/complete_search/hanoi.cpp"
+// #include "algorithms/onlinejudge/complete_search/y2k.cpp"
+#include "algorithms/onlinejudge/complete_search/marcus.cpp"
 
 
 #include "algorithms/rt.cpp"
@@ -282,5 +283,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::complete_search::hanoi::submit(file);
+    algorithms::onlinejudge::complete_search::marcus::submit(file);
 }

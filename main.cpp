@@ -267,7 +267,7 @@
 // #include "algorithms/onlinejudge/complete_search/arithmetic.cpp"
 // #include "algorithms/onlinejudge/complete_search/hanoi.cpp"
 // #include "algorithms/onlinejudge/complete_search/y2k.cpp"
-#include "algorithms/onlinejudge/complete_search/marcus.cpp"
+#include "algorithms/onlinejudge/complete_search/8Queens.cpp"
 
 
 #include "algorithms/rt.cpp"
@@ -283,5 +283,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::complete_search::marcus::submit(file);
+    algorithms::onlinejudge::complete_search::back_to_8_queens::submit(file);
 }

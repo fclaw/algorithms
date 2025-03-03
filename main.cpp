@@ -87,6 +87,7 @@
 #include "algorithms/dp/leetcode/combinationSum4.cpp"
 #include "algorithms/backtrack/leetcode/combine.cpp"
 #include "algorithms/backtrack/leetcode/permute.cpp"
+#include "algorithms/backtrack/leetcode/minSessions.cpp"
 #include "algorithms/backtrack/leetcode/permuteUnique.cpp"
 #include "algorithms/backtrack/leetcode/palindrome.cpp"
 #include "algorithms/backtrack/leetcode/combinationSum3.cpp"
@@ -284,5 +285,6 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::complete_search::sum_it_up::submit(file);
+    // algorithms::onlinejudge::complete_search::sum_it_up::submit(file);
+    cout << algorithms::backtrack::leetcode::min_sessions::minSessions({2,3,3,4,4,4,6,7,8,9,10}, 15);
 }

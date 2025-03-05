@@ -270,7 +270,8 @@
 // #include "algorithms/onlinejudge/complete_search/y2k.cpp"
 // #include "algorithms/onlinejudge/complete_search/8Queens.cpp"
 // #include "algorithms/onlinejudge/complete_search/sumItUp.cpp"
-#include "algorithms/onlinejudge/complete_search/budgetTravel.cpp"
+// #include "algorithms/onlinejudge/complete_search/budgetTravel.cpp"
+#include "algorithms/onlinejudge/complete_search/transportation.cpp"
 
 
 #include "algorithms/rt.cpp"
@@ -286,8 +287,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::complete_search::budget_travel::submit(file);
-    // double t = 15.7 - 297.9 / 22.1;
-    // cout << 20.87 + 2 + std::round((15.7 - t) * 112.9) / 100;
-    // // cout << t << "\n";
+    algorithms::onlinejudge::complete_search::transportation::submit(file);
 }

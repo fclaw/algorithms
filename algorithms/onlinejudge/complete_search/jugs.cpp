@@ -3,21 +3,18 @@
 #include <iostream>
 #include <cstdio>
 #include <vector>
-#include <unordered_set>
 #include <limits>
+#include <queue>
+#include <tuple>
+#include <set>
 
 
 
-// Hash function  
-struct hashFunction 
-{
-    size_t operator()(const std::pair<int,int> &x) const
-    { return x.first ^ x.second; } 
-}; 
 
 typedef std::vector<int> vi;
 typedef std::vector<vi> vvi;
-typedef std::unordered_set<std::pair<int, int>, hashFunction> sii;
+typedef std::queue<std::tuple<int, int, vi>> qpii;
+typedef std::set<std::pair<int, int>> sii;
 
 namespace algorithms::onlinejudge::complete_search::jugs
 {
@@ -27,80 +24,72 @@ namespace algorithms::onlinejudge::complete_search::jugs
     int capacity_b;
     int target;
     vi ans;
-    int min_steps;  // Track the shortest path
+    bool finished;
     enum Action { FillA, PourAB, EmptyA, FillB, PourBA, EmptyB };
-    void backtrack(int curr_a, int curr_b, vi& seq, sii& visited)
+    void bfs(qpii& state, sii& visited)
     {
-        // Stop if we already found a shorter solution
-        if(seq.size() >= min_steps) return;
-
-        // Stop if both jugs are full (early stopping)
-        if(curr_a == capacity_a && 
-           curr_b == capacity_b) return;
-
-        // If target is reached
-        if(curr_b == target) 
+        while(!state.empty() && !finished)
         {
-            if(seq.size() < min_steps) 
-            { min_steps = seq.size(); ans = seq; }
-            return;
-        }
+            auto t = state.front();
+            state.pop();
+            int curr_a = std::get<0>(t);
+            int curr_b = std::get<1>(t);
+            vi seq = std::get<2>(t);
 
-       // Avoid cycles
-       if (visited.count({curr_a, curr_b})) return;
-       visited.insert({curr_a, curr_b});
+            // If already visited, skip
+            if (visited.count({curr_a, curr_b})) continue;
+            visited.insert({curr_a, curr_b});
 
-        for(int i = FillA; i <= EmptyB; i++)
-        {
-            if(curr_a == 0 && i == FillA)
+            if(curr_b == target)
+            { ans = seq; finished = true; }
+            for(int i = FillA; i <= EmptyB; i++)
             {
-                seq.push_back(FillA);
-                backtrack(capacity_a, curr_b, seq, visited);
-                seq.pop_back();
-            }
+                vi next_seq = seq; // Copy sequence
+                if(curr_a == 0 && i == FillA)
+                {
+                  next_seq.push_back(FillA);
+                  state.push({capacity_a, curr_b, next_seq});
+                }
       
-            if (i == PourAB && 
-                curr_a > 0 && 
-                curr_b < capacity_b) 
-            {
-              int diff = std::min(curr_a, capacity_b - curr_b);
-              int next_a = curr_a - diff;
-              int next_b = curr_b + diff;
-              
-              seq.push_back(PourAB);
-              backtrack(next_a, next_b, seq, visited);
-              seq.pop_back();
-            }
+                if (i == PourAB && 
+                    curr_a > 0 && 
+                    curr_b < capacity_b) 
+                {
+                   int diff = std::min(curr_a, capacity_b - curr_b);
+                   int next_a = curr_a - diff;
+                   int next_b = curr_b + diff;
+                   next_seq.push_back(PourAB);
+                   state.push({next_a, next_b, next_seq});  
+                }
          
-            if(curr_a > 0 && i == EmptyA)
-            { 
-                seq.push_back(EmptyA);
-                backtrack(0, curr_b, seq, visited);
-                seq.pop_back();
-            }
+                if(curr_a > 0 && i == EmptyA)
+                { 
+                   next_seq.push_back(EmptyA);
+                   state.push({0, curr_b, next_seq});
+                }
 
-            if(curr_b == 0 && i == FillB)
-            {
-                seq.push_back(FillB);
-                backtrack(curr_a, capacity_b, seq, visited);
-                seq.pop_back();
-            }
+                if(curr_b == 0 && i == FillB)
+                {
+                   next_seq.push_back(FillB);
+                   state.push({curr_a, capacity_b, next_seq});
+                }
         
-            if (i == PourBA && curr_b > 0 && curr_a < capacity_a) {
-              int diff = std::min(curr_b, capacity_a - curr_a);
-              int next_a = curr_a + diff;
-              int next_b = curr_b - diff;
-              
-              seq.push_back(PourBA);
-              backtrack(next_a, next_b, seq, visited);
-              seq.pop_back();
-          }
+                if(i == PourBA && 
+                   curr_b > 0 && 
+                   curr_a < capacity_a) 
+                {
+                   int diff = std::min(curr_b, capacity_a - curr_a);
+                   int next_a = curr_a + diff;
+                   int next_b = curr_b - diff;
+                   next_seq.push_back(PourBA);
+                   state.push({next_a, next_b, next_seq});
+                }
          
-            if(curr_b > 0 && i == EmptyB)
-            {
-               seq.push_back(EmptyB);
-               backtrack(curr_a, 0, seq, visited);
-               seq.pop_back();
+                if(curr_b > 0 && i == EmptyB)
+                {
+                   next_seq.push_back(EmptyB);
+                   state.push({curr_a, 0, next_seq});
+                }
             }
         }
     }
@@ -114,11 +103,12 @@ namespace algorithms::onlinejudge::complete_search::jugs
               capacity_b >> 
               target)
         {
-            min_steps = std::numeric_limits<int>::max();
+            finished = false;
             ans = {};
-            vi seq;
+            qpii state;
             sii visited;
-            backtrack(0, 0, seq, visited);
+            state.push({0, 0, {}});
+            bfs(state, visited);
             for(int a : ans)
               if(a == FillA)
                 std::cout << "fill A" << std::endl;

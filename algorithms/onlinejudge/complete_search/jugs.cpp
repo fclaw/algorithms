@@ -27,7 +27,7 @@ namespace algorithms::onlinejudge::complete_search::jugs
     int capacity_b;
     int target;
     vi ans;
-    int min_steps = std::numeric_limits<int>::max();  // Track the shortest path
+    int min_steps;  // Track the shortest path
     enum Action { FillA, PourAB, EmptyA, FillB, PourBA, EmptyB };
     void backtrack(int curr_a, int curr_b, vi& seq, sii& visited)
     {
@@ -114,6 +114,7 @@ namespace algorithms::onlinejudge::complete_search::jugs
               capacity_b >> 
               target)
         {
+            min_steps = std::numeric_limits<int>::max();
             ans = {};
             vi seq;
             sii visited;

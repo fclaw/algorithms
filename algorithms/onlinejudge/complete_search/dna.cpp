@@ -10,6 +10,7 @@
 
 
 typedef std::vector<std::string> vs;
+typedef std::unordered_set<std::string> ss;
 
 namespace algorithms::onlinejudge::complete_search::dna
 {
@@ -19,10 +20,10 @@ namespace algorithms::onlinejudge::complete_search::dna
      * sort the output and then remove duplicates */
     int N, K;
     std::vector<char> els = {'A', 'G', 'C', 'T'};
-    void backtrack(std::string& dna, int d, int mask, vs& mutations)
+    void backtrack(std::string& dna, int d, int mask, ss& mutations)
     {
         if(d == K)
-        { mutations.push_back(dna); return; }
+        { mutations.insert(dna); return; }
 
         for(int i = 0; i < dna.size(); i++)
           if(!(mask & (1 << i)))
@@ -41,18 +42,18 @@ namespace algorithms::onlinejudge::complete_search::dna
 
         
         int tc;
-        std::cin >> tc;
+        scanf("%d\n", &tc);
         while(tc--)
         {
             scanf("%d %d", &N, &K);
             std::string dna;
             std::cin >> dna;
-            vs mutations = {dna};
+            ss mutations;
             backtrack(dna, 0, 0, mutations);
-            std::sort(mutations.begin(), mutations.end());
-            mutations.erase(std::unique(mutations.begin(), mutations.end()), mutations.end());
-            std::cout << mutations.size() << std::endl;
-            for(auto m : mutations) std::cout << m << std::endl;
+            vs sorted_mutations(mutations.begin(), mutations.end());
+            std::sort(sorted_mutations.begin(), sorted_mutations.end());
+            printf("%d\n", (int)sorted_mutations.size());
+            for(auto m : sorted_mutations) printf("%s\n", m.c_str());
         }
     }
 }

@@ -1,4 +1,4 @@
-#include "algorithms/onlinejudge/complete_search/knuth.cpp"
+#include "algorithms/onlinejudge/complete_search/solitaire.cpp"
 
 
 
@@ -12,5 +12,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::complete_search::knuth::submit(file);
+    algorithms::onlinejudge::complete_search::solitaire::submit(file);
 }

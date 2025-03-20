@@ -1,4 +1,4 @@
-#include "algorithms/onlinejudge/complete_search/dna.cpp"
+#include "algorithms/onlinejudge/complete_search/krypton.cpp"
 
 
 int main(int argc, char* argv[])
@@ -11,5 +11,5 @@ int main(int argc, char* argv[])
     std::optional<char*> file = std::nullopt;
     if(argc > 1) file = std::make_optional(argv[1]);
 
-    algorithms::onlinejudge::complete_search::dna::submit(file);
+    algorithms::onlinejudge::complete_search::krypton::submit(file);
 }

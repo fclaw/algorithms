@@ -22,11 +22,11 @@ namespace algorithms::onlinejudge::complete_search::pizza
     std::string ans;
     bool isSatisfied(const std::pair<int, int>& pref, int toppings) 
     {
-        if ((toppings & pref.first))
+        if (toppings & pref.first)
           return true;  // at least one liked topping is present
-        if ((toppings & pref.second))
-          return false;  // no likes, but also no disliked topping present
-        return true;     // either some dislikes present, or no likes at all
+        if (!(toppings & pref.second))
+          return true;  // no likes, but also no disliked topping present
+        return false;     // either some dislikes present, or no likes at all
     }
     // recursive function to count set bits
     void backtrack(int i, const vi& xs, const vpii& prefs, int curr_tops)
@@ -45,15 +45,18 @@ namespace algorithms::onlinejudge::complete_search::pizza
             std::string local;
             for(int x : xs)
               if((curr_tops & (1 << x)))
-                local += (x + 'A');  
-           if(ans.empty() || ans.size() > local.size())
+                local += (x + 'A');    
+            if (ans.empty() ||
+                local.size() > ans.size() || 
+                (local.size() == ans.size() && local > ans))
               ans = local;
+              std::sort(ans.begin(), ans.end());
         }
 
-        // Try without xs[i]
-        backtrack(i + 1, xs, prefs, curr_tops);
         // Try with xs[i]
         backtrack(i + 1, xs, prefs, curr_tops | (1 << xs[i]));
+        // Try without xs[i]
+        backtrack(i + 1, xs, prefs, curr_tops);
     }
     void submit(std::optional<char*> file)
     {
@@ -68,8 +71,8 @@ namespace algorithms::onlinejudge::complete_search::pizza
         {
             if(l == ".")
             {
+                ans = {};
                 tops.assign(tmp.begin(), tmp.end());
-                std::sort(tops.begin(), tops.end());
                 backtrack(0, tops, prefs, 0);
                 if(!ans.empty()) std::cout << "Toppings: " << ans << std::endl;
                 else printf("No pizza can satisfy these requests.\n");

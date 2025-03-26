@@ -70,7 +70,9 @@
         "cassert": "cpp",
         "atomic": "cpp",
         "numeric": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "span": "cpp",
+        "numbers": "cpp"
     },
     "cSpell.words": [
         "atcoder",

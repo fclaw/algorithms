@@ -33,6 +33,35 @@ namespace algorithms::onlinejudge::complete_search::firetruck
      */
     vvi paths;
     int TARGET, SOURCE = 0, MAX = 21, CASE = 1;
+    /*
+    ==================== Reverse Reachability Pruning (RRP) ====================
+
+    Purpose:
+        Preemptively eliminate nodes that cannot contribute to valid paths 
+        from the source to the target. This reduces the search space before
+        the main DFS/backtracking begins.
+
+    Strategy:
+        - Perform a reverse DFS starting from the target node.
+        - Mark all nodes that can reach the target *without passing through* the source.
+        - Skip the source node during this traversal.
+        - Any node not marked is only able to reach the target via the source,
+        and can safely be excluded from further consideration.
+
+    Use Case:
+        Particularly useful in dense or unordered graphs with many paths or cycles.
+        Avoids redundant computation by pruning unproductive branches early.
+
+    Implementation Note:
+        - Run reverse DFS and mark reachable nodes in a `reachable[]` array.
+        - In your main DFS/backtrack, skip any node where `reachable[node] == false`.
+
+    Effect:
+        This serves as a preprocessing step — similar in spirit to precomputations 
+        in problems like N-Queens — and greatly reduces runtime for hard problems.
+
+    ===========================================================================
+    */
     void prune(int u, const vvi& graph, vb& reachable, int avoid)
     {
         for (int v : graph[u]) 
@@ -52,7 +81,8 @@ namespace algorithms::onlinejudge::complete_search::firetruck
         for(int v : graph[u])
         {
             // basic pruning && check reachability
-            if((mask & (1 << v)) || !reachable[v])
+            if((mask & (1 << v)) || 
+                !reachable[v])
               continue;
             path.push_back(v);
             backtrack(graph, v, mask | (1 << v), path, reachable);

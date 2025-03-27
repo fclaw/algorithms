@@ -23,23 +23,15 @@ namespace algorithms::onlinejudge::complete_search::bishop
     uint64_t ld = 0, rd = 0;
     bool checkPlacement(int c, int r) 
     { return !(ld & (1 << (r - c + MAX_SIZE - 1))) && !(rd & (1 << (r + c)));  }
-    void bits_set(int r, int c, bool flag) 
+    void occupied_diagonals(int r, int c) 
     { 
-       if(flag) {
-         ld |= (1 << (r - c + MAX_SIZE - 1));
-          rd |= (1 << (r + c));
-       }
-       else {
-         ld &= ~(1 << (r - c + MAX_SIZE - 1));
-         rd &= ~(1 << (r + c));
-       }
+        ld |= (1 << (r - c + MAX_SIZE - 1));
+        rd |= (1 << (r + c));
     }
-    ll make_key(int idx, int bishops) 
+    void relieve_diagonals(int r, int c)
     {
-       return ((ll)idx << 40) |
-              ((ll)bishops << 32) |
-              ((ll)ld << 16) |
-              (ll)rd;
+        ld &= ~(1 << (r - c + MAX_SIZE - 1));
+        rd &= ~(1 << (r + c));
     }
     int backtrack(int idx, int bishops)
     {
@@ -69,9 +61,9 @@ namespace algorithms::onlinejudge::complete_search::bishop
         // try placing on the current cell
         if(checkPlacement(c, r))
         {
-            bits_set(r, c, true);
+            occupied_diagonals(r, c);
             ways += backtrack(idx + 1, bishops + 1);
-            bits_set(r, c, false);
+            relieve_diagonals(r, c);
         }
         // skip the current cell
         ways += backtrack(idx + 1, bishops);

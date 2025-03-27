@@ -4,24 +4,13 @@
 #include <cstdio>
 #include <vector>
 #include <bitset>
-#include <unordered_set>
 #include <unordered_map>
-#include <tuple>
+#include <limits>
 
 
-struct TupleHash {
-    template<typename T>
-    std::size_t operator()(const T& t) const {
-        return std::apply([](auto&&... args) {
-            std::size_t seed = 0;
-            (..., (seed ^= std::hash<std::decay_t<decltype(args)>>{}(args) + 0x9e3779b9 + (seed << 6) + (seed >> 2)));
-            return seed;
-        }, t);
-    }
-};
 
 typedef long long ll;
-typedef std::unordered_set<ll> sl;
+typedef std::vector<ll> vl;
 
 namespace algorithms::onlinejudge::complete_search::bishop
 {
@@ -29,46 +18,64 @@ namespace algorithms::onlinejudge::complete_search::bishop
      * backtracking with pruning as in 8-queens recursive backtracking solution; 
      * then pre-calculate the results  */
     int SIZE, BISHOPS;
+    int TOTAL_DIAGONALS;  // = 13
     const int MAX_SIZE = 8;
-    const size_t MAX_BIT = 2 * MAX_SIZE - 1;
-    std::bitset<MAX_BIT> rw, ld, rd;
+    uint64_t ld = 0, rd = 0;
     bool checkPlacement(int c, int r) 
-    { return !ld.test(r - c + MAX_SIZE - 1) && !rd.test(r + c); }
+    { return !(ld & (1 << (r - c + MAX_SIZE - 1))) && !(rd & (1 << (r + c)));  }
     void bits_set(int r, int c, bool flag) 
-    { ld.set(r - c + MAX_SIZE - 1, flag); rd.set(r + c, flag); }
-    sl bishops_map;
-    std::unordered_map<std::tuple<int, int, int, ll>, int, TupleHash> memo;
-    int backtrack(int r, int c, int bishops, ll mask)
+    { 
+       if(flag) {
+         ld |= (1 << (r - c + MAX_SIZE - 1));
+          rd |= (1 << (r + c));
+       }
+       else {
+         ld &= ~(1 << (r - c + MAX_SIZE - 1));
+         rd &= ~(1 << (r + c));
+       }
+    }
+    ll make_key(int idx, int bishops) 
     {
-        int remaining = (SIZE - r) + (SIZE - c - 1) * SIZE;
+       return ((ll)idx << 40) |
+              ((ll)bishops << 32) |
+              ((ll)ld << 16) |
+              (ll)rd;
+    }
+    int backtrack(int idx, int bishops)
+    {
+
+        int mask = (1 << TOTAL_DIAGONALS) - 1;  // e.g., if TOTAL_DIAGONALS = 13 → 0b0001_1111_1111_1111
+        int used_ld = __builtin_popcount(ld & mask);
+        int used_rd = __builtin_popcount(rd & mask);
+
+        int free_ld = TOTAL_DIAGONALS - used_ld;
+        int free_rd = TOTAL_DIAGONALS - used_rd;
+
+        int free_diagonals = std::min(free_ld, free_rd);
+        if (free_diagonals < (BISHOPS - bishops))
+          return 0;
+
+        int remaining = SIZE * SIZE - idx;
         if (remaining < (BISHOPS - bishops))
           return 0;
+
+        if (bishops == BISHOPS) return 1;
+        if (idx == SIZE * SIZE) return 0;
   
-        if(bishops == BISHOPS)
-          if(!bishops_map.count(mask))
-          { bishops_map.insert(mask); return 1; }
-          else return 0;
-
-         auto key = std::make_tuple(r, c, bishops, mask);
-         if(memo.count(key)) return memo[key];
-
+        int r = idx / SIZE;
+        int c = idx % SIZE;
+  
         int ways = 0;
-        for(int i = r; i < SIZE; i++)
-        { 
-            for(int j = c; j < SIZE; j++)
-            {
-                int pos = i * SIZE + j;
-                if(!checkPlacement(j, i))
-                  continue;
-        
-                bits_set(i, j, true);
-                ways += backtrack(i + 1, j, bishops + 1, mask | (1LL << pos));
-                ways += backtrack(0, j + 1, bishops + 1, mask | (1LL << pos));
-                bits_set(i, j, false);
-            }
-            c = 0;
+        // try placing on the current cell
+        if(checkPlacement(c, r))
+        {
+            bits_set(r, c, true);
+            ways += backtrack(idx + 1, bishops + 1);
+            bits_set(r, c, false);
         }
-        return memo[key] = ways;
+        // skip the current cell
+        ways += backtrack(idx + 1, bishops);
+        return ways;
     }
 
     void submit(std::optional<char*> file)
@@ -76,14 +83,12 @@ namespace algorithms::onlinejudge::complete_search::bishop
         if(file.has_value())
           assert(std::freopen(file.value(), "r", stdin) != nullptr);
 
+        bool precomputed = true;
         while(std::cin >> SIZE >> BISHOPS)
         {
-            if(!BISHOPS && !SIZE)
-              break;
-            
-            memo.clear();
-            bishops_map.clear();
-            std::cout << backtrack(0, 0, 0, 0) << std::endl;
+            TOTAL_DIAGONALS = 2 * SIZE  - 1;
+            if(!BISHOPS && !SIZE) break;
+            std::cout << backtrack(0, 0) << std::endl;
         } 
     }
 }

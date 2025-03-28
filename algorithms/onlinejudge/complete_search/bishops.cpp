@@ -12,7 +12,7 @@
 typedef long long ll;
 typedef std::vector<ll> vl;
 
-namespace algorithms::onlinejudge::complete_search::bishop
+namespace algorithms::onlinejudge::complete_search::bishops
 {
     /** https://onlinejudge.org/external/8/861.pdf, 
      * backtracking with pruning as in 8-queens recursive backtracking solution; 
@@ -75,7 +75,6 @@ namespace algorithms::onlinejudge::complete_search::bishop
         if(file.has_value())
           assert(std::freopen(file.value(), "r", stdin) != nullptr);
 
-        bool precomputed = true;
         while(std::cin >> SIZE >> BISHOPS)
         {
             TOTAL_DIAGONALS = 2 * SIZE  - 1;

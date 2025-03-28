@@ -1,4 +1,4 @@
-#include "algorithms/onlinejudge/complete_search/numericalMaze.cpp"
+#include "algorithms/onlinejudge/complete_search/shoulderSurfer.cpp"
 #include <chrono>
 
 
@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
 
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::complete_search::maze::submit(file);
+    algorithms::onlinejudge::complete_search::shoulder_surfer::submit(file);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(end - start);

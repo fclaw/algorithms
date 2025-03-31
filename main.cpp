@@ -1,5 +1,6 @@
 #include "algorithms/onlinejudge/complete_search/guards.cpp"
 #include <chrono>
+#include <iomanip>
 
 
 int main(int argc, char* argv[])
@@ -12,7 +13,7 @@ int main(int argc, char* argv[])
     algorithms::onlinejudge::complete_search::guards::submit(file);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
-    auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(end - start);
-    std::cout << std::endl << "time: " << elapsed.count() << "s\n";
+    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    std::cout << std::endl << "time: " <<  std::fixed << std::setprecision(1) << (double)elapsed.count() / 1000 << "ms\n";
 
 }

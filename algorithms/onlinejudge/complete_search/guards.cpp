@@ -6,7 +6,8 @@
 #include <bitset>
 #include <numeric>
 #include <unordered_set>
-
+#include <algorithm>
+#include <chrono>  // For time tracking
 
 
 typedef std::vector<int> vi;
@@ -28,10 +29,12 @@ namespace algorithms::onlinejudge::complete_search::guards
 {
     /** https://onlinejudge.org/external/100/10094.pdf, 
      * his problem is like the n-queens chess problem, but must find/use the pattern! */
+    const int TIME_LIMIT = 500;
+    std::chrono::steady_clock::time_point start_time;
     int SIZE;
     const int MAX_SIZE = 1000;
     const size_t MAX_BIT = 2 * MAX_SIZE - 1;
-    vi guards;
+    vi layout;
     bool is_solution;
     std::bitset<MAX_BIT> rw, ld, rd;
     bool checkPlacement(int r, int c) 
@@ -39,18 +42,26 @@ namespace algorithms::onlinejudge::complete_search::guards
     void bits_set(int r, int c, bool flag) 
     { rw.set(r, flag); ld.set(r - c + MAX_SIZE - 1, flag); rd.set(r + c, flag); }
     void bits_reset() { rw.reset(); ld.reset(); rd.reset(); }
-    bool isSpecial(int n) { return (n % 6 == 2 || n % 6 == 3); }
+    // bool isSpecial(int n) { return (n % 6 == 2 || n % 6 == 3); }
     void backtrack(int c, int prev, vi& local)
     {
         if(is_solution) return;
+
+        // **Check elapsed time**
+        auto elapsed = 
+          std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::steady_clock::now() - start_time);
+    
+        if (elapsed.count() > TIME_LIMIT) return; // **Terminate if time exceeded**
+
         if(c == SIZE)
         {
-            guards = local;
+            layout = local;
             is_solution = true;
             return;
         }
 
-        int start = prev >= SIZE ? (!(SIZE % 2) ? 0 : 1) : prev;
+        int start = prev >= SIZE ? 0 : prev;
         for(int r = start; r < SIZE; r++)
           if(checkPlacement(r, c))
           {
@@ -61,9 +72,6 @@ namespace algorithms::onlinejudge::complete_search::guards
               bits_set(r, c, false);
           }
     }
-    void generateSpecialLayout(int SIZE) 
-    {
-    }
     void submit(std::optional<char*> file)
     {
         if(file.has_value())
@@ -73,28 +81,21 @@ namespace algorithms::onlinejudge::complete_search::guards
         {
             bits_reset();
             is_solution = false;
-            if(isSpecial(SIZE))
-              generateSpecialLayout(SIZE);
-            else 
-            {
-                int r = !(SIZE % 2) ? 1 : 0;
-                vi local = {r};
-                bits_set(r, 0, true);
-                backtrack(1, r + 2, local);
-            }
-            if(guards.empty()) printf("Impossible\n");
+            vi local = {};
+            start_time = std::chrono::steady_clock::now(); // Start timing
+            backtrack(0, 0, local);
+            if(layout.empty()) printf("Impossible\n");
             else
             {
                 std::string ans =
                 std::accumulate(
-                    guards.begin(),
-                    guards.end(),
+                    layout.begin(),
+                    layout.end(),
                     std::string(), 
                     [](std::string& s, int n) 
                     { return s + (s.empty() ? "" : " ") + std::to_string(n + 1); });
                 std::cout << ans << std::endl;
-                std::cout << "SIZE: " << SIZE << "\n";
-                draw_grid(SIZE, guards);
+                draw_grid(SIZE, layout);
             }
         }
     }

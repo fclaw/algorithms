@@ -5,7 +5,7 @@
 #include <vector>
 #include <limits>
 #include <algorithm>
-#include <iomanip>
+#include <unordered_set>
 
 
 
@@ -14,6 +14,7 @@ typedef std::vector<int> vi;
 typedef std::vector<std::pair<int, vi>> vpivi;
 typedef std::vector<vpivi> vvpivi;
 typedef std::vector<std::vector<bool>> vvb;
+typedef std::unordered_set<int> si;
 
 
 namespace algorithms::onlinejudge::complete_search::going_in_cycle
@@ -30,17 +31,16 @@ namespace algorithms::onlinejudge::complete_search::going_in_cycle
         for(auto& p : graph[u])
         {
             int v = p.first;
-            for (int w : p.second) 
+            for (int w : p.second)
             {   // Iterate over all possible edge weights
                 vi tmp = path;
                 if(!visited[u][v] &&
                    !(mask & (1LL << v)))
                 {
+                    // Fast pruning using integer comparison (avoiding floating-point ops)
+                    if (sw + w >= best_mean * (path.size() + 1)) continue;
+
                     tmp.push_back(v);
-                    double projected_mean = static_cast<double>(sw + w) / (tmp.size() + 1);
-                    if(projected_mean >= best_mean)
-                      continue;
-                    
                     visited[u][v] = true;
                     backtrack(graph, v, mask | (1LL << v), visited, tmp, sw + w);  
                     visited[u][v] = false;
@@ -105,14 +105,17 @@ namespace algorithms::onlinejudge::complete_search::going_in_cycle
             scanf("%d %d\n", &V, &E);
             vvpivi graph(V);
             int u, v, w;
+            si sources;
             for(int e = 0; e < E; e++)
             {
                 scanf("%d %d %d", &u, &v, &w);
                 --u; --v;
+                sources.insert(u);
                 addEdge(graph, u, v, w);
             }
             vvb visited(51, std::vector<bool>(51, false));
-            backtrack(graph, 0, 0, visited, {0}, 0.0);
+            for(auto s : sources)
+              backtrack(graph, s, 0, visited, {s}, 0.0);
 
             printf("Case #%d: ", c++);
             !isCycle ? printf("No cycle found.\n") : printf("%0.2lf\n", best_mean);

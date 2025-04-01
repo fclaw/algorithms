@@ -56,13 +56,9 @@ namespace algorithms::onlinejudge::complete_search::queue
     int backtrack(int mask, ss& used, vi& queue, mi& memo, const std::string& s, int l, int r)
     {
         if(prune(queue, N, l, r, L, R)) return 0;
-        int perm = std::atoi(s.c_str());
-        ll key = encodeKey(perm, l, r);
         if(queue.size() == N)
         { return l == L && r == R ? 1 : 0; }
   
-        if(memo.count(key)) return memo[key];
-
         int cnt = 0;
         for(int i = 1; i <= N; i++)
         {
@@ -86,7 +82,7 @@ namespace algorithms::onlinejudge::complete_search::queue
               cnt += backtrack(mask | (1 << i), used, queue, memo, back, back_l, back_r);
             queue.pop_back();
         }
-        return memo[key] = cnt;
+        return cnt;
     }
     void submit(std::optional<char*> file)
     {

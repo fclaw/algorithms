@@ -14,67 +14,34 @@
 typedef long long ll;
 typedef std::vector<int> vi;
 typedef std::vector<vi> vvi;
+typedef std::vector<vvi> vvvi;
 typedef std::unordered_set<std::string> ss;
-typedef std::unordered_map<std::string, ll> mll;
+typedef std::unordered_map<ll, int> mi;
 
-
-bool leftPrune(const vi& queue, int L) {
-    int maxSeen = 0, visible = 0;
-    for (int h : queue) {
-        if (h > maxSeen) {
-            visible++;
-            maxSeen = h;
-        }
-    }
-    return visible <= L;  // prune if already exceeds L
+inline ll encodeKey(int a, int b, int c) {
+    return (1LL * a << 20) | (b << 10) | c;
 }
 
-bool rightPrune(const vi& queue, int R) {
-    int maxSeen = 0, visible = 0;
-    for (auto it = queue.rbegin(); it != queue.rend(); ++it) {
-        if (*it > maxSeen) {
-            visible++;
-            maxSeen = *it;
-        }
-    }
-    return visible <= R;
-}
-
-int countVisible(const vi& queue) {
-    int maxSeen = 0, visible = 0;
-    for (int h : queue) {
-        if (h > maxSeen) {
-            visible++;
-            maxSeen = h;
-        }
-    }
-    return visible;
-}
-
-int countVisibleReversed(const vi& queue) {
-    int maxSeen = 0, visible = 0;
-    for (auto it = queue.rbegin(); it != queue.rend(); ++it) {
-        if (*it > maxSeen) {
-            visible++;
-            maxSeen = *it;
-        }
-    }
-    return visible;
-}
-
-bool finalCheck(const vi& queue, int L, int R) 
-{ return countVisible(queue) == L && countVisibleReversed(queue) == R; }
-
-bool bothTallest(int L, int R) { return L == 1 && R == 1; }
-
-bool severalFromLeft(const vi& queue, int N, int L)
+std::pair<int, int> getLR(const vi& queue) 
 {
-    return L > 1 && !queue.empty() && queue.front() == N ? false : true;
+    int maxSeen = 0;
+    int l = 0;
+    for (int h : queue)
+      if (h > maxSeen)
+      { l++; maxSeen = h; }
+
+    maxSeen = 0;
+    int r = 0;
+    for(auto it = queue.rbegin(); it != queue.rend(); ++it)
+      if (*it > maxSeen)
+      { r++; maxSeen = *it; }
+
+    return {l, r};
 }
 
-bool severalFromRight(const vi& queue, int N, int R)
+bool prune(const vi& queue, int N, int l, int r, int L, int R)
 {
-    return R > 1 && !queue.empty() && queue.back() == N ? false : true;
+    return false;
 }
 
 
@@ -86,24 +53,17 @@ namespace algorithms::onlinejudge::complete_search::queue
      * then pre-calculate the results */
     int tc, N, L, R;
     ss invalid;
-    ll backtrack(int mask, ss& used, vi& queue, mll& memo, const std::string& s)
+    int backtrack(int mask, ss& used, vi& queue, mi& memo, const std::string& s, int l, int r)
     {
-        if(bothTallest(L, R) ||
-           (!severalFromLeft(queue, N, L) &&
-           !severalFromRight(queue, N, R)))
-          return 0;
-
+        if(prune(queue, N, l, r, L, R)) return 0;
+        int perm = std::atoi(s.c_str());
+        ll key = encodeKey(perm, l, r);
         if(queue.size() == N)
-        { return memo[s] = finalCheck(queue, L, R) ? 1 : 0; }
-        
-        bool is_right = rightPrune(queue, R);
-        bool is_left = leftPrune(queue, L);
+        { return l == L && r == R ? 1 : 0; }
+  
+        if(memo.count(key)) return memo[key];
 
-        if(!is_right && !is_left) { return 0; }
-
-        if(memo.count(s)) return memo[s];
-
-        ll cnt = 0;
+        int cnt = 0;
         for(int i = 1; i <= N; i++)
         {
             if((mask & (1 << i)))
@@ -113,18 +73,20 @@ namespace algorithms::onlinejudge::complete_search::queue
             std::string back = s + std::to_string(i);
 
             queue.emplace(queue.begin(), i);
+            auto [front_l, front_r] = getLR(queue);
             if (!used.count(front))
               used.insert(front),
-              cnt += backtrack(mask | (1 << i), used, queue, memo, front);
+              cnt += backtrack(mask | (1 << i), used, queue, memo, front, front_l, front_r);
             queue.erase(queue.begin());
 
             queue.push_back(i);
+            auto [back_l, back_r] = getLR(queue);
             if (!used.count(back))
               used.insert(back),
-              cnt += backtrack(mask | (1 << i), used, queue, memo, back);
+              cnt += backtrack(mask | (1 << i), used, queue, memo, back, back_l, back_r);
             queue.pop_back();
         }
-        return memo[s] = cnt;
+        return memo[key] = cnt;
     }
     void submit(std::optional<char*> file)
     {
@@ -134,12 +96,13 @@ namespace algorithms::onlinejudge::complete_search::queue
         scanf("%d\n", &tc);
         while(tc--)
         {
+            invalid.clear();
             scanf("%d %d %d\n", &N, &L, &R);
             vi queue;
             ss used;
-            mll memo;
+            mi memo;
             std::string s = {};
-            printf("%llu\n", backtrack(0, used, queue, memo, s));
+            printf("%d\n", backtrack(0, used, queue, memo, s, 0, 0));
         }
     }
 }

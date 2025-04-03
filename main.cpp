@@ -1,4 +1,4 @@
-#include "algorithms/onlinejudge/complete_search/goingInCycle.cpp"
+#include "algorithms/onlinejudge/complete_search/graphColouring.cpp"
 #include <chrono>
 #include <iomanip>
 
@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
 
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::complete_search::going_in_cycle::submit(file);
+    algorithms::onlinejudge::complete_search::graph_colouring::submit(file);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

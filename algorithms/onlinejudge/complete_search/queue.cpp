@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <string>
 #include <numeric>
+#include <algorithm>
 
 
 
@@ -16,11 +17,8 @@ typedef std::vector<int> vi;
 typedef std::vector<vi> vvi;
 typedef std::vector<vvi> vvvi;
 typedef std::unordered_set<std::string> ss;
-typedef std::unordered_map<ll, int> mi;
+typedef std::vector<std::vector<std::vector<int>>> mi;
 
-inline ll encodeKey(int a, int b, int c) {
-    return (1LL * a << 20) | (b << 10) | c;
-}
 
 std::pair<int, int> getLR(const vi& queue) 
 {
@@ -39,9 +37,40 @@ std::pair<int, int> getLR(const vi& queue)
     return {l, r};
 }
 
+
+bool isValidQueue(const vi& queue, int T, int L) 
+{
+    int N = queue.size();
+
+    // Step 1: Locate the tallest element
+    auto it = std::find(queue.begin(), queue.end(), T);
+
+    // Case 1: Tallest not yet placed
+    if (it == queue.end()) {
+        if (N < L) return true; // Defer validation, we're still building the ascending part
+        return false;           // Too many elements, but tallest not placed — invalid
+    }
+
+    // Step 2: Check if tallest is at position L - 1 (0-based index)
+    int pos = distance(queue.begin(), it);
+    if (pos != L - 1 || queue[pos] != T) return false;
+
+    // Step 3: Ensure ascending order up to pos
+    for (int i = 1; i < pos; i++)
+      if(queue[i] <= queue[i - 1]) return false;
+
+    // Step 4: Ensure descending order after pos
+    for (int i = pos + 1; i < N; i++)
+      if (queue[i] >= queue[i - 1]) return false;
+
+    return true;
+}
+
 bool prune(const vi& queue, int N, int l, int r, int L, int R)
 {
-    return false;
+    if(L + R == N + 1)
+      return !isValidQueue(queue, N, L);
+    return true;
 }
 
 
@@ -52,13 +81,13 @@ namespace algorithms::onlinejudge::complete_search::queue
      * permutations that satisfy the requirement; 
      * then pre-calculate the results */
     int tc, N, L, R;
-    ss invalid;
-    int backtrack(int mask, ss& used, vi& queue, mi& memo, const std::string& s, int l, int r)
+    int backtrack(int mask, ss& used, vi& queue, const std::string& s, int l, int r)
     {
+        // ll key = encodeKey(mask, l, r);
         if(prune(queue, N, l, r, L, R)) return 0;
         if(queue.size() == N)
         { return l == L && r == R ? 1 : 0; }
-  
+
         int cnt = 0;
         for(int i = 1; i <= N; i++)
         {
@@ -72,14 +101,14 @@ namespace algorithms::onlinejudge::complete_search::queue
             auto [front_l, front_r] = getLR(queue);
             if (!used.count(front))
               used.insert(front),
-              cnt += backtrack(mask | (1 << i), used, queue, memo, front, front_l, front_r);
+              cnt += backtrack(mask | (1 << i), used, queue, front, front_l, front_r);
             queue.erase(queue.begin());
 
             queue.push_back(i);
             auto [back_l, back_r] = getLR(queue);
             if (!used.count(back))
               used.insert(back),
-              cnt += backtrack(mask | (1 << i), used, queue, memo, back, back_l, back_r);
+              cnt += backtrack(mask | (1 << i), used, queue, back, back_l, back_r);
             queue.pop_back();
         }
         return cnt;
@@ -92,13 +121,11 @@ namespace algorithms::onlinejudge::complete_search::queue
         scanf("%d\n", &tc);
         while(tc--)
         {
-            invalid.clear();
             scanf("%d %d %d\n", &N, &L, &R);
             vi queue;
             ss used;
-            mi memo;
             std::string s = {};
-            printf("%d\n", backtrack(0, used, queue, memo, s, 0, 0));
+            printf("%d\n", backtrack(0, used, queue, s, 0, 0));
         }
     }
 }

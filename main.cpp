@@ -1,4 +1,4 @@
-#include "algorithms/onlinejudge/complete_search/graphColouring.cpp"
+#include "algorithms/onlinejudge/complete_search/queue.cpp"
 #include <chrono>
 #include <iomanip>
 
@@ -10,10 +10,10 @@ int main(int argc, char* argv[])
 
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::complete_search::graph_colouring::submit(file);
+    algorithms::onlinejudge::complete_search::queue::submit(file);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    std::cout << std::endl << "time: " <<  std::fixed << std::setprecision(1) << (double)elapsed.count() / 1000 << "ms\n";
+    std::cout << std::endl << "time: " <<  std::fixed << std::setprecision(1) << (double)elapsed.count() / 1000 << "s\n";
 
 }

@@ -1,4 +1,4 @@
-#include "algorithms/onlinejudge/complete_search/skyline.cpp"
+#include "algorithms/onlinejudge/complete_search/runaround.cpp"
 #include <chrono>
 #include <iomanip>
 
@@ -10,7 +10,10 @@ int main(int argc, char* argv[])
 
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::complete_search::skyline::submit(file);
+    algorithms::onlinejudge::complete_search::runaround::submit(file);
+    
+    // std::cout << algorithms::onlinejudge::complete_search::runaround::isRunaround(xs);
+    // std::cout << "\n";
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

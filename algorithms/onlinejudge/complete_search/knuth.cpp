@@ -54,8 +54,7 @@ namespace algorithms::onlinejudge::complete_search::knuth
               letters.push_back(c);
             vs ans;
             backtrack(letters, 0, {}, ans);
-            for(auto a : ans)
-              std::cout << a << std::endl;
+            for(auto a : ans) std::cout << a << std::endl;
         } 
     }
 }

@@ -44,7 +44,6 @@ namespace algorithms::onlinejudge::complete_search::antiarithmetic
         while(std::cin >> N && N)
         {
             vi numbers;
-            int i = 0;
             std::string in, s;
             std::getline(std::cin, in);
             std::stringstream ss(in);

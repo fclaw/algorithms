@@ -27,8 +27,7 @@ namespace algorithms::onlinejudge::complete_search::closest_sums
             vi sums;
             for(int i = 0; i < N; i++)
               for(int j = i + 1; j < N; j++)
-                if(!used.count(nums[i] + nums[j]))
-                  sums.push_back(nums[i] + nums[j]);
+                sums.push_back(nums[i] + nums[j]);
             std::sort(sums.begin(), sums.end());
 
             printf("Case %d:\n", c++);
@@ -40,11 +39,12 @@ namespace algorithms::onlinejudge::complete_search::closest_sums
                 auto it = std::lower_bound(sums.begin(), sums.end(), v);
                 int ans;
             
-                if (it == sums.begin()) {
-                    ans = *it;
-                } else if (it == sums.end()) {
-                    ans = *(it - 1);
-                } else {
+                if (it == sums.begin())
+                  ans = *it;
+                else if (it == sums.end())
+                  ans = *(it - 1);
+                else 
+                {
                     int a = *it;
                     int b = *(it - 1);
                     ans = (std::abs(a - v) < std::abs(b - v)) ? a : b;

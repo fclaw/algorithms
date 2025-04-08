@@ -14,11 +14,11 @@ typedef std::vector<vi> vvi;
 namespace algorithms::onlinejudge::complete_search::ecosystem
 {
     /**  https://onlinejudge.org/external/6/626.pdf, 3 nested loops */
-    bool isCyclicShift(const vi& xs, const vi& ys) 
+    std::string toString(const vi& xs)
     {
-        vi double_xs = xs;
-        double_xs.insert(double_xs.end(), xs.begin(), xs.end());  // A + A
-        return std::search(double_xs.begin(), double_xs.end(), ys.begin(), ys.end()) != double_xs.end();
+        std::string s;
+        for(int x : xs) s += std::to_string(x) + "_";
+        return s;
     }
     void submit(std::optional<char*> file)
     {
@@ -26,11 +26,8 @@ namespace algorithms::onlinejudge::complete_search::ecosystem
           assert(std::freopen(file.value(), "r", stdin) != nullptr);
 
         int N;
-        bool first = true;
         while(std::cin >> N)
         {
-            if(!first) std::cout << std::endl;
-            first = false;
 
             vvi foodchain_matrix(N, vi(N, 0));
             for(int i = 0; i < N; i++)
@@ -46,11 +43,10 @@ namespace algorithms::onlinejudge::complete_search::ecosystem
                        foodchain_matrix[j][k] && 
                        foodchain_matrix[k][i])
                     {
-                        bool isOk = true;
-                        for(auto& xs : ans)
-                          if(isCyclicShift(xs, {i, j, k}))
-                          { isOk = false; break; }
-                        if(isOk) ans.push_back({i, j, k});
+                        // k, i, j and j, k, i are equivalent to i, j, k
+                        // and must be omitted
+                        if(i < j && j < k || i > j && j > k)
+                          ans.push_back({i, j, k});
                     }
 
             for(int i = 0; i < ans.size(); i++)
@@ -61,7 +57,7 @@ namespace algorithms::onlinejudge::complete_search::ecosystem
                 s.pop_back();  
                 std::cout << s << std::endl;
             }
-            std::cout << "total: " << ans.size() << std::endl;
+            std::cout << "total:" << ans.size() << std::endl << std::endl;
         }
     }
 }

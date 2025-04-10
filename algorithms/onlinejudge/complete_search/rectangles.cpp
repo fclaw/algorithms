@@ -21,17 +21,15 @@ namespace algorithms::onlinejudge::complete_search::rectangles
         for(int r = 0; r < M; r++)
           for(int c = 0; c < N; c++)
             if(board[r][c])
-            {
-                for(int l = 1; l <= N - c; l++)
-                  for(int h = 1; h <= M - r; h++)
-                  {
-                      bool isFailed = false;
-                      for(int i = r; i < r + h && !isFailed; i++)
-                        for(int j = c; j < c + l && !isFailed; j++)
-                          if(!board[i][j]) isFailed = true;
-                     if(!isFailed) counter++;
-                  }
-            }
+              for(int l = 1; l <= N - c; l++)
+                for(int h = 1; h <= M - r; h++)
+                {
+                    bool isFailed = false;
+                    for(int i = r; i < r + h && !isFailed; i++)
+                      for(int j = c; j < c + l && !isFailed; j++)
+                        if(!board[i][j]) isFailed = true;
+                    if(!isFailed) counter++;
+                }
         return counter;    
     }
     void submit(std::optional<char*> file)

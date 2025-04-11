@@ -1,4 +1,4 @@
-#include "algorithms/onlinejudge/complete_search/rectangles.cpp"
+#include "algorithms/onlinejudge/complete_search/perfectCube.cpp"
 #include <chrono>
 #include <iomanip>
 
@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
 
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::complete_search::rectangles::submit(file);
+    algorithms::onlinejudge::complete_search::perfect_cube::submit(file);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

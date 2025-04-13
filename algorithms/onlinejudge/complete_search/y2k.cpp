@@ -66,8 +66,8 @@ namespace algorithms::onlinejudge::complete_search::y2k
     {
         if(months > YEAR)
         { 
-            int profit = validation(balances);
-            if(profit > 0) ans = std::max(ans, profit);
+            int net = validation(balances);
+            if(net > 0) ans = std::max(ans, net);
             return; 
         }
 

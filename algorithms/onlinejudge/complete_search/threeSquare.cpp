@@ -40,11 +40,11 @@ namespace algorithms::onlinejudge::complete_search::three_square
         {
             int target;
             std::cin >> target;
+            int a = -1, b, c;
             if(targets.count(target))
-            {
-                auto [a, b, c] = targets.at(target);
-                printf("%d %d %d\n", a, b, c);
-            } else printf("-1\n");
+              std::tie(a, b, c) = targets.at(target);
+            
+            a != -1 ? printf("%d %d %d\n", a, b, c) : printf("-1\n");
         }
     }
 }

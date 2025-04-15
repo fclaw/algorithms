@@ -7,7 +7,7 @@
 #include <iomanip>
 #include <sstream>
 #include <tuple>
-#include <unordered_set>
+#include <unordered_map>
 
 
 
@@ -32,12 +32,14 @@ void generateNumberWithLeadingZeros(vs& numbers)
 }
 
 
+
+
 namespace algorithms::onlinejudge::complete_search::safebreaker
 {
     /** https://onlinejudge.org/external/2/296.pdf, 
      * try all 10000 possible codes, 4 nested loops, 
      * use similar solution as ‘Master-Mind’ game  */
-    bool trySelect(const std::string& guess, const std::string& cand, int old_c, int old_m, int& mask) 
+    bool trySelect(const std::string& guess, const std::string& cand, int old_c, int old_m) 
     {
         int new_c = old_c, new_m = old_m;
         int used = 0;
@@ -46,13 +48,19 @@ namespace algorithms::onlinejudge::complete_search::safebreaker
           {
               bool right = (guess[i] == cand[j] && i == j && new_c > 0);
               bool misplaced = (guess[i] == cand[j] && i != j && new_m > 0);
-              if((right || misplaced) && !(used & (1 << i)))
-              { i == j ? --new_c : --new_m; used |= (1 << i); }
-
-              if(old_c == 0 && old_m == 0 && guess[i] == cand[j])
-                return false;
+              if((right || misplaced) && !(used & (1 << j)))
+              { i == j ? --new_c : --new_m; used |= (1 << j); }
           }
-        return !((old_c != 0 && new_c > 0) || (old_m != 0 && new_m > 0));
+
+        
+        bool onInGuess = true;
+        if(!new_c && !new_m)
+          for(char c : cand)
+            if(!(used & (1 << (c - '0'))))
+              onInGuess &= (std::string::npos == guess.find(c));
+
+
+        return onInGuess && !( (old_c != 0 && new_c > 0) || (old_m != 0 && new_m > 0) );
     }
     void submit(std::optional<char*> file, bool debug_mode)
     {
@@ -90,9 +98,8 @@ namespace algorithms::onlinejudge::complete_search::safebreaker
             for(auto cand : numbers)
             {
                 bool isValidCand = true;
-                int used = 0;
                 for(auto& [guess, c, m] : guesses)
-                  isValidCand &= trySelect(guess, cand, c, m, used);
+                  isValidCand &= trySelect(guess, cand, c, m);
                 if(isValidCand) candidates.push_back(cand);
             }
             if(debug_mode) dbg(candidates);

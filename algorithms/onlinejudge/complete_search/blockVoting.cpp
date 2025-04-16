@@ -57,31 +57,52 @@ namespace algorithms::onlinejudge::complete_search::block_voting
             vi parties(N);
             for(int i = 0; i < N; i++)
               std::cin >> parties[i];
-            std::sort(parties.begin(), parties.end());
-              
+          
             int w_majority = std::round(std::accumulate(parties.begin(), parties.end(), 0) / 2 + 1);
 
-            vi power(N);
-            for(int block = 1; block <= (1 << N) - 1; block++)
+            int total_blocks = (1 << N);
+            vi vote_sum(total_blocks);
+            
+            /*
+            * Precomputing vote sums for all possible subsets using bitmask DP:
+            * 
+            * For each subset (represented as a bitmask), we can determine its total vote count
+            * by adding the vote of the last added party to the vote sum of a smaller subset.
+            *
+            * Example:
+            *   mask = 0b1101 (parties 0, 2, 3)
+            *   last_bit = 0 (rightmost set bit)
+            *   prev_mask = 0b1100 (mask ^ (1 << last_bit))
+            *   vote_sum[0b1101] = vote_sum[0b1100] + parties[0]
+            *
+            * This avoids recalculating the vote total from scratch every time,
+            * reducing time complexity from O(2^N * N) to O(2^N).
+            *
+            * This precomputed vote_sum can then be used directly to:
+            *  - Check if a coalition is a winning one (i.e., votes >= majority)
+            *  - Efficiently assess each member's contribution to the coalition
+            *
+            * Smart memoisation of subsets like this is a key technique in subset-based problems.
+            */
+            for(int block = 1; block < total_blocks; ++block) 
             {
-                vi ps;
-                int votes = 0;
-                int mask = block;
-                while (mask)
-                {
-                    int i = __builtin_ctz(mask); // index of the least significant bit set
-                    votes += parties[i];
-                    ps.push_back(i);
-                    mask &= (mask - 1); // clear the lowest set bit
-                }
- 
+                int last_bit = __builtin_ctz(block); // rightmost set bit
+                int prev_block = block ^ (1 << last_bit);
+                vote_sum[block] = vote_sum[prev_block] + parties[last_bit];
+            }
+
+            vi power(N);
+            for(int block = 1; block < total_blocks; block++)
+            {
+                int votes = vote_sum[block];
                 if(votes < w_majority) continue;
 
                 // The key idea is that a party’s power is determined by the number of minority coalitions
                 // that it can join and turn into a (winning) majority coalition. 
-                for(int p : ps)
-                  if(votes - parties[p] < w_majority)
-                    power[p]++;
+                for (int i = 0; i < N; ++i)
+                  if((block & (1 << i)))
+                    if(votes - parties[i] < w_majority)
+                      power[i]++;
             }
             
             std::string ans;

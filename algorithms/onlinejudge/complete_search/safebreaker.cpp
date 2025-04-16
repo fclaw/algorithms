@@ -42,33 +42,26 @@ namespace algorithms::onlinejudge::complete_search::safebreaker
     bool trySelect(const std::string& guess, const std::string& cand, int old_c, int old_m) 
     {
         int new_c = old_c, new_m = old_m;
-        int used = 0;
+        std::unordered_map<int, int> used;
         for(int i = 0; i < 4; i++)
           for(int j = 0; j < 4; j++)
           {
               bool right = (guess[i] == cand[j] && i == j && new_c > 0);
               bool misplaced = (guess[i] == cand[j] && i != j && new_m > 0);
-              if((right || misplaced) && !(used & (1 << j)))
-              { i == j ? --new_c : --new_m; used |= (1 << j); }
+              if((right || misplaced) && !used.count(j))
+              { i == j ? --new_c : --new_m; used[j] = i; }
           }
 
-        
-        bool onInGuess = true;
-        if(!new_c && !new_m)
-          for(char c : cand)
-            if(!(used & (1 << (c - '0'))))
-              onInGuess &= (std::string::npos == guess.find(c));
-
-
-        return onInGuess && !( (old_c != 0 && new_c > 0) || (old_m != 0 && new_m > 0) );
+        bool notInGuess = true;
+        return notInGuess && !( (old_c != 0 && new_c > 0) || (old_m != 0 && new_m > 0) );
     }
     void submit(std::optional<char*> file, bool debug_mode)
     {
         if(file.has_value())
           assert(std::freopen(file.value(), "r", stdin) != nullptr);
 
-        vs numbers;
-        generateNumberWithLeadingZeros(numbers);
+        vs numbers = {"3411"};
+        // generateNumberWithLeadingZeros(numbers);
         
         int tc;
         std::cin >> tc;

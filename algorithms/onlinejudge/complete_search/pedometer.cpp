@@ -25,9 +25,9 @@ namespace algorithms::onlinejudge::complete_search::pedometer
         std::unordered_set<int> digits_with_off;
         for(int d : digits)
         {
-          int off_d = (d & ~off);
-          if(digits_with_off.count(off_d))
-            return false;
+            int off_d = (d & ~off);
+            if(digits_with_off.count(off_d))
+              return false;
             digits_with_off.insert(off_d);
         }
         return true;  

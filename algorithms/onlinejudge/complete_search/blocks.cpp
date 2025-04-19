@@ -1,3 +1,4 @@
+#include "../debug.h"
 #include <cassert>
 #include <optional>
 #include <iostream>
@@ -9,7 +10,7 @@
 namespace algorithms::onlinejudge::complete_search::blocks
 {
     /** https://onlinejudge.org/external/103/10365.pdf, use 3 nested loops with pruning */
-    void submit(std::optional<char*> file)
+    void submit(std::optional<char*> file, bool debug_mode)
     {
         if(file.has_value())
           assert(std::freopen(file.value(), "r", stdin) != nullptr);
@@ -26,7 +27,7 @@ namespace algorithms::onlinejudge::complete_search::blocks
               for(int l = 1; l <= cubes; l++)
                 for(int h = 1; h <= cubes; h++)
                   area = std::min(area, 2 * w * l + 2 * h * w + 2 * h * l);
-            std::cout << area << std::endl;      
+            std::cout << area << std::endl;  
         }
     }
 }

@@ -39,7 +39,8 @@ ll modifiedBinaryToInt(const std::string& binary_str)
 
 namespace algorithms::onlinejudge::complete_search::dexter
 {
-    /** https://onlinejudge.org/external/124/12406.pdf, try all 2 ^ p possible bitmasks, change ‘0’s to ‘2’s  */
+    /** https://onlinejudge.org/external/124/12406.pdf, try all 2 ^ p possible bitmasks, change ‘0’s to ‘2’s, 
+     * rt: 0.940s due to linear time complexity of intToModifiedBinary, O(p * 2 ^ p) */
     void submit(std::optional<char*> file, bool debug_mode)
     {
         if(file.has_value())
@@ -53,7 +54,7 @@ namespace algorithms::onlinejudge::complete_search::dexter
             std::cin >> p >> q;
             int divisor = (int)std::pow(2, q);
             ll largest = INT64_MIN, smallest = INT64_MAX;
-            for(int i = 0; i < (1 << p) - 1; i++)
+            for(int i = 0; i < (1 << p); i++)
             {
                auto binary_str = intToModifiedBinary(i, p);
                ll j = modifiedBinaryToInt(binary_str);

@@ -31,8 +31,6 @@ namespace algorithms::onlinejudge::divide_conquer::Fill_Bates
         while(std::cin >> s)
         {
             mcvi chars_dispositions;
-            int order = 1;
-            char c = s[0];
             for(int i = 0; i < s.size(); i++)
               chars_dispositions[s[i]].push_back(i);
 

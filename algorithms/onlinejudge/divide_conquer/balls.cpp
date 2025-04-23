@@ -15,7 +15,7 @@ typedef std::vector<int> vi;
 
 namespace algorithms::onlinejudge::divide_conquer::balls
 {
-    /** https://onlinejudge.org/external/104/10474.pdf, simple: use sort and then lower bound  */
+    /** https://onlinejudge.org/external/6/679.pdf, binary search */
     void submit(std::optional<char*> file, bool debug_mode)
     {
         if(file.has_value())

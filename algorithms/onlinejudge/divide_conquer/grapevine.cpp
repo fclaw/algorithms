@@ -43,28 +43,23 @@ namespace algorithms::onlinejudge::divide_conquer::grapevine
                 int max_square = 0;
                 std::cin >> from >> to;
                 for(int r = 0; r < N; r++)
-                  for(int c = 0; c < M; c++)
-                    if(props_r[r][c] >= from &&
-                       props_c[c][r] <= to)
-                    {
-                        auto c_it = std::lower_bound(props_r[r].begin() + c, props_r[r].end(), to + 1);
-                        if(c_it == props_r[r].end()) 
-                          c_it = props_r[r].end() - 1;
-                        auto r_it = std::lower_bound(props_c[c].begin() + r, props_c[c].end(), to + 1);
-                        if(r_it == props_c[c].end()) 
-                          r_it = props_c[c].end() - 1;
-                        int c_d = c_it - props_r[r].begin();
-                        int r_d = r_it - props_c[c].begin();
-                        int s = std::min(c_d - c, r_d - r);
-                        if(s < max_square) continue;
-                        bool isf = false;
-                        int square = 0;
-                        for(int shift = s; shift >= 0 && !isf; shift--)
-                          if (props_r[r + shift][c + shift] <= to)
-                          { square = shift; isf = true; break; }
-                        max_square = std::max(max_square, 1 + square);
-                        if(isf) break;
-                    }
+                {
+                     auto lw_it = std::lower_bound(props_r[r].begin(), props_r[r].end(), from);
+                     if(lw_it == props_r[r].end()) continue;
+                     auto up_it = std::upper_bound(props_r[r].begin(), props_r[r].end(), to);
+                     if(up_it == props_r[r].end()) 
+                       up_it = props_r[r].end() - 1;
+                     int c_side = up_it - lw_it;
+                     int c = lw_it - props_r[r].begin();
+                     auto up_r_it = std::upper_bound(props_c[c].begin(), props_c[c].end(), to);
+                     if(up_r_it == props_c[c].end()) 
+                       up_r_it = props_c[c].end() - 1;
+                     int r_side = (up_r_it - props_c[c].begin()) - r;
+                     int s = std::min(c_side, r_side);
+                     for(int shift = s; shift >= 0; --shift)
+                       if(props_r[r + shift][c + shift] <= to)
+                       { max_square = std::max(max_square, 1 + shift);  break; }
+                }
                 std::cout << (max_square != INT32_MIN ? max_square : 0) << std::endl;
             }
             printf("-\n");

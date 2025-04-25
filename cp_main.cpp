@@ -14,6 +14,9 @@
 #include <bitset>
 
 
+
+
+typedef long long ll;
 typedef std::vector<int> vi;
 typedef std::vector<vi> vvi;
 
@@ -23,38 +26,22 @@ const int MOD = 1e9;  // 10^9
 
 int main(int argc, char* argv[])
 {
-    int N, M;
-    while(std::cin >> N >> M)
+    int tc;
+    std::cin >> tc;
+    while(tc--)
     {
-        vvi dishes(M);
-        int S, v;
-        for(int i = 0; i < M; i++)
-        {
-            std::cin >> S;
-            vi xs;
-            int ing;
-            for(int j = 0; j < S; j++)
-            {
-                std::cin >> ing; 
-                xs.push_back(ing);
-            }
-            dishes[i] = xs;  
-        }      
-        vi ingredient(N);
-        for(int i = 0; i < N; i++)
-          std::cin >> ingredient[i];
-            
-        bool isAny;
+        int N;
+        std::string in;
+        std::cin >> N;
+        std::cin >> in;
+        std::bitset<11> s(in);
         int cnt = 0;
-        for(int ing : ingredient)
+        for(int i = 0; i < N; i++)
         {
-            isAny = false;
-           for(int i = 0; i < M; i++)
-           {
-            if(dishes[i].second && dishes[i].first.none()) 
-            { isAny = true; cnt++; dishes[i].second = false; }
-          }
-          std::cout << cnt << std::endl;
+            s.flip(i);
+            cnt += s.count();
+            s.flip(i);
         }
+        std::cout << cnt << std::endl;
     }
 }

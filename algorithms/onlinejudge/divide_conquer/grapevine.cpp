@@ -55,11 +55,12 @@ namespace algorithms::onlinejudge::divide_conquer::grapevine
                           r_it = props_c[c].end() - 1;
                         int c_d = c_it - props_r[r].begin();
                         int r_d = r_it - props_c[c].begin();
+                        int s = std::min(c_d - c, r_d - r);
+                        if(s < max_square) continue;
                         bool isf = false;
                         int square = 0;
-                        for(int shift = std::min(c_d - c, r_d - r); shift >= 0 && !isf; shift--)
-                          if (props_r[r + shift][c + shift] <= to &&
-                              props_r[r + shift][c + shift] >= from)
+                        for(int shift = s; shift >= 0 && !isf; shift--)
+                          if (props_r[r + shift][c + shift] <= to)
                           { square = shift; isf = true; break; }
                         max_square = std::max(max_square, 1 + square);
                         if(isf) break;

@@ -6,10 +6,7 @@
 
 
 int main(int argc, char* argv[])
-{  
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(0);
-    
+{    
     std::optional<char*> file = std::nullopt;
     bool debug_mode = true;
     if(argc > 1) file = std::make_optional(argv[1]);

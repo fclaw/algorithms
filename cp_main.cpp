@@ -19,29 +19,15 @@
 typedef long long ll;
 typedef std::vector<int> vi;
 typedef std::vector<vi> vvi;
-
+typedef std::vector<bool> vb;
 
 const int MOD = 1e9;  // 10^9
 
 
+
+
 int main(int argc, char* argv[])
 {
-    int tc;
-    std::cin >> tc;
-    while(tc--)
-    {
-        int N;
-        std::string in;
-        std::cin >> N;
-        std::cin >> in;
-        std::bitset<11> s(in);
-        int cnt = 0;
-        for(int i = 0; i < N; i++)
-        {
-            s.flip(i);
-            cnt += s.count();
-            s.flip(i);
-        }
-        std::cout << cnt << std::endl;
-    }
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(0);
 }

@@ -1,19 +1,22 @@
 #define DBG_MACRO_NO_WARNING
 
-#include "algorithms/onlinejudge/divide_conquer/monkey.cpp"
+#include "algorithms/onlinejudge/divide_conquer/bitMaps.cpp"
 #include <chrono>
 #include <iomanip>
 
 
 int main(int argc, char* argv[])
 {  
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(0);
+    
     std::optional<char*> file = std::nullopt;
     bool debug_mode = true;
     if(argc > 1) file = std::make_optional(argv[1]);
 
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::divide_conquer::monkey::submit(file, debug_mode);
+    algorithms::onlinejudge::divide_conquer::bit_maps::submit(file, debug_mode);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

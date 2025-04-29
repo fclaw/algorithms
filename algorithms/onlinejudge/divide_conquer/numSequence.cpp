@@ -44,6 +44,5 @@ namespace algorithms::onlinejudge::divide_conquer::num_sequence
             int cnt = it - nums.begin() + 1;
             dbg(*(it - 1) + 1, n, *it, cnt);
         }  
-  
     }
 }

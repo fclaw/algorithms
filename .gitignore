@@ -1,2 +1,5 @@
 .history
 .lh
+exe
+*.txt
+.vscode

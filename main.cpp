@@ -1,6 +1,6 @@
 #define DBG_MACRO_NO_WARNING
 
-#include "algorithms/onlinejudge/greedy/loowater.cpp"
+#include "algorithms/onlinejudge/greedy/maxSum.cpp"
 #include <chrono>
 #include <iomanip>
 
@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::greedy::loowater::submit(file, debug_mode);
+    algorithms::onlinejudge::greedy::max_sum::submit(file, debug_mode);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

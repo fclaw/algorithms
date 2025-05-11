@@ -52,6 +52,10 @@ namespace algorithms::onlinejudge::greedy::dynamic_frog
         uint32_t min_jump = UINT32_MAX;
         for(int j = i + 1; j < s; ++j) {
           uint32_t curr_jump = boulders[j].d - boulders[i].d;
+          // If stepping on a 'S' (small, one-time) boulder, we must skip it on the way back.
+          // Hence, we simulate a 'double jump'—we ignore the current small stone's jump,
+          // and instead consider the jump directly to the next stone (j + 1), 
+          // because that will be used on the return trip.
           if(boulders[j].is_one_time && j + 1 < s)
             jump = std::max(jump, boulders[j + 1].d - boulders[i].d);
           else jump = std::max(jump, curr_jump);
@@ -87,7 +91,6 @@ namespace algorithms::onlinejudge::greedy::dynamic_frog
               boulders[i] = {bd, type == 'S'};
             }
 
-            // dbg(boulders);
             vi memo(101, -1);
             printf("Case %d: %u\n", c++, backtrack(boulders, 0, 0, memo));
         }

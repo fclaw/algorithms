@@ -15,10 +15,12 @@
 
 
 typedef std::vector<int> vi;
-typedef std::vector<std::pair<int, int>> vpii;
+typedef std::pair<int, int> pii;
+typedef std::vector<pii> vpii;
 typedef std::vector<vpii> vvpii;
 typedef std::vector<vvpii> vvvpii;
-typedef std::pair<int, int> pii;
+
+const pii def = {INT32_MAX, INT32_MAX};
 
 
 namespace algorithms::onlinejudge::greedy::ferry_loading
@@ -27,44 +29,26 @@ namespace algorithms::onlinejudge::greedy::ferry_loading
     int cap, t, n;
     pii backtrack(const vi& cars, int i, int curr_t, int load, vvvpii& memo)
     {
-         int trip = curr_t / (2 * t);
-         if (trip >= (int)memo[0][0].size())
-           return { INT32_MAX, INT32_MAX };
+         if(i == n) { return {curr_t + t, 1}; }
 
-          pii& res = memo[i][load][trip];
-         if (res.first != INT32_MAX && 
-             res.second != INT32_MAX) 
-           return res;
+         pii& res = memo[i][load][curr_t];
+         if (res != def) return res;
 
-         if(i == (int)cars.size())
-         {  return { curr_t + t, 1}; }
+         // cars haven't arrived yet, the ferry have to wait for the first to be available
+         if(cars[i] > curr_t && !load) return backtrack(cars, i, cars[i], load, memo);
 
-         if(cars[i] > curr_t) 
-           return backtrack(cars, i, cars[i], load, memo);
+         pii best = def;
+         // take on one car and wait for others
+         if(load < cap) best = backtrack(cars, i + 1, std::max(curr_t, cars[i]), load + 1, memo);
 
-         if(load == cap) {
-           pii local_res = backtrack(cars, i, curr_t + 2 * t, 0, memo);
-           if(local_res.second != INT32_MAX) 
-             local_res.second += 1; // Count this trip
-           return res = local_res;
+         // cross with a partial load
+         if(load > 0 && load <= cap) {
+            pii ferry = backtrack(cars, i, i == n ? curr_t + t : curr_t + 2 * t, 0, memo); 
+            ++ferry.second;
+            best = std::min(best, ferry);
          }
 
-         
-         pii take = backtrack(cars, i + 1, curr_t, load + 1, memo);
-         pii depart = {INT32_MAX, INT32_MAX};
-         if(load > 0) {
-           depart = backtrack(cars, i + 1, curr_t + 2 * t, 0, memo);
-           if(depart.second != INT32_MAX) 
-             depart.second += 1;
-         }
-
-         // Choose the better (min total time), breaking ties by fewer trips
-         if (depart.first < take.first || 
-             (depart.first == take.first && 
-              depart.second < take.second))
-           res = depart;
-         else res = take;
-         return res;
+         return res = best;
     }
     void submit(std::optional<char*> file, bool debug_mode)
     {
@@ -85,11 +69,11 @@ namespace algorithms::onlinejudge::greedy::ferry_loading
         {
             while_read(cap, t, n);
             vi cars(n);
-            int max_trips = 2 * n + 1; // conservative upper bound
+            int max_time = 10000 * 100 + 100; // max cars × max latest arrival + return
             loop(n, [&cars](int i) { std::cin >> cars[i]; } );
-            vvvpii memo(n + 1, vvpii(cap + 1, vpii(max_trips, {INT32_MAX, INT32_MAX})));
+            vvvpii memo(n + 1, vvpii(cap + 1, vpii(max_time, def)));
             pii ans = backtrack(cars, 0, 0, 0, memo);
-            std::cout << ans.first << " " <<  ans.second << std::endl;
+            std::cout << ans.first << " " << ans.second << std::endl;
         }
     }
 }

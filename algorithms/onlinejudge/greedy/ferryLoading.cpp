@@ -16,9 +16,6 @@
 
 typedef std::vector<int> vi;
 typedef std::pair<int, int> pii;
-typedef std::vector<pii> vpii;
-typedef std::vector<vpii> vvpii;
-typedef std::vector<vvpii> vvvpii;
 
 const pii def = {INT32_MAX, INT32_MAX};
 
@@ -27,28 +24,25 @@ namespace algorithms::onlinejudge::greedy::ferry_loading
 {
     /** https://onlinejudge.org/external/104/10440.pdf */
     int cap, t, n;
-    pii backtrack(const vi& cars, int i, int curr_t, int load, vvvpii& memo)
+    pii backtrack(const vi& cars, int i, int curr_t, int load)
     {
          if(i == n) { return {curr_t + t, 1}; }
 
-         pii& res = memo[i][load][curr_t];
-         if (res != def) return res;
-
          // cars haven't arrived yet, the ferry have to wait for the first to be available
-         if(cars[i] > curr_t && !load) return backtrack(cars, i, cars[i], load, memo);
+         if(cars[i] > curr_t && !load) return backtrack(cars, i, cars[i], load);
 
          pii best = def;
          // take on one car and wait for others
-         if(load < cap) best = backtrack(cars, i + 1, std::max(curr_t, cars[i]), load + 1, memo);
+         if(load < cap) best = backtrack(cars, i + 1, std::max(curr_t, cars[i]), load + 1);
 
          // cross with a partial load
          if(load > 0 && load <= cap) {
-            pii ferry = backtrack(cars, i, i == n ? curr_t + t : curr_t + 2 * t, 0, memo); 
+            pii ferry = backtrack(cars, i, curr_t + 2 * t, 0);
             ++ferry.second;
             best = std::min(best, ferry);
          }
 
-         return res = best;
+         return best;
     }
     void submit(std::optional<char*> file, bool debug_mode)
     {
@@ -69,10 +63,8 @@ namespace algorithms::onlinejudge::greedy::ferry_loading
         {
             while_read(cap, t, n);
             vi cars(n);
-            int max_time = 10000 * 100 + 100; // max cars × max latest arrival + return
             loop(n, [&cars](int i) { std::cin >> cars[i]; } );
-            vvvpii memo(n + 1, vvpii(cap + 1, vpii(max_time, def)));
-            pii ans = backtrack(cars, 0, 0, 0, memo);
+            pii ans = backtrack(cars, 0, 0, 0);
             std::cout << ans.first << " " << ans.second << std::endl;
         }
     }

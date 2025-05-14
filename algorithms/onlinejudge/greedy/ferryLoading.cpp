@@ -29,6 +29,15 @@
  * - The guiding condition forces a greedy strategy by ensuring the ferry only departs when it is fully loaded or no more cars are available.
  * - The result is optimal and avoids unnecessary recursion, reducing time complexity significantly.
  * - The solution performs optimally in linear time for the given problem constraints.
+ * 
+ * Correctness:
+ * - Correctness without over-complicating the Proof: 
+ *   By combining backtracking with strategic pruning through constraints, 
+ *   you ensure the solution is both correct and efficient. 
+ *   You don’t need to worry about proving the greedy strategy’s correctness 
+ *   in every possible scenario because the backtracking guarantees all potential optimal paths are explored.
+ •	 General Applicability: This hybrid solution is general enough to handle edge cases where a greedy approach would fail,
+ *   making it a safer choice for problems where purely greedy solutions are hard to justify.
  */
 
 #include "../debug.h"

@@ -18,33 +18,34 @@
 
 
 
-
 namespace algorithms::onlinejudge::greedy::bit_mask
 {
     /** https://onlinejudge.org/external/107/10718.pdf */
     const uint32_t M = 32;
     const uint32_t MAX = std::numeric_limits<uint32_t>::max();
     uint32_t n, l, u;
-    void backtrack(int bit, uint32_t curr_v, uint32_t& max_or, uint32_t& comp) 
+    std::pair<uint32_t, uint32_t> backtrack(int bit, uint32_t curr_v) 
     {
-        if(curr_v > u) return;  // Prune invalid branches
+        if(curr_v > u) return {0, MAX};  // Prune invalid branches
         if(bit < 0) {
-          if(curr_v >= l) {
-            uint32_t curr_or = curr_v | n;
-            if(curr_or > max_or) {
-               max_or = curr_or;
-               comp = curr_v;
-             } else if (curr_or == max_or)
-                 comp = std::min(comp, curr_v);  // Keep min comp for tie
-          }
-          return;
+          if(curr_v >= l)
+            return {curr_v | n, curr_v};
+          else return {0, MAX};
         }
 
-      // Try not setting bit
-      backtrack(bit - 1, curr_v, max_or, comp);
-      // Try setting bit
-      backtrack(bit - 1, curr_v | (1U << bit), max_or, comp);
+        std::pair<uint32_t, uint32_t> res;
+
+        // Try not setting bit
+        std::pair<uint32_t, uint32_t> skip = backtrack(bit - 1, curr_v);
+        // Try setting bit
+        std::pair<uint32_t, uint32_t> add = backtrack(bit - 1, curr_v | (1U << bit));
+
+        if(skip.first > add.first) res = skip;
+        else if(skip.first < add.first) res = add;
+        else res = { skip.first, std::min(skip.second, add.second) };
+        return res;
     }
+
     void submit(std::optional<char*> file, bool debug_mode)
     {
         if (file.has_value())
@@ -64,10 +65,7 @@ namespace algorithms::onlinejudge::greedy::bit_mask
             uint32_t msb_n = M - __builtin_clz(n);
             uint32_t msb_u = M - __builtin_clz(u);
             int msb = std::min(M, std::max(msb_n, msb_u));
-            uint32_t max_or = 0;
-            uint32_t comp = 0;
-            backtrack(msb, 0, max_or, comp);
-            std::cout << comp << std::endl;
+            std::cout << backtrack(msb, 0).second << std::endl;
         }
     }
 }

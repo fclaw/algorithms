@@ -37,15 +37,20 @@ namespace algorithms::onlinejudge::dp::Jill_rides_again
             throw std::ios_base::failure(errorMessage);
           }
         
-        int tc;
+        int tc, c = 1;
         std::cin >> tc;
         while(tc--)
         {
             int n;
             std::cin >> n;
-            vi stops(n - 1);
-            loop(n - 1, [&stops](int i) { std::cin >> stops[i]; });
-            
+            vi stops(n);
+            loop(n - 1, [&stops](int i) { std::cin >> stops[i + 1]; });
+             
+            int start, end;
+            bool hasRoute = false;
+
+            if(hasRoute) printf("The nicest part of route %d is between stops %d and %d\n", c++, start, end);
+            else printf("Route %d has no nice parts\n", c++);
         }
     }
 }

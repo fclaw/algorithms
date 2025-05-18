@@ -18,7 +18,7 @@
 namespace algorithms::onlinejudge::greedy::bit_mask
 {
     /** https://onlinejudge.org/external/107/10718.pdf */
-    const uint32_t M = 31;
+    const int MBit = 31;
     const uint32_t MAX = std::numeric_limits<uint32_t>::max();
     uint32_t n, l, u;
     std::pair<uint32_t, uint32_t> backtrack(int bit, uint32_t curr_v) 
@@ -58,43 +58,20 @@ namespace algorithms::onlinejudge::greedy::bit_mask
 
         while(while_read(n, l, u))
         {
-            // Calculate the most significant bit for n and u
-            uint32_t msb_n = M - __builtin_clz(n);
-            uint32_t msb_u = M - __builtin_clz(u);
-            int msb = std::min(M, std::max(msb_n, msb_u));
-
-            uint32_t curr_n = 0;
-            uint32_t max_or = 0;
-            uint32_t max_comp = MAX;
-            for(int bit = msb; bit >= 0; --bit)
+            uint32_t max_comp = 0;
+            for(int bit = MBit; bit >= 0; --bit)
             {
-                uint32_t tmp_n = curr_n | (1U << bit);
-                if(tmp_n > u) continue; // exced the upper bound, skip this bit
-                // below the lower bound, add the bit
-                if(tmp_n < l) 
-                { curr_n = tmp_n; continue; }
-
                 // if bit is not set in n, add it
                 if(!(n & (1U << bit)))
                 {
-                    curr_n = tmp_n;
-                    max_comp = curr_n;
-                    max_or = (curr_n | n);
+                    uint32_t tmp_n = max_comp | (1U << bit);
+                    if(tmp_n <= u) max_comp = tmp_n;
                 }
-                else 
+                else // if bit is set try using inclusive-exclusive principle
                 {
-                    // the options arise: either bit is set or not
-                    // which one should be assigned to curr_n to go on??
-                    // we can exploit the backtracking approach
-                    uint32_t skip = curr_n;
-                    uint32_t add = tmp_n;
-                    if((skip | n) > (add | n)); // do nothing
-                    else if((skip | n) < (add | n))
-                    {
-                        curr_n = add;
-                        max_comp = add;
-                        max_or = (add | n);
-                    } max_comp = std::min(max_comp, std::min(skip, add));
+                    uint32_t add_n = max_comp | (1U << bit);
+                    if(add_n > l) continue; // if added bit leads to passing over l go on to next
+                    max_comp = add_n;
                 }
             }
             std::cout << max_comp << std::endl;

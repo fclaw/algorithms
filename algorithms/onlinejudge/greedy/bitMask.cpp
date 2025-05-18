@@ -19,30 +19,7 @@ namespace algorithms::onlinejudge::greedy::bit_mask
 {
     /** https://onlinejudge.org/external/107/10718.pdf */
     const int MBit = 31;
-    const uint32_t MAX = std::numeric_limits<uint32_t>::max();
     uint32_t n, l, u;
-    std::pair<uint32_t, uint32_t> backtrack(int bit, uint32_t curr_v) 
-    {
-        if(curr_v > u) return {0, MAX};  // Prune invalid branches
-        if(bit < 0) {
-          if(curr_v >= l)
-            return {curr_v | n, curr_v};
-          else return {0, MAX};
-        }
-
-        std::pair<uint32_t, uint32_t> res;
-
-        // Try not setting bit
-        std::pair<uint32_t, uint32_t> skip = backtrack(bit - 1, curr_v);
-        // Try setting bit
-        std::pair<uint32_t, uint32_t> add = backtrack(bit - 1, curr_v | (1U << bit));
-
-        if(skip.first > add.first) res = skip;
-        else if(skip.first < add.first) res = add;
-        else res = { skip.first, std::min(skip.second, add.second) };
-        return res;
-    }
-
     void submit(std::optional<char*> file, bool debug_mode)
     {
         if (file.has_value())
@@ -58,19 +35,35 @@ namespace algorithms::onlinejudge::greedy::bit_mask
 
         while(while_read(n, l, u))
         {
+            int msb_n = MBit - __builtin_clz(n);
+            int msb_u = MBit - __builtin_clz(u);
+            int msb = std::min(MBit, std::max(msb_n, msb_u));
             uint32_t max_comp = 0;
-            for(int bit = MBit; bit >= 0; --bit)
+            for(int bit = msb; bit >= 0; --bit)
             {
                 // if bit is not set in n, add it
-                if(!(n & (1U << bit)))
-                {
-                    uint32_t tmp_n = max_comp | (1U << bit);
-                    if(tmp_n <= u) max_comp = tmp_n;
+                // The current bit is NOT set in N:
+                // → Setting this bit in M may increase (N | M), so we try to include it.
+                // → However, we do so only if the resulting M does not exceed the upper bound U.
+                if(!(n & (1U << bit))) {
+                  if((max_comp | (1U << bit)) <= u) 
+                    max_comp |= (1U << bit);
                 }
                 else // if bit is set try using inclusive-exclusive principle
                 {
+                    /*
+                      In this block, we consider bits that are already set in `n`. 
+                      We attempt to set those same bits in our candidate `max_comp` to possibly increase `(n | max_comp)`.
+                      However, we're constrained by the need to find the **smallest possible M** such that:
+                          - L ≤ M ≤ U
+                          - (N | M) is maximised
+                      So, once `max_comp` reaches or exceeds the lower bound `L`, 
+                      we **must stop adding bits** — because any further increase would make `M` larger than necessary, 
+                      violating the minimality requirement.
+                      Hence, we skip this bit if adding it results in `add_n > L`.
+                    */
                     uint32_t add_n = max_comp | (1U << bit);
-                    if(add_n > l) continue; // if added bit leads to passing over l go on to next
+                    if(add_n > l) continue;
                     max_comp = add_n;
                 }
             }

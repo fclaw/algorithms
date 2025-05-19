@@ -65,7 +65,7 @@ typedef std::vector<int> vi;
 
 namespace algorithms::onlinejudge::dp::catcher
 {
-    /**  */
+    /** https://onlinejudge.org/external/2/231.pdf */
     void submit(std::optional<char*> file, bool debug_mode)
     {
         if (file.has_value())

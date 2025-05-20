@@ -69,9 +69,8 @@ namespace algorithms::onlinejudge::dp::strategic_defense_initiative
               path.push_back(targets[idx]);
               idx = sol[idx];
             }
-            std::reverse(path.begin(), path.end());
             printf("Max hits: %d\n", (int)path.size());
-            for(int p : path) std::cout << p << std::endl;
+            for(auto it = path.rbegin(); it != path.rend(); ++it) std::cout << *it << std::endl;
             if(tc) std::cout << std::endl;  
         }
     }

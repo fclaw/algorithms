@@ -1,6 +1,6 @@
 #define DBG_MACRO_NO_WARNING
 
-#include "algorithms/onlinejudge/dp/murciaSkyline.cpp"
+#include "algorithms/onlinejudge/dp/whatGoesUp.cpp"
 #include <chrono>
 #include <iomanip>
 #include <bits/stdc++.h>
@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::dp::skyline::submit(file, debug_mode);
+    algorithms::onlinejudge::dp::what_goes_up::submit(file, debug_mode);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

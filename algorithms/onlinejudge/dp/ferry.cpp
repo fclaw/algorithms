@@ -28,6 +28,25 @@ Benefits:
 In implementation:
 - Use prefix sums to track how much space has been used by the first `i` cars.
 - Index the memo table by (i, leftRemain).
+
+  IMPORTANT: Optimization Insight:
+  ---------------------
+
+  In the classic ferry loading problem, each car can be loaded on either the port (left) or starboard (right) side of the ferry, 
+  each of which has a maximum capacity of 'L'. At each step 'i', we consider the remaining space on both sides to make our decision.
+
+  However, a crucial observation allows us to reduce the DP state:
+
+    - Let `prefix_sum[i]` be the total length of all cars loaded so far (from 0 to i-1).
+    - The total available space on the ferry is `2L` (L for each side).
+    - If we store only the remaining space on the **port** side, `rem_l`, we can compute the remaining space on the **starboard** side as:
+
+        rem_r = 2L - prefix_sum[i] - rem_l;
+
+  This is valid because the sum of used space on both sides must equal `prefix_sum[i]`.
+  Hence, instead of tracking both `rem_l` and `rem_r` explicitly, we only memoise on `(i, rem_l)`, 
+  and derive `rem_r` dynamically. This effectively reduces the DP dimension from 3D to 2D,
+  significantly improving space complexity and simplifying implementation.
 ================================================================================
 */
 
@@ -69,7 +88,9 @@ namespace algorithms::onlinejudge::dp::ferry
     // base case: i == n -> 0
     std::string print(Side s) { return s == Port ? "port" : "starboard"; }
     piv_side def = {0, {}};
-    piv_side knapsack(const vi& cars, int i, int rem_l, int rem_r, std::vector<std::vector<piv_side>>& memo)
+    vi prefix_sum;
+    int ferry_l, l;
+    piv_side knapsack(const vi& cars, int i, int rem_l, std::vector<std::vector<piv_side>>& memo)
     {
         if(i == (int)cars.size()) return def;
 
@@ -77,14 +98,15 @@ namespace algorithms::onlinejudge::dp::ferry
 
         piv_side best = def;
         if(rem_l - cars[i] >= 0) {
-          auto left = knapsack(cars, i + 1, rem_l - cars[i], rem_r, memo);
+          auto left = knapsack(cars, i + 1, rem_l - cars[i], memo);
           left.first += 1;
           left.second.push_back(Port);
           if(left.first > best.first) best = left;
         }
         
-        if(rem_r - cars[i] >= 0) { 
-          auto right = knapsack(cars, i + 1, rem_l, rem_r - cars[i], memo);
+        int rem_r = 2 * ferry_l - rem_l - prefix_sum[i];
+        if(rem_r >= 0) { 
+          auto right = knapsack(cars, i + 1, rem_l, memo);
           right.first += 1;
           right.second.push_back(Starboard);
           if(right.first > best.first) best = right;
@@ -110,17 +132,27 @@ namespace algorithms::onlinejudge::dp::ferry
         std::cin.ignore();
         while(tc--)
         {
-            int ferry_l, l;
             std::cin >> ferry_l;
             ferry_l *= 100; // bring it to centimetres
             vi cars;
-            while(while_read(l) && l) cars.push_back(l);
+            while(while_read(l) && l) 
+              cars.push_back(l);
             
             int s = (int)cars.size();
+
+            if(!s) { std::cout << 0 << std::endl; continue; }
+
+            prefix_sum.clear();
+            prefix_sum.resize(s);
+            prefix_sum[0] = cars[0];
+            for (int i = 1; i < s; ++i)
+              prefix_sum[i] = prefix_sum[i - 1] + cars[i];
+
             std::vector<std::vector<piv_side>> memo(s + 1, std::vector<piv_side>(ferry_l + 1, {-1, {}}));
-            piv_side ans = knapsack(cars, 0, ferry_l, ferry_l, memo);
+            piv_side ans = knapsack(cars, 0, ferry_l, memo);
             std::cout << ans.first << std::endl;
-            for(Side s : ans.second) std::cout << print(s) << std::endl;
+            for(auto it = ans.second.rbegin(); it != ans.second.rend(); ++it) 
+              std::cout << print(*it) << std::endl;
             if(tc) std::cout << std::endl;
         }  
     }

@@ -1,6 +1,6 @@
 #define DBG_MACRO_NO_WARNING
 
-#include "algorithms/onlinejudge/dp/sumOfPrimes.cpp"
+#include "algorithms/onlinejudge/dp/superSale.cpp"
 #include <chrono>
 #include <iomanip>
 #include <bits/stdc++.h>
@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::dp::sum_of_primes::submit(file, debug_mode);
+    algorithms::onlinejudge::dp::super_sale::submit(file, debug_mode);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

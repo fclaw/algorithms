@@ -75,7 +75,7 @@ enum Side { Port, Starboard };
 typedef std::vector<int> vi;
 typedef std::vector<vi> vvi;
 typedef std::vector<vvi> vvvi;
-typedef std::pair<int, std::vector<Side>> piv_side;
+typedef std::pair<int, std::vector<std::pair<int, Side>>> piv_side;
 
 
 
@@ -86,7 +86,6 @@ namespace algorithms::onlinejudge::dp::ferry
     // f(i, rem_l, rem_r) = 1 + min(f(i + 1, rem_l - cars(i).l, rem_r), f(i + 1, rem_l, rem_r - cars(i).l)), 
     // if conditions are met: rem_l >= cars(i).l,rem_r >= cars(i).l
     // base case: i == n -> 0
-    std::string print(Side s) { return s == Port ? "port" : "starboard"; }
     piv_side def = {0, {}};
     vi prefix_sum;
     int ferry_l, l;
@@ -100,7 +99,7 @@ namespace algorithms::onlinejudge::dp::ferry
         if(rem_l - cars[i] >= 0) {
           auto left = knapsack(cars, i + 1, rem_l - cars[i], memo);
           left.first += 1;
-          left.second.push_back(Port);
+          left.second.push_back({i, Port});
           if(left.first > best.first) best = left;
         }
         
@@ -108,7 +107,7 @@ namespace algorithms::onlinejudge::dp::ferry
         if(rem_r >= 0) { 
           auto right = knapsack(cars, i + 1, rem_l, memo);
           right.first += 1;
-          right.second.push_back(Starboard);
+          right.second.push_back({i, Starboard});
           if(right.first > best.first) best = right;
         }
 
@@ -129,7 +128,6 @@ namespace algorithms::onlinejudge::dp::ferry
         
         int tc;
         std::cin >> tc;
-        std::cin.ignore();
         while(tc--)
         {
             std::cin >> ferry_l;
@@ -140,19 +138,19 @@ namespace algorithms::onlinejudge::dp::ferry
             
             int s = (int)cars.size();
 
-            if(!s) { std::cout << 0 << std::endl; continue; }
-
-            prefix_sum.clear();
-            prefix_sum.resize(s);
-            prefix_sum[0] = cars[0];
-            for (int i = 1; i < s; ++i)
-              prefix_sum[i] = prefix_sum[i - 1] + cars[i];
+            if(s > 0) {
+              prefix_sum.resize(s);
+              prefix_sum[0] = cars[0];
+              for (int i = 1; i < s; ++i)
+                prefix_sum[i] = prefix_sum[i - 1] + cars[i];
+            }
 
             std::vector<std::vector<piv_side>> memo(s + 1, std::vector<piv_side>(ferry_l + 1, {-1, {}}));
             piv_side ans = knapsack(cars, 0, ferry_l, memo);
             std::cout << ans.first << std::endl;
-            for(auto it = ans.second.rbegin(); it != ans.second.rend(); ++it) 
-              std::cout << print(*it) << std::endl;
+            auto xs = ans.second;
+            std::sort(xs.begin(), xs.end(), [](auto &l, auto &r) {return l.first < r.first; });
+            for(auto& x : xs) std::cout << (x.second == Port ? "port" : "starboard") << std::endl;
             if(tc) std::cout << std::endl;
         }  
     }

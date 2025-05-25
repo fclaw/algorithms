@@ -2,7 +2,57 @@
 ───────────────────────────────────────────────────────────────
 🧳 UVa 10819 Trouble of 13-Dots, rt: 0.530s
 ───────────────────────────────────────────────────────────────
+
+==================================================
+  DP Recurrence and Table Initialization Commentary
+==================================================
+
+The recurrence:
+---------------
+We define:
+    int knapsack(i, spend) = maximum favour from items[i..n-1] with current spend.
+
+We always include the "skip" option:
+    skip = knapsack(i + 1, spend);
+    best = max(best, skip);
+
+This guarantees that even if no item is taken, the function returns a valid favour value (≥ 0).
+Hence, there is NO NEED to initialise `best = INT32_MIN`, because:
+    - The skip case provides a baseline result.
+    - This is logically consistent with the base case: if(i == n) return 0.
+
+DP Table Setup:
+---------------
+To mirror this in bottom-up DP:
+
+    vvi dp(n + 1, vi(max_spend + 1, INT32_MIN));
+    dp[0][0] = 0; // Base case: no items, no money spent → 0 favour.
+
+Why INT32_MIN?
+    - Represents an unreachable or invalid state.
+    - Ensures we don’t accidentally maximise over garbage values.
+
+Transitions only propagate values from valid states, so:
+    - We never add to or compare against INT32_MIN directly.
+    - Only states with proper spending constraints are considered.
+
+Final Answer:
+-------------
+After DP is populated, extract the answer as:
+
+    int ans = 0;
+    for (int s = 0; s <= max_spend; ++s)
+        if (s <= budget || (s > THRESHOLD && s <= budget + extra))
+            ans = max(ans, dp[n][s]);
+
+This ensures the final answer respects the mixed budget rule.
+
+Conclusion:
+-----------
+Using skip as the baseline in recurrence ensures correctness without needing `best = INT32_MIN`.
+Using INT32_MIN in the DP table safely marks unreachable states and aligns with the recurrence logic.
 */
+
 
 #include "../debug.h"
 #include "../../aux.h"
@@ -48,20 +98,6 @@ namespace algorithms::onlinejudge::dp::troubleOf13Dots
     const int THRESHOLD = 2000;
     const int extra = 200;
     int budget, n; 
-    int knapsack(const v_item& items, int i, int spend, vvi& memo)
-    {
-        if(i == n) return 0;
-
-        if(~memo[i][spend]) return memo[i][spend];
-
-        int best = knapsack(items, i + 1, spend, memo);
-        
-        if((spend + items[i].price <= budget) ||
-            (spend + items[i].price > THRESHOLD && 
-             spend + items[i].price <= budget + extra))
-          best = std::max(best, items[i].favour_index + knapsack(items, i + 1, spend + items[i].price, memo));  
-        return memo[i][spend] = best;
-    }
     void submit(std::optional<char*> file, bool debug_mode)
     {
         if (file.has_value())
@@ -85,10 +121,26 @@ namespace algorithms::onlinejudge::dp::troubleOf13Dots
             });
 
             std::sort(items.begin(), items.end());
-
             int max_spend = std::max(budget, THRESHOLD) + extra;
-            vvi memo(n + 1, vi(max_spend + 1, -1));
-            std::cout << knapsack(items, 0, 0, memo) << std::endl;
+            vvi dp(n + 1, vi(max_spend + 1, INT32_MIN));
+            dp[0][0] = 0;
+            for(int i = 0; i < n; ++i)
+              for(int s = 0; s <= max_spend; ++s) {
+                  dp[i + 1][s] = dp[i][s]; // skip
+                  if(s >= items[i].price && 
+                     (s <= budget || 
+                      (s > THRESHOLD && 
+                       s <= budget + extra)))
+                    dp[i + 1][s]  = std::max(dp[i + 1][s], items[i].favour_index + dp[i][s - items[i].price]);
+              }
+            
+            int ans = 0;
+            for(int i = 0; i <= max_spend; ++i)
+              if(i <= budget || 
+                 (i > THRESHOLD && 
+                  i <= budget + extra))
+                ans = std::max(ans, dp[n][i]);     
+            std::cout << ans << std::endl;
         }
     }
 }

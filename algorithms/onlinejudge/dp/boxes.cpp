@@ -142,8 +142,19 @@ namespace algorithms::onlinejudge::dp::boxes
             });
 
             // f(i, rem_w) = max(f(i + 1, rem_w), (rem_w >= w(i)) ? 1 + f(i + 1, min(rem_w - w(i), c(i))) : -INF)
-            vvi memo(n + 1, vi(MAX_CAP + 1, -1));
-            std::cout << knapsack(boxes, 0, MAX_CAP, memo) << std::endl;
+            vvi dp(n + 1, vi(MAX_CAP + 1, INT32_MIN));
+            dp[0][MAX_CAP] = 0;
+            for(int i = 0; i < n; ++i)
+              for(int w = MAX_CAP; w >= 0; --w) {
+                  dp[i + 1][w] = std::max(dp[i + 1][w], dp[i][w]);
+                  if(w >= boxes[i].weight) {
+                    int mew_rem_w = std::min(w - boxes[i].weight, boxes[i].capacity);
+                    dp[i + 1][mew_rem_w] = std::max(dp[i + 1][mew_rem_w], 1 + dp[i][w]);
+                  }
+              }
+
+            int ans = *std::max_element(dp[n].begin(), dp[n].end());
+            std::cout << ans << std::endl;  
         }  
     }
 }

@@ -1,6 +1,6 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa 147 Dollars, rt: s
+🧳 UVa 147 Dollars, rt: top-down - 1.740s, bottom-up - 2.560s
 ───────────────────────────────────────────────────────────────
 */
 
@@ -102,8 +102,22 @@ namespace algorithms::onlinejudge::dp::dollars
             int notes = std::atoi(in.substr(0, dot).c_str());
             int coins = std::atoi(in.substr(dot + 1, in.size()).c_str());
             if(!notes && !coins) break;
-            memset(memo, -1, sizeof memo);
-            printf("%6.2f%17llu\n", to_double({notes, coins}), coin_change({notes, coins}, 0));
+
+            ll dp[MAX_NOTES + 1][MAX_COINS + 1];
+            memset(dp, 0, sizeof dp);
+            dp[0][0] = 1;
+
+            for(int i = 0; i < S; ++i)
+              for (int n = 0; n <= notes; ++n)
+                for (int c = 0; c <= MAX_COINS; ++c) {  // coins always < 100
+                  int total_coins = c + currencies[i].coins;
+                  int carry_notes = total_coins / 100;
+                  int new_coins = total_coins % 100;
+                  int new_notes = n + currencies[i].notes + carry_notes;
+                  if(new_notes <= notes)
+                    dp[new_notes][new_coins] += dp[n][c];
+                }
+            printf("%6.2f%17llu\n", to_double({notes, coins}), dp[notes][coins]);
         }  
     }
 }

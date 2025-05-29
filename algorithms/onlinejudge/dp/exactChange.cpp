@@ -2,6 +2,22 @@
 ───────────────────────────────────────────────────────────────
 🧳 UVa 11517 exact change, rt: s
 ───────────────────────────────────────────────────────────────
+
+  Traversal Direction in DP for Coin Change / Knapsack:
+
+  - Unbounded Case (each coin can be reused multiple times):
+    → Traverse 'sum' from low to high (upwards).
+    → Mirrors recursion that allows reusing the same coin.
+    → Example: Unbounded Knapsack / Classic Coin Change.
+
+  - 0/1 Case (each coin can be used only once):
+    → Traverse 'sum' from high to low (downwards).
+    → Mirrors recursion that moves to the next coin and disallows reuse.
+    → Simulates subset combinations.
+    → Example: 0/1 Knapsack / Exact Change with distinct coins.
+
+  Choosing the correct direction is essential to avoid overcounting and
+  to correctly model the problem's constraints.
 */
 
 #include "../debug.h"
@@ -20,7 +36,7 @@
 #include <unordered_set>
 
 
-
+using namespace std;
 
 struct Ans
 {
@@ -43,15 +59,14 @@ typedef std::vector<Ans> v_ans;
 typedef std::vector<v_ans> vv_ans;
 
 
-const int max = (int)1e5;
-Ans def = {max, 0, 0};
+const int MAX = (int)1e5;
+Ans def = {MAX, 0, 0};
 
 namespace algorithms::onlinejudge::dp::exact_change
 {
     /** https://onlinejudge.org/external/115/11517.pdf */
     int tc, price, n;
     vv_ans memo;
-    bool is_exact = false;
     Ans coin_change(const vi& coins, int i, int sum)
     {
         if(i == n && sum < price) return def;
@@ -92,13 +107,28 @@ namespace algorithms::onlinejudge::dp::exact_change
             while_read(price);
             while_read(n);
             vi coins(n);
-            loop(n, [&coins] (int i) {while_read(coins[i]);});
+            int sum_of_coins = 0;
+            loop(n, [&coins, &sum_of_coins] (int i) {
+                while_read(coins[i]);
+                sum_of_coins += coins[i];
+            });
 
-            int max_sum = std::accumulate(coins.begin(), coins.end(), 0);
-            memo.clear();
-            memo = vv_ans(n + 1, v_ans(max_sum + 1, def));
-            Ans ans = coin_change(coins, 0, 0);
-            std::cout << ans.sum << " " << ans.counter << std::endl;
+            v_ans dp(sum_of_coins + 1, def);
+            dp[0] = {0, 0, 0}; // base case
+
+            for (int c : coins)
+              for (int s = sum_of_coins; s >= 0; --s)
+                if(s + c <= sum_of_coins &&
+                   dp[s].diff != MAX) {
+                  Ans new_ans = dp[s];
+                  new_ans.sum += c;
+                  new_ans.counter += 1;
+                  new_ans.diff = new_ans.sum - price;
+                  dp[s + c] = std::min(dp[s + c], new_ans);
+                }
+
+            Ans best = *std::min_element(dp.begin() + price, dp.end());
+            std::cout << best.sum << " " << best.counter << std::endl;
         }  
     }
 }

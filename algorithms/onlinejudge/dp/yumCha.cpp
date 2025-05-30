@@ -68,6 +68,7 @@ namespace algorithms::onlinejudge::dp::yum_cha
     /** https://onlinejudge.org/external/115/11566.pdf */
     int friends, budget, tea, k;
     const int max_tries = 2;
+    const int extra = 500;
     double full_cost(int dumSums_cost) 
     {
         double base = tea * (friends + 1) + dumSums_cost;
@@ -122,14 +123,14 @@ namespace algorithms::onlinejudge::dp::yum_cha
               dimSums[i] = {p, total_idx};
             });
 
-            vv_ans dp(2 * (friends + 1) + 1, v_ans(sum_of_prices + 1000, def));
+            vv_ans dp(2 * (friends + 1) + 1, v_ans(sum_of_prices + extra, def));
             for(auto& d : dimSums)
               for(int c = 2 * (friends + 1); c >= 0; --c)
-                for(int p = sum_of_prices + 9999; p >= 0; --p)
+                for(int p = sum_of_prices + extra - 1; p >= 0; --p)
                   for(int t = 1; t <= 2; ++t) {
                     int nc = c + t;
                     int np = p + t * d.price;
-                    if (nc <= 2 * (friends + 1) && np < sum_of_prices + 1000) {
+                    if (nc <= 2 * (friends + 1) && np < sum_of_prices + extra) {
                       Ans from = dp[c][p];
                       double curr_full_cost = full_cost(np); // try adding a dish
                       if(curr_full_cost <= budget * (friends + 1) + 1e-9) {
@@ -141,10 +142,9 @@ namespace algorithms::onlinejudge::dp::yum_cha
                 }
 
             int best = 0;
-            for (int c = 0; c <= 2 * (friends + 1); ++c)
-              for (int p = 0; p < sum_of_prices + 1000; ++p)
-                if(p <= budget * (friends + 1))
-                  best = std::max(best, dp[c][p].favour_index_sum);
+            for(int p = 0; p < sum_of_prices + extra; ++p)
+              if(p <= budget * (friends + 1))
+                best = std::max(best, dp[c][p].favour_index_sum);
             std::cout << std::setprecision(2) << std::fixed << ((double) best) / (friends + 1) << std::endl;
         }
     }

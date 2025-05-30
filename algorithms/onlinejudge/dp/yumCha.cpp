@@ -122,9 +122,30 @@ namespace algorithms::onlinejudge::dp::yum_cha
               dimSums[i] = {p, total_idx};
             });
 
-            vvv_ans memo(k + 1, vv_ans(2 * (friends + 1) + 1, v_ans(sum_of_prices + 1000, def)));
-            Ans ans = knapsack(dimSums, 0, 2 * (friends + 1), 0, memo);
-            std::cout << std::setprecision(2) << std::fixed << ((double) ans.favour_index_sum) / (friends + 1) << std::endl;
+            vv_ans dp(2 * (friends + 1) + 1, v_ans(sum_of_prices + 1000, def));
+            for(auto& d : dimSums)
+              for(int c = 2 * (friends + 1); c >= 0; --c)
+                for(int p = sum_of_prices + 9999; p >= 0; --p)
+                  for(int t = 1; t <= 2; ++t) {
+                    int nc = c + t;
+                    int np = p + t * d.price;
+                    if (nc <= 2 * (friends + 1) && np < sum_of_prices + 1000) {
+                      Ans from = dp[c][p];
+                      double curr_full_cost = full_cost(np); // try adding a dish
+                      if(curr_full_cost <= budget * (friends + 1) + 1e-9) {
+                        Ans new_ans = from;
+                        new_ans.favour_index_sum += t * d.favour_idx;
+                        dp[nc][np] = std::max(dp[nc][np], new_ans);
+                      }
+                    }
+                }
+
+            int best = 0;
+            for (int c = 0; c <= 2 * (friends + 1); ++c)
+              for (int p = 0; p < sum_of_prices + 1000; ++p)
+                if(p <= budget * (friends + 1))
+                  best = std::max(best, dp[c][p].favour_index_sum);
+            std::cout << std::setprecision(2) << std::fixed << ((double) best) / (friends + 1) << std::endl;
         }
     }
 }

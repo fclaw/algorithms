@@ -42,7 +42,6 @@ typedef std::vector<int> vi;
 struct Ans 
 {
     int favour_index_sum;  // Total favour index of selected dim sums
-    vi chosen_dishes;      // Optional: indices of selected dishes
 };
 
 
@@ -54,7 +53,7 @@ std::ostream& operator <<
   (std::ostream& out, const Ans& ans) 
   { return out << "{" << ans.favour_index_sum << "}"; }
 
-Ans def = {0, {}};
+Ans def = {0};
 
 bool operator < (const Ans& lhs, const Ans& rhs) 
 { return lhs.favour_index_sum < rhs.favour_index_sum; }
@@ -90,7 +89,6 @@ namespace algorithms::onlinejudge::dp::yum_cha
           if(curr_full_cost <= budget * (friends + 1) + 1e-9) {
             try_dish = knapsack(dimSums, i + 1, rem_dishes - t, new_money_spent, memo);
             try_dish.favour_index_sum += (t * dimSums[i].favour_idx);
-            try_dish.chosen_dishes.push_back(i);
             best = std::max(try_dish, best);
           }
         }

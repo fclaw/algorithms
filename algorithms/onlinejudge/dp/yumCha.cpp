@@ -130,7 +130,8 @@ namespace algorithms::onlinejudge::dp::yum_cha
                   for(int t = 1; t <= 2; ++t) {
                     int nc = c + t;
                     int np = p + t * d.price;
-                    if (nc <= 2 * (friends + 1) && np < sum_of_prices + extra) {
+                    if (nc <= 2 * (friends + 1) && 
+                        np < sum_of_prices + extra) {
                       Ans from = dp[c][p];
                       double curr_full_cost = full_cost(np); // try adding a dish
                       if(curr_full_cost <= budget * (friends + 1) + 1e-9) {
@@ -144,7 +145,7 @@ namespace algorithms::onlinejudge::dp::yum_cha
             int best = 0;
             for(int p = 0; p < sum_of_prices + extra; ++p)
               if(p <= budget * (friends + 1))
-                best = std::max(best, dp[c][p].favour_index_sum);
+                best = std::max(best, dp[2 * (friends + 1)][p].favour_index_sum);
             std::cout << std::setprecision(2) << std::fixed << ((double) best) / (friends + 1) << std::endl;
         }
     }

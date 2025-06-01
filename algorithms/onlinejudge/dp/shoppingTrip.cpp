@@ -57,7 +57,8 @@ namespace algorithms::onlinejudge::dp::shopping_trip
         best = -fw_sp[shops[prev].id][0]; // go home
         for(int i = 0; i < k; ++i)
           if(!(visited & (1 << i))) {
-            int go_ahead = shops[i].discount - fw_sp[shops[prev].id][shops[i].id] + tcp(i, visited | (1 << i), memo);
+            int travel_cost = shops[i].discount - fw_sp[shops[prev].id][shops[i].id];
+            int go_ahead = travel_cost + tcp(i, visited | (1 << i), memo);
             best = std::max(best, go_ahead);
           }
         return  best;
@@ -113,8 +114,9 @@ namespace algorithms::onlinejudge::dp::shopping_trip
 
             int max_saving = INT32_MIN;
             for(int i = 0; i < k; ++i) {
-              vvi memo(k + 1, vi(1 << (k + 1), -1));
-              max_saving = std::max(max_saving, shops[i].discount - fw_sp[0][shops[i].id] + tcp(i, 0 | (1 << i), memo));
+              vvi memo(k, vi(1 << k, -1));
+              int travel_cost = shops[i].discount - fw_sp[0][shops[i].id];
+              max_saving = std::max(max_saving, travel_cost + tcp(i, 0 | (1 << i), memo));
             }
             max_saving > 0 ? printf("Daniel can save $%0.2f\n", (double)max_saving / 100) : printf("Don't leave the house\n");
         }

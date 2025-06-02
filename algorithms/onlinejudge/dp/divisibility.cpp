@@ -19,6 +19,9 @@
 typedef std::vector<int> vi;
 typedef std::vector<vi> vvi;
 
+typedef std::vector<bool> vb;
+typedef std::vector<vb> vvb;
+
 
 namespace algorithms::onlinejudge::dp::divisibility
 {
@@ -61,8 +64,16 @@ namespace algorithms::onlinejudge::dp::divisibility
             while_read(n, k);
             vi nums(n);
             loop(n, [&nums](int i) { while_read(nums[i]); });
-            vvi memo(n + 1, vi(k, -1));
-            check_divisibility(nums, 0, 0, memo) ? printf("Divisible\n") : printf("Not divisible\n");
+            vvb dp(n + 1, vb(k, false));
+            dp[0][0] = true;
+            for(int i = 0; i < n; ++i)
+              for(int r = 0; r < k; ++r) {
+                int plus = ((r + nums[i]) % k + k) % k;
+                int minus = ((r - nums[i]) % k + k) % k;
+                dp[i + 1][r] = dp[i][plus] | dp[i][minus];
+              }
+
+            dp[n][0] ? printf("Divisible\n") : printf("Not divisible\n");
         }  
     }
 }

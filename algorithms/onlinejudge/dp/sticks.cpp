@@ -1,3 +1,29 @@
+/*
+  Interval DP Strategy – Why We Expand from Small to Large Segments
+
+  In dynamic programming problems that involve continuous segments (like cutting sticks,
+  matrix multiplication, or palindromic substrings), the optimal cost or value for a 
+  larger interval [l, r] usually depends on the values of smaller subintervals such as:
+      - dp[l][k] and dp[k][r] for some l < k < r
+
+  To ensure all required subresults are already computed before they are used,
+  we must evaluate the DP table in increasing order of segment length.
+
+  This is typically done by looping over segment lengths first, then computing 
+  all intervals of that length:
+  
+      for (int len = 2; len <= n; ++len)
+        for (int l = 0; l + len <= n; ++l) {
+          int r = l + len - 1;
+          // Compute dp[l][r] based on smaller intervals
+        }
+
+  This ensures that by the time we compute dp[l][r], all required values like
+  dp[l][k] and dp[k][r] (for l < k < r) are already available and correct.
+
+  Final result is typically found in dp[0][n - 1] or dp[1][n] depending on indexing.
+*/
+
 #include "../debug.h"
 #include "../../aux.h"
 
@@ -61,8 +87,22 @@ namespace algorithms::onlinejudge::dp::sticks
             cuts.emplace(cuts.begin(), 0);
             cuts.push_back(length);
             int s = (int)cuts.size();
-            vvi memo(s, vi(s, -1));
-            printf("The minimum cutting is %d.\n", min_cut(cuts, 0, s - 1, memo));
+
+            vvi dp(s, vi(s, INT32_MAX));
+
+           for(int i = 0; i < s; ++i)
+             for(int j = 0; j < s; ++j)
+               if(std::abs(i - j) <= 1)
+                 dp[i][j] = 0;
+
+            for(int len = 1; len < s; ++len)
+              for(int l = 0; l + len < s; ++l) {
+                int r = l + len;
+                int cost = cuts[r] - cuts[l];
+                for(int k = l + 1; k < r; ++k)
+                  dp[l][r] = std::min(dp[l][r], cost + dp[l][k] + dp[k][r]);
+              }
+            printf("The minimum cutting is %d.\n", dp[0][s - 1]);  
         }
     }
 }

@@ -15,7 +15,6 @@
 
 
 
-
 typedef std::vector<int> vi;
 typedef std::vector<vi> vvi;
 
@@ -57,8 +56,17 @@ namespace algorithms::onlinejudge::dp::marks
         while(t_cases--)
         {
             while_read(n, t, p);
-            std::memset(memo, -1, sizeof memo);
-            std::cout << get_ways(0, 0) << std::endl;
+            int max_m = t;
+            vvi dp(n + 2, vi(max_m + 1, 0));
+            dp[0][0] = 1;
+            for(int s = 0; s <= n; ++s)
+              for(int tm = 0; tm <= max_m; ++tm)
+                for(int m = p; m <= t; ++m)
+                 if(dp[s][tm] && tm + m <= max_m) {
+                   dp[s + 1][tm + m] += dp[s][tm];
+                }
+
+            std::cout << dp[n][t] << std::endl;
         }
     }
 }

@@ -25,6 +25,8 @@ struct Site
     vi costs_n;
     // Bureau of Civil Engineering Works (BCEW)
     vi costs_b;
+    // actual number of rods at this site
+    int size;
 };
 
 typedef std::vector<Site> v_site;
@@ -66,15 +68,15 @@ namespace algorithms::onlinejudge::dp::rods
 
         Ans best = def;
         best.min_cost = INT32_MAX;
-        int s = (int)sites[i].costs_n.size();
+        int s = sites[i].size;
         for(int c = 0; c <= s; ++c) {
           int new_rem_n = rem_n - c;
           int new_rem_b = rem_b - (s - c);
           Ans ans = min_cost(sites, i + 1, new_rem_n, new_rem_b, memo);
           if(ans.min_cost == INT32_MAX) continue;
           ans.samples.push_back(c);
-          if(c - 1 >= 0) ans.min_cost += sites[i].costs_n[c - 1];
-          if(s - c - 1 >= 0)  ans.min_cost += sites[i].costs_b[s - c - 1];
+          ans.min_cost += sites[i].costs_n[c];
+          ans.min_cost += sites[i].costs_b[s - c];
           best = std::min(best, ans);
         }
         return memo[i][rem_n][rem_b] = best;
@@ -100,12 +102,12 @@ namespace algorithms::onlinejudge::dp::rods
             loop(n, [&sites](int i) {
               int k;
               while_read(k);
-              vi ncpc(k), bcew(k);
+              vi ncpc(k + 1), bcew(k + 1);
               loop(k, [&ncpc](int i) 
-              { while_read(ncpc[i]); });
+              { while_read(ncpc[i + 1]); });
               loop(k, [&bcew](int i) 
-              { while_read(bcew[i]); });
-              sites[i] = {ncpc, bcew};
+              { while_read(bcew[i + 1]); });
+              sites[i] = {ncpc, bcew, k};
             });
 
             vvv_ans memo(n, vv_ans(rods_n + 1, v_ans(rods_b + 1, def)));

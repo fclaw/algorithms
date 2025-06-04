@@ -16,8 +16,8 @@
 
 
 
-// 60 + 30 + 20 -> 110  
-
+typedef std::vector<int> vi;
+typedef std::vector<vi> vvi;
 
 
 namespace algorithms::onlinejudge::dp::flight_scheduler

@@ -72,12 +72,11 @@ namespace algorithms::onlinejudge::dp::rods
         for(int c = 0; c <= s; ++c) {
           int new_rem_n = rem_n - c;
           int new_rem_b = rem_b - (s - c);
-          Ans ans = min_cost(sites, i + 1, new_rem_n, new_rem_b, memo);
-          if(ans.min_cost == INT32_MAX) continue;
-          ans.samples.push_back(c);
-          ans.min_cost += sites[i].costs_n[c];
-          ans.min_cost += sites[i].costs_b[s - c];
-          best = std::min(best, ans);
+          Ans candidate = min_cost(sites, i + 1, new_rem_n, new_rem_b, memo);
+          if(candidate.min_cost == INT32_MAX) continue;
+          candidate.samples.push_back(c);
+          candidate.min_cost += (sites[i].costs_n[c] + sites[i].costs_b[s - c]);
+          best = std::min(best, candidate);
         }
         return memo[i][rem_n][rem_b] = best;
     }
@@ -110,13 +109,33 @@ namespace algorithms::onlinejudge::dp::rods
               sites[i] = {ncpc, bcew, k};
             });
 
-            vvv_ans memo(n, vv_ans(rods_n + 1, v_ans(rods_b + 1, def)));
-            Ans ans = min_cost(sites, 0, rods_n, rods_b, memo);
+            vvv_ans dp(n + 1, vv_ans(rods_n + 1, v_ans(rods_b + 1, {INT32_MAX, {}})));
+
+            dp[0][0][0] = def;
+
+            for(int i = 0; i < n; ++i)
+              for(int rem_n = 0; rem_n <= rods_n; ++rem_n)
+                for(int rem_b = 0; rem_b <= rods_b; ++rem_b)
+                  if(dp[i][rem_n][rem_b].min_cost != INT32_MAX) {
+                    int s = sites[i].size;
+                    for(int c = 0; c <= s; ++c) {
+                      int new_rem_n = rem_n + c;
+                      int new_rem_b = rem_b + (s - c);
+                      if(new_rem_n <= rods_n && new_rem_b <= rods_b) {
+                        Ans ans = dp[i][rem_n][rem_b];
+                        ans.samples.push_back(c);
+                        ans.min_cost += sites[i].costs_n[c] + sites[i].costs_b[s - c];
+                        dp[i + 1][new_rem_n][new_rem_b] = std::min(dp[i + 1][new_rem_n][new_rem_b], ans);
+                      }
+                    }
+                  }
+
+            Ans ans = dp[n][rods_n][rods_b];
             std::string s;
-            for(auto it = ans.samples.rbegin(); it != ans.samples.rend(); ++it)
-              s += std::to_string(*it) + " ";
+            for(int n : ans.samples)
+              s += std::to_string(n) + " ";
             s.pop_back();
-            printf("%d\n%s\n\n", ans.min_cost, s.c_str());
-        }  
+            printf("%d\n%s\n\n", ans.min_cost, s.c_str());  
+        }
     }
 }

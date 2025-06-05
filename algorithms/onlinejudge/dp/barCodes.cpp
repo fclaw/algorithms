@@ -59,8 +59,14 @@ namespace algorithms::onlinejudge::dp::bar_codes
           }
         
         while(while_read(n, k, m)) {
-          std::memset(memo, -1, sizeof memo);
-          printf("%llu\n", count_bars(0, 0));
+          vvl dp(n + 1, vl(k + 1, 0));
+          dp[0][0] = 1;
+          for(int u = 0; u <= n; ++u)
+            for(int b = 0; b <= k; ++b)
+              for(int j = 1; j <= std::min(n - u, m); ++j)
+                if(u + j <= n && b + 1 <= k) 
+                  dp[u + j][b + 1] += dp[u][b];
+          printf("%llu\n", dp[n][k]);
         }
     }
 }

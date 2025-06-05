@@ -31,19 +31,18 @@ namespace algorithms::onlinejudge::dp::chest
 {
     /** https://onlinejudge.org/external/114/11420.pdf */
     int n, k;
-    enum Drawer { None, Lock, Unlock };
-    ll memo[66][3][66];
+    enum Drawer { Lock, Unlock };
+    ll memo[66][2][66];
     ll count_ways(int c_n, Drawer prev_s, int n_l)
     {
-        if(c_n == n)
-          return n_l == k ? 1 : 0;
+        if(!c_n) return n_l == k ? 1 : 0;
 
         if(~memo[c_n][prev_s][n_l]) 
           return memo[c_n][prev_s][n_l]; 
 
-        int new_n_l = prev_s == Lock || prev_s == None ? n_l + 1 : n_l;
-        ll lock = count_ways(c_n + 1, Lock, new_n_l);
-        ll unlock = count_ways(c_n + 1, Unlock, n_l);
+        int new_n_l = prev_s == Lock ? n_l + 1 : n_l;
+        ll lock = count_ways(c_n - 1, Lock, new_n_l);
+        ll unlock = count_ways(c_n - 1, Unlock, n_l);
         return memo[c_n][prev_s][n_l] = lock + unlock;
     }
     void submit(std::optional<char*> file, bool debug_mode)
@@ -61,7 +60,7 @@ namespace algorithms::onlinejudge::dp::chest
         
         while(while_read(n, k) && n > 0 && k >= 0) {
           std::memset(memo, -1, sizeof memo);
-          printf("%llu\n", count_ways(0, None, 0));
+          printf("%llu\n", count_ways(n, Lock, 0));
         }
     }
 }

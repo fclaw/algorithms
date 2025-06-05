@@ -59,8 +59,17 @@ namespace algorithms::onlinejudge::dp::chest
           }
         
         while(while_read(n, k) && n > 0 && k >= 0) {
-          std::memset(memo, -1, sizeof memo);
-          printf("%llu\n", count_ways(n, Lock, 0));
+          vvvl dp(n + 1, vvl(2, vl(k + 1, 0)));
+          for(int s = 0; s <= 1; ++s) 
+            dp[0][s][0] = 1;
+          for(int d = 0; d < n; ++d)
+            for(int s = 0; s <= 1; ++s)
+              for(int l = 0; l <= k; ++l) {
+                int nl = s == Lock ? l + 1 : l;
+                if(nl <= k) dp[d + 1][Lock][nl] += dp[d][s][l];
+                dp[d + 1][Unlock][l] += dp[d][s][l];
+              }
+          printf("%llu\n", dp[n][Lock][k]);
         }
     }
 }

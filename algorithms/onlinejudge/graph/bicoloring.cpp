@@ -57,32 +57,35 @@ namespace algorithms::onlinejudge::graph::bicoloring
           v_colour clr(V, None);
           bool is_bipartite = true;
 
-          tools::Dfs dfs_s = tools::init_dfs(V);
+          tools::Dfs<> dfs_s = tools::init_dfs<>(V);
           dfs_s.on_discover = 
-            [&clr, &dfs_s](int v) {
-              int p = dfs_s.parent[v];
-              if(p == -1) clr[v] = White;
-              else clr[v] = set_op_colour(clr[p]);
+            [&clr, &dfs_s](const tools::Node<>& v) {
+              int p = dfs_s.parent[v.node];
+              if(p == -1) clr[v.node] = White;
+              else clr[v.node] = set_op_colour(clr[p]);
             };
           dfs_s.process_back_edge = 
-            [&clr, &dfs_s, &is_bipartite](int u, int v) {
+            [&clr, &dfs_s, &is_bipartite]
+            (const tools::Node<>& u, 
+             const tools::Node<>& v) {
               // Ignore the parent edge in undirected graph
-              if(v != dfs_s.parent[u] && 
-                 clr[u] == clr[v]) {
+              if(v.node != dfs_s.parent[u.node] && 
+                 clr[u.node] == clr[v.node]) {
                 dfs_s.is_finished = true;
                 is_bipartite = false;
               }
           };
 
-          tools::vvi adj_list(v);
+          std::vector<std::vector<tools::Node<>>> adj_list(V);
           loop(E, [&adj_list](int _) {
             int u, v;
             while_read(u, v);
-            adj_list[u].push_back(v);
-            adj_list[v].push_back(u);
+            adj_list[u].push_back({v, {}});
+            adj_list[v].push_back({u, {}});
           });
 
-          tools::dfs(adj_list, dfs_s, 0);
+          tools::Node<> start_v = {tools::start_vertex, {}};
+          tools::dfs<>(adj_list, dfs_s, start_v);
           printf("%s.\n", is_bipartite ? "BICOLORABLE" : "NOT BICOLORABLE");
         }
     }

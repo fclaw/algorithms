@@ -2,6 +2,7 @@
 #include <functional> // for std::function
 #include <algorithm>
 #include <set>
+#include <unordered_map>
 
 
 namespace algorithms::onlinejudge::graph::tools
@@ -18,6 +19,21 @@ namespace algorithms::onlinejudge::graph::tools
 
     int start_vertex = 0;
 
+    struct Unit {};
+
+    template <typename T = Unit>
+    struct Node 
+    {
+        int node;
+        T value;
+    };
+
+    // Overload operator<< for Node<T>
+    template <typename T>
+    std::ostream& operator << (std::ostream& os, const Node<T>& n) 
+    { return os << "{node: " << n.node << ", value: " << n.value << "}"; }
+
+    template <typename T = Unit>
     struct Dfs
     {
         v_state state;
@@ -27,25 +43,26 @@ namespace algorithms::onlinejudge::graph::tools
         int time;
         int root_children;
         int root = start_vertex;
-        std::function<void(int)> on_discover;
-        std::function<void(int)> after_discover;
+        std::function<void(const Node<T>&)> on_discover;
+        std::function<void(const Node<T>&)> after_discover;
         // Tree edge: The edge traversed by DFS, i.e. an edge from a vertex currently with state:
         // EXPLORED to a vertex with state: UNVISITED
-        std::function<void(int, int)> process_tree_edge;
+        std::function<void(const Node<T>&, const Node<T>&)> process_tree_edge;
         // Back edge: Edge that is part of a cycle, i.e. an edge from a vertex currently with state:
         // EXPLORED to a vertex with state: EXPLORED too. This is an important application of
         // this algorithm. Note that we usually do not count bi-directional edges as having a
         // ‘cycle’ (We need to remember dfs_parent to distinguish this, see the code below).
-        std::function<void(int, int)> process_back_edge;
+        std::function<void(const Node<T>&, const Node<T>&)> process_back_edge;
         // Forward/Cross edges from vertex with state: EXPLORED to vertex with state: VISITED
-        std::function<void(int, int)> process_forward_edge;
-        std::function<void(int, int)> process_cross_edge;
+        std::function<void(const Node<T>&, const Node<T>&)> process_forward_edge;
+        std::function<void(const Node<T>&, const Node<T>&)> process_cross_edge;
         bool is_finished;
 
     };
 
-    Dfs init_dfs(int V) {
-      Dfs dfs_s;
+    template <typename T = Unit>
+    Dfs<T> init_dfs(int V) {
+      Dfs<T> dfs_s;
       dfs_s.is_finished = false;
       dfs_s.state = tools::v_state(V, tools::Unvisited);
       dfs_s.time = 1;
@@ -57,40 +74,41 @@ namespace algorithms::onlinejudge::graph::tools
     }
 
 
-    void dfs(const vvi& adj_list, Dfs& dfs_s, int u)
+    template <typename T = Unit>
+    void dfs(const std::vector<std::vector<Node<T>>>& adj_list, Dfs<T>& dfs_s, const Node<T>& u)
     {
 
         if(dfs_s.is_finished) return;
 
-        dfs_s.state[u] = Explored;
-        dfs_s.entry_t[u] = dfs_s.time;
+        dfs_s.state[u.node] = Explored;
+        dfs_s.entry_t[u.node] = dfs_s.time;
         dfs_s.time++;
        
         if(dfs_s.on_discover) dfs_s.on_discover(u);
 
-        for(int v : adj_list[u])
-          if(dfs_s.state[v] == Unvisited) {
+        for(const Node<T>& v : adj_list[u.node])
+          if(dfs_s.state[v.node] == Unvisited) {
             if(dfs_s.process_tree_edge) 
               dfs_s.process_tree_edge(u, v);    
-            dfs_s.parent[v] = u;
-            if (dfs_s.parent[u] == -1)  // u is root
+            dfs_s.parent[v.node] = u.node;
+            if (dfs_s.parent[u.node] == -1)  // u is root
               dfs_s.root_children++;
             dfs(adj_list, dfs_s, v);
-          } else if(dfs_s.state[v] == Explored) {
-            if(v != dfs_s.parent[u] && 
+          } else if(dfs_s.state[v.node] == Explored) {
+            if(v.node != dfs_s.parent[u.node] && 
                dfs_s.process_back_edge)
               dfs_s.process_back_edge(u, v);   
-          } else if(dfs_s.state[v] == Visited) {
-            if(dfs_s.entry_t[v] > dfs_s.entry_t[u])
+          } else if(dfs_s.state[v.node] == Visited) {
+            if(dfs_s.entry_t[v.node] > dfs_s.entry_t[u.node])
               if(dfs_s.process_forward_edge)
                 dfs_s.process_forward_edge(u, v);
-            if(dfs_s.entry_t[v] < dfs_s.entry_t[u])
+            if(dfs_s.entry_t[v.node] < dfs_s.entry_t[u.node])
               if(dfs_s.process_cross_edge)
                 dfs_s.process_cross_edge(u, v);
           }  
 
-        dfs_s.state[u] = Visited;
-        dfs_s.exit_t[u] = dfs_s.time;
+        dfs_s.state[u.node] = Visited;
+        dfs_s.exit_t[u.node] = dfs_s.time;
         dfs_s.time++;
 
         if(dfs_s.after_discover) dfs_s.after_discover(u);
@@ -113,7 +131,9 @@ namespace algorithms::onlinejudge::graph::tools
 
     void init_ancestor(int v) { reachable_ancestor[v] = v; }
     void incr_tree_out_degree(int v) { tree_out_degree[v]++; }
-    void set_ancestor(int u, int v, Dfs& dfs) {
+
+    template <typename T = Unit>
+    void set_ancestor(int u, int v, Dfs<T>& dfs) {
       if(dfs.entry_t[v] < dfs.entry_t[reachable_ancestor[u]] && dfs.parent[u] != v)
         reachable_ancestor[u] = v;
     }
@@ -138,7 +158,8 @@ namespace algorithms::onlinejudge::graph::tools
     // to represent the age of vertex v. The reachability time time v calculated below
     // denotes the oldest vertex that can be reached using back edges. Getting back to
     // an ancestor above v rules out the possibility of v being a cut-node:
-    void detect_cut_node(int v, Dfs& dfs) {
+    template <typename T = Unit> 
+    void detect_cut_node(int v, Dfs<T>& dfs) {
 
         // Root cut-node case
         if(v == dfs.root) {
@@ -167,6 +188,55 @@ namespace algorithms::onlinejudge::graph::tools
           int time_v = dfs.entry_t[reachable_ancestor[v]];
           int time_parent = dfs.entry_t[reachable_ancestor[dfs.parent[v]]];
           if (time_v < time_parent) reachable_ancestor[dfs.parent[v]] = reachable_ancestor[v];
+        }
+    }
+
+    struct Dir
+    {
+        int r_shift;
+        int c_shift;
+    };
+
+    typedef std::vector<Dir> v_dir;
+
+    // Default DAG directions: only right and down
+    const v_dir dirs_dag = {{0, 1}, {1, 0}};
+
+    template <typename T, typename F = char>
+    struct GridGraph {
+      std::vector<std::vector<Node<T>>> adj;
+      std::unordered_map<int, T> vertex_value;
+      std::function<T(F)> cell_to_value;
+    };
+
+    template <typename T, typename F = char>
+    void grid_to_adj_list(
+      GridGraph<T, F>& g,
+      const std::vector<std::vector<F>>& grid,
+      v_dir directions = dirs_dag) {
+
+        int rows = grid.size();
+        if (rows == 0) return;
+        int cols = grid[0].size();
+
+        g.adj.resize(rows * cols);
+
+        auto in_bounds = [&](int r, int c) 
+        { return r >= 0 && r < rows && c >= 0 && c < cols; };
+
+        for(int r = 0; r < rows; ++r) {
+          for(int c = 0; c < cols; ++c) {
+            int u = r * cols + c;
+            g.vertex_value[u] = g.cell_to_value(grid[r][c]);
+
+            for(const Dir& d : directions) {
+              int nr = r + d.r_shift, nc = c + d.c_shift;
+              if (in_bounds(nr, nc)) {
+                int v = nr * cols + nc;
+                g.adj[u].push_back(Node<T>{v, g.cell_to_value(grid[nr][nc])});
+              }
+            }
+          }
         }
     }
 }

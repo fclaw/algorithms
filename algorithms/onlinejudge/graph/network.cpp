@@ -24,21 +24,11 @@
 
 namespace tools = algorithms::onlinejudge::graph::tools;
 
-enum Colour { None, Black, White};
-typedef std::vector<Colour> v_colour;
 
-Colour set_op_colour(Colour cl) 
-{
-    if(cl == None) return None;
-    else if(cl == Black) return White;
-    else return Black;
-}
-
-
-namespace algorithms::onlinejudge::graph::bicoloring
+namespace algorithms::onlinejudge::graph::network
 {
     /** https://onlinejudge.org/external/100/10004.pdf */
-    int V, E;
+    int V;
     void submit(std::optional<char*> file, bool debug_mode)
     {
         if (file.has_value())
@@ -52,38 +42,41 @@ namespace algorithms::onlinejudge::graph::bicoloring
             throw std::ios_base::failure(errorMessage);
           }
         
-        while(while_read(V, E) && V) {
+        while(while_read(V) && V) {
 
-          v_colour clr(V, None);
-          bool is_bipartite = true;
+          tools::vvi adj_list(V);
+          std::string line;
+          while(std::getline(std::cin, line) && 
+                line != "0") {
+           std::istringstream iss(line);
+            int u;
+            iss >> u; // This is the current vertex
+            int v;
+            --u;
+            while (iss >> v) {
+              --v;
+              adj_list[u].push_back(v);
+              adj_list[v].push_back(u); // Because it's undirected
+            }
+          }
 
           tools::Dfs dfs_s = tools::init_dfs(V);
-          dfs_s.on_discover = 
-            [&clr, &dfs_s](int v) {
-              int p = dfs_s.parent[v];
-              if(p == -1) clr[v] = White;
-              else clr[v] = set_op_colour(clr[p]);
-            };
-          dfs_s.process_back_edge = 
-            [&clr, &dfs_s, &is_bipartite](int u, int v) {
-              // Ignore the parent edge in undirected graph
-              if(v != dfs_s.parent[u] && 
-                 clr[u] == clr[v]) {
-                dfs_s.is_finished = true;
-                is_bipartite = false;
-              }
-          };
+          tools::init_cut_nodes(V);
+          dfs_s.on_discover = [](int u) { tools::reachable_ancestor[u] = u; };
+          dfs_s.process_tree_edge = [&dfs_s](int u, int v) { tools::incr_tree_out_degree(u); };
+          dfs_s.process_back_edge = [&dfs_s](int u, int v) { tools::set_ancestor(u, v, dfs_s); };
+          dfs_s.after_discover = [&dfs_s](int u) { tools::detect_cut_node(u, dfs_s); };
 
-          tools::vvi adj_list(v);
-          loop(E, [&adj_list](int _) {
-            int u, v;
-            while_read(u, v);
-            adj_list[u].push_back(v);
-            adj_list[v].push_back(u);
-          });
-
+          dfs_s.root = 0;
           tools::dfs(adj_list, dfs_s, 0);
-          printf("%s.\n", is_bipartite ? "BICOLORABLE" : "NOT BICOLORABLE");
+
+          int count_ap = 0;
+          for(auto n : tools::cut_nodes)
+            if(n.count(tools::Parent) || 
+               n.count(tools::Root) || 
+               n.count(tools::Bridge))
+              count_ap++;
+          std::cout << count_ap << std::endl;
         }
     }
 }

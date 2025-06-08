@@ -67,8 +67,7 @@ namespace algorithms::onlinejudge::graph::network
           dfs_s.process_back_edge = [&dfs_s](int u, int v) { tools::set_ancestor(u, v, dfs_s); };
           dfs_s.after_discover = [&dfs_s](int u) { tools::detect_cut_node(u, dfs_s); };
 
-          dfs_s.root = 0;
-          tools::dfs(adj_list, dfs_s, 0);
+          tools::dfs(adj_list, dfs_s, tools::start_vertex);
 
           int count_ap = 0;
           for(auto n : tools::cut_nodes)

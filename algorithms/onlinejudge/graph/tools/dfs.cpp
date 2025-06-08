@@ -16,6 +16,8 @@ namespace algorithms::onlinejudge::graph::tools
     typedef std::set<CutNode> s_cut_node;
     typedef std::vector<s_cut_node> vs_cut_node;
 
+    int start_vertex = 0;
+
     struct Dfs
     {
         v_state state;
@@ -24,7 +26,7 @@ namespace algorithms::onlinejudge::graph::tools
         vi parent;
         int time;
         int root_children;
-        int root;
+        int root = start_vertex;
         std::function<void(int)> on_discover;
         std::function<void(int)> after_discover;
         // Tree edge: The edge traversed by DFS, i.e. an edge from a vertex currently with state:

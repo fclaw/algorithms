@@ -19,6 +19,7 @@
 #include <bitset>
 #include <unordered_map>
 #include <unordered_set>
+#include <set>
 
 
 
@@ -73,14 +74,14 @@ namespace algorithms::onlinejudge::graph::critical_links
              [&dfs_s](tools::Node<>& u) 
              { tools::detect_cut_points(u.node, dfs_s); };
 
-          std::vector<std::pair<int, int>> res;  
+          std::set<std::pair<int, int>> res;
           for(int v = 0; v < V; ++v) {
             if(dfs_s.state[v] == tools::Unvisited) {
               tools::init_cut_points(V);
               tools::Node<> start_v = tools::def_node;
               start_v.node = v;
               tools::dfs<>(network, dfs_s, start_v);
-              for(auto& e : tools::cut_edges) res.push_back({e.from, e.to});
+              for(auto& e : tools::cut_edges) res.insert({e.from, e.to});
             }
           }
 

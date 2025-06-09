@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <set>
 #include <unordered_map>
+#include <set>
 
 
 namespace algorithms::onlinejudge::graph::tools
@@ -10,12 +11,28 @@ namespace algorithms::onlinejudge::graph::tools
     enum State { Unvisited, Explored, Visited };
     enum CutNode { Leaf, Root, Parent, Bridge };
 
+    struct Edge
+    {
+        const int from;
+        const int to;
+        Edge(int a, int b) : from(std::min(a, b)), to(std::max(a, b)) {}
+    };
+
+    bool operator < (const Edge& lhs, const Edge& rhs) 
+    { return lhs.from < rhs.from || (lhs.from == rhs.from && lhs.to < rhs.to); }
+     bool operator == (const Edge& lhs, const Edge& rhs) 
+     { return lhs.from == rhs.from && lhs.to == rhs.to; }
+
+    std::ostream& operator << (std::ostream& os, const Edge& e) 
+    { return os << "{" << e.from << ", " << e.to << "}"; }
+
     typedef std::vector<int> vi;
     typedef std::vector<bool> vb;
     typedef std::vector<vi> vvi;
     typedef std::vector<State> v_state;
     typedef std::set<CutNode> s_cut_node;
     typedef std::vector<s_cut_node> vs_cut_node;
+    typedef std::set<Edge> s_cut_edge;
 
     int start_vertex = 0;
 
@@ -26,10 +43,13 @@ namespace algorithms::onlinejudge::graph::tools
     template <typename T = Unit>
     struct Node 
     {
-        const int node;
+        int node;
         T value;
     };
 
+    Node<> def_node = {0, {}};
+
+    typedef std::vector<tools::Node<>> v_def_node;
     typedef std::vector<std::vector<tools::Node<>>> vv_def_node;
 
     // Overload operator<< for Node<T>
@@ -64,6 +84,8 @@ namespace algorithms::onlinejudge::graph::tools
 
     };
 
+    const int node_sentinel = -1;
+
     template <typename T = Unit>
     Dfs<T> init_dfs(int V) {
       Dfs<T> dfs_s;
@@ -72,7 +94,7 @@ namespace algorithms::onlinejudge::graph::tools
       dfs_s.time = 1;
       dfs_s.entry_t = tools::vi(V);
       dfs_s.exit_t = tools::vi(V);
-      dfs_s.parent = tools::vi(V, -1);
+      dfs_s.parent = tools::vi(V, node_sentinel);
       dfs_s.root_children = 0;
       return dfs_s;
     }
@@ -91,7 +113,7 @@ namespace algorithms::onlinejudge::graph::tools
         if(dfs_s.on_discover) dfs_s.on_discover(u);
 
         bool should_continue = true;
-        for(Node<T> v : adj_list[u.node])
+        for(Node<T> v : adj_list[u.node]) {
           if(dfs_s.state[v.node] == Unvisited) {
             if(dfs_s.process_tree_edge) 
               should_continue = dfs_s.process_tree_edge(u, v);
@@ -99,7 +121,7 @@ namespace algorithms::onlinejudge::graph::tools
             if(!should_continue) continue; // ← Skip DFS if not allowed
 
             dfs_s.parent[v.node] = u.node;
-            if (dfs_s.parent[u.node] == -1)  // u is root
+            if (dfs_s.parent[u.node] == node_sentinel)  // u is root
               dfs_s.root_children++;
             dfs(adj_list, dfs_s, v);
           } else if(dfs_s.state[v.node] == Explored) {
@@ -114,6 +136,7 @@ namespace algorithms::onlinejudge::graph::tools
               if(dfs_s.process_cross_edge)
                 dfs_s.process_cross_edge(u, v);      
           }
+        }
 
         dfs_s.state[u.node] = Visited;
         dfs_s.exit_t[u.node] = dfs_s.time;
@@ -126,11 +149,14 @@ namespace algorithms::onlinejudge::graph::tools
     vi reachable_ancestor;
     vi tree_out_degree;
     vs_cut_node cut_nodes;
+    s_cut_edge cut_edges;
 
-    void init_cut_nodes(int V) {
+
+    void init_cut_points(int V) {
       reachable_ancestor.clear();
       tree_out_degree.clear();
       cut_nodes.clear();
+      cut_edges.clear();
       reachable_ancestor.resize(V);
       tree_out_degree.resize(V);
       cut_nodes.resize(V);
@@ -167,7 +193,7 @@ namespace algorithms::onlinejudge::graph::tools
     // denotes the oldest vertex that can be reached using back edges. Getting back to
     // an ancestor above v rules out the possibility of v being a cut-node:
     template <typename T = Unit> 
-    void detect_cut_node(int v, Dfs<T>& dfs) {
+    void detect_cut_points(int v, Dfs<T>& dfs) {
 
         // Root cut-node case
         if(v == dfs.root) {
@@ -178,21 +204,25 @@ namespace algorithms::onlinejudge::graph::tools
 
         // Parent cut-node
         int p = dfs.parent[v];
-        if (p != -1 && 
+        if (p != node_sentinel && 
             p != dfs.root && 
             reachable_ancestor[v] == p)
           cut_nodes[p].insert(Parent);
 
         // Bridge cut-node
         if(reachable_ancestor[v] == v) {
-          if(dfs.parent[v] != dfs.root)  
+          if(dfs.parent[v] != dfs.root && 
+             dfs.parent[v] != node_sentinel)
             cut_nodes[dfs.parent[v]].insert(Bridge);
           if(tree_out_degree[v] > 0)
             cut_nodes[v].insert(Bridge);
+          
+          // This line detects bridges  
+          if(dfs.parent[v] != node_sentinel) cut_edges.insert({dfs.parent[v], v});
         }
 
         // Update reachable_ancestor of parent
-        if (dfs.parent[v] != -1) {
+        if (dfs.parent[v] != node_sentinel) {
           int time_v = dfs.entry_t[reachable_ancestor[v]];
           int time_parent = dfs.entry_t[reachable_ancestor[dfs.parent[v]]];
           if (time_v < time_parent) reachable_ancestor[dfs.parent[v]] = reachable_ancestor[v];

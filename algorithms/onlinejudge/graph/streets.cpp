@@ -1,6 +1,6 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa  315 Network, rt: s
+🧳 UVa 610 StreetDirections, rt: s
 ───────────────────────────────────────────────────────────────
 */
 
@@ -25,10 +25,10 @@
 namespace tools = algorithms::onlinejudge::graph::tools;
 
 
-namespace algorithms::onlinejudge::graph::network
+namespace algorithms::onlinejudge::graph::streets
 {
-    /** https://onlinejudge.org/external/3/315.pdf */
-    int V;
+    /** https://onlinejudge.org/external/6/610.pdf */
+    int V, E, t_cases = 1;
     void submit(std::optional<char*> file, bool debug_mode)
     {
         if (file.has_value())
@@ -42,31 +42,28 @@ namespace algorithms::onlinejudge::graph::network
             throw std::ios_base::failure(errorMessage);
           }
         
-        while(while_read(V) && V) {
-
-          tools::vv_def_node adj_list(V);
-          std::string line;
-          while(std::getline(std::cin, line) && 
-                line != "0") {
-           std::istringstream iss(line);
-            int u;
-            iss >> u; // This is the current vertex
-            int v;
-            --u;
-            while (iss >> v) {
-              --v;
-              adj_list[u].push_back({v, {}});
-              adj_list[v].push_back({u, {}}); // Because it's undirected
-            }
-          }
-
+        while(while_read(V, E) && V && E) {
+          tools::vv_def_node g(V);
+          int from, to;
+          std::vector<tools::Edge> streets;
+          loop(E, [&](int _) {
+            while_read(from, to);
+            --from; --to;
+            g[from].push_back({to, {}});
+            g[to].push_back({from, {}});
+            streets.push_back({from, to});
+          });
+        
           tools::Dfs<> dfs_s = tools::init_dfs<>(V);
           tools::init_cut_points(V);
-          dfs_s.on_discover = [](tools::Node<>& u) { tools::init_ancestor(u.node); };
+          dfs_s.on_discover = 
+            [](tools::Node<>& u) 
+            { tools::init_ancestor(u.node); };
           dfs_s.process_tree_edge = 
             [&dfs_s](const tools::Node<>& u, 
                      const tools::Node<>& v) -> bool { 
-              tools::incr_tree_out_degree(u.node); return true; 
+              tools::incr_tree_out_degree(u.node); 
+              return true; 
             };
           dfs_s.process_back_edge = 
             [&dfs_s](const tools::Node<>& u, 
@@ -78,15 +75,16 @@ namespace algorithms::onlinejudge::graph::network
              { tools::detect_cut_points(u.node, dfs_s); };
 
           tools::Node<> start_v = {tools::start_vertex, {}};
-          tools::dfs<>(adj_list, dfs_s, start_v);
+          tools::dfs<>(g, dfs_s, start_v);
 
-          int count_ap = 0;
-          for(auto n : tools::cut_nodes)
-            if(n.count(tools::Parent) || 
-               n.count(tools::Root) || 
-               n.count(tools::Bridge))
-              count_ap++;
-          std::cout << count_ap << std::endl;
-        }
+
+          std::cout << t_cases++ << std::endl << std::endl;
+          for(const auto& s : streets) {
+            printf("%d %d\n", s.from + 1, s.to + 1);
+            if(tools::cut_edges.count(s))
+              printf("%d %d\n", s.to + 1, s.from + 1);
+          }
+          std::cout << "#" << std::endl;
+        }  
     }
 }

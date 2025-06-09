@@ -44,7 +44,7 @@ namespace algorithms::onlinejudge::graph::network
         
         while(while_read(V) && V) {
 
-          std::vector<std::vector<tools::Node<>>> adj_list(V);
+          tools::vv_def_node adj_list(V);
           std::string line;
           while(std::getline(std::cin, line) && 
                 line != "0") {
@@ -62,10 +62,18 @@ namespace algorithms::onlinejudge::graph::network
 
           tools::Dfs<> dfs_s = tools::init_dfs<>(V);
           tools::init_cut_nodes(V);
-          dfs_s.on_discover = [](const tools::Node<>& u) { tools::init_ancestor(u.node); };
-          dfs_s.process_tree_edge = [&dfs_s](const tools::Node<>& u, const tools::Node<>& v) { tools::incr_tree_out_degree(u.node); };
-          dfs_s.process_back_edge = [&dfs_s](const tools::Node<>& u, const tools::Node<>& v) { tools::set_ancestor(u.node, v.node, dfs_s); };
-          dfs_s.after_discover = [&dfs_s](const tools::Node<>& u) { tools::detect_cut_node(u.node, dfs_s); };
+          dfs_s.on_discover = [](tools::Node<>& u) { tools::init_ancestor(u.node); };
+          dfs_s.process_tree_edge = 
+            [&dfs_s](const tools::Node<>& u, 
+                     const tools::Node<>& v) -> bool { 
+              tools::incr_tree_out_degree(u.node); return true; 
+            };
+          dfs_s.process_back_edge = 
+            [&dfs_s](const tools::Node<>& u, 
+                     const tools::Node<>& v) { 
+              tools::set_ancestor(u.node, v.node, dfs_s);
+            };
+          dfs_s.after_discover = [&dfs_s](tools::Node<>& u) { tools::detect_cut_node(u.node, dfs_s); };
 
           tools::Node<> start_v = {tools::start_vertex, {}};
           tools::dfs<>(adj_list, dfs_s, start_v);

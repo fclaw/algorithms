@@ -21,12 +21,16 @@ namespace algorithms::onlinejudge::graph::tools
 
     struct Unit {};
 
+    std::ostream& operator << (std::ostream& os, const Unit& u) { return os << "{}"; }
+
     template <typename T = Unit>
     struct Node 
     {
-        int node;
+        const int node;
         T value;
     };
+
+    typedef std::vector<std::vector<tools::Node<>>> vv_def_node;
 
     // Overload operator<< for Node<T>
     template <typename T>
@@ -43,11 +47,11 @@ namespace algorithms::onlinejudge::graph::tools
         int time;
         int root_children;
         int root = start_vertex;
-        std::function<void(const Node<T>&)> on_discover;
-        std::function<void(const Node<T>&)> after_discover;
+        std::function<void(Node<T>&)> on_discover;
+        std::function<void(Node<T>&)> after_discover;
         // Tree edge: The edge traversed by DFS, i.e. an edge from a vertex currently with state:
         // EXPLORED to a vertex with state: UNVISITED
-        std::function<void(const Node<T>&, const Node<T>&)> process_tree_edge;
+        std::function<bool(const Node<T>&, const Node<T>&)> process_tree_edge;
         // Back edge: Edge that is part of a cycle, i.e. an edge from a vertex currently with state:
         // EXPLORED to a vertex with state: EXPLORED too. This is an important application of
         // this algorithm. Note that we usually do not count bi-directional edges as having a
@@ -75,7 +79,7 @@ namespace algorithms::onlinejudge::graph::tools
 
 
     template <typename T = Unit>
-    void dfs(const std::vector<std::vector<Node<T>>>& adj_list, Dfs<T>& dfs_s, const Node<T>& u)
+    void dfs(const std::vector<std::vector<Node<T>>>& adj_list, Dfs<T>& dfs_s, Node<T>& u)
     {
 
         if(dfs_s.is_finished) return;
@@ -86,10 +90,14 @@ namespace algorithms::onlinejudge::graph::tools
        
         if(dfs_s.on_discover) dfs_s.on_discover(u);
 
-        for(const Node<T>& v : adj_list[u.node])
+        bool should_continue = true;
+        for(Node<T> v : adj_list[u.node])
           if(dfs_s.state[v.node] == Unvisited) {
             if(dfs_s.process_tree_edge) 
-              dfs_s.process_tree_edge(u, v);    
+              should_continue = dfs_s.process_tree_edge(u, v);
+            
+            if(!should_continue) continue; // ← Skip DFS if not allowed
+
             dfs_s.parent[v.node] = u.node;
             if (dfs_s.parent[u.node] == -1)  // u is root
               dfs_s.root_children++;
@@ -97,15 +105,15 @@ namespace algorithms::onlinejudge::graph::tools
           } else if(dfs_s.state[v.node] == Explored) {
             if(v.node != dfs_s.parent[u.node] && 
                dfs_s.process_back_edge)
-              dfs_s.process_back_edge(u, v);   
+              dfs_s.process_back_edge(u, v);
           } else if(dfs_s.state[v.node] == Visited) {
             if(dfs_s.entry_t[v.node] > dfs_s.entry_t[u.node])
               if(dfs_s.process_forward_edge)
                 dfs_s.process_forward_edge(u, v);
             if(dfs_s.entry_t[v.node] < dfs_s.entry_t[u.node])
               if(dfs_s.process_cross_edge)
-                dfs_s.process_cross_edge(u, v);
-          }  
+                dfs_s.process_cross_edge(u, v);      
+          }
 
         dfs_s.state[u.node] = Visited;
         dfs_s.exit_t[u.node] = dfs_s.time;
@@ -200,7 +208,12 @@ namespace algorithms::onlinejudge::graph::tools
     typedef std::vector<Dir> v_dir;
 
     // Default DAG directions: only right and down
-    const v_dir dirs_dag = {{0, 1}, {1, 0}};
+    const v_dir dirs_4 = 
+      { {-1, 0}, // up
+        {1, 0},  // down
+        {0, -1}, // left
+        {0, 1}   // right
+      };
 
     template <typename T, typename F = char>
     struct GridGraph {
@@ -213,7 +226,8 @@ namespace algorithms::onlinejudge::graph::tools
     void grid_to_adj_list(
       GridGraph<T, F>& g,
       const std::vector<std::vector<F>>& grid,
-      v_dir directions = dirs_dag) {
+      v_dir directions = dirs_4,
+      bool bidirectional = false) {
 
         int rows = grid.size();
         if (rows == 0) return;
@@ -231,9 +245,10 @@ namespace algorithms::onlinejudge::graph::tools
 
             for(const Dir& d : directions) {
               int nr = r + d.r_shift, nc = c + d.c_shift;
-              if (in_bounds(nr, nc)) {
+              if(in_bounds(nr, nc)) {
                 int v = nr * cols + nc;
                 g.adj[u].push_back(Node<T>{v, g.cell_to_value(grid[nr][nc])});
+                if(bidirectional) g.adj[v].push_back(Node<T>{u, g.cell_to_value(grid[r][c])});
               }
             }
           }

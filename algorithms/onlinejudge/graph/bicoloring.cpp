@@ -59,7 +59,7 @@ namespace algorithms::onlinejudge::graph::bicoloring
 
           tools::Dfs<> dfs_s = tools::init_dfs<>(V);
           dfs_s.on_discover = 
-            [&clr, &dfs_s](const tools::Node<>& v) {
+            [&clr, &dfs_s](tools::Node<>& v) {
               int p = dfs_s.parent[v.node];
               if(p == -1) clr[v.node] = White;
               else clr[v.node] = set_op_colour(clr[p]);
@@ -76,7 +76,7 @@ namespace algorithms::onlinejudge::graph::bicoloring
               }
           };
 
-          std::vector<std::vector<tools::Node<>>> adj_list(V);
+          tools::vv_def_node adj_list(V);
           loop(E, [&adj_list](int _) {
             int u, v;
             while_read(u, v);

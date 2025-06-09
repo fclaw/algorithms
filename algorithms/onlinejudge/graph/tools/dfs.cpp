@@ -48,7 +48,7 @@ namespace algorithms::onlinejudge::graph::tools
         int root_children;
         int root = start_vertex;
         std::function<void(Node<T>&)> on_discover;
-        std::function<void(Node<T>&)> after_discover;
+        std::function<void(Node<T>&)> on_exit;
         // Tree edge: The edge traversed by DFS, i.e. an edge from a vertex currently with state:
         // EXPLORED to a vertex with state: UNVISITED
         std::function<bool(const Node<T>&, const Node<T>&)> process_tree_edge;
@@ -119,7 +119,7 @@ namespace algorithms::onlinejudge::graph::tools
         dfs_s.exit_t[u.node] = dfs_s.time;
         dfs_s.time++;
 
-        if(dfs_s.after_discover) dfs_s.after_discover(u);
+        if(dfs_s.on_exit) dfs_s.on_exit(u);
     }
 
     

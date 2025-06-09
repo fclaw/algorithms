@@ -73,7 +73,7 @@ namespace algorithms::onlinejudge::graph::network
                      const tools::Node<>& v) { 
               tools::set_ancestor(u.node, v.node, dfs_s);
             };
-          dfs_s.after_discover = [&dfs_s](tools::Node<>& u) { tools::detect_cut_node(u.node, dfs_s); };
+          dfs_s.on_exit = [&dfs_s](tools::Node<>& u) { tools::detect_cut_node(u.node, dfs_s); };
 
           tools::Node<> start_v = {tools::start_vertex, {}};
           tools::dfs<>(adj_list, dfs_s, start_v);

@@ -66,9 +66,9 @@ namespace algorithms::onlinejudge::graph::tools
         vi parent;
         int time;
         int root_children;
-        int root = start_vertex;
+        int& root = start_vertex;
         std::function<void(Node<T>&)> on_discover;
-        std::function<void(Node<T>&)> on_exit;
+        std::function<void(Node<T>&)> on_leaving;
         // Tree edge: The edge traversed by DFS, i.e. an edge from a vertex currently with state:
         // EXPLORED to a vertex with state: UNVISITED
         std::function<bool(const Node<T>&, const Node<T>&)> process_tree_edge;
@@ -77,7 +77,21 @@ namespace algorithms::onlinejudge::graph::tools
         // this algorithm. Note that we usually do not count bi-directional edges as having a
         // ‘cycle’ (We need to remember dfs_parent to distinguish this, see the code below).
         std::function<void(const Node<T>&, const Node<T>&)> process_back_edge;
-        // Forward/Cross edges from vertex with state: EXPLORED to vertex with state: VISITED
+        /* Forward/Cross edges from vertex with state: EXPLORED to vertex with state: VISITED (only for Directed Graphs)
+           Edge classification in DFS (Directed Graphs):
+            - Forward Edge:
+                An edge from a node `u` to a descendant `v` in the DFS tree,
+                but not the edge that first discovered `v`.
+                Example: u → v, where `v` is in the subtree of `u`, but not directly.
+
+            - Cross Edge:
+                An edge from a node `u` to a previously visited node `v` that is
+                neither an ancestor nor a descendant in the DFS tree.
+                It connects different DFS branches or finished subtrees.
+                Example: u → v, where DFS has already finished processing `v`.
+
+            Note: These edge types do not apply to undirected graphs.
+        */
         std::function<void(const Node<T>&, const Node<T>&)> process_forward_edge;
         std::function<void(const Node<T>&, const Node<T>&)> process_cross_edge;
         bool is_finished;
@@ -142,7 +156,7 @@ namespace algorithms::onlinejudge::graph::tools
         dfs_s.exit_t[u.node] = dfs_s.time;
         dfs_s.time++;
 
-        if(dfs_s.on_exit) dfs_s.on_exit(u);
+        if(dfs_s.on_leaving) dfs_s.on_leaving(u);
     }
 
     
@@ -169,6 +183,7 @@ namespace algorithms::onlinejudge::graph::tools
     template <typename T = Unit>
     void set_ancestor(int u, int v, Dfs<T>& dfs) {
       if(dfs.entry_t[v] < dfs.entry_t[reachable_ancestor[u]] && dfs.parent[u] != v)
+        // subtree of u hits one of ancestors v 
         reachable_ancestor[u] = v;
     }
 
@@ -214,8 +229,9 @@ namespace algorithms::onlinejudge::graph::tools
           if(dfs.parent[v] != dfs.root && 
              dfs.parent[v] != node_sentinel)
             cut_nodes[dfs.parent[v]].insert(Bridge);
-          if(tree_out_degree[v] > 0)
+          if(tree_out_degree[v] > 0) {
             cut_nodes[v].insert(Bridge);
+          }
           
           // This line detects bridges  
           if(dfs.parent[v] != node_sentinel) cut_edges.insert({dfs.parent[v], v});

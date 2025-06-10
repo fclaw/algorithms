@@ -1,6 +1,6 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa 796 Critical Links , rt: s
+🧳 UVa 10199 Tourist Guide, rt: s
 ───────────────────────────────────────────────────────────────
 */
 
@@ -19,17 +19,16 @@
 #include <bitset>
 #include <unordered_map>
 #include <unordered_set>
-#include <set>
 
 
 
 namespace tools = algorithms::onlinejudge::graph::tools;
 
 
-namespace algorithms::onlinejudge::graph::critical_links
+namespace algorithms::onlinejudge::graph::tourist
 {
-    /** https://onlinejudge.org/external/7/796.pdf */
-    int V;
+    /** https://onlinejudge.org/external/101/10199.pdf */
+    int V, E, t_cases = 1;
     void submit(std::optional<char*> file, bool debug_mode)
     {
         if (file.has_value())
@@ -42,26 +41,36 @@ namespace algorithms::onlinejudge::graph::critical_links
               " with error: " + std::strerror(errno);
             throw std::ios_base::failure(errorMessage);
           }
-         
-        while(while_read(V)) {
-          tools::vv_def_node network(V);
-          loop(V, [&] (int _) {
-            int from, C;
-            scanf("%d",&from);
-            char c;
-            scanf("%c%c%d%c",&c,&c,&C,&c);
-            tools::v_def_node nodes(C, tools::def_node);
-            loop(C, [&nodes](int i) { while_read(nodes[i].node); });
-            if(!nodes.empty()) network[from] = nodes;
+        
+        std::unordered_map<std::string, int> city_id;
+        while(while_read(V) && V) {
+          city_id.clear();
+          tools::vv_def_node roads(V);
+          loop(V, [&](int i) {
+            std::string place;
+            while_read(place);
+            city_id[place] = i;
+          });
+
+          while_read(E);
+          loop(E, [&roads, city_id](int i) {
+            std::string from_l, to_l;
+            while_read(from_l, to_l);
+            int from = city_id.at(from_l);
+            int to = city_id.at(to_l);
+            roads[from].push_back({to, {}});
+            roads[to].push_back({from, {}});
           });
 
           tools::Dfs<> dfs_s = tools::init_dfs<>(V);
+          tools::init_cut_points(V);
+
           dfs_s.on_discover = 
             [](tools::Node<>& u) 
             { tools::init_ancestor(u.node); };
           dfs_s.process_tree_edge = 
             [&dfs_s](const tools::Node<>& u, 
-                     const tools::Node<>& v) -> bool { 
+                     const tools::Node<>& v) -> bool {           
               tools::incr_tree_out_degree(u.node); 
               return true; 
             };
@@ -74,21 +83,27 @@ namespace algorithms::onlinejudge::graph::critical_links
              [&dfs_s](tools::Node<>& u) 
              { tools::detect_cut_points(u.node, dfs_s); };
 
-          std::set<std::pair<int, int>> res;
           for(int v = 0; v < V; ++v) {
             if(dfs_s.state[v] == tools::Unvisited) {
-              tools::init_cut_points(V);
               tools::Node<> start_v = tools::def_node;
               start_v.node = v;
-              tools::dfs<>(network, dfs_s, start_v);
-              for(auto& e : tools::cut_edges) res.insert({e.from, e.to});
+              tools::start_vertex = v;
+              tools::dfs<>(roads, dfs_s, start_v);
             }
           }
 
-        
-          printf("%d critical links\n", (int)res.size());
-          for(auto& r : res) printf("%d - %d\n", r.first, r.second);
+          std::set<std::string> locs;
+          for(int u = 0; u < V; ++u) {
+            tools::s_cut_node n = tools::cut_nodes[u];
+              if(n.count(tools::Bridge)) {
+                for(auto& p : city_id) 
+                  if(p.second == u)
+                    locs.insert(p.first);
+                }
+              }
+          printf("City map #%d: %d camera(s) found\n", t_cases++, (int)locs.size());
+          for(auto l : locs) printf("%s\n", l.c_str());
           std::cout << std::endl;
-        }
+        }  
     }
 }

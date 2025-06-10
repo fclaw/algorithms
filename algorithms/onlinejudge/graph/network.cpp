@@ -73,7 +73,7 @@ namespace algorithms::onlinejudge::graph::network
                      const tools::Node<>& v) { 
               tools::set_ancestor(u.node, v.node, dfs_s);
             };
-          dfs_s.on_exit = 
+          dfs_s.on_leaving = 
              [&dfs_s](tools::Node<>& u) 
              { tools::detect_cut_points(u.node, dfs_s); };
 

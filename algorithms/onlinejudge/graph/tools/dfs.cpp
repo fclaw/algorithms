@@ -143,8 +143,7 @@ namespace algorithms::onlinejudge::graph::tools
               dfs_s.root_children++;
             dfs(adj_list, dfs_s, v);
           } else if(dfs_s.state[v.node] == Explored) {
-            if(v.node != dfs_s.parent[u.node] && 
-               dfs_s.process_back_edge)
+            if(dfs_s.process_back_edge)
               dfs_s.process_back_edge(u, v);
           } else if(dfs_s.state[v.node] == Visited) {
             if(dfs_s.entry_t[v.node] > dfs_s.entry_t[u.node])
@@ -330,53 +329,61 @@ namespace algorithms::onlinejudge::graph::tools
             scc[v] = sentinel;
           }
         }
-
-        void handle_back_edge(
-          Dfs<T>& dfs, 
-          const Node<T>& u, 
-          const Node<T>& v) {
-          if(dfs.entry_t[v.node] < 
-             dfs.entry_t[low[u.node]])
-            low[u.node] = v.node;
-        }
-
-        void handle_cross_edge(
-          Dfs<T>& dfs, 
-          const Node<T>& u, 
-          const Node<T>& v) {
-          if(scc[u] == sentinel) {
-            if(dfs.entry_t[v.node] < 
-               dfs.entry_t[low[u.node]])
-              low[u.node] = v.node;
-          }
-        }
-
-        void handle_on_discover(Node<T>& u) {
-          active_comp.push(u.node);
-        }
-
-        // A new strongly connected component is found whenever the lowest reachable
-        // vertex from v is v. If so, we can clear the stack of this component. Otherwise, we
-        // give our parent the benefit of the oldest ancestor we can reach and backtrack
-        void handle_on_leaving(Dfs<T>& dfs, Node<T>& u) {
-          if(low[u.node] == u.node) 
-            pop_component(u.node);
-          if(dfs.entry_t[low[u.node]] < 
-             dfs.entry_t[low[dfs.parent[u.node]]])
-            low[dfs.parent[u.node]] = low[u.node];    
-        }
-
-        void pop_component(int u) {
-          int p; // vertex placeholder;
-          count++;
-          scc[u] = count;
-          while((p = active_comp.top()) != u) {
-            scc[p] = count;
-            active_comp.pop();
-          }
-        }
     };
 
     template<typename T = Unit>
-    SCC<T>& init_scc() {SCC<T> scc; }
+    void handle_back_edge(
+      Dfs<T>& dfs,
+      SCC<T>& scc,
+      const Node<T>& u, 
+      const Node<T>& v) {
+        if(dfs.entry_t[v.node] < 
+           dfs.entry_t[scc.low[u.node]])
+          scc.low[u.node] = v.node;
+    }
+
+    template<typename T = Unit>
+    void handle_cross_edge(
+      Dfs<T>& dfs,
+      SCC<T>& scc,
+      const Node<T>& u, 
+      const Node<T>& v) {
+        if(scc.scc[v.node] == sentinel) {
+          if(dfs.entry_t[v.node] < 
+             dfs.entry_t[scc.low[u.node]])
+            scc.low[u.node] = v.node;
+        }
+    }
+    template<typename T = Unit>
+    void handle_on_discover(SCC<T>& scc, Node<T>& u) 
+    { scc.active_comp.push(u.node); }
+
+    // A new strongly connected component is found whenever the lowest reachable
+    // vertex from v is v. If so, we can clear the stack of this component. Otherwise, we
+    // give our parent the benefit of the oldest ancestor we can reach and backtrack
+    template<typename T = Unit>
+    void handle_on_leaving(
+      SCC<T>& scc, 
+      Dfs<T>& dfs, 
+      Node<T>& u) {
+      if(scc.low[u.node] == u.node) 
+        pop_component(scc, u.node);
+      if(dfs.entry_t[scc.low[u.node]] < 
+         dfs.entry_t[scc.low[dfs.parent[u.node]]])
+        scc.low[dfs.parent[u.node]] = scc.low[u.node];    
+    }
+
+    int stack_top(std::stack<int>& stack) {
+      int t = stack.top();
+      stack.pop();
+      return t;
+    }
+
+    template<typename T = Unit>
+    void pop_component(SCC<T>& scc, int u) {
+      int p; // vertex placeholder;
+      scc.count++;
+      scc.scc[u] = scc.count;
+      while((p = stack_top(scc.active_comp)) != u) scc.scc[p] = scc.count;
+    }
 }

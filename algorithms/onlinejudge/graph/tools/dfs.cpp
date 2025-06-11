@@ -52,6 +52,9 @@ namespace algorithms::onlinejudge::graph::tools
     typedef std::vector<tools::Node<>> v_def_node;
     typedef std::vector<std::vector<tools::Node<>>> vv_def_node;
 
+    template <typename T>
+    using Graph = std::vector<std::vector<Node<T>>>;
+
     // Overload operator<< for Node<T>
     template <typename T>
     std::ostream& operator << (std::ostream& os, const Node<T>& n) 

@@ -4,6 +4,7 @@
 #include <set>
 #include <unordered_map>
 #include <set>
+#include <stack>
 
 
 namespace algorithms::onlinejudge::graph::tools
@@ -101,7 +102,7 @@ namespace algorithms::onlinejudge::graph::tools
 
     };
 
-    const int node_sentinel = -1;
+    const int sentinel = -1;
 
     template <typename T = Unit>
     Dfs<T> init_dfs(int V) {
@@ -111,7 +112,7 @@ namespace algorithms::onlinejudge::graph::tools
       dfs_s.time = 1;
       dfs_s.entry_t = tools::vi(V);
       dfs_s.exit_t = tools::vi(V);
-      dfs_s.parent = tools::vi(V, node_sentinel);
+      dfs_s.parent = tools::vi(V, sentinel);
       dfs_s.root_children = 0;
       return dfs_s;
     }
@@ -138,7 +139,7 @@ namespace algorithms::onlinejudge::graph::tools
             if(!should_continue) continue; // ← Skip DFS if not allowed
 
             dfs_s.parent[v.node] = u.node;
-            if (dfs_s.parent[u.node] == node_sentinel)  // u is root
+            if (dfs_s.parent[u.node] == sentinel)  // u is root
               dfs_s.root_children++;
             dfs(adj_list, dfs_s, v);
           } else if(dfs_s.state[v.node] == Explored) {
@@ -222,7 +223,7 @@ namespace algorithms::onlinejudge::graph::tools
 
         // Parent cut-node
         int p = dfs.parent[v];
-        if (p != node_sentinel && 
+        if (p != sentinel && 
             p != dfs.root && 
             reachable_ancestor[v] == p)
           cut_nodes[p].insert(Parent);
@@ -230,18 +231,18 @@ namespace algorithms::onlinejudge::graph::tools
         // Bridge cut-node
         if(reachable_ancestor[v] == v) {
           if(dfs.parent[v] != dfs.root && 
-             dfs.parent[v] != node_sentinel)
+             dfs.parent[v] != sentinel)
             cut_nodes[dfs.parent[v]].insert(Bridge);
           if(tree_out_degree[v] > 0) {
             cut_nodes[v].insert(Bridge);
           }
           
           // This line detects bridges  
-          if(dfs.parent[v] != node_sentinel) cut_edges.insert({dfs.parent[v], v});
+          if(dfs.parent[v] != sentinel) cut_edges.insert({dfs.parent[v], v});
         }
 
         // Update reachable_ancestor of parent
-        if (dfs.parent[v] != node_sentinel) {
+        if (dfs.parent[v] != sentinel) {
           int time_v = dfs.entry_t[reachable_ancestor[v]];
           int time_parent = dfs.entry_t[reachable_ancestor[dfs.parent[v]]];
           if (time_v < time_parent) reachable_ancestor[dfs.parent[v]] = reachable_ancestor[v];
@@ -303,4 +304,79 @@ namespace algorithms::onlinejudge::graph::tools
           }
         }
     }
+
+    // strongly connected components
+    // we are mostly concerned with back and cross edges
+    // cross edges that point vertices
+    // from previous strongly connected components of the graph cannot help us, because
+    // there can be no way back from them to v, but otherwise cross edges are fair game.
+    // Forward edges have no impact on reachability over the depth-first tree edges, and
+    // hence can be disregarded
+    template<typename T = Unit>
+    struct SCC
+    {
+        //  Define low[v] to be the oldest vertex known to be in the same strongly connected
+        // component as v. This vertex is not necessarily an ancestor, but may also
+        // be a distant cousin of v because of cross edges
+        vi low;
+        vi scc;
+        int count;
+        std::stack<int> active_comp;
+        SCC(int V) : count(0) {
+          low.resize(V);
+          scc.resize(V);
+          for(int v = 0; v < V; ++v) {
+            low[v] = v;
+            scc[v] = sentinel;
+          }
+        }
+
+        void handle_back_edge(
+          Dfs<T>& dfs, 
+          const Node<T>& u, 
+          const Node<T>& v) {
+          if(dfs.entry_t[v.node] < 
+             dfs.entry_t[low[u.node]])
+            low[u.node] = v.node;
+        }
+
+        void handle_cross_edge(
+          Dfs<T>& dfs, 
+          const Node<T>& u, 
+          const Node<T>& v) {
+          if(scc[u] == sentinel) {
+            if(dfs.entry_t[v.node] < 
+               dfs.entry_t[low[u.node]])
+              low[u.node] = v.node;
+          }
+        }
+
+        void handle_on_discover(Node<T>& u) {
+          active_comp.push(u.node);
+        }
+
+        // A new strongly connected component is found whenever the lowest reachable
+        // vertex from v is v. If so, we can clear the stack of this component. Otherwise, we
+        // give our parent the benefit of the oldest ancestor we can reach and backtrack
+        void handle_on_leaving(Dfs<T>& dfs, Node<T>& u) {
+          if(low[u.node] == u.node) 
+            pop_component(u.node);
+          if(dfs.entry_t[low[u.node]] < 
+             dfs.entry_t[low[dfs.parent[u.node]]])
+            low[dfs.parent[u.node]] = low[u.node];    
+        }
+
+        void pop_component(int u) {
+          int p; // vertex placeholder;
+          count++;
+          scc[u] = count;
+          while((p = active_comp.top()) != u) {
+            scc[p] = count;
+            active_comp.pop();
+          }
+        }
+    };
+
+    template<typename T = Unit>
+    SCC<T>& init_scc() {SCC<T> scc; }
 }

@@ -1,6 +1,6 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa 247 Calling Circles, rt: s
+🧳 UVa 11838 Come and Go, rt: s
 ───────────────────────────────────────────────────────────────
 */
 
@@ -25,10 +25,10 @@
 namespace tools = algorithms::onlinejudge::graph::tools;
 
 
-namespace algorithms::onlinejudge::graph::calling_circles
+namespace algorithms::onlinejudge::graph::come_and_go
 {
-    /** https://onlinejudge.org/external/2/247.pdf  */
-    int V, E, t_cases = 1;
+    /** https://onlinejudge.org/external/118/11838.pdf */
+    int V, E;
     void submit(std::optional<char*> file, bool debug_mode)
     {
         if (file.has_value())
@@ -41,43 +41,17 @@ namespace algorithms::onlinejudge::graph::calling_circles
               " with error: " + std::strerror(errno);
             throw std::ios_base::failure(errorMessage);
           }
-
-        bool is_first = true;  
-        while(while_read(V, E) && V) {
-          if(!is_first) std::cout << std::endl; 
-          else is_first = false;
-          std::unordered_map<std::string, int> name;
-          std::unordered_map<int, std::string> indices;
-          tools::vi edges(V, -1);
+        
+        while(while_read(V, E) && V && E) {
           tools::Dfs<> dfs_s = tools::init_dfs<>(V);
-          tools::vv_def_node circle(V);
-
-          int idx = 0;
-          loop(E, [&](int _) {
-            std::string from_n, to_n;
-            while_read(from_n, to_n);
-            auto it = name.find(from_n);
-            int from, to;
-
-            if(it == name.end()) { 
-              from = idx; 
-              name[from_n] = idx++;
-              indices[from] = from_n;
-            }
-            else from = it->second;
-
-            it = name.find(to_n);
-            if(it == name.end()) { 
-              to = idx; 
-              name[to_n] = idx++;
-              indices[to] = to_n;
-            }
-            else to = it->second;
-            
-            if(edges[from] != to) { 
-              edges[from] = to; 
-              circle[from].push_back({to, {}}); 
-            }
+          tools::vv_def_node roads_network(V);
+          loop(E, [&roads_network] (int _) {
+            int from, to, is_b;
+            scanf("%d %d %d\n", &from, &to, &is_b);
+            --from; --to;
+            bool is_bidirectional = (bool)(--is_b);
+            roads_network[from].push_back(tools::mkDefNode(to));
+            if(is_bidirectional) roads_network[to].push_back(tools::mkDefNode(from));
           });
 
           tools::SCC<> scc(V);
@@ -102,19 +76,10 @@ namespace algorithms::onlinejudge::graph::calling_circles
               tools::Node<> start_v = tools::def_node;
               start_v.node = v;
               tools::start_vertex = v;
-              tools::dfs<>(circle, dfs_s, start_v);
+              tools::dfs<>(roads_network, dfs_s, start_v);
             }
-           
-          printf("Calling circles for data set %d:\n", t_cases++);
-          std::unordered_map<int, std::string> ans;
-          for(int v = 0; v < V; ++v)
-            ans[scc.scc[v]] += indices[v] + ", ";
 
-          for(auto a : ans) {
-            a.second.pop_back();
-            a.second.pop_back();
-            std::cout << a.second << std::endl;
-          }
+          std::cout << (scc.count == 1 ? 1 : 0) << std::endl;
         }
     }
 }

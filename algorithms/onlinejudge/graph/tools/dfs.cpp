@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <set>
 #include <stack>
+#include <cassert>
 
 
 namespace algorithms::onlinejudge::graph::tools
@@ -49,6 +50,8 @@ namespace algorithms::onlinejudge::graph::tools
     };
 
     Node<> def_node = {0, {}};
+ 
+    Node<> mkDefNode(int v) { return {v, {}}; }
 
     typedef std::vector<tools::Node<>> v_def_node;
     typedef std::vector<std::vector<tools::Node<>>> vv_def_node;
@@ -366,11 +369,17 @@ namespace algorithms::onlinejudge::graph::tools
       SCC<T>& scc, 
       Dfs<T>& dfs, 
       Node<T>& u) {
-      if(scc.low[u.node] == u.node) 
+      
+      assert(!scc.active_comp.empty() && "handle_on_leaving:stack is empty!!");  
+
+      if(scc.low[u.node] == u.node && 
+         !scc.active_comp.empty()) 
         pop_component(scc, u.node);
-      if(dfs.entry_t[scc.low[u.node]] < 
-         dfs.entry_t[scc.low[dfs.parent[u.node]]])
-        scc.low[dfs.parent[u.node]] = scc.low[u.node];    
+      if(dfs.parent[u.node] != sentinel) {  
+        if(dfs.entry_t[scc.low[u.node]] < 
+           dfs.entry_t[scc.low[dfs.parent[u.node]]])
+          scc.low[dfs.parent[u.node]] = scc.low[u.node];   
+      } 
     }
 
     int stack_top(std::stack<int>& stack) {

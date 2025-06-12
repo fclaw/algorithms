@@ -130,7 +130,7 @@ namespace algorithms::onlinejudge::graph::tools
         dfs_s.state[u.node] = Explored;
         dfs_s.entry_t[u.node] = dfs_s.time;
         dfs_s.time++;
-       
+
         if(dfs_s.on_discover) dfs_s.on_discover(u);
 
         bool should_continue = true;
@@ -269,10 +269,18 @@ namespace algorithms::onlinejudge::graph::tools
 
     template <typename T, typename F = char>
     struct GridGraph {
-      std::vector<std::vector<Node<T>>> adj;
+      Graph<T> adj;
       std::unordered_map<int, T> vertex_value;
       std::function<T(F)> cell_to_value;
     };
+
+    template <typename T, typename F = char>
+    GridGraph<T> init_grid_graph(int R, int C) {
+      Graph<T> graph;
+      std::unordered_map<int, T> vertex_value;
+      return GridGraph<T>{graph, vertex_value, nullptr};
+    }
+
 
     template <typename T, typename F = char>
     void grid_to_adj_list(

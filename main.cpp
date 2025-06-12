@@ -1,6 +1,6 @@
 #define DBG_MACRO_NO_WARNING
 
-#include "algorithms/onlinejudge/graph/comeAndGo.cpp"
+#include "algorithms/onlinejudge/graph/robotMotion.cpp"
 #include <chrono>
 #include <iomanip>
 #include <bits/stdc++.h>
@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::graph::come_and_go::submit(file, debug_mode);
+    algorithms::onlinejudge::graph::robot_motion::submit(file, debug_mode);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

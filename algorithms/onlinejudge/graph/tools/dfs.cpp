@@ -267,6 +267,18 @@ namespace algorithms::onlinejudge::graph::tools
         {0, 1}   // right
       };
 
+
+    const v_dir dirs_8 = {
+        {-1,  0}, // up
+        { 1,  0}, // down
+        { 0, -1}, // left
+        { 0,  1}, // right
+        {-1, -1}, // upper-left
+        {-1,  1}, // upper-right
+        { 1, -1}, // lower-left
+        { 1,  1}  // lower-right
+    };
+
     template <typename T, typename F = char>
     struct GridGraph {
       Graph<T> adj;

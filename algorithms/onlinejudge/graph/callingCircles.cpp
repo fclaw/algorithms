@@ -108,7 +108,7 @@ namespace algorithms::onlinejudge::graph::calling_circles
           printf("Calling circles for data set %d:\n", t_cases++);
           std::unordered_map<int, std::string> ans;
           for(int v = 0; v < V; ++v)
-            ans[scc.scc[v]] += indices[v] + ", ";
+            ans[scc.components[v]] += indices[v] + ", ";
 
           for(auto a : ans) {
             a.second.pop_back();

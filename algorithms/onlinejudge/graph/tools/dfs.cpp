@@ -329,15 +329,15 @@ namespace algorithms::onlinejudge::graph::tools
         // component as v. This vertex is not necessarily an ancestor, but may also
         // be a distant cousin of v because of cross edges
         vi low;
-        vi scc;
+        vi components;
         int count;
         std::stack<int> active_comp;
         SCC(int V) : count(0) {
           low.resize(V);
-          scc.resize(V);
+          components.resize(V);
           for(int v = 0; v < V; ++v) {
             low[v] = v;
-            scc[v] = sentinel;
+            components[v] = sentinel;
           }
         }
     };
@@ -359,7 +359,7 @@ namespace algorithms::onlinejudge::graph::tools
       SCC<T>& scc,
       const Node<T>& u, 
       const Node<T>& v) {
-        if(scc.scc[v.node] == sentinel) {
+        if(scc.components[v.node] == sentinel) {
           if(dfs.entry_t[v.node] < 
              dfs.entry_t[scc.low[u.node]])
             scc.low[u.node] = v.node;
@@ -400,7 +400,7 @@ namespace algorithms::onlinejudge::graph::tools
     void pop_component(SCC<T>& scc, int u) {
       int p; // vertex placeholder;
       scc.count++;
-      scc.scc[u] = scc.count;
-      while((p = stack_top(scc.active_comp)) != u) scc.scc[p] = scc.count;
+      scc.components[u] = scc.count;
+      while((p = stack_top(scc.active_comp)) != u) scc.components[p] = scc.count;
     }
 }

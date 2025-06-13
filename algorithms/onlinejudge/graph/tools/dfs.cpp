@@ -6,6 +6,7 @@
 #include <set>
 #include <stack>
 #include <cassert>
+#include <stdexcept>
 
 
 namespace algorithms::onlinejudge::graph::tools
@@ -290,7 +291,7 @@ namespace algorithms::onlinejudge::graph::tools
     GridGraph<T> init_grid_graph(int R, int C) {
       Graph<T> graph;
       std::unordered_map<int, T> vertex_value;
-      return GridGraph<T>{graph, vertex_value, nullptr};
+      return GridGraph<T>{graph, vertex_value};
     }
 
 
@@ -300,6 +301,9 @@ namespace algorithms::onlinejudge::graph::tools
       const std::vector<std::vector<F>>& grid,
       v_dir directions = dirs_4,
       bool bidirectional = false) {
+
+        if (!g.cell_to_value) 
+          throw std::runtime_error("grid_to_adj_list:cell_to_value not set!");
 
         int rows = grid.size();
         if (rows == 0) return;

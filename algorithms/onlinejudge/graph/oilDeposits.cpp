@@ -83,7 +83,7 @@ namespace algorithms::onlinejudge::graph::oil_deposits
           tools::grid_to_adj_list(graph, grid, tools::dirs_8, true);
           tools::Dfs<Plot> dfs_s = tools::init_dfs<Plot>(V);
 
-          tools::vi pockets(V, 0);
+          tools::vb pockets(V, false);
           bool in_pocket = false;
           int entry_node = tools::sentinel;
           dfs_s.on_discover = 
@@ -109,9 +109,9 @@ namespace algorithms::onlinejudge::graph::oil_deposits
             (tools::Node<Plot>& node) {
               if(node.node == entry_node) {
                 in_pocket = false;
-                if(pockets[node.node] == 0) 
-                  pockets[node.node] = 1;
-                entry_node = 0;
+                if(!pockets[node.node]) 
+                  pockets[node.node] = true;
+                entry_node = tools::sentinel;
               }
             };
 
@@ -122,7 +122,7 @@ namespace algorithms::onlinejudge::graph::oil_deposits
               tools::dfs<Plot>(graph.adj, dfs_s, start);
             }
 
-          std::cout << std::count(pockets.begin(), pockets.end(), 1) << std::endl;  
+          std::cout << std::count(pockets.begin(), pockets.end(), true) << std::endl;  
         }
     }
 }

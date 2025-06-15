@@ -259,6 +259,8 @@ namespace algorithms::onlinejudge::graph::tools
     };
 
     typedef std::vector<Dir> v_dir;
+    typedef std::vector<char> vc;
+    typedef std::vector<vc> vvc;
 
     // Default DAG directions: only right and down
     const v_dir dirs_4 = 

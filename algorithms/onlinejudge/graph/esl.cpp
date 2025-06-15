@@ -60,17 +60,38 @@ namespace algorithms::onlinejudge::graph::esl
           }
         }
         // add
-        tmp = w;
-        tmp.push_back(' ');
-        for(char c = 'a'; c <= 'z'; ++c) {
-          tmp[tmp.size() - 1] = c;
-          if(word_node.count(tmp) && 
-             used.insert(tmp).second) {
-            int n = word_node.at(tmp);
-            graph[node].push_back(tools::mkDefNode(n));
-            backtrack(word_node, tmp, graph, used);
+        for(char c = 'a'; c <= 'z'; ++c)
+          for(int j = 0; j < (int)w.size(); ++j) {
+            std::string tmp;
+            std::string left = w.substr(0, j);
+            std::string right = w.substr(j, w.size() - j); // Fixing substring length
+            left.push_back(c);
+            tmp = left + right;
+            if(word_node.count(tmp) && 
+               used.insert(tmp).second) {
+              int n = word_node.at(tmp);
+              graph[node].push_back(tools::mkDefNode(n));
+              backtrack(word_node, tmp, graph, used);
+            }
+            
+            tmp = w;
+            tmp.push_back(c);
+            if(word_node.count(tmp) && 
+               used.insert(tmp).second) {
+              int n = word_node.at(tmp);
+              graph[node].push_back(tools::mkDefNode(n));
+              backtrack(word_node, tmp, graph, used);
+            }
+
+            tmp = w;
+            tmp[0] = c;
+            if(word_node.count(tmp) && 
+               used.insert(tmp).second) {
+              int n = word_node.at(tmp);
+              graph[node].push_back(tools::mkDefNode(n));
+              backtrack(word_node, tmp, graph, used);
+            }
           }
-        }
       }
     }
     void submit(std::optional<char*> file, bool debug_mode)

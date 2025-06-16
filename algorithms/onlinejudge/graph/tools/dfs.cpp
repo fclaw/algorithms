@@ -121,6 +121,17 @@ namespace algorithms::onlinejudge::graph::tools
       return dfs_s;
     }
 
+    template <typename T = Unit>
+    void reset_dfs(int V, Dfs<T>& dfs_s) {
+      dfs_s.is_finished = false;
+      std::fill(dfs_s.state.begin(), dfs_s.state.end(), Unvisited);
+      dfs_s.time = 1;
+      dfs_s.entry_t = tools::vi(V);
+      dfs_s.exit_t = tools::vi(V);
+      dfs_s.parent = tools::vi(V, sentinel);
+      dfs_s.root_children = 0;
+    }
+
 
     template <typename T = Unit>
     void dfs(const std::vector<std::vector<Node<T>>>& adj_list, Dfs<T>& dfs_s, Node<T>& u)

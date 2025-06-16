@@ -28,7 +28,7 @@ namespace algorithms::onlinejudge::graph::tools
             int x = findSet(i);
             int y = findSet(j);                        // find both rep items
             if(rank[x] > rank[y]) 
-              swap(x, y);                              // keep x 'shorter' than y
+              std::swap(x, y);                              // keep x 'shorter' than y
             p[x] = y;                                  // set x under y
             if(rank[x] == rank[y]) ++rank[y];          // optional speedup
             setSize[y] += setSize[x];                  // combine set sizes at y

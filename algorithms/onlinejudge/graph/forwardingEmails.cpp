@@ -2,6 +2,43 @@
 ───────────────────────────────────────────────────────────────
 🧳 UVa 12442 Forwarding Emails, rt: s
 ───────────────────────────────────────────────────────────────
+======================= Memoisation Insight =======================
+Problem: UVa 12442 - Forwarding Emails
+Type   : Directed Graph + DFS + Memoisation
+
+Key Insight:
+-------------
+In problems where each node leads to another in a singly-linked fashion 
+(e.g., a forwarding chain), traversing blindly leads to redundant work 
+and possible TLE on large graphs.
+
+The clever optimisation lies in **memoising** the number of reachable 
+nodes from any given node — especially important when multiple DFS paths 
+converge onto the same cycle or sub-path.
+
+Example:
+---------
+If 1 → 2 → 3 → 1 forms a cycle of length 3, then:
+  dp[1] = dp[2] = dp[3] = 3
+
+Any other node (e.g., 4 → 1) just adds +1 to dp[1]:
+  dp[4] = 1 + dp[1] = 4
+
+This avoids recomputing the same cycle repeatedly from multiple entry points.
+
+Cycle detection is integrated by tracking the DFS discovery order 
+and using it to identify and annotate the entire cycle when a back edge 
+is encountered.
+
+Result:
+--------
+This memoisation ensures each node is processed at most once, 
+bringing down total complexity to O(V) over all test cases.
+
+Combined with fast I/O, this makes even the 50,000-node case 
+runnable well within time limits.
+
+===============================================================
 */
 
 #include "../debug.h"
@@ -83,7 +120,7 @@ namespace algorithms::onlinejudge::graph::forwarding_emails
             [&](
               const tools::Node<>& u, 
               const tools::Node<>& v) -> bool {
-              if(dp[v.node] != -1) {
+              if(~dp[v.node]) {
                 dp[u.node] = dp[v.node] + 1;
                 curr_martians += dp[v.node];
                 dfs_s.is_finished = true;

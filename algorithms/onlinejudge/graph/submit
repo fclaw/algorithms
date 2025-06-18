@@ -658,6 +658,7 @@ namespace algorithms::onlinejudge::graph::tools::mst
          W min_cost;
          tools::UnionFind uf;
          std::function<void(W&, W)> mappend;
+         std::function<void(int i)> on_adding_edge;
      };
 
      template <typename W = int>
@@ -665,9 +666,13 @@ namespace algorithms::onlinejudge::graph::tools::mst
         return {E, V, def, tools::UnionFind(V)};
      }
 
- 
     template <typename W = int> 
     void kruskal(VEdge<W>& edges, Kruskal<W>& kruskal_s, bool is_min = true) {
+
+      if(!kruskal_s.mappend && 
+         !kruskal_s.on_adding_edge) 
+        throw std::runtime_error("kruskal: callbacks are not set!");
+
       std::function<bool(const Edge<W>&, const Edge<W>&)> cmp;
       if(is_min) cmp = [](const Edge<W>& a, const Edge<W>& b) { return a.weight < b.weight; }; // Min-heap
       else cmp = [](const Edge<W>& a, const Edge<W>& b) { return a.weight > b.weight; }; // Max-heap
@@ -677,46 +682,59 @@ namespace algorithms::onlinejudge::graph::tools::mst
       for(int i = 0; i < kruskal_s.E; ++i) {         // up to O(E)
         Edge<W> e = edges[i];              
         if(uf.isSameSet(e.from, e.to)) continue;     // already in the same CC
-        if(!kruskal_s.mappend) 
-          throw std::runtime_error("kruskal: mappend not set!");
         kruskal_s.mappend(kruskal_s.min_cost, e.weight); // add w of this edge
         uf.unionSet(e.from, e.to);                   // link them
         ++num_taken;                                 // 1 more edge is taken
+        kruskal_s.on_adding_edge(i);
         if(num_taken == kruskal_s.V - 1) break;      // optimization
        }
     }
 }
 
 
+
+
+
+
 namespace mst = algorithms::onlinejudge::graph::tools::mst;
 
 
-namespace algorithms::onlinejudge::graph::dark_roads
+namespace algorithms::onlinejudge::graph::heavy_cycle_edges
 {
-    /** https://onlinejudge.org/external/116/11631.pdf */
+    /** https://onlinejudge.org/external/117/11747.pdf */
     int V, E;
     void submit()
     {
+       
         
-        while(while_read(V, E) && V && E) {
-          
-          int max_cost = 0;
-          mst::VEdge<> roads;
+        while(while_read(V, E) && V) {
+          mst::VEdge<> edges;
           loop(E, [&](int _) {
             int from, to, w;
             while_read(from, to, w);
-            max_cost += w;
-            roads.push_back(mst::mkDefEdge(from, to, w));
+            edges.push_back(mst::mkDefEdge(from, to, w));
           });
  
-          mst::Kruskal<> kruskal_s = mst::initKruskal(V, (int)roads.size(), 0);
+          mst::Kruskal<> kruskal_s = mst::initKruskal(V, (int)edges.size(), 0);
           kruskal_s.mappend = [](int& acc, int x) { acc += x; };
-          mst::kruskal(roads, kruskal_s);
-          printf("%d\n", max_cost - kruskal_s.min_cost);
+          std::unordered_set<int> used;
+          kruskal_s.on_adding_edge = [&used] (int i) { used.insert(i); };
+          mst::kruskal(edges, kruskal_s);
+
+          if(used.size() == edges.size() || !E) 
+            printf("forest\n");
+          else {
+            std::string s;
+            for(int i = 0; i < (int)edges.size(); ++i)
+              if(!used.count(i))
+                s += std::to_string(edges[i].weight) + " ";
+            s.pop_back();
+            std::cout << s << std::endl;
+          }
         }
     }
 }
 
-namespace roads = algorithms::onlinejudge::graph::dark_roads;
+namespace heavy_cycle_edges = algorithms::onlinejudge::graph::heavy_cycle_edges;
 
-int main() { roads::submit(); }
+int main() { heavy_cycle_edges::submit(); }

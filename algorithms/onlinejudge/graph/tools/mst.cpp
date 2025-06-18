@@ -132,7 +132,9 @@ namespace algorithms::onlinejudge::graph::tools::mst
 
      template <typename W = int>
      Kruskal<W> initKruskal(int V, int E, W def) {
-        return {E, V, def, tools::UnionFind(V)};
+        auto def_mappend = [](int& acc, int x) { acc += x; };
+        auto def_on_adding_edge = [](int _) {};
+        return {E, V, def, tools::UnionFind(V), def_mappend, def_on_adding_edge};
      }
  
     template <typename W = int> 

@@ -696,45 +696,45 @@ namespace algorithms::onlinejudge::graph::tools::mst
 
 
 
+
 namespace mst = algorithms::onlinejudge::graph::tools::mst;
 
 
-namespace algorithms::onlinejudge::graph::heavy_cycle_edges
+namespace algorithms::onlinejudge::graph::airports
 {
-    /** https://onlinejudge.org/external/117/11747.pdf */
-    int V, E;
+    /** https://onlinejudge.org/external/117/11733.pdf */
+    int t_cases, V, E, A, c = 1;
     void submit()
     {
        
         
-        while(while_read(V, E) && V) {
-          mst::VEdge<> edges;
+        while_read(t_cases);
+        while(t_cases--) {
+          while_read(V, E, A);
+          mst::VEdge<> roads;
           loop(E, [&](int _) {
             int from, to, w;
             while_read(from, to, w);
-            edges.push_back(mst::mkDefEdge(from, to, w));
+            --from; --to;
+            roads.push_back(mst::mkDefEdge(from, to, w));
           });
- 
-          mst::Kruskal<> kruskal_s = mst::initKruskal(V, (int)edges.size(), 0);
-          kruskal_s.mappend = [](int& acc, int x) { acc += x; };
-          std::unordered_set<int> used;
-          kruskal_s.on_adding_edge = [&used] (int i) { used.insert(i); };
-          mst::kruskal(edges, kruskal_s);
 
-          if(used.size() == edges.size() || !E) 
-            printf("forest\n");
-          else {
-            std::string s;
-            for(int i = 0; i < (int)edges.size(); ++i)
-              if(!used.count(i))
-                s += std::to_string(edges[i].weight) + " ";
-            s.pop_back();
-            std::cout << s << std::endl;
-          }
+          mst::Kruskal<> kruskal_s = mst::initKruskal(V, (int)roads.size(), 0);
+          int airports = 0;
+          kruskal_s.mappend = 
+            [&](int& acc, int c) {
+              if(c >= A) {
+                acc += A;
+                airports++;
+              } else acc += c;
+            };
+          kruskal_s.on_adding_edge = [](int _) {};  
+          mst::kruskal(roads, kruskal_s);
+          printf("Case #%d: %d %d\n", c++, kruskal_s.uf.numDisjointSets() * A + kruskal_s.min_cost, airports + kruskal_s.uf.numDisjointSets());
         }
     }
 }
 
-namespace heavy_cycle_edges = algorithms::onlinejudge::graph::heavy_cycle_edges;
+namespace airports = algorithms::onlinejudge::graph::airports;
 
-int main() { heavy_cycle_edges::submit(); }
+int main() { airports::submit(); }

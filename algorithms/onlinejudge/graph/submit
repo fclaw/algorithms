@@ -1,0 +1,722 @@
+#include <vector>
+#include <vector>
+#include <functional> // for std::function
+#include <algorithm>
+#include <set>
+#include <unordered_map>
+#include <set>
+#include <stack>
+#include <cassert>
+#include <stdexcept>
+#include <queue>
+#include <tuple>
+#include <algorithm>
+#include <iostream>
+#include <sstream>
+#include <cstdio>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+#include <stdexcept>
+#include <cstring>
+#include <bitset>
+#include <unordered_map>
+#include <map>
+#include <unordered_set>
+#include <queue>
+#include <tuple>
+#include <algorithm>
+
+
+template<typename F>
+inline void loop(size_t n, F&& f)
+{
+    for (size_t i = 0; i < n; ++i)
+      std::forward<F>(f)(i);
+}
+
+template<typename... Args>
+bool while_read(Args&... args) { return (... && static_cast<bool>(std::cin >> args)); }
+
+
+namespace algorithms::onlinejudge::graph::tools
+{
+    enum State { Unvisited, Explored, Visited };
+    enum CutNode { Leaf, Root, Parent, Bridge };
+
+    struct Edge
+    {
+        const int from;
+        const int to;
+        Edge(int a, int b) : from(std::min(a, b)), to(std::max(a, b)) {}
+    };
+
+    bool operator < (const Edge& lhs, const Edge& rhs) 
+    { return lhs.from < rhs.from || (lhs.from == rhs.from && lhs.to < rhs.to); }
+     bool operator == (const Edge& lhs, const Edge& rhs) 
+     { return lhs.from == rhs.from && lhs.to == rhs.to; }
+
+    std::ostream& operator << (std::ostream& os, const Edge& e) 
+    { return os << "{" << e.from << ", " << e.to << "}"; }
+
+    typedef std::vector<int> vi;
+    typedef std::vector<bool> vb;
+    typedef std::vector<vi> vvi;
+    typedef std::vector<State> v_state;
+    typedef std::set<CutNode> s_cut_node;
+    typedef std::vector<s_cut_node> vs_cut_node;
+    typedef std::set<Edge> s_cut_edge;
+
+    int start_vertex = 0;
+
+    struct Unit {};
+
+    std::ostream& operator << (std::ostream& os, const Unit& u) { return os << "{}"; }
+
+    template <typename T = Unit>
+    struct Node 
+    {
+        int node;
+        T value;
+    };
+
+    Node<> def_node = {0, {}};
+ 
+    Node<> mkDefNode(int v) { return {v, {}}; }
+
+    typedef std::vector<tools::Node<>> v_def_node;
+    typedef std::vector<std::vector<tools::Node<>>> vv_def_node;
+
+    template <typename T>
+    using Graph = std::vector<std::vector<Node<T>>>;
+
+    // Overload operator<< for Node<T>
+    template <typename T>
+    std::ostream& operator << (std::ostream& os, const Node<T>& n) 
+    { return os << "{node: " << n.node << ", value: " << n.value << "}"; }
+
+    template <typename T = Unit>
+    struct Dfs
+    {
+        v_state state;
+        vi entry_t;
+        vi exit_t;
+        vi parent;
+        int time;
+        int root_children;
+        int& root = start_vertex;
+        std::function<void(Node<T>&)> on_discover;
+        std::function<void(Node<T>&)> on_leaving;
+        // Tree edge: The edge traversed by DFS, i.e. an edge from a vertex currently with state:
+        // EXPLORED to a vertex with state: UNVISITED
+        std::function<bool(const Node<T>&, const Node<T>&)> process_tree_edge;
+        // Back edge: Edge that is part of a cycle, i.e. an edge from a vertex currently with state:
+        // EXPLORED to a vertex with state: EXPLORED too. This is an important application of
+        // this algorithm. Note that we usually do not count bi-directional edges as having a
+        // ‘cycle’ (We need to remember dfs_parent to distinguish this, see the code below).
+        std::function<void(const Node<T>&, const Node<T>&)> process_back_edge;
+        /* Forward/Cross edges from vertex with state: EXPLORED to vertex with state: VISITED (only for Directed Graphs)
+           Edge classification in DFS (Directed Graphs):
+            - Forward Edge:
+                An edge from a node `u` to a descendant `v` in the DFS tree,
+                but not the edge that first discovered `v`.
+                Example: u → v, where `v` is in the subtree of `u`, but not directly.
+
+            - Cross Edge:
+                An edge from a node `u` to a previously visited node `v` that is
+                neither an ancestor nor a descendant in the DFS tree.
+                It connects different DFS branches or finished subtrees.
+                Example: u → v, where DFS has already finished processing `v`.
+
+            Note: These edge types do not apply to undirected graphs.
+        */
+        std::function<void(const Node<T>&, const Node<T>&)> process_forward_edge;
+        std::function<void(const Node<T>&, const Node<T>&)> process_cross_edge;
+        bool is_finished;
+
+    };
+
+    const int sentinel = -1;
+
+    template <typename T = Unit>
+    Dfs<T> init_dfs(int V) {
+      Dfs<T> dfs_s;
+      dfs_s.is_finished = false;
+      dfs_s.state = tools::v_state(V, tools::Unvisited);
+      dfs_s.time = 1;
+      dfs_s.entry_t = tools::vi(V);
+      dfs_s.exit_t = tools::vi(V);
+      dfs_s.parent = tools::vi(V, sentinel);
+      dfs_s.root_children = 0;
+      return dfs_s;
+    }
+
+    template <typename T = Unit>
+    void reset_dfs(int V, Dfs<T>& dfs_s) {
+      dfs_s.is_finished = false;
+      std::fill(dfs_s.state.begin(), dfs_s.state.end(), Unvisited);
+      dfs_s.time = 1;
+      dfs_s.entry_t = tools::vi(V);
+      dfs_s.exit_t = tools::vi(V);
+      dfs_s.parent = tools::vi(V, sentinel);
+      dfs_s.root_children = 0;
+    }
+
+
+    template <typename T = Unit>
+    void dfs(const std::vector<std::vector<Node<T>>>& adj_list, Dfs<T>& dfs_s, Node<T>& u)
+    {
+
+        if(dfs_s.is_finished) return;
+
+        dfs_s.state[u.node] = Explored;
+        dfs_s.entry_t[u.node] = dfs_s.time;
+        dfs_s.time++;
+
+        if(dfs_s.on_discover) dfs_s.on_discover(u);
+
+        bool should_continue = true;
+        for(Node<T> v : adj_list[u.node]) {
+          if(dfs_s.state[v.node] == Unvisited) {
+            if(dfs_s.process_tree_edge) 
+              should_continue = dfs_s.process_tree_edge(u, v);
+            
+            if(!should_continue) continue; // ← Skip DFS if not allowed
+
+            dfs_s.parent[v.node] = u.node;
+            if (dfs_s.parent[u.node] == sentinel)  // u is root
+              dfs_s.root_children++;
+            dfs(adj_list, dfs_s, v);
+          } else if(dfs_s.state[v.node] == Explored) {
+            if(dfs_s.process_back_edge)
+              dfs_s.process_back_edge(u, v);
+          } else if(dfs_s.state[v.node] == Visited) {
+            if(dfs_s.entry_t[v.node] > dfs_s.entry_t[u.node])
+              if(dfs_s.process_forward_edge)
+                dfs_s.process_forward_edge(u, v);
+            if(dfs_s.entry_t[v.node] < dfs_s.entry_t[u.node])
+              if(dfs_s.process_cross_edge)
+                dfs_s.process_cross_edge(u, v);      
+          }
+        }
+
+        dfs_s.state[u.node] = Visited;
+        dfs_s.exit_t[u.node] = dfs_s.time;
+        dfs_s.time++;
+
+        if(dfs_s.on_leaving) dfs_s.on_leaving(u);
+    }
+
+    
+    vi reachable_ancestor;
+    vi tree_out_degree;
+    vs_cut_node cut_nodes;
+    s_cut_edge cut_edges;
+
+
+    void init_cut_points(int V) {
+      reachable_ancestor.clear();
+      tree_out_degree.clear();
+      cut_nodes.clear();
+      cut_edges.clear();
+      reachable_ancestor.resize(V);
+      tree_out_degree.resize(V);
+      cut_nodes.resize(V);
+      for(auto& v : cut_nodes) v.insert(Leaf);
+    }
+
+    void init_ancestor(int v) { reachable_ancestor[v] = v; }
+    void incr_tree_out_degree(int v) { tree_out_degree[v]++; }
+
+    template <typename T = Unit>
+    void set_ancestor(int u, int v, Dfs<T>& dfs) {
+      if(dfs.entry_t[v] < dfs.entry_t[reachable_ancestor[u]] && dfs.parent[u] != v)
+        // subtree of u hits one of ancestors v 
+        reachable_ancestor[u] = v;
+    }
+
+    // ---- 3 possibilities -----
+
+    // Root cut-nodes – If the root of the DFS tree has two or more children, it must
+    // be an articulation vertex. No edges from the subtree of the second child can
+    // possibly connect to the subtree of the first child.
+
+    // Bridge cut-nodes – If the earliest reachable vertex from v is v, then deleting
+    // the single edge (parent[v], v) disconnects the graph. Clearly parent[v] must
+    // be an articulation vertex, since it cuts v from the graph. Vertex v is also an
+    // articulation vertex unless it is a leaf of the DFS tree. For any leaf, nothing
+    // falls off when you cut it.
+
+    // Parent cut-nodes – If the earliest reachable vertex from v is the parent of v,
+    // then deleting the parent must sever v from the tree unless the parent is the root.
+
+    // The routine below systematically evaluates each of the three conditions as we
+    // back up from the vertex after traversing all outgoing edges. We use entry time[v]
+    // to represent the age of vertex v. The reachability time time v calculated below
+    // denotes the oldest vertex that can be reached using back edges. Getting back to
+    // an ancestor above v rules out the possibility of v being a cut-node:
+    template <typename T = Unit> 
+    void detect_cut_points(int v, Dfs<T>& dfs) {
+
+        // Root cut-node case
+        if(v == dfs.root) {
+          if(dfs.root_children > 1)
+            cut_nodes[v].insert(Root);
+          return;
+        }
+
+        // Parent cut-node
+        int p = dfs.parent[v];
+        if (p != sentinel && 
+            p != dfs.root && 
+            reachable_ancestor[v] == p)
+          cut_nodes[p].insert(Parent);
+
+        // Bridge cut-node
+        if(reachable_ancestor[v] == v) {
+          if(dfs.parent[v] != dfs.root && 
+             dfs.parent[v] != sentinel)
+            cut_nodes[dfs.parent[v]].insert(Bridge);
+          if(tree_out_degree[v] > 0) {
+            cut_nodes[v].insert(Bridge);
+          }
+          
+          // This line detects bridges  
+          if(dfs.parent[v] != sentinel) cut_edges.insert({dfs.parent[v], v});
+        }
+
+        // Update reachable_ancestor of parent
+        if (dfs.parent[v] != sentinel) {
+          int time_v = dfs.entry_t[reachable_ancestor[v]];
+          int time_parent = dfs.entry_t[reachable_ancestor[dfs.parent[v]]];
+          if (time_v < time_parent) reachable_ancestor[dfs.parent[v]] = reachable_ancestor[v];
+        }
+    }
+
+    struct Dir
+    {
+        int r_shift;
+        int c_shift;
+    };
+
+    typedef std::vector<Dir> v_dir;
+    typedef std::vector<char> vc;
+    typedef std::vector<vc> vvc;
+
+    // Default DAG directions: only right and down
+    const v_dir dirs_4 = 
+      { {-1, 0}, // up
+        {1, 0},  // down
+        {0, -1}, // left
+        {0, 1}   // right
+      };
+
+
+    const v_dir dirs_8 = {
+        {-1,  0}, // up
+        { 1,  0}, // down
+        { 0, -1}, // left
+        { 0,  1}, // right
+        {-1, -1}, // upper-left
+        {-1,  1}, // upper-right
+        { 1, -1}, // lower-left
+        { 1,  1}  // lower-right
+    };
+
+    template <typename T, typename F = char>
+    struct GridGraph {
+      Graph<T> adj;
+      std::unordered_map<int, T> vertex_value;
+      std::function<T(F)> cell_to_value;
+    };
+
+    template <typename T, typename F = char>
+    GridGraph<T> init_grid_graph(int R, int C) {
+      Graph<T> graph;
+      std::unordered_map<int, T> vertex_value;
+      return GridGraph<T>{graph, vertex_value};
+    }
+
+
+    template <typename T, typename F = char>
+    void grid_to_adj_list(
+      GridGraph<T, F>& g,
+      const std::vector<std::vector<F>>& grid,
+      v_dir directions = dirs_4,
+      bool bidirectional = false,
+      bool scroll_x = false,
+      bool scroll_y = false) {
+
+        if(!g.cell_to_value)
+          throw std::runtime_error("grid_to_adj_list: cell_to_value not set!");
+
+        int rows = grid.size();
+        if (rows == 0) return;
+        int cols = grid[0].size();
+
+        g.adj.resize(rows * cols);
+
+        auto wrap = 
+          [&](int r, int c) -> std::pair<int, int> {
+            if(scroll_y) r = (r + rows) % rows;
+            if(scroll_x) c = (c + cols) % cols;
+            return {r, c};
+          };
+
+        auto in_bounds = 
+          [&](int r, int c) {
+            return (!scroll_y ? (r >= 0 && r < rows) : true) &&
+                   (!scroll_x ? (c >= 0 && c < cols) : true);
+          };
+
+        for(int r = 0; r < rows; ++r) {
+          for(int c = 0; c < cols; ++c) {
+            int u = r * cols + c;
+            g.vertex_value[u] = g.cell_to_value(grid[r][c]);
+            for(const Dir& d : directions) {
+              int nr = r + d.r_shift, nc = c + d.c_shift;
+              if(!in_bounds(nr, nc)) continue;
+              auto [wr, wc] = wrap(nr, nc);
+              int v = wr * cols + wc;
+              g.adj[u].push_back(Node<T>{v, g.cell_to_value(grid[wr][wc])});
+              if(bidirectional) {
+                g.adj[v].push_back(Node<T>{u, g.cell_to_value(grid[r][c])});
+              }
+            }
+          }
+        }
+    }
+
+    // strongly connected components
+    // we are mostly concerned with back and cross edges
+    // cross edges that point vertices
+    // from previous strongly connected components of the graph cannot help us, because
+    // there can be no way back from them to v, but otherwise cross edges are fair game.
+    // Forward edges have no impact on reachability over the depth-first tree edges, and
+    // hence can be disregarded
+    template<typename T = Unit>
+    struct SCC
+    {
+        //  Define low[v] to be the oldest vertex known to be in the same strongly connected
+        // component as v. This vertex is not necessarily an ancestor, but may also
+        // be a distant cousin of v because of cross edges
+        vi low;
+        vi components;
+        int count;
+        std::stack<int> active_comp;
+        SCC(int V) : count(0) {
+          low.resize(V);
+          components.resize(V);
+          for(int v = 0; v < V; ++v) {
+            low[v] = v;
+            components[v] = sentinel;
+          }
+        }
+    };
+
+    template<typename T = Unit>
+    void handle_back_edge(
+      Dfs<T>& dfs,
+      SCC<T>& scc,
+      const Node<T>& u, 
+      const Node<T>& v) {
+        if(dfs.entry_t[v.node] < 
+           dfs.entry_t[scc.low[u.node]])
+          scc.low[u.node] = v.node;
+    }
+
+    template<typename T = Unit>
+    void handle_cross_edge(
+      Dfs<T>& dfs,
+      SCC<T>& scc,
+      const Node<T>& u, 
+      const Node<T>& v) {
+        if(scc.components[v.node] == sentinel) {
+          if(dfs.entry_t[v.node] < 
+             dfs.entry_t[scc.low[u.node]])
+            scc.low[u.node] = v.node;
+        }
+    }
+    template<typename T = Unit>
+    void handle_on_discover(SCC<T>& scc, Node<T>& u) 
+    { scc.active_comp.push(u.node); }
+
+    // A new strongly connected component is found whenever the lowest reachable
+    // vertex from v is v. If so, we can clear the stack of this component. Otherwise, we
+    // give our parent the benefit of the oldest ancestor we can reach and backtrack
+    template<typename T = Unit>
+    void handle_on_leaving(
+      SCC<T>& scc, 
+      Dfs<T>& dfs, 
+      Node<T>& u) {
+      
+      assert(!scc.active_comp.empty() && "handle_on_leaving:stack is empty!!");  
+
+      if(scc.low[u.node] == u.node && 
+         !scc.active_comp.empty()) 
+        pop_component(scc, u.node);
+      if(dfs.parent[u.node] != sentinel) {  
+        if(dfs.entry_t[scc.low[u.node]] < 
+           dfs.entry_t[scc.low[dfs.parent[u.node]]])
+          scc.low[dfs.parent[u.node]] = scc.low[u.node];   
+      } 
+    }
+
+    int stack_top(std::stack<int>& stack) {
+      int t = stack.top();
+      stack.pop();
+      return t;
+    }
+
+    template<typename T = Unit>
+    void pop_component(SCC<T>& scc, int u) {
+      int p; // vertex placeholder;
+      scc.count++;
+      scc.components[u] = scc.count;
+      while((p = stack_top(scc.active_comp)) != u) scc.components[p] = scc.count;
+    }
+}
+
+
+
+namespace tools = algorithms::onlinejudge::graph::tools;
+
+namespace algorithms::onlinejudge::graph::tools::wg
+{
+    template <typename T = tools::Unit, typename W = int>
+    struct WNode
+    {
+        int node;
+        W weight;
+        T value;
+    };
+
+    template <typename T, typename W>
+    using WGraph = std::vector<std::vector<WNode<T, W>>>;
+}
+
+
+namespace algorithms::onlinejudge::graph::tools
+{
+
+    typedef std::vector<int> vi;
+    // Union-Find Disjoint Sets Library written in OOP manner, using both path compression and union by rank heuristics
+    // courtesy of Competitive Programming 4
+    class UnionFind {                                // OOP style
+      private: 
+        vi p, rank, setSize;                  // vi p is the key part
+        int numSets;
+      public:
+        UnionFind(int N) {
+          p.assign(N, 0); 
+          for (int i = 0; i < N; ++i) p[i] = i;
+          rank.assign(N, 0);                           // optional speedup
+          setSize.assign(N, 1);                        // optional feature
+          numSets = N;                                 // optional feature
+        }
+        int findSet(int i) 
+        { return (p[i] == i) ? i : (p[i] = findSet(p[i])); }
+        bool isSameSet(int i, int j) 
+        { return findSet(i) == findSet(j); }
+        void unionSet(int i, int j) {
+          if(!isSameSet(i, j)) {
+            int x = findSet(i);
+            int y = findSet(j);                        // find both rep items
+            if(rank[x] > rank[y]) 
+              std::swap(x, y);                              // keep x 'shorter' than y
+            p[x] = y;                                  // set x under y
+            if(rank[x] == rank[y]) ++rank[y];          // optional speedup
+            setSize[y] += setSize[x];                  // combine set sizes at y
+            --numSets;                                 // a union reduces numSets
+          }
+        }
+        int numDisjointSets() { return numSets; }
+        int sizeOfSet(int i) { return setSize[findSet(i)]; }
+    };
+}
+
+
+/*
+--------------------------------------------
+ Prim's vs Kruskal's Algorithm (MST Summary)
+--------------------------------------------
+
+🔹 Purpose: 
+  Both algorithms find a Minimum Spanning Tree (MST) of a weighted undirected graph.
+
+🔹 Key Differences:
+
+1. Strategy:
+   - Prim's: Grows the MST one vertex at a time, always choosing the minimum-weight edge
+             that connects a new vertex to the growing tree.
+   - Kruskal's: Adds edges one by one in increasing order of weight, ensuring no cycles are formed.
+
+2. Data Structure:
+   - Prim's: Uses a priority queue (min-heap) to select the next lightest edge.
+   - Kruskal's: Uses Disjoint Set Union (Union-Find) to track connected components and avoid cycles.
+
+3. Edge vs Vertex Focus:
+   - Prim's: Vertex-based; starts from any node and expands outward.
+   - Kruskal's: Edge-based; sorts all edges up front and processes them globally.
+
+4. Graph Requirements:
+   - Prim's: Requires a connected graph to function properly.
+   - Kruskal's: Can handle disconnected graphs (returns a forest of MSTs).
+
+5. Time Complexity:
+   - Prim's: O(E log V) with min-heap and adjacency list.
+   - Kruskal's: O(E log E) due to edge sorting and DSU operations.
+
+🔹 When to Use:
+   - Prim’s is preferred for dense graphs (many edges).
+   - Kruskal’s is better for sparse graphs (fewer edges).
+
+*/
+
+
+namespace wg = algorithms::onlinejudge::graph::tools::wg;
+namespace tools = algorithms::onlinejudge::graph::tools;
+
+namespace algorithms::onlinejudge::graph::tools::mst
+{
+     typedef std::pair<int, int> ii;
+     tools::vb taken;                                 // to avoid cycle
+     std::priority_queue<ii> pq;                      // to select shorter edges
+
+
+     template <typename T, typename W> 
+     void enqueue_neighs(const wg::WGraph<T, W>& graph, int u, bool is_min) { // set u as taken and enqueue neighbors of u
+        taken[u] = true;
+        for(wg::WNode<T, W>& n : graph)
+          if(!taken[n.node]) {
+            if(is_min) n.weight = -n.weight;
+            pq.push({n.weight, -n.node});  // sort by non-dec weight, then by inc id
+        }
+     }
+
+    template <typename T, typename W>    
+    int prim(const wg::WGraph<T, W>& graph, int V, int start, bool is_min) {
+      taken.assign(V, false);
+      enqueue_neighs(graph, start, is_min);
+      int mst_cost = 0, num_taken = 0;              // no edge has been taken
+      while(!pq.empty()) {                          // up to O(E)
+         auto [w, u] = pq.top(); pq.pop();          
+        if(is_min) w = -w; 
+        u = -u;                                     // negate to reverse order
+        if (taken[u]) continue;                     // already taken, skipped
+        mst_cost += w;                              // add w of this edge
+        enqueue_neighs(graph, u, is_min);           // take+process vertex u
+        ++num_taken;                                // 1 more edge is taken
+        if(num_taken == V - 1) break;               // optimization
+      }
+      return mst_cost;
+    }
+
+    template <typename W>
+    struct Edge 
+    {
+        int from;
+        int to;
+        W weight;
+        Edge(int a, int b, int w) {
+          from = std::min(a, b);
+          to = std::max(a, b);
+          weight = w;
+        }
+        bool operator == (const Edge& other) const {
+          return from == other.from && to == other.to && weight == other.weight;
+        }
+    };
+
+    template <typename W>
+    std::ostream& operator << 
+    (std::ostream& out, const Edge<W>& edge) 
+    { return out << "{from: " << edge.from << ", to: "  << edge.to << ", w: " << edge.weight << "}"; }
+
+
+    template <typename W>
+    bool operator < (const Edge<W>& lhs, const Edge<W>& rhs) {
+      return lhs.weight < rhs.weight || 
+             (lhs.weight == rhs.weight && 
+              (std::tie(lhs.from, lhs.to) <
+               std::tie(rhs.from, rhs.to)));
+    }
+
+    template <typename W = int>
+    using VEdge = std::vector<Edge<W>>;
+
+    template<typename W = int>
+    Edge<W> mkDefEdge(int from, int to, W weight) {
+      return Edge<W>(from, to, weight);
+    }
+
+     template <typename W = int> 
+     struct Kruskal
+     {
+         int E;
+         int V;
+         W min_cost;
+         tools::UnionFind uf;
+         std::function<void(W&, W)> mappend;
+     };
+
+     template <typename W = int>
+     Kruskal<W> initKruskal(int V, int E, W def) {
+        return {E, V, def, tools::UnionFind(V)};
+     }
+
+ 
+    template <typename W = int> 
+    void kruskal(VEdge<W>& edges, Kruskal<W>& kruskal_s, bool is_min = true) {
+      std::function<bool(const Edge<W>&, const Edge<W>&)> cmp;
+      if(is_min) cmp = [](const Edge<W>& a, const Edge<W>& b) { return a.weight < b.weight; }; // Min-heap
+      else cmp = [](const Edge<W>& a, const Edge<W>& b) { return a.weight > b.weight; }; // Max-heap
+      std::sort(edges.begin(), edges.end(), cmp);
+      int num_taken = 0;                             // no edge has been taken
+      tools::UnionFind& uf = kruskal_s.uf;
+      for(int i = 0; i < kruskal_s.E; ++i) {         // up to O(E)
+        Edge<W> e = edges[i];              
+        if(uf.isSameSet(e.from, e.to)) continue;     // already in the same CC
+        if(!kruskal_s.mappend) 
+          throw std::runtime_error("kruskal: mappend not set!");
+        kruskal_s.mappend(kruskal_s.min_cost, e.weight); // add w of this edge
+        uf.unionSet(e.from, e.to);                   // link them
+        ++num_taken;                                 // 1 more edge is taken
+        if(num_taken == kruskal_s.V - 1) break;      // optimization
+       }
+    }
+}
+
+
+namespace mst = algorithms::onlinejudge::graph::tools::mst;
+
+
+namespace algorithms::onlinejudge::graph::dark_roads
+{
+    /** https://onlinejudge.org/external/116/11631.pdf */
+    int V, E;
+    void submit()
+    {
+        
+        while(while_read(V, E) && V && E) {
+          
+          int max_cost = 0;
+          mst::VEdge<> roads;
+          loop(E, [&](int _) {
+            int from, to, w;
+            while_read(from, to, w);
+            max_cost += w;
+            roads.push_back(mst::mkDefEdge(from, to, w));
+          });
+ 
+          mst::Kruskal<> kruskal_s = mst::initKruskal(V, (int)roads.size(), 0);
+          kruskal_s.mappend = [](int& acc, int x) { acc += x; };
+          mst::kruskal(roads, kruskal_s);
+          printf("%d\n", max_cost - kruskal_s.min_cost);
+        }
+    }
+}
+
+namespace roads = algorithms::onlinejudge::graph::dark_roads;
+
+int main() { roads::submit(); }

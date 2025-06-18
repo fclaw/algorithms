@@ -1,6 +1,6 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa 11228 Transportation system, rt: s
+🧳 UVa 11631 Dark roads, rt: s
 ───────────────────────────────────────────────────────────────
 */
 
@@ -19,17 +19,17 @@
 #include <cstring>
 #include <bitset>
 #include <unordered_map>
+#include <map>
 #include <unordered_set>
-
-
 
 
 namespace mst = algorithms::onlinejudge::graph::tools::mst;
 
 
-namespace algorithms::onlinejudge::graph::transportation_system
+namespace algorithms::onlinejudge::graph::dark_roads
 {
-    /** https://onlinejudge.org/external/112/11228.pdf */
+    /** https://onlinejudge.org/external/116/11631.pdf */
+    int V, E;
     void submit(std::optional<char*> file, bool debug_mode)
     {
         if (file.has_value())
@@ -42,5 +42,22 @@ namespace algorithms::onlinejudge::graph::transportation_system
               " with error: " + std::strerror(errno);
             throw std::ios_base::failure(errorMessage);
           }
+        
+        while(while_read(V, E) && V && E) {
+          
+          int max_cost = 0;
+          mst::VEdge<> roads;
+          loop(E, [&](int _) {
+            int from, to, w;
+            while_read(from, to, w);
+            max_cost += w;
+            roads.push_back(mst::mkDefEdge(from, to, w));
+          });
+ 
+          mst::Kruskal<> kruskal_s = mst::initKruskal(V, (int)roads.size(), 0);
+          kruskal_s.mappend = [](int& acc, int x) { acc += x; };
+          mst::kruskal(roads, kruskal_s);
+          printf("%d\n", max_cost - kruskal_s.min_cost);
+        }
     }
 }

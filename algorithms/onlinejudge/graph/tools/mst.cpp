@@ -87,38 +87,71 @@ namespace algorithms::onlinejudge::graph::tools::mst
         int from;
         int to;
         W weight;
+        Edge(int a, int b, int w) {
+          from = std::min(a, b);
+          to = std::max(a, b);
+          weight = w;
+        }
+        bool operator == (const Edge& other) const {
+          return from == other.from && to == other.to && weight == other.weight;
+        }
     };
+
+    template <typename W>
+    std::ostream& operator << 
+    (std::ostream& out, const Edge<W>& edge) 
+    { return out << "{from: " << edge.from << ", to: "  << edge.to << ", w: " << edge.weight << "}"; }
+
 
     template <typename W>
     bool operator < (const Edge<W>& lhs, const Edge<W>& rhs) {
       return lhs.weight < rhs.weight || 
-             (lhs.weight < rhs.weight && 
-              (std::tie(lhs.from, lhs.to) < 
+             (lhs.weight == rhs.weight && 
+              (std::tie(lhs.from, lhs.to) <
                std::tie(rhs.from, rhs.to)));
     }
 
-    template <typename W>
+    template <typename W = int>
     using VEdge = std::vector<Edge<W>>;
 
-    template<typename T = int>
-    Edge<T> mkDefEdge(int from, int to, T weight) {
-      return Edge<T>{from, to, weight};
+    template<typename W = int>
+    Edge<W> mkDefEdge(int from, int to, W weight) {
+      return Edge<W>(from, to, weight);
     }
 
-    template <typename W> 
-    int kruskal(const VEdge<W>& edges, int V, int E, bool is_min) {
-      auto cmp = is_min ? std::less<Edge<W>>() : std::greater<Edge<W>>();
+     template <typename W = int> 
+     struct Kruskal
+     {
+         int E;
+         int V;
+         W min_cost;
+         tools::UnionFind uf;
+         std::function<void(W&, W)> mappend;
+     };
+
+     template <typename W = int>
+     Kruskal<W> initKruskal(int V, int E, W def) {
+        return {E, V, def, tools::UnionFind(V)};
+     }
+
+ 
+    template <typename W = int> 
+    void kruskal(VEdge<W>& edges, Kruskal<W>& kruskal_s, bool is_min = true) {
+      std::function<bool(const Edge<W>&, const Edge<W>&)> cmp;
+      if(is_min) cmp = [](const Edge<W>& a, const Edge<W>& b) { return a.weight < b.weight; }; // Min-heap
+      else cmp = [](const Edge<W>& a, const Edge<W>& b) { return a.weight > b.weight; }; // Max-heap
       std::sort(edges.begin(), edges.end(), cmp);
-      int mst_cost = 0, num_taken = 0;               // no edge has been taken
-      tools::UnionFind uf(V);
-      for(int i = 0; i < E; ++i) {                  // up to O(E)
+      int num_taken = 0;                             // no edge has been taken
+      tools::UnionFind& uf = kruskal_s.uf;
+      for(int i = 0; i < kruskal_s.E; ++i) {         // up to O(E)
         Edge<W> e = edges[i];              
         if(uf.isSameSet(e.from, e.to)) continue;     // already in the same CC
-        mst_cost += e.weight;                        // add w of this edge
+        if(!kruskal_s.mappend) 
+          throw std::runtime_error("kruskal: mappend not set!");
+        kruskal_s.mappend(kruskal_s.min_cost, e.weight); // add w of this edge
         uf.unionSet(e.from, e.to);                   // link them
         ++num_taken;                                 // 1 more edge is taken
-        if(num_taken == V - 1) break;                // optimization
+        if(num_taken == kruskal_s.V - 1) break;      // optimization
        }
-      return mst_cost;
     }
 }

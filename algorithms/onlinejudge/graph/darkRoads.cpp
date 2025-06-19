@@ -56,7 +56,7 @@ namespace algorithms::onlinejudge::graph::dark_roads
  
           mst::Kruskal<> kruskal_s = mst::initKruskal(V, (int)roads.size(), 0);
           kruskal_s.mappend = [](int& acc, int x) { acc += x; };
-          kruskal_s.on_adding_edge = [](int _) {};
+          kruskal_s.on_adding_edge = [](const mst::Edge<int>& _) {};
           mst::kruskal(roads, kruskal_s);
           printf("%d\n", max_cost - kruskal_s.min_cost);
         }

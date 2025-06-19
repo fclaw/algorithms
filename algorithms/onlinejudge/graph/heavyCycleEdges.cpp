@@ -53,16 +53,19 @@ namespace algorithms::onlinejudge::graph::heavy_cycle_edges
  
           mst::Kruskal<> kruskal_s = mst::initKruskal(V, (int)edges.size(), 0);
           kruskal_s.mappend = [](int& acc, int x) { acc += x; };
-          std::unordered_set<int> used;
-          kruskal_s.on_adding_edge = [&used] (int i) { used.insert(i); };
+          std::unordered_set<mst::Edge<int>> used;
+          kruskal_s.on_adding_edge = 
+            [&used] 
+            (const mst::Edge<int>& e) 
+             used.insert(e); };
           mst::kruskal(edges, kruskal_s);
 
           if(used.size() == edges.size() || !E) 
             printf("forest\n");
           else {
             std::string s;
-            for(int i = 0; i < (int)edges.size(); ++i)
-              if(!used.count(i))
+            for(auto& e : edges)
+              if(!used.count(e))
                 s += std::to_string(edges[i].weight) + " ";
             s.pop_back();
             std::cout << s << std::endl;

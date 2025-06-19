@@ -1,3 +1,5 @@
+#pragma once
+
 #include "dfs.cpp"
 
 #include <queue>

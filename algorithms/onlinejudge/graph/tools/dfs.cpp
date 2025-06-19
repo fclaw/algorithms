@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 #include <functional> // for std::function
 #include <algorithm>

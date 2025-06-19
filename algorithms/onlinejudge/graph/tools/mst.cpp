@@ -127,17 +127,17 @@ namespace algorithms::onlinejudge::graph::tools::mst
          W min_cost;
          tools::UnionFind uf;
          std::function<void(W&, W)> mappend;
-         std::function<void(int i)> on_adding_edge;
+         std::function<void(const Edge<W>& )> on_adding_edge;
      };
 
      template <typename W = int>
      Kruskal<W> initKruskal(int V, int E, W def) {
         auto def_mappend = [](int& acc, int x) { acc += x; };
-        auto def_on_adding_edge = [](int _) {};
+        auto def_on_adding_edge = [](const Edge<W>& _) {};
         return {E, V, def, tools::UnionFind(V), def_mappend, def_on_adding_edge};
      }
  
-    template <typename W = int> 
+    template <typename W = int>
     void kruskal(VEdge<W>& edges, Kruskal<W>& kruskal_s, bool is_min = true) {
 
       if(!kruskal_s.mappend && 
@@ -151,12 +151,12 @@ namespace algorithms::onlinejudge::graph::tools::mst
       int num_taken = 0;                             // no edge has been taken
       tools::UnionFind& uf = kruskal_s.uf;
       for(int i = 0; i < kruskal_s.E; ++i) {         // up to O(E)
-        Edge<W> e = edges[i];              
+        Edge<W> e = edges[i];  
         if(uf.isSameSet(e.from, e.to)) continue;     // already in the same CC
         kruskal_s.mappend(kruskal_s.min_cost, e.weight); // add w of this edge
         uf.unionSet(e.from, e.to);                   // link them
         ++num_taken;                                 // 1 more edge is taken
-        kruskal_s.on_adding_edge(i);
+        kruskal_s.on_adding_edge(e);
         if(num_taken == kruskal_s.V - 1) break;      // optimization
        }
     }

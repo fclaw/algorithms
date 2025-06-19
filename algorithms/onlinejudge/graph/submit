@@ -26,6 +26,7 @@
 #include <queue>
 #include <tuple>
 #include <algorithm>
+#include <cmath>
 
 
 template<typename F>
@@ -650,131 +651,134 @@ namespace algorithms::onlinejudge::graph::tools::mst
       return Edge<W>(from, to, weight);
     }
 
-     template <typename W = int> 
+   template <typename W = int> 
      struct Kruskal
      {
          int E;
          int V;
          W min_cost;
          tools::UnionFind uf;
+         bool is_finished;
          std::function<void(W&, W)> mappend;
          std::function<void(const Edge<W>& )> on_adding_edge;
+         std::function<bool(const Edge<W>&, const Edge<W>& b)> cmp;
      };
 
      template <typename W = int>
      Kruskal<W> initKruskal(int V, int E, W def) {
-        return {E, V, def, tools::UnionFind(V)};
+        auto def_mappend = [](int& acc, int x) { acc += x; };
+        auto def_on_adding_edge = [](const Edge<W>& _) {};
+        auto def_cmp = 
+          [](const Edge<W>& a, const Edge<W>& b) 
+          { return a.weight < b.weight; }; // Min-heap
+        return {E, V, def, tools::UnionFind(V), false, def_mappend, def_on_adding_edge, def_cmp};
      }
-
-    template <typename W = int> 
+ 
+    template <typename W = int>
     void kruskal(VEdge<W>& edges, Kruskal<W>& kruskal_s, bool is_min = true) {
 
       if(!kruskal_s.mappend && 
-         !kruskal_s.on_adding_edge) 
+         !kruskal_s.on_adding_edge && 
+         !kruskal_s.cmp) 
         throw std::runtime_error("kruskal: callbacks are not set!");
 
-      std::function<bool(const Edge<W>&, const Edge<W>&)> cmp;
-      if(is_min) cmp = [](const Edge<W>& a, const Edge<W>& b) { return a.weight < b.weight; }; // Min-heap
-      else cmp = [](const Edge<W>& a, const Edge<W>& b) { return a.weight > b.weight; }; // Max-heap
-      std::sort(edges.begin(), edges.end(), cmp);
+      std::sort(edges.begin(), edges.end(), kruskal_s.cmp);
       int num_taken = 0;                             // no edge has been taken
       tools::UnionFind& uf = kruskal_s.uf;
       for(int i = 0; i < kruskal_s.E; ++i) {         // up to O(E)
-        Edge<W> e = edges[i];              
+        Edge<W> e = edges[i];  
         if(uf.isSameSet(e.from, e.to)) continue;     // already in the same CC
         kruskal_s.mappend(kruskal_s.min_cost, e.weight); // add w of this edge
         uf.unionSet(e.from, e.to);                   // link them
         ++num_taken;                                 // 1 more edge is taken
         kruskal_s.on_adding_edge(e);
-        if(num_taken == kruskal_s.V - 1) break;      // optimization
+        if(num_taken == kruskal_s.V - 1 || 
+           kruskal_s.is_finished) break;      // optimization
        }
     }
+
 }
 
 
 
+/*
+───────────────────────────────────────────────────────────────
+🧳 UVa 11228 Transportation system, rt: s
+───────────────────────────────────────────────────────────────
+*/
 
 
 namespace mst = algorithms::onlinejudge::graph::tools::mst;
 namespace tools = algorithms::onlinejudge::graph::tools;
 
-namespace algorithms::onlinejudge::graph::audiophobia
+typedef std::pair<int, int> ii;
+typedef std::vector<ii> vii;
+
+
+namespace algorithms::onlinejudge::graph::transportation
 {
-    /** https://onlinejudge.org/external/100/10048.pdf */
-    int V, E, Q, c = 1;
-    bool is_first = true;
+    /** https://onlinejudge.org/external/112/11228.pdf */
+    int t_cases, V, threshold, c = 1;
+    int mk_cartesian_dist(const ii& p1, const ii& p2) 
+    {
+        int x_diff = std::abs(p1.first - p2.first);
+        int y_diff = std::abs(p1.second - p2.second);
+        return x_diff * x_diff + y_diff * y_diff;
+    }
     void submit()
     {
+        
 
-        while(while_read(V, E, Q) && V && E && Q) {
-          tools::vvi nn_w(V, tools::vi(V, INT32_MAX));
-          mst::VEdge<> streets;
-          loop(E, [&](int _) {
-            int from, to, d;
-            while_read(from, to, d);
-            --from; --to;
-            streets.push_back(mst::mkDefEdge(from, to, d));
-            nn_w[from][to] = nn_w[to][from] = d; 
+        while_read(t_cases);
+        while(t_cases--) {
+          while_read(V, threshold);
+
+          vii points;
+          loop(V, [&points](int _) {
+            int x, y;
+            while_read(x, y);
+            points.push_back({x, y});
           });
 
-          tools::vv_def_node sp(V);
-          mst::Kruskal<> kruskal_s = mst::initKruskal(V, (int)streets.size(), 0);
+          mst::VEdge<> distances;
+          for(int i = 0; i < V; ++i)
+            for(int j = i + 1; j < V; ++j) {
+              ii from = points[i];
+              ii to = points[j];
+              distances.push_back(mst::mkDefEdge(i, j, mk_cartesian_dist(from, to)));
+            }
+  
+          threshold *= threshold;
+          double min_roads_ext = 0;
+          double min_rails_ext = 0;
+          int regions = 1;
+          mst::Kruskal<> kruskal_s = mst::initKruskal(V, (int)distances.size(), 0);
           kruskal_s.on_adding_edge =
-            [&sp, kruskal_s, streets] 
+            [&min_roads_ext, 
+             &min_rails_ext,
+             &regions]
             (const mst::Edge<int>& edge) {
-              int from = edge.from;
-              int to = edge.to;
-              sp[from].push_back(tools::mkDefNode(to));
-              sp[to].push_back(tools::mkDefNode(from));
-            };
-        
-          kruskal_s.mappend = [](int& acc, int x) { acc += x; };
-          mst::kruskal(streets, kruskal_s);
-
-          if(!is_first) std::cout << std::endl;
-          else is_first = false;
-          printf("Case #%d\n", c++);
-          while(Q--) {
-            int source, sink;
-            while_read(source, sink);
-            --source, --sink;
-            int min_decibels = 0;
-            tools::Dfs<> dfs_s = tools::init_dfs<>(V);
-            tools::vi path;
-            dfs_s.on_discover = 
-              [&path]
-              (tools::Node<>& node) 
-              { path.push_back(node.node); }; 
-            dfs_s.process_tree_edge =
-             [&dfs_s]
-               (const tools::Node<>& u, 
-                const tools::Node<>& v) -> bool {   
-              return !dfs_s.is_finished;
-            };
-
-            dfs_s.on_leaving = 
-              [&path, &min_decibels, sink, nn_w, &dfs_s]
-              (tools::Node<>& node) {
-              if(node.node == sink) {
-                for(int i = 1; i < (int)path.size(); ++i) {
-                  min_decibels = std::max(min_decibels, nn_w[path[i - 1]][path[i]]);
-                  dfs_s.is_finished = true;
-                }
+              if(edge.weight < threshold)
+               min_roads_ext += std::sqrt(edge.weight);
+              else { 
+                regions++;
+                min_rails_ext += std::sqrt(edge.weight);
               }
-              path.pop_back();   
             };
-            
-            tools::start_vertex = source;
-            auto start = tools::mkDefNode(source);
-            tools::dfs<>(sp, dfs_s, start);
+        kruskal_s.mappend = [](int& acc, int x) { acc += x; };
 
-            printf("%s\n", !min_decibels ? "no path" : std::to_string(min_decibels).c_str());
+        kruskal_s.cmp = 
+          [](const mst::Edge<int>& a, const mst::Edge<int>& b) 
+          { return a.weight < b.weight; }; // Min-heap
+
+          mst::kruskal(distances, kruskal_s);
+
+          printf("Case #%d: %d %0.f %0.f\n", c++, regions, min_roads_ext, min_rails_ext);
         }
-      }
     }
 }
 
 
-namespace audiophobia = algorithms::onlinejudge::graph::audiophobia;
+namespace transportation = algorithms::onlinejudge::graph::transportation;
 
-int main() { audiophobia::submit(); }
+int main() { transportation::submit(); }

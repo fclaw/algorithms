@@ -126,28 +126,31 @@ namespace algorithms::onlinejudge::graph::tools::mst
          int V;
          W min_cost;
          tools::UnionFind uf;
+         bool is_finished;
          std::function<void(W&, W)> mappend;
          std::function<void(const Edge<W>& )> on_adding_edge;
+         std::function<bool(const Edge<W>&, const Edge<W>& b)> cmp;
      };
 
      template <typename W = int>
      Kruskal<W> initKruskal(int V, int E, W def) {
         auto def_mappend = [](int& acc, int x) { acc += x; };
         auto def_on_adding_edge = [](const Edge<W>& _) {};
-        return {E, V, def, tools::UnionFind(V), def_mappend, def_on_adding_edge};
+        auto def_cmp = 
+          [](const Edge<W>& a, const Edge<W>& b) 
+          { return a.weight < b.weight; }; // Min-heap
+        return {E, V, def, tools::UnionFind(V), false, def_mappend, def_on_adding_edge, def_cmp};
      }
  
     template <typename W = int>
     void kruskal(VEdge<W>& edges, Kruskal<W>& kruskal_s, bool is_min = true) {
 
       if(!kruskal_s.mappend && 
-         !kruskal_s.on_adding_edge) 
+         !kruskal_s.on_adding_edge && 
+         !kruskal_s.cmp) 
         throw std::runtime_error("kruskal: callbacks are not set!");
 
-      std::function<bool(const Edge<W>&, const Edge<W>&)> cmp;
-      if(is_min) cmp = [](const Edge<W>& a, const Edge<W>& b) { return a.weight < b.weight; }; // Min-heap
-      else cmp = [](const Edge<W>& a, const Edge<W>& b) { return a.weight > b.weight; }; // Max-heap
-      std::sort(edges.begin(), edges.end(), cmp);
+      std::sort(edges.begin(), edges.end(), kruskal_s.cmp);
       int num_taken = 0;                             // no edge has been taken
       tools::UnionFind& uf = kruskal_s.uf;
       for(int i = 0; i < kruskal_s.E; ++i) {         // up to O(E)
@@ -157,7 +160,8 @@ namespace algorithms::onlinejudge::graph::tools::mst
         uf.unionSet(e.from, e.to);                   // link them
         ++num_taken;                                 // 1 more edge is taken
         kruskal_s.on_adding_edge(e);
-        if(num_taken == kruskal_s.V - 1) break;      // optimization
+        if(num_taken == kruskal_s.V - 1 || 
+           kruskal_s.is_finished) break;      // optimization
        }
     }
 }

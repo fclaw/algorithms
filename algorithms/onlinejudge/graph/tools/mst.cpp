@@ -49,36 +49,68 @@ namespace tools = algorithms::onlinejudge::graph::tools;
 namespace algorithms::onlinejudge::graph::tools::mst
 {
      typedef std::pair<int, int> ii;
-     tools::vb taken;                                 // to avoid cycle
-     std::priority_queue<ii> pq;                      // to select shorter edges
+     tools::vb taken;
+     template <typename T, typename W>
+     using queue = std::priority_queue<wg::WNode<T, W>>;
 
+     template <typename T = tools::Unit, typename W = int> 
+     struct Prim
+     {
+         int V;
+         W min_cost;
+         bool is_finished;
+         bool is_min;
+         std::function<void(W&, W)> mappend;
+         std::function<void(const wg::WNode<T, W>&)> on_adding_point;
+     };
+
+     template <typename T = tools::Unit, typename W = int>
+     Prim<T, W> initPrim(int V) {
+       auto def_mappend = [](W& acc, W val) { acc += val; }; // generic default
+       auto def_on_adding_point = [](const wg::WNode<T, W>&) {};
+        return {V, W{}, false, true, def_mappend, def_on_adding_point};
+     }
 
      template <typename T, typename W> 
-     void enqueue_neighs(const wg::WGraph<T, W>& graph, int u, bool is_min) { // set u as taken and enqueue neighbors of u
-        taken[u] = true;
-        for(wg::WNode<T, W>& n : graph)
-          if(!taken[n.node]) {
-            if(is_min) n.weight = -n.weight;
-            pq.push({n.weight, -n.node});  // sort by non-dec weight, then by inc id
+     void enqueue_neighs
+       (const wg::WGraph<T, W>& graph, 
+        wg::WNode<T, W> node,
+        const Prim<T, W>& prim_s,
+        queue<T, W>& pq) { // set u as taken and enqueue neighbors of u
+        taken[node.node] = true;
+        for(wg::WNode<T, W> neigh : graph[node.node]) {
+          if(!taken[neigh.node]) {
+            auto tmp = neigh;
+            if(!prim_s.is_min) tmp.weight *= (-1);
+            pq.emplace(tmp);  // sort by non-dec weight, then by inc id
+          }
         }
      }
 
     template <typename T, typename W>    
-    int prim(const wg::WGraph<T, W>& graph, int V, int start, bool is_min) {
-      taken.assign(V, false);
-      enqueue_neighs(graph, start, is_min);
-      int mst_cost = 0, num_taken = 0;              // no edge has been taken
+    void prim
+      (const wg::WGraph<T, W>& graph, 
+       Prim<T, W>& prim_s, 
+       wg::WNode<T, W>& node) {
+
+      if(!prim_s.mappend && 
+         !prim_s.on_adding_point) 
+        throw std::runtime_error("prim: callbacks are not set!");
+
+      queue<T, W> pq;   
+      taken.assign(prim_s.V, false);
+      enqueue_neighs(graph, node, prim_s, pq);
+      int num_taken = 0;                            // no edge has been taken
       while(!pq.empty()) {                          // up to O(E)
-         auto [w, u] = pq.top(); pq.pop();          
-        if(is_min) w = -w; 
-        u = -u;                                     // negate to reverse order
-        if (taken[u]) continue;                     // already taken, skipped
-        mst_cost += w;                              // add w of this edge
-        enqueue_neighs(graph, u, is_min);           // take+process vertex u
+        wg::WNode<T, W> next = pq.top(); pq.pop();
+        if(!prim_s.is_min) next.weight *= (-1);
+        if(taken[next.node]) continue;                     // already taken, skipped
+        prim_s.mappend(prim_s.min_cost, next.weight);       // add w of this edge
+        prim_s.on_adding_point(next);
+        enqueue_neighs(graph, next, prim_s, pq);        // take+process vertex u
         ++num_taken;                                // 1 more edge is taken
-        if(num_taken == V - 1) break;               // optimization
+        if(num_taken == prim_s.V - 1 || prim_s.is_finished) break; // optimization
       }
-      return mst_cost;
     }
 
     template <typename W>
@@ -143,7 +175,7 @@ namespace algorithms::onlinejudge::graph::tools::mst
      }
  
     template <typename W = int>
-    void kruskal(VEdge<W>& edges, Kruskal<W>& kruskal_s, bool is_min = true) {
+    void kruskal(VEdge<W>& edges, Kruskal<W>& kruskal_s) {
 
       if(!kruskal_s.mappend && 
          !kruskal_s.on_adding_edge && 

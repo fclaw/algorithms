@@ -490,12 +490,27 @@ namespace algorithms::onlinejudge::graph::tools::wg
         int node;
         W weight;
         T value;
+        // Define comparison: first by weight (ascending), then by id (ascending)
+        // smaller weights have higher priority
+        // smaller ids have higher priority if weights are equal
+        bool operator < (const WNode& other) const 
+        { return weight > other.weight || 
+                (weight == other.weight && 
+                 node > other.node); }
+        bool operator > (const WNode& other) const { return !(*this < other); }      
     };
 
     template <typename T, typename W>
-    using WGraph = std::vector<std::vector<WNode<T, W>>>;
-}
+    std::ostream& operator << 
+    (std::ostream& out, const WNode<T, W>& node) 
+    { return out << "{n: " << node.node << ", w: "  << node.weight << "}"; }
 
+    template <typename T = tools::Unit, typename W = int>
+    using WGraph = std::vector<std::vector<WNode<T, W>>>;
+
+    template <typename T = tools::Unit, typename W = int>
+    WNode<T, W> mkWNode(int n, W w, T v = tools::Unit{}) { return {n, w, v}; }
+}
 
 namespace algorithms::onlinejudge::graph::tools
 {
@@ -580,37 +595,70 @@ namespace tools = algorithms::onlinejudge::graph::tools;
 
 namespace algorithms::onlinejudge::graph::tools::mst
 {
-     typedef std::pair<int, int> ii;
-     tools::vb taken;                                 // to avoid cycle
-     std::priority_queue<ii> pq;                      // to select shorter edges
 
+   typedef std::pair<int, int> ii;
+     tools::vb taken;
+     template <typename T, typename W>
+     using queue = std::priority_queue<wg::WNode<T, W>>;
+
+     template <typename T = tools::Unit, typename W = int> 
+     struct Prim
+     {
+         int V;
+         W min_cost;
+         bool is_finished;
+         bool is_min;
+         std::function<void(W&, W)> mappend;
+         std::function<void(const wg::WNode<T, W>&)> on_adding_point;
+     };
+
+     template <typename T = tools::Unit, typename W = int>
+     Prim<T, W> initPrim(int V) {
+       auto def_mappend = [](W& acc, W val) { acc += val; }; // generic default
+       auto def_on_adding_point = [](const wg::WNode<T, W>&) {};
+        return {V, W{}, false, true, def_mappend, def_on_adding_point};
+     }
 
      template <typename T, typename W> 
-     void enqueue_neighs(const wg::WGraph<T, W>& graph, int u, bool is_min) { // set u as taken and enqueue neighbors of u
-        taken[u] = true;
-        for(wg::WNode<T, W>& n : graph)
-          if(!taken[n.node]) {
-            if(is_min) n.weight = -n.weight;
-            pq.push({n.weight, -n.node});  // sort by non-dec weight, then by inc id
+     void enqueue_neighs
+       (const wg::WGraph<T, W>& graph, 
+        wg::WNode<T, W> node,
+        const Prim<T, W>& prim_s,
+        queue<T, W>& pq) { // set u as taken and enqueue neighbors of u
+        taken[node.node] = true;
+        for(wg::WNode<T, W> neigh : graph[node.node]) {
+          if(!taken[neigh.node]) {
+            auto tmp = neigh;
+            if(!prim_s.is_min) tmp.weight *= (-1);
+            pq.emplace(tmp);  // sort by non-dec weight, then by inc id
+          }
         }
      }
 
     template <typename T, typename W>    
-    int prim(const wg::WGraph<T, W>& graph, int V, int start, bool is_min) {
-      taken.assign(V, false);
-      enqueue_neighs(graph, start, is_min);
-      int mst_cost = 0, num_taken = 0;              // no edge has been taken
+    void prim
+      (const wg::WGraph<T, W>& graph, 
+       Prim<T, W>& prim_s, 
+       wg::WNode<T, W>& node) {
+
+      if(!prim_s.mappend && 
+         !prim_s.on_adding_point) 
+        throw std::runtime_error("prim: callbacks are not set!");
+
+      queue<T, W> pq;   
+      taken.assign(prim_s.V, false);
+      enqueue_neighs(graph, node, prim_s, pq);
+      int num_taken = 0;                            // no edge has been taken
       while(!pq.empty()) {                          // up to O(E)
-         auto [w, u] = pq.top(); pq.pop();          
-        if(is_min) w = -w; 
-        u = -u;                                     // negate to reverse order
-        if (taken[u]) continue;                     // already taken, skipped
-        mst_cost += w;                              // add w of this edge
-        enqueue_neighs(graph, u, is_min);           // take+process vertex u
+        wg::WNode<T, W> next = pq.top(); pq.pop();
+        if(!prim_s.is_min) next.weight *= (-1);
+        if(taken[next.node]) continue;                     // already taken, skipped
+        prim_s.mappend(prim_s.min_cost, next.weight);       // add w of this edge
+        prim_s.on_adding_point(next);
+        enqueue_neighs(graph, next, prim_s, pq);        // take+process vertex u
         ++num_taken;                                // 1 more edge is taken
-        if(num_taken == V - 1) break;               // optimization
+        if(num_taken == prim_s.V - 1 || prim_s.is_finished) break; // optimization
       }
-      return mst_cost;
     }
 
     template <typename W>
@@ -711,74 +759,49 @@ namespace algorithms::onlinejudge::graph::tools::mst
 namespace mst = algorithms::onlinejudge::graph::tools::mst;
 namespace tools = algorithms::onlinejudge::graph::tools;
 
-typedef std::pair<int, int> ii;
-typedef std::vector<ii> vii;
+/*
+───────────────────────────────────────────────────────────────
+🧳 UVa 10842 Traffic Flow, rt: s
+───────────────────────────────────────────────────────────────
+*/
 
 
-namespace algorithms::onlinejudge::graph::transportation
+namespace mst = algorithms::onlinejudge::graph::tools::mst;
+namespace tools = algorithms::onlinejudge::graph::tools;
+
+
+namespace algorithms::onlinejudge::graph::traffic_flow
 {
-    /** https://onlinejudge.org/external/112/11228.pdf */
-    int t_cases, V, threshold, c = 1;
-    int mk_cartesian_dist(const ii& p1, const ii& p2) 
-    {
-        int x_diff = std::abs(p1.first - p2.first);
-        int y_diff = std::abs(p1.second - p2.second);
-        return x_diff * x_diff + y_diff * y_diff;
-    }
+    /** https://onlinejudge.org/external/108/10842.pdf */
+    int t_cases, V, E, c = 1;
     void submit()
     {
         
-
         while_read(t_cases);
         while(t_cases--) {
-          while_read(V, threshold);
-
-          vii points;
-          loop(V, [&points](int _) {
-            int x, y;
-            while_read(x, y);
-            points.push_back({x, y});
+          while_read(V, E);
+          wg::WGraph<> roads(V);
+          loop(E, [&roads] (int _) {
+            int from, to, cap;
+            while_read(from, to, cap);
+            roads[from].push_back(wg::mkWNode(to, cap));
+            roads[to].push_back(wg::mkWNode(from, cap));
           });
 
-          mst::VEdge<> distances;
-          for(int i = 0; i < V; ++i)
-            for(int j = i + 1; j < V; ++j) {
-              ii from = points[i];
-              ii to = points[j];
-              distances.push_back(mst::mkDefEdge(i, j, mk_cartesian_dist(from, to)));
-            }
-  
-          threshold *= threshold;
-          double min_roads_ext = 0;
-          double min_rails_ext = 0;
-          int regions = 1;
-          mst::Kruskal<> kruskal_s = mst::initKruskal(V, (int)distances.size(), 0);
-          kruskal_s.on_adding_edge =
-            [&min_roads_ext, 
-             &min_rails_ext,
-             &regions]
-            (const mst::Edge<int>& edge) {
-              if(edge.weight < threshold)
-               min_roads_ext += std::sqrt(edge.weight);
-              else { 
-                regions++;
-                min_rails_ext += std::sqrt(edge.weight);
-              }
-            };
-        kruskal_s.mappend = [](int& acc, int x) { acc += x; };
-
-        kruskal_s.cmp = 
-          [](const mst::Edge<int>& a, const mst::Edge<int>& b) 
-          { return a.weight < b.weight; }; // Min-heap
-
-          mst::kruskal(distances, kruskal_s);
-
-          printf("Case #%d: %d %0.f %0.f\n", c++, regions, min_roads_ext, min_rails_ext);
-        }
+          int min_cap = INT32_MAX;
+          mst::Prim<> prim_s = mst::initPrim(V);
+          prim_s.is_min = false;
+          prim_s.on_adding_point = 
+            [&min_cap](const wg::WNode<>& node) 
+            { min_cap = std::min(min_cap, node.weight); };
+          wg::WNode<> start = wg::mkWNode(0, INT32_MAX);
+          mst::prim(roads, prim_s, start);
+          printf("Case #%d: %d\n", c++, min_cap);
+        }  
     }
 }
 
 
-namespace transportation = algorithms::onlinejudge::graph::transportation;
+namespace traffic_flow = algorithms::onlinejudge::graph::traffic_flow;
 
-int main() { transportation::submit(); }
+int main() { traffic_flow::submit(); }

@@ -10,15 +10,7 @@ namespace algorithms::onlinejudge::graph::tools::wg
     {
         int node;
         W weight;
-        T value;
-        // Define comparison: first by weight (ascending), then by id (ascending)
-        // smaller weights have higher priority
-        // smaller ids have higher priority if weights are equal
-        bool operator < (const WNode& other) const 
-        { return weight > other.weight || 
-                (weight == other.weight && 
-                 node > other.node); }
-        bool operator > (const WNode& other) const { return !(*this < other); }      
+        T value;   
     };
 
     template <typename T, typename W>

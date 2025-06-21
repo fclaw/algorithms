@@ -48,10 +48,25 @@ namespace tools = algorithms::onlinejudge::graph::tools;
 
 namespace algorithms::onlinejudge::graph::tools::mst
 {
+
+     // Define comparison: first by weight (ascending), then by id (ascending)
+     // smaller weights have higher priority
+     // smaller ids have higher priority if weights are equal
+     template <typename T, typename W>
+     struct PrimCmp {
+        bool operator () 
+          (const wg::WNode<T, W>& a, 
+           const wg::WNode<T, W>& b) const {
+            return a.weight > b.weight || 
+                   (a.weight == b.weight && 
+                    a.node > b.node);
+        }
+     };
+
      typedef std::pair<int, int> ii;
      tools::vb taken;
      template <typename T, typename W>
-     using queue = std::priority_queue<wg::WNode<T, W>>;
+     using queue = std::priority_queue<wg::WNode<T, W>, std::vector<wg::WNode<T, W>>, PrimCmp<T, W>>;
 
      template <typename T = tools::Unit, typename W = int> 
      struct Prim

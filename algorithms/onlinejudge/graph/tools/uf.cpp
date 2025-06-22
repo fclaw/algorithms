@@ -11,6 +11,7 @@ namespace algorithms::onlinejudge::graph::tools
       private: 
         vi p, rank, setSize;                  // vi p is the key part
         int numSets;
+        int V;
       public:
         UnionFind(int N) {
           p.assign(N, 0); 
@@ -18,6 +19,7 @@ namespace algorithms::onlinejudge::graph::tools
           rank.assign(N, 0);                           // optional speedup
           setSize.assign(N, 1);                        // optional feature
           numSets = N;                                 // optional feature
+          V = N;
         }
         int findSet(int i) 
         { return (p[i] == i) ? i : (p[i] = findSet(p[i])); }
@@ -37,5 +39,15 @@ namespace algorithms::onlinejudge::graph::tools
         }
         int numDisjointSets() { return numSets; }
         int sizeOfSet(int i) { return setSize[findSet(i)]; }
+        vi getMembers(int el) {
+          int rep = this->findSet(el);
+          tools::vi members;
+          // To get all the members of the set of `e.from`, iterate over all nodes and find the ones in the same set
+          for(int v = 0; v < V; ++v) {
+            if(this->findSet(v) == rep)
+              members.push_back(v);
+          }
+          return members;
+        }
     };
 }

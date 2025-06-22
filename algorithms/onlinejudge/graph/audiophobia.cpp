@@ -60,7 +60,7 @@ namespace algorithms::onlinejudge::graph::audiophobia
           mst::Kruskal<> kruskal_s = mst::initKruskal(V, (int)streets.size(), 0);
           kruskal_s.on_adding_edge =
             [&sp] 
-            (const mst::Edge<int>& edge) {
+            (int _, const mst::Edge<int>& edge) {
               int from = edge.from;
               int to = edge.to;
               sp[from].push_back(tools::mkDefNode(to));

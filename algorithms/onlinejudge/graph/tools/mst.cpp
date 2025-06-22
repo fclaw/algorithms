@@ -30,8 +30,8 @@
    - Kruskal's: O(E log E) due to edge sorting and DSU operations.
 
 🔹 When to Use:
-   - Prim’s is preferred for dense graphs (many edges).
-   - Kruskal’s is better for sparse graphs (fewer edges).
+   - Prim’s is preferred for dense graphs (many edges). E >= a * V ^ 2
+   - Kruskal’s is better for sparse graphs (fewer edges). E <= b * V
 
 */
 
@@ -128,7 +128,7 @@ namespace algorithms::onlinejudge::graph::tools::mst
       }
     }
 
-    template <typename W>
+    template <typename W = int>
     struct Edge 
     {
         int from;
@@ -166,28 +166,36 @@ namespace algorithms::onlinejudge::graph::tools::mst
       return Edge<W>(from, to, weight);
     }
 
-     template <typename W = int> 
-     struct Kruskal
-     {
+    enum EdgeAction {
+        Skip,  // Skip the current edge and continue
+        GoOn,   // Proceed with the current edge
+        Terminate
+    };
+
+    template <typename W = int> 
+    struct Kruskal
+    {
          int E;
          int V;
          W min_cost;
          tools::UnionFind uf;
          bool is_finished;
          std::function<void(W&, W)> mappend;
-         std::function<void(const Edge<W>& )> on_adding_edge;
+         std::function<void(int i, const Edge<W>&)> on_adding_edge;
          std::function<bool(const Edge<W>&, const Edge<W>& b)> cmp;
-     };
+         std::function<EdgeAction(const Edge<W>&)> check_edge;
+    };
 
-     template <typename W = int>
-     Kruskal<W> initKruskal(int V, int E, W def) {
-        auto def_mappend = [](int& acc, int x) { acc += x; };
-        auto def_on_adding_edge = [](const Edge<W>& _) {};
-        auto def_cmp = 
-          [](const Edge<W>& a, const Edge<W>& b) 
-          { return a.weight < b.weight; }; // Min-heap
-        return {E, V, def, tools::UnionFind(V), false, def_mappend, def_on_adding_edge, def_cmp};
-     }
+    template <typename W = int>
+    Kruskal<W> initKruskal(int V, int E, W def) {
+      auto def_mappend = [](int& acc, int x) { acc += x; };
+      auto def_on_adding_edge = [](int _, const Edge<W>& __) {};
+      auto def_cmp = 
+        [](const Edge<W>& a, const Edge<W>& b) 
+        { return a.weight < b.weight; }; // Min-heap
+      auto def_check = [](const Edge<W>& _) -> EdgeAction { return GoOn; };
+      return {E, V, def, tools::UnionFind(V), false, def_mappend, def_on_adding_edge, def_cmp, def_check};
+    }
  
     template <typename W = int>
     void kruskal(VEdge<W>& edges, Kruskal<W>& kruskal_s) {
@@ -203,12 +211,19 @@ namespace algorithms::onlinejudge::graph::tools::mst
       for(int i = 0; i < kruskal_s.E; ++i) {         // up to O(E)
         Edge<W> e = edges[i];  
         if(uf.isSameSet(e.from, e.to)) continue;     // already in the same CC
-        kruskal_s.mappend(kruskal_s.min_cost, e.weight); // add w of this edge
-        uf.unionSet(e.from, e.to);                   // link them
-        ++num_taken;                                 // 1 more edge is taken
-        kruskal_s.on_adding_edge(e);
-        if(num_taken == kruskal_s.V - 1 || 
-           kruskal_s.is_finished) break;      // optimization
-       }
+
+        // decision-making block
+        EdgeAction action = kruskal_s.check_edge(e);
+        if(action == Skip) continue;
+        else if(action == Terminate) break;
+        else if(action == GoOn) {
+          kruskal_s.mappend(kruskal_s.min_cost, e.weight); // add w of this edge
+          uf.unionSet(e.from, e.to);                   // link them
+          ++num_taken;                                 // 1 more edge is taken
+          kruskal_s.on_adding_edge(i, e);
+          if(num_taken == kruskal_s.V - 1 || 
+          kruskal_s.is_finished) break;      // optimization
+        }
+      }
     }
 }

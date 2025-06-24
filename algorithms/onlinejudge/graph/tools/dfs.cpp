@@ -43,6 +43,8 @@ namespace algorithms::onlinejudge::graph::tools
 
     struct Unit {};
 
+    bool operator == (const Unit& lhs, const Unit& rhs) { return true; }
+
     std::ostream& operator << (std::ostream& os, const Unit& u) { return os << "{}"; }
 
     template <typename T = Unit>
@@ -50,6 +52,9 @@ namespace algorithms::onlinejudge::graph::tools
     {
         int node;
         T value;
+        bool operator == (const Node<T>& other) const {
+          return node == other.node && value == other.value;
+        }
     };
 
     Node<> def_node = {0, {}};
@@ -59,7 +64,7 @@ namespace algorithms::onlinejudge::graph::tools
     typedef std::vector<tools::Node<>> v_def_node;
     typedef std::vector<std::vector<tools::Node<>>> vv_def_node;
 
-    template <typename T>
+    template <typename T = Unit>
     using Graph = std::vector<std::vector<Node<T>>>;
 
     // Overload operator<< for Node<T>

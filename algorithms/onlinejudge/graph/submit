@@ -72,6 +72,7 @@ namespace algorithms::onlinejudge::graph::tools
 
     struct Unit {};
 
+    bool operator == (const Unit& lhs, const Unit& rhs) { return true; }
     std::ostream& operator << (std::ostream& os, const Unit& u) { return os << "{}"; }
 
     template <typename T = Unit>
@@ -79,6 +80,9 @@ namespace algorithms::onlinejudge::graph::tools
     {
         int node;
         T value;
+        bool operator == (const Node<T>& other) const {
+          return node == other.node && value == other.value;
+        }
     };
 
     Node<> def_node = {0, {}};
@@ -88,7 +92,7 @@ namespace algorithms::onlinejudge::graph::tools
     typedef std::vector<tools::Node<>> v_def_node;
     typedef std::vector<std::vector<tools::Node<>>> vv_def_node;
 
-    template <typename T>
+    template <typename T = Unit>
     using Graph = std::vector<std::vector<Node<T>>>;
 
     // Overload operator<< for Node<T>
@@ -773,202 +777,224 @@ namespace algorithms::onlinejudge::graph::tools::mst
     }
 
 }
-/*
-───────────────────────────────────────────────────────────────
-🧳 UVa 1265 Tour Belt, rt: s
-───────────────────────────────────────────────────────────────
 
-the size of a set, options
+namespace algorithms::onlinejudge::graph::tools
+{
 
-1 both size of 1
-merge: always
-merge condition: external edges < a single edge
-2 first >= 2, second = 1,  (internal edge)
-merge: conditional
-merge condition: internal edge <= all internal edges (may appear several new), internal edge > external edges
-3 first >= 2, second >= 2,  (external edge)
-merge: conditional
-merge condition: external edge > all other external edges
-*/
+    struct TopSortKahn
+    {
+        tools::vi top_sort;
+        bool is_cycle;   
+    };
+
+    // ---------- Kahn's algorithm for topological sort ----------
+    // Step 1: Calculate the In-Degree of Each Node
+    // In-degree represents the number of incoming edges to a node, i.e., its dependencies.
+    // Initialize an array `in_degree[]` of size V (number of nodes) to zero.
+    // Traverse the graph and for each edge u -> v, increment the in-degree of v by 1.
+
+    // Step 2: Initialize the Queue
+    // Create an empty queue to store nodes with an in-degree of 0 (i.e., nodes with no dependencies).
+    // Traverse the in-degree array and enqueue all nodes with in-degree 0.
+
+    // Step 3: Process the Nodes in the Queue (BFS-like)
+    // While the queue is not empty:
+    //   1. Remove a node `u` from the front of the queue.
+    //   2. Add `u` to the topological order result list.
+    //   3. For each adjacent node `v` of `u` (i.e., for each outgoing edge u -> v):
+    //      - Decrease the in-degree of `v` by 1 (because we've processed one of its dependencies).
+    //      - If the in-degree of `v` becomes 0, enqueue `v` (since it now has no dependencies and can be processed next).
+
+    // Step 4: Cycle Detection
+    // After processing all nodes, check if the number of nodes in the topological order matches the total number of nodes in the graph.
+    // If the number of nodes in the result is less than the total number of nodes, a cycle exists in the graph.
+    // In this case, a topological sort is not possible.
+
+    // Step 5: Output the Topological Sort
+    // If no cycle was detected and all nodes were processed, output the topological order.
+    // If a cycle was detected (i.e., some nodes were not processed), report that topological sorting is not possible.
+    template <typename T = tools::Unit>
+    TopSortKahn top_sort_kahn(int V, const tools::Graph<T>& graph)
+    {
+        tools::vi in_degree(V, 0);
+        for(int v = 0; v < V; ++v)
+          for(const tools::Node<T>& u : graph[v])
+            in_degree[u.node]++;
+             
+        std::priority_queue<int, std::vector<int>, std::greater<int>> no_degree;
+        for(int v = 0; v < V; ++v)
+          if(!in_degree[v])
+            no_degree.push(v);
+            
+        tools::vi tops_sort;
+        while(!no_degree.empty()) {
+          int u = no_degree.top();
+          no_degree.pop();
+          tops_sort.push_back(u);
+
+          for(const tools::Node<T>& v : graph[u]) {
+            in_degree[v.node]--;
+            if(!in_degree[v.node])
+              no_degree.push(v.node);
+          }
+        }
+        return {tops_sort, (int)tops_sort.size() == V};
+    }
 
 
-namespace mst = algorithms::onlinejudge::graph::tools::mst;
+    enum BfsCheck { IsFinished, GoOn };
+
+    // bfs traversal
+    template <typename T = tools::Unit>
+    struct Bfs 
+    {
+        tools::Node<T> source;
+        tools::vi parent;
+        tools::vi dist;
+        Bfs(int V, const tools::Node<T>& source) {
+          this->source = source;
+          parent.assign(V, tools::sentinel);
+          dist.assign(V, INT32_MAX);
+          dist[source.node] = 0;
+        }
+        vi restore_path(const tools::Node<T>& sink) {
+          vi path;
+          int u = sink.node;
+          while(u != this->source.node) {
+            path.push_back(u);
+            u = parent[u];
+          }
+          std::reverse(path.begin(), path.end());
+          return path;
+        }
+        int getDistance(const tools::Node<T>& dest) {
+          return dist[dest.node];
+        }
+        std::function<BfsCheck(const tools::Node<T>&)> check;
+    };
+
+    template <typename T = tools::Unit>
+    void bfs(const tools::Graph<T>& graph, Bfs<T>& bfs_s) {
+
+      if(graph.empty()) throw std::runtime_error("bfs: graph empty!");
+
+      if(!bfs_s.check) throw std::runtime_error("bfs: callbacks are not set!");
+
+      std::queue<tools::Node<T>> queue; 
+      queue.push(bfs_s.source);
+      while(!queue.empty()) {
+        tools::Node<T> u = queue.front(); queue.pop();
+        BfsCheck check = bfs_s.check(u);
+        if(check == IsFinished) break;
+        for(const tools::Node<T>& v : graph[u.node]) {
+          if(bfs_s.dist[v.node] != INT32_MAX) continue;
+          bfs_s.dist[v.node] = bfs_s.dist[u.node] + 1;
+          bfs_s.parent[v.node] = u.node;
+          queue.push(v);
+        }
+      }
+    }
+}
+
+
+
 namespace tools = algorithms::onlinejudge::graph::tools;
 
+typedef std::unordered_map<std::string, int> msi;
+typedef std::pair<std::string, int> psi;
 
-enum Merge {
-    Merge_No_Contribution,   // Merge happens, but does not contribute to the total candidate count
-    Merge_Valid,             // Valid merge, contributing to the total candidate count
-    InvalidMerge             // Merge fails due to synergy condition violation
-};
+const std::string letters = "abcdefghijklmnopqrstuvwxyz0123456789";
 
-Merge is_candidate(
-  int V,
-  mst::Kruskal<>& kruskal_s,
-  const tools::vvi& synergies,
-  const mst::Edge<>& e) {
-  
-  // Find the representatives of e.from and e.to
-  int fromRep = kruskal_s.uf.findSet(e.from);
-  int toRep = kruskal_s.uf.findSet(e.to);
-
-  // Get the members of the two sets (regions) involved in the merge
-  tools::vi from_members = kruskal_s.uf.getMembers(fromRep);
-  tools::vi to_members = kruskal_s.uf.getMembers(toRep);
-  std::unordered_set<int> from_members_s(from_members.begin(), from_members.end());
-  std::unordered_set<int> to_members_s(to_members.begin(), to_members.end());
-
-  // Case 1: Both sets are of size 1
-  int from_size = kruskal_s.uf.sizeOfSet(fromRep);
-  int to_size = kruskal_s.uf.sizeOfSet(toRep);
-
-  int w = e.weight;
-
-  // Case 1: Check if the current edge creates a valid region with respect to border edges
-  // if no Merge_No_Contribution
-  if(from_size == 1 && to_size == 1) {
-    for(int v = 0; v < V; ++v) {
-      if(v == e.to || synergies[e.from][v] == tools::sentinel)
-        continue;
-      if(synergies[e.from][v] >= w) 
-        return Merge_No_Contribution;
-    }
-
-    for(int v = 0; v < V; ++v) {
-      if(e.from == v || synergies[e.to][v] == tools::sentinel)
-        continue;
-      if(synergies[e.to][v] >= w)
-        return Merge_No_Contribution;
-    }
-    return Merge_Valid;
-  }
-
-  // Case 2: first set >= 2, second set = 1 therefore the edge becomes internal
-  // none of internal edges must be lesser then a newly added one
-  // Check the synergy condition for internal edges (internal edge must be strictly larger than border edges)
-  if(from_size >= 2 && to_size == 1) {
-    from_members_s.insert(e.to);
-    for(int u : from_members_s)
-      for(int v = 0; v < V; ++v) {
-        int cw = synergies[u][v];
-        if(mst::mkDefEdge(u, v, cw) == e || 
-           synergies[u][v] == tools::sentinel) continue;
-        if(from_members_s.count(v)) { // internal edge
-          if(cw < w) return InvalidMerge;
-        } else { // external edge
-          if(cw >= w) return Merge_No_Contribution;
-        }
-      }
-    return Merge_Valid;
-  } else if(to_size >= 2 && from_size == 1) {
-    to_members_s.insert(e.from);
-    for(int u : to_members_s)
-      for(int v = 0; v < V; ++v) {
-        int cw = synergies[u][v];
-        if(mst::mkDefEdge(u, v, cw) == e ||
-           synergies[u][v] == tools::sentinel) continue;
-        if(to_members_s.count(v)) { // internal edge
-          if(cw < w) return InvalidMerge;
-        } else { // external edge
-          if(cw >= w) return Merge_No_Contribution;
-        }
-      }
-    return Merge_Valid;
-  }
-
-  // Case 3: Both sets >= 2 (external edge)
-  // just check whether all border edges are less then a newly added one
-  if(from_size >= 2 && to_size >= 2) {
-    for(int u : from_members_s)
-      for(int v = 0; v < V; ++v) {
-        int cw = synergies[u][v];
-        if(mst::mkDefEdge(u, v, cw) == e  || 
-           synergies[u][v] == tools::sentinel) continue;
-        if(!from_members_s.count(v)) { // external edge
-          if(cw >= w) return InvalidMerge;
-        }
-      }
-
-    for(int u : to_members_s)
-      for(int v = 0; v < V; ++v) {
-        int cw = synergies[u][v];
-        if(mst::mkDefEdge(u, v, cw) == e || 
-           synergies[u][v] == tools::sentinel) continue;
-        if(!to_members_s.count(v)) { // external edge
-          if(cw >= w) return InvalidMerge;
-        }
-      }
-    return Merge_Valid;
-  }
-
-  return Merge_Valid;
-}
-
-
-namespace algorithms::onlinejudge::graph::tour_belt
+namespace algorithms::onlinejudge::graph::word_transformer
 {
-    /** https://onlinejudge.org/external/12/1265.pdf */
-    int t_cases, V, E;
+    /** https://onlinejudge.org/external/4/429.pdf */
+    int t_cases;
+    void backtrack(
+      const psi& p, 
+      const msi& words, 
+      tools::Graph<>& graph, 
+      std::unordered_set<std::string>& used) {
+
+      int n = p.second;
+      std::string w = p.first;
+      for(int i = 0; i < (int)w.size(); ++i)
+        for(char c : letters) {
+
+          std::string tmp = w;
+          tmp[i] = c;
+          if(words.count(tmp) && 
+             !used.count(tmp)) {
+            int cn = words.at(tmp);
+            graph[n].push_back(tools::mkDefNode(cn));
+            graph[cn].push_back(tools::mkDefNode(n));
+            used.insert(tmp);
+            psi cp = {tmp, cn};
+            backtrack(cp, words, graph, used);
+            used.erase(tmp);
+          }
+        }
+    }
     void submit()
     {
-      
+        
         while_read(t_cases);
+        std::cin.ignore();
+        std::cin.ignore();
         while(t_cases--) {
-          while_read(V, E);
-          tools::vvi synergies(V, tools::vi(V, tools::sentinel));
-          mst::VEdge<> islands;
-          loop(E, [&](int _) {
-            int from, to, synergy;
-            while_read(from, to, synergy);
-            --from; --to;
-            islands.push_back(mst::mkDefEdge(from, to, synergy));
-            synergies[from][to] = synergies[to][from] = synergy;
-          });
 
-          mst::Kruskal<> kruskal_s = mst::initKruskal(V, (int)islands.size(), 0);
-          kruskal_s.cmp = 
-            [](const mst::Edge<>& lhs, 
-               const mst::Edge<>& rhs) 
-            {  return lhs.weight > rhs.weight || 
-                      (lhs.weight == rhs.weight && 
-                       std::tie(lhs.from, lhs.to) <
-                       std::tie(rhs.from, rhs.to)); };
+          msi words;
+          std::string in;
+          int idx = 0;
+          while(std::getline(std::cin, in) && in != "*") {
+            words[in] = idx++;
+          }
 
-          int candidates = 0;             
-          kruskal_s.check_edge =
-            [&](const mst::Edge<>& e) 
-              -> mst::EdgeAction {
-             Merge merge = is_candidate(V, kruskal_s, synergies, e);  // Check if we can merge the regions
-             // Case 1: Invalid merge, skip the edge
-             if(merge == InvalidMerge) 
-               return mst::Skip;
-             // Case 2: Merge happens but doesn't contribute to candidate count
-             else if(merge == Merge_No_Contribution) 
-               return mst::GoOn;
-             // Case 3: Valid merge, contribute to candidate count
-             else {
-               // If the edge forms a valid merge, calculate the new candidates count:
-               // Find the representative of the first node
-              int rep_from = kruskal_s.uf.findSet(e.from);
-              // Get the size of the set for 'from' node
-              int from_size = kruskal_s.uf.sizeOfSet(rep_from);
-              // Find the representative of the second node
-              int rep_to = kruskal_s.uf.findSet(e.to);
-              // Get the size of the set for 'to' node
-              int to_size = kruskal_s.uf.sizeOfSet(rep_to);
-              // Increment candidates by the total size of the two merged sets
-              candidates += from_size + to_size;
-              return mst::GoOn;
+          int V = idx;
+
+          tools::Graph<> graph(V);
+          std::unordered_set<std::string> used;
+          for(auto& p : words) {
+            if(used.count(p.first)) continue;
+             used.insert(p.first);
+             backtrack(p, words, graph, used);
+          }
+ 
+          while(std::getline(std::cin, in) && !in.empty()) {
+            std::stringstream ss(in);
+            std::string source, sink, tmp;
+            bool is_source = true;
+            while(ss >> tmp) {
+              if(is_source) {
+                source = tmp;
+                is_source = false;
+              } else sink = tmp;
             }
-          };
-          mst::kruskal(islands, kruskal_s);
-          if(kruskal_s.uf.numDisjointSets() > 1) candidates += V;
-          std::cout << candidates << std::endl;
-        } 
+
+            tools::Node<> start = tools::mkDefNode(words.at(source));
+            tools::Node<> end = tools::mkDefNode(words.at(sink));
+            tools::Bfs<> bfs_s(V, start);
+            bfs_s.check = 
+              [&](const tools::Node<>& node)
+                  -> tools::BfsCheck {  
+                if(node == end) 
+                  return tools::IsFinished;
+                return tools::GoOn;
+              }; 
+            tools::bfs(graph, bfs_s);
+            int d = bfs_s.getDistance(end);
+            // tools::vi path = bfs_s.restore_path(end);
+            // for(int n : path) 
+            //   for(auto& p : words) 
+            //     if(p.second == n)
+            //       dbg(p.first);
+            printf("%s %s %d\n", source.c_str(), sink.c_str(), d);
+          }
+          if(t_cases) std::cout << std::endl;
+        }  
     }
 }
 
 
-namespace tour_belt = algorithms::onlinejudge::graph::tour_belt;
+namespace word_transformer = algorithms::onlinejudge::graph::word_transformer;
 
-int main() { tour_belt::submit(); }
+int main() { word_transformer::submit(); }

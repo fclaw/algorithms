@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../debug.h"
 #include "dfs.cpp"
 
 #include <queue>
@@ -115,9 +116,9 @@ namespace algorithms::onlinejudge::graph::tools
         if(check == IsFinished) break;
         for(const tools::Node<T>& v : graph[u.node]) {
           if(bfs_s.dist[v.node] != INT32_MAX) continue;
+          queue.push(v);
           bfs_s.dist[v.node] = bfs_s.dist[u.node] + 1;
           bfs_s.parent[v.node] = u.node;
-          queue.push(v);
         }
       }
     }

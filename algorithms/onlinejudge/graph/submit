@@ -841,8 +841,7 @@ namespace algorithms::onlinejudge::graph::tools
         return {tops_sort, (int)tops_sort.size() == V};
     }
 
-
-    enum BfsCheck { IsFinished, GoOn };
+   enum BfsCheck { IsFinished, GoOn };
 
     // bfs traversal
     template <typename T = tools::Unit>
@@ -888,9 +887,9 @@ namespace algorithms::onlinejudge::graph::tools
         if(check == IsFinished) break;
         for(const tools::Node<T>& v : graph[u.node]) {
           if(bfs_s.dist[v.node] != INT32_MAX) continue;
+          queue.push(v);
           bfs_s.dist[v.node] = bfs_s.dist[u.node] + 1;
           bfs_s.parent[v.node] = u.node;
-          queue.push(v);
         }
       }
     }
@@ -900,101 +899,67 @@ namespace algorithms::onlinejudge::graph::tools
 
 namespace tools = algorithms::onlinejudge::graph::tools;
 
-typedef std::unordered_map<std::string, int> msi;
-typedef std::pair<std::string, int> psi;
 
-const std::string letters = "abcdefghijklmnopqrstuvwxyz0123456789";
 
-namespace algorithms::onlinejudge::graph::word_transformer
+namespace algorithms::onlinejudge::graph::net
 {
-    /** https://onlinejudge.org/external/4/429.pdf */
-    int t_cases;
-    void backtrack(
-      const psi& p, 
-      const msi& words, 
-      tools::Graph<>& graph, 
-      std::unordered_set<std::string>& used) {
-
-      int n = p.second;
-      std::string w = p.first;
-      for(int i = 0; i < (int)w.size(); ++i)
-        for(char c : letters) {
-
-          std::string tmp = w;
-          tmp[i] = c;
-          if(words.count(tmp) && 
-             !used.count(tmp)) {
-            int cn = words.at(tmp);
-            graph[n].push_back(tools::mkDefNode(cn));
-            graph[cn].push_back(tools::mkDefNode(n));
-            used.insert(tmp);
-            psi cp = {tmp, cn};
-            backtrack(cp, words, graph, used);
-            used.erase(tmp);
-          }
-        }
-    }
+    /** https://onlinejudge.org/external/6/627.pdf */
+    int V, Q;
     void submit()
     {
-        
-        while_read(t_cases);
-        std::cin.ignore();
-        std::cin.ignore();
-        while(t_cases--) {
-
-          msi words;
-          std::string in;
-          int idx = 0;
-          while(std::getline(std::cin, in) && in != "*") {
-            words[in] = idx++;
-          }
-
-          int V = idx;
-
+       
+        while(while_read(V)) {
+          std::cin.ignore();
           tools::Graph<> graph(V);
-          std::unordered_set<std::string> used;
-          for(auto& p : words) {
-            if(used.count(p.first)) continue;
-             used.insert(p.first);
-             backtrack(p, words, graph, used);
-          }
- 
-          while(std::getline(std::cin, in) && !in.empty()) {
-            std::stringstream ss(in);
-            std::string source, sink, tmp;
-            bool is_source = true;
-            while(ss >> tmp) {
-              if(is_source) {
-                source = tmp;
-                is_source = false;
-              } else sink = tmp;
+          std::string s;
+          loop(V, [&] (int _) {
+            std::getline(std::cin, s);
+            auto ns = s.substr(0, s.find('-')); 
+            int from = std::atoi(ns.c_str());
+            --from;
+            auto rest = s.substr(s.find('-') + 1, s.size());
+            std::stringstream ss(rest);
+            int to;
+            while(ss >> to) {
+              --to;
+              auto tn = tools::mkDefNode(to);
+              graph[from].push_back(tn);
+              if(ss.peek() == ',') ss.ignore();
             }
+          });
 
-            tools::Node<> start = tools::mkDefNode(words.at(source));
-            tools::Node<> end = tools::mkDefNode(words.at(sink));
+          printf("-----\n");
+          while_read(Q);
+          while(Q--) {
+            int from, to;
+            while_read(from, to);
+            --from; --to;
+            tools::Node<> start = tools::mkDefNode(from);
+            tools::Node<> end = tools::mkDefNode(to);
             tools::Bfs<> bfs_s(V, start);
             bfs_s.check = 
               [&](const tools::Node<>& node)
-                  -> tools::BfsCheck {  
+                  -> tools::BfsCheck {       
                 if(node == end) 
                   return tools::IsFinished;
                 return tools::GoOn;
               }; 
             tools::bfs(graph, bfs_s);
-            int d = bfs_s.getDistance(end);
-            // tools::vi path = bfs_s.restore_path(end);
-            // for(int n : path) 
-            //   for(auto& p : words) 
-            //     if(p.second == n)
-            //       dbg(p.first);
-            printf("%s %s %d\n", source.c_str(), sink.c_str(), d);
+            if(bfs_s.dist[to] == INT32_MAX) 
+              printf("connection impossible\n");
+            else {
+              tools::vi path = bfs_s.restore_path(end);
+              std::string s;
+              s += std::to_string(from + 1) + " ";
+              for(int n : path) s += std::to_string(n + 1) + " ";
+              s.pop_back();
+              std::cout << s << std::endl; 
+            }
           }
-          if(t_cases) std::cout << std::endl;
-        }  
+        } 
     }
 }
 
+namespace net = algorithms::onlinejudge::graph::net;
 
-namespace word_transformer = algorithms::onlinejudge::graph::word_transformer;
-
-int main() { word_transformer::submit(); }
+int main() { net::submit(); }

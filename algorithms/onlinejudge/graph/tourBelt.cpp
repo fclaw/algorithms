@@ -227,7 +227,7 @@ namespace algorithms::onlinejudge::graph::tour_belt
             }
           };
           mst::kruskal(islands, kruskal_s);
-        //   if(kruskal_s.uf.numDisjointSets() > 1) candidates += V;
+          if(kruskal_s.uf.numDisjointSets() > 1) candidates += V;
           std::cout << candidates << std::endl;
         } 
     }

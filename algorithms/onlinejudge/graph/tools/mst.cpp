@@ -222,7 +222,7 @@ namespace algorithms::onlinejudge::graph::tools::mst
           ++num_taken;                                 // 1 more edge is taken
           kruskal_s.on_adding_edge(i, e);
           if(num_taken == kruskal_s.V - 1 || 
-          kruskal_s.is_finished) break;      // optimization
+             kruskal_s.is_finished) break;      // optimization
         }
       }
     }

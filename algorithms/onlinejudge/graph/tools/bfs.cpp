@@ -67,4 +67,49 @@ namespace algorithms::onlinejudge::graph::tools
         }
         return {tops_sort, (int)tops_sort.size() == V};
     }
+
+
+    // bfs traversal
+    template <typename T = tools::Unit>
+    struct Bfs 
+    {
+        tools::Node<T> source;
+        tools::Node<T> sink;
+        tools::vi parent;
+        tools::vi dist;
+        Bfs(int V, const tools::Node<T>& source, const tools::Node<T>& sink) {
+          this->source = source;
+          this->sink = sink;
+          parent.assign(V, tools::sentinel);
+          dist.assign(V, INT32_MAX);
+          dist[source.node] = 0;
+        }
+        vi restore_path() {
+          vi path;
+          int u = this->sink.node;
+          while(u != this->source.node) {
+            path.push_back(u);
+            u = parent[u];
+          }
+          std::reverse(path.begin(), path.end());
+          return path;
+        }
+    };
+
+    template <typename T = tools::Unit>
+    void bfs(const tools::Graph<T>& graph, Bfs<T>& bfs_s) {
+      std::queue<tools::Node<T>> q; 
+      q.push(bfs_s.source);
+      while(!q.empty()) {
+        tools::Node<T> u = q.top(); q.pop();
+        if(u == bfs_s.sink) break;
+        for(tools::Node<T>& v : graph[u.node]) {
+          if(bfs_s.dist[v.node] != INT32_MAX)
+            continue;
+          bfs_s.dist[v.node] = bfs_s.dist[u.node] + 1;
+          bfs_s.parent[v.node] = u.node;
+          q.push(v);
+        }
+      }
+    }
 }

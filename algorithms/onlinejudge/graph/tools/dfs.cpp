@@ -55,6 +55,10 @@ namespace algorithms::onlinejudge::graph::tools
         bool operator == (const Node<T>& other) const {
           return node == other.node && value == other.value;
         }
+        bool operator < (const Node<T>& other) const {
+          return node < other.node && (node == other.node && value < other.value);
+        }
+
     };
 
     Node<> def_node = {0, {}};
@@ -305,13 +309,14 @@ namespace algorithms::onlinejudge::graph::tools
       Graph<T> adj;
       std::unordered_map<int, T> vertex_value;
       std::function<T(F)> cell_to_value;
+      std::function<bool(T)> is_blocked;
     };
 
     template <typename T, typename F = char>
-    GridGraph<T> init_grid_graph(int R, int C) {
+    GridGraph<T, F> init_grid_graph() {
       Graph<T> graph;
       std::unordered_map<int, T> vertex_value;
-      return GridGraph<T>{graph, vertex_value};
+      return GridGraph<T, F>{graph, vertex_value};
     }
 
 
@@ -324,7 +329,7 @@ namespace algorithms::onlinejudge::graph::tools
       bool scroll_x = false,
       bool scroll_y = false) {
 
-        if(!g.cell_to_value)
+        if(!g.cell_to_value && !g.is_blocked)
           throw std::runtime_error("grid_to_adj_list: cell_to_value not set!");
 
         int rows = grid.size();
@@ -349,15 +354,21 @@ namespace algorithms::onlinejudge::graph::tools
         for(int r = 0; r < rows; ++r) {
           for(int c = 0; c < cols; ++c) {
             int u = r * cols + c;
-            g.vertex_value[u] = g.cell_to_value(grid[r][c]);
+            T val = g.cell_to_value(grid[r][c]);
+            g.vertex_value[u] = val;
+            if(g.is_blocked(val)) continue;
             for(const Dir& d : directions) {
               int nr = r + d.r_shift, nc = c + d.c_shift;
               if(!in_bounds(nr, nc)) continue;
               auto [wr, wc] = wrap(nr, nc);
+               
+              T w_val = g.cell_to_value(grid[wr][wc]);
+              if(g.is_blocked(w_val)) continue;
+
               int v = wr * cols + wc;
-              g.adj[u].push_back(Node<T>{v, g.cell_to_value(grid[wr][wc])});
+              g.adj[u].push_back(Node<T>{v, w_val});
               if(bidirectional) {
-                g.adj[v].push_back(Node<T>{u, g.cell_to_value(grid[r][c])});
+                g.adj[v].push_back(Node<T>{u, val});
               }
             }
           }

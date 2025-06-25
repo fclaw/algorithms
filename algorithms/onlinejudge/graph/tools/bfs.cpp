@@ -110,7 +110,8 @@ namespace algorithms::onlinejudge::graph::tools
 
       std::queue<tools::Node<T>> queue; 
       queue.push(bfs_s.source);
-      while(!queue.empty()) {
+      bool is_finished = false;
+      while(!queue.empty() && !is_finished) {
         tools::Node<T> u = queue.front(); queue.pop();
         BfsCheck check = bfs_s.check(u);
         if(check == IsFinished) break;

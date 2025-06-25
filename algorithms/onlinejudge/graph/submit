@@ -333,13 +333,14 @@ namespace algorithms::onlinejudge::graph::tools
       Graph<T> adj;
       std::unordered_map<int, T> vertex_value;
       std::function<T(F)> cell_to_value;
+      std::function<bool(T)> is_blocked;
     };
 
     template <typename T, typename F = char>
-    GridGraph<T> init_grid_graph(int R, int C) {
+    GridGraph<T, F> init_grid_graph() {
       Graph<T> graph;
       std::unordered_map<int, T> vertex_value;
-      return GridGraph<T>{graph, vertex_value};
+      return GridGraph<T, F>{graph, vertex_value};
     }
 
 
@@ -352,7 +353,7 @@ namespace algorithms::onlinejudge::graph::tools
       bool scroll_x = false,
       bool scroll_y = false) {
 
-        if(!g.cell_to_value)
+        if(!g.cell_to_value && !g.is_blocked)
           throw std::runtime_error("grid_to_adj_list: cell_to_value not set!");
 
         int rows = grid.size();
@@ -377,15 +378,21 @@ namespace algorithms::onlinejudge::graph::tools
         for(int r = 0; r < rows; ++r) {
           for(int c = 0; c < cols; ++c) {
             int u = r * cols + c;
-            g.vertex_value[u] = g.cell_to_value(grid[r][c]);
+            T val = g.cell_to_value(grid[r][c]);
+            g.vertex_value[u] = val;
+            if(g.is_blocked(val)) continue;
             for(const Dir& d : directions) {
               int nr = r + d.r_shift, nc = c + d.c_shift;
               if(!in_bounds(nr, nc)) continue;
               auto [wr, wc] = wrap(nr, nc);
+               
+              T w_val = g.cell_to_value(grid[wr][wc]);
+              if(g.is_blocked(w_val)) continue;
+
               int v = wr * cols + wc;
-              g.adj[u].push_back(Node<T>{v, g.cell_to_value(grid[wr][wc])});
+              g.adj[u].push_back(Node<T>{v, w_val});
               if(bidirectional) {
-                g.adj[v].push_back(Node<T>{u, g.cell_to_value(grid[r][c])});
+                g.adj[v].push_back(Node<T>{u, val});
               }
             }
           }
@@ -872,6 +879,7 @@ namespace algorithms::onlinejudge::graph::tools
         std::function<BfsCheck(const tools::Node<T>&)> check;
     };
 
+
     template <typename T = tools::Unit>
     void bfs(const tools::Graph<T>& graph, Bfs<T>& bfs_s) {
 
@@ -881,7 +889,8 @@ namespace algorithms::onlinejudge::graph::tools
 
       std::queue<tools::Node<T>> queue; 
       queue.push(bfs_s.source);
-      while(!queue.empty()) {
+      bool is_finished = false;
+      while(!queue.empty() && !is_finished) {
         tools::Node<T> u = queue.front(); queue.pop();
         BfsCheck check = bfs_s.check(u);
         if(check == IsFinished) break;
@@ -901,58 +910,79 @@ namespace algorithms::onlinejudge::graph::tools
 namespace tools = algorithms::onlinejudge::graph::tools;
 
 
+enum Field { Mine, Free };
 
-namespace algorithms::onlinejudge::graph::gossips
+std::ostream& operator << (std::ostream& os, const Field& field) 
 {
-    /** https://onlinejudge.org/external/9/924.pdf */
-    int V, Q;
+    std::string s;
+    if(field == Mine) s = "mine";
+    else if(field == Free) s = "free";
+    return os << s; 
+}
+
+
+namespace algorithms::onlinejudge::graph::bombs
+{
+    /** https://onlinejudge.org/external/106/10653.pdf */
+    int R, C, B;
+    tools::Bfs<Field> bfs_s(1000 * 1000, {0, Free});
     void submit()
     {
        
-         
-        while(while_read(V)) {
-          tools::Graph<> graph(V);
-          loop(V, [&] (int fn) {
-            int N, num;
-            while_read(N);
-            loop(N, [&] (int _) {
-              while_read(num);
-              auto tn = tools::mkDefNode(num);      
-              graph[fn].push_back(tn);
+        
+
+        while(while_read(R, C) && R && C) {
+          while_read(B);
+          std::vector<tools::vb> field(R, tools::vb(C, false));
+          loop(B, [&](int _) {
+            int r, c, n;
+            while_read(r, n);
+            loop(n, [&](int _) {
+              while_read(c);
+              field[r][c] = true;
             });
           });
+        
+          tools::GridGraph<Field, bool> graph = tools::init_grid_graph<Field, bool>();
+          graph.cell_to_value = [](bool _) -> Field { return Free; };
+          graph.is_blocked = [](Field field) { return field == Mine; };
+          tools::grid_to_adj_list(graph, field, tools::dirs_4);
 
-          while_read(Q);
-          while(Q--) {
-            int source;
-            while_read(source);
-            tools::Node<> start = tools::mkDefNode(source);
-            tools::vi counter(V, 0);
-            tools::Bfs<> bfs_s(V, start);
-            bfs_s.check =
-              [&](const tools::Node<>& node)
-                  -> tools::BfsCheck 
-              { 
-                counter[bfs_s.dist[node.node]]++;
-                return tools::GoOn; 
-              };
-            tools::bfs(graph, bfs_s);
-            int max_boom = 0, boom_day = 0;
-            for(int d = 1; d < (int)counter.size(); ++d) {
-              if(counter[d] > max_boom) {
-                max_boom = counter[d];
-                boom_day = d;
-              }
-            }
-            if(!max_boom) std::cout << 0 << std::endl;
-            else printf("%d %d\n", max_boom, boom_day);
-          }
-        }  
+          int r, c;
+          while_read(r, c);
+          int start_node = r * C + c;
+          tools::Node<Field> source = {start_node, Free};
+          while_read(r, c);
+          int end_node = r * C + c;
+          tools::Node<Field> sink = {end_node, Free};  
+
+          bfs_s.source = source;
+          bfs_s.dist[source.node] = 0;
+          bfs_s.check = 
+            [&](const tools::Node<Field>& node)
+              -> tools::BfsCheck { 
+              if(node == sink) 
+                return tools::IsFinished;
+              return tools::GoOn;
+            };
+
+          tools::bfs(graph.adj, bfs_s);
+          std::cout << bfs_s.getDistance(sink) << std::endl;
+
+          bfs_s.parent.assign(1000 * 1000, tools::sentinel);
+          bfs_s.dist.assign(1000 * 1000, tools::sentinel);
+        }
     }
 }
 
 
 
-namespace gossips = algorithms::onlinejudge::graph::gossips;
 
-int main() { gossips::submit(); }
+namespace bombs = algorithms::onlinejudge::graph::bombs;
+
+int main() { 
+        std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+    
+    bombs::submit(); 
+}

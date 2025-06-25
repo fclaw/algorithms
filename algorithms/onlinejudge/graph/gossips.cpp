@@ -1,6 +1,6 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa 627 The Net, rt: s
+🧳 UVa 924 Spreading the News, rt: s
 ───────────────────────────────────────────────────────────────
 */
 
@@ -25,9 +25,9 @@ namespace tools = algorithms::onlinejudge::graph::tools;
 
 
 
-namespace algorithms::onlinejudge::graph::net
+namespace algorithms::onlinejudge::graph::gossips
 {
-    /** https://onlinejudge.org/external/6/627.pdf */
+    /** https://onlinejudge.org/external/9/924.pdf */
     int V, Q;
     void submit(std::optional<char*> file, bool debug_mode)
     {
@@ -41,55 +41,44 @@ namespace algorithms::onlinejudge::graph::net
               " with error: " + std::strerror(errno);
             throw std::ios_base::failure(errorMessage);
           }
-
+         
         while(while_read(V)) {
-          std::cin.ignore();
           tools::Graph<> graph(V);
-          std::string s;
-          loop(V, [&] (int _) {
-            std::getline(std::cin, s);
-            auto ns = s.substr(0, s.find('-')); 
-            int from = std::atoi(ns.c_str());
-            --from;
-            auto rest = s.substr(s.find('-') + 1, s.size());
-            std::stringstream ss(rest);
-            int to;
-            while(ss >> to) {
-              --to;
-              auto tn = tools::mkDefNode(to);
-              graph[from].push_back(tn);
-              if(ss.peek() == ',') ss.ignore();
-            }
+          loop(V, [&] (int fn) {
+            int N, num;
+            while_read(N);
+            loop(N, [&] (int _) {
+              while_read(num);
+              auto tn = tools::mkDefNode(num);      
+              graph[fn].push_back(tn);
+            });
           });
 
-          printf("-----\n");
           while_read(Q);
           while(Q--) {
-            int from, to;
-            while_read(from, to);
-            --from; --to;
-            tools::Node<> start = tools::mkDefNode(from);
-            tools::Node<> end = tools::mkDefNode(to);
+            int source;
+            while_read(source);
+            tools::Node<> start = tools::mkDefNode(source);
+            tools::vi counter(V, 0);
             tools::Bfs<> bfs_s(V, start);
-            bfs_s.check = 
+            bfs_s.check =
               [&](const tools::Node<>& node)
-                  -> tools::BfsCheck {       
-                if(node == end) 
-                  return tools::IsFinished;
-                return tools::GoOn;
-              }; 
+                  -> tools::BfsCheck 
+              { 
+                counter[bfs_s.dist[node.node]]++;
+                return tools::GoOn; 
+              };
             tools::bfs(graph, bfs_s);
-            if(!(~bfs_s.getDistance(end))) 
-              printf("connection impossible\n");
-            else {
-              tools::vi path = bfs_s.restore_path(end);
-              std::string s;
-              s += std::to_string(from + 1) + " ";
-              for(int n : path) s += std::to_string(n + 1) + " ";
-              s.pop_back();
-              std::cout << s << std::endl; 
+            int max_boom = 0, boom_day = 0;
+            for(int d = 1; d < (int)counter.size(); ++d) {
+              if(counter[d] > max_boom) {
+                max_boom = counter[d];
+                boom_day = d;
+              }
             }
+            if(!max_boom) std::cout << 0 << std::endl;
+            else printf("%d %d\n", max_boom, boom_day);
           }
-        } 
+        }  
     }
 }

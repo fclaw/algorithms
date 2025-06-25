@@ -70,7 +70,7 @@ namespace algorithms::onlinejudge::graph::tools
     }
 
 
-    enum BfsCheck { IsFinished, GoOn };
+    enum BfsCheck { IsFinished, GoOn, Skip };
 
     // bfs traversal
     template <typename T = tools::Unit>
@@ -82,7 +82,7 @@ namespace algorithms::onlinejudge::graph::tools
         Bfs(int V, const tools::Node<T>& source) {
           this->source = source;
           parent.assign(V, tools::sentinel);
-          dist.assign(V, INT32_MAX);
+          dist.assign(V, tools::sentinel);
           dist[source.node] = 0;
         }
         vi restore_path(const tools::Node<T>& sink) {
@@ -114,8 +114,9 @@ namespace algorithms::onlinejudge::graph::tools
         tools::Node<T> u = queue.front(); queue.pop();
         BfsCheck check = bfs_s.check(u);
         if(check == IsFinished) break;
+        if(check == Skip) continue;
         for(const tools::Node<T>& v : graph[u.node]) {
-          if(bfs_s.dist[v.node] != INT32_MAX) continue;
+          if(~bfs_s.dist[v.node]) continue;
           queue.push(v);
           bfs_s.dist[v.node] = bfs_s.dist[u.node] + 1;
           bfs_s.parent[v.node] = u.node;

@@ -57,11 +57,8 @@ enum Rotate { Right, Left };
 Direction rotateLeft(Direction d) { return  static_cast<Direction>((d + 1) % 4); }
 Direction rotateRight(Direction d) { return static_cast<Direction>((d + 3) % 4); } // same as (d - 1 + 4) % 4
 
-Direction rotate(Rotate r, Direction d)
-{
-    if(r == Left) return rotateLeft(d);
-    else return rotateRight(d);
-}
+Direction rotate(Rotate r, Direction d) 
+{ return r == Left ? rotateLeft(d) : rotateRight(d); }
 
 std::pair<int, int> dirToDelta(Direction d) 
 {
@@ -74,20 +71,23 @@ std::pair<int, int> dirToDelta(Direction d)
     }
 }
 
-std::pair<int, int> moveForward(const std::pair<int, int>& pos, Direction d, int steps) {
+std::pair<int, int> 
+  moveForward(
+    const std::pair<int, int>& pos, 
+    Direction d, 
+    int steps) {
     auto diff = dirToDelta(d);
-    int dr = diff.first;
-    int dc = diff.second;
-    std::pair<int, int> newPos = {
-        pos.first + steps * dr,
-        pos.second + steps * dc
+    std::pair<int, int> new_pos = {
+        pos.first + steps * diff.first,
+        pos.second + steps * diff.second
     };
-    return newPos;
+    return new_pos;
 }
 
 bool isFree(int x, int y) 
 {
-    return !obstacle[x - 1][y - 1] &&
+    return x >= 1 && y >= 1 && 
+           !obstacle[x - 1][y - 1] &&
            !obstacle[x - 1][y] &&
            !obstacle[x][y - 1] &&
            !obstacle[x][y];
@@ -116,7 +116,9 @@ namespace algorithms::onlinejudge::graph::robot
           std::memset(visited, false, sizeof visited);
           loop(R, [&](int r) {
             loop(C, [&](int c) {
-              while_read(obstacle[r][c]);
+              bool cell;
+              while_read(cell);
+              if(cell) obstacle[r][c] = true;
              });
           });
 
@@ -124,37 +126,37 @@ namespace algorithms::onlinejudge::graph::robot
           std::string d_s;
           while_read(source_r, source_c, sink_r, sink_c, d_s);
           Direction d = read(d_s);
-          
+
           bool is_valid = true;
           if(!isFree(source_r, source_c)) is_valid = false;
 
           std::queue<State> queue;
           queue.push({{source_r, source_c}, d, 0});
+          visited[source_r][source_c][d] = true;
           int min_time = -1;
           while(!queue.empty() && is_valid) {
-            State s = queue.front(); queue.pop();
-            int r = s.pos.first;
-            int c = s.pos.second;
-            Direction d = s.d;
+            State state = queue.front(); queue.pop();
+            int r = state.pos.first;
+            int c = state.pos.second;
+            Direction d = state.d;
             if(r == sink_r && c == sink_c) 
-            {  min_time = s.time; break; };
-            visited[r][c][d] = true;
+            {  min_time = state.time; break; };
             for(int j = 0; j <= 1; ++j) {
               Rotate rt = static_cast<Rotate>(j);
               Direction nd = rotate(rt, d);
               if(!visited[r][c][nd]) {
                 visited[r][c][nd] = true;
-                queue.push({{r, c}, nd, s.time + 1});
+                queue.push({{r, c}, nd, state.time + 1});
               }
             }
 
             for(int step = 1; step <= 3; ++step) {
-              auto new_pos = moveForward(s.pos, d, step);
+              auto new_pos = moveForward(state.pos, d, step);
               if(in_bounds(new_pos.first, new_pos.second) &&
                  isFree(new_pos.first, new_pos.second)) {
                 if(!visited[new_pos.first][new_pos.second][d]) {          
                   visited[new_pos.first][new_pos.second][d] = true;
-                  queue.push({new_pos, d, s.time + 1});
+                  queue.push({new_pos, d, state.time + 1});
                 }
                } else break;
             }

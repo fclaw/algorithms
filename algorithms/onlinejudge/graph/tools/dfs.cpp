@@ -58,7 +58,6 @@ namespace algorithms::onlinejudge::graph::tools
         bool operator < (const Node<T>& other) const {
           return node < other.node && (node == other.node && value < other.value);
         }
-
     };
 
     Node<> def_node = {0, {}};

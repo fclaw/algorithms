@@ -27,6 +27,7 @@
 #include <tuple>
 #include <algorithm>
 #include <cmath>
+#include <limits>
 
 
 template<typename F>
@@ -521,6 +522,47 @@ namespace algorithms::onlinejudge::graph::tools::wg
 
     template <typename T = tools::Unit, typename W = int>
     WNode<T, W> mkWNode(int n, W w, T v = tools::Unit{}) { return {n, w, v}; }
+  
+    // Function to setup a WGraph from a grid of weights
+    template <typename T = tools::Unit, typename W = int>
+    WGraph<T, W> setupGraph(
+      const std::vector<std::vector<W>>& grid, 
+      bool is_unidirectional = false) 
+    {
+        int rows = grid.size();
+        int cols = grid[0].size();
+        int V = rows * cols;
+        WGraph<T, W> graph(V + 1);
+
+        graph[0].push_back(mkWNode(1, grid[0][0]));
+
+        auto in_bounds = [&](int r, int c) { return r >= 0 && r < rows && c >= 0 && c < cols; };
+
+         // Fill the graph with nodes and their neighbors
+        for(int r = 0; r < rows; ++r) {
+          for(int c = 0; c < cols; ++c) {
+             int node = r * cols + c + 1;  // Calculate the node index based on row and column
+             W w = grid[r][c];
+             for(const tools::Dir& d : tools::dirs_4) {
+               int nr = r + d.r_shift;
+               int nc = c + d.c_shift;
+               int neigh = nr * cols + nc + 1;
+               if(in_bounds(nr, nc)) {
+                 W nw = grid[nr][nc];
+                 if(is_unidirectional) {
+                   // For unidirectional graph, ensure we don't revisit the reverse edge
+                     graph[node].push_back(mkWNode(neigh, nw));  // Add edge in one direction
+                 } else {
+                   // For bidirectional graph, add both directions
+                   graph[node].push_back(mkWNode(neigh, nw));  // Add edge in both directions
+                   graph[neigh].push_back(mkWNode(node, w));  // Add reverse edge
+                 }
+               }
+             }
+          }
+        }
+       return graph;
+    }
 }
 
 namespace algorithms::onlinejudge::graph::tools
@@ -907,83 +949,114 @@ namespace algorithms::onlinejudge::graph::tools
 
 
 
-namespace tools = algorithms::onlinejudge::graph::tools;
+namespace wg = algorithms::onlinejudge::graph::tools::wg;
 
 
-enum Field { Mine, Free };
+// Custom comparator for the priority queue
+template<typename T, typename W>
+struct Compare {
+    bool operator () (
+      const std::pair<int, wg::WNode<T, W>>& a, 
+      const std::pair<int, wg::WNode<T, W>>& b) const {
+      // First compare by the 'int' value (node index)
+      return a.first > b.first || (a.first == b.first && a.second.node < b.second.node); 
+    }
+};
 
-std::ostream& operator << (std::ostream& os, const Field& field) 
+namespace algorithms::onlinejudge::graph::tools::dijkstra
 {
-    std::string s;
-    if(field == Mine) s = "mine";
-    else if(field == Free) s = "free";
-    return os << s; 
-}
 
+    constexpr int inf = 1e5;
+    template<typename T, typename W>
+    using piwn = std::pair<int, wg::WNode<T, W>>;
+    typedef std::vector<int> vi;
+    typedef std::pair<int, int> pii;
+    template<typename T, typename W>
+    using PQ = std::priority_queue<std::pair<int, wg::WNode<T, W>>, std::vector<std::pair<int, wg::WNode<T, W>>>, Compare<T, W>>;
 
-namespace algorithms::onlinejudge::graph::bombs
-{
-    /** https://onlinejudge.org/external/106/10653.pdf */
-    int R, C, B;
-    tools::Bfs<Field> bfs_s(1000 * 1000, {0, Free});
-    void submit()
+    template<typename T = tools::Unit, typename W = int>
+    struct Dijkstra
     {
-       
-        
-
-        while(while_read(R, C) && R && C) {
-          while_read(B);
-          std::vector<tools::vb> field(R, tools::vb(C, false));
-          loop(B, [&](int _) {
-            int r, c, n;
-            while_read(r, n);
-            loop(n, [&](int _) {
-              while_read(c);
-              field[r][c] = true;
-            });
-          });
-        
-          tools::GridGraph<Field, bool> graph = tools::init_grid_graph<Field, bool>();
-          graph.cell_to_value = [](bool _) -> Field { return Free; };
-          graph.is_blocked = [](Field field) { return field == Mine; };
-          tools::grid_to_adj_list(graph, field, tools::dirs_4);
-
-          int r, c;
-          while_read(r, c);
-          int start_node = r * C + c;
-          tools::Node<Field> source = {start_node, Free};
-          while_read(r, c);
-          int end_node = r * C + c;
-          tools::Node<Field> sink = {end_node, Free};  
-
-          bfs_s.source = source;
-          bfs_s.dist[source.node] = 0;
-          bfs_s.check = 
-            [&](const tools::Node<Field>& node)
-              -> tools::BfsCheck { 
-              if(node == sink) 
-                return tools::IsFinished;
-              return tools::GoOn;
-            };
-
-          tools::bfs(graph.adj, bfs_s);
-          std::cout << bfs_s.getDistance(sink) << std::endl;
-
-          bfs_s.parent.assign(1000 * 1000, tools::sentinel);
-          bfs_s.dist.assign(1000 * 1000, tools::sentinel);
+        std::vector<W> dist;
+        PQ<T, W> queue;
+        Dijkstra(int V, const wg::WNode<T, W>& source) {
+          const W inf = std::numeric_limits<W>::max();
+          dist.assign(V, inf);
+          dist[source.node] = 0;
+          queue.emplace(0, source);
         }
+    };
+    
+    // priority queue
+    template<typename T, typename W>
+    void dijkstra(
+      const wg::WGraph<T, W>& graph, 
+      Dijkstra<T, W>& dijkstra_s) {
+      auto& queue = dijkstra_s.queue;
+      while(!queue.empty()) {
+        piwn<T, W> p = queue.top(); queue.pop();
+        int d = p.first;
+        wg::WNode<T, W> node = p.second;
+        int u = node.node;
+        if(d > dijkstra_s.dist[u]) continue; // lazy deletion
+        for(const wg::WNode<T, W>& neigh : graph[u]) {
+          int v = neigh.node;
+          W w = neigh.weight;
+          if(dijkstra_s.dist[v] > 
+             dijkstra_s.dist[u] + w) {
+            dijkstra_s.dist[v] = dijkstra_s.dist[u] + w;
+            queue.emplace(dijkstra_s.dist[v], neigh);
+          }
+        }
+      }
     }
 }
 
 
 
 
-namespace bombs = algorithms::onlinejudge::graph::bombs;
+
+namespace dijkstra = algorithms::onlinejudge::graph::tools::dijkstra;
+namespace wg = algorithms::onlinejudge::graph::tools::wg;
+
+namespace algorithms::onlinejudge::graph::numbered_maze
+{
+    /** https://onlinejudge.org/external/9/929.pdf */
+    int t_cases, N, M;
+    void submit()
+    {
+        
+        while_read(t_cases);
+        while(t_cases--) {
+          while_read(N);
+          while_read(M);
+          std::cin.ignore();
+          tools::vvi maze(N);
+          std::string s;
+          loop(N, [&] (int i) {
+            std::getline(std::cin, s);
+            for(int j = 0; j < (int)s.size(); ++j) 
+              if(std::isdigit(s[j])) 
+                maze[i].push_back(s[j] - '0');
+          });
+
+          wg::WGraph<> graph = wg::setupGraph(maze);
+          int V = N * M;
+          wg::WNode<> start = wg::mkWNode(0, 0);
+          dijkstra::Dijkstra<> dijkstra_s(V + 1, start);
+          dijkstra::dijkstra(graph, dijkstra_s);
+          std::cout << dijkstra_s.dist[V] << std::endl;
+        }
+    }
+}
+
+
+namespace numbered_maze = algorithms::onlinejudge::graph::numbered_maze;
 
 int main() { 
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    bombs::submit(); 
+    numbered_maze::submit(); 
 }
 

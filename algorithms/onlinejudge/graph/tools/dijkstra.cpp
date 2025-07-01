@@ -10,9 +10,12 @@
 namespace wg = algorithms::onlinejudge::graph::tools::wg;
 
 
+template<typename W>
+inline constexpr W inf = std::numeric_limits<W>::max();
+
 // Custom comparator for the priority queue
 template<typename T, typename W>
-struct Compare {
+struct DijkstraCmp {
     bool operator () (
       const std::pair<int, wg::WNode<T, W>>& a, 
       const std::pair<int, wg::WNode<T, W>>& b) const {
@@ -24,24 +27,27 @@ struct Compare {
 namespace algorithms::onlinejudge::graph::tools::dijkstra
 {
 
-    constexpr int inf = 1e5;
     template<typename T, typename W>
     using piwn = std::pair<int, wg::WNode<T, W>>;
     typedef std::vector<int> vi;
     typedef std::pair<int, int> pii;
     template<typename T, typename W>
-    using PQ = std::priority_queue<std::pair<int, wg::WNode<T, W>>, std::vector<std::pair<int, wg::WNode<T, W>>>, Compare<T, W>>;
+    using PQ = std::priority_queue<std::pair<int, wg::WNode<T, W>>, std::vector<std::pair<int, wg::WNode<T, W>>>, DijkstraCmp<T, W>>;
 
     template<typename T = tools::Unit, typename W = int>
     struct Dijkstra
     {
         std::vector<W> dist;
         PQ<T, W> queue;
-        Dijkstra(int V, const wg::WNode<T, W>& source) {
-          const W inf = std::numeric_limits<W>::max();
-          dist.assign(V, inf);
+        std::function<W(W, W)> mappend;
+        Dijkstra(
+          int V, 
+          const wg::WNode<T, W>& source, 
+          std::function<W(W, W)> mappend) {
+          dist.assign(V, inf<W>);
           dist[source.node] = 0;
           queue.emplace(0, source);
+          this->mappend = mappend;
         }
     };
     
@@ -60,9 +66,9 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
         for(const wg::WNode<T, W>& neigh : graph[u]) {
           int v = neigh.node;
           W w = neigh.weight;
-          if(dijkstra_s.dist[v] > 
-             dijkstra_s.dist[u] + w) {
-            dijkstra_s.dist[v] = dijkstra_s.dist[u] + w;
+          W nw = dijkstra_s.mappend(dijkstra_s.dist[u], w);
+          if(dijkstra_s.dist[v] > nw) {
+            dijkstra_s.dist[v] = nw;
             queue.emplace(dijkstra_s.dist[v], neigh);
           }
         }

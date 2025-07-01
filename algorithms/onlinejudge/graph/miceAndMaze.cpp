@@ -1,6 +1,6 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa 929 Number Maze, rt: s
+🧳 UVa 1112 Mice and Maze, rt: s
 ───────────────────────────────────────────────────────────────
 */
 
@@ -27,10 +27,10 @@
 namespace dijkstra = algorithms::onlinejudge::graph::tools::dijkstra;
 namespace wg = algorithms::onlinejudge::graph::tools::wg;
 
-namespace algorithms::onlinejudge::graph::numbered_maze
+namespace algorithms::onlinejudge::graph::mice_and_maze
 {
-    /** https://onlinejudge.org/external/9/929.pdf */
-    int t_cases, N, M;
+    /** https://onlinejudge.org/external/11/1112.pdf */
+    int t_cases, V, E, exit, timer;
     void submit(std::optional<char*> file, bool debug_mode)
     {
         if (file.has_value())
@@ -44,27 +44,34 @@ namespace algorithms::onlinejudge::graph::numbered_maze
             throw std::ios_base::failure(errorMessage);
           }
         
+        bool is_first = true;  
         while_read(t_cases);
+        std::cin.ignore();
         while(t_cases--) {
-          while_read(N);
-          while_read(M);
-          std::cin.ignore();
-          tools::vvi maze(N);
-          std::string s;
-          loop(N, [&] (int i) {
-            std::getline(std::cin, s);
-            for(int j = 0; j < (int)s.size(); ++j) 
-              if(std::isdigit(s[j])) 
-                maze[i].push_back(s[j] - '0');
-          });
+          while_read(V);
+          while_read(exit);
+          while_read(timer);
+          while_read(E);
 
-          wg::WGraph<> graph = wg::setupGraph(maze);
-          int V = N * M;
-          wg::WNode<> start = wg::mkWNode(0, 0);
+          wg::WGraph<> graph(V);
+          loop(E, [&] (int _) {
+            int from, to, w;
+            while_read(from, to, w);
+            --from; --to;
+            // reverse order
+            graph[to].push_back(wg::mkWNode(from, w));
+          });
+          
+          --exit;
+          wg::WNode<> start = wg::mkWNode(exit, 0);
           auto mappend = [](int w, int a) { return w + a; };
-          dijkstra::Dijkstra<> dijkstra_s(V + 1, start, mappend);
+          dijkstra::Dijkstra<> dijkstra_s(V, start, mappend);
           dijkstra::dijkstra(graph, dijkstra_s);
-          std::cout << dijkstra_s.dist[V] << std::endl;
+          int mouse_escaped = 0;
+          for(int t : dijkstra_s.dist)
+            if(t <= timer) mouse_escaped++;
+          if(!is_first) std::cout << std::endl; else is_first = false;  
+          std::cout << mouse_escaped << std::endl; 
         }
     }
 }

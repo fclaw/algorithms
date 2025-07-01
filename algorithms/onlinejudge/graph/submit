@@ -963,27 +963,45 @@ struct Compare {
     }
 };
 
+
+template<typename W>
+inline constexpr W inf = std::numeric_limits<W>::max();
+
+// Custom comparator for the priority queue
+template<typename T, typename W>
+struct DijkstraCmp {
+    bool operator () (
+      const std::pair<int, wg::WNode<T, W>>& a, 
+      const std::pair<int, wg::WNode<T, W>>& b) const {
+      // First compare by the 'int' value (node index)
+      return a.first > b.first || (a.first == b.first && a.second.node < b.second.node); 
+    }
+};
+
 namespace algorithms::onlinejudge::graph::tools::dijkstra
 {
 
-    constexpr int inf = 1e5;
     template<typename T, typename W>
     using piwn = std::pair<int, wg::WNode<T, W>>;
     typedef std::vector<int> vi;
     typedef std::pair<int, int> pii;
     template<typename T, typename W>
-    using PQ = std::priority_queue<std::pair<int, wg::WNode<T, W>>, std::vector<std::pair<int, wg::WNode<T, W>>>, Compare<T, W>>;
+    using PQ = std::priority_queue<std::pair<int, wg::WNode<T, W>>, std::vector<std::pair<int, wg::WNode<T, W>>>, DijkstraCmp<T, W>>;
 
     template<typename T = tools::Unit, typename W = int>
     struct Dijkstra
     {
         std::vector<W> dist;
         PQ<T, W> queue;
-        Dijkstra(int V, const wg::WNode<T, W>& source) {
-          const W inf = std::numeric_limits<W>::max();
-          dist.assign(V, inf);
+        std::function<W(W, W)> mappend;
+        Dijkstra(
+          int V, 
+          const wg::WNode<T, W>& source, 
+          std::function<W(W, W)> mappend) {
+          dist.assign(V, inf<W>);
           dist[source.node] = 0;
           queue.emplace(0, source);
+          this->mappend = mappend;
         }
     };
     
@@ -1002,9 +1020,9 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
         for(const wg::WNode<T, W>& neigh : graph[u]) {
           int v = neigh.node;
           W w = neigh.weight;
-          if(dijkstra_s.dist[v] > 
-             dijkstra_s.dist[u] + w) {
-            dijkstra_s.dist[v] = dijkstra_s.dist[u] + w;
+          W nw = dijkstra_s.mappend(dijkstra_s.dist[u], w);
+          if(dijkstra_s.dist[v] > nw) {
+            dijkstra_s.dist[v] = nw;
             queue.emplace(dijkstra_s.dist[v], neigh);
           }
         }
@@ -1014,49 +1032,57 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
 
 
 
-
-
 namespace dijkstra = algorithms::onlinejudge::graph::tools::dijkstra;
 namespace wg = algorithms::onlinejudge::graph::tools::wg;
 
-namespace algorithms::onlinejudge::graph::numbered_maze
+namespace algorithms::onlinejudge::graph::mice_and_maze
 {
-    /** https://onlinejudge.org/external/9/929.pdf */
-    int t_cases, N, M;
+    /** https://onlinejudge.org/external/11/1112.pdf */
+    int t_cases, V, E, exit, timer;
     void submit()
     {
         
+        
+        bool is_first = true;  
         while_read(t_cases);
+        std::cin.ignore();
         while(t_cases--) {
-          while_read(N);
-          while_read(M);
-          std::cin.ignore();
-          tools::vvi maze(N);
-          std::string s;
-          loop(N, [&] (int i) {
-            std::getline(std::cin, s);
-            for(int j = 0; j < (int)s.size(); ++j) 
-              if(std::isdigit(s[j])) 
-                maze[i].push_back(s[j] - '0');
-          });
+          while_read(V);
+          while_read(exit);
+          while_read(timer);
+          while_read(E);
 
-          wg::WGraph<> graph = wg::setupGraph(maze);
-          int V = N * M;
-          wg::WNode<> start = wg::mkWNode(0, 0);
-          dijkstra::Dijkstra<> dijkstra_s(V + 1, start);
+          wg::WGraph<> graph(V);
+          loop(E, [&] (int _) {
+            int from, to, w;
+            while_read(from, to, w);
+            --from; --to;
+            // reverse order
+            graph[to].push_back(wg::mkWNode(from, w));
+          });
+          
+          --exit;
+          wg::WNode<> start = wg::mkWNode(exit, 0);
+          auto mappend = [](int w, int a) { return w + a; };
+          dijkstra::Dijkstra<> dijkstra_s(V, start, mappend);
           dijkstra::dijkstra(graph, dijkstra_s);
-          std::cout << dijkstra_s.dist[V] << std::endl;
+          int mouse_escaped = 0;
+          for(int t : dijkstra_s.dist)
+            if(t <= timer) mouse_escaped++;
+          if(!is_first) std::cout << std::endl; else is_first = false;  
+          std::cout << mouse_escaped << std::endl; 
         }
     }
 }
 
 
-namespace numbered_maze = algorithms::onlinejudge::graph::numbered_maze;
+
+namespace mice_and_maze = algorithms::onlinejudge::graph::mice_and_maze;
 
 int main() { 
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    numbered_maze::submit(); 
+    mice_and_maze::submit(); 
 }
 

@@ -31,11 +31,13 @@
 
 
 template<typename F>
-inline void loop(size_t n, F&& f)
-{
-    for (size_t i = 0; i < n; ++i)
-      std::forward<F>(f)(i);
+inline void loop(size_t n, F&& f) {
+  for(size_t i = 0; i < n; ++i)
+    std::forward<F>(f)(i);
 }
+
+// Overloading the >> operator for std::pair<int, int>
+std::istream& operator >> (std::istream& is, std::pair<int, int>& p) { return is >> p.first >> p.second; }
 
 template<typename... Args>
 bool while_read(Args&... args) { return (... && static_cast<bool>(std::cin >> args)); }
@@ -502,14 +504,6 @@ namespace algorithms::onlinejudge::graph::tools::wg
         int node;
         W weight;
         T value;
-        // Define comparison: first by weight (ascending), then by id (ascending)
-        // smaller weights have higher priority
-        // smaller ids have higher priority if weights are equal
-        bool operator < (const WNode& other) const 
-        { return weight > other.weight || 
-                (weight == other.weight && 
-                 node > other.node); }
-        bool operator > (const WNode& other) const { return !(*this < other); }      
     };
 
     template <typename T, typename W>
@@ -522,47 +516,6 @@ namespace algorithms::onlinejudge::graph::tools::wg
 
     template <typename T = tools::Unit, typename W = int>
     WNode<T, W> mkWNode(int n, W w, T v = tools::Unit{}) { return {n, w, v}; }
-  
-    // Function to setup a WGraph from a grid of weights
-    template <typename T = tools::Unit, typename W = int>
-    WGraph<T, W> setupGraph(
-      const std::vector<std::vector<W>>& grid, 
-      bool is_unidirectional = false) 
-    {
-        int rows = grid.size();
-        int cols = grid[0].size();
-        int V = rows * cols;
-        WGraph<T, W> graph(V + 1);
-
-        graph[0].push_back(mkWNode(1, grid[0][0]));
-
-        auto in_bounds = [&](int r, int c) { return r >= 0 && r < rows && c >= 0 && c < cols; };
-
-         // Fill the graph with nodes and their neighbors
-        for(int r = 0; r < rows; ++r) {
-          for(int c = 0; c < cols; ++c) {
-             int node = r * cols + c + 1;  // Calculate the node index based on row and column
-             W w = grid[r][c];
-             for(const tools::Dir& d : tools::dirs_4) {
-               int nr = r + d.r_shift;
-               int nc = c + d.c_shift;
-               int neigh = nr * cols + nc + 1;
-               if(in_bounds(nr, nc)) {
-                 W nw = grid[nr][nc];
-                 if(is_unidirectional) {
-                   // For unidirectional graph, ensure we don't revisit the reverse edge
-                     graph[node].push_back(mkWNode(neigh, nw));  // Add edge in one direction
-                 } else {
-                   // For bidirectional graph, add both directions
-                   graph[node].push_back(mkWNode(neigh, nw));  // Add edge in both directions
-                   graph[neigh].push_back(mkWNode(node, w));  // Add reverse edge
-                 }
-               }
-             }
-          }
-        }
-       return graph;
-    }
 }
 
 namespace algorithms::onlinejudge::graph::tools
@@ -964,8 +917,9 @@ struct Compare {
 };
 
 
-template<typename W>
-inline constexpr W inf = std::numeric_limits<W>::max();
+// template<typename W>
+// inline constexpr W inf = std::numeric_limits<W>::max();
+
 
 // Custom comparator for the priority queue
 template<typename T, typename W>
@@ -998,7 +952,8 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
           int V, 
           const wg::WNode<T, W>& source, 
           std::function<W(W, W)> mappend) {
-          dist.assign(V, inf<W>);
+          W inf = std::numeric_limits<W>::max();
+          dist.assign(V, inf);
           dist[source.node] = 0;
           queue.emplace(0, source);
           this->mappend = mappend;
@@ -1035,54 +990,43 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
 namespace dijkstra = algorithms::onlinejudge::graph::tools::dijkstra;
 namespace wg = algorithms::onlinejudge::graph::tools::wg;
 
-namespace algorithms::onlinejudge::graph::mice_and_maze
+namespace algorithms::onlinejudge::graph::smtp
 {
-    /** https://onlinejudge.org/external/11/1112.pdf */
-    int t_cases, V, E, exit, timer;
+    /** https://onlinejudge.org/external/109/10986.pdf */
+    int t_cases, c = 1, V, E, source, sink;
     void submit()
     {
         
-        
-        bool is_first = true;  
         while_read(t_cases);
-        std::cin.ignore();
         while(t_cases--) {
-          while_read(V);
-          while_read(exit);
-          while_read(timer);
-          while_read(E);
-
-          wg::WGraph<> graph(V);
+          while_read(V, E, source, sink);
+          wg::WGraph<> network(V);
           loop(E, [&] (int _) {
-            int from, to, w;
-            while_read(from, to, w);
-            --from; --to;
-            // reverse order
-            graph[to].push_back(wg::mkWNode(from, w));
+            int from, to, latency;
+            while_read(from, to, latency);
+            network[from].push_back(wg::mkWNode(to, latency));
+            network[to].push_back(wg::mkWNode(from, latency));
           });
-          
-          --exit;
-          wg::WNode<> start = wg::mkWNode(exit, 0);
+
+          wg::WNode<> start = wg::mkWNode(source, 0);
           auto mappend = [](int w, int a) { return w + a; };
           dijkstra::Dijkstra<> dijkstra_s(V, start, mappend);
-          dijkstra::dijkstra(graph, dijkstra_s);
-          int mouse_escaped = 0;
-          for(int t : dijkstra_s.dist)
-            if(t <= timer) mouse_escaped++;
-          if(!is_first) std::cout << std::endl; else is_first = false;  
-          std::cout << mouse_escaped << std::endl; 
-        }
+          dijkstra::dijkstra(network, dijkstra_s);
+          int min_time = dijkstra_s.dist[sink];
+          std::string ans = min_time == std::numeric_limits<int>::max() ? "unreachable" : std::to_string(min_time);
+          printf("Case #%d: %s\n", c++, ans.c_str());
+        } 
     }
 }
 
 
 
-namespace mice_and_maze = algorithms::onlinejudge::graph::mice_and_maze;
+namespace smtp = algorithms::onlinejudge::graph::smtp;
 
 int main() { 
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    mice_and_maze::submit(); 
+    smtp::submit(); 
 }
 

@@ -33,6 +33,6 @@ int main(int argc, char* argv[])
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
     // Measure memory after algorithm ends
     long mem_after = get_memory_usage();
-    std::cout << std::endl << "time: " <<  std::fixed << std::setprecision(1) << (double)elapsed.count() / 1000 << "s\n";
-    std::cout << "Memory usage: " << (mem_after - mem_before) / 1024 << " MB\n";
+    std::cout << std::endl << "Time: " <<  std::fixed << std::setprecision(1) << (double)elapsed.count() / 1000 << "s, ";
+    std::cout << "Memory usage: " << (mem_after - mem_before) / 1024 << "Mb\n";
 }

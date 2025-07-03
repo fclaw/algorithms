@@ -84,6 +84,7 @@ namespace algorithms::onlinejudge::graph::krochanska
     int t_cases, V, lines;
     double do_bfs(
       int source,
+      int junctions_num,
       std::queue<State>& queue, 
       tools::vi& visited,
       const tools::vb& is_junction, 
@@ -95,6 +96,7 @@ namespace algorithms::onlinejudge::graph::krochanska
         // map contains the adjacency list of the graph
         tools::vi times(V, -1);
         times[source] = 0; // Start from the source station
+        int found_junctions = 0;
         while(!queue.empty()) {
           State state = queue.front(); queue.pop();
           int station = state.station;
@@ -103,6 +105,8 @@ namespace algorithms::onlinejudge::graph::krochanska
           if(is_junction[station]) {
             if(!(~times[station])) 
               times[station] = 2 * travel_time;
+            if(++found_junctions == junctions_num) break;
+            // If we have found all junctions, we can stop   
           }
 
           for(const auto& n : network[station]) {
@@ -170,7 +174,7 @@ namespace algorithms::onlinejudge::graph::krochanska
             std::queue<State> queue;
             queue.push({v, 0}); // Start BFS from the current station
             visited[v] = 1; // Mark the starting station as visited
-            double total_time = do_bfs(v, queue, visited, is_junction, network);
+            double total_time = do_bfs(v, junctions_num, queue, visited, is_junction, network);
             double avg_time = total_time / junctions_num; // Average time to all junctions
             if(avg_time < best_avg_time) {
               best_avg_time = avg_time;

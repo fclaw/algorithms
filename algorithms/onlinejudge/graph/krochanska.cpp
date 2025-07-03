@@ -84,10 +84,9 @@ namespace algorithms::onlinejudge::graph::krochanska
     int t_cases, V, lines;
     double do_bfs(
       int source,
-      int total_junctions_to_visit,
       std::queue<State>& queue, 
       tools::vvi& visited,
-      const tools::vvi& map, 
+      const tools::vb& is_junction, 
       const tools::Graph<int>& network)
     {
         // BFS to find the average time to all junctions
@@ -95,21 +94,20 @@ namespace algorithms::onlinejudge::graph::krochanska
         // visited keeps track of visited stations on each line
         // map contains the adjacency list of the graph
         tools::vi times(V, 0);
-        int visited_junctions = 0;
+        int iterations = 0;
         while(!queue.empty()) {
+          ++iterations;
           State state = queue.front(); queue.pop();
           int station = state.station;
           int travel_time = state.travel_time;
 
-          bool is_junction = map[station].size() > 1;
-          if(is_junction && station != source) {
-            if(times[station] == 0) {
+          if(is_junction[station] && station != source) {
+            if(!times[station]) {
               times[station] = travel_time;
-              ++visited_junctions;
-              if(visited_junctions == 
-                 total_junctions_to_visit) break; // Early exit
-            } else times[station] = std::min(times[station], travel_time);
+            } else times[station] =
+              std::min(times[station], travel_time);
           }
+
           for(const auto& n : network[station]) {
             int next_station = n.node;
             int line_id = n.value;
@@ -142,56 +140,50 @@ namespace algorithms::onlinejudge::graph::krochanska
         while_read(t_cases);
         while(t_cases--) {
           while_read(V, lines);
-          std::cin.ignore();
-          tools::vvi junctions(V); // Track which lines each station belongs to
-          std::string s;
-          tools::Graph<int> network(V);
-          loop(lines, [&](int line) {
-            std::getline(std::cin, s);
-            std::istringstream iss(s);
+          tools::vvi counter(V); // Track which lines each station belongs to
+          tools::Graph<int> network(V); 
+          int junctions_num = 0;
+          tools::vb is_junction(V, false);
+          for(int line = 0; line < lines; ++line) {
             int curr, prev = tools::sentinel;
-            while(iss >> curr && curr) {
-              --curr; // Convert to 0-based index
+            while(while_read(curr) && --curr >= 0) {
               if(prev != tools::sentinel) {
                 network[prev].push_back(tools::Node<int>{curr, line});
                 network[curr].push_back(tools::Node<int>{prev, line});
               }
               prev = curr;
-              junctions[curr].push_back(line);
-            }
-          });
 
-          // Find all junctions (stations with more than one line) 
-          int junctions_num = 0;
-          for(const auto& p : junctions) {
-            if(p.size() > 1) {
-              ++junctions_num; // Count only junctions
+              // Detect junctions on the fly
+              if (!counter[curr].empty() &&
+                  counter[curr].back() != line) {
+                if (!is_junction[curr]) {
+                  is_junction[curr] = true;
+                  ++junctions_num;
+                }
+              }
+
+              counter[curr].push_back(line);
             }
           }
-          
 
           int best_station = -1;
           double best_avg_time = std::numeric_limits<double>::max();
           for(int v = 0 ; v < V; ++v) {
-            if(junctions[v].size() == 1) continue; // Skip non-j
+            if(counter[v].size() == 1) continue; // Skip non-junctions
             tools::vvi visited(V, tools::vi(lines, 0));
             std::queue<State> queue;
-            for(int line_id : junctions[v]) {
+            for(int line_id : counter[v]) {
               visited[v][line_id] = 1; // Mark as visited
               // Start BFS from this station on the given line
               queue.push({v, 0});
             }
-            double total_time = do_bfs(v, junctions_num, queue, visited, junctions, network);
+            double total_time = do_bfs(v, queue, visited, is_junction, network);
             double avg_time = total_time / junctions_num; // Average time to all junctions
             if(avg_time < best_avg_time) {
               best_avg_time = avg_time;
               best_station = v;
-            } else {
-              if(avg_time ==
-                best_avg_time && 
-                v < best_station)
-                best_station = v; // Prefer the lower numbered station
-            }
+            } else if(avg_time == best_avg_time)
+              best_station = std::min(best_station, v); // Prefer the lower numbered station
           }
           printf("Krochanska is in: %d\n", best_station == -1 ? -1 : best_station + 1);
         }

@@ -63,6 +63,7 @@ namespace algorithms::onlinejudge::graph::tools
     Node<> def_node = {0, {}};
  
     Node<> mkDefNode(int v) { return {v, {}}; }
+    Node<int> mkIntNode(int v, int val) { return {v, val}; }
 
     typedef std::vector<tools::Node<>> v_def_node;
     typedef std::vector<std::vector<tools::Node<>>> vv_def_node;
@@ -150,7 +151,7 @@ namespace algorithms::onlinejudge::graph::tools
         if(dfs_s.is_finished) return;
 
         dfs_s.state[u.node] = Explored;
-        dfs_s.entry_t[u.node] = dfs_s.time;
+        dfs_s.entry_t[u.node] = dfs_s.time; // define a preordering of the vertices
         dfs_s.time++;
 
         if(dfs_s.on_discover) dfs_s.on_discover(u);
@@ -181,7 +182,7 @@ namespace algorithms::onlinejudge::graph::tools
         }
 
         dfs_s.state[u.node] = Visited;
-        dfs_s.exit_t[u.node] = dfs_s.time;
+        dfs_s.exit_t[u.node] = dfs_s.time; // define a postordering of the vertices.
         dfs_s.time++;
 
         if(dfs_s.on_leaving) dfs_s.on_leaving(u);

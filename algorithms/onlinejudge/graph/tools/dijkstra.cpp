@@ -40,8 +40,8 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
         std::vector<W> dist;
         PQ<T, W> queue;
         std::function<W(W, W)> mappend;
-        std::function<void(int, int)> on_adding;
-        std::function<void(int, int)> on_equal_weights;
+        std::function<void(int, int)> on_relaxation;
+        std::function<void(int, int)> on_tied_path;
         Dijkstra(
           int V, 
           const wg::WNode<T, W>& source, 
@@ -71,13 +71,13 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
           W nw = dijkstra_s.mappend(dijkstra_s.dist[u], w);
           if(dijkstra_s.dist[v] > nw) {
             dijkstra_s.dist[v] = nw;
-            if(dijkstra_s.on_adding)
-              dijkstra_s.on_adding(u, v);
+            if(dijkstra_s.on_relaxation)
+              dijkstra_s.on_relaxation(u, v);
             queue.emplace(nw, neigh);
           }
           else if(dijkstra_s.dist[v] == nw) {
-            if(dijkstra_s.on_equal_weights)
-              dijkstra_s.on_equal_weights(u, v);
+            if(dijkstra_s.on_tied_path)
+              dijkstra_s.on_tied_path(u, v);
           }   
         }
       }

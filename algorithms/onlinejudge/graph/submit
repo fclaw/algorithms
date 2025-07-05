@@ -28,6 +28,9 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <utility>
+#include <functional>
+#include <set>
 
 
 template<typename F>
@@ -917,8 +920,8 @@ struct Compare {
 };
 
 
-// template<typename W>
-// inline constexpr W inf = std::numeric_limits<W>::max();
+template<typename W>
+inline constexpr W inf = std::numeric_limits<W>::max();
 
 
 // Custom comparator for the priority queue
@@ -942,21 +945,18 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
     template<typename T, typename W>
     using PQ = std::priority_queue<std::pair<int, wg::WNode<T, W>>, std::vector<std::pair<int, wg::WNode<T, W>>>, DijkstraCmp<T, W>>;
 
-    template<typename T = tools::Unit, typename W = int>
+ template<typename T = tools::Unit, typename W = int>
     struct Dijkstra
     {
         std::vector<W> dist;
         PQ<T, W> queue;
         std::function<W(W, W)> mappend;
-        Dijkstra(
-          int V, 
-          const wg::WNode<T, W>& source, 
-          std::function<W(W, W)> mappend) {
-          W inf = std::numeric_limits<W>::max();
-          dist.assign(V, inf);
+        std::function<void(int, int)> on_relaxation;
+        std::function<void(int, int)> on_tied_path;
+        Dijkstra(int V, const wg::WNode<T, W>& source) {
+          dist.assign(V, inf<W>);
           dist[source.node] = 0;
           queue.emplace(0, source);
-          this->mappend = mappend;
         }
     };
     
@@ -965,6 +965,10 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
     void dijkstra(
       const wg::WGraph<T, W>& graph, 
       Dijkstra<T, W>& dijkstra_s) {
+
+      if(!dijkstra_s.mappend) 
+        throw std::runtime_error("dijkstra: mappend are not set!");
+
       auto& queue = dijkstra_s.queue;
       while(!queue.empty()) {
         piwn<T, W> p = queue.top(); queue.pop();
@@ -978,55 +982,143 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
           W nw = dijkstra_s.mappend(dijkstra_s.dist[u], w);
           if(dijkstra_s.dist[v] > nw) {
             dijkstra_s.dist[v] = nw;
-            queue.emplace(dijkstra_s.dist[v], neigh);
+            if(dijkstra_s.on_relaxation)
+              dijkstra_s.on_relaxation(u, v);
+            queue.emplace(nw, neigh);
           }
+          else if(dijkstra_s.dist[v] == nw) {
+            if(dijkstra_s.on_tied_path)
+              dijkstra_s.on_tied_path(u, v);
+          }   
         }
       }
     }
 }
 
 
+/*
+───────────────────────────────────────────────────────────────
+🧳 UVa 12878 Flowery Trails, rt: s
+───────────────────────────────────────────────────────────────
+*/
+
+
+
+struct hash_pair 
+{
+    template <class T1, class T2>
+    size_t operator()(const std::pair<T1, T2>& p) const {
+      // Hash the first element
+      size_t fh = std::hash<T1>{}(p.first);
+      // Hash the second element
+      size_t sh = std::hash<T2>{}(p.second);
+      // Combine the two hash values
+      return fh ^ (sh + 0x9e3779b9 + (fh << 6) + (fh >> 2));
+    }
+};
+
+
+typedef std::unordered_map<std::pair<int, int>, int, hash_pair> map_piii;
 
 namespace dijkstra = algorithms::onlinejudge::graph::tools::dijkstra;
 namespace wg = algorithms::onlinejudge::graph::tools::wg;
 
-namespace algorithms::onlinejudge::graph::smtp
+
+namespace algorithms::onlinejudge::graph::flowery_trails
 {
-    /** https://onlinejudge.org/external/109/10986.pdf */
-    int t_cases, c = 1, V, E, source, sink;
+    /** https://onlinejudge.org/external/128/12878.pdf */
+    int V, E;
+    void backtrack(
+      int v, 
+      const std::vector<std::set<int>>& paths, 
+      std::vector<int>& path, 
+      const map_piii& lengths,
+      const map_piii& counter, 
+      int& total,
+      // avoid repeated counting
+      std::vector<tools::vb>& processed) {
+      if(paths[v].empty()) {
+        for(int i = 0; i < (int)path.size() - 1; ++i) {
+          auto trail = std::minmax(path[i], path[i + 1]);
+          if(!processed[trail.first][trail.second]) {
+            processed[trail.first][trail.second] = true;
+            total += counter.at(trail) * lengths.at(trail);
+          }
+        }
+        return;
+      }
+
+      // Explore each predecessor of the current node v
+      for(int u : paths[v]) {
+        // Skip this path if the edge (u, v) has been processed
+        auto trail = std::minmax(u, v);
+        if(processed[trail.first][trail.second]) continue; // Skip already processed edges
+        path.push_back(u);
+        backtrack(u, paths, path, lengths, counter, total, processed);
+        path.pop_back();
+      }
+    }
     void submit()
     {
         
-        while_read(t_cases);
-        while(t_cases--) {
-          while_read(V, E, source, sink);
-          wg::WGraph<> network(V);
+        while(while_read(V, E)) {
+          map_piii lengths;
+          map_piii counter;
+          wg::WGraph<> trails(V);
           loop(E, [&] (int _) {
-            int from, to, latency;
-            while_read(from, to, latency);
-            network[from].push_back(wg::mkWNode(to, latency));
-            network[to].push_back(wg::mkWNode(from, latency));
+            int from, to, length;
+            while_read(from, to, length);
+            trails[from].push_back(wg::mkWNode(to, length));
+            trails[to].push_back(wg::mkWNode(from, length));
+            std::pair<int, int> edge_key = std::minmax(from, to);
+            auto it = lengths.find(edge_key);
+            if(it == lengths.end()) { 
+                lengths[edge_key] = length;
+                counter[edge_key] = 1;
+            }
+            else {
+              int& trial_length = (*it).second;
+              // Update minimum length between `from` and `to`
+              if(trial_length > length) {
+                trial_length = length;
+              }
+              // If you need to count equal length edges, you can store it in a separate counter map:
+              else if (trial_length == length) {
+                ++counter[edge_key];  // Assuming you need a counter for edges of equal length
+              }
+            }
           });
-
-          wg::WNode<> start = wg::mkWNode(source, 0);
-          auto mappend = [](int w, int a) { return w + a; };
-          dijkstra::Dijkstra<> dijkstra_s(V, start, mappend);
-          dijkstra::dijkstra(network, dijkstra_s);
-          int min_time = dijkstra_s.dist[sink];
-          std::string ans = min_time == std::numeric_limits<int>::max() ? "unreachable" : std::to_string(min_time);
-          printf("Case #%d: %s\n", c++, ans.c_str());
-        } 
+          std::vector<std::set<int>> paths(V, std::set<int>());
+          wg::WNode<> start = wg::mkWNode(0, 0);
+          dijkstra::Dijkstra<> dijkstra_s(V, start);
+          dijkstra_s.mappend = [](int w, int a) { return w + a; };
+          dijkstra_s.on_relaxation = 
+            [&](int u, int v) {
+              paths[v].clear();  // Clear previous longer paths
+              paths[v].insert(u);  // Add u as the valid predecessor
+            };
+          dijkstra_s.on_tied_path = [&](int u, int v) { paths[v].insert(u); };
+          dijkstra::dijkstra(trails, dijkstra_s);
+          
+          std::vector<tools::vb> processed(V, tools::vb(V, false));
+          int total_length = 0;
+          std::vector<int> path;
+          path.push_back(V - 1);
+          backtrack(V - 1, paths, path, lengths, counter, total_length, processed);
+          std::cout << 2 * total_length << std::endl;
+        }
     }
 }
 
 
 
-namespace smtp = algorithms::onlinejudge::graph::smtp;
+
+namespace flowery_trails = algorithms::onlinejudge::graph::flowery_trails;
 
 int main() { 
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    smtp::submit(); 
+    flowery_trails::submit(); 
 }
 

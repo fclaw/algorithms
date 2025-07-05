@@ -42,14 +42,10 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
         std::function<W(W, W)> mappend;
         std::function<void(int, int)> on_relaxation;
         std::function<void(int, int)> on_tied_path;
-        Dijkstra(
-          int V, 
-          const wg::WNode<T, W>& source, 
-          std::function<W(W, W)> mappend) {
+        Dijkstra(int V, const wg::WNode<T, W>& source) {
           dist.assign(V, inf<W>);
           dist[source.node] = 0;
           queue.emplace(0, source);
-          this->mappend = mappend;
         }
     };
     
@@ -58,6 +54,10 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
     void dijkstra(
       const wg::WGraph<T, W>& graph, 
       Dijkstra<T, W>& dijkstra_s) {
+
+      if(!dijkstra_s.mappend) 
+        throw std::runtime_error("dijkstra: mappend are not set!");
+
       auto& queue = dijkstra_s.queue;
       while(!queue.empty()) {
         piwn<T, W> p = queue.top(); queue.pop();

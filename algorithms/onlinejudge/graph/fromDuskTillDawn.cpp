@@ -26,6 +26,8 @@
 
 namespace tools = algorithms::onlinejudge::graph::tools;
 
+typedef std::pair<int, int> pii;
+
 template<typename W>
 inline constexpr W inf = std::numeric_limits<W>::max();
 
@@ -39,19 +41,20 @@ struct Route
 struct State
 {
     std::string city; // name of the city
-    int arrival; // arrival time
+    int departure_tm; // departure time
+    int arrival_tm;
     int blood_consumed; // blood consumed to reach this state
-    int travel_time;
+    int travel_tm;
     bool operator < (const State& other) const {
       // We want the priority queue to pop the state with the lowest blood_consumed
       return 
         blood_consumed > other.blood_consumed || 
         (blood_consumed == other.blood_consumed && 
-         travel_time > other.travel_time); // Min-heap based on blood_consumed and travel time
+         travel_tm > other.travel_tm); // Min-heap based on blood_consumed and travel time
     }
 };
 
-constexpr int MAX_ARRIVAL = 25;
+constexpr int MAX_TIME = 25;
 constexpr int HOUR_24 = 24;
 
 
@@ -103,37 +106,60 @@ namespace algorithms::onlinejudge::graph::from_dusk_till_dawn
           int min_blood = inf<int>;
           std::string start_city, dest_city;
           while_read(start_city, dest_city);
-          int start_index = city_index[start_city];
+
           std::priority_queue<State> queue;
-          tools::vvi blood(V, tools::vi(MAX_ARRIVAL, inf<int>));
-          blood[start_index][0] = 0; // Starting point, no blood consumed
-          queue.push({start_city, 0, 0}); // (city, arrival time, blood consumed)
+          std::vector<std::vector<pii>> blood(V, std::vector<pii>(MAX_TIME, {inf<int>, inf<int>}));
+          for(auto& p : routes) {
+            if(p.first == start_city && 
+               city_index.count(start_city)) {  
+              int idx = city_index.at(start_city);
+              for(auto& r : p.second) {
+                if(r.departure > 6 && r.departure < 18) continue;
+                blood[idx][r.departure] = {0, 0};
+                // Starting point, no blood consumed
+                queue.push({start_city, r.departure, 0, 0, 0});
+              }
+            }
+          }
           while(!queue.empty()) {
             State state = queue.top(); queue.pop();
             std::string curr_city = state.city;
-            int arrival = state.arrival;
+            int departure_tm = state.departure_tm;
             int blood_consumed = state.blood_consumed;
+            int travel_tm = state.travel_tm;
+            int arrival_tm = state.arrival_tm;
     
+
             // If we reached the destination with enough blood
             if(curr_city == dest_city) {
-               min_blood = blood_consumed; 
-                break;
+               if((arrival_tm >= 18 && arrival_tm <= 24) || 
+                 (arrival_tm >= 0 && arrival_tm <= 6)) { 
+                 min_blood = blood_consumed; break;
+               }
             }
     
             // Explore all routes from the current city
             for(const Route& route : routes[state.city]) {
-              int next_city_index = city_index.at(route.city);
-              int next_arrival = (route.departure + route.time) % HOUR_24; // Wrap around after 24 hours
+              int arrival_tm = (departure_tm + route.time) % HOUR_24;
+              if((route.departure > 6 && 
+                  route.departure < 18)) 
+                continue;
+              if(!city_index.count(route.city)) continue;
+              int next_idx = city_index.at(route.city);
+              int diff = (route.departure - arrival_tm + HOUR_24) % HOUR_24;
 
-              if(route.departure  > 6 && route.departure  < 18) continue;
+              int daylight_minutes = 0;
+              for (int i = 0; i < diff; ++i) {
+                int t = (arrival_tm + i) % 24;
+                if (t >= 7 && t < 18) ++daylight_minutes;
+              }
+              int new_bc = blood_consumed + (daylight_minutes > 0 ? 1 : 0);
 
-              if(arrival < route.departure) {
-                int new_blood_consumed = blood_consumed + (next_arrival < arrival ? 1 : 0); // Blood consumed if we arrive after midnight
-                // If we can reach the next city with less blood consumed
-                if(new_blood_consumed < blood[next_city_index][next_arrival]) {
-                  blood[next_city_index][next_arrival] = new_blood_consumed;
-                  queue.push({route.city, next_arrival, new_blood_consumed});
-                }
+              int new_tt = travel_tm + diff;
+              pii new_blood = {new_bc, new_tt};
+              if(new_blood < blood[next_idx][route.departure]) {
+                blood[next_idx][route.departure] = new_blood;
+                queue.push({route.city, route.departure, arrival_tm, new_bc, new_tt});
               }
             }
           }

@@ -43,7 +43,6 @@ struct State
 };
 
 
-
 namespace algorithms::onlinejudge::graph::rough_roads
 {
     /** https://onlinejudge.org/external/103/10356.pdf */
@@ -70,7 +69,6 @@ namespace algorithms::onlinejudge::graph::rough_roads
             wg::pair(roads, from, to, length, true);
           }
 
-          int min_dist = inf<int>;
           std::vector<std::array<int, 2>> distance(V, {inf<int>, inf<int>});
           std::deque<State> queue;
           // he starts the journey with the flag is_on_cycle on assuming that prior we was on the bike
@@ -81,24 +79,17 @@ namespace algorithms::onlinejudge::graph::rough_roads
             int point = state.point;
             bool is_on_cycle = state.is_on_cycle;
             int dist = state.dist;
-            
-            if(dist > distance[point][is_on_cycle]) continue; // cannot be improved, skip
-
-            if(point == sink) {
-              if(is_on_cycle) { 
-                min_dist = dist; break;
-              } else continue;
-            }
 
             for(const wg::WNode<>& node : roads[point]) {
               int next_point = node.node;
               int w = node.weight + dist;
-              if(distance[next_point][!is_on_cycle] > w) {
-                distance[next_point][!is_on_cycle] = w;
+              if(distance[next_point][(int)!is_on_cycle] > w) {
+                distance[next_point][(int)!is_on_cycle] = w;
                 queue.push_front({next_point, !is_on_cycle, w});
               }
             }
           }
+          int min_dist = distance[sink][true];
           printf("Set #%d\n%s\n", t_case++, min_dist == inf<int> ? "?" : std::to_string(min_dist).c_str());
         }
     }

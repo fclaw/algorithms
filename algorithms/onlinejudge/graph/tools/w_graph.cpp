@@ -27,6 +27,12 @@ namespace algorithms::onlinejudge::graph::tools::wg
     template <typename T = tools::Unit, typename W = int>
     WNode<T, W> mkWNode(int n, W w, T v = tools::Unit{}) { return {n, w, v}; }
 
+    template <typename T = tools::Unit, typename W = int>
+    void pair(WGraph<T, W>& graph, int u, int v, W w, bool is_bi) {
+      graph[u].push_back(wg::mkWNode(v, w));
+      if(is_bi) graph[v].push_back(wg::mkWNode(u, w));
+    }
+
 
     // Function to setup a WGraph from a grid of weights
     template <typename T = tools::Unit, typename W = int>

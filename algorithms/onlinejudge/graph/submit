@@ -31,6 +31,7 @@
 #include <utility>
 #include <functional>
 #include <set>
+#include <deque>
 
 
 template<typename F>
@@ -519,6 +520,12 @@ namespace algorithms::onlinejudge::graph::tools::wg
 
     template <typename T = tools::Unit, typename W = int>
     WNode<T, W> mkWNode(int n, W w, T v = tools::Unit{}) { return {n, w, v}; }
+
+    template <typename T = tools::Unit, typename W = int>
+    void pair(WGraph<T, W>& graph, int u, int v, W w, bool is_bi) {
+      graph[u].push_back(wg::mkWNode(v, w));
+      if(is_bi) graph[v].push_back(wg::mkWNode(u, w));
+    }
 }
 
 namespace algorithms::onlinejudge::graph::tools
@@ -996,116 +1003,78 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
 }
 
 
+
 /*
-───────────────────────────────────────────────────────────────
-🧳 UVa 12878 Flowery Trails, rt: s
-───────────────────────────────────────────────────────────────
+ * ───────────────────────────────────────────────────────────────
+ * 🧳 UVa 10356 Rough Roads, rt: s
+ * ───────────────────────────────────────────────────────────────
 */
 
 
 
-struct hash_pair 
+namespace wg = algorithms::onlinejudge::graph::tools::wg;
+
+
+struct State
 {
-    template <class T1, class T2>
-    size_t operator()(const std::pair<T1, T2>& p) const {
-      // Hash the first element
-      size_t fh = std::hash<T1>{}(p.first);
-      // Hash the second element
-      size_t sh = std::hash<T2>{}(p.second);
-      // Combine the two hash values
-      return fh ^ (sh + 0x9e3779b9 + (fh << 6) + (fh >> 2));
+    int point;
+    bool is_on_cycle;
+    int dist;
+    bool operator < (const State& other) const {
+      // We want the priority queue to pop the state with the lowest dist
+      return dist > other.dist;
     }
 };
 
 
-typedef std::unordered_map<std::pair<int, int>, int, hash_pair> map_piii;
 
-namespace dijkstra = algorithms::onlinejudge::graph::tools::dijkstra;
-namespace wg = algorithms::onlinejudge::graph::tools::wg;
-
-
-namespace algorithms::onlinejudge::graph::flowery_trails
+namespace algorithms::onlinejudge::graph::rough_roads
 {
-    /** https://onlinejudge.org/external/128/12878.pdf */
-    int V, E;
-    void backtrack(
-      int v, 
-      const std::vector<std::set<int>>& paths, 
-      std::vector<int>& path, 
-      const map_piii& lengths,
-      const map_piii& counter, 
-      int& total,
-      // avoid repeated counting
-      std::vector<tools::vb>& processed) {
-      if(paths[v].empty()) {
-        for(int i = 0; i < (int)path.size() - 1; ++i) {
-          auto trail = std::minmax(path[i], path[i + 1]);
-          if(!processed[trail.first][trail.second]) {
-            processed[trail.first][trail.second] = true;
-            total += counter.at(trail) * lengths.at(trail);
-          }
-        }
-        return;
-      }
-
-      // Explore each predecessor of the current node v
-      for(int u : paths[v]) {
-        // Skip this path if the edge (u, v) has been processed
-        auto trail = std::minmax(u, v);
-        if(processed[trail.first][trail.second]) continue; // Skip already processed edges
-        path.push_back(u);
-        backtrack(u, paths, path, lengths, counter, total, processed);
-        path.pop_back();
-      }
-    }
+    /** https://onlinejudge.org/external/103/10356.pdf */
+    int V, E, t_case = 1;
     void submit()
     {
+      
         
         while(while_read(V, E)) {
-          map_piii lengths;
-          map_piii counter;
-          wg::WGraph<> trails(V);
-          loop(E, [&] (int _) {
+          int source = 0, sink = V - 1;
+          wg::WGraph<> roads(V);
+          for(int e = 0; e < E; e++) {
             int from, to, length;
             while_read(from, to, length);
-            trails[from].push_back(wg::mkWNode(to, length));
-            trails[to].push_back(wg::mkWNode(from, length));
-            std::pair<int, int> edge_key = std::minmax(from, to);
-            auto it = lengths.find(edge_key);
-            if(it == lengths.end()) { 
-                lengths[edge_key] = length;
-                counter[edge_key] = 1;
+            wg::pair(roads, from, to, length, false);
+          }
+
+          int min_dist = inf<int>;
+          std::vector<std::array<int, 2>> distance(V, {inf<int>, inf<int>});
+          std::deque<State> queue;
+          // he starts the journey with the flag is_on_cycle on assuming that prior we was on the bike
+          distance[source][true] = 0;
+          queue.push_back({source, true, 0});
+          while(!queue.empty()) {
+            State state = queue.front(); queue.pop_front();
+            int point = state.point;
+            bool is_on_cycle = state.is_on_cycle;
+            int dist = state.dist;
+            
+            if(dist > distance[point][is_on_cycle]) continue; // cannot be improved, skip
+
+            if(point == sink) {
+              if(is_on_cycle) { 
+                min_dist = dist; break;
+              } else continue;
             }
-            else {
-              int& trial_length = (*it).second;
-              // Update minimum length between `from` and `to`
-              if(trial_length > length) {
-                trial_length = length;
-              }
-              // If you need to count equal length edges, you can store it in a separate counter map:
-              else if (trial_length == length) {
-                ++counter[edge_key];  // Assuming you need a counter for edges of equal length
+
+            for(const wg::WNode<>& node : roads[point]) {
+              int next_point = node.node;
+              int w = node.weight + dist;
+              if(distance[next_point][!is_on_cycle] > w) {
+                distance[next_point][!is_on_cycle] = w;
+                queue.push_front({next_point, !is_on_cycle, w});
               }
             }
-          });
-          std::vector<std::set<int>> paths(V, std::set<int>());
-          wg::WNode<> start = wg::mkWNode(0, 0);
-          dijkstra::Dijkstra<> dijkstra_s(V, start);
-          dijkstra_s.mappend = [](int w, int a) { return w + a; };
-          dijkstra_s.on_relaxation = 
-            [&](int u, int v) {
-              paths[v].clear();  // Clear previous longer paths
-              paths[v].insert(u);  // Add u as the valid predecessor
-            };
-          dijkstra_s.on_tied_path = [&](int u, int v) { paths[v].insert(u); };
-          dijkstra::dijkstra(trails, dijkstra_s);
-          
-          std::vector<tools::vb> processed(V, tools::vb(V, false));
-          int total_length = 0;
-          std::vector<int> path;
-          path.push_back(V - 1);
-          backtrack(V - 1, paths, path, lengths, counter, total_length, processed);
-          std::cout << 2 * total_length << std::endl;
+          }
+          printf("Set #%d\n%s\n", t_case++, min_dist == inf<int> ? "?" : std::to_string(min_dist).c_str());
         }
     }
 }
@@ -1113,12 +1082,12 @@ namespace algorithms::onlinejudge::graph::flowery_trails
 
 
 
-namespace flowery_trails = algorithms::onlinejudge::graph::flowery_trails;
+namespace rough_roads = algorithms::onlinejudge::graph::rough_roads;
 
 int main() { 
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    flowery_trails::submit(); 
+    rough_roads::submit(); 
 }
 

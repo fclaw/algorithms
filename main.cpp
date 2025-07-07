@@ -1,6 +1,6 @@
 #define DBG_MACRO_NO_WARNING
 
-#include "algorithms/onlinejudge/graph/roughRoads.cpp"
+#include "algorithms/onlinejudge/graph/fromDuskTillDawn.cpp"
 #include <chrono>
 #include <iomanip>
 #include <bits/stdc++.h>
@@ -16,8 +16,8 @@ long get_memory_usage() {
 int main(int argc, char* argv[])
 {
 
-    std::ios_base::sync_with_stdio(false);
-    std::cin.tie(NULL);
+    // std::ios_base::sync_with_stdio(false);
+    // std::cin.tie(NULL);
 
     std::optional<char*> file = std::nullopt;
     bool debug_mode = true;
@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
     long mem_before = get_memory_usage();
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::graph::rough_roads::submit(file, debug_mode);
+    algorithms::onlinejudge::graph::from_dusk_till_dawn::submit(file, debug_mode);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

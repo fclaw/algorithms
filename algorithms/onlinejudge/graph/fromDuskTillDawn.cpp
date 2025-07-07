@@ -82,12 +82,6 @@ namespace algorithms::onlinejudge::graph::from_dusk_till_dawn
             std::string from, dest;
             int departure, time;
             while_read(from, dest, departure, time);
-
-            if(routes.find(from) == routes.end()) {
-              routes[from] = std::vector<Route>();
-              routes[from].push_back({dest, departure, time});
-            } else routes[from].push_back({dest, departure, time});
-
             // Add cities to the index
             // This will ensure that each city has a unique index
             // and we can use it to represent the graph
@@ -97,6 +91,8 @@ namespace algorithms::onlinejudge::graph::from_dusk_till_dawn
               city_index[from] = index++;
             if(!city_index.count(dest))
               city_index[dest] = index++;
+
+            routes[from].push_back({dest, departure, time}); 
           }
 
           int min_blood = inf<int>;
@@ -151,7 +147,7 @@ namespace algorithms::onlinejudge::graph::from_dusk_till_dawn
 
               int daylight_minutes = 0;
               for (int i = 0; i < diff; ++i) {
-                int t = (arrival_tm + i) % 24;
+                int t = (arrival_tm + i) % HOUR_24;
                 if (t >= 7 && t < 18) ++daylight_minutes;
               }
 

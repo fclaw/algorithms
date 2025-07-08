@@ -502,7 +502,7 @@ namespace tools = algorithms::onlinejudge::graph::tools;
 
 namespace algorithms::onlinejudge::graph::tools::wg
 {
-    template <typename T = tools::Unit, typename W = int>
+     template <typename W = int, typename T = tools::Unit>
     struct WNode
     {
         int node;
@@ -510,21 +510,54 @@ namespace algorithms::onlinejudge::graph::tools::wg
         T value;
     };
 
-    template <typename T, typename W>
+    template <typename W, typename T>
     std::ostream& operator << 
-    (std::ostream& out, const WNode<T, W>& node) 
+    (std::ostream& out, const WNode<W, T>& node) 
     { return out << "{n: " << node.node << ", w: "  << node.weight << "}"; }
 
-    template <typename T = tools::Unit, typename W = int>
-    using WGraph = std::vector<std::vector<WNode<T, W>>>;
+    template <typename W = int, typename T = tools::Unit>
+    using WGraph = std::vector<std::vector<WNode<W, T>>>;
 
-    template <typename T = tools::Unit, typename W = int>
-    WNode<T, W> mkWNode(int n, W w, T v = tools::Unit{}) { return {n, w, v}; }
+    template <typename W = int, typename T = tools::Unit>
+    WNode<W, T> mkWNode(int n, W w, T v = tools::Unit{}) { return {n, w, v}; }
 
-    template <typename T = tools::Unit, typename W = int>
-    void pair(WGraph<T, W>& graph, int u, int v, W w, bool is_bi) {
+    template <typename W = int>
+    using WGrid = std::vector<std::vector<W>>;
+
+    template <typename W = int, typename T = tools::Unit>
+    void pair(WGraph<W, T>& graph, int u, int v, W w, bool is_bidirectional = true) {
       graph[u].push_back(wg::mkWNode(v, w));
-      if(is_bi) graph[v].push_back(wg::mkWNode(u, w));
+      if(is_bidirectional) 
+        graph[v].push_back(wg::mkWNode(u, w));
+    }
+
+    // Function to setup a WGraph from a grid of weights
+    template <typename W = int, typename T = tools::Unit>
+    WGraph<W, T> setupGraph(const WGrid<W>& grid, bool is_unidirectional = false) {
+      int rows = grid.size();
+      int cols = grid[0].size();
+      int V = rows * cols;
+      WGraph<T, W> graph(V + 1);
+
+      graph[0].push_back(mkWNode(1, grid[0][0]));
+
+      auto in_bounds = [&](int r, int c) { return r >= 0 && r < rows && c >= 0 && c < cols; };
+
+      // Fill the graph with nodes and their neighbors
+      for(int r = 0; r < rows; ++r) {
+        for(int c = 0; c < cols; ++c) {
+          int node = r * cols + c + 1;  // Calculate the node index based on row and column
+          W w = grid[r][c];
+          for(const tools::Dir& d : tools::dirs_4) {
+            int nr = r + d.r_shift;
+            int nc = c + d.c_shift;
+            int neigh = nr * cols + nc + 1;
+            if(in_bounds(nr, nc))
+              pair(graph, node, neigh, grid[nr][nc], !is_unidirectional);
+          }
+        }
+      }
+      return graph;
     }
 }
 
@@ -930,13 +963,12 @@ struct Compare {
 template<typename W>
 inline constexpr W inf = std::numeric_limits<W>::max();
 
-
 // Custom comparator for the priority queue
-template<typename T, typename W>
+template<typename W, typename T>
 struct DijkstraCmp {
     bool operator () (
-      const std::pair<int, wg::WNode<T, W>>& a, 
-      const std::pair<int, wg::WNode<T, W>>& b) const {
+      const std::pair<int, wg::WNode<W, T>>& a, 
+      const std::pair<int, wg::WNode<W, T>>& b) const {
       // First compare by the 'int' value (node index)
       return a.first > b.first || (a.first == b.first && a.second.node < b.second.node); 
     }
@@ -945,22 +977,22 @@ struct DijkstraCmp {
 namespace algorithms::onlinejudge::graph::tools::dijkstra
 {
 
-    template<typename T, typename W>
-    using piwn = std::pair<int, wg::WNode<T, W>>;
+    template<typename W, typename T>
+    using piwn = std::pair<int, wg::WNode<W, T>>;
     typedef std::vector<int> vi;
     typedef std::pair<int, int> pii;
-    template<typename T, typename W>
-    using PQ = std::priority_queue<std::pair<int, wg::WNode<T, W>>, std::vector<std::pair<int, wg::WNode<T, W>>>, DijkstraCmp<T, W>>;
+    template<typename W, typename T>
+    using PQ = std::priority_queue<std::pair<int, wg::WNode<W, T>>, std::vector<std::pair<int, wg::WNode<W, T>>>, DijkstraCmp<W, T>>;
 
- template<typename T = tools::Unit, typename W = int>
+    template<typename W = int, typename T = tools::Unit>
     struct Dijkstra
     {
         std::vector<W> dist;
-        PQ<T, W> queue;
+        PQ<W, T> queue;
         std::function<W(W, W)> mappend;
         std::function<void(int, int)> on_relaxation;
         std::function<void(int, int)> on_tied_path;
-        Dijkstra(int V, const wg::WNode<T, W>& source) {
+        Dijkstra(int V, const wg::WNode<W, T>& source) {
           dist.assign(V, inf<W>);
           dist[source.node] = 0;
           queue.emplace(0, source);
@@ -968,22 +1000,22 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
     };
     
     // priority queue
-    template<typename T, typename W>
+    template<typename W, typename T>
     void dijkstra(
-      const wg::WGraph<T, W>& graph, 
-      Dijkstra<T, W>& dijkstra_s) {
+      const wg::WGraph<W, T>& graph, 
+      Dijkstra<W, T>& dijkstra_s) {
 
       if(!dijkstra_s.mappend) 
         throw std::runtime_error("dijkstra: mappend are not set!");
 
       auto& queue = dijkstra_s.queue;
       while(!queue.empty()) {
-        piwn<T, W> p = queue.top(); queue.pop();
+        piwn<W, T> p = queue.top(); queue.pop();
         int d = p.first;
-        wg::WNode<T, W> node = p.second;
+        wg::WNode<W, T> node = p.second;
         int u = node.node;
         if(d > dijkstra_s.dist[u]) continue; // lazy deletion
-        for(const wg::WNode<T, W>& neigh : graph[u]) {
+        for(const wg::WNode<W, T>& neigh : graph[u]) {
           int v = neigh.node;
           W w = neigh.weight;
           W nw = dijkstra_s.mappend(dijkstra_s.dist[u], w);
@@ -1002,169 +1034,103 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
     }
 }
 
-/*
- * ───────────────────────────────────────────────────────────────
- * 🧳 UVa 10187 From Dusk till Dawn, rt: s
- * ───────────────────────────────────────────────────────────────
-*/
 
 
+namespace dijkstra = algorithms::onlinejudge::graph::tools::dijkstra;
+namespace wg = algorithms::onlinejudge::graph::tools::wg;
 
-namespace tools = algorithms::onlinejudge::graph::tools;
 
-typedef std::pair<int, int> pii;
+tools::vvi calculate_apsp(int V, const wg::WGraph<>& graph) {
+  // all pairs shortest paths matrix
+  tools::vvi apsp(V, tools::vi(V, inf<int>));
+  for(int v = 0; v < V; ++v) {
+    wg::WNode<> start = wg::mkWNode(v, 0);
+    dijkstra::Dijkstra<> dijkstra_s(V, start);
+    dijkstra_s.mappend = [](int w, int a) { return w + a; };
+    dijkstra::dijkstra(graph, dijkstra_s);
+    apsp[v] = dijkstra_s.dist;
+  }
+  return apsp;
+}
 
-struct Route
+
+std::unordered_map<int, int> calculate_old_dist(int V, const tools::vvi& apsp, const std::unordered_set<int>& old) {
+  std::unordered_map<int, int> dist_to_old;
+  for(int v = 0; v < V; ++v) {
+    if(old.count(v)) continue;
+    int min_dist = inf<int>;
+    for(int s : old)
+      min_dist = std::min(min_dist, apsp[v][s]);
+    dist_to_old[v] = min_dist;
+  }
+  return dist_to_old;
+}
+
+
+namespace algorithms::onlinejudge::graph::fire_station
 {
-    std::string city; // name of the city
-    int departure; // departure time
-    int time; // travel time
-}; 
-
-struct State
-{
-    std::string city; // name of the city
-    int arrival_tm;
-    int blood_consumed; // blood consumed to reach this state
-    int travel_tm;
-    bool operator < (const State& other) const {
-      // We want the priority queue to pop the state with the lowest blood_consumed
-      return 
-        blood_consumed > other.blood_consumed || 
-        (blood_consumed == other.blood_consumed && 
-         travel_tm > other.travel_tm); // Min-heap based on blood_consumed and travel time
-    }
-};
-
-
-constexpr int MAX_TIME = 25;
-constexpr int HOUR_24 = 24;
-
-
-namespace algorithms::onlinejudge::graph::from_dusk_till_dawn
-{
-    /** https://onlinejudge.org/external/101/10187.pdf */
-    int t_cases, R, c = 1;
-    void submit(std::optional<char*> file, bool debug_mode)
+    /** https://onlinejudge.org/external/102/10278.pdf */
+    int t_cases, F, V; // F stands for the number of fire stations
+    void submit()
     {
-        if (file.has_value())
-          // Attempt to reopen stdin with the provided file
-          if (std::freopen(file.value(), "r", stdin) == nullptr) {
-            // If freopen fails, throw an exception with a more detailed error message
-            std::string name = file.value();
-            std::string errorMessage = 
-              "Failed to open file: " + name +
-              " with error: " + std::strerror(errno);
-            throw std::ios_base::failure(errorMessage);
-          }
         
-        std::cin >> t_cases;
+        while_read(t_cases);
+        bool is_first = true;
         while(t_cases--) {
-          std::cin >> R;
-          std::unordered_map<std::string, std::vector<Route>> routes;
-          std::unordered_map<std::string, int> city_index;
-          int index = 0;
-          for(int i = 0; i < R; ++i) {
-            std::string from, dest;
-            int departure, time;
-            while_read(from, dest, departure, time);
-
-            if(routes.find(from) == routes.end()) {
-              routes[from] = std::vector<Route>();
-              routes[from].push_back({dest, departure, time});
-            } else routes[from].push_back({dest, departure, time});
-
-            // Add cities to the index
-            // This will ensure that each city has a unique index
-            // and we can use it to represent the graph
-            // in a more compact way
-            // This is useful for the priority queue and distance array
-            if(!city_index.count(from))
-              city_index[from] = index++;
-            if(!city_index.count(dest))
-              city_index[dest] = index++;
+          while_read(F, V);
+          std::unordered_set<int> old;
+          int station;
+          for(int i = 0; i < F; ++i) {
+            while_read(station);
+            --station;
+            old.insert(station);
+          }
+          int s, e, length;
+          wg::WGraph<> graph(V);
+          std::string line;
+          std::cin.ignore();
+          while(std::getline(std::cin, line) && 
+                !line.empty()) {
+            std::stringstream ss(line);
+            ss >> s >> e >> length;
+            --s; --e;
+            wg::pair(graph, s, e, length);
           }
 
-          int V = index; // Number of unique cities
-          int min_blood = inf<int>;
-          std::string start_city, dest_city;
-          while_read(start_city, dest_city);
+          // all pairs shortest paths matrix
+          tools::vvi apsp = calculate_apsp(V, graph);
+          // the closest fire station to every town
+          std::unordered_map<int, int> old_dist = calculate_old_dist(V, apsp, old);
 
-          if(start_city == dest_city) {
-            printf("Test Case %d.\nVladimir needs 0 litre(s) of blood.\n", c++);
-            continue;
-          }
-
-          bool can_start = false;
-          std::priority_queue<State> queue;
-          std::vector<std::vector<pii>> blood(V, std::vector<pii>(MAX_TIME, {inf<int>, inf<int>}));
-          for(auto& p : routes) {
-            if(p.first == start_city) {  
-              int idx = city_index.at(start_city);
-              for(auto& r : p.second) {
-                if(r.departure > 6 && r.departure < 18) continue;
-                if(!can_start) can_start = true;
-                blood[idx][r.departure] = {0, 0};
-                // Starting point, no blood consumed
-                queue.emplace(start_city, r.departure, 0, 0);
-              }
+          int min_max_dist = inf<int>, best_location = -1;
+          for(int u = 0; u < V; ++u) {
+            int current_max_dist = 0;
+            for(int v = 0; v < V; ++v) {
+              int dist_to_new = apsp[v][u];
+              int dist_to_old = old_dist[v];
+              int dist_for_v = std::min(dist_to_new, dist_to_old);
+              current_max_dist = std::max(current_max_dist, dist_for_v);
+            }
+            if(min_max_dist > current_max_dist) {
+                min_max_dist = current_max_dist;
+                best_location = u;
             }
           }
-
-
-          while(can_start && !queue.empty()) {
-            State state = queue.top(); queue.pop();
-            std::string curr_city = state.city;
-            int arrival_tm = state.arrival_tm;
-            int blood_consumed = state.blood_consumed;
-            int travel_tm = state.travel_tm;
-    
-            // If we reached the destination with enough blood
-            if(curr_city == dest_city) {
-              min_blood = blood_consumed; break;
-            }
-
-            // Explore all routes from the current city
-            for(const Route& route : routes[state.city]) {
-              if((route.departure > 6 &&
-                  route.departure < 18) || 
-                  route.time > 12)
-                continue;
-              int next_idx = city_index.at(route.city);
-              int diff = (route.departure - arrival_tm + HOUR_24) % HOUR_24;
-              int new_arrival_tm = (route.departure + route.time) % HOUR_24;
-
-              if(new_arrival_tm > 6 && new_arrival_tm < 18) continue;
-
-              int daylight_minutes = 0;
-              for (int i = 0; i < diff; ++i) {
-                int t = (arrival_tm + i) % 24;
-                if (t >= 7 && t < 18) ++daylight_minutes;
-              }
-
-              int new_blood_consumed = blood_consumed + (int)(daylight_minutes > 0);
-              int new_travel_tm = travel_tm + diff + route.time;
-              pii new_blood = {new_blood_consumed, new_travel_tm};
-              if(new_blood < blood[next_idx][new_arrival_tm]) {
-                blood[next_idx][new_arrival_tm] = new_blood;
-                queue.push({route.city, new_arrival_tm, new_blood_consumed, new_travel_tm});
-              }
-            }
-          }
-          printf("Test Case %d.\n", c++);
-          min_blood == inf<int> ? printf("There is no route Vladimir can take.\n") : printf("Vladimir needs %d litre(s) of blood.\n", min_blood);
+          if(!is_first) std::cout << std::endl;
+          else is_first = false;
+          std::cout << best_location + 1 << std::endl;
         }
     }
 }
 
 
 
-namespace from_dusk_till_dawn = algorithms::onlinejudge::graph::from_dusk_till_dawn;
+namespace fire_station = algorithms::onlinejudge::graph::fire_station;
 
 int main() { 
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    from_dusk_till_dawn::submit(); 
+    fire_station::submit(); 
 }
 

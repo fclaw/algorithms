@@ -84,6 +84,7 @@ struct State
 
 constexpr int MAX_HOURS_IN_DAY = 24;
 constexpr int noon = 12;
+constexpr int start_tm = 18;
 
 
 namespace algorithms::onlinejudge::graph::from_dusk_till_dawn
@@ -139,17 +140,23 @@ namespace algorithms::onlinejudge::graph::from_dusk_till_dawn
           bool can_start = false;
           std::priority_queue<State> queue;
           std::vector<std::vector<pii>> blood(V, std::vector<pii>(MAX_HOURS_IN_DAY, {inf<int>, inf<int>}));
+
           for(auto& p : routes) {
-            if(p.first == start_city) {  
-              int idx = city_to_idx.at(start_city);
+            if(p.first == start_city) {
               for(auto& r : p.second) {
-                if(r.departure > 6 && r.departure < 18) continue;
-                if(!can_start) can_start = true;
-                blood[idx][r.departure] = {0, 0};
-                // Starting point, no blood consumed
-                queue.push({start_city, r.departure, 0, 0});
+                if(r.departure > 6 && 
+                   r.departure < 18) 
+                  continue;
+                can_start = true;
+                break;
               }
             }
+          }
+
+          if(can_start) {
+            int idx = city_to_idx.at(start_city);
+            blood[idx][start_tm] = {0, 0};
+            queue.push({start_city, start_tm, 0, 0});
           }
 
           while(can_start && !queue.empty()) {
@@ -163,12 +170,13 @@ namespace algorithms::onlinejudge::graph::from_dusk_till_dawn
                 continue;
             }
 
-            if(routes.find(state.city) == routes.end()) { continue; }
-
             // If we reached the destination with enough blood
             if(curr_city == dest_city) {
               min_blood = blood_consumed; break;
             }
+
+            // cannot be placed before checking the final city for it may have no routes and thus alg stops prematurely
+            if(routes.find(state.city) == routes.end()) { continue; }
 
             // Explore all routes from the current city
             for(const Route& route : routes[state.city]) {

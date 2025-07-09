@@ -32,6 +32,10 @@
 using vi = std::vector<int>;
 using vvi = std::vector<vi>;
 
+// The State struct represents a node in a State-Space Graph, containing attributes such as 
+// travel_tm (edge weight), floor, and lift_id. 
+// It also defines a custom comparison operator < for use in priority queues, 
+// prioritising states with smaller travel_tm values
 struct State 
 {
     int travel_tm; // an edge
@@ -104,9 +108,9 @@ namespace algorithms::onlinejudge::graph::lift_hopping
               // go on on the current lift
               if(lift_id == curr_lift_id) {
                 int v = lifts_velocity[curr_lift_id];
-                // Get the list of stops for the elevator we are currently in.
+                // Get the list of stops for the lift we are currently in.
                 vi& stops_on_this_lift = lifts[curr_lift_id];
-                // Loop through ALL possible destinations on this same elevator line.
+                // Loop through ALL possible destinations on this same lift line.
                 // This single loop handles both UP and DOWN travel.
                 for (int next_floor : stops_on_this_lift) {
                   // You can't travel from a floor to itself.

@@ -1036,101 +1036,84 @@ namespace algorithms::onlinejudge::graph::tools::dijkstra
 
 
 
-namespace dijkstra = algorithms::onlinejudge::graph::tools::dijkstra;
+
 namespace wg = algorithms::onlinejudge::graph::tools::wg;
+namespace dijkstra = algorithms::onlinejudge::graph::tools::dijkstra;
 
 
-tools::vvi calculate_apsp(int V, const wg::WGraph<>& graph) {
-  // all pairs shortest paths matrix
-  tools::vvi apsp(V, tools::vi(V, inf<int>));
-  for(int v = 0; v < V; ++v) {
-    wg::WNode<> start = wg::mkWNode(v, 0);
-    dijkstra::Dijkstra<> dijkstra_s(V, start);
-    dijkstra_s.mappend = [](int w, int a) { return w + a; };
-    dijkstra::dijkstra(graph, dijkstra_s);
-    apsp[v] = dijkstra_s.dist;
-  }
-  return apsp;
-}
 
-
-std::unordered_map<int, int> calculate_old_dist(int V, const tools::vvi& apsp, const std::unordered_set<int>& old) {
-  std::unordered_map<int, int> dist_to_old;
-  for(int v = 0; v < V; ++v) {
-    if(old.count(v)) continue;
-    int min_dist = inf<int>;
-    for(int s : old)
-      min_dist = std::min(min_dist, apsp[v][s]);
-    dist_to_old[v] = min_dist;
-  }
-  return dist_to_old;
-}
-
-
-namespace algorithms::onlinejudge::graph::fire_station
+namespace algorithms::onlinejudge::graph::highest_paid_toll
 {
-    /** https://onlinejudge.org/external/102/10278.pdf */
-    int t_cases, F, V; // F stands for the number of fire stations
+
+  struct Edge
+  {
+      int from;
+      int to;
+      int w;
+  };
+    /** https://onlinejudge.org/external/120/12047.pdf */
+    int t_cases, V, E, source, sink, p;
     void submit()
     {
+      
         
         while_read(t_cases);
-        bool is_first = true;
         while(t_cases--) {
-          while_read(F, V);
-          std::unordered_set<int> old;
-          int station;
-          for(int i = 0; i < F; ++i) {
-            while_read(station);
-            --station;
-            old.insert(station);
-          }
-          int s, e, length;
-          wg::WGraph<> graph(V);
-          std::string line;
-          std::cin.ignore();
-          while(std::getline(std::cin, line) && 
-                !line.empty()) {
-            std::stringstream ss(line);
-            ss >> s >> e >> length;
-            --s; --e;
-            wg::pair(graph, s, e, length);
+          while_read(V, E, source, sink, p);
+          --source; --sink;
+          wg::WGraph<> source_graph(V);
+          wg::WGraph<> sink_graph(V);
+          std::vector<Edge> edges;
+          for(int e = 0; e < E; ++e) {
+            int u, v, toll;
+            while_read(u, v, toll);
+            --u; --v;
+            wg::pair(source_graph, u, v, toll, false);
+            wg::pair(sink_graph, v, u, toll, false);
+            edges.push_back({u, v, toll});
           }
 
-          // all pairs shortest paths matrix
-          tools::vvi apsp = calculate_apsp(V, graph);
-          // the closest fire station to every town
-          std::unordered_map<int, int> old_dist = calculate_old_dist(V, apsp, old);
+          // from source
+          wg::WNode<> start = wg::mkWNode(source, 0);
+          dijkstra::Dijkstra<> dijkstra_s(V, start);
+          dijkstra_s.mappend = [](int w, int a) { return w + a; };
+          dijkstra::dijkstra(source_graph, dijkstra_s);
 
-          int min_max_dist = inf<int>, best_location = -1;
-          for(int u = 0; u < V; ++u) {
-            int current_max_dist = 0;
-            for(int v = 0; v < V; ++v) {
-              int dist_to_new = apsp[v][u];
-              int dist_to_old = old_dist[v];
-              int dist_for_v = std::min(dist_to_new, dist_to_old);
-              current_max_dist = std::max(current_max_dist, dist_for_v);
-            }
-            if(min_max_dist > current_max_dist) {
-                min_max_dist = current_max_dist;
-                best_location = u;
+          tools::vi source_dist = dijkstra_s.dist;
+
+          // from sink
+          start = wg::mkWNode(sink, 0);
+          dijkstra_s = dijkstra::Dijkstra<>(V, start);
+          dijkstra_s.mappend = [](int w, int a) { return w + a; };
+          dijkstra::dijkstra(sink_graph, dijkstra_s);
+
+          tools::vi sink_dist = dijkstra_s.dist;
+
+          int max_toll = -1;
+          for(auto& e : edges) {
+            int source_toll = source_dist[e.from];
+            int sink_toll = sink_dist[e.to];
+            // Make sure the paths from both ends are reachable
+            if(source_toll != inf<int> && 
+               sink_toll != inf<int>) {
+              int total_toll = source_toll + e.w + sink_toll;
+              if(total_toll <= p) {
+                max_toll = std::max(max_toll, e.w);
+              }
             }
           }
-          if(!is_first) std::cout << std::endl;
-          else is_first = false;
-          std::cout << best_location + 1 << std::endl;
+          std::cout << max_toll << std::endl;
         }
     }
 }
 
 
-
-namespace fire_station = algorithms::onlinejudge::graph::fire_station;
+namespace highest_paid_toll = algorithms::onlinejudge::graph::highest_paid_toll;
 
 int main() { 
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    fire_station::submit(); 
+    highest_paid_toll::submit(); 
 }
 

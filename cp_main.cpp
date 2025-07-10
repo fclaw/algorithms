@@ -1,5 +1,3 @@
-#include <cassert>
-#include <optional>
 #include <iostream>
 #include <cstdio>
 #include <vector>
@@ -9,18 +7,23 @@
 #include <sstream>
 #include <numeric>
 #include <unordered_set>
+#include <unordered_map>
 #include <cctype>
 #include <queue>
 #include <bitset>
+#include <cmath>
+#include <functional>
 
 
 
 template<typename F>
-inline void loop(size_t n, F&& f)
-{
-    for (size_t i = 0; i < n; ++i)
-      std::forward<F>(f)(i);
+inline void loop(size_t n, F&& f) {
+  for(size_t i = 0; i < n; ++i)
+    std::forward<F>(f)(i);
 }
+
+// Overloading the >> operator for std::pair<int, int>
+std::istream& operator >> (std::istream& is, std::pair<int, int>& p) { return is >> p.first >> p.second; }
 
 template<typename... Args>
 bool while_read(Args&... args) { return (... && static_cast<bool>(std::cin >> args)); }
@@ -30,53 +33,49 @@ typedef long long ll;
 typedef std::vector<int> vi;
 typedef std::vector<vi> vvi;
 typedef std::vector<bool> vb;
+typedef std::vector<vb> vvb;
 
-const int MOD = 1e9;  // 10^9
+constexpr int MOD = 1e9;  // 10^9
+constexpr int inf = 1e5;
 
-
-int t_case, n, sec;
-
-bool backtrack(const vi& doors, int i, bool is_used, int sec_left)
-{
-    if (i == (int)doors.size()) return true; // base case first!
-
-    int s = doors[i];
-
-    // If the door is closed and the button is used up and time expired, stop
-    if (s == 1 && is_used && sec_left <= 0) return false;
-
-    if (s == 0) {
-        int new_sec_left = is_used ? sec_left - 1 : sec_left;
-        if (new_sec_left >= 0)
-            return backtrack(doors, i + 1, is_used, new_sec_left);
-        return false;
-    }
-    else if (s == 1) {
-        if (!is_used) {
-            return backtrack(doors, i + 1, true, i + sec - 1);
-        } else {
-            int new_sec_left = sec_left - 1;
-            if (new_sec_left >= 0)
-                return backtrack(doors, i + 1, is_used, new_sec_left);
-            return false;
-        }
-    }
-    return false;
-}
 
 int main(int argc, char* argv[])
 {
-    
-    while_read(t_case);
-    while(t_case--)
-    {
-         while_read(n, sec);
-         vi doors(n);
-         loop(n, [&doors](int i){  
-           int s;
-           while_read(s);
-           doors[i] = s;
-         });
-         std::cout << (backtrack(doors, 0, false, 0) ? "YES" : "NO") << std::endl;
+    int N;
+    while(while_read(N)) {
+      int a, b;
+      std::vector<int> q_vector(N);
+      std::vector<int> compressed_vector(N);
+
+      for(int i = 0; i < N; ++i)
+        while_read(q_vector[i]);
+
+      for(int i = 0; i < N; ++i)
+        while_read(compressed_vector[i]);
+
+      while_read(a, b);
+
+      std::vector<int> d_vector(N);
+      for(int i = 0; i < N; ++i) {
+
+        // a >= b
+        if (a == b) 
+        { d_vector[i] = a; continue; }
+
+        int c_i = compressed_vector[i];
+        ll numerator = 1LL * c_i * (b - a);
+        ll divisor = 255;
+        //  round up
+        ll rounded = (numerator + divisor / 2) / divisor;
+        int d_i = a + rounded;
+        d_vector[i] = d_i;
+      }
+
+      ll scalar_product = 0;
+      for(int i = 0; i < N; ++i) {
+        scalar_product += 1LL * q_vector[i] * d_vector[i];
+      }
+
+      std::cout << scalar_product << std::endl;
     }
 }

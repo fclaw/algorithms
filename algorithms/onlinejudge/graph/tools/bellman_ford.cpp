@@ -17,7 +17,7 @@ inline constexpr W inf = std::numeric_limits<W>::max();
 namespace algorithms::onlinejudge::graph::tools::bellman_ford
 {
 
-    template<typename T = tools::Unit, typename W = int>
+    template<typename W = int, typename T = tools::Unit>
     struct BellmanFord
     {
         int V;
@@ -32,9 +32,10 @@ namespace algorithms::onlinejudge::graph::tools::bellman_ford
         // outermost loop. Note that k is still O(V ) though
         bool hasNegativeCycle;
         std::function<W(W, W)> mappend;
+        std::function<void(int, int)> on_cycle;
         BellmanFord(
           int V, 
-          const wg::WNode<T, W>& source, 
+          const wg::WNode<W, T>& source, 
           std::function<W(W, W)> mappend) {
           this->V = V;
           dist.assign(V, inf<W>);
@@ -44,19 +45,21 @@ namespace algorithms::onlinejudge::graph::tools::bellman_ford
         }
     };
     
-    template<typename T, typename W>
+    template<typename W, typename T>
     void bellman_ford(
-      const wg::WGraph<T, W>& graph, 
-      BellmanFord<T, W>& bellman_s) {
+      const wg::WGraph<W, T>& graph, 
+      BellmanFord<W, T>& bellman_s) {
       int V = bellman_s.V;
+      vi& dist = bellman_s.dist;
       for(int i = 0; i < V - 1; ++i) {             // total O(V*E)
         bool modified = false;                     // optimization
         for(int u = 0; u < V; ++u)                 // these two loops = O(E)
           if (dist[u] != inf<W>)                   // important check
-            for(wg::WNode<T, W>& n : graph[u]) {
+            for(const wg::WNode<W, T>& n : graph[u]) {
+              int v = n.node;
               W nw = bellman_s.mappend(dist[u], n.weight);
               if(nw < dist[v]) {
-                dist[v] = nw                       // relax operation
+                dist[v] = nw;                      // relax operation
                 modified = true;                   // optimization
               }                   
             }
@@ -64,21 +67,27 @@ namespace algorithms::onlinejudge::graph::tools::bellman_ford
         if(!modified) break;                        // optimization
       }
 
-      bool hasNegativeCycle = false;
       for(int u = 0; u < V; ++u)                     // one more pass to check
         if(dist[u] != inf<W>) {
-          for(wg::WNode<T, W>& n : graph[u]) {
-            W w = bellman_s.mappend(dist[u], n.weight)
+          for(const wg::WNode<W, T>& n : graph[u]) {
+            W w = bellman_s.mappend(dist[u], n.weight);
             // As the corollary: if we can still relax an edge, 
             // there must be at least one negative cycle in our weighted graph.
             // should be false
-            if(dist[v] > w) hasNegativeCycle = true; // if true => -ve cycle
+            if(dist[n.node] > w) {
+              if(bellman_s.on_cycle) 
+                bellman_s.on_cycle(u, n.node);
+              bellman_s.hasNegativeCycle = true; // if true => -ve cycle
+              goto is_cycle;
+            }
           }
         }
+      
+      is_cycle:;  
     }
 
 
-    template<typename T = tools::Unit, typename W = int>
+    template<typename W = int, typename T = tools::Unit>
     struct BellmanFordMoore
     {
         int V;
@@ -88,7 +97,7 @@ namespace algorithms::onlinejudge::graph::tools::bellman_ford
         std::function<W(W, W)> mappend;
         BellmanFordMoore(
           int V,
-          const wg::WNode<T, W>& source, 
+          const wg::WNode<W, T>& source, 
           std::function<W(W, W)> mappend) {
           this->V = V;
           dist.assign(V, inf<W>);
@@ -100,20 +109,23 @@ namespace algorithms::onlinejudge::graph::tools::bellman_ford
         }
     };
 
-    template<typename T, typename W>
+    template<typename W, typename T>
     void bellman_ford_moore(
-      const wg::WGraph<T, W>& graph,
-      BellmanFordMoore<T, W>& bellman_s) {
-      auto queue = bellman_s.queue;
-      while (!q.empty()) {
-        int u = q.front(); q.pop(); 
+      const wg::WGraph<W, T>& graph,
+      BellmanFordMoore<W, T>& bellman_s) {
+      auto& queue = bellman_s.queue;
+      tools::vi& dist = bellman_s.dist;
+      tools::vi& in_queue = bellman_s.in_queue;
+      while (!queue.empty()) {
+        int u = queue.front(); queue.pop(); 
         bellman_s.in_queue[u] = 0;               // pop from queue
-        for(wg::WNode<T, W>& n : graph[u]) {
+        for(const wg::WNode<W, T>& n : graph[u]) {
           W w = bellman_s.mappend(dist[u], n.weight);
+          int v =- n.node;
           if(w >= dist[v]) continue;             // not improving, skip
           dist[v] = w;                           // relax operation
           if(!in_queue[v]) {                     // add to the queue
-            q.push(v);                           // only if v is not
+            queue.push(v);                       // only if v is not
             in_queue[v] = 1;                     // already in the queue
           }
         }

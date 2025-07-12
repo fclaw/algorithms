@@ -759,79 +759,52 @@ namespace fd = algorithms::onlinejudge::graph::tools::floyd_warshall;
 namespace wg = algorithms::onlinejudge::graph::tools::wg;
 
 
+bool is_number(const std::string &s) {
+  auto is_digit = [](char ch) { return std::isdigit(static_cast<unsigned char>(ch)); };
+  return !s.empty() && std::all_of(s.begin(), s.end(), is_digit);
+}
 
-namespace algorithms::onlinejudge::graph::non_stop_travel
+namespace algorithms::onlinejudge::graph::maelstrom
 {
+    /** https://onlinejudge.org/external/4/423.pdf */
+    int V;
     constexpr int inf = 1e5;
-    /** https://onlinejudge.org/external/3/341.pdf */
-    int V, c = 1;
     void submit()
     {
-       
         
-        while(while_read(V) && V) {
-          wg::WGraph<> graph(V);
+        while(while_read(V)) {
           std::string s;
-          int u = 0;
-          while(u < V) {
-            std::string line;
-            if(!std::getline(std::cin, line)) { break; }
-            // Create a stringstream from the line. This handles empty lines
-            // and lines with only whitespace gracefully.
-            std::stringstream ss(line);
-            // Attempt to read the first integer (number of edges).
-            int num_edges;
-            // --- THE KEY SANITIZATION STEP ---
-            if(!(ss >> num_edges)) {
-              // This block executes if:
-              //  - The line was empty.
-              //  - The line contained only whitespace.
-              //  - The line did not start with a valid integer.
-              // In this problem, we can assume this means there are no edges for this node.
-              continue; // Safely skip to the next line.
-            }
-            
-            // Now, read the pairs of (vertex, delay).
-            for(int j = 0; j < num_edges; ++j) {
-              int v, delay;
-              // It's also good practice to check these reads, though less critical
-              // if the input format is guaranteed to be correct.
-              if(ss >> v >> delay) {
-                wg::pair(graph, u, v - 1, delay, false); // Using your function
-              } else {
-                // Handle malformed line error if necessary, e.g., not enough pairs.      
-                break; 
+          wg::WGraph<> graph(V);
+          for(int u = 1; u < V; ++u) {
+            for(int v = 0; v < u; ++v) {
+              while_read(s);
+              if(is_number(s)) {
+                int latency = std::stoi(s);
+                wg::pair(graph, u, v, latency);
               }
             }
-            ++u;
           }
-
-          int start, end;
-          while_read(start, end);
-          --start; --end;
-
+          
           fd::FloydWarshall<> fw_s(V, 0, inf);
           fw_s.mappend = [](int u, int v) { return u + v; };
           fd::floyd_warshall(graph, fw_s);
 
-          std::string s_path;
-          fd::vi path = fw_s.getPath(start, end);
-          for(int n : path) s_path += std::to_string(n + 1) + " ";
-          s_path.pop_back();
-          int min_delay = fw_s.matrix[start][end];
-          printf("Case %d: Path = %s; %d second delay\n", c++, s_path.c_str(), min_delay); 
-
+          int min_broadcast_tm = 0;
+          for(int n = 1; n < V; ++n) {
+            min_broadcast_tm = std::max(min_broadcast_tm, fw_s.matrix[0][n]);
+          }
+          std::cout << min_broadcast_tm << std::endl;
         }  
     }
 }
 
 
-namespace non_stop_travel = algorithms::onlinejudge::graph::non_stop_travel;
+namespace maelstrom = algorithms::onlinejudge::graph::maelstrom;
 
 int main() { 
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    non_stop_travel::submit(); 
+    maelstrom::submit(); 
 }
 

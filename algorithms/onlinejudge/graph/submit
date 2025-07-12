@@ -652,475 +652,186 @@ namespace algorithms::onlinejudge::graph::tools
 
 
 namespace wg = algorithms::onlinejudge::graph::tools::wg;
-namespace tools = algorithms::onlinejudge::graph::tools;
 
-namespace algorithms::onlinejudge::graph::tools::mst
+
+constexpr int MAX_V = 450; // if |V| > 450, you cannot use Floyd Washall's
+
+
+namespace algorithms::onlinejudge::graph::tools::floyd_warshall
 {
-
-   typedef std::pair<int, int> ii;
-     tools::vb taken;
-     template <typename T, typename W>
-     using queue = std::priority_queue<wg::WNode<T, W>>;
-
-     template <typename T = tools::Unit, typename W = int> 
-     struct Prim
-     {
-         int V;
-         W min_cost;
-         bool is_finished;
-         bool is_min;
-         std::function<void(W&, W)> mappend;
-         std::function<void(const wg::WNode<T, W>&)> on_adding_point;
-     };
-
-     template <typename T = tools::Unit, typename W = int>
-     Prim<T, W> initPrim(int V) {
-       auto def_mappend = [](W& acc, W val) { acc += val; }; // generic default
-       auto def_on_adding_point = [](const wg::WNode<T, W>&) {};
-        return {V, W{}, false, true, def_mappend, def_on_adding_point};
-     }
-
-     template <typename T, typename W> 
-     void enqueue_neighs
-       (const wg::WGraph<T, W>& graph, 
-        wg::WNode<T, W> node,
-        const Prim<T, W>& prim_s,
-        queue<T, W>& pq) { // set u as taken and enqueue neighbors of u
-        taken[node.node] = true;
-        for(wg::WNode<T, W> neigh : graph[node.node]) {
-          if(!taken[neigh.node]) {
-            auto tmp = neigh;
-            if(!prim_s.is_min) tmp.weight *= (-1);
-            pq.emplace(tmp);  // sort by non-dec weight, then by inc id
-          }
-        }
-     }
-
-    template <typename T, typename W>    
-    void prim
-      (const wg::WGraph<T, W>& graph, 
-       Prim<T, W>& prim_s, 
-       wg::WNode<T, W>& node) {
-
-      if(!prim_s.mappend && 
-         !prim_s.on_adding_point) 
-        throw std::runtime_error("prim: callbacks are not set!");
-
-      queue<T, W> pq;   
-      taken.assign(prim_s.V, false);
-      enqueue_neighs(graph, node, prim_s, pq);
-      int num_taken = 0;                            // no edge has been taken
-      while(!pq.empty()) {                          // up to O(E)
-        wg::WNode<T, W> next = pq.top(); pq.pop();
-        if(!prim_s.is_min) next.weight *= (-1);
-        if(taken[next.node]) continue;                     // already taken, skipped
-        prim_s.mappend(prim_s.min_cost, next.weight);       // add w of this edge
-        prim_s.on_adding_point(next);
-        enqueue_neighs(graph, next, prim_s, pq);        // take+process vertex u
-        ++num_taken;                                // 1 more edge is taken
-        if(num_taken == prim_s.V - 1 || prim_s.is_finished) break; // optimization
-      }
-    }
-
-    template <typename W = int>
-    struct Edge 
-    {
-        int from;
-        int to;
-        W weight;
-        Edge(int a, int b, int w) {
-          from = std::min(a, b);
-          to = std::max(a, b);
-          weight = w;
-        }
-        bool operator == (const Edge& other) const {
-          return from == other.from && to == other.to && weight == other.weight;
-        }
-    };
-
-    template <typename W>
-    std::ostream& operator << 
-    (std::ostream& out, const Edge<W>& edge) 
-    { return out << "{from: " << edge.from << ", to: "  << edge.to << ", w: " << edge.weight << "}"; }
-
-
-    template <typename W = int>
-    bool operator < (const Edge<W>& lhs, const Edge<W>& rhs) {
-      return lhs.weight < rhs.weight || 
-             (lhs.weight == rhs.weight && 
-              (std::tie(lhs.from, lhs.to) <
-               std::tie(rhs.from, rhs.to)));
-    }
-
-    template <typename W = int>
-    using VEdge = std::vector<Edge<W>>;
-
-    template<typename W = int>
-    Edge<W> mkDefEdge(int from, int to, W weight) {
-      return Edge<W>(from, to, weight);
-    }
-
-   enum EdgeAction {
-        Skip,  // Skip the current edge and continue
-        GoOn,   // Proceed with the current edge
-        Terminate
-    };
-
-    template <typename W = int> 
-    struct Kruskal
-    {
-         int E;
-         int V;
-         W min_cost;
-         tools::UnionFind uf;
-         bool is_finished;
-         std::function<void(W&, W)> mappend;
-         std::function<void(int i, const Edge<W>&)> on_adding_edge;
-         std::function<bool(const Edge<W>&, const Edge<W>& b)> cmp;
-         std::function<EdgeAction(const Edge<W>&)> check_edge;
-    };
-
-    template <typename W = int>
-    Kruskal<W> initKruskal(int V, int E, W def) {
-      auto def_mappend = [](int& acc, int x) { acc += x; };
-      auto def_on_adding_edge = [](int _, const Edge<W>& __) {};
-      auto def_cmp = 
-        [](const Edge<W>& a, const Edge<W>& b) 
-        { return a.weight < b.weight; }; // Min-heap
-      auto def_check = [](const Edge<W>& _) -> EdgeAction { return GoOn; };
-      return {E, V, def, tools::UnionFind(V), false, def_mappend, def_on_adding_edge, def_cmp, def_check};
-    }
- 
-    template <typename W = int>
-    void kruskal(VEdge<W>& edges, Kruskal<W>& kruskal_s) {
-
-      if(!kruskal_s.mappend && 
-         !kruskal_s.on_adding_edge && 
-         !kruskal_s.cmp) 
-        throw std::runtime_error("kruskal: callbacks are not set!");
-
-      std::sort(edges.begin(), edges.end(), kruskal_s.cmp);
-      int num_taken = 0;                             // no edge has been taken
-      tools::UnionFind& uf = kruskal_s.uf;
-      for(int i = 0; i < kruskal_s.E; ++i) {         // up to O(E)
-        Edge<W> e = edges[i];  
-        if(uf.isSameSet(e.from, e.to)) continue;     // already in the same CC
-
-        // decision-making block
-        EdgeAction action = kruskal_s.check_edge(e);
-        if(action == Skip) continue;
-        else if(action == Terminate) break;
-        else if(action == GoOn) {
-          kruskal_s.mappend(kruskal_s.min_cost, e.weight); // add w of this edge
-          uf.unionSet(e.from, e.to);                   // link them
-          ++num_taken;                                 // 1 more edge is taken
-          kruskal_s.on_adding_edge(i, e);
-          if(num_taken == kruskal_s.V - 1 || 
-          kruskal_s.is_finished) break;      // optimization
-        }
-      }
-    }
-
-}
-
-namespace algorithms::onlinejudge::graph::tools
-{
-
-    struct TopSortKahn
-    {
-        tools::vi top_sort;
-        bool is_cycle;   
-    };
-
-    // ---------- Kahn's algorithm for topological sort ----------
-    // Step 1: Calculate the In-Degree of Each Node
-    // In-degree represents the number of incoming edges to a node, i.e., its dependencies.
-    // Initialize an array `in_degree[]` of size V (number of nodes) to zero.
-    // Traverse the graph and for each edge u -> v, increment the in-degree of v by 1.
-
-    // Step 2: Initialize the Queue
-    // Create an empty queue to store nodes with an in-degree of 0 (i.e., nodes with no dependencies).
-    // Traverse the in-degree array and enqueue all nodes with in-degree 0.
-
-    // Step 3: Process the Nodes in the Queue (BFS-like)
-    // While the queue is not empty:
-    //   1. Remove a node `u` from the front of the queue.
-    //   2. Add `u` to the topological order result list.
-    //   3. For each adjacent node `v` of `u` (i.e., for each outgoing edge u -> v):
-    //      - Decrease the in-degree of `v` by 1 (because we've processed one of its dependencies).
-    //      - If the in-degree of `v` becomes 0, enqueue `v` (since it now has no dependencies and can be processed next).
-
-    // Step 4: Cycle Detection
-    // After processing all nodes, check if the number of nodes in the topological order matches the total number of nodes in the graph.
-    // If the number of nodes in the result is less than the total number of nodes, a cycle exists in the graph.
-    // In this case, a topological sort is not possible.
-
-    // Step 5: Output the Topological Sort
-    // If no cycle was detected and all nodes were processed, output the topological order.
-    // If a cycle was detected (i.e., some nodes were not processed), report that topological sorting is not possible.
-    template <typename T = tools::Unit>
-    TopSortKahn top_sort_kahn(int V, const tools::Graph<T>& graph)
-    {
-        tools::vi in_degree(V, 0);
-        for(int v = 0; v < V; ++v)
-          for(const tools::Node<T>& u : graph[v])
-            in_degree[u.node]++;
-             
-        std::priority_queue<int, std::vector<int>, std::greater<int>> no_degree;
-        for(int v = 0; v < V; ++v)
-          if(!in_degree[v])
-            no_degree.push(v);
-            
-        tools::vi tops_sort;
-        while(!no_degree.empty()) {
-          int u = no_degree.top();
-          no_degree.pop();
-          tops_sort.push_back(u);
-
-          for(const tools::Node<T>& v : graph[u]) {
-            in_degree[v.node]--;
-            if(!in_degree[v.node])
-              no_degree.push(v.node);
-          }
-        }
-        return {tops_sort, (int)tops_sort.size() == V};
-    }
-
-   enum BfsCheck { IsFinished, GoOn, Skip };
-
-    // bfs traversal
-    template <typename T = tools::Unit>
-    struct Bfs 
-    {
-        tools::Node<T> source;
-        tools::vi parent;
-        tools::vi dist;
-        Bfs(int V, const tools::Node<T>& source) {
-          this->source = source;
-          parent.assign(V, tools::sentinel);
-          dist.assign(V, tools::sentinel);
-          dist[source.node] = 0;
-        }
-        vi restore_path(const tools::Node<T>& sink) {
-          vi path;
-          int u = sink.node;
-          while(u != this->source.node) {
-            path.push_back(u);
-            u = parent[u];
-          }
-          std::reverse(path.begin(), path.end());
-          return path;
-        }
-        int getDistance(const tools::Node<T>& dest) {
-          return dist[dest.node];
-        }
-        std::function<BfsCheck(const tools::Node<T>&)> check;
-    };
-
-
-    template <typename T = tools::Unit>
-    void bfs(const tools::Graph<T>& graph, Bfs<T>& bfs_s) {
-
-      if(graph.empty()) throw std::runtime_error("bfs: graph empty!");
-
-      if(!bfs_s.check) throw std::runtime_error("bfs: callbacks are not set!");
-
-      std::queue<tools::Node<T>> queue; 
-      queue.push(bfs_s.source);
-      bool is_finished = false;
-      while(!queue.empty() && !is_finished) {
-        tools::Node<T> u = queue.front(); queue.pop();
-        BfsCheck check = bfs_s.check(u);
-        if(check == IsFinished) break;
-        if(check == Skip) continue;
-        for(const tools::Node<T>& v : graph[u.node]) {
-          if(~bfs_s.dist[v.node]) continue;
-          queue.push(v);
-          bfs_s.dist[v.node] = bfs_s.dist[u.node] + 1;
-          bfs_s.parent[v.node] = u.node;
-        }
-      }
-    }
-}
-
-
-
-namespace wg = algorithms::onlinejudge::graph::tools::wg;
-
-
-// Custom comparator for the priority queue
-template<typename T, typename W>
-struct Compare {
-    bool operator () (
-      const std::pair<int, wg::WNode<T, W>>& a, 
-      const std::pair<int, wg::WNode<T, W>>& b) const {
-      // First compare by the 'int' value (node index)
-      return a.first > b.first || (a.first == b.first && a.second.node < b.second.node); 
-    }
-};
-
-
-template<typename W>
-inline constexpr W inf = std::numeric_limits<W>::max();
-
-// Custom comparator for the priority queue
-template<typename W, typename T>
-struct DijkstraCmp {
-    bool operator () (
-      const std::pair<int, wg::WNode<W, T>>& a, 
-      const std::pair<int, wg::WNode<W, T>>& b) const {
-      // First compare by the 'int' value (node index)
-      return a.first > b.first || (a.first == b.first && a.second.node < b.second.node); 
-    }
-};
-
-namespace algorithms::onlinejudge::graph::tools::dijkstra
-{
-
-    template<typename W, typename T>
-    using piwn = std::pair<int, wg::WNode<W, T>>;
-    typedef std::vector<int> vi;
-    typedef std::pair<int, int> pii;
-    template<typename W, typename T>
-    using PQ = std::priority_queue<std::pair<int, wg::WNode<W, T>>, std::vector<std::pair<int, wg::WNode<W, T>>>, DijkstraCmp<W, T>>;
-
+    using vi = std::vector<int>;
+    using vvi = std::vector<vi>;
     template<typename W = int, typename T = tools::Unit>
-    struct Dijkstra
+    struct FloydWarshall
     {
-        std::vector<W> dist;
-        PQ<W, T> queue;
+        vvi matrix;
+        vvi path;
+        W inf;
+        W def;
         std::function<W(W, W)> mappend;
-        std::function<void(int, int)> on_relaxation;
-        std::function<void(int, int)> on_tied_path;
-        Dijkstra(int V, const wg::WNode<W, T>& source) {
-          dist.assign(V, inf<W>);
-          dist[source.node] = 0;
-          queue.emplace(0, source);
+        FloydWarshall(int V, W def, W inf) {
+          if(V > MAX_V) throw std::runtime_error("floyd warshall: cannot support the size greater then 450!");
+          this->inf = inf;
+          this->def = def;
+          matrix.assign(V, vi(V, inf));
+          for(int v = 0; v < V; ++v) 
+            matrix[v][v] = def; // base neutral element in W (for int is 0)
         }
-    };
-    
-    // priority queue
-    template<typename W, typename T>
-    void dijkstra(
-      const wg::WGraph<W, T>& graph, 
-      Dijkstra<W, T>& dijkstra_s) {
 
-      if(!dijkstra_s.mappend) 
-        throw std::runtime_error("dijkstra: mappend are not set!");
-
-      auto& queue = dijkstra_s.queue;
-      while(!queue.empty()) {
-        piwn<W, T> p = queue.top(); queue.pop();
-        int d = p.first;
-        wg::WNode<W, T> node = p.second;
-        int u = node.node;
-        if(d > dijkstra_s.dist[u]) continue; // lazy deletion
-        for(const wg::WNode<W, T>& neigh : graph[u]) {
-          int v = neigh.node;
-          W w = neigh.weight;
-          W nw = dijkstra_s.mappend(dijkstra_s.dist[u], w);
-          if(dijkstra_s.dist[v] > nw) {
-            dijkstra_s.dist[v] = nw;
-            if(dijkstra_s.on_relaxation)
-              dijkstra_s.on_relaxation(u, v);
-            queue.emplace(nw, neigh);
+        vi getPath(int start, int end) const {
+          // Check if a path exists first
+          if(matrix[start][end] == inf) {
+            return {}; // Return an empty vector for no path
           }
-          else if(dijkstra_s.dist[v] == nw) {
-            if(dijkstra_s.on_tied_path)
-              dijkstra_s.on_tied_path(u, v);
-          }   
+
+          vi p;
+          int current = start;
+          p.push_back(current);
+          while (current != end) {
+            // Get the next node on the path from 'current' to 'end'
+            current = path[current][end];
+            if (current == -1) {
+              // Should not happen if matrix[start][end] != inf, but good for safety
+              return {}; // Path broken
+            }
+            p.push_back(current);
+          }
+          return p;
+        }
+
+    };
+
+    template<typename W, typename T>
+    void floyd_warshall(
+      const wg::WGraph<W, T>& graph,
+      FloydWarshall<W, T>& fw_s) {
+
+      if(!fw_s.mappend) 
+        throw std::runtime_error("floyd warshall: mappend are not set!");
+
+      int V = (int)graph.size();
+      auto& matrix = fw_s.matrix;
+      auto& path = fw_s.path;
+      path.assign(V, vi(V));
+
+      for(int i = 0; i < V; ++i) {
+        for(int j = 0; j < V; ++j) {
+          if (i == j) {
+            path[i][j] = i;
+          } else {
+            path[i][j] = -1; // No path known yet
+          }
         }
       }
-    }
-}
 
+      for(int u = 0; u < V; ++u)
+        for(const wg::WNode<W, T>& n : graph[u]) {
+          matrix[u][n.node] = std::min(matrix[u][n.node], n.weight);
+          // The next node on the path from u to n.node is n.node itself
+          path[u][n.node] = n.node;
+        }
 
-
-
-namespace wg = algorithms::onlinejudge::graph::tools::wg;
-
-
-enum Parity { Even, Odd };
-
-// a helper function to flip the parity
-Parity flip(Parity p) { return (p == Parity::Even) ? Parity::Odd : Parity::Even; }
-
-struct State
-{
-    int city;
-    Parity parity; // arrival in city can be made either through even number of roads or odd ones
-    int toll;
-    // for priority queue
-    bool operator < (const State& other) const { return toll > other.toll; }
-};
-
-
-
-namespace algorithms::onlinejudge::graph::even_obsession
-{
-    /** https://onlinejudge.org/external/129/12950.pdf */
-    int V, E;
-    void submit(std::optional<char*> file, bool debug_mode)
-    {
-        if (file.has_value())
-          // Attempt to reopen stdin with the provided file
-          if (std::freopen(file.value(), "r", stdin) == nullptr) {
-            // If freopen fails, throw an exception with a more detailed error message
-            std::string name = file.value();
-            std::string errorMessage = 
-              "Failed to open file: " + name +
-              " with error: " + std::strerror(errno);
-            throw std::ios_base::failure(errorMessage);
-          }
-
-        while(while_read(V, E)) {
-          int source = 0, sink = V - 1;
-          wg::WGraph<> graph(V);
-          for(int e = 0; e <  E; ++e) {
-            int u, v, toll;
-            while_read(u, v, toll);
-            --u; --v;
-            wg::pair(graph, u, v, toll);
-          }
-
-          std::vector<std::array<int, 2>> states(V, {inf<int>, inf<int>});
-          std::priority_queue<State> queue;
-
-          states[source][Even] = 0;
-          queue.push({source, Even, 0});
-          while(!queue.empty()) {
-            State state = queue.top(); queue.pop();
-            int curr_city = state.city;
-            Parity curr_parity = state.parity;
-            int curr_toll = state.toll;
-
-             // >>> ESSENTIAL DIJKSTRA'S CHECK <<<
-            if(curr_toll > states[curr_city][curr_parity]) continue;
-
-            for(const wg::WNode<>& node : graph[curr_city]) {
-              int next_city = node.node;
-              int next_toll = node.weight + curr_toll;
-              Parity next_parity = flip(curr_parity);
-              if(states[next_city][next_parity] > next_toll) {
-                states[next_city][next_parity] = next_toll;
-                queue.push({next_city, next_parity, next_toll});
+      for(int k = 0; k < V; ++k) {               // loop order is k->u->v, first fix the intermediate vertex
+        for(int u = 0; u < V; ++u) {
+          for(int v = 0; v < V; ++v) {
+            // Check for "infinite" paths to avoid overflow
+            if(matrix[u][k] != fw_s.inf && 
+               matrix[k][v] != fw_s.inf) {
+              W dist = fw_s.mappend(matrix[u][k], matrix[k][v]);
+              if(dist < matrix[u][v]) {
+                matrix[u][v] = dist;
+                // The path from u to v now goes through k.
+                // So, the first step from u should be the same
+                // as the first step on the path from u to k.
+                path[u][v] = path[u][k];
               }
             }
           }
-
-          int min_toll_paid = states[sink][Even];
-          std::cout << (min_toll_paid != inf<int> ? min_toll_paid : -1) << std::endl;
         }
+      }
     }
 }
 
 
-namespace even_obsession = algorithms::onlinejudge::graph::even_obsession;
+
+
+namespace fd = algorithms::onlinejudge::graph::tools::floyd_warshall;
+namespace wg = algorithms::onlinejudge::graph::tools::wg;
+
+
+
+namespace algorithms::onlinejudge::graph::non_stop_travel
+{
+    constexpr int inf = 1e5;
+    /** https://onlinejudge.org/external/3/341.pdf */
+    int V, c = 1;
+    void submit()
+    {
+       
+        
+        while(while_read(V) && V) {
+          wg::WGraph<> graph(V);
+          std::string s;
+          int u = 0;
+          while(u < V) {
+            std::string line;
+            if(!std::getline(std::cin, line)) { break; }
+            // Create a stringstream from the line. This handles empty lines
+            // and lines with only whitespace gracefully.
+            std::stringstream ss(line);
+            // Attempt to read the first integer (number of edges).
+            int num_edges;
+            // --- THE KEY SANITIZATION STEP ---
+            if(!(ss >> num_edges)) {
+              // This block executes if:
+              //  - The line was empty.
+              //  - The line contained only whitespace.
+              //  - The line did not start with a valid integer.
+              // In this problem, we can assume this means there are no edges for this node.
+              continue; // Safely skip to the next line.
+            }
+            
+            // Now, read the pairs of (vertex, delay).
+            for(int j = 0; j < num_edges; ++j) {
+              int v, delay;
+              // It's also good practice to check these reads, though less critical
+              // if the input format is guaranteed to be correct.
+              if(ss >> v >> delay) {
+                wg::pair(graph, u, v - 1, delay, false); // Using your function
+              } else {
+                // Handle malformed line error if necessary, e.g., not enough pairs.      
+                break; 
+              }
+            }
+            ++u;
+          }
+
+          int start, end;
+          while_read(start, end);
+          --start; --end;
+
+          fd::FloydWarshall<> fw_s(V, 0, inf);
+          fw_s.mappend = [](int u, int v) { return u + v; };
+          fd::floyd_warshall(graph, fw_s);
+
+          std::string s_path;
+          fd::vi path = fw_s.getPath(start, end);
+          for(int n : path) s_path += std::to_string(n + 1) + " ";
+          s_path.pop_back();
+          int min_delay = fw_s.matrix[start][end];
+          printf("Case %d: Path = %s; %d second delay\n", c++, s_path.c_str(), min_delay); 
+
+        }  
+    }
+}
+
+
+namespace non_stop_travel = algorithms::onlinejudge::graph::non_stop_travel;
 
 int main() { 
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    even_obsession::submit(); 
+    non_stop_travel::submit(); 
 }
 

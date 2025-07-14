@@ -755,56 +755,69 @@ namespace algorithms::onlinejudge::graph::tools::floyd_warshall
 
 
 
+
 namespace fd = algorithms::onlinejudge::graph::tools::floyd_warshall;
 namespace wg = algorithms::onlinejudge::graph::tools::wg;
 
 
-bool is_number(const std::string &s) {
-  auto is_digit = [](char ch) { return std::isdigit(static_cast<unsigned char>(ch)); };
-  return !s.empty() && std::all_of(s.begin(), s.end(), is_digit);
-}
-
-namespace algorithms::onlinejudge::graph::maelstrom
+namespace algorithms::onlinejudge::graph::risk
 {
-    /** https://onlinejudge.org/external/4/423.pdf */
-    int V;
+    /** https://onlinejudge.org/external/5/567.pdf  */
+    constexpr int V = 20;
     constexpr int inf = 1e5;
+    int t_cases = 1, Q;
     void submit()
     {
-        
-        while(while_read(V)) {
-          std::string s;
-          wg::WGraph<> graph(V);
-          for(int u = 1; u < V; ++u) {
-            for(int v = 0; v < u; ++v) {
-              while_read(s);
-              if(is_number(s)) {
-                int latency = std::stoi(s);
-                wg::pair(graph, u, v, latency);
-              }
+       
+        int num_neighbors;
+        // The main loop condition: try to read the very first integer of a new test set.
+        // This will fail cleanly at the end of the file. `std::cin >> var` is a robust way
+        // to handle leading whitespace, blank lines, etc.
+        while (std::cin >> num_neighbors) {
+          wg::WGraph<> graph(V); // The graph always has 20 countries (1-20)
+          // We already read the number of neighbors for country 1.
+          for(int i = 0; i < num_neighbors; ++i) {
+            int neighbor;
+            std::cin >> neighbor;
+            // Add undirected edge from 1 to neighbor (0-indexed vs 1-indexed)
+            wg::pair(graph, 1 - 1, neighbor - 1, 1, true);
+          }
+
+          // Now, read the definitions for countries 2 through 19.
+          for(int u = 2; u <= 19; ++u) {
+            std::cin >> num_neighbors;
+            for(int i = 0; i < num_neighbors; ++i) {
+              int neighbor;
+              std::cin >> neighbor;
+              wg::pair(graph, u - 1, neighbor - 1, 1, true);
             }
           }
-          
+
           fd::FloydWarshall<> fw_s(V, 0, inf);
           fw_s.mappend = [](int u, int v) { return u + v; };
           fd::floyd_warshall(graph, fw_s);
-
-          int min_broadcast_tm = 0;
-          for(int n = 1; n < V; ++n) {
-            min_broadcast_tm = std::max(min_broadcast_tm, fw_s.matrix[0][n]);
+          
+          printf("Test Set #%d\n", t_cases++);
+          std::cin >> Q;
+          while(Q--) {
+            int start, end;
+            while_read(start, end);
+            int how_many = fw_s.getPath(start - 1, end - 1).size() - 1;
+            printf("%2d to %2d: %d", start, end, how_many);
           }
-          std::cout << min_broadcast_tm << std::endl;
-        }  
+          std::cout << std::endl;
+        }
     }
 }
 
 
-namespace maelstrom = algorithms::onlinejudge::graph::maelstrom;
+
+namespace risk = algorithms::onlinejudge::graph::risk;
 
 int main() { 
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    maelstrom::submit(); 
+    risk::submit(); 
 }
 

@@ -756,68 +756,69 @@ namespace algorithms::onlinejudge::graph::tools::floyd_warshall
 
 
 
+
+
+
 namespace fd = algorithms::onlinejudge::graph::tools::floyd_warshall;
 namespace wg = algorithms::onlinejudge::graph::tools::wg;
 
 
-namespace algorithms::onlinejudge::graph::risk
+
+
+namespace algorithms::onlinejudge::graph::page_hopping
 {
-    /** https://onlinejudge.org/external/5/567.pdf  */
-    constexpr int V = 20;
+    /** https://onlinejudge.org/external/8/821.pdf  */
+    int t_cases = 1;
     constexpr int inf = 1e5;
-    int t_cases = 1, Q;
+    constexpr int MAX = 100;
     void submit()
     {
        
-        int num_neighbors;
-        // The main loop condition: try to read the very first integer of a new test set.
-        // This will fail cleanly at the end of the file. `std::cin >> var` is a robust way
-        // to handle leading whitespace, blank lines, etc.
-        while (std::cin >> num_neighbors) {
-          wg::WGraph<> graph(V); // The graph always has 20 countries (1-20)
-          // We already read the number of neighbors for country 1.
-          for(int i = 0; i < num_neighbors; ++i) {
-            int neighbor;
-            std::cin >> neighbor;
-            // Add undirected edge from 1 to neighbor (0-indexed vs 1-indexed)
-            wg::pair(graph, 1 - 1, neighbor - 1, 1, true);
+  
+        int u, v;
+        while(while_read(u, v) && u && v) {
+          std::unordered_set<int> nodes;
+          wg::WGraph<> graph(MAX);
+          nodes.insert(u - 1);
+          nodes.insert(v - 1);
+          wg::pair(graph, u - 1, v - 1, 1, false);
+          while(while_read(u, v) && u && v) {
+            nodes.insert(u - 1);
+            nodes.insert(v - 1);
+            wg::pair(graph, u - 1, v - 1, 1, false);
           }
 
-          // Now, read the definitions for countries 2 through 19.
-          for(int u = 2; u <= 19; ++u) {
-            std::cin >> num_neighbors;
-            for(int i = 0; i < num_neighbors; ++i) {
-              int neighbor;
-              std::cin >> neighbor;
-              wg::pair(graph, u - 1, neighbor - 1, 1, true);
+          fd::FloydWarshall<> fw_s(MAX, 0, inf);
+          fw_s.mappend = [](int u, int v) { return u + v; };
+          fd::floyd_warshall(graph, fw_s);
+
+          int sum_of_clicks = 0;
+          for(int u = 0; u < MAX; ++u) {
+            for(int v = 0; v < MAX; ++v) {
+              if(fw_s.matrix[u][v] != inf) {
+                sum_of_clicks += fw_s.matrix[u][v];
+              }
             }
           }
 
-          fd::FloydWarshall<> fw_s(V, 0, inf);
-          fw_s.mappend = [](int u, int v) { return u + v; };
-          fd::floyd_warshall(graph, fw_s);
-          
-          printf("Test Set #%d\n", t_cases++);
-          std::cin >> Q;
-          while(Q--) {
-            int start, end;
-            while_read(start, end);
-            int how_many = fw_s.getPath(start - 1, end - 1).size() - 1;
-            printf("%2d to %2d: %d", start, end, how_many);
-          }
-          std::cout << std::endl;
+          // total number of such ordered pairs is given 
+          // by the formula for permutations of n items 
+          // taken 2 at a time, denoted P(n, 2)
+          // P(n, 2) = n * (n - 1)
+          int V = (int)nodes.size();
+          int num_of_pairs = V * (V - 1);
+          printf("Case %d: average length between pages = %0.3f clicks\n", t_cases++, (double)sum_of_clicks / num_of_pairs);
         }
     }
 }
 
 
-
-namespace risk = algorithms::onlinejudge::graph::risk;
+namespace page_hopping = algorithms::onlinejudge::graph::page_hopping;
 
 int main() { 
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    risk::submit(); 
+    page_hopping::submit(); 
 }
 

@@ -659,12 +659,16 @@ constexpr int MAX_V = 450; // if |V| > 450, you cannot use Floyd Washall's
 
 namespace algorithms::onlinejudge::graph::tools::floyd_warshall
 {
+    template<typename W = int>
+    using v_w = std::vector<W>;
+    template<typename W = int>
+    using vv_w = std::vector<v_w<W>>;
     using vi = std::vector<int>;
     using vvi = std::vector<vi>;
     template<typename W = int, typename T = tools::Unit>
     struct FloydWarshall
     {
-        vvi matrix;
+        vv_w<W> matrix;
         vvi path;
         W inf;
         W def;
@@ -673,9 +677,12 @@ namespace algorithms::onlinejudge::graph::tools::floyd_warshall
           if(V > MAX_V) throw std::runtime_error("floyd warshall: cannot support the size greater then 450!");
           this->inf = inf;
           this->def = def;
-          matrix.assign(V, vi(V, inf));
-          for(int v = 0; v < V; ++v) 
-            matrix[v][v] = def; // base neutral element in W (for int is 0)
+          matrix.resize(V, v_w<W>(V));
+          for(int i = 0; i < V; ++i)
+            for(int j = 0; j < V; ++j) {
+              if(i == j) matrix[i][j] = def;
+              else matrix[i][j] = inf;
+          }
         }
 
         vi getPath(int start, int end) const {
@@ -755,70 +762,75 @@ namespace algorithms::onlinejudge::graph::tools::floyd_warshall
 
 
 
-
-
-
-
 namespace fd = algorithms::onlinejudge::graph::tools::floyd_warshall;
 namespace wg = algorithms::onlinejudge::graph::tools::wg;
 
 
-
-
-namespace algorithms::onlinejudge::graph::page_hopping
+struct Route 
 {
-    /** https://onlinejudge.org/external/8/821.pdf  */
-    int t_cases = 1;
+    int cost;
+    int hopes;
+    bool operator < (const Route& other) const { return cost < other.cost || (cost == other.cost && hopes < other.hopes); }
+    bool operator == (const Route& other) const { return cost == other.cost && hopes == other.hopes; }
+    bool operator != (const Route& other) const { return !(*this == other); }
+};
+
+
+namespace algorithms::onlinejudge::graph::interstar_transport
+{
+    /** https://onlinejudge.org/external/12/1247.pdf */
+    int V, E, Q;
     constexpr int inf = 1e5;
-    constexpr int MAX = 100;
+    int getIdx(char c) { return c - '0' - 17; }
     void submit()
     {
-       
-  
-        int u, v;
-        while(while_read(u, v) && u && v) {
-          std::unordered_set<int> nodes;
-          wg::WGraph<> graph(MAX);
-          nodes.insert(u - 1);
-          nodes.insert(v - 1);
-          wg::pair(graph, u - 1, v - 1, 1, false);
-          while(while_read(u, v) && u && v) {
-            nodes.insert(u - 1);
-            nodes.insert(v - 1);
-            wg::pair(graph, u - 1, v - 1, 1, false);
+      
+        
+        while(while_read(V, E)) {
+          std::vector<char> planets(V);
+          wg::WGraph<Route> graph(V);
+          for(int e = 0; e < E; ++e) {
+            char s_u, s_v;
+            int cost;
+            while_read(s_u, s_v, cost);
+            int u = getIdx(s_u);
+            int v = getIdx(s_v);
+            planets[u] = s_u;
+            planets[v] = s_v;
+            wg::pair(graph, u, v, {cost, 1});
           }
 
-          fd::FloydWarshall<> fw_s(MAX, 0, inf);
-          fw_s.mappend = [](int u, int v) { return u + v; };
+          fd::FloydWarshall<Route> fw_s(V, {0, 0}, {inf, inf});
+          fw_s.mappend = 
+            [](const Route& u, const Route& v) 
+            { return (Route){u.cost + v.cost, u.hopes + v.hopes}; };
           fd::floyd_warshall(graph, fw_s);
 
-          int sum_of_clicks = 0;
-          for(int u = 0; u < MAX; ++u) {
-            for(int v = 0; v < MAX; ++v) {
-              if(fw_s.matrix[u][v] != inf) {
-                sum_of_clicks += fw_s.matrix[u][v];
-              }
-            }
-          }
+          while_read(Q);
+          while(Q--) {
+            char s_start, s_end;
+            while_read(s_start, s_end);
+            int start = getIdx(s_start);
+            int end = getIdx(s_end);
 
-          // total number of such ordered pairs is given 
-          // by the formula for permutations of n items 
-          // taken 2 at a time, denoted P(n, 2)
-          // P(n, 2) = n * (n - 1)
-          int V = (int)nodes.size();
-          int num_of_pairs = V * (V - 1);
-          printf("Case %d: average length between pages = %0.3f clicks\n", t_cases++, (double)sum_of_clicks / num_of_pairs);
+            auto xs = fw_s.getPath(start, end);
+            std::string path;
+            for(int idx : xs) {
+              path += std::string(1, planets[idx]) + " ";
+            }
+            path.pop_back();
+            std::cout << path << std::endl;
+          }
         }
     }
 }
 
-
-namespace page_hopping = algorithms::onlinejudge::graph::page_hopping;
+namespace interstar_transport = algorithms::onlinejudge::graph::interstar_transport;
 
 int main() { 
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    page_hopping::submit(); 
+    interstar_transport::submit(); 
 }
 

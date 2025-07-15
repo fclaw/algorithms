@@ -760,77 +760,177 @@ namespace algorithms::onlinejudge::graph::tools::floyd_warshall
 }
 
 
-
-
-namespace fd = algorithms::onlinejudge::graph::tools::floyd_warshall;
-namespace wg = algorithms::onlinejudge::graph::tools::wg;
-
-
-struct Route 
+namespace algorithms::onlinejudge::graph::tools
 {
-    int cost;
-    int hopes;
-    bool operator < (const Route& other) const { return cost < other.cost || (cost == other.cost && hopes < other.hopes); }
-    bool operator == (const Route& other) const { return cost == other.cost && hopes == other.hopes; }
-    bool operator != (const Route& other) const { return !(*this == other); }
+
+    struct TopSortKahn
+    {
+        tools::vi top_sort;
+        bool is_cycle;   
+    };
+
+    // ---------- Kahn's algorithm for topological sort ----------
+    // Step 1: Calculate the In-Degree of Each Node
+    // In-degree represents the number of incoming edges to a node, i.e., its dependencies.
+    // Initialize an array `in_degree[]` of size V (number of nodes) to zero.
+    // Traverse the graph and for each edge u -> v, increment the in-degree of v by 1.
+
+    // Step 2: Initialize the Queue
+    // Create an empty queue to store nodes with an in-degree of 0 (i.e., nodes with no dependencies).
+    // Traverse the in-degree array and enqueue all nodes with in-degree 0.
+
+    // Step 3: Process the Nodes in the Queue (BFS-like)
+    // While the queue is not empty:
+    //   1. Remove a node `u` from the front of the queue.
+    //   2. Add `u` to the topological order result list.
+    //   3. For each adjacent node `v` of `u` (i.e., for each outgoing edge u -> v):
+    //      - Decrease the in-degree of `v` by 1 (because we've processed one of its dependencies).
+    //      - If the in-degree of `v` becomes 0, enqueue `v` (since it now has no dependencies and can be processed next).
+
+    // Step 4: Cycle Detection
+    // After processing all nodes, check if the number of nodes in the topological order matches the total number of nodes in the graph.
+    // If the number of nodes in the result is less than the total number of nodes, a cycle exists in the graph.
+    // In this case, a topological sort is not possible.
+
+    // Step 5: Output the Topological Sort
+    // If no cycle was detected and all nodes were processed, output the topological order.
+    // If a cycle was detected (i.e., some nodes were not processed), report that topological sorting is not possible.
+    template <typename T = tools::Unit>
+    TopSortKahn top_sort_kahn(int V, const tools::Graph<T>& graph)
+    {
+        tools::vi in_degree(V, 0);
+        for(int v = 0; v < V; ++v)
+          for(const tools::Node<T>& u : graph[v])
+            in_degree[u.node]++;
+             
+        std::priority_queue<int, std::vector<int>, std::greater<int>> no_degree;
+        for(int v = 0; v < V; ++v)
+          if(!in_degree[v])
+            no_degree.push(v);
+            
+        tools::vi tops_sort;
+        while(!no_degree.empty()) {
+          int u = no_degree.top();
+          no_degree.pop();
+          tops_sort.push_back(u);
+
+          for(const tools::Node<T>& v : graph[u]) {
+            in_degree[v.node]--;
+            if(!in_degree[v.node])
+              no_degree.push(v.node);
+          }
+        }
+        return {tops_sort, (int)tops_sort.size() == V};
+    }
+}
+
+
+
+namespace tools = algorithms::onlinejudge::graph::tools;
+
+
+ using vi = std::vector<int>;
+
+struct Box
+{
+    int idx;
+    vi sides;
+    // Your operator> would then change to this to match:
+    bool operator < (const Box& other) const { // Naming it '<' is more intuitive
+      for(int i = 0; i < (int)sides.size(); ++i)
+        if(sides[i] >= other.sides[i]) return false; // Note the >=
+      return true; 
+    }
 };
 
+using v_box = std::vector<Box>;
 
-namespace algorithms::onlinejudge::graph::interstar_transport
+
+namespace algorithms::onlinejudge::graph::stacking_boxes
 {
-    /** https://onlinejudge.org/external/12/1247.pdf */
-    int V, E, Q;
-    constexpr int inf = 1e5;
-    int getIdx(char c) { return c - '0' - 17; }
+    /** https://onlinejudge.org/external/1/103.pdf */
+    int N, D;
     void submit()
     {
-      
         
-        while(while_read(V, E)) {
-          std::vector<char> planets(V);
-          wg::WGraph<Route> graph(V);
-          for(int e = 0; e < E; ++e) {
-            char s_u, s_v;
-            int cost;
-            while_read(s_u, s_v, cost);
-            int u = getIdx(s_u);
-            int v = getIdx(s_v);
-            planets[u] = s_u;
-            planets[v] = s_v;
-            wg::pair(graph, u, v, {cost, 1});
+        while(while_read(N, D)) {
+          v_box boxes(N);
+          for(int idx = 0; idx < N; ++idx) {
+            Box box;
+            box.idx = idx;
+            auto& xs = box.sides; 
+            xs.resize(D);
+            for(int d = 0; d < D; ++d)
+              while_read(xs[d]);
+            std::sort(xs.begin(), xs.end());
+            boxes[idx] = box;
           }
-
-          fd::FloydWarshall<Route> fw_s(V, {0, 0}, {inf, inf});
-          fw_s.mappend = 
-            [](const Route& u, const Route& v) 
-            { return (Route){u.cost + v.cost, u.hopes + v.hopes}; };
-          fd::floyd_warshall(graph, fw_s);
-
-          while_read(Q);
-          while(Q--) {
-            char s_start, s_end;
-            while_read(s_start, s_end);
-            int start = getIdx(s_start);
-            int end = getIdx(s_end);
-
-            auto xs = fw_s.getPath(start, end);
-            std::string path;
-            for(int idx : xs) {
-              path += std::string(1, planets[idx]) + " ";
+  
+          tools::Graph<> graph(N);
+          for(int i = 0; i < N; ++i)
+            for(int j = 0; j < N; ++j) {
+              if(i != j && boxes[j] < boxes[i]) {
+                int u = boxes[i].idx; 
+                int v = boxes[j].idx;
+                graph[u].push_back(tools::mkDefNode(v));
+              }
             }
-            path.pop_back();
-            std::cout << path << std::endl;
+             
+          tools::TopSortKahn khan = tools::top_sort_kahn(N, graph);
+          // dp[i] will store the LENGTH of the longest path ending at node i.
+          std::vector<int> dp(N, 1); // Initialize all paths to length 1 (the box itself)
+          // parent[i] will store the predecessor of node i on its current longest path.
+          // This is needed to reconstruct the final path.
+          std::vector<int> parent(N, -1);
+
+          //Iterate through the nodes in the order given by the topological sort.
+          for(int u : khan.top_sort) {   
+            // For each neighbor v of u...
+            for(const auto& neighbor_node : graph[u]) {
+              int v = neighbor_node.node;     
+              //Check if the path through u creates a longer path to v.
+              if(dp[u] + 1 > dp[v]) {
+                // We found a better path to v!
+                dp[v] = dp[u] + 1;
+                parent[v] = u; // The best way to get to v is now from u.
+              }
+            }
           }
+
+
+          // 1. Find the length of the longest path and where it ends.
+          int max_len = 0;
+          int end_node = -1;
+          for(int i = 0; i < N; ++i) {
+            if(dp[i] > max_len) {
+              max_len = dp[i];
+              end_node = i;
+            }
+          }
+
+          // 2. Reconstruct the path by backtracking using the parent array.
+          std::vector<int> path;
+          int current_node = end_node;
+          while(current_node != -1) {
+            path.push_back(current_node);
+            current_node = parent[current_node];
+          }
+          
+          std::string s;
+          for(int n : path) s += std::to_string(n + 1) + " ";
+          s.pop_back();
+          printf("%d\n%s\n", max_len, s.c_str());
         }
     }
 }
 
-namespace interstar_transport = algorithms::onlinejudge::graph::interstar_transport;
+
+namespace stacking_boxes = algorithms::onlinejudge::graph::stacking_boxes;
 
 int main() { 
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    interstar_transport::submit(); 
+    stacking_boxes::submit(); 
 }
 

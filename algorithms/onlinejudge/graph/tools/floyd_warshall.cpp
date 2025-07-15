@@ -130,6 +130,7 @@ namespace algorithms::onlinejudge::graph::tools::floyd_warshall
                 // So, the first step from u should be the same
                 // as the first step on the path from u to k.
                 path[u][v] = path[u][k];
+
               }
               else if(dist == matrix[u][v]) {
                 path_count[u][v] += combined_path_count;

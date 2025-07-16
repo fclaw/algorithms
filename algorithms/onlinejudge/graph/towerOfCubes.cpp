@@ -29,7 +29,7 @@ namespace tools = algorithms::onlinejudge::graph::tools;
 
 enum Face {Front, Back, Left, Right, Top, Bottom};
 
-constexpr int Faces = 5;
+constexpr int Faces = 6;
 
 std::unordered_map<Face, Face> opposite_face = 
 { {Front, Back}, 
@@ -96,11 +96,11 @@ namespace algorithms::onlinejudge::graph::tower_of_cubes
           map node_to_cube;
           for(int cube_idx = 1; cube_idx <= N; ++cube_idx) {
             // Read the 6 face colors for the current cube
-            int colors[6];
-            for(int i = 0; i < 6; ++i) std::cin >> colors[i];
+            int colors[Faces];
+            for(int i = 0; i < Faces; ++i) std::cin >> colors[i];
             
             // For each of the 6 possible orientations...
-            for (int top_face_idx = 0; top_face_idx <= Faces; ++top_face_idx) {
+            for (int top_face_idx = 0; top_face_idx < Faces; ++top_face_idx) {
               Face top_face = static_cast<Face>(top_face_idx);
               Face bottom_face = opposite_face[top_face];  
               node_to_cube[node++] = {
@@ -114,21 +114,22 @@ namespace algorithms::onlinejudge::graph::tower_of_cubes
 
           int V = node;
           tools::Graph<> graph(V);
-          for(int i = 0; i < V; ++i)
+          for(int i = 0; i < V; ++i) {
             for(int j = 0; j < V; ++j) {
               if(i == j) continue;
               int cube_i = node_to_cube[i].id;
               int cube_j = node_to_cube[j].id;
               if(cube_i != cube_j) {
-                int colour_i = node_to_cube[i].op_colour;
-                int colour_j = node_to_cube[j].colour;
+                int top_colour = node_to_cube[i].colour;
+                int bottom_colour = node_to_cube[j].op_colour;
                 // match the colour of the top face of the heaviest cube 
                 // with colour on the opposite face to the top face of the lighter one
-                if(cube_j > cube_i && colour_i == colour_j) {
-                  graph[j].push_back(tools::mkDefNode(i));
+                if(cube_i > cube_j && top_colour == bottom_colour) {
+                  graph[i].push_back(tools::mkDefNode(j));
                 }
               }
             }
+          }
           
           tools::TopSortKahn khan = tools::top_sort_kahn(V, graph);
           // dp[i] will store the LENGTH of the longest path ending at node i.

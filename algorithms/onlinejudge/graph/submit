@@ -828,109 +828,97 @@ namespace algorithms::onlinejudge::graph::tools
 
 namespace tools = algorithms::onlinejudge::graph::tools;
 
+using vi = std::vector<int>;
+using vvi = std::vector<vi>;
+using vb = std::vector<bool>;
+constexpr int V = 27;
 
- using vi = std::vector<int>;
 
-struct Box
+namespace algorithms::onlinejudge::graph::project_scheduling
 {
-    int idx;
-    vi sides;
-    // Your operator> would then change to this to match:
-    bool operator < (const Box& other) const { // Naming it '<' is more intuitive
-      for(int i = 0; i < (int)sides.size(); ++i)
-        if(sides[i] >= other.sides[i]) return false; // Note the >=
-      return true; 
+    /** https://onlinejudge.org/external/4/452.pdf */
+    int t_cases;
+    int uof_to_idx(char c) {
+      // Optional: Add a check for robustness, though not always needed
+      // in competitive programming if the input is guaranteed.
+      if(c < 'A' || c > 'Z') {
+        // Handle error: character is not an uppercase letter.
+        // For example, throw an exception or return -1.
+        throw std::out_of_range("Character is not an uppercase letter");
+      } 
+      return c - 'A';
     }
-};
-
-using v_box = std::vector<Box>;
-
-
-namespace algorithms::onlinejudge::graph::stacking_boxes
-{
-    /** https://onlinejudge.org/external/1/103.pdf */
-    int N, D;
     void submit()
     {
-        
-        while(while_read(N, D)) {
-          v_box boxes(N);
-          for(int idx = 0; idx < N; ++idx) {
-            Box box;
-            box.idx = idx;
-            auto& xs = box.sides; 
-            xs.resize(D);
-            for(int d = 0; d < D; ++d)
-              while_read(xs[d]);
-            std::sort(xs.begin(), xs.end());
-            boxes[idx] = box;
-          }
-  
-          tools::Graph<> graph(N);
-          for(int i = 0; i < N; ++i)
-            for(int j = 0; j < N; ++j) {
-              if(i != j && boxes[j] < boxes[i]) {
-                int u = boxes[i].idx; 
-                int v = boxes[j].idx;
-                graph[u].push_back(tools::mkDefNode(v));
-              }
+
+        while_read(t_cases);
+        std::cin.ignore();
+        std::cin.ignore();
+        while(t_cases--) {
+          std::string in;
+          tools::Graph<> graph(V);
+          vi times(V);
+          vb is_in_degree_zero(V, true);
+          vb is_active(V, false);
+          while(std::getline(std::cin, in)) {
+            if(in.empty()) break;
+            std::stringstream ss(in);
+            int tm;
+            char unit_of_work;
+            ss >> unit_of_work >> tm;
+            int v = uof_to_idx(unit_of_work);
+            times[v] = tm;
+            is_active[v] = true;
+            
+            while(ss >> unit_of_work) {
+              if(is_in_degree_zero[v]) 
+                is_in_degree_zero[v] = false;
+              if(!std::isupper(unit_of_work)) continue;
+              int u = uof_to_idx(unit_of_work);
+              graph[u].push_back(tools::mkDefNode(v));
             }
-             
-          tools::TopSortKahn khan = tools::top_sort_kahn(N, graph);
-          // dp[i] will store the LENGTH of the longest path ending at node i.
-          std::vector<int> dp(N, 1); // Initialize all paths to length 1 (the box itself)
-          // parent[i] will store the predecessor of node i on its current longest path.
-          // This is needed to reconstruct the final path.
-          std::vector<int> parent(N, -1);
+          }
+
+          tools::TopSortKahn khan = tools::top_sort_kahn(V, graph);
+          // Initialize the finish times for source nodes (those with no prerequisites)
+          // In your graph model, these would be nodes with an in-degree of 0.
+          vi finish_time(V, 0);
+          for(int i = 0; i < V; ++i) {
+            if(is_active[i] && is_in_degree_zero[i]) { // is_active checks if the task exists
+              finish_time[i] = times[i];
+            }
+          }
 
           //Iterate through the nodes in the order given by the topological sort.
           for(int u : khan.top_sort) {   
             // For each neighbor v of u...
-            for(const auto& neighbor_node : graph[u]) {
-              int v = neighbor_node.node;     
-              //Check if the path through u creates a longer path to v.
-              if(dp[u] + 1 > dp[v]) {
-                // We found a better path to v!
-                dp[v] = dp[u] + 1;
-                parent[v] = u; // The best way to get to v is now from u.
-              }
+            for(const auto& neigh : graph[u]) {
+              int v = neigh.node;
+              // The start time for v must be after u finishes.
+              // So, the finish time for v is the max of its current earliest start + its own time,
+              // or u's finish time + v's own time.
+              finish_time[v] = std::max(finish_time[v], finish_time[u] + times[v]);
             }
           }
 
-
-          // 1. Find the length of the longest path and where it ends.
-          int max_len = 0;
-          int end_node = -1;
-          for(int i = 0; i < N; ++i) {
-            if(dp[i] > max_len) {
-              max_len = dp[i];
-              end_node = i;
-            }
+          int max_time_to_complete = 0;
+          for(int v = 0; v < V; ++v) {
+            if(is_active[v])
+              max_time_to_complete = std::max(max_time_to_complete, finish_time[v]);
           }
 
-          // 2. Reconstruct the path by backtracking using the parent array.
-          std::vector<int> path;
-          int current_node = end_node;
-          while(current_node != -1) {
-            path.push_back(current_node);
-            current_node = parent[current_node];
-          }
-          
-          std::string s;
-          for(int n : path) s += std::to_string(n + 1) + " ";
-          s.pop_back();
-          printf("%d\n%s\n", max_len, s.c_str());
+          std::cout << max_time_to_complete << std::endl;
+          if(t_cases) std::cout << std::endl;
         }
     }
 }
 
-
-namespace stacking_boxes = algorithms::onlinejudge::graph::stacking_boxes;
+namespace project_scheduling = algorithms::onlinejudge::graph::project_scheduling;
 
 int main() { 
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    stacking_boxes::submit(); 
+    project_scheduling::submit(); 
 }
 

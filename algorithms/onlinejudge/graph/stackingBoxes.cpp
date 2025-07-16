@@ -122,16 +122,11 @@ namespace algorithms::onlinejudge::graph::stacking_boxes
             path.push_back(current_node);
             current_node = parent[current_node];
           }
-
-          // std::string s;
-          // for(int n : path) s += std::to_string(n + 1) + " ";
-          // s.pop_back();
-          // printf("%d\n%s\n", max_len, s.c_str());
-
-
-          vi memo(N, -1);
-          int ans = calculate_max_stack(0, khan.top_sort, graph, memo);
-          dbg(ans);
+          
+          std::string s;
+          for(int n : path) s += std::to_string(n + 1) + " ";
+          s.pop_back();
+          printf("%d\n%s\n", max_len, s.c_str());
         }
     }
 }

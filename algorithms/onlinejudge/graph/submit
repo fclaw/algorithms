@@ -826,99 +826,161 @@ namespace algorithms::onlinejudge::graph::tools
 
 
 
-namespace tools = algorithms::onlinejudge::graph::tools;
+
+
 
 using vi = std::vector<int>;
-using vvi = std::vector<vi>;
-using vb = std::vector<bool>;
-constexpr int V = 27;
+
+namespace tools = algorithms::onlinejudge::graph::tools;
+
+enum Face {Front, Back, Left, Right, Top, Bottom};
+
+constexpr int Faces = 5;
+
+std::unordered_map<Face, Face> opposite_face = 
+{ {Front, Back}, 
+  {Back, Front},
+  {Left, Right}, 
+  {Right, Left},
+  {Top, Bottom}, 
+  {Bottom, Top}};
 
 
-namespace algorithms::onlinejudge::graph::project_scheduling
+std::string face_to_str(Face face) 
 {
-    /** https://onlinejudge.org/external/4/452.pdf */
-    int t_cases;
-    int uof_to_idx(char c) {
-      // Optional: Add a check for robustness, though not always needed
-      // in competitive programming if the input is guaranteed.
-      if(c < 'A' || c > 'Z') {
-        // Handle error: character is not an uppercase letter.
-        // For example, throw an exception or return -1.
-        throw std::out_of_range("Character is not an uppercase letter");
-      } 
-      return c - 'A';
+    switch(face) {
+        case Front:  return "front";
+        case Back:   return "back";
+        case Left:   return "left";
+        case Right:  return "right";
+        case Top:    return "top";
+        case Bottom: return "bottom";
+        default:     return "unknown";
     }
+}
+
+struct Cube
+{
+    int id;
+    Face top_face;
+    int colour;
+    int op_colour;
+};
+
+std::ostream& operator << (std::ostream& os, const Cube& cube) 
+{ return os << "{cube_id: " << cube.id << ", face: " << cube.top_face << ", colour: " << cube.colour << ", opposite colour: " << cube.op_colour << "}"; }
+
+using map = std::unordered_map<int, Cube>;
+
+namespace algorithms::onlinejudge::graph::tower_of_cubes
+{
+    /** https://onlinejudge.org/external/100/10051.pdf */
+    int N, t_case = 1;
     void submit()
     {
 
-        while_read(t_cases);
-        std::cin.ignore();
-        std::cin.ignore();
-        while(t_cases--) {
-          std::string in;
-          tools::Graph<> graph(V);
-          vi times(V);
-          vb is_in_degree_zero(V, true);
-          vb is_active(V, false);
-          while(std::getline(std::cin, in)) {
-            if(in.empty()) break;
-            std::stringstream ss(in);
-            int tm;
-            char unit_of_work;
-            ss >> unit_of_work >> tm;
-            int v = uof_to_idx(unit_of_work);
-            times[v] = tm;
-            is_active[v] = true;
-            
-            while(ss >> unit_of_work) {
-              if(is_in_degree_zero[v]) 
-                is_in_degree_zero[v] = false;
-              if(!std::isupper(unit_of_work)) continue;
-              int u = uof_to_idx(unit_of_work);
-              graph[u].push_back(tools::mkDefNode(v));
-            }
-          }
+        bool first_case = true; // Flag to track if this is the first test case
+        while(while_read(N) && N) {
 
-          tools::TopSortKahn khan = tools::top_sort_kahn(V, graph);
-          // Initialize the finish times for source nodes (those with no prerequisites)
-          // In your graph model, these would be nodes with an in-degree of 0.
-          vi finish_time(V, 0);
-          for(int i = 0; i < V; ++i) {
-            if(is_active[i] && is_in_degree_zero[i]) { // is_active checks if the task exists
-              finish_time[i] = times[i];
-            }
+          // --- THE FIX ---
+          if(!first_case) {
+            std::cout << std::endl; // Print the blank line separator BEFORE this case
           }
+          first_case = false; // It's no longer the first case
+
+          int node = 0;
+          map node_to_cube;
+          for(int cube_idx = 1; cube_idx <= N; ++cube_idx) {
+            // Read the 6 face colors for the current cube
+            int colors[6];
+            for(int i = 0; i < 6; ++i) std::cin >> colors[i];
+            
+            // For each of the 6 possible orientations...
+            for (int top_face_idx = 0; top_face_idx <= Faces; ++top_face_idx) {
+              Face top_face = static_cast<Face>(top_face_idx);
+              Face bottom_face = opposite_face[top_face];  
+              node_to_cube[node++] = {
+                cube_idx,
+                top_face,
+                colors[top_face_idx],       // color of the top face
+                colors[bottom_face]         // color of the bottom face
+              };
+            }
+        }
+
+          int V = node;
+          tools::Graph<> graph(V);
+          for(int i = 0; i < V; ++i)
+            for(int j = 0; j < V; ++j) {
+              if(i == j) continue;
+              int cube_i = node_to_cube[i].id;
+              int cube_j = node_to_cube[j].id;
+              if(cube_i != cube_j) {
+                int colour_i = node_to_cube[i].op_colour;
+                int colour_j = node_to_cube[j].colour;
+                // match the colour of the top face of the heaviest cube 
+                // with colour on the opposite face to the top face of the lighter one
+                if(cube_j > cube_i && colour_i == colour_j) {
+                  graph[j].push_back(tools::mkDefNode(i));
+                }
+              }
+            }
+          
+          tools::TopSortKahn khan = tools::top_sort_kahn(V, graph);
+          // dp[i] will store the LENGTH of the longest path ending at node i.
+          vi dp(V, 1); // Initialize all paths to length 1 (the box itself)
+          // parent[i] will store the predecessor of node i on its current longest path.
+          // This is needed to reconstruct the final path.
+          vi parent(V, -1);
 
           //Iterate through the nodes in the order given by the topological sort.
           for(int u : khan.top_sort) {   
             // For each neighbor v of u...
             for(const auto& neigh : graph[u]) {
-              int v = neigh.node;
-              // The start time for v must be after u finishes.
-              // So, the finish time for v is the max of its current earliest start + its own time,
-              // or u's finish time + v's own time.
-              finish_time[v] = std::max(finish_time[v], finish_time[u] + times[v]);
+              int v = neigh.node;     
+              //Check if the path through u creates a longer path to v.
+              if(dp[u] + 1 > dp[v]) {
+                // We found a better path to v!
+                dp[v] = dp[u] + 1;
+                parent[v] = u; // The best way to get to v is now from u.
+              }
             }
           }
 
-          int max_time_to_complete = 0;
-          for(int v = 0; v < V; ++v) {
-            if(is_active[v])
-              max_time_to_complete = std::max(max_time_to_complete, finish_time[v]);
+
+          // 1. Find the length of the longest path and where it ends.
+          int max_len = 0;
+          int end_node = -1;
+          for(int i = 0; i < V; ++i) {
+            if(dp[i] > max_len) {
+              max_len = dp[i];
+              end_node = i;
+            }
           }
 
-          std::cout << max_time_to_complete << std::endl;
-          if(t_cases) std::cout << std::endl;
-        }
+          // 2. Reconstruct the path by backtracking using the parent array.
+          vi path;
+          int current_node = end_node;
+          while(current_node != -1) {
+            path.push_back(current_node);
+            current_node = parent[current_node];
+          }
+
+          printf("Case #%d\n%d\n", t_case++, max_len);
+          for(auto& p : path) {
+            Cube cube = node_to_cube[p];
+            printf("%d %s\n", cube.id, face_to_str(cube.top_face).c_str());
+          }
+        }  
     }
 }
 
-namespace project_scheduling = algorithms::onlinejudge::graph::project_scheduling;
+namespace tower_of_cubes = algorithms::onlinejudge::graph::tower_of_cubes;
 
-int main() { 
+int main() {
         std::ios_base::sync_with_stdio(false);
     std::cin.tie(NULL);
     
-    project_scheduling::submit(); 
+    tower_of_cubes::submit(); 
 }
 

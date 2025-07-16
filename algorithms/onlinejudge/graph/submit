@@ -879,7 +879,7 @@ namespace algorithms::onlinejudge::graph::tower_of_cubes
     void submit()
     {
 
-        bool first_case = true; // Flag to track if this is the first test case
+      bool first_case = true; // Flag to track if this is the first test case
         while(while_read(N) && N) {
 
           // --- THE FIX ---

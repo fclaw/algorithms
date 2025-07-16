@@ -59,6 +59,7 @@ struct Cube
     Face top_face;
     int colour;
     int op_colour;
+    int weight;
 };
 
 std::ostream& operator << (std::ostream& os, const Cube& cube) 
@@ -107,7 +108,8 @@ namespace algorithms::onlinejudge::graph::tower_of_cubes
                 cube_idx,
                 top_face,
                 colors[top_face_idx],       // color of the top face
-                colors[bottom_face]         // color of the bottom face
+                colors[bottom_face],        // color of the bottom face
+                cube_idx
               };
             }
         }
@@ -122,9 +124,11 @@ namespace algorithms::onlinejudge::graph::tower_of_cubes
               if(cube_i != cube_j) {
                 int top_colour = node_to_cube[i].colour;
                 int bottom_colour = node_to_cube[j].op_colour;
+                int w_i = node_to_cube[i].weight;
+                int w_j = node_to_cube[j].weight;
                 // match the colour of the top face of the heaviest cube 
                 // with colour on the opposite face to the top face of the lighter one
-                if(cube_i > cube_j && top_colour == bottom_colour) {
+                if(w_i > w_j && top_colour == bottom_colour) {
                   graph[i].push_back(tools::mkDefNode(j));
                 }
               }

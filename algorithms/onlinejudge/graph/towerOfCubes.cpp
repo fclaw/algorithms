@@ -57,8 +57,8 @@ struct Cube
 {
     int id;
     Face top_face;
-    int colour;
-    int op_colour;
+    int colour; // color of the top face
+    int op_colour; // color of the bottom face
     int weight;
 };
 
@@ -103,14 +103,9 @@ namespace algorithms::onlinejudge::graph::tower_of_cubes
             // For each of the 6 possible orientations...
             for (int top_face_idx = 0; top_face_idx < Faces; ++top_face_idx) {
               Face top_face = static_cast<Face>(top_face_idx);
-              Face bottom_face = opposite_face[top_face];  
-              node_to_cube[node++] = {
-                cube_idx,
-                top_face,
-                colors[top_face_idx],       // color of the top face
-                colors[bottom_face],        // color of the bottom face
-                cube_idx
-              };
+              int top_clr = colors[top_face];
+              int bottom_clr = colors[opposite_face[top_face]];
+              node_to_cube[node++] = { cube_idx, top_face, top_clr, bottom_clr, cube_idx };
             }
         }
 
@@ -122,13 +117,13 @@ namespace algorithms::onlinejudge::graph::tower_of_cubes
               int cube_i = node_to_cube[i].id;
               int cube_j = node_to_cube[j].id;
               if(cube_i != cube_j) {
-                int top_colour = node_to_cube[i].colour;
-                int bottom_colour = node_to_cube[j].op_colour;
+                int top_clr = node_to_cube[i].colour;
+                int bottom_clr = node_to_cube[j].op_colour;
                 int w_i = node_to_cube[i].weight;
                 int w_j = node_to_cube[j].weight;
                 // match the colour of the top face of the heaviest cube 
                 // with colour on the opposite face to the top face of the lighter one
-                if(w_i > w_j && top_colour == bottom_colour) {
+                if(w_i > w_j && top_clr == bottom_clr) {
                   graph[i].push_back(tools::mkDefNode(j));
                 }
               }

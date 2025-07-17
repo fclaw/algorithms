@@ -977,10 +977,5 @@ namespace algorithms::onlinejudge::graph::tower_of_cubes
 
 namespace tower_of_cubes = algorithms::onlinejudge::graph::tower_of_cubes;
 
-int main() {
-        std::ios_base::sync_with_stdio(false);
-    std::cin.tie(NULL);
-    
-    tower_of_cubes::submit(); 
-}
+int main() { tower_of_cubes::submit(); }
 

@@ -29,7 +29,7 @@ using vvvi = std::vector<vvi>;
 using ll = long long;
 
 constexpr int inf = 1e5;
-constexpr int MAX = 1001;
+constexpr int MAX = 1010;
 constexpr int WALK_TM = 16;
 constexpr int REST_TM = 8; 
 constexpr int NIGHT_START = 18;
@@ -39,7 +39,7 @@ constexpr int TIME_24 = 24;
 
  bool is_jungle[MAX];
 
-bool can_walk(int walk_tm) { return walk_tm <= WALK_TM; }
+bool can_walk(int walk_tm) { return walk_tm < WALK_TM; }
 bool is_night(int tm) { return (tm >= NIGHT_START && tm <= 23) || (tm >= 0 && tm <= NIGHT_END); }
 bool is_pos_safe(int pos, int tm) { 
   return !is_jungle[pos] ||

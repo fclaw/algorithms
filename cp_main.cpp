@@ -41,5 +41,21 @@ constexpr int inf = 1e5;
 
 int main(int argc, char* argv[])
 {
+    std::string warehouse;
+    while_read(warehouse);
 
+      int s = (int)warehouse.size();
+      int curr_idx = 0;
+      while(curr_idx < s) {
+
+         int j = curr_idx;
+         while(j < s && warehouse[j] == '.') ++j;
+         int first_package = ++j;
+         while(j < s && warehouse[j] == '.') ++j;
+         int second_package = ++j;
+         if(first_package < s && second_package < s) {
+          printf("%d,%d\n", first_package, second_package);
+         }
+         curr_idx = j;
+      }
 }

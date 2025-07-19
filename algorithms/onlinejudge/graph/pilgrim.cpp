@@ -37,7 +37,7 @@ constexpr int NIGHT_END = 6;
 constexpr int TIME_24 = 24; 
 
 
- bool is_jungle[MAX];
+bool is_jungle[MAX];
 
 bool can_walk(int walk_tm) { return walk_tm < WALK_TM; }
 bool is_night(int tm) { return (tm >= NIGHT_START && tm <= 23) || (tm >= 0 && tm <= NIGHT_END); }

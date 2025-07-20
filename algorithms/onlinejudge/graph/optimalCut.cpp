@@ -2,6 +2,41 @@
 ───────────────────────────────────────────────────────────────
 🧳 UVa 11782 Optimal Cut, rt: s
 ───────────────────────────────────────────────────────────────
+// dp[node_id][k]
+vector<vector<int>> dp;
+
+void solve(Tree* u) {
+    if (u == nullptr) return;
+
+    // Post-order traversal: solve for children first
+    solve(u->left);
+    solve(u->right);
+
+    // --- DP Calculation for node u ---
+    
+    // Case 1: The cut in u's subtree includes u itself.
+    // This is a valid cut of size 1 for the subtree.
+    dp[u->id][1] = u->w;
+
+    // Case 2: The cut is formed by combining cuts from the children.
+    if (u->left && u->right) {
+      for(int k_left = 1; k_left <= K; ++k_left) {
+        int k_right = K - k_left;
+        // Combine a k_left-node cut from the left 
+        // and a k_right-node cut from the right
+        dp[u->id][k_left + k_right] = 
+          std::max(dp[u->id][k_left + k_right],
+                   dp[u->left->id][k_left] + 
+                   dp[u->right->id][k_right]);
+      }
+    }
+    // (Also handle cases where only one child exists)
+}
+
+// Initial call:
+// solve(root);
+// The final answer is max(dp[root][k] for k from 1 to K)
+
 */
 
 #include "../debug.h"

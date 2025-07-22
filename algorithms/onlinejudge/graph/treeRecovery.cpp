@@ -26,9 +26,9 @@ namespace algorithms::onlinejudge::graph::tree_recovery
 {
     /** https://onlinejudge.org/external/5/536.pdf */
     std::string preorder_s, inorder_s; 
-    Tree* restore_from_preorder_inorder(int& pos, const std::string& inorder) {
+    Tree* restore_from_preorder_inorder(size_t& pos, const std::string& inorder) {
 
-      if(pos >= (int)preorder_s.size()) return nullptr;
+      if(pos >= preorder_s.size()) return nullptr;
 
       if(inorder.size() == 1) {
         return new Tree(pos++, inorder.front());
@@ -39,7 +39,7 @@ namespace algorithms::onlinejudge::graph::tree_recovery
         pos++;
         auto left = inorder.substr(0, root_pos);
         if(!left.empty()) tree->left = restore_from_preorder_inorder(pos, left);
-        auto right = inorder.substr(root_pos + 1, inorder.size());
+        auto right = inorder.substr(root_pos + 1, inorder.size() - (root_pos + 1));
         if(!right.empty()) tree->right = restore_from_preorder_inorder(pos, right);
         return tree;
       }
@@ -68,7 +68,7 @@ namespace algorithms::onlinejudge::graph::tree_recovery
             throw std::ios_base::failure(errorMessage);
           }  
         while(while_read(preorder_s, inorder_s)) {
-          int pos = 0;
+          size_t pos = 0;
           Tree* tree = restore_from_preorder_inorder(pos, inorder_s);
           std::string tree_s;
           do_postorder(tree, tree_s);

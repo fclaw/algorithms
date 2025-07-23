@@ -10,6 +10,9 @@
 #include <bits/stdc++.h>
 
 
+using vi = std::vector<int>;
+
+
 namespace tree = algorithms::onlinejudge::graph::tools::tree;
 
 
@@ -23,6 +26,8 @@ void backtrack(tree::Tree<>* tree, int acc, int& leaf, int& min_path_value) {
       if(acc < min_path_value) {
         leaf = tree->val;
         min_path_value = acc;
+      } else if(acc == min_path_value) {
+        leaf = std::min(leaf, tree->val);
       }
       return;
     }
@@ -39,26 +44,20 @@ void backtrack(tree::Tree<>* tree, int acc, int& leaf, int& min_path_value) {
 namespace algorithms::onlinejudge::graph::tree_recovery_2
 {
     /** https://onlinejudge.org/external/5/548.pdf */
-    std::string in_order, post_order;
-    tree::Tree<>* restore_from_postorder_inorder(size_t& pos, const std::string& inorder) {
+    vi inorder, postorder;
+    std::unordered_map<int, int> inorder_positions;
+    tree::Tree<>* restore_tree(size_t root_start, size_t l, size_t r) {
 
-      if(pos >= in_order.size()) return nullptr;
+      if(l >= r) return nullptr;
 
-      if(inorder.size() == 1) {
-        return new tree::Tree<>(pos++, inorder.front() - '0');
-      } else {
-        char label = post_order[pos];
-        int v = label - '0';
-        tree::Tree<>* tree = new tree::Tree<>(pos, v);
-        size_t root_pos = inorder.find(label);
-        pos++;
-        auto left = inorder.substr(0, root_pos);
-        if(!left.empty()) tree->left = restore_from_postorder_inorder(pos, left);
-        auto right = inorder.substr(root_pos + 1, inorder.size() - (root_pos + 1));
-        if(!right.empty()) tree->right = restore_from_postorder_inorder(pos, right);
-        return tree;
-      }
+      int root_label = postorder[root_start];
+      tree::Tree<>* tree = new tree::Tree<>(root_label, root_start);
 
+      size_t m = inorder_positions.at(root_label);
+      size_t right_size = r - m - 1;
+      tree->left = restore_tree(root_start - right_size - 1, l, m);
+      tree->right = restore_tree(root_start - 1, m + 1, r);
+      return tree;
     }
     void submit(std::optional<char*> file, bool debug_mode)
     {
@@ -75,21 +74,23 @@ namespace algorithms::onlinejudge::graph::tree_recovery_2
         
         std::string s;  
         while(std::getline(std::cin, s)) {
-          for(int i = 0; i < (int)s.size(); ++i) {
-            if(std::isdigit(s[i])) {
-              in_order.push_back(s[i]);
-            }
-          }
+          int v;
+          inorder_positions.clear();
+          inorder.clear();
+          postorder.clear();
+          std::stringstream ss_in(s);
+          while(ss_in >> v) { inorder.push_back(v); }
+
           std::getline(std::cin, s);
-          for(int i = 0; i < (int)s.size(); ++i) {
-            if(std::isdigit(s[i])) {
-              post_order.push_back(s[i]);
-            }
+          std::stringstream ss_post(s);
+          while(ss_post >> v) { postorder.push_back(v); }
+
+          // Pre-compute inorder positions for O(1) lookups
+          for (int i = 0; i < (int)inorder.size(); ++i) {
+            inorder_positions[inorder[i]] = i;
           }
 
-          std::reverse(post_order.begin(), post_order.end());
-          size_t pos = 0;
-          tree::Tree<>* tree = restore_from_postorder_inorder(pos, in_order);
+          tree::Tree<>* tree = restore_tree(postorder.size() - 1, 0, inorder.size());
           int leaf = 0;
           int min_path_value = INT32_MAX;
           backtrack(tree, 0, leaf, min_path_value);

@@ -91,9 +91,6 @@ tree::Tree<Node>* build_tree(int& i, const v_input& nodes) {
     // Left child is a sub-mobile, so we recurse.
     // The distance Dl belongs to this child.
     root->left = build_tree(i, nodes);
-    if(root->left) { // Check if recursion was successful
-      root->val.l = Dl; // Store distance in the child
-    }
   } else {
     // Left child is a direct weight. Create a leaf node.
     root->left = new tree::Tree<Node>({Wl, 0, 0});
@@ -103,9 +100,6 @@ tree::Tree<Node>* build_tree(int& i, const v_input& nodes) {
   if(Wr == 0) {
     // Right child is a sub-mobile.
     root->right = build_tree(i, nodes);
-    if(root->right) {
-      root->val.r = Dr; // Store distance
-    }
   } else {
     // Right child is a direct weight.
     root->right = new tree::Tree<Node>({Wr, 0, 0});

@@ -145,7 +145,6 @@ namespace algorithms::onlinejudge::graph::mobile
           }
           tree::Tree<Node>* tree = build_tree(idx, nodes);
           ll ans = is_equilibrium(tree);
-          dbg(ans, tree::def<ll>);
           printf("%s\n", (ans != tree::def<ll> ? "YES" : "NO"));
           if(t_cases) std::cout << std::endl;
         }

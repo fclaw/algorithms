@@ -13,21 +13,23 @@
 
 namespace tree = algorithms::onlinejudge::graph::tools::tree;
 
+using ll = long long;
+
 // fulcrum: w = 0, w /= 0, r /= 0
 // weight: w /= 0, l = r = 0;
 struct Node
 {
-    int w;
-    int l;
-    int r;
+    ll w;
+    ll l;
+    ll r;
 };
 
 struct Input
 {
-    int w_l;
-    int d_l;
-    int w_r;
-    int d_r;
+    ll w_l;
+    ll d_l;
+    ll w_r;
+    ll d_r;
     Input() {}
 };
 
@@ -39,7 +41,7 @@ std::istream& operator >> (std::istream& is, Input& input) {
 
 using v_input = std::vector<Input>;
 
-int is_equilibrium(tree::Tree<Node>* tree) {
+ll is_equilibrium(tree::Tree<Node>* tree) {
 
   if(!(tree->left) &&
      !(tree->right))
@@ -49,16 +51,16 @@ int is_equilibrium(tree::Tree<Node>* tree) {
   tree::Tree<Node>* right_tree = tree->right;
 
   // fulcrum is imbalanced
-  if(!left_tree || !right_tree)
-    return tree::def<>;
+  if(!left_tree || !right_tree) 
+    return tree::def<ll>;
 
-  int total_left_w = is_equilibrium(left_tree);
-  int total_right_w = is_equilibrium(right_tree);
+  ll total_left_w = is_equilibrium(left_tree);
+  ll total_right_w = is_equilibrium(right_tree);
 
-  if(total_left_w != tree::def<> &&
-     total_right_w != tree::def<>) {
-    int left_w = total_left_w * (tree->val).l;
-    int right_w = total_right_w * (tree->val).r;
+  if(total_left_w != tree::def<ll> &&
+     total_right_w != tree::def<ll>) {
+    ll left_w = total_left_w * (tree->val).l;
+    ll right_w = total_right_w * (tree->val).r;
     if(left_w == right_w) {
       // we are solely concerned with 
       // total weight of left, right
@@ -66,7 +68,7 @@ int is_equilibrium(tree::Tree<Node>* tree) {
       return total_left_w + total_right_w;
     }
   }
-  return tree::def<>;
+  return tree::def<ll>;
 }
 
 
@@ -75,16 +77,16 @@ tree::Tree<Node>* build_tree(int& i, const v_input& nodes) {
   if(i >= (int)nodes.size()) return nullptr;
 
   // Get the definition for the current node from the flat list.
-  int Wl = nodes[i].w_l;
-  int Dl = nodes[i].d_l;
-  int Wr = nodes[i].w_r;
-  int Dr = nodes[i].d_r;
+  ll Wl = nodes[i].w_l;
+  ll Dl = nodes[i].d_l;
+  ll Wr = nodes[i].w_r;
+  ll Dr = nodes[i].d_r;
   i++; // Consume this line
 
   // Create the node representing the fulcrum/bar.
   // Its value doesn't matter much, it just holds the children.
   auto root = new tree::Tree<Node>(); 
-  root->val.w = tree::def<>;
+  root->val.w = tree::def<ll>;
   // --- Check Left Child ---
   if (Wl == 0) {
     // Left child is a sub-mobile, so we recurse.
@@ -143,8 +145,8 @@ namespace algorithms::onlinejudge::graph::mobile
             nodes.push_back(input);
           }
           tree::Tree<Node>* tree = build_tree(idx, nodes);
-          int ans = is_equilibrium(tree);
-          printf("%s\n", (ans != tree::def<> ? "YES" : "NO"));
+          ll ans = is_equilibrium(tree);
+          printf("%s\n", (ans != tree::def<ll> ? "YES" : "NO"));
           if(t_cases) std::cout << std::endl;
         }
     }

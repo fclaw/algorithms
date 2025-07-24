@@ -137,19 +137,15 @@ namespace algorithms::onlinejudge::graph::mobile
           v_input nodes;
           Input input;
           std::string s;
-          while(std::getline(std::cin, s) && 
-                !s.empty()) {
+          while(std::getline(std::cin, s) && !s.empty()) {
             std::stringstream ss(s);
-            ss >> input.w_l;
-            ss >> input.d_l;
-            ss >> input.w_r;
-            ss >> input.d_r;
+            ss >> input;
             nodes.push_back(input);
           }
           tree::Tree<Node>* tree = build_tree(idx, nodes);
           int ans = is_equilibrium(tree);
-          if(ans != tree::def<>) puts("YES"); else puts("NO");
-          if(t_cases) puts("");
+          printf("%s\n", (ans != tree::def<> ? "YES" : "NO"));
+          if(t_cases) std::cout << std::endl;
         }
     }
 }

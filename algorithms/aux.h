@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include <bits/stdc++.h>
 
 template<typename F>
 inline void loop(size_t n, F&& f) {
@@ -13,3 +13,20 @@ std::istream& operator >> (std::istream& is, std::pair<int, int>& p) { return is
 
 template<typename... Args>
 bool while_read(Args&... args) { return (... && static_cast<bool>(std::cin >> args)); }
+
+
+// --- RECOMMENDED ALTERNATIVE: Specialize std::hash ---
+// This is often considered cleaner because you don't need to specify
+// the hasher every time you declare a map.
+// This specialization needs to be in the std namespace.
+namespace std {
+    template<typename T1, typename T2>
+    struct hash<std::pair<T1, T2>> {
+        size_t operator()(const std::pair<T1, T2>& p) const {
+            // Use the same robust combination logic.
+            auto h1 = std::hash<T1>{}(p.first);
+            auto h2 = std::hash<T2>{}(p.second);
+            return h1 ^ (h2 + 0x9e3779b9 + (h1 << 6) + (h1 >> 2));
+        }
+    };
+}

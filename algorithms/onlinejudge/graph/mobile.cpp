@@ -59,9 +59,9 @@ ll is_equilibrium(tree::Tree<Node>* tree) {
 
   if(total_left_w != tree::def<ll> &&
      total_right_w != tree::def<ll>) {
-    ll left_w = total_left_w * (tree->val).l;
-    ll right_w = total_right_w * (tree->val).r;
-    if(left_w == right_w) {
+    ll left_torque = total_left_w * (tree->val).l;
+    ll right_torque = total_right_w * (tree->val).r;
+    if(left_torque == right_torque) {
       // we are solely concerned with 
       // total weight of left, right
       // and the propagation of it upward
@@ -85,8 +85,7 @@ tree::Tree<Node>* build_tree(int& i, const v_input& nodes) {
 
   // Create the node representing the fulcrum/bar.
   // Its value doesn't matter much, it just holds the children.
-  auto root = new tree::Tree<Node>(); 
-  root->val.w = tree::def<ll>;
+  auto root = new tree::Tree<Node>({tree::def<ll>, Dl, Dr});
   // --- Check Left Child ---
   if (Wl == 0) {
     // Left child is a sub-mobile, so we recurse.
@@ -146,6 +145,7 @@ namespace algorithms::onlinejudge::graph::mobile
           }
           tree::Tree<Node>* tree = build_tree(idx, nodes);
           ll ans = is_equilibrium(tree);
+          dbg(ans, tree::def<ll>);
           printf("%s\n", (ans != tree::def<ll> ? "YES" : "NO"));
           if(t_cases) std::cout << std::endl;
         }

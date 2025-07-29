@@ -1,0 +1,87 @@
+ /*
+ ─────────────────────────────────────────────────────────────── 
+ 🧳 UVa 12186 Another Crisis, rt: s
+ ───────────────────────────────────────────────────────────────
+ */
+
+#include "../debug.h"
+#include "../../aux.h"
+#include <bits/stdc++.h>
+#include <set>
+
+
+using vi = std::vector<int>;
+using vvi = std::vector<vi>;
+
+struct Petition
+{
+    int boss;
+    int workers;
+    bool operator < (const Petition& other) const {
+      return workers < other.workers || 
+            (workers == other.workers && 
+             boss < other.boss);
+    }
+};
+
+int min_workers_needed(int boss, const vvi& hierarchy, const std::unordered_map<int, int>& threshold) 
+{
+    bool is_boss = false;
+    std::set<Petition> petitions;
+    for(int subordinate : hierarchy[boss]) {
+      is_boss = true; // If there are children, this node is a boss
+      // Recursively calculate the number of workers needed in the child subtree
+      int workers = min_workers_needed(subordinate, hierarchy, threshold);
+      petitions.insert({subordinate, workers});
+    }
+
+    // If the current node is a boss, check if it needs to hire more workers
+    if(is_boss) {
+      std::vector<Petition> petitions_v(petitions.begin(), petitions.end());
+      int required_petitions = threshold.at(boss);
+      int curr = 0;
+      int workers = 0;
+      while(curr < required_petitions) {
+        Petition petition = petitions_v[curr];
+        workers += petition.workers;
+        ++curr;
+      }
+      return workers;
+    } else return 1; // If it's not a boss, it needs at least one worker
+}
+
+
+namespace algorithms::onlinejudge::graph::petitions
+{
+    /** https://onlinejudge.org/external/121/12186.pdf */
+    int n, t;
+    void submit(std::optional<char*> file, bool debug_mode)
+    {
+        if (file.has_value())
+          // Attempt to reopen stdin with the provided file
+          if (std::freopen(file.value(), "r", stdin) == nullptr) {
+            // If freopen fails, throw an exception with a more detailed error message
+            std::string name = file.value();
+            std::string errorMessage = 
+              "Failed to open file: " + name +
+              " with error: " + std::strerror(errno);
+            throw std::ios_base::failure(errorMessage);
+          }
+        
+        while(while_read(n, t)) {
+          if(!n && !t) break;
+          int boss;
+          std::unordered_map<int, int> threshold;
+          vvi hierarchy(n + 1);
+          for(int e = 1; e <= n; ++e) {
+            while_read(boss);
+            threshold[boss]++;
+            hierarchy[boss].push_back(e);
+          }
+          for(auto& p : threshold) {
+            p.second = std::ceil(p.second * t / 100.0);
+          }
+          std::cout << min_workers_needed(0, hierarchy, threshold) << std::endl;
+        }
+    }
+}

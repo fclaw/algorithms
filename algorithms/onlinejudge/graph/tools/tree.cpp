@@ -1,10 +1,13 @@
 #pragma once
 
 #include <numeric>
-
+#include <set>
 
 namespace algorithms::onlinejudge::graph::tools::tree
 {
+
+    int sentinel = -1;   
+
     template<typename T = int>
     T def = std::numeric_limits<T>::max();
     template<typename T = int>
@@ -15,10 +18,10 @@ namespace algorithms::onlinejudge::graph::tools::tree
         Tree* left = nullptr; 
         Tree* right = nullptr;
         Tree() {
-          this->node = -1;
+          this->node = sentinel;
           this->val = def<T>;
         }
-        Tree(T val, int node = -1) {
+        Tree(T val, int node = sentinel) {
         this->node = node;
         this->val = val;
         }
@@ -27,6 +30,7 @@ namespace algorithms::onlinejudge::graph::tools::tree
   
    using vi = std::vector<int>;
    using vvi = std::vector<vi>;
+   using ii = std::pair<int, int>;
 
    struct Diameter
    {
@@ -69,4 +73,18 @@ namespace algorithms::onlinejudge::graph::tools::tree
      }
      return diameter;
    }
+
+  std::set<int> find_tree_centres(const ii& range, const vi& path) {
+    int cnt = 0, idx = 0;
+    std::set<int> roots;
+    while(idx < (int)path.size()) {  
+      if(cnt >= range.first && 
+         cnt <= range.second) {
+        roots.insert(path[idx]);
+      }
+      ++idx;
+      ++cnt;
+    }
+    return roots;
+  }
 }

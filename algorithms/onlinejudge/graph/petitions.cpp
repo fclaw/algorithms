@@ -35,7 +35,7 @@ int min_workers_needed(int boss, const vvi& hierarchy, const std::unordered_map<
       petitions.insert({subordinate, workers});
     }
 
-    // If the current node is a boss, check if it needs to hire more workers
+    // If the current node is a boss, how min workers are needed to meet the threshold?
     if(is_boss) {
       std::vector<Petition> petitions_v(petitions.begin(), petitions.end());
       int required_petitions = threshold.at(boss);

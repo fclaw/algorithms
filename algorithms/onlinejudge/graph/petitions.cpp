@@ -27,26 +27,23 @@ struct Petition
 int min_workers_needed(int boss, const vvi& hierarchy, const std::unordered_map<int, int>& threshold) 
 {
     bool is_boss = false;
-    std::set<Petition> petitions;
+    std::vector<Petition> petitions;
     for(int subordinate : hierarchy[boss]) {
       is_boss = true; // If there are children, this node is a boss
       // Recursively calculate the number of workers needed in the child subtree
       int workers = min_workers_needed(subordinate, hierarchy, threshold);
-      petitions.insert({subordinate, workers});
+      petitions.push_back({subordinate, workers});
     }
 
     // If the current node is a boss, how min workers are needed to meet the threshold?
     if(is_boss) {
-      std::vector<Petition> petitions_v(petitions.begin(), petitions.end());
+      std::sort(petitions.begin(), petitions.end());
       int required_petitions = threshold.at(boss);
-      int curr = 0;
-      int workers = 0;
-      while(curr < required_petitions) {
-        Petition petition = petitions_v[curr];
-        workers += petition.workers;
-        ++curr;
+      int total_workers = 0;
+      for (int i = 0; i < required_petitions; ++i) {
+        total_workers += petitions[i].workers;
       }
-      return workers;
+      return total_workers;
     } else return 1; // If it's not a boss, it needs at least one worker
 }
 

@@ -72,7 +72,7 @@ tree::vvi do_bfs(int start, int V, const tree::vvi& graph) {
         visited[neigh] = true;
         bfs_tree[node].push_back(neigh);
         bfs_tree[neigh].push_back(node);
-        q.push(neigh);
+    q.push(neigh);
       }
     }
   }

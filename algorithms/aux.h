@@ -9,7 +9,8 @@ inline void loop(size_t n, F&& f) {
 }
 
 // Overloading the >> operator for std::pair<int, int>
-std::istream& operator >> (std::istream& is, std::pair<int, int>& p) { return is >> p.first >> p.second; }
+template<typename T1, typename T2>
+std::istream& operator >> (std::istream& is, std::pair<T1, T2>& p) { return is >> p.first >> p.second; }
 
 template<typename... Args>
 bool while_read(Args&... args) { return (... && static_cast<bool>(std::cin >> args)); }

@@ -15,7 +15,7 @@ namespace mcmb = algorithms::onlinejudge::graph::tools::mcmb;
 
 
 constexpr double speed_factor = 2.0; // factor to speed up the dog
-constexpr double eps = 1e-8; // epsilon for floating point comparison
+constexpr double eps = 1e-6; // epsilon for floating point comparison
 
 using ii = std::pair<int, int>;
 
@@ -31,7 +31,7 @@ struct Segment
 
 
 // right set is the places
-struct Place 
+struct Place
 {
     int id;
     ii pos;
@@ -46,9 +46,9 @@ using ll = long long;
 
 // All inputs are std::pair<int, int>
 double euclidean(const ii& p1, const ii& p2) {
-  ll dx = p1.first - p2.first;
-  ll dy = p1.second - p2.second;
-  return dx*dx + dy*dy;
+  ll dx = std::abs(p1.first - p2.first);
+  ll dy = std::abs(p1.second - p2.second);
+  return dx * dx + dy * dy;
 }
 
 
@@ -100,11 +100,12 @@ namespace algorithms::onlinejudge::graph::dog
           mcmb::vvi graph(R_SIZE);
           for(const auto& seg : segments) {
             for(const auto& place : places) {
-              double dog_walk = 
-                euclidean(seg.start, place.pos) + 
-                euclidean(place.pos, seg.end);
-              double man_walk = euclidean(seg.start, seg.end);
-              if(dog_walk <= speed_factor * man_walk + eps) {
+              double dist_AP_sq = euclidean(seg.start, place.pos);
+              double dist_PB_sq = euclidean(place.pos, seg.end);
+              double dist_AB_sq = euclidean(seg.start, seg.end);
+              double dog_walk = std::sqrt(dist_AP_sq) + std::sqrt(dist_PB_sq);
+              double master_walk = std::sqrt(dist_AB_sq);
+              if(dog_walk <= speed_factor * master_walk + eps) {
                 graph[seg.id].push_back(place.id);
               }
             }
@@ -138,7 +139,8 @@ namespace algorithms::onlinejudge::graph::dog
             route_str += std::to_string(p.first) + " " + std::to_string(p.second) + " ";
           }
           route_str.pop_back(); // remove last space
-          printf("%d\n%s\n\n", (int)route.size(), route_str.c_str());
+          printf("%d\n%s\n", (int)route.size(), route_str.c_str());
+          if(t_cases) std::cout << std::endl;
         }
     }
 }

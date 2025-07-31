@@ -53,6 +53,7 @@ namespace algorithms::onlinejudge::graph::tools::mcmb
     using vi = std::vector<int>;
     using vvi = std::vector<vi>;
     using vb = std::vector<bool>;
+    constexpr int sentinel = -1;
     struct kuhn
     {
         // k - the number of vertices in the right set
@@ -61,7 +62,7 @@ namespace algorithms::onlinejudge::graph::tools::mcmb
         int v;
         vi match;
         vb visited;
-        kuhn(int k) : k(k), match(k, -1) {}
+        kuhn(int k) : k(k), match(k, sentinel) {}
     };
 
     // Function to find a matching in a bipartite graph using the Kuhn algorithm
@@ -71,9 +72,10 @@ namespace algorithms::onlinejudge::graph::tools::mcmb
         return false;
       kuhn_s.visited[v] = true;
       for(int to : graph[v]) {
-        if(kuhn_s.match[to] == -1 ||
-           try_kuhn(kuhn_s.match[to], graph, kuhn_s)) {
-          kuhn_s.match[to] = v;
+        int& match = kuhn_s.match[to];
+        if((match == sentinel) || 
+           try_kuhn(match, graph, kuhn_s)) {
+          match = v;
           return true;
         }
       }

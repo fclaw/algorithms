@@ -18,26 +18,25 @@ namespace mcmb = algorithms::onlinejudge::graph::tools::mcmb;
 struct Outlet
 {
     int id;
-    std::string type;
+    int type_id;
 };
 
 struct Device
 {
     int id;
-    std::string name;
-    std::string plug;
+    int type_id;
 };
 
 struct Adapter
 {
     int id;
-    std::string from;
-    std::string to;
+    int from_type_id;
+    int to_type_id;
 };
 
 
-using vb = std::vector<bool>;
-using vvb = std::vector<vb>;
+using vi = std::vector<int>;
+using vvi = std::vector<vi>;
 using v_adapter = std::vector<Adapter>;
 using v_outlet = std::vector<Outlet>;
 using v_device = std::vector<Device>;
@@ -62,24 +61,36 @@ namespace algorithms::onlinejudge::graph::plug_for_UNIX
         
         while_read(t_cases);
         while(t_cases--) {
+
+          int outlet_id = 0;
+          std::unordered_map<std::string, int> outlet_type_id;
+
+          std::string type;
           while_read(outlets_n);
           std::vector<Outlet> outlets(outlets_n);
           for(int o = 0; o < outlets_n; ++o) {
             Outlet outlet;
             outlet.id = o;
-            while_read(outlet.type);
+            while_read(type);
+            if(!outlet_type_id.count(type)) {
+              outlet.type_id = outlet_id++;
+              outlet_type_id[type] = outlet.type_id;
+            } else { outlet.type_id = outlet_type_id[type]; }
             outlets[o] = outlet;
           }
           while_read(devices_n);
           std::vector<Device> devices(devices_n);
-          std::unordered_map<int, std::string> id_device_title;
           for(int d = 0; d < devices_n; ++d) {
             Device device;
             device.id = d;
-            while_read(device.name);
-            while_read(device.plug);
+            std::string name;
+            while_read(name);
+            while_read(type);
+            if(!outlet_type_id.count(type)) {
+              outlet_type_id[type] = outlet_id++;
+              device.type_id = outlet_type_id[type];
+            } else { device.type_id = outlet_type_id[type]; }
             devices[d] = device;
-            id_device_title[d] = device.name; 
           }
 
           while_read(adapters_n);
@@ -87,54 +98,59 @@ namespace algorithms::onlinejudge::graph::plug_for_UNIX
           for(int a = 0; a < adapters_n; ++a) {
             Adapter adapter;
             adapter.id = a;
-            while_read(adapter.from);
-            while_read(adapter.to);
+            std::string from, to;
+            while_read(from);
+            while_read(to);
+            if(!outlet_type_id.count(from)) {
+              outlet_type_id[from] = outlet_id++;
+              adapter.from_type_id = outlet_type_id[from];
+            } else { adapter.from_type_id = outlet_type_id[from]; }
+            if(!outlet_type_id.count(to)) {
+              outlet_type_id[to] = outlet_id++;
+              adapter.to_type_id = outlet_type_id[to];
+            } else { adapter.to_type_id = outlet_type_id[to]; }
             adapters[a] = adapter;
           }
 
           // make connectivity map between adapters (100 adapters)
-          std::unordered_map<std::string, std::unordered_map<std::string, bool>> adapters_map;
-          for(const auto& adapter : adapters) {
-            adapters_map[adapter.from][adapter.to] = true;
-            adapters_map[adapter.from][adapter.from] = true;
-            adapters_map[adapter.to][adapter.to] = true;
+          vvi adapters_map(outlet_id, vi(outlet_id, false));
+          for(int o = 0; o < outlet_id; ++o) {
+            adapters_map[o][o] = true;
           }
           
+          // *** ADD THIS MISSING STEP ***
+          // Populate with direct adapter connections
+          for (const auto& adapter : adapters) {
+            adapters_map[adapter.from_type_id][adapter.to_type_id] = true;
+          }
+
+
           // Floyd-Warshall
           for(int i = 0; i < adapters_n; ++i) {
             for(int j = 0; j < adapters_n; ++j) {
               for(int k = 0; k < adapters_n; ++k) {
-                auto from  = adapters[i].from;
-                auto to = adapters[j].to;
-                auto k_from = adapters[k].from;
-                auto k_to = adapters[k].to;
-                adapters_map[from][to] = 
-                  adapters_map[from][to] || 
-                  (adapters_map[from][k_from] &&
-                   adapters_map[k_to][to]);
+                int from_id = adapters[i].from_type_id;
+                int to_id = adapters[j].to_type_id;
+                int k_from_id = adapters[k].from_type_id;
+                int k_to_id = adapters[k].to_type_id;
+                adapters_map[from_id][to_id] = 
+                  adapters_map[from_id][to_id] || 
+                  (adapters_map[from_id][k_from_id] &&
+                   adapters_map[k_to_id][to_id]);
               }
             }
           }
-           
+
           int R_SIZE = devices_n;
           int L_SIZE = outlets_n;
           
           mcmb::vvi graph(R_SIZE);
           for(int dev_id = 0; dev_id < R_SIZE; ++dev_id) {
             for(int outlet_id = 0; outlet_id < L_SIZE; ++outlet_id) {
-              auto dev_type = devices[dev_id].plug;
-              auto outlet_type = outlets[outlet_id].type;
-              bool can_reach = false;
-              if(auto dev_it = adapters_map.find(dev_type); 
-                 dev_it != adapters_map.end()) {
-                if(auto out_it = dev_it->second.find(outlet_type); 
-                   out_it != dev_it->second.end()) {
-                  can_reach = out_it->second;
-                }
-              }
-              // either through the chain of adapters or direct compatibility
-              if(can_reach || dev_type == outlet_type) {
-                graph[dev_id].push_back(outlet_id);
+              int dev_type_id = devices[dev_id].type_id;
+              int outlet_type_id = outlets[outlet_id].type_id;
+              if(adapters_map[dev_type_id][outlet_type_id]) {
+                 graph[dev_id].push_back(outlet_id);
               }
             }
           }

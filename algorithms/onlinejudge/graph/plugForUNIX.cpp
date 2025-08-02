@@ -141,12 +141,12 @@ namespace algorithms::onlinejudge::graph::plug_for_UNIX
             }
           }
 
-          int R_SIZE = devices_n;
-          int L_SIZE = outlets_n;
+          int L_SIZE = devices_n;
+          int R_SIZE = outlets_n;
           
-          mcmb::vvi graph(R_SIZE);
-          for(int dev_id = 0; dev_id < R_SIZE; ++dev_id) {
-            for(int outlet_id = 0; outlet_id < L_SIZE; ++outlet_id) {
+          mcmb::vvi graph(L_SIZE);
+          for(int dev_id = 0; dev_id < L_SIZE; ++dev_id) {
+            for(int outlet_id = 0; outlet_id < R_SIZE; ++outlet_id) {
               int dev_type_id = devices[dev_id].type_id;
               int outlet_type_id = outlets[outlet_id].type_id;
               if(adapters_map[dev_type_id][outlet_type_id]) {
@@ -156,9 +156,9 @@ namespace algorithms::onlinejudge::graph::plug_for_UNIX
           }
 
           int coupled_device = 0;
-          mcmb::kuhn kuhn_s(L_SIZE);
-          for(int dev_id = 0; dev_id < R_SIZE; ++dev_id) {
-            kuhn_s.visited.assign(R_SIZE, false);
+          mcmb::kuhn kuhn_s(R_SIZE);
+          for(int dev_id = 0; dev_id < L_SIZE; ++dev_id) {
+            kuhn_s.visited.assign(L_SIZE, false);
             bool is_coupled = mcmb::try_kuhn(dev_id, graph, kuhn_s);
             if(is_coupled) coupled_device++;
           }

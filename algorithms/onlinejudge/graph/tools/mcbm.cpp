@@ -50,8 +50,10 @@
 
 namespace algorithms::onlinejudge::graph::tools::mcmb
 {
+    template<typename T>
+    using container = std::vector<T>;
     using vi = std::vector<int>;
-    using vvi = std::vector<vi>;
+    using vvi = container<vi>;
     using vb = std::vector<bool>;
     constexpr int sentinel = -1;
     struct kuhn
@@ -67,7 +69,8 @@ namespace algorithms::onlinejudge::graph::tools::mcmb
 
     // Function to find a matching in a bipartite graph using the Kuhn algorithm
     // Returns true if a matching for v is found, false otherwise
-    bool try_kuhn(int v, const vvi& graph, kuhn& kuhn_s) {
+    template<typename T>
+    bool try_kuhn(int v, const container<T>& graph, kuhn& kuhn_s) {
       if(kuhn_s.visited[v]) 
         return false;
       kuhn_s.visited[v] = true;

@@ -28,13 +28,13 @@ using vvi = std::vector<vi>;
 using v_bead = std::vector<Bead>;
 
 
-bool is_connected(int start, const vvi& adj) {
+bool is_connected(int start, const vvi& colours) {
     
     // --- Step 1: Count the total number of "active" vertices ---
     // An active vertex is one that is part of at least one bead (edge).
     int total_active_nodes = 0;
     for (int i = 0; i < MAX_COLOUR; ++i) {
-        if (!adj[i].empty()) {
+        if (!colours[i].empty()) {
             total_active_nodes++;
         }
     }
@@ -43,32 +43,18 @@ bool is_connected(int start, const vvi& adj) {
     if (total_active_nodes <= 1) {
         return true;
     }
-
-    // --- Step 2: Run a single traversal (BFS is common) to see how many nodes we can reach ---
-    std::vector<bool> visited(MAX_COLOUR, false);
-    std::queue<int> q;
-    int nodes_reached = 0;
-
-    q.push(start);
-    visited[start] = true;
-    
-    while (!q.empty()) {
-        int u = q.front();
-        q.pop();
-        nodes_reached++;
-
-        for (int v : adj[u]) {
-            if (!visited[v]) {
-                visited[v] = true;
-                q.push(v);
-            }
-        }
-    }
-
-    // --- Step 3: Compare the counts ---
-    // If the number of nodes reached by our traversal equals the total number
-    // of active nodes, then the graph is connected.
-    return nodes_reached == total_active_nodes;
+  
+   uint64_t visited = 0;
+   std::function<void(int)> do_dfs =
+     [&](int node) {
+      visited |= (1LL << node);      
+       for(int neigh : colours[node]) {
+         if(!(visited & (1LL << neigh)))
+           do_dfs(neigh);
+       }
+     };
+   do_dfs(start);
+   return __builtin_popcountll(visited) == total_active_nodes;
 }
 
 

@@ -5,6 +5,9 @@ namespace algorithms::onlinejudge::graph::tools::eulerian
     using vi = std::vector<int>;
     using vvi = std::vector<vi>;
 
+
+
+    
     // This function assumes the graph has an Eulerian path/circuit
     vi hierholzer_u(
       int start,

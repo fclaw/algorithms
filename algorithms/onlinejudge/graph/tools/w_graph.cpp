@@ -37,6 +37,12 @@ namespace algorithms::onlinejudge::graph::tools::wg
         graph[v].push_back(wg::mkWNode(u, w));
     }
 
+    template <typename W = int, typename T = tools::Unit>
+    void pair_cond(WGraph<W, T>& graph, int u, int v, W w, std::function<bool()> cond) {
+      graph[u].push_back(wg::mkWNode(v, w));
+      if(cond) graph[v].push_back(wg::mkWNode(u, w));
+    }
+
     // Function to setup a WGraph from a grid of weights
     template <typename W = int, typename T = tools::Unit>
     WGraph<W, T> setupGraph(const WGrid<W>& grid, bool is_unidirectional = false) {

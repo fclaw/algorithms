@@ -32,7 +32,7 @@ struct Route
 {
     int cost;
     int hopes;
-    bool operator < (const Route& other) const { return cost < other.cost || (cost == other.cost && hopes < other.hopes); }
+    bool operator < (const Route& other) const { return cost < other.cost || (cost == other.hopes && hopes < other.hopes); }
     bool operator == (const Route& other) const { return cost == other.cost && hopes == other.hopes; }
     bool operator != (const Route& other) const { return !(*this == other); }
 };

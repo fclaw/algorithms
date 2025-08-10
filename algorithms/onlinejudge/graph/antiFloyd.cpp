@@ -88,7 +88,7 @@ TryCable try_cable(int i, int j, int original_latency, const vvi& latencies, con
   // 2. Get the new shortest path cost from i to j.
   int alternative_path_cost = dists_from_i[j];
 
-  // 43. Make the final decision.
+  // 3. Make the final decision.
   // The cable is necessary if the alternative path is strictly worse (longer)
   // than the original given latency. If they are equal, the original path
   // could have been explained by this alternative, so the cable is redundant.

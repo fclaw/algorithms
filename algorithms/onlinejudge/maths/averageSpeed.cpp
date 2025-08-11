@@ -25,9 +25,5 @@ namespace algorithms::onlinejudge::maths::particle
               " with error: " + std::strerror(errno);
             throw std::ios_base::failure(errorMessage);
           }
-        
-        while(while_read(velocity, time)) {
-          std::cout << (velocity * 2 * time) << std::endl;
-        }
     }
 }

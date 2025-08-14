@@ -23,23 +23,19 @@ bool check_divisibility(const vi& digits, int k) {
 }
 
 
-void backtrack(int i, int left, int right, vi& digits, vi& ans, bool& found) {
-  if(i > right) {
+void backtrack(int k, int left, int right, vi& digits, vi& ans, bool& found) {
+  if(k > right) {
     ans = digits;
     found = true;
     return;
   }
 
-  for(int digit = 0; digit <= 9; ++digit) {
-    if(digit == 0 && digits.empty()) 
-      continue;
+  for(int digit = (k == 1 ? 1 : 0); digit <= 9; ++digit) {
     digits.push_back(digit);
-    bool is_valid = check_divisibility(digits, i);
-    if(i >= left && !is_valid) {
-      digits.pop_back();
-      continue;
+    bool is_valid = check_divisibility(digits, k);
+    if(k < left || (k >= left && is_valid)) {
+      backtrack(k + 1, left, right, digits, ans, found);
     }
-    backtrack(i + 1, left, right, digits, ans, found);
     digits.pop_back();
     if(found) return;
   }
@@ -74,9 +70,9 @@ namespace algorithms::onlinejudge::maths::super_number
           }
         }
         
-        while_read(t_cases);
+        scanf("%d\n", &t_cases);
         while(t_cases--) {
-          while_read(left, right);
+          scanf("%d %d\n", &left, &right);
           vi digits;
           vi ans;
           bool found = false;

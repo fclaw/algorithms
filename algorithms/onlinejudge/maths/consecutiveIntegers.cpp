@@ -29,6 +29,13 @@ namespace algorithms::onlinejudge::maths::consecutive_integers
         
         while(scanf("%d", &num) == 1 && num != -1) {
           int n, first;
+          // If there are multiple solutions, which one consists of more numbers? 
+          // it tells us to maximize n which implies std::sqrt(2 * num) for 2S = n * (2a + n - 1)
+          // For a fixed sum S, if we want to make n as large as possible, we must make the other term (2a + n - 1) as small as possible.
+          // Since n is positive, we need to make a (the starting term) as small as possible. 
+          // The problem doesn't explicitly state the integers must be positive, but for finding the longest sequence, 
+          // a small positive a is the most constraining case. The smallest possible integer to start a sequence with is a = 1.
+          // 2S = n * (2(1) + n - 1) => 2S = n * (2 + n - 1) => 2S = n * (n + 1)
           for(int curr_n = std::sqrt(2 * num); curr_n >= 1; --curr_n) {
             if(!((2 * num) % curr_n) && !(((2 * num) / curr_n - curr_n + 1) % 2)) {
               first = ((2 * num) / curr_n - curr_n + 1) / 2;

@@ -32,21 +32,18 @@ namespace algorithms::onlinejudge::maths::ant_on_chessboard
           }
         
         while(scanf("%lld", &time) == 1 && time > 0) {
-          ld nd = std::sqrtl(time);
-
-          ld dn;
-          ld n_frac = std::modf(nd, &dn);
+          ld root;
+          bool is_integer = std::modf(std::sqrtl(time), &root) == 0;          
+          ll n = root;
 
           if(time == 2) {
             printf("1 2\n");
-          } else if(n_frac == 0) {
-            ll n = (ll)dn;
-            if(((ll)n % 2)) {
-              printf("%lld %lld\n", (ll)1, (ll)n);
-            } else printf("%lld %lld\n", (ll)n, (ll)1);
+          } else if(is_integer) {
+            if((n % 2)) {
+              printf("%d %lld\n", 1, n);
+            } else printf("%lld %d\n", n, 1);
           } else {
-
-            ll n = (ll)dn + 1;
+            n += 1;
             ll shift = (n * n) % time;
             if((n % 2)) {
               // start position (1, n)

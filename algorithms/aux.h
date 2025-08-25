@@ -35,3 +35,16 @@ namespace std {
 template<typename T1, typename T2>
 std::ostream& operator << (std::ostream& os, const std::pair<T1, T2>& p) 
 { return os << "{ " << p.first << ", " << p.second << "}"; }
+
+
+template <typename T>
+T modpow(T base, T exp, T modulus) {
+  base %= modulus;
+  T result = 1;
+  while (exp > 0) {
+    if (exp & 1) result = (result * base) % modulus;
+    base = (base * base) % modulus;
+    exp >>= 1;
+  }
+  return result;
+}

@@ -1,6 +1,6 @@
 #define DBG_MACRO_NO_WARNING
 
-#include "algorithms/onlinejudge/maths/countOnCantor.cpp"
+#include "algorithms/onlinejudge/maths/beeMaja.cpp"
 #include <chrono>
 #include <iomanip>
 #include <bits/stdc++.h>
@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
     long mem_before = get_memory_usage();
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::maths::count_on_cantor::submit(file, debug_mode);
+    algorithms::onlinejudge::maths::bee_Maja::submit(file, debug_mode);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

@@ -2,6 +2,20 @@
 ───────────────────────────────────────────────────────────────
 🧳 UVa 138 Street Numbers, rt: s
 ───────────────────────────────────────────────────────────────
+ * --- Analysis ---
+ *
+ * The problem requires finding integer pairs (k, n) that satisfy the equation:
+ *   Sum(1..k-1) = Sum(k+1..n)
+ *
+ * This simplifies to the Diophantine equation:
+ *   2k^2 = n(n+1)
+ *
+ * which is a form of Pell's equation that can be written as (2n+1)^2 - 8k^2 = 1.
+ *
+ * The solutions can be generated via a recurrence relation. If (k_i, n_i) is a
+ * solution, the next is (k_{i+1}, n_{i+1}):
+ *   k_{i+1} = 3*k_i + 2*n_i + 1
+ *   n_{i+1} = 4*k_i + 3*n_i + 1
 */
 
 #include "../debug.h"

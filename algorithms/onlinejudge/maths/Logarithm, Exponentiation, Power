@@ -1,0 +1,75 @@
+/*
+ * =====================================================================================
+ *
+ *       SECTION: Logarithm, Exponentiation, and Power Techniques
+ *
+ * --- Author's Philosophy: Recognizing the Pattern ---
+ *
+ * This collection of problems hinges on a single, powerful theme: solving challenges
+ * that involve numbers too large for standard data types by transforming them into
+ * a manageable domain using logarithms and exponentiation.
+ *
+ * The key to this section is not just knowing the formulas, but mastering the art of
+ * recognizing when to apply them. A problem rarely says "use logarithms"; instead,
+ * it provides clues. This commentary serves as a guide to identifying these clues.
+ *
+ *
+ * ### Telltale Sign #1: The Scale Mismatch (Huge Numbers, Simple Output) ###
+ *
+ * This is the most common and powerful indicator.
+ *   - The problem involves intermediate calculations that would generate numbers far
+ *     exceeding the capacity of a `long long` (e.g., N!, k^n for large n, numbers
+ *     given as strings of hundreds of digits).
+ *   - Despite these massive numbers, the required output is simple and small, such
+ *     as the number of digits, a single root, a depth level, or a comparison.
+ *
+ *   >> Mental Trigger: If you can't store the number, you are not meant to compute it.
+ *      You are meant to compute a *property* of the number. Logarithms are the
+ *      primary tool for analyzing properties of numbers without calculating their
+ *      full value.
+ *
+ *
+ * ### Telltale Sign #2: Explicit Exponential or Recursive Growth ###
+ *
+ * The problem statement describes a process where a quantity is repeatedly
+ * multiplied or divided by a factor.
+ *
+ *   - Examples:
+ *     - "The number of cats at level d is N^d." (UVa 107)
+ *     - "Repeatedly cut the largest piece in half." (UVa 11847)
+ *     - "Finding the smallest power of two greater than n." (UVa 11384)
+ *
+ *   >> Mental Trigger: Repeated multiplication is exponentiation. Repeated division
+ *      is related to logarithms. If the core mechanic is geometric growth or decay,
+ *      the solution will involve `pow` and `log`. Problems involving halving or
+ *      doubling specifically point to `log2`.
+ *
+ *
+ * ### Telltale Sign #3: The Unknown is in the Exponent ###
+ *
+ * The value you are asked to solve for is itself an exponent in an equation.
+ *
+ *   - Example: Given H and N, find `d` in the equation `H = (N+1)^d`.
+ *
+ *   >> Mental Trigger: The definition of a logarithm is the tool to solve for an
+ *      unknown exponent. `a^x = b` is equivalent to `x = log_a(b)`.
+ *
+ *
+ * ### Telltale Sign #4: Comparing or Manipulating Huge Numbers ###
+ *
+ * The task requires comparing two enormous numbers, like `a^b` and `c^d`, or finding
+ * the n-th root of a number `p`.
+ *
+ *   - Example: To compare `a^b` and `c^d`, you instead compare `b*log(a)` and `d*log(c)`.
+ *   - Example: To find `p^(1/n)`, you calculate `exp((1/n) * log(p))`.
+ *
+ *   >> Mental Trigger: Logarithms transform multiplication into addition, and
+ *      exponentiation into multiplication. This "downgrades" the complexity of the
+ *      operation, bringing it into a realm where standard floating-point arithmetic
+ *      is sufficient.
+ *
+ * By training yourself to spot these patterns, you can quickly identify when a problem
+ * is not about heavy computation, but about clever mathematical transformation.
+ *
+ * =====================================================================================
+ */

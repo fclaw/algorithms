@@ -2,6 +2,14 @@
 ───────────────────────────────────────────────────────────────
 🧳 UVa 10916 Factstone Benchmark, rt: s
 ───────────────────────────────────────────────────────────────
+// 1960 -> 4 bits, 2
+// 1970 -> 8 bits, 3
+// 1980 -> 16 bits, 4
+// 1990 -> 32 bits ..
+// 2000 -> 64 bits
+// 2010 -> 128 bits
+// 2020 -> 256 bits
+// 2030 -> 512 bits
 */
 
 #include "../debug.h"
@@ -10,6 +18,7 @@
 
 
 using ll = long long;
+
 
 constexpr int INIT_YEAR = 1960;
 constexpr int MAX_INT = 10000000;
@@ -33,14 +42,6 @@ namespace algorithms::onlinejudge::maths::factstone_benchmark
          
         int year;
         while(scanf("%d", &year) == 1 && year != 0) {
-          // 1960 -> 4 bits, 2
-          // 1970 -> 8 bits, 3
-          // 1980 -> 16 bits, 4
-          // 1990 -> 32 bits ..
-          // 2000 -> 64 bits
-          // 2010 -> 128 bits
-          // 2020 -> 256 bits
-          // 2030 -> 512 bits
           int diff = (year - INIT_YEAR) / 10;
           ll bits = 1LL << (diff + 2); // 2^diff 
           // Calculate the target value in "log space".
@@ -50,7 +51,7 @@ namespace algorithms::onlinejudge::maths::factstone_benchmark
           long double target_log_sum = bits * std::log10l(2.0L);
 
           int max_int = 0;
-          double curr_log_sum = 0;
+          long double curr_log_sum = 0;
           for(int n = 1; n <= MAX_INT; ++n) {
             curr_log_sum += std::log10(n);
             if(curr_log_sum > target_log_sum) {

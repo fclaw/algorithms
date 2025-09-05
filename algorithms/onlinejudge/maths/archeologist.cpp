@@ -12,6 +12,8 @@
 using ll = long long;
 using ld = long double;
 
+constexpr int MAX_LENGTH = 100000000;
+
 
 namespace algorithms::onlinejudge::maths::archeologist
 {
@@ -37,12 +39,16 @@ namespace algorithms::onlinejudge::maths::archeologist
 
           // --- The Search Loop ---
           // more than half of the digits are missing
-          ll t = std::floorl(std::log10l(n)) + 2;
-          while(std::ceill(log2_N + t * log2_10) != 
-                std::floorl(log2_N_1 + t * log2_10))
-           t++;
+          ll exp = std::floorl(std::log10l(n)) + 2;
+          while(std::ceill(log2_N + exp * log2_10) != 
+                std::floorl(log2_N_1 + exp * log2_10)) {
+            if(exp >= MAX_LENGTH) goto done;
+            ++exp;
+          }
 
-          printf("%d\n", (int)std::floorl(log2_N_1 + t * log2_10));
+          done:
+          auto ans = exp < MAX_LENGTH ? std::to_string((int)std::floorl(log2_N_1 + exp * log2_10)) : "no power of 2";    
+          printf("%s\n", ans.c_str());
         }
     }
 }

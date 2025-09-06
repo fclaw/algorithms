@@ -135,15 +135,10 @@ namespace algorithms::onlinejudge::maths::repeating_fractions
           ll ten_kj = arithmetics::power(10, total_digits);
           ll ten_j = arithmetics::power(10, j);
           ll ten_k = arithmetics::power(10, k);
-          ll denom = ten_kj - ten_k;
-          ll nom = num - num / ten_j;
-          if(!nom) {
-            ll gcd = arithmetics::__gcd(ten_kj, num);
-            printf("Case %d: %lld/%lld\n", t_case++, num / gcd, ten_kj / gcd);
-          } else {
-            ll gcd = arithmetics::__gcd(denom, nom);
-            printf("Case %d: %lld/%lld\n", t_case++, nom / gcd, denom / gcd);
-          }
+          ll denom = !j ? ten_kj : ten_kj - ten_k;
+          ll nom = !j ? num : num - num / ten_j;
+          ll gcd = arithmetics::__gcd(denom, nom);
+          printf("Case %d: %lld/%lld\n", t_case++, nom / gcd, denom / gcd);
         }
     }
 }

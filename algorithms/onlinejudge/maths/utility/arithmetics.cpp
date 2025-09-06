@@ -49,4 +49,8 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
        return a;
       return __gcd(b, a % b);
     }
+
+    long long __lcm(long long a, long long b) {
+      return (a * b) / __gcd(a, b);
+    }
 }

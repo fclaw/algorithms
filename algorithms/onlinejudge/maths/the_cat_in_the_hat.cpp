@@ -145,12 +145,13 @@ namespace algorithms::onlinejudge::maths::the_cat_in_the_hat
                 if(std::pow(n_w, d) == W && std::pow(n_w + 1, d) == H) {
                   branch_f = n_w;
                   depth = d;
-                  break; // Found the unique, exact solution.
+                  goto finished; // Found the unique, exact solution.
                 }
               }
             }
           }
 
+          finished:
           // number of non-working cats
           int non_working = branch_f > 1 ? (W - 1) / (branch_f - 1) : (int)std::log2(H);
           // total height of all cats

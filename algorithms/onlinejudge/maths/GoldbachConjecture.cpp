@@ -40,12 +40,13 @@ namespace algorithms::onlinejudge::maths::Goldbach_Conjecture
         while(scanf("%lld", &num) == 1 && num) {
           pll best = {-1, -1};
           ll best_diff = best.second - best.first;
-          auto middle = std::lower_bound(v_primes.begin(), v_primes.end(), num >> 1);
-          for(auto a = v_primes.begin(); a != middle + 1; ++a) {
+          auto middle = std::upper_bound(v_primes.begin(), v_primes.end(), num >> 1);
+          for(auto a = v_primes.begin(); a != middle; ++a) {
             ll b = num - *a;
             if(primes::isPrime(b)) {
-              if((!(~best.first) && !(~best.first)) ||
-                 (~best.first && 
+              if((!(~best.first) && 
+                  !(~best.first)) ||
+                 (~best.first &&
                   ~best.second && 
                   (b - *a > best_diff))) {
                 best = {*a, b};

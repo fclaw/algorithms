@@ -30,8 +30,9 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
     }
 
     // Calculates (base^exp)
-    long long power(long long base, long long exp) {
-      long long res = 1;
+    template<typename T = long long>
+    T power(T base, T exp) {
+      T res = 1;
       while (exp > 0) {
         // If the current bit of exp is 1 (i.e., exp is odd)
         if(exp & 1) { res *= base; }

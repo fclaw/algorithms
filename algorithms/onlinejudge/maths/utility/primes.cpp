@@ -35,6 +35,10 @@ namespace algorithms::onlinejudge::maths::utility::primes
       return true;                                   // slow if N = large prime
     } // note: only guaranteed to work for N <= (last prime in vll p)^2
 
+
+    auto nearest_prime_low(ll n) { return std::lower_bound(p.begin(), p.end(), n); }
+    auto nearest_prime_up(ll n) { return std::upper_bound(p.begin(), p.end(), n); }
+
     // second part
 
     vll primeFactors(ll N) {                         // pre-condition, N >= 1

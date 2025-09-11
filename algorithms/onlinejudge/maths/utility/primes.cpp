@@ -175,4 +175,12 @@ namespace algorithms::onlinejudge::maths::utility::primes
       if (N != 1) ans -= ans/N;                      // last factor
       return ans;
     }
+
+    // Returns largest power of p that divides n! 
+    int legendre(ll n, ll p)  { 
+      // Base Case
+      if(n == 0) return 0;
+      // Recursive Case
+      return n / p + legendre(n / p, p);
+    } 
 }

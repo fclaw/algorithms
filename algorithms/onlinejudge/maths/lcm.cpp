@@ -1,25 +1,25 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa 10139, Factovisors, rt: s
+🧳 UVa 10680 LCM, rt: s
 ───────────────────────────────────────────────────────────────
 */
 
 #include "../debug.h"
 #include "../../aux.h"
 #include "utility/primes.cpp"
+#include "utility/arithmetics.cpp"
 #include <bits/stdc++.h>
 
 
 
 namespace primes = algorithms::onlinejudge::maths::utility::primes;
+namespace arithmetics = algorithms::onlinejudge::maths::utility::arithmetics;
 
 constexpr ll MAX = 1000000;
 
-using map_ii = std::unordered_map<int, int>;
-using ii = std::pair<int, int>;
+using ull = unsigned long long;
 
-
-namespace algorithms::onlinejudge::maths::factovisors
+namespace algorithms::onlinejudge::maths::lcm
 {
 
     void submit(std::optional<char*> file, bool debug_mode)
@@ -38,23 +38,19 @@ namespace algorithms::onlinejudge::maths::factovisors
           }
         }
 
-        int n, m;
-        while(scanf("%d %d", &n, &m) == 2) {
-          map_ii m_factors_power;
-          for(ll fac : primes::primeFactors(m))
-            m_factors_power[fac]++;
+        int n;
+        while(scanf("%d", &n) == 1 && n) {
+          std::set<ll> ps = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        //   for(int i = 1; i <= n; ++i) {
+        //     for(ll fac : primes::primeFactors(i))
+        //       ps.insert(fac);
+        //   }
 
-          bool is_m_divides_n = true;
-          for(ii x : m_factors_power) {
-            int factor = x.first;
-            int power = x.second;
-            int max_power = primes::legendre(n, factor);
-            if(max_power < power) {
-              is_m_divides_n = false;
-              goto finished;
-            }
-          }
-          finished: printf("%d %s %d!\n", m, is_m_divides_n || m == 0 ? "divides" : "does not divide", n);
+        //  dbg(ps);
+
+          ll lcm = 1;
+          for(ll p : ps) lcm = arithmetics::__lcm(lcm, p);
+          dbg(lcm);
         }
     }
 }

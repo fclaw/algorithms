@@ -45,13 +45,15 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
       return res;
     }
 
-    long long __gcd(long long a, long long b) {
+    template<typename T = long long>
+    T __gcd(T a, T b) {
       if (b == 0)
        return a;
       return __gcd(b, a % b);
     }
 
-    long long __lcm(long long a, long long b) {
+    template<typename T = long long>
+    T __lcm(T a, T b) {
       return (a * b) / __gcd(a, b);
     }
 }

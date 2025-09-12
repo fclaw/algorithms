@@ -1,6 +1,6 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa 10680 LCM, rt: s
+🧳 UVa 10791 Minimum Sum LCM, https://onlinejudge.org/external/107/10791.pdf, rt: s
 ───────────────────────────────────────────────────────────────
 */
 
@@ -16,10 +16,10 @@ namespace primes = algorithms::onlinejudge::maths::utility::primes;
 namespace arithmetics = algorithms::onlinejudge::maths::utility::arithmetics;
 
 constexpr ll MAX = 1000000;
+using map_ll_i = std::unordered_map<ll, int>;
 
-using ull = unsigned long long;
 
-namespace algorithms::onlinejudge::maths::lcm
+namespace algorithms::onlinejudge::maths::min_sum_lcm
 {
 
     void submit(std::optional<char*> file, bool debug_mode)
@@ -38,19 +38,23 @@ namespace algorithms::onlinejudge::maths::lcm
           }
         }
 
-        int n;
-        while(scanf("%d", &n) == 1 && n) {
-          std::set<ll> ps = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        //   for(int i = 1; i <= n; ++i) {
-        //     for(ll fac : primes::primeFactors(i))
-        //       ps.insert(fac);
-        //   }
-
-        //  dbg(ps);
-
-          ll lcm = 1;
-          for(ll p : ps) lcm = arithmetics::__lcm(lcm, p);
-          dbg(lcm);
+        ll num; 
+        int t_case = 1;
+        while(scanf("%lld", &num) == 1 && num) {
+          if(num == 1) { printf("Case %d: 2\n", t_case++); continue; }
+          if(primes::isPrime(num)) {
+            printf("Case %d: %lld\n", t_case++, num + 1);
+          } else {
+            map_ll_i fac_freq;
+            vll factors = primes::primeFactors(num);
+            for(ll fac : factors) fac_freq[fac]++;
+            int add_1 = fac_freq.size() == 1 ? 1 : 0; 
+            ll min_sum = add_1;
+            for(auto p : fac_freq) {
+              min_sum += arithmetics::power(p.first, (ll)p.second);
+            }
+            printf("Case %d: %lld\n", t_case++, min_sum);
+          }
         }
     }
 }

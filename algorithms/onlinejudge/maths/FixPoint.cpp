@@ -21,8 +21,7 @@ int lsopf(ll num, map_ll_i& memo) {
   ll sum = primes::sumPF(num);
   if(sum == num) return 1;
   if(memo.count(sum)) return memo[sum];
-  memo[sum] = 1 + lsopf(sum, memo);
-  return 1 + lsopf(sum, memo);
+  return memo[sum] = 1 + lsopf(sum, memo);
 }
 
 

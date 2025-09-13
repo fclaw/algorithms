@@ -7,7 +7,7 @@ typedef long long ll;
 typedef vector<int> vi;
 typedef vector<ll> vll;
 typedef map<int, int> mii;
-typedef unordered_map<ll, ll> map_ll_i;
+typedef unordered_map<ll, int> map_ll_i;
 
 
 namespace algorithms::onlinejudge::maths::utility::primes
@@ -53,39 +53,22 @@ namespace algorithms::onlinejudge::maths::utility::primes
       return factors;
     }
 
-    map_ll_i getPrimeFactorization(ll N) {
-      map_ll_i factorization;
-      if (N <= 1) {
-          return factorization; // Return empty map for 1 or less.
-      }
-
-      for (ll prime : p) {
-          // The sqrt(N) optimization. Stop when the square of the prime is > N.
-          if (prime * prime > N) {
-              break;
+    map_ll_i primeFactors_power(ll N) {                         // pre-condition, N >= 1
+      map_ll_i factors;
+      for (int i = 0; i < (int)p.size() && p[i]*p[i] <= N; ++i) {
+        if(N % p[i] == 0) {
+          int power = 0;
+          while (N % p[i] == 0) {                        // found a prime for N
+            N /= p[i];                                 // remove it from N
+            power++;
           }
-
-          // Check if the current prime is a factor.
-          if (N % prime == 0) {
-              int power = 0;
-              // Count the exponent of this prime factor.
-              while (N % prime == 0) {
-                  N /= prime;
-                  power++;
-              }
-              factorization[prime] = power;
-          }
+          factors[p[i]] = power;
+        }
       }
-
-      // The "Last Factor" edge case:
-      // If N is still not 1, the remaining value of N is a large prime factor
-      // with an exponent of 1.
-      if (N > 1) {
-          factorization[N] = 1;
-      }
-      
-      return factorization;
+      if (N != 1) factors[N] = 1;              // remaining N is a prime
+      return factors;
     }
+
 
     // third part
 

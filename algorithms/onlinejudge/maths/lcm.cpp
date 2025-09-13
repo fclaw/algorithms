@@ -39,32 +39,46 @@ namespace algorithms::onlinejudge::maths::lcm
           }
         }
  
-        std::unordered_map<ll, map_ll_i> map;
-        for(ll n = 2; n <= 1000000; ++n)
-          map[n] = primes::getPrimeFactorization(n);
-
-        ll num; 
+        ll num;
         while(scanf("%lld", &num) == 1 && num) {
-          map_ll_i fac_freq;
-          for(ll n = 2; n <= num; ++n) {
-            for(auto& p : map[n]) {
-              fac_freq[p.first] = std::max(p.second, fac_freq[p.first]);
+
+          std::vector<int> lcm_factors(num + 1, 0);
+           // Loop through pre-computed primes p <= num
+          for (ll p : primes::p) {
+            if(p > num) { break; }
+
+            ll cp = p;
+            int exp = 0;
+
+            // Keep multiplying by p until we exceed num.
+            // This avoids repeated power calculations.
+            while(cp <= num) {
+              exp++;
+                  
+              // Check for potential overflow before multiplying.
+              // This is crucial for large p and num.
+              if(cp > num / p) {
+                break; 
+               }
+               cp *= p;
+            }
+              
+            if(exp > 0) {
+              lcm_factors[p] = exp;
             }
           }
 
-          ll count2 = fac_freq[2];
-          ll count5 = fac_freq[5];
-          if(count2 > count5) {
-            fac_freq.erase(5);
-            fac_freq[2] = count2 - count5;
-          } else {
-            fac_freq.erase(2);
-            fac_freq[5] = count5 - count2;
+          if(lcm_factors.size() >= 5) {
+            ll count2 = lcm_factors[2];
+            ll count5 = lcm_factors[5];
+            lcm_factors[5] = 0;
+            lcm_factors[2] = count2 - count5;
           }
 
           ll last_digit = 1;
-          for(auto fac : fac_freq) {
-            ll term = arithmetics::power_mod(fac.first, fac.second, MOD);
+          for(ll base = 2; base <= num; ++base) {
+            ll exp = lcm_factors[base];
+            ll term = arithmetics::power_mod(base, exp, MOD);
             last_digit = (last_digit * term) % MOD;
           }
  

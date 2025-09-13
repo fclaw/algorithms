@@ -7,6 +7,7 @@ typedef long long ll;
 typedef vector<int> vi;
 typedef vector<ll> vll;
 typedef map<int, int> mii;
+typedef unordered_map<ll, ll> map_ll_i;
 
 
 namespace algorithms::onlinejudge::maths::utility::primes
@@ -50,6 +51,40 @@ namespace algorithms::onlinejudge::maths::utility::primes
         }
       if (N != 1) factors.push_back(N);              // remaining N is a prime
       return factors;
+    }
+
+    map_ll_i getPrimeFactorization(ll N) {
+      map_ll_i factorization;
+      if (N <= 1) {
+          return factorization; // Return empty map for 1 or less.
+      }
+
+      for (ll prime : p) {
+          // The sqrt(N) optimization. Stop when the square of the prime is > N.
+          if (prime * prime > N) {
+              break;
+          }
+
+          // Check if the current prime is a factor.
+          if (N % prime == 0) {
+              int power = 0;
+              // Count the exponent of this prime factor.
+              while (N % prime == 0) {
+                  N /= prime;
+                  power++;
+              }
+              factorization[prime] = power;
+          }
+      }
+
+      // The "Last Factor" edge case:
+      // If N is still not 1, the remaining value of N is a large prime factor
+      // with an exponent of 1.
+      if (N > 1) {
+          factorization[N] = 1;
+      }
+      
+      return factorization;
     }
 
     // third part

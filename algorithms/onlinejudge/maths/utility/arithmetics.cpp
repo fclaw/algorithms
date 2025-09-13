@@ -45,6 +45,25 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
       return res;
     }
 
+    // Calculates (base^exp % mod)
+    template<typename T = long long>
+    T power_mod(T base, T exp, T mod) {
+      T res = 1;
+      base %= mod; // Initial reduction
+      while (exp > 0) {
+        // If the current bit of exp is 1 (i.e., exp is odd)
+        if(exp & 1)
+        // Apply modular multiplication here
+        { res = (res * base) % mod; }
+        // Square the base for the next bit position
+        base = (base * base) % mod;
+        // Move to the next bit of the exponent
+        // This is equivalent to exp = exp / 2
+        exp >>= 1;
+      }
+      return res;
+    }
+
     template<typename T = long long>
     T __gcd(T a, T b) {
       if (b == 0)

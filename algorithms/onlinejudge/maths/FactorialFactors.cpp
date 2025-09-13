@@ -43,7 +43,7 @@ namespace algorithms::onlinejudge::maths::factorial_factors
 
         ll num;
         while(scanf("%lld", &num) == 1) {
-          printf("%d\n", factors[num]);  
+          printf("%d\n", factors[num]);
         }
     }
 }

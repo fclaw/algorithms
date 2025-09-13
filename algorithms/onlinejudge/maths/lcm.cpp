@@ -16,8 +16,8 @@ namespace primes = algorithms::onlinejudge::maths::utility::primes;
 namespace arithmetics = algorithms::onlinejudge::maths::utility::arithmetics;
 
 constexpr ll MAX = 1000000;
+constexpr ll MOD = 10;
 using ull = unsigned long long;
-using map_ll_i = std::unordered_map<ll, int>;
 
 
 namespace algorithms::onlinejudge::maths::lcm
@@ -38,18 +38,37 @@ namespace algorithms::onlinejudge::maths::lcm
             throw std::ios_base::failure(errorMessage);
           }
         }
+ 
+        std::unordered_map<ll, map_ll_i> map;
+        for(ll n = 2; n <= 1000000; ++n)
+          map[n] = primes::getPrimeFactorization(n);
 
         ll num; 
         while(scanf("%lld", &num) == 1 && num) {
           map_ll_i fac_freq;
-          for(ll i = 2; i <= num; ++i) {
-            map_ll_i curr_fac_freq;
-            vll factors = primes::primeFactors(i);
-            for(ll fac : factors) curr_fac_freq[fac]++;
-            for(auto& p : curr_fac_freq) {
+          for(ll n = 2; n <= num; ++n) {
+            for(auto& p : map[n]) {
               fac_freq[p.first] = std::max(p.second, fac_freq[p.first]);
             }
           }
+
+          ll count2 = fac_freq[2];
+          ll count5 = fac_freq[5];
+          if(count2 > count5) {
+            fac_freq.erase(5);
+            fac_freq[2] = count2 - count5;
+          } else {
+            fac_freq.erase(2);
+            fac_freq[5] = count5 - count2;
+          }
+
+          ll last_digit = 1;
+          for(auto fac : fac_freq) {
+            ll term = arithmetics::power_mod(fac.first, fac.second, MOD);
+            last_digit = (last_digit * term) % MOD;
+          }
+ 
+          printf("%lld\n", last_digit);
         }
     }
 }

@@ -13,11 +13,12 @@ typedef unordered_map<ll, int> map_ll_i;
 namespace algorithms::onlinejudge::maths::utility::primes
 {
 
+    constexpr ll MAX_NUM = 1000000;
     ll _sieve_size;
     bitset<10000010> bs;                             // 10^7 is the rough limit
     vll p;                                           // compact list of primes
 
-    void sieve(ll upperbound) {                      // range = [0..upperbound]
+    void sieve(ll upperbound = MAX_NUM) {                      // range = [0..upperbound]
       _sieve_size = upperbound + 1;                  // to include upperbound
       bs.set();                                      // all 1s
       bs[0] = bs[1] = 0;                             // except index 0+1
@@ -37,8 +38,8 @@ namespace algorithms::onlinejudge::maths::utility::primes
     } // note: only guaranteed to work for N <= (last prime in vll p)^2
 
 
-    auto nearest_prime_low(ll n) { return std::lower_bound(p.begin(), p.end(), n); }
-    auto nearest_prime_up(ll n) { return std::upper_bound(p.begin(), p.end(), n); }
+    std::vector<ll>::iterator nearest_prime_low(ll n) { return std::lower_bound(p.begin(), p.end(), n); }
+    std::vector<ll>::iterator nearest_prime_up(ll n) { return std::upper_bound(p.begin(), p.end(), n); }
 
     // second part
 

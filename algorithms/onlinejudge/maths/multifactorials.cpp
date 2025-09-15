@@ -15,7 +15,6 @@ namespace primes = algorithms::onlinejudge::maths::utility::primes;
 namespace arithmetics = algorithms::onlinejudge::maths::utility::arithmetics;
 
 auto mk_factors = primes::primeFactors_power;
-auto power = arithmetics::power<>;
 
 namespace algorithms::onlinejudge::maths::multifactorials
 {
@@ -47,12 +46,12 @@ namespace algorithms::onlinejudge::maths::multifactorials
           n = std::atoi(s_n.c_str());
           k = s.size() - pos;
           
-          std::set<int> terms = {!(n % k) ? k : n % k};
-          for(int i = 0; i < n; ++i) {
-            if(i * k >= n) break;
-            terms.insert(n - i * k);
+          std::vector<int> terms;
+          int current_term = n;
+          while(current_term > 0) {
+            terms.push_back(current_term);
+            current_term -= k;
           }
-
 
           std::unordered_map<int, int> factors;
           for(int term : terms) {
@@ -61,17 +60,18 @@ namespace algorithms::onlinejudge::maths::multifactorials
           }
 
           ll divs = 1;
-          ll limit = power(10, 18);
+          ll limit = 1000000000000000000LL; // 10^18
           bool is_infinity = false;
           for(auto& fac : factors) {
-            if(divs * (fac.second + 1) > limit) {
+            ll term = fac.second + 1;
+            if(divs > limit / term) {
               is_infinity = true;
-              goto finished;
+              break;
             }
-            divs *= (fac.second + 1);
+            divs *= term;
           }
 
-          finished: printf("Case %d: %s\n", t_case++, !is_infinity ? std::to_string(divs).c_str() : "Infinity");
+          printf("Case %d: %s\n", t_case++, !is_infinity ? std::to_string(divs).c_str() : "Infinity");
         }
     }
 }

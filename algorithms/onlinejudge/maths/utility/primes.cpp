@@ -195,6 +195,37 @@ namespace algorithms::onlinejudge::maths::utility::primes
       return ans;
     }
 
+    std::vector<bool> findCoPrimes(long long N) {
+        if (N == 0) return {};
+        long long original_N = N;
+        std::vector<bool> co_primes(original_N + 1, true);
+        co_primes[0] = false; // 0 is not co-prime to anything
+
+        // 1. Find the unique prime factors of the original N
+        std::vector<long long> n_prime_factors;
+        for (long long p : primes::p) {
+            if (p * p > N) break;
+            if (N % p == 0) {
+                n_prime_factors.push_back(p);
+                while (N % p == 0) {
+                    N /= p;
+                }
+            }
+        }
+        if (N > 1) {
+            n_prime_factors.push_back(N);
+        }
+        
+        // 2. Use a sieve-like method to mark all multiples
+        for (long long p : n_prime_factors) {
+            for (long long multiple = p; multiple <= original_N; multiple += p) {
+                co_primes[multiple] = false;
+            }
+        }
+
+        return co_primes;
+    }
+
     // Returns largest power of p that divides n! 
     int legendre(ll n, ll p)  { 
       // Base Case

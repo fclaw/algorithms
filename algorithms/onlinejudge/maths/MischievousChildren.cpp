@@ -17,7 +17,8 @@ ll do_factorial(ll n) {
   for(ll i = 1; i <= n; ++i)
     fac *= i;
   return fac;  
-}
+} 
+
 
 
 namespace algorithms::onlinejudge::maths::mischievous_children

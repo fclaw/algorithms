@@ -63,6 +63,52 @@
  *
  * This O(N) approach is efficient and numerically stable for the given constraints.
  *
+ *   ### The Combinatorial Insight: Column Sum and the Repunit Multiplier ###
+ *
+ * A naive summation of all N! permutations is computationally infeasible. The elegant
+ * solution lies in a combinatorial shortcut that exploits the symmetry of permutations.
+ *
+ * Instead of summing the numbers horizontally, we can sum them vertically, column by
+ * column (i.e., by place value).
+ *
+ *
+ * --- Step 1: The Column Sum is Constant ---
+ *
+ * Due to the uniform nature of permutations, each digit appears in each position a
+ * proportional number of times. This leads to a remarkable property: the sum of the
+ * digits in the ones column is IDENTICAL to the sum of the digits in the tens column,
+ * the hundreds column, and so on.
+ *
+ * Let's call this constant sum `ColumnSum`. We can calculate it once using the formula:
+ *   `ColumnSum = (Total Permutations * Sum of original Digits) / N`
+ *
+ *
+ * --- Step 2: The Repunit Multiplier ("Raising the Level") ---
+ *
+ * Once we have the `ColumnSum`, we can calculate the grand total sum.
+ * Let's take a 3-digit case where `ColumnSum = C`.
+ *
+ * The total sum is the sum of the contributions from each place value:
+ *   Total = (Sum of hundreds column) * 100
+ *         + (Sum of tens column)    * 10
+ *         + (Sum of ones column)    * 1
+ *
+ * Since all column sums are equal to C:
+ *   Total = (C * 100) + (C * 10) + (C * 1)
+ *
+ * By the distributive law, we can factor out C:
+ *   Total = C * (100 + 10 + 1)
+ *   Total = C * 111
+ *
+ * The number `111` is a "Repunit" (a number consisting of only the digit 1).
+ * For a number with N digits, the multiplier will be a Repunit of length N.
+ *
+ * The `for` loop `rep = rep * 10 + 1` is a simple and efficient procedural way
+ * to generate this Repunit number.
+ *
+ * As insightfully phrased, the Repunit "raises" the value of the single `ColumnSum`
+ * to the "required level" of the final grand total. This elegant step transforms
+ * a complex summation over millions of large numbers into a single, final multiplication.
  * =====================================================================================
 */
 
@@ -115,7 +161,7 @@ v_sum_unit split_into_summation_units(const vi& nums) {
   return units;
 }
 
-ull do_summation_ull(int s, const Summation_Unit& unit, const std::array<ull, 13>& factorials) {
+ull do_summation(int s, const Summation_Unit& unit, const std::array<ull, 13>& factorials) {
   // 1. Get properties
   int lead = unit.lead;
   map_ll tail_freqs = unit.els;
@@ -158,12 +204,12 @@ ull do_summation_ull(int s, const Summation_Unit& unit, const std::array<ull, 13
     }
 
     // d. Calculate full tail sum
-    tail_sum = col_sum_tail * repunit_tail; // <-- POTENTIAL OVERFLOW
+    tail_sum = col_sum_tail * repunit_tail;
   }
 
   // 5. Final Sum
   // The addition can also overflow.
-  ull total_sum = lead_sum + tail_sum; // <-- POTENTIAL OVERFLOW
+  ull total_sum = lead_sum + tail_sum;
 
   return total_sum;
 }
@@ -198,7 +244,7 @@ namespace algorithms::onlinejudge::maths::add_again
           ull sum = 0;
           v_sum_unit units = split_into_summation_units(nums);
           for(auto& unit : units)
-            sum += do_summation_ull(size, unit, factorials);
+            sum += do_summation(size, unit, factorials);
           printf("%llu\n", sum);
         }
     }

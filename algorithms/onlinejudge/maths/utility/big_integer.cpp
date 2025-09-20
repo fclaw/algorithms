@@ -37,13 +37,6 @@ namespace algorithms::onlinejudge::maths::utility::big_integer
             }
         }
 
-        // Friend function for printing
-        friend std::ostream& operator<<(std::ostream& os, const BigInt& b) {
-            for (int i = b.digits.size() - 1; i >= 0; --i) {
-                os << b.digits[i];
-            }
-            return os;
-        }
 
         // --- Core Arithmetic Operations ---
 
@@ -88,29 +81,25 @@ namespace algorithms::onlinejudge::maths::utility::big_integer
             return result;
         }
 
-        BigInt operator += (const BigInt& other) {
-      int carry = 0;
-    
-    // The loop needs to run as long as there are digits in either number
-    // or there is a carry left over.
-    for (size_t i = 0; i < other.digits.size() || carry > 0; ++i) {
-        // If the current number (*this) runs out of digits, we need to
-        // extend it with zeros to continue the addition.
-        if (i >= this->digits.size()) {
-            this->digits.push_back(0);
-        }
+        BigInt& operator+=(const BigInt& other) {
+          // Make sure *this is at least as long as other.
+            if (digits.size() < other.digits.size()) {
+                digits.resize(other.digits.size(), 0);
+            }
+            
+            int carry = 0;
+            for (size_t i = 0; i < digits.size(); ++i) {
+                int other_digit = (i < other.digits.size()) ? other.digits[i] : 0;
+                int current = digits[i] + other_digit + carry;
+                digits[i] = current % 10;
+                carry = current / 10;
+            }
 
-        // Get the i-th digit of the 'other' number, or 0 if it's shorter.
-        int other_digit = (i < other.digits.size()) ? other.digits[i] : 0;
-
-        // Perform the grade-school addition for this "column".
-        int current = this->digits[i] + other_digit + carry;
-        this->digits[i] = current % 10; // The new digit for this position
-        carry = current / 10;           // The new carry for the next position
-    }
-    
-    // Return a reference to the modified object.
-    return *this;
+            // Handle final carry
+            if (carry > 0) {
+                digits.push_back(carry);
+            }
+            return *this;
         }
         
 
@@ -125,11 +114,94 @@ namespace algorithms::onlinejudge::maths::utility::big_integer
         }
 
         std::string get_string() const {
-          std::string s;
-          for(auto d : digits)
-            s += std::to_string(d);
-          return s;
+        // Handle the case of the number being zero.
+        if (digits.empty() || (digits.size() == 1 && digits[0] == 0)) {
+            return "0";
         }
+
+        std::string s = "";
+        
+        // Find the most significant digit (the last non-zero digit in our reversed vector).
+        // This step is crucial for trimming leading zeros.
+        int first_digit_idx = digits.size() - 1;
+        while (first_digit_idx > 0 && digits[first_digit_idx] == 0) {
+            first_digit_idx--;
+        }
+        
+        // Iterate backwards from the most significant digit to the least significant.
+        for (int i = first_digit_idx; i >= 0; --i) {
+            s += std::to_string(digits[i]);
+        }
+        
+        return s;
+        }
+
+        BigInt operator/(int n) const {
+            if (n == 0) {
+                throw std::invalid_argument("Division by zero");
+            }
+            BigInt result;
+            result.digits.clear();
+            
+            long long remainder = 0;
+            
+            // Iterate from Most Significant Digit to Least
+            for (int i = this->digits.size() - 1; i >= 0; --i) {
+                // "Bring down" the next digit
+                remainder = remainder * 10 + this->digits[i];
+                
+                result.digits.push_back(remainder / n);
+                remainder = remainder % n;
+            }
+            
+            // The result's digits are in reverse order, which is backwards for us.
+            // We need to reverse them back to our standard {lsb, ..., msb} format.
+            std::reverse(result.digits.begin(), result.digits.end());
+            
+            // Trim leading zeros from the result (e.g., if 123 / 10 = 012.3 -> 12)
+            while (result.digits.size() > 1 && result.digits.back() == 0) {
+                result.digits.pop_back();
+            }
+            
+            return result;
+        }
+
+
+        BigInt operator*(const BigInt& other) const {
+            BigInt result(0); // Start with a result of 0
+
+            // For each digit in the other number...
+            for (size_t i = 0; i < other.digits.size(); ++i) {
+                int other_digit = other.digits[i];
+                
+                // Multiply this BigInt by that single digit.
+                BigInt partial_product = (*this) * other_digit; // We already have BigInt * int
+                
+                // Shift the partial product to the left by 'i' positions.
+                // The easiest way is to insert 'i' zeros at the beginning of its digits vector.
+                if (partial_product.digits.size() != 1 || partial_product.digits[0] != 0) {
+                    partial_product.digits.insert(partial_product.digits.begin(), i, 0);
+                }
+                
+                // Add this partial product to the running total.
+                result += partial_product; // We need operator+=
+            }
+
+            // Trim leading zeros on the final result
+            while (result.digits.size() > 1 && result.digits.back() == 0) {
+                result.digits.pop_back();
+            }
+            
+            return result;
+        }
+
+
+    // It's also good practice to overload operator<< using this function
+    friend std::ostream& operator<<(std::ostream& os, const BigInt& b) {
+        os << b.get_string();
+        return os;
+    }
+
     };
 
     BigInt operator + (const BigInt& lhs, const BigInt& rhs) {
@@ -145,4 +217,5 @@ namespace algorithms::onlinejudge::maths::utility::big_integer
         return result;
     }
     }
+
 }

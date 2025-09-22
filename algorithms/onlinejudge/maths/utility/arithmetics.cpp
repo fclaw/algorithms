@@ -47,7 +47,7 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
 
     // Calculates (base^exp % mod)
     template<typename T = long long>
-    T power_mod(T base, T exp, T mod) {
+    T mod_power(T base, T exp, T mod) {
       T res = 1;
       base %= mod; // Initial reduction
       while (exp > 0) {

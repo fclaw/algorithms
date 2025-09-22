@@ -126,7 +126,7 @@ namespace algorithms::onlinejudge::maths::utility::big_integer
             str = n.str;
         }
 
-        const std::string& getRawRep() const { return str; }
+        const std::string &getRawRep() const { return str; }
 
         // operator overloading for output stream {<<}
         friend std::ostream &operator<<(std::ostream &stream, const bigint &n)
@@ -1617,5 +1617,34 @@ namespace algorithms::onlinejudge::maths::utility::big_integer
                 return false;
         }
         return true;
+    }
+}
+
+namespace bi = algorithms::onlinejudge::maths::utility::big_integer;
+
+size_t find_last_none_zero(const std::string &s)
+{
+    // Loop from the last index (s.length() - 1) down to 0.
+    for (int i = s.length() - 1; i >= 0; --i) // 
+    {
+        if (s[i] != '0')
+        {
+            // Found it. Return the index.
+            return i;
+        }
+    }
+    // If the loop completes, the character was not found.
+    return std::string::npos; // Using -1 as a sentinel value, similar to string::npos.
+}
+
+int main()
+{
+    int num;
+    while (scanf("%d", &num) == 1)
+    {
+        bi::bigint fac(num);
+        std::string fac_s = fac._big_fact(fac).getRawRep();
+        size_t pos = find_last_none_zero(fac_s);
+        printf("%5d -> %c\n", num, pos != std::string::npos ? fac_s[pos] : fac_s.back());
     }
 }

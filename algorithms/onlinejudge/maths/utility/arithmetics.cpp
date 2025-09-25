@@ -79,20 +79,85 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
     // Function for extended Euclidean Algorithm 
     template<typename T = long long>
     T extended_euclid(T a, T b, T &x, T &y) {
-      // Base Case 
-      if(a == 0) {
-        x = 0; 
-        y = 1;
-        return b; 
-      } 
-
-      T x1, y1; 
-      T gcd = extended_euclid(b % a, a, x1, y1); 
-
-      // Update x and y using results of 
-      // recursive call
-      x = y1 - (b / a) * x1; 
-      y = x1;
-      return gcd; 
+      T xx = y = 0;
+      T yy = x = 1;
+      while (b) {                                    // repeats until b == 0
+        T q = a / b;
+        std::tie(a, b) = std::make_tuple(b, a % b);
+        std::tie(x, xx) = std::make_tuple(xx, x - q * xx);
+        std::tie(y, yy) = std::make_tuple(yy, y - q * yy);
+      }
+      return a;                                      // returns gcd(a, b)
     }
+
+    template<typename T = long long>
+    T mod(T a, T m) { return ((a % m) + m) % m; } // ensure positive answer
+
+    enum ModInverseStatus { Failure, Success };
+    template<typename T = long long>
+    struct ModInverse {
+      T val;
+      ModInverseStatus status;
+    };
+
+    template<typename T = long long>
+    ModInverse<T> modInverse(T b, T m) {               // returns b^(-1) (mod m)
+      T x, y;
+      T gcd = extended_euclid(b, m, x, y); // to get b * x + m * y == d
+      if(gcd != 1) return { -1, Failure }; // to indicate failure
+      // b * x + m * y == 1, now apply (mod m) to get b * x == 1 (mod m)
+      return { mod(x, m), Success };
+    }
+
+
+    template<typename T = long long>
+    struct Diophantine {
+      bool exists;
+      T x;    // One particular solution for x
+      T y;    // One particular solution for y
+      T gcd;  // The greatest common divisor of the original coefficients a and b
+
+      // To generate all solutions, use the formulas:
+      // x_k = x + k * (b / gcd)
+      // y_k = y - k * (a / gcd)
+      // for any integer k.
+    };
+
+    template<typename T = long long>
+    std::ostream& operator << (std::ostream& os, const Diophantine<T>& d) {
+      return os << "{x: " << d.x << ", y: " << d.y << ", gcd: " << d.gcd << ", exists: " << d.exists << "}"; 
+    }
+
+
+    template<typename T = long long>
+    Diophantine<T> diophantine_equation(T a, T b, T c) {
+      // Handle edge case where a and b are both 0
+      if(a == 0 && b == 0) {
+        if (c == 0) {
+        // 0x + 0y = 0 has infinite solutions. {0, 0} is one of them.
+          return {true, 0, 0, 0};
+        }
+        // 0x + 0y = c (where c != 0) has no solution.
+        return {false, 0, 0, 0};
+      }
+
+      T x0, y0;
+      T g = extended_euclid(std::abs(a), std::abs(b), x0, y0);
+
+      // Check for solvability
+      if(c % g != 0) {
+        return {false, 0, 0, g}; // No integer solution exists
+      }
+
+      // Scale the solution from ax + by = g  to  ax + by = c
+      T factor = c / g;
+      T final_x = x0 * factor;
+      T final_y = y0 * factor;
+
+      // Adjust signs for the original a and b
+      if (a < 0) final_x = -final_x;
+      if (b < 0) final_y = -final_y;
+
+      return {true, final_x, final_y, g};
+    }  
 }

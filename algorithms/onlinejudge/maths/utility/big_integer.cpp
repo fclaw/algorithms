@@ -486,7 +486,7 @@ namespace algorithms::onlinejudge::maths::utility::big_integer
         /* Operator {<} Overloadings, for different kind of
         parameter for the programmer's convinience  */
 
-        bool operator<(bigint const &n)
+        bool operator<(bigint const &n) const
         {
             return is_strictlyMinimum(str, n.str);
         }

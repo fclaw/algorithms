@@ -109,6 +109,10 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
       return { mod(x, m), Success };
     }
 
+    template<typename T = long long>
+    T modInverse_fermat(T a, T p) { // Fermat’s little theorem, a and p are coprime
+      return mod_power(a, p - 2, p);
+    }
 
     template<typename T = long long>
     struct Diophantine {

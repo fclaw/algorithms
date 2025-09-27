@@ -2,6 +2,20 @@
 ───────────────────────────────────────────────────────────────
 🧳 UVa 763 Fibinary Numbers, Zeckendorf representation, greedy, use Java BigInteger, https://onlinejudge.org/external/7/763.pdf, rt: s
 ───────────────────────────────────────────────────────────────
+ *
+ * This problem involves arithmetic with numbers represented in the Fibonacci base
+ * (Zeckendorf representation).
+ *
+ * The overall strategy is:
+ * 1. Pre-compute a list of standard Fibonacci numbers. F(0)=0, F(1)=1, F(2)=1, F(3)=2...
+ * 2. For each pair of input "Fibinary" strings:
+ *    a. Convert each string to its decimal (base-10) equivalent BigInteger by summing the
+ *       corresponding Fibonacci numbers for each '1' in the string.
+ *    b. Add the two BigInteger values together.
+ *    c. Convert the resulting sum back to its unique Fibinary representation using a
+ *       greedy algorithm. This involves repeatedly finding the largest Fibonacci number
+ *       less than or equal to the remaining sum, subtracting it, and marking that
+ *       position with a '1'.
 */
 
 #include "../debug.h"

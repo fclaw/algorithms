@@ -1,0 +1,64 @@
+/*
+ * --- A Guideline for Solving Combinatorial Problems ---
+ *
+ * Combinatorial problems ask "How many ways...?" and require finding a mathematical
+ * shortcut to avoid brute-force, which would lead to a Time Limit Exceeded (TLE).
+ *
+ * --- PHASE 1: UNDERSTAND AND EXPLORE (Pen & Paper + Code) ---
+ *
+ * 1.  ANALYZE THE CONSTRAINTS:
+ *     - What are you counting (permutations, combinations, sequences, paths)?
+ *     - What are the rules (no adjacency, must be sorted, etc.)?
+ *     - The value of 'N' is the most important clue for the required complexity:
+ *       - N <= 20:  Suggests exponential complexity is acceptable. A direct
+ *                   Backtracking solution (possibly with memoization) might pass.
+ *       - N <= 5000: Suggests polynomial complexity (DP, e.g., O(N^2)).
+ *       - N >= 10^5: Suggests a fast formula (O(N), O(log N), or O(1)).
+ *
+ * 2.  SOLVE SMALL CASES MANUALLY (OR WITH BACKTRACKING):
+ *     - For very small N (1, 2, 3, 4), try to work out answers by hand. This builds intuition.
+ *     - To get more data points, write a simple, slow, but correct BACKTRACKING
+ *       or brute-force program. Use it to generate the answers for N up to ~10.
+ *     - This transforms the problem into finding a formula for a sequence you now have.
+ *     - Example: A backtracking solution for "Critical Mass" yields 0,0,1,3,8,20...
+ *
+ * 3.  LOOK FOR A RECURRENCE RELATION:
+ *     - This is the critical step. Ask: "Can I build the solution for N using
+ *       solutions for smaller values (like N-1 or N-2)?"
+ *     - This recurrence will be the basis for a Dynamic Programming solution.
+ *     - Example (Brick Wall): Ways(N) = Ways(N-1) + Ways(N-2).
+ *
+ * --- PHASE 2: IDENTIFY THE PATTERN & FORMULATE A PLAN ---
+ *
+ * 1.  RECOGNIZE THE SEQUENCE:
+ *     - Take the sequence from Step 1.2 (e.g., 1, 2, 3, 5, ...) and see if it's famous.
+ *     - Common Patterns: Factorials (n!), Binomial Coefficients (nCr),
+ *       Fibonacci Numbers (F(n)), Catalan Numbers (C(n)).
+ *     - SECRET WEAPON: If the sequence is unfamiliar, plug the first 7-8 terms into the
+ *       On-Line Encyclopedia of Integer Sequences (OEIS) to identify it.
+ *       -> PLATFORM LINK: https://oeis.org/
+ *
+ * 2.  CHOOSE THE ALGORITHM:
+ *     - If you found a mathematical formula (e.g., via OEIS), the plan is to implement it.
+ *     - If you found a recurrence, the plan is to use Dynamic Programming.
+ *     - If N is small enough, the initial BACKTRACKING with memoization is the DP solution.
+ *
+ * --- PHASE 3: IMPLEMENT AND HANDLE COMPUTATIONAL ISSUES ---
+ *
+ * 1.  ADDRESS LARGE NUMBERS:
+ *     - Will the answer overflow a 64-bit integer (long long)?
+ *     - If YES, does the problem ask for "answer modulo M"?
+ *       -> Use MODULAR ARITHMETIC for all calculations. (Most common case).
+ *     - If YES, does the problem ask for the full exact answer?
+ *       -> Use a BIG INTEGER library. (Less common).
+ *
+ * 2.  PRE-COMPUTATION & CODING:
+ *     - For formulas like nCr, it's often efficient to pre-compute factorials
+ *       and their modular inverses in an array before processing queries.
+ *     - Implement your DP table or formula cleanly.
+ *
+ * 3.  CHECK EDGE CASES:
+ *     - Does your solution work for N=0 or N=1?
+ *     - Test your code against the small cases you generated. This is your
+ *       first and most important sanity check.
+ */

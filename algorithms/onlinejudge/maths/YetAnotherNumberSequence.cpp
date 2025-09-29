@@ -43,6 +43,41 @@
  *     d) Compute F(n_prime) % M and F(n_minus_1_prime) % M using a simple DP loop.
  *     e) Plug these values into the modular formula from Step 4.
  *     f) The result is the answer. Pad with leading zeros if necessary to print 'm' digits.
+ * 
+ *
+ * 7.  THE KEY TECHNIQUE: MATRIX EXPONENTIATION (O(log N))
+ *     This is the canonical solution for finding the N-th term of a linear
+ *     recurrence relation. The strategy is as follows:
+ *
+ *     a) Represent the Recurrence as a Matrix:
+ *        The recurrence can be expressed as a matrix equation that transforms a vector
+ *        of previous states [f(n-1), f(n-2), ...] to the next state [f(n), f(n-1), ...].
+ *
+ *        For a Fibonacci-like recurrence f(n) = A*f(n-1) + B*f(n-2), the
+ *        transformation matrix T is:
+ *        [ A  B ]
+ *        [ 1  0 ]
+ *        Such that:
+ *        [ f(n)   ]   [ A  B ]   [ f(n-1) ]
+ *        [ f(n-1) ] = [ 1  0 ] * [ f(n-2) ]
+ *
+ *     b) Find the N-th Term:
+ *        To get from the base case [f(1), f(0)] to [f(n), f(n-1)], we need to apply
+ *        the transformation matrix T (n-1) times:
+ *        [ f(n)   ]   [ A  B ]^(n-1)   [ f(1) ]
+ *        [ f(n-1) ] = [ 1  0 ]      * [ f(0) ]
+ *
+ *     c) The Algorithm:
+ *        - Construct the base vector [f(1), f(0), ...].
+ *        - Construct the transformation matrix T.
+ *        - Compute T^(n-1) using binary exponentiation for matrices (a fast power
+ *          algorithm with O(k^3 * log N) complexity, where k is the matrix size).
+ *        - Multiply T^(n-1) by the base vector to get the final state vector.
+ *        - The answer f(n) is the top element of the resulting vector.
+ *
+ * 8.  COMPUTATIONAL ISSUES (MATRIX EXPONENTIATION):
+ *     All matrix multiplications must be performed using MODULAR ARITHMETIC to
+ *     prevent overflow, as specified by the problem.
 */
 
 #include "../debug.h"

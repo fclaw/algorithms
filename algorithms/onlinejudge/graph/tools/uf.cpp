@@ -51,15 +51,13 @@ namespace algorithms::onlinejudge::graph::tools
         }
 
         // --- The Reset Method ---
-        void reset() {
-          // Reset the number of disjoint sets to the total number of vertices.
-          numSets = V;
-          // Iterate through each element and restore its initial state.
-          for(int i = 0; i < V; ++i) {
-            p[i] = i;       // Every element is its own parent.
-            rank[i] = 0;    // Reset rank for union-by-rank.
-            setSize[i] = 1; // Each set is initially of size 1.
-          }
+        void reset(int N) {
+          p.assign(N, 0); 
+          for (int i = 0; i < N; ++i) p[i] = i;
+          rank.assign(N, 0);                           // optional speedup
+          setSize.assign(N, 1);                        // optional feature
+          numSets = N;                                 // optional feature
+          V = N;
         }
     };
 }

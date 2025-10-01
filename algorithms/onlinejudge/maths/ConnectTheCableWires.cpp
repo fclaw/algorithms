@@ -41,8 +41,7 @@ bool backtrack(int pos, const v_ii& edges, uf::UnionFind uf, s_ii& curr_topology
       if(backtrack(pos + 1, edges, uf_copy, curr_topology, topologies)) {
         curr_topology.erase(e);
         return true; // Found a valid configuration
-      } 
-      curr_topology.erase(e);
+      } else curr_topology.erase(e);
     }
   }
 

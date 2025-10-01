@@ -62,3 +62,69 @@
  *     - Test your code against the small cases you generated. This is your
  *       first and most important sanity check.
  */
+
+ /*
+ * --- A Strategic Guideline for Solving Combinatorial Counting Problems ---
+ *
+ * This outlines a robust, step-by-step mental flowchart for tackling problems that
+ * ask "How many ways...?". The goal is to systematically move from brute-force
+ * exploration to an efficient, optimized solution.
+ *
+ * --- Step 1: Analyze & Generate Data (The Empirical Phase) ---
+ *
+ * GOAL: Turn the abstract problem into a concrete sequence of numbers.
+ *
+ * 1.  ANALYZE CONSTRAINTS: The input size 'N' is the biggest clue.
+ *     - N <= 20:   Suggests an exponential solution (backtracking, bitmask DP) is feasible.
+ *     - N <= 5000: Suggests a polynomial solution (standard DP, O(N^2), etc.).
+ *     - N >= 10^5: Demands a near-linear or logarithmic solution (math formula, O(N), O(log N)).
+ *
+ * 2.  GENERATE THE SEQUENCE: Write a simple, slow, but provably correct program to find
+ *     the answers for small N (e.g., N=1 through 10).
+ *     - METHOD A: BACKTRACKING for problems involving choices, permutations, or subsets.
+ *     - METHOD B: SIMULATION for problems involving evolving states over time (e.g., populations).
+ *
+ * --- Step 2: Identify the Pattern (The "Superpower" Phase) ---
+ *
+ * GOAL: Find a known mathematical identity for your generated sequence.
+ *
+ * 1.  CONSULT THE OEIS: Take the first 7-10 numbers from your sequence and search for
+ *     them in the On-Line Encyclopedia of Integer Sequences.
+ *     -> PLATFORM LINK: https://oeis.org/
+ *
+ * --- Step 3: Implement the Obvious Solution (The Easy Path) ---
+ *
+ * GOAL: If the OEIS gave a positive match, implement it.
+ *
+ * 1.  OEIS provides a formula or simple recurrence (e.g., Fibonacci, Catalan, nCr).
+ * 2.  Write an efficient O(N) or O(log N) solution based on this formula.
+ * 3.  Handle computational details: use modular arithmetic for large answers, or a
+ *     BigInt library if required.
+ * 4.  You are likely done.
+ *
+ * --- Step 4: No Match Found (The "Real Work" Phase) ---
+ *
+ * GOAL: If the OEIS comes up empty, you must derive the solution from first principles.
+ * There are two main paths: Dynamic Programming or a "Mathematical Grind".
+ *
+ * PATH 4A: DYNAMIC PROGRAMMING (Bottom-Up Construction)
+ *   - Can you define a recurrence relation? "Can I build the solution for N
+ *     from the solutions for smaller values (N-1, N-2, etc.)?"
+ *   - What information (state) do you need to carry forward to solve the next subproblem?
+ *     (e.g., dp[i][j] = ways to build a sequence of length 'i' ending with 'j' X's).
+ *   - If yes, implement the DP solution (either bottom-up with a table or top-down
+ *     with your memoized backtracking code).
+ *
+ * PATH 4B: MATHEMATICAL GRIND (Top-Down Derivation)
+ *   - Does the problem fit a classic combinatorial model?
+ *   - INCLUSION-EXCLUSION: Is it easier to count the opposite?
+ *     (Total Ways) - (Invalid Ways) = (Valid Ways).
+ *   - STARS AND BARS: Is it about distributing identical items into distinct bins?
+ *     (e.g., solutions to x1 + x2 + ... + xk = N).
+ *   - BINOMIAL COEFFICIENTS: Is it about choosing a subset (nCr), arranging items of
+ *     two types, or paths on a grid?
+ *   - If you can model the problem this way, implement the corresponding formula.
+ *
+ * If all else fails, the problem may require a more complex combination of these
+ * techniques or a clever insight that re-frames the problem entirely.
+ */

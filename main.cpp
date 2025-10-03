@@ -1,6 +1,6 @@
 #define DBG_MACRO_NO_WARNING
 
-#include "algorithms/onlinejudge/maths/TileCode.cpp"
+#include "algorithms/onlinejudge/maths/pizzaCutting.cpp"
 #include <chrono>
 #include <iomanip>
 #include <bits/stdc++.h>
@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
     long mem_before = get_memory_usage();
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::maths::tile_code::submit(file, debug_mode);
+    algorithms::onlinejudge::maths::pizza_cutting::submit(file, debug_mode);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

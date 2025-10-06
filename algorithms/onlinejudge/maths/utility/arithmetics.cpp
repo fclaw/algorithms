@@ -163,5 +163,25 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
       if (b < 0) final_y = -final_y;
 
       return {true, final_x, final_y, g};
-    }  
+    }
+
+    // Pre-calculated constants for performance
+    const double PI = acos(-1.0);
+    const double LOG10_OF_2_PI = log10(2.0 * PI);
+
+    /**
+     * Calculates an approximation of log10(n!) using Stirling's Approximation.
+     * This is an O(1) operation and works for very large n.
+     * Returns 0 for n=0 or n=1 as log10(1) = 0.
+     */
+    double stirling(int n) {
+      if(n <= 1) {
+        return 0.0;
+      }
+      // Using the more accurate version of Stirling's formula for ln(n!):
+      // ln(n!) ≈ n*ln(n) - n + 0.5*ln(2*pi*n)
+      // We convert to log10 by dividing by ln(10) which is log(10.0) in C++.
+      return (double)n * log10((double)n) - (double)n / log(10.0) + 0.5 * (LOG10_OF_2_PI + log10((double)n));
+    }
+
 }

@@ -29,6 +29,37 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
       return count;
     }
 
+    // In your arithmetics library
+    template<typename T = long long>
+    T mod_multiply(T a, T b, T mod) {
+        T res = 0;
+        a %= mod;
+        while (b > 0) {
+            if (b % 2 == 1) {
+                res = (res + a) % mod;
+            }
+            a = (a * 2) % mod;
+            b /= 2;
+        }
+        return res;
+    }
+
+    // In your arithmetics library
+template<typename T = long long>
+T mod_add(T a, T b, T mod) {
+    a %= mod;
+    b %= mod;
+    // The addition can exceed 'mod' but is safe from overflowing T.
+    T res = a + b; 
+    // If res >= mod, subtract mod to bring it back into the [0, mod-1] range.
+    if (res >= mod) {
+        res -= mod;
+    }
+    // This is equivalent to (a + b) % mod but can be slightly faster
+    // as it avoids a division/modulo operation.
+    return res;
+}
+
     // Calculates (base^exp)
     template<typename T = long long>
     T power(T base, T exp) {
@@ -100,13 +131,26 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
       ModInverseStatus status;
     };
 
+    // Your generic modInverse function
     template<typename T = long long>
-    ModInverse<T> modInverse(T b, T m) {               // returns b^(-1) (mod m)
-      T x, y;
-      T gcd = extended_euclid(b, m, x, y); // to get b * x + m * y == d
-      if(gcd != 1) return { -1, Failure }; // to indicate failure
-      // b * x + m * y == 1, now apply (mod m) to get b * x == 1 (mod m)
-      return { mod(x, m), Success };
+    ModInverse<T> modInverse(T b, T m) {
+      long long x, y;
+
+      // --- THE FIX ---
+      // Cast the unsigned inputs to signed long long for the internal calculation.
+      long long b_ll = static_cast<long long>(b);
+      long long m_ll = static_cast<long long>(m);
+
+      long long gcd = extended_euclid(b_ll, m_ll, x, y);
+
+      if (gcd != 1) {
+        return { static_cast<T>(-1), Failure }; // Inverse doesn't exist
+      }
+
+      // The result 'x' is a signed long long. We need to convert it
+      // back to the requested type T (e.g., unsigned long long).
+      // The 'mod' helper function correctly handles negative x.
+      return { static_cast<T>(mod(x, m_ll)), Success };
     }
 
     template<typename T = long long>

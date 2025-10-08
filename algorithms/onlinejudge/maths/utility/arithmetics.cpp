@@ -2,6 +2,9 @@
 #include <bits/stdc++.h>
 
 
+using ll = long long;
+
+
 namespace algorithms::onlinejudge::maths::utility::arithmetics
 {
     int countDecimalDigits(double d) {
@@ -45,20 +48,20 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
     }
 
     // In your arithmetics library
-template<typename T = long long>
-T mod_add(T a, T b, T mod) {
-    a %= mod;
-    b %= mod;
-    // The addition can exceed 'mod' but is safe from overflowing T.
-    T res = a + b; 
-    // If res >= mod, subtract mod to bring it back into the [0, mod-1] range.
-    if (res >= mod) {
-        res -= mod;
+    template<typename T = long long>
+    T mod_add(T a, T b, T mod) {
+        a %= mod;
+        b %= mod;
+        // The addition can exceed 'mod' but is safe from overflowing T.
+        T res = a + b; 
+        // If res >= mod, subtract mod to bring it back into the [0, mod-1] range.
+        if (res >= mod) {
+            res -= mod;
+        }
+        // This is equivalent to (a + b) % mod but can be slightly faster
+        // as it avoids a division/modulo operation.
+        return res;
     }
-    // This is equivalent to (a + b) % mod but can be slightly faster
-    // as it avoids a division/modulo operation.
-    return res;
-}
 
     // Calculates (base^exp)
     template<typename T = long long>
@@ -228,4 +231,66 @@ T mod_add(T a, T b, T mod) {
       return (double)n * log10((double)n) - (double)n / log(10.0) + 0.5 * (LOG10_OF_2_PI + log10((double)n));
     }
 
+    std::vector<ll> factorial;
+    std::vector<ll> invFactorial;
+
+    // Pre-computation function (run once)
+    void precompute(ll n_max, ll mod) {
+      factorial.resize(n_max + 1);
+      invFactorial.resize(n_max + 1);
+
+      factorial[0] = 1;
+      for (int i = 1; i <= n_max; i++) {
+        factorial[i] = (factorial[i - 1] * i) % mod;
+      }
+
+      ModInverse<ll> res = modInverse(factorial[n_max], mod);
+      // Assert that the inverse must exist. If this fails, it means our 
+      // mathematical approach is invalid for the given 'n_max' and 'mod'
+      // (because n_max! is not coprime to the modulus).
+      assert(res.status == Success);
+      invFactorial[n_max] = res.val;
+      for (int i = n_max - 1; i >= 0; i--) {
+        invFactorial[i] = mod_multiply(invFactorial[i + 1], (ll)i + 1, mod);
+      }
+    }
+
+
+    ll combinations(ll n, ll k, ll mod) {
+      if (k < 0 || k > n) return 0;
+      ll num = factorial[n];
+      ll den = mod_multiply(invFactorial[k], invFactorial[n - k], mod);
+      return mod_multiply(num, den, mod);
+    }
+
+    // O(1) query for a single Catalan number
+    ll catalan_formula(ll n, ll mod) {
+      ll term1 = combinations(2 * n, n, mod);
+      ModInverse<ll> res = modInverse(n + 1, mod);
+      // Assert that the inverse must exist. If this fails, it means our 
+      // mathematical approach is invalid for the given 'n + 1' and 'mod'
+      // (because (n + 1)! is not coprime to the modulus).
+      assert(res.status == Success);
+      ll term2 = res.val;
+      return mod_multiply(term1, term2, mod);
+    }
+
+    // O(N) pre-computation for all Catalan numbers up to n_max
+    std::vector<ll> catalan_all(ll n_max, ll mod) {
+      std::vector<ll> Cat(n_max + 1);
+      Cat[0] = 1;
+      for (int n = 1; n <= n_max; ++n) {
+        ll numerator = 4LL * n - 2;
+        ll denominator = n + 1;
+        ModInverse<ll> res = modInverse(denominator, mod);
+        // Assert that the inverse must exist. If this fails, it means our 
+        // mathematical approach is invalid for the given 'n_max' and 'mod'
+        // (because n_max! is not coprime to the modulus).
+        assert(res.status == Success);
+        ll inv_denom = res.val;
+        ll term1 = mod_multiply(numerator, Cat[n - 1], mod);
+        Cat[n] = mod_multiply(term1, inv_denom, mod);
+      }
+      return Cat;
+    }
 }

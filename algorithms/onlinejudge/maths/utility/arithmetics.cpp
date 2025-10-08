@@ -1,6 +1,10 @@
 
+#include "big_integer.cpp"
 #include <bits/stdc++.h>
 
+
+
+namespace bg = algorithms::onlinejudge::maths::utility::big_integer;
 
 using ll = long long;
 
@@ -262,6 +266,37 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
       ll den = mod_multiply(invFactorial[k], invFactorial[n - k], mod);
       return mod_multiply(num, den, mod);
     }
+
+    bg::bigint combinations_bigint(int n, int k) {
+      if (k < 0 || k > n) {
+        return bg::bigint(0);
+      }
+    
+      // Use the symmetry C(n, k) = C(n, n-k) for a massive speedup
+      // when k is large.
+      if (k > n / 2) {
+        k = n - k;
+      }
+
+      if(k == 0) {
+        return bg::bigint(1);
+      }
+    
+      bg::bigint numerator(1);
+      bg::bigint denominator(1);
+    
+      // Calculate the numerator: n * (n-1) * ... * (n-k+1)
+      // and denominator: k!
+      for(int i = 1; i <= k; ++i) {
+        numerator = numerator * bg::bigint(n - i + 1);
+        denominator = denominator * bg::bigint(i);
+      }
+
+      // The final result is numerator / denominator.
+      // Your BigInt library must have a correct division operator.
+      return numerator / denominator;
+    }
+
 
     // O(1) query for a single Catalan number
     ll catalan_formula(ll n, ll mod) {

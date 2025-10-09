@@ -328,4 +328,29 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
       }
       return Cat;
     }
+
+    bg::bigint catalan_all_bigint_rec(int n, std::unordered_map<int, bg::bigint>& memo) {
+      if(n == 0) return 1;
+
+      if(memo.count(n)) 
+        return memo[n];
+
+      bg::bigint ways(0);
+      // C_n = Sum C_i * C_{n-1-i}, Catalan recurrence 
+      for(int i = 0; i < n; ++i) {
+        // Break the problem into a left subproblem of 'i' elements
+        // and a right subproblem of 'n - 1 - i' elements.
+        ways += catalan_all_bigint_rec(i) * catalan_all_bigint_rec(n - 1 - i, memo);
+      }
+      return memo[n] = ways;
+    }
+
+    std::vector<bg::bigint> catalan_all_bigint(int n_max) {
+      std::unordered_map<int, bg::bigint> memo;
+      std::vector<bg::bigint> Cat(n_max + 1);
+      for(int n = 1; n <= n_max; ++n) {
+        Cat[n] = catalan_all_bigint_rec(n, memo);
+      }
+      return Cat;
+    }
 }

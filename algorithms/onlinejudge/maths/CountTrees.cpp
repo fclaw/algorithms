@@ -41,7 +41,7 @@ constexpr int MAX_NODES = 300;
 
 std::unordered_map<int, bg::bigint> memo;
 
-bg::bigint backtrack(int nodes) {
+bg::bigint count_ways(int nodes) {
   if(nodes == 0) return 1;
 
   if(memo.count(nodes)) 
@@ -52,7 +52,7 @@ bg::bigint backtrack(int nodes) {
   for(int i = 0; i < nodes; ++i) {
     // Break the problem into a left subtree of 'i' nodes
     // and a right subtree of 'num_nodes - 1 - i' nodes.
-    ways += backtrack(i) * backtrack(nodes - 1 - i);
+    ways += count_ways(i) * count_ways(nodes - 1 - i);
   }
   return memo[nodes] = ways;
 }
@@ -76,7 +76,7 @@ namespace algorithms::onlinejudge::maths::count_trees
  
         v_bg catalans(MAX_NODES + 1);
         for(int i = 0; i <= MAX_NODES; ++i)
-          catalans[i] = backtrack(i);
+          catalans[i] = count_ways(i);
 
         int nodes;
         while(scanf("%d", &nodes) == 1 && nodes) {

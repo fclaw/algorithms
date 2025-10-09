@@ -311,7 +311,7 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
     }
 
     // O(N) pre-computation for all Catalan numbers up to n_max
-    std::vector<ll> catalan_all(ll n_max, ll mod) {
+    std::vector<ll> catalan_all(int n_max, ll mod) {
       std::vector<ll> Cat(n_max + 1);
       Cat[0] = 1;
       for (int n = 1; n <= n_max; ++n) {
@@ -340,7 +340,7 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
       for(int i = 0; i < n; ++i) {
         // Break the problem into a left subproblem of 'i' elements
         // and a right subproblem of 'n - 1 - i' elements.
-        ways += catalan_all_bigint_rec(i) * catalan_all_bigint_rec(n - 1 - i, memo);
+        ways += catalan_all_bigint_rec(i, memo) * catalan_all_bigint_rec(n - 1 - i, memo);
       }
       return memo[n] = ways;
     }
@@ -348,9 +348,48 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
     std::vector<bg::bigint> catalan_all_bigint(int n_max) {
       std::unordered_map<int, bg::bigint> memo;
       std::vector<bg::bigint> Cat(n_max + 1);
+      Cat[0] = bg::bigint(1);
       for(int n = 1; n <= n_max; ++n) {
         Cat[n] = catalan_all_bigint_rec(n, memo);
       }
       return Cat;
+    }
+
+    std::vector<ll> super_catalans_all(int n_max) {
+      std::vector<ll> s(n_max + 1);
+
+      // Set the correct base cases
+      if (n_max >= 0) s[0] = 1;
+      if (n_max >= 1) s[1] = 1;
+
+      // DP loop using the recurrence
+      for (int n = 2; n <= n_max; ++n) {
+        long long term1 = (6LL * n - 3) * s[n - 1];
+        long long term2 = (long long)(n - 2) * s[n - 2];
+        
+        // The division by (n+1) is guaranteed to be clean (no remainder).
+        s[n] = (term1 - term2) / (n + 1);
+      }
+      return s;
+    }
+
+    std::vector<bg::bigint> super_catalans_all_bigint(int n_max) {
+      std::vector<bg::bigint> s(n_max + 1);
+
+      // Set the correct base cases
+      if (n_max >= 0) s[0] = bg::bigint(1);
+      if (n_max >= 1) s[1] = bg::bigint(1);
+
+
+      // DP loop using the recurrence
+      for (int n = 2; n <= n_max; ++n) {
+        bg::bigint term1 =  (6LL * n - 3) * s[n - 1];
+        bg::bigint term2 = (long long)(n - 2) * s[n - 2];
+        bg::bigint divisor = bg::bigint(n + 1);
+        
+        // The division by (n+1) is guaranteed to be clean (no remainder).
+        s[n] = (term1 - term2) / divisor;
+      }
+      return s;
     }
 }

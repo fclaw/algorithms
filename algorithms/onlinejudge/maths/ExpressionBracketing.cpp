@@ -41,7 +41,7 @@ namespace algorithms::onlinejudge::maths::expression_bracketing
 
         int n_letters;
         while(scanf("%d", &n_letters) == 1) {
-          printf("%s\n", (s_catalans[n_letters - 1] - catalans[n_letters - 1]).getRawRep().c_str());
+          std::cout << (s_catalans[n_letters - 1] - catalans[n_letters - 1]) << std::endl;
         }
     }
 }

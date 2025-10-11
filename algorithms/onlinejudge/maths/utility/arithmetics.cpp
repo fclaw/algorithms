@@ -239,7 +239,7 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
     std::vector<ll> invFactorial;
 
     // Pre-computation function (run once)
-    void precompute(ll n_max, ll mod) {
+    void precompute_fact_and_fact_inv_mod(ll n_max, ll mod) {
       factorial.resize(n_max + 1);
       invFactorial.resize(n_max + 1);
 

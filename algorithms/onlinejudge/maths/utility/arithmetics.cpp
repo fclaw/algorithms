@@ -1,10 +1,12 @@
 
 #include "big_integer.cpp"
 #include <bits/stdc++.h>
+#include <boost/multiprecision/cpp_int.hpp> // The header for the bigint class
 
 
 
 namespace bg = algorithms::onlinejudge::maths::utility::big_integer;
+namespace mp = boost::multiprecision;
 
 using ll = long long;
 
@@ -351,6 +353,32 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
       Cat[0] = bg::bigint(1);
       for(int n = 1; n <= n_max; ++n) {
         Cat[n] = catalan_all_bigint_rec(n, memo);
+      }
+      return Cat;
+    }
+
+    mp::cpp_int catalan_all_bigint_boost_rec(int n, std::unordered_map<int, mp::cpp_int>& memo) {
+      if(n == 0) return 1;
+
+      if(memo.count(n)) 
+        return memo[n];
+
+      mp::cpp_int ways(0);
+      // C_n = Sum C_i * C_{n-1-i}, Catalan recurrence 
+      for(int i = 0; i < n; ++i) {
+        // Break the problem into a left subproblem of 'i' elements
+        // and a right subproblem of 'n - 1 - i' elements.
+        ways += catalan_all_bigint_boost_rec(i, memo) * catalan_all_bigint_boost_rec(n - 1 - i, memo);
+      }
+      return memo[n] = ways;
+    }
+
+    std::vector<mp::cpp_int> catalan_all_boost_bigint(int n_max) {
+      std::unordered_map<int, mp::cpp_int> memo;
+      std::vector<mp::cpp_int> Cat(n_max + 1);
+      Cat[0] = 1;
+      for(int n = 1; n <= n_max; ++n) {
+        Cat[n] = catalan_all_bigint_boost_rec(n, memo);
       }
       return Cat;
     }

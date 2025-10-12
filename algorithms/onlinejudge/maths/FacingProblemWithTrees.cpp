@@ -88,14 +88,16 @@
 #include "../../aux.h"
 #include "utility/arithmetics.cpp"
 #include <bits/stdc++.h>
+#include <boost/multiprecision/cpp_int.hpp> // The header for the bigint class
 
 
 
 namespace arithmetics = algorithms::onlinejudge::maths::utility::arithmetics;
 namespace bg = algorithms::onlinejudge::maths::utility::big_integer;
+namespace mp = boost::multiprecision;
 
 using ull = unsigned long long;
-using v_bg = std::vector<bg::bigint>;
+using v_bg = std::vector<mp::cpp_int>;
 using vv_bg = std::vector<v_bg>;
 
 
@@ -104,25 +106,25 @@ constexpr int MAX_NODES = 500;
 constexpr int MAX_TRIANGLES = 250;
 
 
+mp::cpp_int sentinel = mp::cpp_int(-1);
+
 // You'll need a memoization table (a 2D vector of bigint)
 // to store the results of count_trees to avoid re-computation.
-bg::bigint count_trees(int nodes, int triangles, const v_bg& catalans, vv_bg& memo) {
+mp::cpp_int count_trees(int nodes, int triangles, const v_bg& catalans, vv_bg& memo) {
   // Base Cases
   if(triangles == 0) return 1; // 0 triangles can be distributed in 1 way (all leaves)
   if(nodes == 0) return 0; // Cannot distribute triangles if there are no children
     
   // Check memoization table
-  if(memo[nodes][triangles] != bg::bigint(-1)) { // Assuming -1 is your sentinel value
+  if(memo[nodes][triangles] != sentinel) { // Assuming -1 is your sentinel value
     return memo[nodes][triangles];
   }
 
-  bg::bigint total_ways = 0;
-    
+  mp::cpp_int total_ways = 0;    
   //Recursive step: Iterate over the number of triangles given to the 'first' of the 'nodes' children
   for(int i = 0; i <= triangles; ++i) {
     // Ways for first child (with i triangles) * Ways for the rest (nodes-1 children, triangles-i triangles)
-    bg::bigint curr_cat = catalans[i];
-    total_ways += curr_cat * count_trees(nodes - 1, triangles - i, catalans, memo);
+    total_ways += catalans[i] * count_trees(nodes - 1, triangles - i, catalans, memo);
   }
 
   // Store and return result
@@ -148,20 +150,20 @@ namespace algorithms::onlinejudge::maths::facing_problem_with_trees
         }
 
         // pre-compute catalans
-        v_bg catalans = arithmetics::catalan_all_bigint(MAX_CAT);
-        vv_bg memo(MAX_NODES + 1, v_bg(MAX_TRIANGLES + 1, bg::bigint(-1))); // global memo
+        v_bg catalans = arithmetics::catalan_all_boost_bigint(MAX_CAT);
+        vv_bg memo(MAX_NODES + 1, v_bg(MAX_TRIANGLES + 1, sentinel)); // global memo
    
         int t_cases, edges, t_case = 1;
         scanf("%d", &t_cases);
         while (t_cases--) {
           scanf("%d", &edges);
-          bg::bigint ans = 0; // // Start with the t=0 (e=edges) case
+          mp::cpp_int ans = 0; // // Start with the t=0 (e=edges) case
           int max_triangles = edges / 2;
           for(int t = 0; t <= max_triangles; ++t) {
             int nodes = edges - 2 * t;
             ans += count_trees(nodes, t, catalans, memo);
           }
-          printf("Case %d: %s\n", t_case++, ans.getCharRep());
+          printf("Case %d: %s\n", t_case++, ans.str().c_str());
         }
     }
 }

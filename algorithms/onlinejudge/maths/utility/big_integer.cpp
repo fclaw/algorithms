@@ -128,6 +128,13 @@ namespace algorithms::onlinejudge::maths::utility::big_integer
 
         const std::string& getRawRep() const { return str; }
 
+        char* getCharRep()
+        {
+            char *s = new char[str.length() + 1];
+            strcpy(s, str.c_str());
+            return s;
+        }
+
         // operator overloading for output stream {<<}
         friend std::ostream &operator<<(std::ostream &stream, const bigint &n)
         {

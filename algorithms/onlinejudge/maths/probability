@@ -1,0 +1,91 @@
+/*
+ * =====================================================================================
+ * STRATEGIC GUIDE: SOLVING PROBABILITY PROBLEMS IN COMPETITIVE PROGRAMMING
+ * =====================================================================================
+ *
+ * Probability problems in contests almost always fall into one of two categories.
+ * Recognizing which category a problem belongs to is the most critical first step.
+ * The choice determines whether the solution will be pure mathematics or algorithmic counting.
+ *
+ * -------------------------------------------------------------------------------------
+ * APPROACH 1: DIRECT FORMULA (CLOSED-FORM SOLUTION)
+ * -------------------------------------------------------------------------------------
+ *
+ * - CORE IDEA:
+ *   Manipulate probabilities directly using mathematical rules and formulas.
+ *   The goal is to derive a single, explicit mathematical expression (a "closed form")
+ *   that gives the final answer.
+ *
+ * - THE FORMULA:
+ *   This approach is rooted in the classic definition:
+ *   P(Event) = (Number of Favorable Outcomes) / (Total Number of Outcomes)
+ *   However, instead of counting, you reason about the probabilities of sequential or
+ *   conditional events. For example: P(A and B) = P(A) * P(B|A).
+ *
+ * - WHEN TO USE THIS APPROACH:
+ *   1.  When the problem is "pure" probability and doesn't involve a complex sequence of
+ *       many steps (e.g., it has a fixed, small number of stages).
+ *   2.  When the events are simple enough that their conditional probabilities are easy
+ *       to reason about.
+ *   3.  When the problem feels more like a math puzzle than an algorithm design task.
+ *
+ * - CLASSIC EXAMPLE: The Monty Hall Problem ("Cows and Cars")
+ *   The solution involves calculating P(Win by switching) by chaining together the
+ *   probabilities of your initial choice, the host's action, and your final choice.
+ *   The entire calculation is done with fractions and probabilities, not by counting states.
+ *
+ * - PROS:
+ *   + Often extremely fast to compute (O(1)) once the formula is derived.
+ *   + Mathematically elegant.
+ *
+ * - CONS:
+ *   - Deriving the correct formula can be very difficult and counter-intuitive.
+ *   - This method is applicable to a relatively small and specific set of problems.
+ *
+ * -------------------------------------------------------------------------------------
+ * APPROACH 2: STATE-SPACE EXPLORATION (DYNAMIC PROGRAMMING & COMBINATORICS)
+ * -------------------------------------------------------------------------------------
+ *
+ * - CORE IDEA:
+ *   Re-frame the probability problem as a counting problem. Instead of working with
+ *   fractions (probabilities), you work with integers (counts). You only perform a
+ *   single division at the very end to get the final probability.
+ *
+ * - THE FORMULA:
+ *   You calculate the numerator and the denominator of the probability formula SEPARATELY.
+ *   1.  COUNT FAVORABLE OUTCOMES: This is the hard part and the core of the algorithm.
+ *       You use powerful counting techniques like:
+ *       - Dynamic Programming (DP)
+ *       - Recursion with Memoization
+ *       - Combinatorics (Combinations, Permutations, Catalan, Derangements, etc.)
+ *   2.  COUNT TOTAL OUTCOMES: This is usually much simpler (e.g., n!, 2^n, 6^n).
+ *
+ * - WHEN TO USE THIS APPROACH (THIS IS THE DEFAULT FOR MOST CP PROBLEMS):
+ *   1.  When the problem describes a process that unfolds over a sequence of steps or time.
+ *   2.  When the outcome depends on the results of previous events in a complex way.
+ *   3.  When a direct probability formula seems hopelessly complex or non-existent.
+ *   4.  When you can define a "state" and a transition between states.
+ *
+ * - CLASSIC EXAMPLE: The Hat Problem (Derangements)
+ *   - Problem: "What is the probability that N people all pick the wrong hat?"
+ *   - Total Outcomes: N! (easy to count).
+ *   - Favorable Outcomes: The number of "derangements" of N items. This is a classic
+ *     counting problem solved with a DP recurrence: D_n = (n-1) * (D_{n-1} + D_{n-2}).
+ *   - Final Probability = D_n / N!
+ *
+ * - PROS:
+ *   + Turns messy probability problems into more familiar algorithmic counting problems.
+ *   + Extremely powerful and versatile; solves a huge range of problems.
+ *   + Leverages your existing skills in DP, recursion, and combinatorics.
+ *
+ * - CONS:
+ *   - Can be computationally intensive. The DP state space can be large.
+ *   - Often requires BigInteger arithmetic for the intermediate counts, as they can
+ *     exceed the capacity of standard integer types before the final division.
+ *
+ * =====================================================================================
+ * GOLDEN RULE: When faced with a probability problem, your first question should
+ * always be: "Can I transform this into a problem of counting integers?"
+ * If yes, you are on the path to an algorithmic solution.
+ * =====================================================================================
+ */

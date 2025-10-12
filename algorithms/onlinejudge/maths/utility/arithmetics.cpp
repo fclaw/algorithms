@@ -300,6 +300,37 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
     }
 
 
+    mp::cpp_int combinations_bigint_boost(int n, int k) {
+      if (k < 0 || k > n) {
+        return 0;
+      }
+    
+      // Use the symmetry C(n, k) = C(n, n-k) for a massive speedup
+      // when k is large.
+      if (k > n / 2) {
+        k = n - k;
+      }
+
+      if(k == 0) {
+        return 1;
+      }
+    
+      mp::cpp_int numerator(1);
+      mp::cpp_int denominator(1);
+    
+      // Calculate the numerator: n * (n-1) * ... * (n-k+1)
+      // and denominator: k!
+      for(int i = 1; i <= k; ++i) {
+        numerator = numerator * mp::cpp_int(n - i + 1);
+        denominator = denominator * mp::cpp_int(i);
+      }
+
+      // The final result is numerator / denominator.
+      // Your BigInt library must have a correct division operator.
+      return numerator / denominator;
+    }
+
+
     // O(1) query for a single Catalan number
     ll catalan_formula(ll n, ll mod) {
       ll term1 = combinations(2 * n, n, mod);
@@ -414,6 +445,26 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
         bg::bigint term1 =  (6LL * n - 3) * s[n - 1];
         bg::bigint term2 = (long long)(n - 2) * s[n - 2];
         bg::bigint divisor = bg::bigint(n + 1);
+        
+        // The division by (n+1) is guaranteed to be clean (no remainder).
+        s[n] = (term1 - term2) / divisor;
+      }
+      return s;
+    }
+
+    std::vector<mp::cpp_int> super_catalans_all_bigint_boost(int n_max) {
+      std::vector<mp::cpp_int> s(n_max + 1);
+
+      // Set the correct base cases
+      if (n_max >= 0) s[0] = 1;
+      if (n_max >= 1) s[1] = 1;
+
+
+      // DP loop using the recurrence
+      for (int n = 2; n <= n_max; ++n) {
+        mp::cpp_int term1 =  (6LL * n - 3) * s[n - 1];
+        mp::cpp_int term2 = (long long)(n - 2) * s[n - 2];
+        mp::cpp_int divisor = n + 1;
         
         // The division by (n+1) is guaranteed to be clean (no remainder).
         s[n] = (term1 - term2) / divisor;

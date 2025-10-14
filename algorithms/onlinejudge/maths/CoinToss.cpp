@@ -107,7 +107,6 @@ namespace algorithms::onlinejudge::maths::coin_toss
             // If freopen fails, throw an exception with a more detailed error message
             std::string name = file.value();
             std::string errorMessage = 
-              "Failed to open file: " + name +
               " with error: " + std::strerror(errno);
             throw std::ios_base::failure(errorMessage);
           }

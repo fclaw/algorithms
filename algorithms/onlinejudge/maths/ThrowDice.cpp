@@ -65,7 +65,8 @@ namespace algorithms::onlinejudge::maths::throw_dice
               }
             }
           }
-          printf("%s/%s\n", dp[std::min(faces * throws, target)][throws].str().c_str(), total_outcomes.str().c_str());
+          mp::cpp_int desirable_outcome = faces * throws < target ? 0 : dp[target][throws];
+          printf("%s/%s\n", desirable_outcome.str().c_str(), total_outcomes.str().c_str());
         }
     }
 }

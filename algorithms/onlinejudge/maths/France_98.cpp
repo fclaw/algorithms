@@ -18,46 +18,51 @@ using vvd = std::vector<vd>;
 constexpr int N = 16;
 
 
-ld calculate_win_probability(int round, int team_id, const vvd& prob_matrix) {
-  // base case
-  if(round == 0) {
-    return 1.0;
+ld calculate_win_probability(int l, int r, int team_id, const vvd& prob_matrix) {
+  int num_teams = r - l;
+
+  // --- Base Case ---
+  // If there is only one team in the bracket, its probability of winning is 100%.
+  if(num_teams == 1) return 1.0;
+
+  int m = (l + r) / 2;
+
+  int opp_half_start_idx;
+  int opp_half_end_idx;
+  int our_half_start_idx;
+  int our_half_end_idx;
+
+  // Is our team in the first or second half of this bracket?
+  if(team_id < m) {
+    // We are in the first half
+    opp_half_start_idx = m;
+    opp_half_end_idx = r;
+    our_half_start_idx = l;
+    our_half_end_idx = m;
+  } else {
+    // We are in the second half
+    opp_half_start_idx = l;
+    opp_half_end_idx = m;
+    our_half_start_idx = m;
+    our_half_end_idx = r;
   }
 
   // --- Recursive Step ---
-  // To win round 'round', a team must have won round 'round-1' AND win its match in this round.
 
   // 1. Get the probability of our team (team_id) reaching this round.
   // This is the "first_p" from your insight.
-  ld prob_reach_this_round = calculate_win_probability(round - 1, team_id, prob_matrix);
+  ld prob_reach_this_round = calculate_win_probability(our_half_start_idx, our_half_end_idx, team_id, prob_matrix);
 
 
   // 2. Calculate the probability of winning the match in this round.
   // This is the "second_p" (the summation) from your insight.
   ld prob_win_match_in_round = 0.0;
 
-  // --- Determine the range of opponents for team_id in this round ---
-  // This is the trickiest part.
-  int teams_in_group = 1 << round;         // Size of the bracket at this round (2, 4, 8, 16)
-
-  int group_start_idx = (team_id / teams_in_group) * teams_in_group;
-
-  int opp_half_start_idx;
-  int half_size = teams_in_group / 2;
-
-  // Is our team in the first or second half of this bracket?
-  if((team_id - group_start_idx) < half_size) {
-    // We are in the first half
-    opp_half_start_idx = group_start_idx + half_size;
-  } else {
-    // We are in the second half
-    opp_half_start_idx = group_start_idx;
-  }
 
   // Sum over all potential opponents in the other half of the bracket.
-  for(int opp_id = opp_half_start_idx; opp_id < opp_half_start_idx + half_size; ++opp_id) {
+  for(int opp_id = opp_half_start_idx; opp_id < opp_half_end_idx; ++opp_id) {
     // Prob that this specific opponent wins their half to reach the match against us.
-    ld prob_opp_reaches = calculate_win_probability(round - 1, opp_id, prob_matrix);
+    ld prob_opp_reaches = calculate_win_probability(opp_half_start_idx, opp_half_end_idx, opp_id, prob_matrix);
     
     // Prob that we beat this specific opponent if we meet them.
     ld prob_we_beat_opp = prob_matrix[team_id][opp_id];
@@ -103,11 +108,9 @@ namespace algorithms::onlinejudge::maths::france_98
         }
 
         vd win_prob(N);
-        int round = std::ceil(std::log2(N));
         for(int i = 0; i < N; ++i) {
-          win_prob[i] = 100.0 * calculate_win_probability(round, i, prob_matrix);
+          win_prob[i] = 100.0 * calculate_win_probability(0, 16, i, prob_matrix);
         }
-
 
         for(int i = 0; i < N; ++i) {
           printf("%-11sp=%.2Lf%%\n", teams[i].c_str(), win_prob[i]);

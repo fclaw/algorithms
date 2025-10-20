@@ -109,7 +109,7 @@ namespace algorithms::onlinejudge::maths::france_98
 
         vd win_prob(N);
         for(int i = 0; i < N; ++i) {
-          win_prob[i] = 100.0 * calculate_win_probability(0, 16, i, prob_matrix);
+          win_prob[i] = 100.0 * calculate_win_probability(0, N, i, prob_matrix);
         }
 
         for(int i = 0; i < N; ++i) {

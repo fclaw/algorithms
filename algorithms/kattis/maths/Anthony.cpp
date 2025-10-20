@@ -21,7 +21,7 @@ bool is_init[MAX + 1][MAX + 1];
 int INITIAL_N;
 int INITIAL_M;
 
-ld calculate_p_b(int Anthony_points, int Cora_points, const vd& rounds_prob) {
+ld calculate_win_probability(int Anthony_points, int Cora_points, const vd& rounds_prob) {
   if(Anthony_points == 0 || 
      Cora_points == 0)
     return Anthony_points > 0 ? 1.0 : 0.0;
@@ -35,8 +35,8 @@ ld calculate_p_b(int Anthony_points, int Cora_points, const vd& rounds_prob) {
   // Recover the round number from the other two parameters!
   int rounds_played = (INITIAL_N - Anthony_points) + (INITIAL_M - Cora_points);
 
-  ld anthony_wins_point = rounds_prob[rounds_played] * calculate_p_b(Anthony_points, Cora_points - 1, rounds_prob);
-  ld cora_wins_point = (1.0 - rounds_prob[rounds_played]) * calculate_p_b(Anthony_points - 1, Cora_points, rounds_prob);
+  ld anthony_wins_point = rounds_prob[rounds_played] * calculate_win_probability(Anthony_points, Cora_points - 1, rounds_prob);
+  ld cora_wins_point = (1.0 - rounds_prob[rounds_played]) * calculate_win_probability(Anthony_points - 1, Cora_points, rounds_prob);
   return memo[Anthony_points][Cora_points] = anthony_wins_point + cora_wins_point;
 }
 
@@ -67,7 +67,7 @@ namespace algorithms::kattis::maths::Anthony_and_Cora
          INITIAL_M = Cora_points;
          std::memset(memo, -1.0, sizeof(memo));
          std::memset(is_init, false, sizeof(is_init));  
-         printf("%.6Lf\n", calculate_p_b(Anthony_points, Cora_points, rounds_prob));
+         printf("%.6Lf\n", calculate_win_probability(Anthony_points, Cora_points, rounds_prob));
        }
     }
 }

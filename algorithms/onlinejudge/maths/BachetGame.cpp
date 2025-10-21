@@ -34,15 +34,15 @@ namespace algorithms::onlinejudge::maths::bachet_game
           for(int i = 0; i < n; ++i) {
             scanf("%d", &moves[i]);
           }
-           std::vector<bool> dp(num + 1, false);
-           for(int i = 0; i <= num; ++i) {
-             for(int m : moves) {
-               if(i - m >= 0) {
-                 dp[i] = dp[i] || !dp[i - m];
-               }
-             }
-           }
-           printf("%s\n", dp[num] ? "Stan wins" : "Ollie wins");
+          std::vector<bool> dp(num + 1, false);
+          for(int i = 0; i <= num; ++i) {
+            for(int m : moves) {
+              if(i - m >= 0) {
+                dp[i] = dp[i] || !dp[i - m];
+              }
+            }
+          }
+          printf("%s\n", dp[num] ? "Stan wins" : "Ollie wins");
         }
     }
 }

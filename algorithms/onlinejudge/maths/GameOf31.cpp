@@ -67,10 +67,11 @@ bool can_win(int sum, vi& deck, Player player) {
   }
 
   bool is_win_pos = false;
-  for(int n = 0; n < NUM; ++n) {
+  for(int n = 1; n <= NUM; ++n) {
     if(!clear_msb(deck[n])) continue;
-    int s = n + 1;
-    if(sum + s <= TARGET) is_win_pos |= !can_win(sum + s, deck, switch_player(player));
+    player = switch_player(player);
+    if(sum + n <= TARGET) 
+      is_win_pos |= !can_win(sum + n, deck, player);
     set_msb(deck[n]);
   }
 
@@ -103,12 +104,12 @@ namespace algorithms::onlinejudge::maths::game_of_31
         while(while_read(game)) {
           int start_sum = 0;
           Player player = A;
-          vi deck(NUM, (1U << MAX) - 1);
+          vi deck(NUM + 1, (1u << MAX) - 1);
           for(auto c : game) {
             player = switch_player(player);
             int n = c - '0';
             start_sum += n;
-            clear_msb(deck[n - 1]);
+            clear_msb(deck[n]);
           }
           bool can_player_win = can_win(start_sum, deck, player);
           printf("%s %s\n", game.c_str(), make_answer(player, can_player_win).c_str());

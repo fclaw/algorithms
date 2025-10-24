@@ -46,24 +46,37 @@ bool is_free(uint32_t board, const v_cell& cells) {
   return res;
 }
 
-// clockwise from up
-vii dirs = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-
 
 bool in_board(int r, int c) { 
   return r >= 0 && r < SIZE &&  c >= 0 && c < SIZE; 
 }
 
-bool is_side_cell(int r, int c, vii& ds) {
-  if(r == 0 && c == 0) ds = {dirs[2], dirs[1]};
-  else if(r == 0 && c == SIZE - 1) ds = {dirs[2], dirs[3]};
-  else if(r == SIZE - 1 && c == 0) ds = {dirs[0], dirs[1]}; 
-  else if(r == SIZE - 1 && c == SIZE - 1) ds = {dirs[0], dirs[3]};
-  else if(r == 0) ds = {dirs[2]};
-  else if(r == SIZE - 1) ds = {dirs[0]};
-  else if(c == 0) ds = {dirs[1]};
-  else if(c == SIZE - 1) ds = {dirs[3]};
+bool is_side_cell(int r, int c) {
   return r == 0 || r == SIZE - 1 || c == 0 || c == SIZE - 1;
+}
+
+// clockwise from up
+vii dirs = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+
+vii get_dirs(int r, int c) {
+  vii valid_dirs;
+  // Is it on the top edge? If so, Down is a valid direction.
+  if (r == 0) {
+   valid_dirs.push_back(dirs[2]); // Down {1, 0}
+  }
+  // Is it on the bottom edge? If so, Up is a valid direction.
+  if(r == SIZE - 1) {
+    valid_dirs.push_back(dirs[0]); // Up {-1, 0}
+  }
+  // Is it on the left edge? If so, Right is a valid direction.
+  if(c == 0) {
+    valid_dirs.push_back(dirs[1]); // Right {0, 1}
+  }
+  // Is it on the right edge? If so, Left is a valid direction.
+  if(c == SIZE - 1) {
+    valid_dirs.push_back(dirs[3]); // Left {0, -1}
+   }
+  return valid_dirs;
 }
 
 v_cell place_pin(const Cell& center_cell, int pin_size, const ii& d) {
@@ -103,9 +116,8 @@ bool can_win(uint32_t board, const v_cell& cells) {
         }
       // try placing from the side
       for(int pin = 1; pin <= MAX_PIN; ++pin) {
-        vii dirs;
-        if(is_side_cell(r, c, dirs)) {
-          for(auto& d : dirs) {
+        if(is_side_cell(r, c)) {
+          for(auto& d : get_dirs(r, c)) {
             v_cell pin_cells = place_pin(curr_cell, pin, d);
             if(is_free(board, pin_cells)) {
               uint32_t new_board = fill_cells_2d(board, pin_cells);

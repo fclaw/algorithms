@@ -1,6 +1,6 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa 10111 Find the Winning Move, https://onlinejudge.org/external/101/10111.pdf,  rt: 0.200s
+🧳 UVa 10111 Find the Winning Move, https://onlinejudge.org/external/101/10111.pdf,  rt: 0.100s
 ───────────────────────────────────────────────────────────────
 */
 
@@ -132,7 +132,7 @@ Outcome can_win(uint32_t board, const v_cell& cells, Player current_player) {
   // Has the current player just made a winning move?
   if(has_player_won(board, current_player)) {
     // We start our turn in a state where we've already lost.
-    return  WIN;
+    return WIN;
   }
   // Is the board full (and we already know no one won)?
   if(__builtin_popcount(get_occupied_mask(board)) == SIZE * SIZE) {
@@ -155,7 +155,7 @@ Outcome can_win(uint32_t board, const v_cell& cells, Player current_player) {
       Player opponent = switch_player(current_player);
       Outcome outcome = can_win(new_board, cells, opponent);
       if(outcome == LOSS) {
-        return memo[{board, current_player}] = WIN;
+        return WIN;
       } else if(outcome == DRAW) {
         can_force_draw = true;
       }

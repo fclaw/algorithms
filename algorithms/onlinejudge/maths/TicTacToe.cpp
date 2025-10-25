@@ -1,6 +1,6 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa 10111 Find the Winning Move, https://onlinejudge.org/external/101/10111.pdf,  rt: s
+🧳 UVa 10111 Find the Winning Move, https://onlinejudge.org/external/101/10111.pdf,  rt: 0.200s
 ───────────────────────────────────────────────────────────────
 */
 
@@ -26,13 +26,13 @@ Player switch_player(Player player) {
 }
 
 void set_cell_value(uint32_t& board, int r, int c, Player p) {
-    int pos = r * 4 + c;
-    int start_bit = pos * 2;
-    uint32_t player_value = static_cast<uint32_t>(p);
-    uint32_t clear_mask = ~(3u << start_bit);
-    board &= clear_mask;
-    uint32_t set_mask = (player_value << start_bit);
-    board |= set_mask;
+  int pos = r * 4 + c;
+  int start_bit = pos * 2;
+  uint32_t player_value = static_cast<uint32_t>(p);
+  uint32_t clear_mask = ~(3u << start_bit);
+  board &= clear_mask;
+  uint32_t set_mask = (player_value << start_bit);
+  board |= set_mask;
 }
 
 uint32_t get_cell_value(uint32_t board, int r, int c) {
@@ -109,39 +109,41 @@ enum Outcome { WIN, LOSS, DRAW };
  * @return A bitmask where the k-th bit is 1 if cell k is occupied, 0 otherwise.
  */
 uint32_t get_occupied_mask(uint32_t board) {
-    uint32_t occupied_mask = 0;
+  uint32_t occupied_mask = 0;
 
-    for (int i = 0; i < SIZE * SIZE; ++i) {
-        // Extract the 2-bit value for cell 'i'
-        uint32_t cell_value = (board >> (i * 2)) & 3;
+  for(int i = 0; i < SIZE * SIZE; ++i) {
+    // Extract the 2-bit value for cell 'i'
+    uint32_t cell_value = (board >> (i * 2)) & 3;
 
-        // If the cell is not EMPTY (i.e., its value is non-zero)
-        if (cell_value != EMPTY) {
-            // Set the corresponding bit in the output mask.
-            occupied_mask |= (1u << i);
-        }
+    // If the cell is not EMPTY (i.e., its value is non-zero)
+    if(cell_value != EMPTY) {
+      // Set the corresponding bit in the output mask.
+      occupied_mask |= (1u << i);
     }
-    return occupied_mask;
+  }
+  return occupied_mask;
 }
 
+std::map<std::pair<uint32_t, Player>, Outcome> memo;
 
 Outcome can_win(uint32_t board, const v_cell& cells, Player current_player) {
 
    // --- Base Cases ---
-    // Has the PREVIOUS player just made a winning move?
-    // Player opponent = switch_player(current_player);
-    if (has_player_won(board, current_player)) {
-        // We start our turn in a state where we've already lost.
-        return  WIN;
-    }
-    // Is the board full (and we already know no one won)?
-    if (__builtin_popcount(get_occupied_mask(board)) == SIZE * SIZE) {
-        return DRAW;
-    }
+  // Has the current player just made a winning move?
+  if(has_player_won(board, current_player)) {
+    // We start our turn in a state where we've already lost.
+    return  WIN;
+  }
+  // Is the board full (and we already know no one won)?
+  if(__builtin_popcount(get_occupied_mask(board)) == SIZE * SIZE) {
+    return DRAW;
+  }
 
-    // --- Recursive Step: Explore moves ---
-    bool can_force_draw = false;
+  if(memo.count({board, current_player}))
+    return memo.at({board, current_player});
 
+  // --- Recursive Step: Explore moves ---
+  bool can_force_draw = false;
 
   for(const Cell& cell : cells) {
     int r = cell.first;
@@ -150,26 +152,27 @@ Outcome can_win(uint32_t board, const v_cell& cells, Player current_player) {
     uint32_t cp = get_cell_value(new_board, r, c);
     if(cp == static_cast<uint32_t>(EMPTY)) {
       set_cell_value(new_board, r, c, current_player);
-      Outcome outcome = can_win(new_board, cells, switch_player(current_player));
+      Player opponent = switch_player(current_player);
+      Outcome outcome = can_win(new_board, cells, opponent);
       if(outcome == LOSS) {
-          return WIN;
+        return memo[{board, current_player}] = WIN;
       } else if(outcome == DRAW) {
-          can_force_draw = true;
+        can_force_draw = true;
       }
     }
   }
 
 
   // --- Final Conclusion for this State ---
-    // If we finished the loop without finding a winning move...
-    if (can_force_draw) {
-        // ...but we found a move that leads to a draw, that's our best option.
-        return DRAW;
-    } else {
-        // ...and we couldn't even force a draw, it means all our moves lead to a
-        // win for the opponent. This is a losing position.
-        return LOSS;
-    }
+  // If we finished the loop without finding a winning move...
+  if(can_force_draw) {
+    // ...but we found a move that leads to a draw, that's our best option.
+    return  memo[{board, current_player}] = DRAW;
+  } else {
+    // ...and we couldn't even force a draw, it means all our moves lead to a
+    // win for the opponent. This is a losing position.
+    return  memo[{board, current_player}] = LOSS;
+  }
 
 }
 

@@ -11,7 +11,6 @@
 
 
 
-using ull = unsigned long long;
 using Cell = std::pair<int, int>;
 using v_cell = std::vector<Cell>;
 
@@ -19,114 +18,159 @@ constexpr char E = '$';
 constexpr int SIZE = 4;
 constexpr char X = 'x';
 constexpr char O = 'o';
-constexpr int Empty = '.';
 
-enum Player {
-  X_PLAYER,
-  O_PLAYER
-};
+enum Player : uint32_t { EMPTY = 0, X_PLAYER = 1, O_PLAYER = 2 };
 
 Player switch_player(Player player) {
   return player == X_PLAYER ? O_PLAYER : X_PLAYER;
 }
 
-// This struct will hold the board state for ONE player.
-// You would have two of these: one for 'X' and one for 'O'.
-struct PlayerBoard {
-  std::array<uint32_t, SIZE> rows;
-  std::array<uint32_t, SIZE> cols;
-  uint32_t main_diag;
-  uint32_t aux_diag;
-    
-  PlayerBoard() : rows{}, cols{}, main_diag(0), aux_diag(0) {}
+void set_cell_value(uint32_t& board, int r, int c, Player p) {
+    int pos = r * 4 + c;
+    int start_bit = pos * 2;
+    uint32_t player_value = static_cast<uint32_t>(p);
+    uint32_t clear_mask = ~(3u << start_bit);
+    board &= clear_mask;
+    uint32_t set_mask = (player_value << start_bit);
+    board |= set_mask;
+}
 
-  void place_piece(int r, int c) {
-    // For row 'r', set the bit corresponding to the column 'c'.
-    rows[r] |= (1u << c);
-    // For column 'c', set the bit corresponding to the row 'r'.
-    cols[c] |= (1u << r);
-    if (r == c) {
-      main_diag |= (1u << r);
-    }
-    if (r + c == SIZE - 1) {
-      aux_diag |= (1u << r);
-    }
-  }
+uint32_t get_cell_value(uint32_t board, int r, int c) {
+  int pos = r * SIZE + c;
+  int start_bit = pos * 2;
+  return (board >> start_bit) & 3;
+}
 
-  bool has_won() const {
-    // A full line is represented by a bitmask where all SIZE bits are set.
-    // E.g., for SIZE=3, this is 0b111 = 7. ( (1u << 3) - 1 )
-    const uint32_t WIN_MASK = (1u << SIZE) - 1;
-
-    // Check rows and columns
-    for(int i = 0; i < SIZE; ++i) {
-      // Your popcount logic is great too, this is just another way.
-      if(rows[i] == WIN_MASK || 
-         cols[i] == WIN_MASK) {
-        return true;
+/**
+ * @brief Checks if a given player has won on the board.
+ * 
+ * Iterates through all 10 possible winning lines (4 rows, 4 columns, 2 diagonals)
+ * to see if any are filled with the specified player's pieces.
+ *
+ * @param board The 32-bit integer representing the 4x4 board state.
+ * @param player The player (X_PLAYER or O_PLAYER) to check for a win.
+ * @return True if the player has won, false otherwise.
+ */
+bool has_player_won(uint32_t board, Player player) {
+  // --- 1. Check Rows ---
+  for(int r = 0; r < SIZE; ++r) {
+    bool row_win = true;
+    for(int c = 0; c < SIZE; ++c) {
+      if(get_cell_value(board, r, c) != player) {
+        row_win = false;
+        break;
       }
     }
-        
-    // Check diagonals
-    if(main_diag == WIN_MASK || 
-       aux_diag == WIN_MASK) {
-      return true;
-    }
-        
-    return false;
+    if(row_win) return true;
   }
 
-  // undo
-  void remove_piece(int r, int c) {
-    rows[r] ^= (1u << c);
-    cols[c] ^= (1u << r);
-    if(r == c) {
-      main_diag ^= (1u << r);
-    }
-    if(r + c == SIZE - 1) {
-      aux_diag ^= (1u << r);
-    }
-  }
-};
-
-using v_PlayerBoard = std::vector<PlayerBoard>;
-
-
-bool can_win(uint32_t board, const v_cell& cells, Player curr_player, std::vector<PlayerBoard>& boards, bool& has_o_won) {
-
-  for(auto& curr_cell : cells) {
-    int r = curr_cell.first;
-    int c = curr_cell.second;
-    int p = r * SIZE + c;
-    if(!(board & (1u << p))) { // If cell is empty
-      PlayerBoard& player_board = boards[curr_player];
-      uint32_t new_board = board | (1u << p);
-      player_board.place_piece(r, c);
-
-      // --- CHECK OUTCOME ---
-      // Base Case 1: Did this move result in an immediate win?
-      bool has_player_won = player_board.has_won();
-      if(has_player_won) {
-        player_board.remove_piece(r, c);
-        if(curr_player == O_PLAYER) has_o_won = true;
-        return true;
+  // --- 2. Check Columns ---
+  for(int c = 0; c < SIZE; ++c) {
+    bool col_win = true;
+    for(int r = 0; r < SIZE; ++r) {
+      if(get_cell_value(board, r, c) != player) {
+        col_win = false;
+        break;
       }
-
-      if(__builtin_popcount(new_board) < SIZE * SIZE) {
-        Player next_player = switch_player(curr_player);
-        if(!can_win(new_board, cells, next_player, boards, has_o_won)) {
-          player_board.remove_piece(r, c); // BACKTRACK
-          if(curr_player == O_PLAYER) has_o_won = true;
-          return true;
-        }
-      }
-      // --- BACKTRACK THE MOVE ---
-      // Must undo the move before the next iteration of the for loop.
-      player_board.remove_piece(r, c);
     }
+    if(col_win) return true;
   }
 
+  // --- 3. Check Main Diagonal (top-left to bottom-right) ---
+  bool main_diag_win = true;
+  for(int i = 0; i < SIZE; ++i) {
+    if(get_cell_value(board, i, i) != player) {
+      main_diag_win = false;
+      break;
+    }
+  }
+  if(main_diag_win) return true;
+
+  // --- 4. Check Anti-Diagonal (top-right to bottom-left) ---
+  bool anti_diag_win = true;
+  for(int i = 0; i < SIZE; ++i) {
+    if(get_cell_value(board, i, SIZE - 1 - i) != player) {
+      anti_diag_win = false;
+      break;
+    }
+  }
+  if(anti_diag_win) return true;
+
+  // If no winning lines were found
   return false;
+}
+
+enum Outcome { WIN, LOSS, DRAW };
+
+/**
+ * @brief Creates a 1-bit-per-cell mask indicating occupied squares.
+ *
+ * @param board The 32-bit (2-bit-per-cell) board state.
+ * @return A bitmask where the k-th bit is 1 if cell k is occupied, 0 otherwise.
+ */
+uint32_t get_occupied_mask(uint32_t board) {
+    uint32_t occupied_mask = 0;
+
+    for (int i = 0; i < SIZE * SIZE; ++i) {
+        // Extract the 2-bit value for cell 'i'
+        uint32_t cell_value = (board >> (i * 2)) & 3;
+
+        // If the cell is not EMPTY (i.e., its value is non-zero)
+        if (cell_value != EMPTY) {
+            // Set the corresponding bit in the output mask.
+            occupied_mask |= (1u << i);
+        }
+    }
+    return occupied_mask;
+}
+
+
+Outcome can_win(uint32_t board, const v_cell& cells, Player current_player) {
+
+   // --- Base Cases ---
+    // Has the PREVIOUS player just made a winning move?
+    // Player opponent = switch_player(current_player);
+    if (has_player_won(board, current_player)) {
+        // We start our turn in a state where we've already lost.
+        return  WIN;
+    }
+    // Is the board full (and we already know no one won)?
+    if (__builtin_popcount(get_occupied_mask(board)) == SIZE * SIZE) {
+        return DRAW;
+    }
+
+    // --- Recursive Step: Explore moves ---
+    bool can_force_draw = false;
+
+
+  for(const Cell& cell : cells) {
+    int r = cell.first;
+    int c = cell.second;
+    uint32_t new_board = board;
+    uint32_t cp = get_cell_value(new_board, r, c);
+    if(cp == static_cast<uint32_t>(EMPTY)) {
+      set_cell_value(new_board, r, c, current_player);
+      Outcome outcome = can_win(new_board, cells, switch_player(current_player));
+      if(outcome == LOSS) {
+          return WIN;
+      } else if(outcome == DRAW) {
+          can_force_draw = true;
+      }
+    }
+  }
+
+
+  // --- Final Conclusion for this State ---
+    // If we finished the loop without finding a winning move...
+    if (can_force_draw) {
+        // ...but we found a move that leads to a draw, that's our best option.
+        return DRAW;
+    } else {
+        // ...and we couldn't even force a draw, it means all our moves lead to a
+        // win for the opponent. This is a losing position.
+        return LOSS;
+    }
+
 }
 
 
@@ -148,36 +192,30 @@ namespace algorithms::onlinejudge::maths::tic_tac_toe
 
         char c;
         while(while_read(c) && c != E) {
-          uint32_t initial_board = 0;
+          uint32_t board = 0;
           v_cell start_cells;
-          PlayerBoard x_board;
-          PlayerBoard o_board;
           for(int i = 0; i < SIZE; ++i) {
             for(int j = 0; j < SIZE; ++j) {
               while_read(c);
               if(c == X) {
-                int position = i * SIZE + j;
-                initial_board |= (1u << position); 
-                x_board.place_piece(i, j);
+                set_cell_value(board, i, j, X_PLAYER);
               } else if(c == O) {
-                int position = i * SIZE + j;
-                initial_board |= (1u << position); 
-                o_board.place_piece(i, j);
+                set_cell_value(board, i, j, O_PLAYER);
               } else start_cells.push_back({i, j});
             }
-          }      
+          }
  
           bool found_winning_move = false;
           for(const Cell& cell : start_cells) {
-            v_PlayerBoard boards = {x_board, o_board};
-            uint32_t board = initial_board;
-            bool has_o_won = false;
-            if(can_win(board, start_cells, X_PLAYER, boards, has_o_won)) {
-              if(!has_o_won) {
-                printf("(%d,%d)\n", cell.first, cell.second);
-                found_winning_move = true;
-                goto finished;
-              }
+            int r = cell.first;
+            int c = cell.second;
+            uint32_t new_board = board;
+            set_cell_value(new_board, r, c, X_PLAYER);
+            Outcome outcome = can_win(new_board, start_cells, O_PLAYER);
+            if(outcome == LOSS) {
+              printf("(%d,%d)\n", r, c);
+              found_winning_move = true;
+              goto finished;
             }
           }
 

@@ -48,3 +48,20 @@ T modpow(T base, T exp, T modulus) {
   }
   return result;
 }
+
+
+// Define a custom assert macro that streams a message upon failure.
+// This only works in debug builds (when NDEBUG is not defined).
+#ifndef NDEBUG
+#define ___assert(condition, message) \
+    do { \
+        if (! (condition)) { \
+            std::cerr << "Assertion failed: (" #condition "), function " << __func__ \
+                      << ", file " << __FILE__ << ", line " << __LINE__ << ".\n" \
+                      << "Message: " << message << std::endl; \
+            std::abort(); \
+        } \
+    } while (false)
+#else
+#define ___assert(condition, message) do { } while (false)
+#endif

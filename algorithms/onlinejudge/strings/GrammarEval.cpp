@@ -24,6 +24,14 @@ bool is_expression(const std::string& s, int l, int r);
 bool is_component(const std::string& s, int l, int r);
 
 
+std::pair<ll, ll> fetch_x_y(std::stack<ll>& eval_stack) {
+  ll x = eval_stack.top();
+  eval_stack.pop();
+  ll y = eval_stack.top();
+  eval_stack.pop();
+  return {x, y};
+}
+
 /**
  * @brief Checks if the substring s[l..r) is a valid <factor>.
  */
@@ -31,14 +39,12 @@ bool is_factor(const std::string& s, int l, int r) {
   // Check for empty range
   if (l >= r) return false;
 
-  int size = 0;
   bool is_integer = true;
   for(int i = l; i < r; ++i) {
     if(!isdigit(s[i])) {
       is_integer = false;
       break;
     }
-    size++;
   }
   if(is_integer) {
     ll val = std::stoll(s.substr(l, r - l));
@@ -79,12 +85,9 @@ bool is_component(const std::string& s, int l, int r) {
      bool is_comp  = is_component(s, l, i);
      bool is_fac = is_factor(s, i + 1, r);
      if(is_comp && is_fac) {
-      ll x = eval_stack.top();
-      eval_stack.pop();
-      ll y = eval_stack.top();
-      eval_stack.pop();
-      eval_stack.push(x * y);
-      return true;
+       auto [x, y] = fetch_x_y(eval_stack);
+       eval_stack.push(x * y);
+       return true;
      } else return false;
     }
   }
@@ -119,10 +122,7 @@ bool is_expression(const std::string& s, int l, int r) {
       bool is_exp = is_expression(s, l, i);
       bool is_comp = is_component(s, i + 1, r);
       if(is_exp && is_comp) {
-        ll x = eval_stack.top();
-        eval_stack.pop();
-        ll y = eval_stack.top();
-        eval_stack.pop();
+        auto [x, y] = fetch_x_y(eval_stack);
         eval_stack.push(x + y);
         return true;
       } else return false;

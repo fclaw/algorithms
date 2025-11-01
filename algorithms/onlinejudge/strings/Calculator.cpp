@@ -10,7 +10,12 @@
 
 
 
-std::unordered_map<char, int> op_prec = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}};
+std::unordered_map<char, std::pair<int, std::function<double(double, double)>>> 
+ op_prec = 
+ {{'+', {1, std::plus<double>()}}, 
+ {'-', {1, std::minus<double>()}}, 
+ {'*', {2, std::multiplies<double>()}}, 
+ {'/', {2, std::divides<double>()}}};
 
 
 double parse_num(const std::string& exp, size_t& i) {
@@ -32,20 +37,7 @@ void apply_op(std::stack<double>& eval_stack, std::stack<char>& op_stack) {
   double y = eval_stack.top();
   eval_stack.pop();
   op_stack.pop();
-  switch(top_op) {
-    case '+':
-      eval_stack.push(y + x);
-      break;
-    case '-':
-      eval_stack.push(y - x);
-      break;
-    case '*':
-      eval_stack.push(y * x);
-      break;
-    case '/':
-      eval_stack.push(y / x);
-      break;
-    }
+  eval_stack.push(op_prec[top_op].second(y, x));
 }
 
 
@@ -57,9 +49,9 @@ double eval(const std::string& exp) {
   eval_stack.push(num);
   while(i < exp.size()) {
     char curr_op = exp[i++];
-    while(!op_stack.empty() && 
-          (op_prec[op_stack.top()] >= 
-           op_prec[curr_op])) {
+    while(!op_stack.empty() &&
+          (op_prec[op_stack.top()].first >= 
+           op_prec[curr_op].first)) {
       apply_op(eval_stack, op_stack);
     }
     op_stack.push(curr_op);

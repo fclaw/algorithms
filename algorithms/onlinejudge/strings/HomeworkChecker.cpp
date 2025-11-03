@@ -9,9 +9,14 @@
 #include <bits/stdc++.h>
 
 
-std::unordered_map<char, std::function<double(double, double)>> op_map =
-  {{'+', std::plus<double>()}, 
-   {'-', std::minus<double>()}};
+
+constexpr char plus = '+';
+constexpr char minus = '-';
+
+
+std::unordered_map<char, std::function<int(int, int)>> op_map =
+  {{plus, std::plus<int>()}, 
+   {minus, std::minus<int>()}};
 
 
 namespace algorithms::onlinejudge::strings::homework_checker
@@ -34,18 +39,22 @@ namespace algorithms::onlinejudge::strings::homework_checker
         int correct_answers = 0;
         std::string exp;
         while(std::getline(std::cin, exp)) {
-          std::stringstream ss(exp);
-          int x, y;
-          ss >> x;
-          char op;
-          ss >> op;
-          ss >> y;
-          char _eq;
-          ss >> _eq;
-          std::string ans;
-          ss >> ans;
+          size_t op_pos = exp.find(plus);
+          if(op_pos == std::string::npos) {
+            op_pos = exp.find(minus);
+          }
+          
+          size_t ans_pos = exp.find('=');
+
+          std::string x_str = exp.substr(0, op_pos);
+          std::string y_str = exp.substr(op_pos + 1, ans_pos);
+          std::string ans = exp.substr(ans_pos + 1);
+
+          int x = std::stoi(x_str);
+          int y = std::stoi(y_str);
+
           if(ans != "?") {
-            if(op_map.at(op)(x, y) == std::stoi(ans)) 
+            if(op_map.at(exp[op_pos])(x, y) == std::stoi(ans)) 
               correct_answers++;
           }
         }

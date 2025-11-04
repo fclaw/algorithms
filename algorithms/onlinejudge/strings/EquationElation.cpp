@@ -20,53 +20,85 @@ std::unordered_map<std::string, std::function<int(int, int)>>
  {"*", std::multiplies<int>()}, 
  {"/", std::divides<int>()}};
 
-// Function to split a mathematical expression string into tokens (numbers and operators)
-vs tokenize(const std::string& expression) {
-    vs tokens;
-    std::string current_number;
 
-    for (int i = 0; i < (int)expression.length(); ++i) {
-        char c = expression[i];
-
-        if (isspace(c)) {
-            continue; // Skip all whitespace
-        }
-
-        if (isdigit(c)) {
-            current_number += c;
-        } else {
-            // It's an operator or parenthesis.
-            // First, push any number we've accumulated.
-            if (!current_number.empty()) {
-                tokens.push_back(current_number);
-                current_number.clear();
-            }
-
-            // Now, analyze the current character 'c'.
-            bool is_unary_context = tokens.empty() || 
-                                    std::string("+-*/(").find(tokens.back()) != std::string::npos;
-
-            if ((c == '+' || c == '-') && is_unary_context) {
-                // This is a unary operator.
-                if (c == '-') {
-                    // Start a new number with the negative sign.
-                    current_number += c;
-                }
-                // If c == '+', we do nothing, effectively ignoring the redundant unary plus.
-            } else {
-                // This is a binary operator or a parenthesis.
-                tokens.push_back(std::string(1, c));
-            }
-        }
-    }
-
-    // After the loop, push any remaining number.
-    if (!current_number.empty()) {
-        tokens.push_back(current_number);
-    }
-
-    return tokens;
+bool is_operator(const std::string& s) {
+    return s == "+" || s == "-" || s == "*" || s == "/";
 }
+
+bool is_number(const std::string& s) {
+  if(s.empty()) {
+    return false;
+  }
+
+  auto start = s.begin();
+  if(s.front() == '-' || s.front() == '+') {
+    start = s.begin() + 1;
+  }
+  return start < s.end() && std::all_of(start, s.end(), ::isdigit);
+}
+
+
+// --- The Core Backtracking Function ---
+
+// Returns true if a valid tokenization is found, false otherwise.
+// Takes 'tokens' by reference to build the result efficiently.
+bool backtrack(int start_index, const std::string& expression, vs& tokens, vs& reduction) {
+  // BASE CASE: We've successfully tokenized the entire string.
+  if(start_index == (int)expression.length()) {
+    reduction = tokens;
+    return true; // A solution has been found!
+   }
+
+  // RECURSIVE STEP: Try every possible next token starting from start_index.
+  // We iterate through all possible lengths for the next token.
+  for (int len = 1; start_index + len <= (int)expression.length(); ++len) {
+    std::string candidate = expression.substr(start_index, len);
+    // --- CONTEXTUAL VALIDATION ---
+    // Apply rules to see if this candidate is valid right now.
+    bool is_valid_candidate = false;
+    if(tokens.empty()) {
+      // The first token must be a number (e.g., "5", "-92").
+      if(is_number(candidate)) {
+        is_valid_candidate = true;
+      }
+    } else {
+      const std::string& last_token = tokens.back();
+      if(is_number(last_token)) {
+        // If the last token was a number, the next must be an operator.
+        if (is_operator(candidate)) {
+          is_valid_candidate = true;
+        }
+      } else if (is_operator(last_token)) {
+        // If the last token was an operator, the next must be a number.
+        if (is_number(candidate)) {
+          is_valid_candidate = true;
+        }
+      }
+    }
+
+    // --- RECURSION and BACKTRACKING ---
+    if(is_valid_candidate) {
+      // 1. CHOOSE: Add the candidate token to our list.
+      if(is_number(candidate)) {
+        if(candidate.front() == '+')
+          candidate = candidate.erase(0, 1);
+      }
+      tokens.push_back(candidate);
+
+      // 2. EXPLORE: Recurse with the new index.
+      if(backtrack(start_index + len, expression, tokens, reduction)) {
+        return true; // If the recursive call found a solution, propagate success.
+      }
+
+      // 3. UNCHOOSE: If the recursive call failed, backtrack by removing the candidate.
+      tokens.pop_back();
+    }
+  }
+
+  // If the loop finishes without finding any valid path, this path is a dead end.
+  return false;
+}
+
 
 // Converts a vector of tokens back into a readable string
 std::string tokensToString(const vs& tokens) {   
@@ -171,9 +203,10 @@ namespace algorithms::onlinejudge::strings::equation_elation
           size_t eq_pos = equation.find('=');
           std::string left = equation.substr(eq_pos + 1, equation.length());
           std::string exp = equation.substr(0, eq_pos);
-          vs tokens = tokenize(exp);
-          vs reduced_exp = do_reduction(tokens);
-          reduced_exp.insert(reduced_exp.begin(), tokensToString(tokens));
+          vs tokens, reduction;
+          backtrack(0, exp, tokens, reduction);
+          vs reduced_exp = do_reduction(reduction);
+          reduced_exp.insert(reduced_exp.begin(), tokensToString(reduction));
           for(auto s : reduced_exp) {
             printf("%s\n", (s + " = " + left).c_str());
           }

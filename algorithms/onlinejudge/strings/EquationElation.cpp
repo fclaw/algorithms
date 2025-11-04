@@ -42,10 +42,10 @@ bool is_number(const std::string& s) {
 
 // Returns true if a valid tokenization is found, false otherwise.
 // Takes 'tokens' by reference to build the result efficiently.
-bool backtrack(int start_index, const std::string& expression, vs& tokens, vs& reduction) {
+bool backtrack(int start_index, const std::string& expression, vs& tokens, vs& out_tokens) {
   // BASE CASE: We've successfully tokenized the entire string.
   if(start_index == (int)expression.length()) {
-    reduction = tokens;
+    out_tokens = tokens;
     return true; // A solution has been found!
    }
 
@@ -86,7 +86,7 @@ bool backtrack(int start_index, const std::string& expression, vs& tokens, vs& r
       tokens.push_back(candidate);
 
       // 2. EXPLORE: Recurse with the new index.
-      if(backtrack(start_index + len, expression, tokens, reduction)) {
+      if(backtrack(start_index + len, expression, tokens, out_tokens)) {
         return true; // If the recursive call found a solution, propagate success.
       }
 
@@ -203,10 +203,10 @@ namespace algorithms::onlinejudge::strings::equation_elation
           size_t eq_pos = equation.find('=');
           std::string left = equation.substr(eq_pos + 1, equation.length());
           std::string exp = equation.substr(0, eq_pos);
-          vs tokens, reduction;
-          backtrack(0, exp, tokens, reduction);
-          vs reduced_exp = do_reduction(reduction);
-          reduced_exp.insert(reduced_exp.begin(), tokensToString(reduction));
+          vs tokens, out_tokens;
+          backtrack(0, exp, tokens, out_tokens);
+          vs reduced_exp = do_reduction(out_tokens);
+          reduced_exp.insert(reduced_exp.begin(), tokensToString(out_tokens));
           for(auto s : reduced_exp) {
             printf("%s\n", (s + " = " + left).c_str());
           }

@@ -217,7 +217,7 @@ namespace algorithms::onlinejudge::strings::strange_integration
           if (std::freopen(file.value(), "r", stdin) == nullptr) {
             // If freopen fails, throw an exception with a more detailed error message
             std::string name = file.value();
-            std::string errorMessage = 
+            std::string errorMessage =
               "Failed to open file: " + name +
               " with error: " + std::strerror(errno);
             throw std::ios_base::failure(errorMessage);

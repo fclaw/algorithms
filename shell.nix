@@ -1,5 +1,5 @@
 let
-   pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-24.11.tar.gz") {};
+   pkgs = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-25.11.tar.gz") {};
    clang = pkgs.gcc14;
    py = pkgs.python3;
    git = pkgs.git; 

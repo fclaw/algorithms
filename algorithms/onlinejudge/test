@@ -1,7 +1,10 @@
-3
-2 1
-EEENNNWWWSSS.
-2 1
-ENWS.
-2 1
-EEEEEEEEEENWWWWWWWWWWS.
+new test 0.5 1.5 
+buy test 20 
+sell test 10
+report
+delete test 
+new test 0.5 1.0
+buy test 20
+sell test 10
+report 
+*

@@ -22,6 +22,9 @@ struct Directory
 
     Directory(std::string n) : name(n) {}
 
+    ~Directory() {
+      for (auto sub : subdirectories) delete sub;
+    }
 
     void print(int depth) {
         std::string indent = "";
@@ -126,19 +129,20 @@ namespace algorithms::onlinejudge::strings::file_mapping
         bool is_first = true;
         while(std::getline(std::cin, line) && line != "#") {
 
-          if(line == "*") {
-
-            if(is_first) is_first = false;
-            else std::cout << std::endl;
-
-            Directory* root = new Directory("ROOT");
-            fileSystemBuilder(lines, 0, root);
-            printf("DATA SET %d:\n", t_cases++);
-            root->print(0);
-            lines.clear();
-          } else {
+          if(line != "*") {
             lines.push_back(line);
+            continue;
           }
+
+
+          if(is_first) is_first = false;
+          else std::cout << std::endl;
+
+          Directory* root = new Directory("ROOT");
+          fileSystemBuilder(lines, 0, root);
+          printf("DATA SET %d:\n", t_cases++);
+          root->print(0);
+          lines.clear();
         }
     }
 }

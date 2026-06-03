@@ -1,38 +1,91 @@
 import random
+import subprocess
+import sys
 
-def generate_test_cases(num_cases):
-    for _ in range(num_cases):
-        # Generate random dimensions between 2 and 10 (UVa 10500 limits are small)
-        N = random.randint(2, 10)
-        M = random.randint(2, 10)
-        
-        # Generate starting coordinates (1-indexed)
-        start_r = random.randint(1, N)
-        start_c = random.randint(1, M)
-        
-        print(f"{N} {M}")
-        print(f"{start_r} {start_c}")
-        
-        for r in range(1, N + 1):
-            row_chars = []
-            for c in range(1, M + 1):
-                if r == start_r and c == start_c:
-                    # Starting cell MUST be empty
-                    row_chars.append('0')
-                else:
-                    # Randomly choose 'X' or 'O'. 
-                    # We bias towards 'O' to allow for more complex robot paths.
-                    row_chars.append(random.choice(['X', '0', '0', '0']))
+# Replace this with the exact name of your compiled C++ executable
+CPP_EXECUTABLE = "./exe" 
+
+OPERATORS = ['+', '-', '*', '/']
+
+def generate_weird_expression(max_depth, current_depth=0):
+    if current_depth >= max_depth or random.random() < 0.3:
+        # Generate numbers, sometimes negative, sometimes decimals
+        num = str(random.randint(1, 500))
+        if random.random() < 0.2: num = "-" + num
+        return num
+    
+    op = random.choice(OPERATORS)
+    left = generate_weird_expression(max_depth, current_depth + 1)
+    right = generate_weird_expression(max_depth, current_depth + 1)
+    
+    # Randomly add massive amounts of spaces
+    sp1 = " " * random.randint(0, 3)
+    sp2 = " " * random.randint(0, 3)
+    
+    expr = f"{left}{sp1}{op}{sp2}{right}"
+    
+    # Wrap in parens randomly
+    if random.random() < 0.6:
+        expr = f"({expr})"
+        # Double or triple wrap!
+        if random.random() < 0.2:
+            expr = f"(({expr}))"
             
-            # Print row with spaces between characters
-            print(" ".join(row_chars))
+    return expr
+
+def fuzz():
+    tests_run = 0
+    while tests_run < 10000:
+        expr = generate_weird_expression(max_depth=15)
+        
+        # 1. Ask Python what the answer is
+        try:
+            py_ans = eval(expr)
+            # Skip massive numbers or deep floats to avoid standard precision differences
+            if abs(py_ans) > 1e6: continue 
+        except ZeroDivisionError:
+            continue
+        except SyntaxError:
+            continue # Skip invalid Python syntax like "5 - - 3"
+
+        # Format Python answer EXACTLY like C++ printf("%.2f")
+        if abs(py_ans) < 0.005: py_ans = 0.0
+        expected_str = f"{py_ans:.2f}"
+
+        # 2. Ask your C++ program what the answer is
+        try:
+            # We pass the expression via standard input
+            process = subprocess.Popen([CPP_EXECUTABLE], 
+                                       stdin=subprocess.PIPE, 
+                                       stdout=subprocess.PIPE, 
+                                       stderr=subprocess.PIPE,
+                                       text=True)
             
-    # Print the termination signal
-    print("0 0")
+            cpp_out, cpp_err = process.communicate(input=expr + "\n", timeout=1)
+            cpp_out = cpp_out.strip()
+            
+            # 3. Compare!
+            if cpp_out != expected_str:
+                print("\n" + "="*50)
+                print("💥 BUG FOUND! 💥")
+                print("="*50)
+                print(f"Expression : {expr}")
+                print(f"Python Says: {expected_str}")
+                print(f"C++ Says   : {cpp_out}")
+                print(f"C++ Errors : {cpp_err}")
+                print("="*50)
+                sys.exit(1)
+                
+        except subprocess.TimeoutExpired:
+            print(f"\n💥 TLE / INFINITE LOOP CAUGHT! 💥\nExpression: {expr}")
+            process.kill()
+            sys.exit(1)
+
+        tests_run += 1
+        if tests_run % 100 == 0:
+            print(f"Passed {tests_run} tests...")
+
+    print("\n🎉 Survived 10,000 tests! The logic is bulletproof.")
 
 if __name__ == "__main__":
-    try:
-        count = int(input("Enter number of test cases to generate: "))
-        generate_test_cases(count)
-    except ValueError:
-        print("Please enter a valid integer.")
+    fuzz()

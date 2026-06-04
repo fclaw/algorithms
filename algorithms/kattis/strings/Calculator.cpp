@@ -47,7 +47,7 @@ int findWeakestOperator(const std::string& expr, size_t start, size_t end) {
       if(is_unary && (expr[i] == '+' || expr[i] == '-')) continue;
 
       int p = get_rank(expr[i]);
-      // '<' guarantees we pick the RIGHTMOST weakest operator
+      // '<' guarantees we pick the LEFTMOST weakest operator to comply with Associativity law: (1 + 5) + 7 
       if (p <= min_prec) {
         min_prec = p;
         pivot = i;

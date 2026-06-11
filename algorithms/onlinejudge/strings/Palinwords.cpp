@@ -18,7 +18,7 @@ using vvb = std::vector<vb>;
 
 
 bool is_palinwords(const std::string& s) {
-  std::set<std::string> s_palindroms;
+  std::unordered_set<std::string> s_palindroms;
   int n = s.length();
 
   vvb dp = vvb(n, vb(n, false));

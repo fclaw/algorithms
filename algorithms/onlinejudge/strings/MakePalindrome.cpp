@@ -87,8 +87,8 @@ std::pair<int, std::string> makePalindrome(const std::string& str) {
       if(str[i] == str[j]) {
         dp[i][j] = 2 + dp[i + 1][j - 1];
         auto indices = indices_matrix[i + 1][j - 1];
-        indices[i] = true;
-        indices[j] = true;
+        indices.set(i);
+        indices.set(j);
         indices_matrix[i][j] = indices;
       } else {
         if (dp[i + 1][j] > dp[i][j - 1]) {

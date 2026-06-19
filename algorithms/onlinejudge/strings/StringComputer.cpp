@@ -54,7 +54,8 @@ State get_instruction_sequence(const std::string& from, const std::string& to, i
   if (i == (int)from.size() && 
       j < (int)to.size()) { 
     std::vector<std::tuple<int, char, Action>> ins;
-    for (int k = j; k < (int)to.size(); k++) {
+    // Iterate BACKWARD so rbegin() processes them FORWARD
+    for (int k = (int)to.size() - 1; k >= j; k--) {
       ins.push_back(std::make_tuple(i, to[k], INSERT));
     }
     return {(int)to.size() - j, ins};
@@ -66,8 +67,9 @@ State get_instruction_sequence(const std::string& from, const std::string& to, i
   if (i < (int)from.size() && 
       j == (int)to.size()) {
     std::vector<std::tuple<int, char, Action>> ins;
-    for (int k = i; k < (int)from.size(); k++) {
-      ins.insert(ins.begin(), std::make_tuple(k, from[k], DELETE));
+    // Iterate BACKWARD so rbegin() processes them FORWARD
+    for (int k = (int)from.size() - 1; k >= i; k--) {
+      ins.push_back(std::make_tuple(k, from[k], DELETE)); 
     }
     return {(int)from.size() - i, ins};
   }
@@ -119,7 +121,8 @@ namespace algorithms::onlinejudge::strings::string_computer
         }
 
         std::string from, to;
-        while(std::cin >> from >> to && from != "#") {
+        while(std::cin >> from && from != "#") {
+          std::cin >> to;
           vv_state cache(from.size() + 1, v_state(to.size() + 1, State{-1, {}})); 
           State state = get_instruction_sequence(from, to, 0, 0, cache);
           std::string seq;

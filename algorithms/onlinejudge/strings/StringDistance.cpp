@@ -1,6 +1,6 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa 164 String Computer, https://onlinejudge.org/external/1/164.pdf, rt: s
+🧳 UVa 526 String Distance and Transform Process, https://onlinejudge.org/external/5/526.pdf, rt: s
 ───────────────────────────────────────────────────────────────
 */
 
@@ -10,18 +10,18 @@
 
 
 
-enum Action { INSERT, DELETE, CHANGE };
+enum Action { INSERT, DELETE, REPLACE };
 
-char actionToChar(Action a) {
+std::string actionToString(Action a) {
   switch (a) {
     case INSERT: 
-      return 'I'; // Or '+' if the problem asks for symbols
+      return "Insert"; // Or '+' if the problem asks for symbols
     case DELETE: 
-      return 'D'; // Or '-' if the problem asks for symbols
-    case CHANGE: 
-      return 'C'; // Or 'M' (Mismatch) or 'R' (Replace) depending on the problem
+      return "Delete"; // Or '-' if the problem asks for symbols
+    case REPLACE: 
+      return "Replace"; // Or 'M' (Mismatch) or 'R' (Replace) depending on the problem
   }
-  return '\0';
+  return "";
 }
 
 
@@ -93,14 +93,14 @@ State get_instruction_sequence(const std::string& from, const std::string& to, i
   prev_delete.steps++;
 
   State prev_replace = get_instruction_sequence(from, to, i + 1, j + 1, cache);
-  prev_replace.instructions.push_back(std::make_tuple(i, to[j], CHANGE));
+  prev_replace.instructions.push_back(std::make_tuple(i, to[j], REPLACE));
   prev_replace.steps++;
 
   return cache[i][j] = std::min(state, std::min(prev_replace, std::min(prev_insert, prev_delete)));
 }
 
 
-namespace algorithms::onlinejudge::strings::string_computer
+namespace algorithms::onlinejudge::strings::string_distance
 {
 
     void submit(std::optional<char*> file, bool debug_mode)
@@ -118,12 +118,14 @@ namespace algorithms::onlinejudge::strings::string_computer
         }
 
         std::string from, to;
-        while(std::cin >> from && from != "#") {
-          std::cin >> to;
+        bool is_first = true;
+        while(std::getline(std::cin, from)) {
+          std::getline(std::cin, to);
           vv_state cache(from.size() + 1, v_state(to.size() + 1, State{-1, {}})); 
           State state = get_instruction_sequence(from, to, 0, 0, cache);
-          std::string seq;
+          std::string seq = std::to_string(state.steps) + "\n";
           int adj = 0; // Tracks the changing length of the string
+          int bullet_point = 1;
           auto it = state.instructions.rbegin();
           for(; it != state.instructions.rend(); ++it) {
              auto val = *it;
@@ -141,13 +143,14 @@ namespace algorithms::onlinejudge::strings::string_computer
              // CHANGE does not affect the shift
 
              std::string s_pos = std::to_string(true_index);
-             if (true_index < 10) {
-               s_pos = "0" + s_pos;
-             }
-             std::string instruction = std::string(1, actionToChar(a)) + std::string(1, c)  + s_pos;
-             seq += instruction;
+             std::string symb =  "," + std::string(1, c);
+             if(a == DELETE) symb = "";
+             std::string instruction = std::to_string(bullet_point++) + " " + actionToString(a) + " " + s_pos + symb;
+             seq += instruction + "\n";
           }
-          seq += "E";
+          seq.pop_back();
+          if(!is_first) std::cout << std::endl;
+          else is_first = false; 
           std::cout << seq << std::endl;
         }
     }

@@ -59,7 +59,7 @@ using v_state = std::vector<State>;
 using vv_state = std::vector<v_state>;
 
 
-State get_instruction_sequence(const std::string& from, const std::string& to, int i, int j, vv_state& cache) {
+State get_min_steps(const std::string& from, const std::string& to, int i, int j, vv_state& cache) {
 
   if (i == (int)from.size() && 
       j == (int)to.size()) {
@@ -87,22 +87,22 @@ State get_instruction_sequence(const std::string& from, const std::string& to, i
     return cache[i][j];
   }
 
-  State state = {INT_MAX};
+  State eq_state = {INT_MAX};
 
   if(from[i] == to[j]) {
-    state = get_instruction_sequence(from, to, i + 1, j + 1, cache);
+    eq_state = get_min_steps(from, to, i + 1, j + 1, cache);
   }
 
-  State prev_insert = get_instruction_sequence(from, to, i, j + 1, cache);
+  State prev_insert = get_min_steps(from, to, i, j + 1, cache);
   prev_insert.steps++;
 
-  State prev_delete = get_instruction_sequence(from, to, i + 1, j, cache);
+  State prev_delete = get_min_steps(from, to, i + 1, j, cache);
   prev_delete.steps++;
 
-  State prev_replace = get_instruction_sequence(from, to, i + 1, j + 1, cache);
+  State prev_replace = get_min_steps(from, to, i + 1, j + 1, cache);
   prev_replace.steps++;
 
-  return cache[i][j] = std::min(state, std::min(prev_replace, std::min(prev_insert, prev_delete)));
+  return cache[i][j] = std::min(eq_state, std::min(prev_replace, std::min(prev_insert, prev_delete)));
 }
 
 
@@ -128,13 +128,13 @@ namespace algorithms::onlinejudge::strings::string_to_palindrome
         int t_cases, t_case = 1;
         std::cin >> t_cases;
         std::cin.ignore();
+        std::string str;
         while(t_cases--) {
-          std::string str;
           std::cin >> str;
           std::string reverse_str(str.begin(), str.end());
           std::reverse(reverse_str.begin(), reverse_str.end());
           vv_state cache(str.size() + 1, v_state(str.size() + 1, State{-1})); 
-          State state = get_instruction_sequence(str, reverse_str, 0, 0, cache);
+          State state = get_min_steps(str, reverse_str, 0, 0, cache);
           printf("Case %d: %d\n", t_case++, state.steps / 2);
         }
     }

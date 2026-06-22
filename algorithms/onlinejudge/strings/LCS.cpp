@@ -1,6 +1,6 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa 10192 Vacation, https://onlinejudge.org/external/101/10192.pdf, rt: s
+🧳 UVa 10405 Longest Common Subsequence, https://onlinejudge.org/external/104/10405.pdf, rt: s
 ───────────────────────────────────────────────────────────────
 */
 
@@ -13,8 +13,7 @@
 using vi = std::vector<int>;
 using vvi = std::vector<vi>;
 
-
-namespace algorithms::onlinejudge::strings::holiday
+namespace algorithms::onlinejudge::strings::lcs
 {
 
     void submit(std::optional<char*> file, bool debug_mode)
@@ -31,9 +30,8 @@ namespace algorithms::onlinejudge::strings::holiday
           }
         }
 
-        int t_case = 1;
         std::string first, second;
-        while(std::getline(std::cin, first) && first != "#") {
+        while(std::getline(std::cin, first)) {
           std::getline(std::cin, second);
           
           vvi dp(first.size() + 1, vi(second.size() + 1, 0));
@@ -48,7 +46,7 @@ namespace algorithms::onlinejudge::strings::holiday
             }
           }
 
-          printf("Case #%d: you can visit at most %d cities.\n", t_case++, dp[first.size()][second.size()]);
+          std::cout << dp[first.size()][second.size()] << std::endl;
         }
     }
 }

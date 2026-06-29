@@ -91,14 +91,14 @@ namespace algorithms::onlinejudge::strings::palinagram
                      };
           std::sort(freq.begin(), freq.end(), cmp);  
 
-           std::string ans;
-           for(auto& p : freq) {
-              if((p.second % 2)) {
-                ans.push_back(p.first);
-              }
-           }
-           if(!ans.empty()) ans.pop_back();
-           std::cout << ans << std::endl;
+          std::string ans;
+          for(auto& p : freq) {
+            if((p.second % 2)) {
+              ans.push_back(p.first);
+            }
+          }
+          if(!ans.empty()) ans.pop_back();
+          std::cout << ans << std::endl;
         }
     }
 }

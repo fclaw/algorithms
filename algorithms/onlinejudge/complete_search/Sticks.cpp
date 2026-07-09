@@ -17,20 +17,9 @@ using vi = std::vector<int>;
 const int MAX_HEIGHT = 50 * 60;
 
 
+bool is_feasible(const vi& splinters, std::unordered_map<int, int>& pool, int curr_height, int target_height, int rem_splinters) {
 
-bool is_pool_empty(const std::unordered_map<int, int>& pool) {
-  for(auto [_, c] : pool) {
-    if(c > 0) {
-      return false;
-    }
-  }
-  return true;
-}
-
-
-bool is_feasible(const vi& splinters, std::unordered_map<int, int>& pool, int curr_height, int target_height) {
-
-  if(is_pool_empty(pool)) {
+  if(rem_splinters == 0) {
     return curr_height == 0;
   }
 
@@ -38,12 +27,14 @@ bool is_feasible(const vi& splinters, std::unordered_map<int, int>& pool, int cu
     if(pool.at(splinter) > 0) {
       int new_curr_height = curr_height + splinter;
       if(new_curr_height <= target_height) {
+
         if(new_curr_height == target_height) {
           new_curr_height = 0;
         }
+
         pool[splinter]--;
 
-        if(is_feasible(splinters, pool, new_curr_height, target_height)) {
+        if(is_feasible(splinters, pool, new_curr_height, target_height, rem_splinters - 1)) {
           pool[splinter]++;
           return true; // We found a path!
         }
@@ -53,7 +44,6 @@ bool is_feasible(const vi& splinters, std::unordered_map<int, int>& pool, int cu
         // ====================================================================
         // --- THE GOLDEN PRUNING RULES ---
         // ====================================================================
-        
         // PRUNING RULE 1: If the first piece we tried on a blank stick failed,
         // then this entire branching path is a dead end.
         if (curr_height == 0) {
@@ -65,7 +55,6 @@ bool is_feasible(const vi& splinters, std::unordered_map<int, int>& pool, int cu
         if (new_curr_height == target_height) {
           return false;
         }
-        
         // ====================================================================
       }
     }
@@ -114,11 +103,20 @@ namespace algorithms::onlinejudge::complete_search::sticks
           std::sort(splinters.begin(), splinters.end(), std::greater<int>());
           int ans = -1;
           int bound = std::min(max_height, MAX_HEIGHT);
-          for(int candidate = 1; candidate <= bound; ++candidate) {
-            if(reached[candidate] && 
-               candidate >= splinters.front()) {
+          int start = splinters.front(); 
+          for(int candidate = start; candidate <= bound; ++candidate) {
+            if(reached[candidate]) {
+
+              // --- THE GOLDEN PRUNING RULE ---
+              // If the candidate doesn't evenly divide the total sum, 
+              // it is mathematically impossible. Skip it instantly!
+              if (max_height % candidate != 0) {
+                continue;
+              }
+
               std::unordered_map<int, int> loc_pool = pool;
-              if(is_feasible(splinters, loc_pool, 0, candidate)) {
+              int rem_splinters = (int)splinters.size();
+              if(is_feasible(splinters, loc_pool, 0, candidate, rem_splinters)) {
                 ans = candidate;
                 goto exit;
               }

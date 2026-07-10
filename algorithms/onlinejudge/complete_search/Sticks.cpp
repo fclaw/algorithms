@@ -94,6 +94,7 @@ bool is_feasible(const vi& splinters, int start_idx, std::unordered_map<int, int
 
   for(int i = start_idx; i < (int)splinters.size(); ++i) {
 
+    // GUARD 1:
     // --- THE DUPLICATE SKIPPER ---
     // If the element we are about to try has the exact same value 
     // as the one we just tried and failed, SKIP IT!
@@ -127,12 +128,14 @@ bool is_feasible(const vi& splinters, int start_idx, std::unordered_map<int, int
         // ====================================================================
         // --- THE GOLDEN PRUNING RULES ---
         // ====================================================================
+        // GUARD 2:
         // PRUNING RULE 1: If the first piece we tried on a blank stick failed,
         // then this entire branching path is a dead end.
         if (curr_height == 0) {
           return false; 
         }
 
+        // GUARD 3:
         // PRUNING RULE 2: If a piece that perfectly completed the current stick 
         // failed, trying smaller pieces to complete it is guaranteed to fail.
         if (completed_stick) {
@@ -191,6 +194,7 @@ namespace algorithms::onlinejudge::complete_search::sticks
           for(int candidate = start; candidate <= bound; ++candidate) {
             if(reached[candidate]) {
 
+              // GUARD 0:
               // --- THE GOLDEN PRUNING RULE ---
               // If the candidate doesn't evenly divide the total sum, 
               // it is mathematically impossible. Skip it instantly!

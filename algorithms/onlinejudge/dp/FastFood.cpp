@@ -66,6 +66,11 @@ Ans minimize_sum(const vi& restaurants, int left, int right, int depots_left) {
      int d = restaurants[p];
      for(int l = p; l >= left; --l) {
        for(int r = p; r < right; ++r) {
+         int remaining_elements = (l - left) + (right - (r + 1));
+         int remaining_depots = depots_left - 1;
+         if (remaining_elements < remaining_depots) {
+           continue;
+         }
          int sum = 0;
          // prefix sum
           for(int i = l; i <= r; ++i) {
@@ -73,8 +78,11 @@ Ans minimize_sum(const vi& restaurants, int left, int right, int depots_left) {
           }
          Ans curr_ans = {sum, {{idx, p, l, r}}};
          for(int d = 0; d < depots_left; ++d) {
+          int right_depots = depots_left - d - 1;
+          if(l - left > d && right - r - 1 > right_depots) {
+            continue;
+           }
            Ans left_ans = minimize_sum(restaurants, left, l, d);
-           int right_depots = depots_left - d - 1;
            Ans right_ans = minimize_sum(restaurants, r + 1, right, right_depots);
            Ans total = curr_ans + left_ans + right_ans;
            ans = std::min(ans, total);

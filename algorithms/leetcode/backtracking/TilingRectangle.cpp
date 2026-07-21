@@ -21,10 +21,11 @@ using vii = std::vector<ii>;
 
 int N, M;
 
-
-bool is_occupied(int size, const vi& occupied, int p_idx) {
-    int r = p_idx / M;
-    int c = p_idx % M;
+bool is_occupied(int size, const vvi& occupied, const ii& p) {
+    int r = p.first;
+    int c = p.second;
+    int N = occupied.size();
+    int M = N > 0 ? occupied[0].size() : 0;
 
     // Check if the square exceeds grid boundaries
     if (r + size > N || c + size > M) {
@@ -34,8 +35,7 @@ bool is_occupied(int size, const vi& occupied, int p_idx) {
     // Check for collisions inside the square
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
-            int idx = (r + i) * M + (c + j);
-            if (occupied[idx] != 0) {
+            if (occupied[r + i][c + j] != 0) {
                 return true;
             }
         }
@@ -44,88 +44,134 @@ bool is_occupied(int size, const vi& occupied, int p_idx) {
     return false;
 }
 
-vi fill_in_occupied(int size, const vi& occupied, int p_idx) {
-    vi new_occupied = occupied;
-    int r = p_idx / M;
-    int c = p_idx % M;
 
+// In-place modification: Marks cells as occupied
+void place_square(int size, vvi& occupied, const ii& p) {
+    int r = p.first;
+    int c = p.second;
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
-            int idx = (r + i) * M + (c + j);
-            new_occupied[idx] = 1; // Mark as occupied
+            occupied[r + i][c + j] = 1;
         }
     }
+}
 
-    return new_occupied;
+// In-place modification: Unmarks cells (Backtracks)
+void unplace_square(int size, vvi& occupied, const ii& p) {
+    int r = p.first;
+    int c = p.second;
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            occupied[r + i][c + j] = 0;
+        }
+    }
 }
 
 
-vi add_points(int size, const vi& points, int p_idx) {
-    int r = p_idx / M;
-    int c = p_idx % M;
-
-    vi new_points;
+vii add_points(int size, const vii& points, const ii& p, const vvi& occupied) {
+    int r = p.first;
+    int c = p.second;
+    int N = occupied.size();
+    int M = N > 0 ? occupied[0].size() : 0;
+    
+    vii new_points;
 
     // 1. Remove existing points covered by the new square
-    for (int q_idx : points) {
-        int qr = q_idx / M;
-        int qc = q_idx % M;
+    for (const auto& q : points) {
+        int qr = q.first;
+        int qc = q.second;
 
         if (qr >= r && qr < r + size && qc >= c && qc < c + size) {
             continue; // Exclude
         }
-        new_points.push_back(q_idx);
+        new_points.push_back(q);
     }
 
-    // Helper lambda to check if point is already in the list
-    auto contains = [](const vi& pts, int pt) {
+    auto contains = [](const vii& pts, const ii& pt) {
         return std::find(pts.begin(), pts.end(), pt) != pts.end();
     };
 
-    // 2. Add right candidate if within boundary
+    // 2. Add right candidate if within boundary and NOT a continuous vertical edge from above
     if (c + size < M) {
-        int right_idx = r * M + (c + size);
-        if (!contains(new_points, right_idx)) {
-            new_points.push_back(right_idx);
+        bool is_vertical_continuation = false;
+        if (r - 1 >= 0) {
+            // If the cell to the left of the boundary above is occupied,
+            // and the cell to the right of the boundary above is empty/out of bounds,
+            // then this is a continuous straight vertical edge from above.
+            bool left_above_occupied = (occupied[r - 1][c + size - 1] != 0);
+            bool right_above_empty = (occupied[r - 1][c + size] == 0);
+            if (left_above_occupied && right_above_empty) {
+                is_vertical_continuation = true;
+            }
+        }
+
+        if (!is_vertical_continuation) {
+            ii right_candidate = {r, c + size};
+            if (!contains(new_points, right_candidate)) {
+                new_points.push_back(right_candidate);
+            }
         }
     }
 
-    // 3. Add bottom candidate if within boundary
+    // 3. Add bottom candidate if within boundary and NOT a continuous horizontal edge from the left
     if (r + size < N) {
-        int bottom_idx = (r + size) * M + c;
-        if (!contains(new_points, bottom_idx)) {
-            new_points.push_back(bottom_idx);
+        bool is_horizontal_continuation = false;
+        if (c - 1 >= 0) {
+            // If the cell above the boundary to the left is occupied,
+            // and the cell below the boundary to the left is empty/out of bounds,
+            // then this is a continuous straight horizontal edge from the left.
+            bool above_left_occupied = (occupied[r + size - 1][c - 1] != 0);
+            bool below_left_empty = (occupied[r + size][c - 1] == 0);
+            if (above_left_occupied && below_left_empty) {
+                is_horizontal_continuation = true;
+            }
+        }
+
+        if (!is_horizontal_continuation) {
+            ii bottom_candidate = {r + size, c};
+            if (!contains(new_points, bottom_candidate)) {
+                new_points.push_back(bottom_candidate);
+            }
         }
     }
 
-    // 4. Sorting 1D indices ascending naturally sorts them by row, then by column
+    // 4. Sort the points to maintain a consistent search order
     std::sort(new_points.begin(), new_points.end());
 
     return new_points;
 }
 
 
-int backtrack(int max_squares, const vi& occupied, const vi& insertion_points) {
-    
-    if (insertion_points.empty()) {
-        return 0;
-    }
+void backtrack(int max_squares, vvi& occupied, const vii& insertion_points, int curr_squares, int& sol) {
 
-    int ans = MAX;
-    for (int square = 1; square <= max_squares; ++square) {
-      for(int p_idx : insertion_points) {
-        if (!is_occupied(square, occupied, p_idx)) {
-          vi new_occupied = fill_in_occupied(square, occupied, p_idx);
-          vi new_insertion_points = add_points(square, insertion_points, p_idx);      
-          int curr_ans = backtrack(max_squares, new_occupied, new_insertion_points);
-          ans = std::min(ans, 1 + curr_ans);
-        }
+  if(insertion_points.empty()) {
+    sol = std::min(sol, curr_squares);
+    return;
+  }
+
+
+  if(curr_squares + 1 >= sol) {
+    return;
+  }
+
+  for(int square = max_squares; square >= 1; --square) {
+    for(const auto& p : insertion_points) {
+      if(!is_occupied(square, occupied, p)) {
+        // 1. Place the square directly in the referenced grid
+        place_square(square, occupied, p);
+        
+        // 2. Generate the next insertion points locally
+        vii new_insertion_points = add_points(square, insertion_points, p, occupied);
+        
+        // 3. Recurse (passing grid by reference, and new points by reference)
+        backtrack(max_squares, occupied, new_insertion_points, 1 + curr_squares, sol);
+        
+        // 4. Backtrack (restore the referenced grid for the next iteration)
+        unplace_square(square, occupied, p);
       }
     }
-
-    return ans;
+  }
 }
-
 
 namespace algorithms::leetcode::backtracking::tiling_rectangle
 {
@@ -145,9 +191,11 @@ namespace algorithms::leetcode::backtracking::tiling_rectangle
 
         while(std::cin >> N >> M) {
           int max_squares = std::min(N, M);
-          vi occupied_cells(N * M, 0);
-          vi insertion_points = {0};
-          std::cout << backtrack(max_squares, occupied_cells, insertion_points) << std::endl;
+          vvi occupied_cells(N, vi(M, 0));
+          vii insertion_points = {{0, 0}};
+          int sol = N * M;
+          backtrack(max_squares, occupied_cells, insertion_points, 0, sol);
+          std::cout << sol << std::endl;
         }
     }
 }

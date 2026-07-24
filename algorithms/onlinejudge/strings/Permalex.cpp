@@ -26,7 +26,7 @@ vd precompute_factorials(int max_n) {
 const vd fact = precompute_factorials(40);
 
 // Helper to calculate distinct permutations of the remaining elements
-ll calculate_permutations(int remaining_length, const std::unordered_map<char, int>& freq, int pos) {
+ll calculate_rank(int remaining_length, const std::unordered_map<char, int>& freq, int pos) {
    if (remaining_length <= 0 || pos == 0) return 0;
 
   double numerator = pos * fact[remaining_length];
@@ -65,7 +65,7 @@ int get_permutation_rank(const std::string& perm) {
    int rank = 1;
    for(int i = 0; i < S; ++i) {
     int pos = get_pos(i, perm);
-    rank += calculate_permutations(S - i - 1, freq, pos);
+    rank += calculate_rank(S - i - 1, freq, pos);
     freq[perm[i]]--;
    }
    

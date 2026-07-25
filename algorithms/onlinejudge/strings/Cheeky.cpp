@@ -39,7 +39,8 @@ std::string find_dance(const std::string& steps) {
   }
 
   std::string base = steps.substr(start, period);
-  std::string continuation = base.substr(S - start - 2 * period, base.length());
+  int s = S - start - 2 * period;
+  std::string continuation = base.substr(s, base.length());
   for(int i = 1; i <= 8; ++i) {
     continuation += base; 
   }

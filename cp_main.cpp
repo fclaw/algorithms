@@ -30,23 +30,52 @@ constexpr int MOD = 1e9;  // 10^9
 constexpr int inf = 1e5;
 
 
+bool can_form_palindrome_ascii(const std::string& s) {
+    // ASCII character frequency table
+    std::vector<int> freq(256, 0);
+    for (char c : s) {
+        freq[static_cast<unsigned char>(c)]++;
+    }
+
+    int odd_count = 0;
+    for (int count : freq) {
+        if (count % 2 != 0) {
+            odd_count++;
+        }
+    }
+
+    return odd_count <= 1;
+}
+
+
+bool can_be_palindrome_by_one_replacement(const std::string& s) {
+  int count = 0;
+  for(int i = 0; i < s.size(); ++i) {
+    if(s[i] != s[s.size() - i]) {
+      count++;
+      if(count > 1) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 
 int main(int argc, char* argv[])
 {
-  int lines, colours;
-  while(std::cin >> lines >> colours) {
-    vi balls(colours, -1);
-    int ball, size;
-    for(int l = 0; l < lines; ++l) {
-      std::cin >> ball >> size;
-      balls[ball - 1] = std::max(balls[ball - 1], size);
-    }
-
-    for(int i = 0; i < (int)balls.size(); ++i) {
-      std::cout << balls[i];
-      if(i != (int)balls.size() - 1) {
-        std::cout << " ";
+  std::string s;
+  while(std::cin >> s) {
+    int count = 0;
+    std::set<char> un(s.begin(), s.end());
+    for(int i = 0; i < s.size(); ++i) {
+      for(int j = i; j < s.size(); ++j) {
+        auto sub = s.substr(i, j - i + 1);
+        if(can_form_palindrome_ascii(sub) || can_be_palindrome_by_one_replacement(sub)) {
+          count++;
+        }
       }
     }
+    std::cout << count << std::endl;
   }
 }

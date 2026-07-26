@@ -471,4 +471,22 @@ namespace algorithms::onlinejudge::maths::utility::arithmetics
       }
       return s;
     }
+
+    // Finds all factors of n in O(sqrt(n)) time
+    std::vector<ll> factors(ll n) {
+      std::vector<ll> factors;
+    
+      // We only need to iterate up to the square root of n
+      for(ll f = 1; f * f <= n; ++f) {
+        if (n % f == 0) {
+          factors.push_back(f); // i is a factor
+            
+          // To prevent adding the same factor twice for perfect squares (e.g., 6*6 = 36)
+          if (f * f != n) {
+            factors.push_back(n / f); // n / i is the paired factor
+          }
+        }
+      }    
+      return factors;
+    }
 }

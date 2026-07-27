@@ -1,6 +1,6 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa 11514 Batman, https://onlinejudge.org/external/115/11514.pdf, rt: s
+🧳 UVa 11514 Batman, https://onlinejudge.org/external/115/11514.pdf, bottom-up: 1.970, top-down: 0.790, rt: s
 ───────────────────────────────────────────────────────────────
 */
 
@@ -9,6 +9,9 @@
 #include <bits/stdc++.h>
  
 
+
+using vi = std::vector<int>;
+using vvi = std::vector<vi>;
 
 
 struct Power
@@ -166,10 +169,33 @@ namespace algorithms::onlinejudge::dp::batman
             villains[i] = villain;
           }
 
-          std::memset(cache, -1, sizeof cache);
-          int min_energy = min_energy_to_beat_all_villains(0, 0, powers, villains);
-          printf("%s\n", min_energy <= E ? "Yes" : "No");
+          //   std::memset(cache, -1, sizeof cache);
+          //   int min_energy = min_energy_to_beat_all_villains(0, 0, powers, villains);
 
+          vvi dp(P + 1, vi(V + 1, INT32_MAX));
+          for(int i = 0; i <= P; ++i) {
+            dp[i][0] = 0;
+          }
+
+          for(int i = 1; i <= P; ++i) {
+            for(int j = 1; j <= V; ++j) {
+              int skip = dp[i - 1][j];
+              int take = INT32_MAX;
+              for(auto& power : villains[j - 1].ps) {
+                if(power == powers[i - 1].name && 
+                   powers[i - 1].attack_factor >= 
+                   villains[j - 1].defense_factor) {
+                   int prev = dp[i - 1][j - 1];
+                  // if reachable
+                  if(prev != INT32_MAX) {
+                    take = std::min(take, powers[i - 1].energy + prev);
+                  }
+                }
+              }
+              dp[i][j] = std::min(dp[i][j], std::min(skip, take));
+            }
+          }
+          printf("%s\n", dp[P][V] <= E ? "Yes" : "No");
         }
      }
 }

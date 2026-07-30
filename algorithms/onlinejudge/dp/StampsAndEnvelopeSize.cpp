@@ -143,8 +143,8 @@ namespace algorithms::onlinejudge::dp::stamps_and_envelope_size
               collection = col;
             } else if(max_coverage == curr_max_coverage) {
               if((!collection.empty() && 
-                 is_preferred(collection, col)) || 
-                 collection.empty()) {
+                  is_preferred(collection, col)) || 
+                  collection.empty()) {
                 collection = col;
               }
             }

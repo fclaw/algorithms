@@ -3,7 +3,59 @@
 🧳 UVa 10448 - Unique World
    URL: https://onlinejudge.org/external/104/10448.pdf
    Verdict: Accepted | Runtime: ~0.010 0s
-────────────────────────────────────────────────────────────────────────────────
+   Algorithmic Summary & Subtleties:
+
+   1. The Tree Property:
+      Because the graph is connected and has exactly one unique path between any 
+      two nodes, it is mathematically a Tree. For any query from source 'A' to 
+      destination 'B', we first find the unique simple path consisting of 'n' 
+      edges with weights {C_1, C_2, ..., C_n}.
+
+   2. The "Necessary Roads Only" Constraint:
+      The problem states we can only use roads "necessary for the path." This 
+      strictly forbids us from wandering off the unique simple path between A 
+      and B. We cannot use any other adjacent edges in the tree.
+
+   3. The Last Leg Constraint:
+      We cannot perform round-trips on the last edge C_n. Once we cross the final 
+      edge and land in our destination B, our journey stops. Thus, its traversal 
+      count is exactly 1. Only the first n-1 edges on the path can be used for 
+      round-trips.
+
+   4. Mathematical Reduction to Coin Change:
+      Let B be the base path cost (the sum of the n edges on the simple path).
+      To get from A to B, we must cross each edge at least once (consuming B 
+      energy and taking n steps). 
+      
+      Any additional cost must be spent as k_i >= 0 round-trips (back-and-forth) 
+      on edge i (for 1 <= i <= n-1). Each round-trip adds 2 * C_i to the cost 
+      and 2 to the steps.
+      
+      Total Cost Equation:
+         B + 2 * Sum_{i=1}^{n-1} (k_i * C_i) = T  (where T is the target cost)
+         Sum_{i=1}^{n-1} (k_i * C_i) = (T - B) / 2
+      
+      To minimize the total roads traveled (steps), we want to minimize:
+         Total Steps = n + 2 * Sum_{i=1}^{n-1} k_i
+      
+      This reduces exactly to finding the minimum number of coins (round-trips) 
+      to form the target sum (T - B) / 2 using the first n-1 edge weights.
+
+   5. Crucial Feasibility and Edge Cases:
+      - We must have T >= B (target cannot be less than the base path cost).
+      - (T - B) must be even (since every round-trip adds an even cost of 2 * C_i).
+      - If n = 1 (A and B are directly connected):
+        The only edge is the last edge, which cannot be used for round-trips. 
+        Thus, only T = B is possible (with exactly 1 step). If T > B, it is 
+        impossible.
+
+   6. Per-Query DP Execution:
+      Because the allowed "coins" depend entirely on the unique path of each query, 
+      we must run a local, unbounded DP of size (T - B) / 2 using the first 
+      n-1 edge weights per query. 
+      Since n <= 100 and (T - B)/2 <= 50000, each query runs in at most 
+      O(n * (T - B)/2) ≈ 5 * 10^6 basic operations, which executes in milliseconds.
+───────────────────────────────────────────────────────────────────────────────
 */
 
 

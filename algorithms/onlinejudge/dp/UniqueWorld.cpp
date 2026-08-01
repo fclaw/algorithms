@@ -115,13 +115,11 @@ namespace algorithms::onlinejudge::dp::unique_world
           std::cin >> V >> E;
           adj tree(V);
           int from, to, c;
-          vi costs;
           for(int e = 0; e < E; ++e) {
             std::cin >> from >> to >> c;
             --from; --to;
             tree[from].push_back({to, c});
             tree[to].push_back({from, c});
-            costs.push_back(c);
           }
           
           int queries;

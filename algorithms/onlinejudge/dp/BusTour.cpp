@@ -2,6 +2,51 @@
 ───────────────────────────────────────────────────────────────
 🧳 UVa 1281 Bus Tour, https://onlinejudge.org/external/12/1281.pdf, rt: s
 ───────────────────────────────────────────────────────────────
+🗺️ Incremental TSP Builder using Bottom-Up Bitmask Dynamic Programming
+   Formal Name: The Held-Karp Algorithm (1962)
+   Complexity: Time O(2^N * N^2) | Space O(2^N * N)
+
+   Algorithmic Summary & Design Principles:
+
+   1. State Representation (dp[mask][v]):
+      The DP table is a 2D array indexed by:
+        - 'mask' (uint): Bitmask representing the exact subset of visited vertices.
+                         The i-th bit is 1 if vertex i is visited, 0 otherwise.
+        - 'v'    (int) : The specific vertex where the path currently terminates.
+      
+      dp[mask][v] stores the minimal path distance starting from the source 
+      (e.g., HQ/Start), visiting every vertex in 'mask' exactly once, and 
+      ending at vertex 'v'.
+
+   2. Automatic Topological Order (Incremental Mask Building):
+      Instead of using recursion or explicit level-by-level sorting, we iterate 
+      'mask' numerically from 1 to (1 << N) - 1. 
+      
+      Mathematical Property:
+         For any mask M, any proper sub-mask M' ⊂ M has a strictly smaller 
+         numerical integer value (M' < M).
+      
+      Therefore, an ascending integer loop over 'mask' automatically processes 
+      all smaller subsets before larger subsets, guaranteeing that subproblems 
+      are fully calculated before they are needed.
+
+   3. State Transition Logic:
+      To extend a path to an unvisited vertex 'v' (where !(mask & (1 << v))):
+         
+         next_mask = mask | (1 << v)
+         dp[next_mask][v] = min_{u in mask} ( dp[mask][u] + dist[u][v] )
+      
+      where 'u' is the previous endpoint in 'mask', and 'dist[u][v]' is the 
+      shortest distance (from Floyd-Warshall or graph weights) between u and v.
+
+   4. Performance & Memory Advantages:
+      - Zero Heap Allocations: No vectors or maps are created or resized inside 
+        the loops. All lookups use O(1) direct 2D array indexing.
+      - High Cache Locality: Sequential iteration over contiguous memory arrays 
+        maximizes CPU L1/L2 cache hits.
+      - Alphabet/Graph Independence: Performance depends purely on N (vertices)
+        and is independent of edge density.
+───────────────────────────────────────────────────────────────
 */
 
 #include "../debug.h"
@@ -11,20 +56,13 @@
 
 
 
-using ii = std::pair<int, int>;
-using vii = std::vector<ii>;
-using vvii = std::vector<vii>;
 using vi = std::vector<int>;
 using vvi = std::vector<vi>;
-using vvvi = std::vector<vvi>;
 
 
 int V, E;
 
 int t_case = 1;
-
-enum Point { HQ, ATTR };
-
 
 
 void runFloydWarshall(vvi& dist) {
@@ -56,32 +94,6 @@ vi restore_hotels(int mask) {
 }
 
 
-int tsp(int u, int target, const vi& hotels, const vvi& dist, int visited, vvi& cache) {
-   
-  int S = (int)hotels.size();
-  if(__builtin_popcount(visited) == S) {
-    return (cache[u][visited] = (u == target ? 0 : INT32_MAX));
-  }
-
-  if(~cache[u][visited]) {
-    return cache[u][visited];
-  }
-
-  int best = INT32_MAX;
-  for(int i = 0; i < S; ++i) {
-    int bit = (1 << i);
-    int v = hotels[i];
-    if(!(visited & bit)) {
-      int next = tsp(v, target, hotels, dist, visited | bit, cache);
-      if(next != INT32_MAX) {
-        best = std::min(best, dist[u][v] + next);
-      }
-    }
-  }
- 
-  return (cache[u][visited] = best);
-
-}
 
 
 namespace algorithms::onlinejudge::dp::bus_tour
@@ -102,7 +114,6 @@ namespace algorithms::onlinejudge::dp::bus_tour
 
 
         while(std::cin >> V >> E) {
-          vvii graph(V);
           vvi apsp(V, vi(V));
          
           for(int i = 0; i < V; ++i) {
@@ -118,78 +129,104 @@ namespace algorithms::onlinejudge::dp::bus_tour
           int from, to, c;
           for(int e = 0; e < E; ++e) {
             std::cin >> from >> to >> c;
-            graph[from].push_back({to, c});
-            graph[to].push_back({from, c});
             apsp[from][to] = apsp[to][from] = c;
           }
 
           runFloydWarshall(apsp);
 
           // generate all possible hotels of the size of h / 2
-          int hq = 0;
-          int attr = V - 1;
-          int SIZE = (V - 2) / 2;
-          
-          // Mask containing 1s for all hotel vertices (excluding hq=0 and attraction=V-1)
-          int all_hotels_mask = ((1 << V) - 1) ^ (1 << hq) ^ (1 << attr);
-          vi first_half_masks;
-
-          for(int set = 0; set < (1 << V); ++set) {
-            // Ensure set is of size SIZE and contains ONLY hotel vertices
-            if (__builtin_popcount(set) == SIZE && 
-                (set & all_hotels_mask) == set) {
-              first_half_masks.push_back(set);
-            }
-          }
-
-
-          vvvi dp(2, vvi(all_hotels_mask, vi(V, INT32_MAX)));
-          for(int mask : first_half_masks) {
-            vi hotels = restore_hotels(mask | (1 << hq));
-            int S = hotels.size();
-            vvi cache(V, vi(1 << S, -1));
-            for(int i = 1; i < (int)hotels.size(); ++i) {
-              int dist = tsp(hq, hotels[i], hotels, apsp, 0 | (1 << 0), cache);
-              dp[HQ][mask][hotels[i]] = dist;
-            }
-            
-            cache = vvi(V, vi(1 << S, -1));
-            hotels = restore_hotels(mask | (1 << attr));
-            for(int i = 0; i < (int)hotels.size() - 1; ++i) {
-              int dist = tsp(attr, hotels[i], hotels, apsp, 0 | (1 << ((int)hotels.size() - 1)), cache);
-              dp[ATTR][mask][hotels[i]] = dist;
-            }
-
-            int s_mask = all_hotels_mask ^ mask;
-            hotels = restore_hotels(s_mask | (1 << attr));
-            S = hotels.size();
-            cache = vvi(V, vi(1 << S, -1));
-            for(int i = 0; i < (int)hotels.size() - 1; ++i) {
-              int dist = tsp(attr, hotels[i], hotels, apsp, 0 | (1 << ((int)hotels.size() - 1)), cache);
-              dp[ATTR][s_mask][hotels[i]] = dist;
-            }
-
-            cache = vvi(V, vi(1 << S, -1));
-            hotels = restore_hotels(s_mask | (1 << hq));
-            for(int i = 1; i < (int)hotels.size(); ++i) {
-              int dist = tsp(hq, hotels[i], hotels, apsp, 0 | (1 << 0), cache);
-              dp[HQ][s_mask][hotels[i]] = dist;
-            }
-          }
-        
-
-          int min_tour_time = INT32_MAX;
-          for(int mask : first_half_masks) {
-            int s_mask = all_hotels_mask ^ mask;
-            for(int u : restore_hotels(mask)) {
-              for(int v : restore_hotels(s_mask)) {
-                int forward_leg = dp[HQ][mask][u] + apsp[u][v] + dp[ATTR][s_mask][v];
-                int backward_leg = dp[ATTR][mask][u] + apsp[u][v] + dp[HQ][s_mask][v];
-                min_tour_time = std::min(min_tour_time, forward_leg + backward_leg);
+          int HQ = 0;
+          int ATTR = V - 1;
+          int masks = (1 << V) - 1; // All possible subsets of vertices
+          vvi dp_hq(masks + 1, vi(V, INT32_MAX));
+          dp_hq[1 << HQ][HQ] = 0; // Starting point at HQ
+          for(int mask = 0; mask <= masks; ++mask) {
+            if((mask & (1 << HQ))) {
+              for(int v = 0; v < V; ++v) {
+                if(mask & (1 << v)) {
+                  // If vertex v is included in the mask, we can consider it as a hotel
+                  // Here you can implement your logic to handle the hotel selection
+                  int prev_mask = mask ^ (1 << v); // Remove v from the mask
+                  vi hotels = restore_hotels(prev_mask);
+                  for(int u : hotels) {
+                    if(dp_hq[prev_mask][u] != INT32_MAX && 
+                       apsp[u][v] != INT32_MAX) {
+                      dp_hq[mask][v] = std::min(dp_hq[mask][v], dp_hq[prev_mask][u] + apsp[u][v]);
+                    }
+                  }
+                }
               }
             }
           }
-          printf("Case %d: %d\n", t_case++, min_tour_time);
+
+          vvi dp_attr(masks + 1, vi(V, INT32_MAX));
+          dp_attr[1 << ATTR][ATTR] = 0; // Starting point at ATTR
+          for(int mask = 0; mask <= masks; ++mask) {
+            if((mask & (1 << ATTR))) {
+              for(int v = 0; v < V; ++v) {
+                if (mask & (1 << v)) {
+                  int prev_mask = mask ^ (1 << v); // Remove v from the mask
+                  vi hotels = restore_hotels(prev_mask);
+                  for(int u : hotels) {
+                    if(dp_attr[prev_mask][u] != INT32_MAX && 
+                       apsp[u][v] != INT32_MAX) {
+                      dp_attr[mask][v] = std::min(dp_attr[mask][v], dp_attr[prev_mask][u] + apsp[u][v]);
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+         int min_time = INT32_MAX;
+         int HALF_SIZE = (V - 2) / 2;
+
+         for (int mask = 0; mask <= masks; ++mask) {
+           // 1. Ensure HQ is in mask, and the hotel count is EXACTLY h / 2
+           int hotel_count = __builtin_popcount(mask ^ (1 << HQ));
+          if ((mask & (1 << HQ)) && hotel_count == HALF_SIZE) {
+                
+            int s_mask = masks ^ mask; 
+            if (!(s_mask & (1 << ATTR))) continue;
+                
+            int mask_to_attr = (mask ^ (1 << HQ)) | (1 << ATTR);
+            int s_mask_to_hq = (s_mask ^ (1 << ATTR)) | (1 << HQ);
+
+            int min_forward = INT32_MAX;
+            int min_return = INT32_MAX;
+
+            // Forward Leg Minimum (Independent)
+            for (int v : restore_hotels(mask ^ (1 << HQ))) {
+              for (int u : restore_hotels(s_mask ^ (1 << ATTR))) {
+                if (dp_hq[mask][v] != INT32_MAX && 
+                    dp_attr[s_mask][u] != INT32_MAX && 
+                    apsp[v][u] != INT32_MAX) {
+                  int forward_time = dp_hq[mask][v] + apsp[v][u] + dp_attr[s_mask][u];
+                  min_forward = std::min(min_forward, forward_time);
+                }
+              }
+            }
+
+            // Return Leg Minimum (Independent)
+            for (int x : restore_hotels(mask ^ (1 << HQ))) {
+              for (int y : restore_hotels(s_mask ^ (1 << ATTR))) {
+                if (dp_attr[mask_to_attr][x] != INT32_MAX && 
+                    dp_hq[s_mask_to_hq][y] != INT32_MAX && 
+                    apsp[x][y] != INT32_MAX) {
+                  int return_time = dp_attr[mask_to_attr][x] + apsp[x][y] + dp_hq[s_mask_to_hq][y];
+                  min_return = std::min(min_return, return_time);
+                }
+              }
+            }
+
+            if (min_forward != INT32_MAX && 
+                min_return != INT32_MAX) {
+              min_time = std::min(min_time, min_forward + min_return);
+            }
+          }
         }
+        printf("Case %d: %d", t_case++, min_time);
+        if (std::cin.peek() != EOF) { printf("\n"); }
+      }
     }
 }

@@ -126,21 +126,22 @@ namespace algorithms::onlinejudge::dp::bus_tour
             }
           }
 
+          int total_cost = 0;
           int from, to, c;
           for(int e = 0; e < E; ++e) {
             std::cin >> from >> to >> c;
             apsp[from][to] = std::min(apsp[from][to], c);
             apsp[to][from] = std::min(apsp[to][from], c);
+            total_cost += c;
           }
-
-          runFloydWarshall(apsp);
 
           // Handle the special case when V == 3 (HQ, ATTR, and one hotel)
           if(V == 3) {
-            int direct_cost = apsp[0][1] + apsp[1][2];
-            printf("Case %d: %d\n", t_case++, 2 * direct_cost);
+            printf("Case %d: %d\n", t_case++, 2 * total_cost);
             continue;
           }
+
+          runFloydWarshall(apsp);
 
           // generate all possible hotels of the size of h / 2
           int HQ = 0;

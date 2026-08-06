@@ -106,7 +106,7 @@ bool is_feasible(vi& marbles, int pool, int curr_value, int target) {
 }
 
 
-namespace algorithms::onlinejudge::complete_search::dividing_up
+namespace algorithms::onlinejudge::advanced_topics::dividing_up
 {
     void submit(std::optional<char*> file, bool debug_mode)
     {

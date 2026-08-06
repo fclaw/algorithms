@@ -129,10 +129,18 @@ namespace algorithms::onlinejudge::dp::bus_tour
           int from, to, c;
           for(int e = 0; e < E; ++e) {
             std::cin >> from >> to >> c;
-            apsp[from][to] = apsp[to][from] = c;
+            apsp[from][to] = std::min(apsp[from][to], c);
+            apsp[to][from] = std::min(apsp[to][from], c);
           }
 
           runFloydWarshall(apsp);
+
+          // Handle the special case when V == 3 (HQ, ATTR, and one hotel)
+          if(V == 3) {
+            int direct_cost = apsp[0][1] + apsp[1][2];
+            printf("Case %d: %d\n", t_case++, 2 * direct_cost);
+            continue;
+          }
 
           // generate all possible hotels of the size of h / 2
           int HQ = 0;
@@ -178,6 +186,7 @@ namespace algorithms::onlinejudge::dp::bus_tour
             }
           }
 
+
          int min_time = INT32_MAX;
          int HALF_SIZE = (V - 2) / 2;
 
@@ -188,16 +197,19 @@ namespace algorithms::onlinejudge::dp::bus_tour
                 
             int s_mask = masks ^ mask; 
             if (!(s_mask & (1 << ATTR))) continue;
-                
+              
             int mask_to_attr = (mask ^ (1 << HQ)) | (1 << ATTR);
             int s_mask_to_hq = (s_mask ^ (1 << ATTR)) | (1 << HQ);
 
             int min_forward = INT32_MAX;
             int min_return = INT32_MAX;
 
+            vi mask_hotels = restore_hotels(mask ^ (1 << HQ));
+            vi s_mask_hotels = restore_hotels(s_mask ^ (1 << ATTR));
+
             // Forward Leg Minimum (Independent)
-            for (int v : restore_hotels(mask ^ (1 << HQ))) {
-              for (int u : restore_hotels(s_mask ^ (1 << ATTR))) {
+            for (int v : mask_hotels) {
+              for (int u : s_mask_hotels) {
                 if (dp_hq[mask][v] != INT32_MAX && 
                     dp_attr[s_mask][u] != INT32_MAX && 
                     apsp[v][u] != INT32_MAX) {
@@ -208,8 +220,8 @@ namespace algorithms::onlinejudge::dp::bus_tour
             }
 
             // Return Leg Minimum (Independent)
-            for (int x : restore_hotels(mask ^ (1 << HQ))) {
-              for (int y : restore_hotels(s_mask ^ (1 << ATTR))) {
+            for (int x : mask_hotels) {
+              for (int y : s_mask_hotels) {
                 if (dp_attr[mask_to_attr][x] != INT32_MAX && 
                     dp_hq[s_mask_to_hq][y] != INT32_MAX && 
                     apsp[x][y] != INT32_MAX) {
@@ -225,8 +237,7 @@ namespace algorithms::onlinejudge::dp::bus_tour
             }
           }
         }
-        printf("Case %d: %d", t_case++, min_time);
-        if (std::cin.peek() != EOF) { printf("\n"); }
+        printf("Case %d: %d\n", t_case++, min_time);
       }
     }
 }

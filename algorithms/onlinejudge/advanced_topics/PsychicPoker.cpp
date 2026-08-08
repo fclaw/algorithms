@@ -156,6 +156,9 @@ int get_max_hand(v_card hand, const v_card& deck) {
   std::sort(hand.begin(), hand.end());
   do {
     backtrack(hand, deck, 0, 0, max_hand);
+    if(max_hand == 1) {
+      break;
+    }
   } while(std::next_permutation(hand.begin(), hand.end()));
 
   return max_hand;

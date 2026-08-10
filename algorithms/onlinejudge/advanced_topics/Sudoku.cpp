@@ -36,7 +36,7 @@ struct Masks
 
 
 int get_box_idx(int r, int c, int n) {
-  return (r / n) * n + (c / n);
+  return (r / n) * n + (c / n); // shrunk by the factor of n
 }
 
 

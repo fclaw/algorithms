@@ -31,8 +31,8 @@ void backtrack(int i, int S, const vvii& dist, int collected_boxes, int sink, in
       int dist_to_sink = 0;
       for(ii box : dist[i]) {
         if(box.second == sink) {
-            dist_to_sink = box.first;
-            break;
+          dist_to_sink = box.first;
+          break;
         }
       }
       int tmp_dist = curr_dist + dist_to_sink;

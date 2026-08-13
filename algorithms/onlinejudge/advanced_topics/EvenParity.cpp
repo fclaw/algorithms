@@ -74,17 +74,23 @@ bool check_left_diagonals_parity(int r, int c, const vvii& grid, int N) {
 
 void backtrack(int r, int c, vvii& grid, int N, int even_parities_cells, int sol, int& best) {
 
-  if(even_parities_cells == N * N) {
-    best = std::min(best, sol);
-    return;
-  }
-
   if(c == N) {
     r++;
     c = 0;
   }
 
-  if(r == N || sol >= best) {
+  if(r == N) {
+    if(even_parities_cells == N * N) {
+      best = std::min(best, sol);
+    }
+    return;
+  }
+
+  if(r >= 1 && grid[r][c].first == 1 && (grid[r - 1][c].second % 2 != 0)) {
+    return;
+  }
+
+  if(sol >= best) {
     return;
   }
 

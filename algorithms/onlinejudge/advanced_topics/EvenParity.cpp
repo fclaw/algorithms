@@ -47,60 +47,82 @@ void transform_0_to_1(ii cell, vvii& grid, int& even_parities_cells, int N) {
   }
 }
 
+
 bool check_left_diagonals_parity(int r, int c, const vvii& grid, int N) {
-  int parity = grid[r - 1][c - 1].second;
+  // Check top-left light (r - 1, c - 1): Permanently finalized by cell (r, c)  
   if(r - 1 >= 0 && 
-     c - 1 >= 0 && 
-     (parity % 2)) {
-    return false;
+     c - 1 >= 0) {
+    int parity = grid[r - 1][c - 1].second;
+    if(parity % 2) {
+      return false;
+    }
+  }
+
+  // End-of-Row Check: When at the last column (c == C - 1), 
+  // the top-right light (r - 1, C - 1) is ALSO permanently finalized!
+  if (c == N - 1 && 
+      r - 1 >= 0) {
+    int parity = grid[r - 1][c].second;
+    if(parity % 2) {
+      return false;
+    }  
   }
 
   return true; // Valid progress, continue searching
 }
 
-void backtrack(int r, int c, vvii& grid, int N, int even_parities_cells, int curr_transformation, int& best) {
+
+void backtrack(int r, int c, vvii& grid, int N, int even_parities_cells, int sol, int& best) {
+
+  if(even_parities_cells == N * N) {
+    best = std::min(best, sol);
+    return;
+  }
 
   if(c == N) {
     r++;
     c = 0;
   }
 
-  if(r == N) {
-    if(even_parities_cells == N * N) {
-      best = std::min(best, curr_transformation);
-    }
+  if(r == N || sol >= best) {
     return;
   }
 
-  if(curr_transformation >= best) {
-    return;
+  bool should_0_change = true;
+  if(r >= 1 && !(grid[r - 1][c].second % 2)) {
+    should_0_change = false;
   }
 
-  int curr_even_parities_cells = even_parities_cells;
-  vvii old = grid;
-  if(!grid[r][c].first) {
+  if(!grid[r][c].first && 
+     should_0_change) {
+    int curr_even_parities_cells = even_parities_cells;
+    vvii old = grid;
     transform_0_to_1({r, c}, grid, curr_even_parities_cells, N);
-    if(check_left_diagonals_parity(r, c, grid, N)) {
-      backtrack(r, c + 1, grid, N, curr_even_parities_cells, curr_transformation + 1, best);
-    }
-    grid = old; // backtrack
-  }
+
+    grid[r][c].first = 1;
   
-  if(check_left_diagonals_parity(r, c, grid, N)) {
-    backtrack(r, c + 1, grid, N, even_parities_cells, curr_transformation, best);
+    if(check_left_diagonals_parity(r, c, grid, N)) {
+      backtrack(r, c + 1, grid, N, curr_even_parities_cells, sol + 1, best);
+    }
+
+    grid = old; // backtrack
+    grid[r][c].first = 0;
   }
+
+  if(check_left_diagonals_parity(r, c, grid, N)) {
+    backtrack(r, c + 1, grid, N, even_parities_cells, sol, best);
+  }
+
 }
 
 
 int min_transformation_required(vvii& grid, int N, int even_parities_cells) {
-
-  int min_transformation = INT32_MAX;
-  int curr_transformation = 0;
-  backtrack(0, 0, grid, N, even_parities_cells, curr_transformation, min_transformation);
-  if(min_transformation == INT32_MAX) {
-    min_transformation = -1;
+  int ans = INT32_MAX; 
+  backtrack(0, 0, grid, N, even_parities_cells, 0, ans);
+  if(ans == INT32_MAX) {
+    ans = -1;
   }
-  return min_transformation;
+  return ans;
 }
 
 

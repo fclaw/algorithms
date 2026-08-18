@@ -8,7 +8,7 @@
 #include "../../aux.h"
 #include <bits/stdc++.h>
 
-
+ 
 
 enum Colour { Y, G, B, R }; 
 

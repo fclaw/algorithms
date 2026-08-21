@@ -10,8 +10,6 @@
 
 
 using ll = long long;
-// using vi = std::vector<int>;
-// using vvi = std::vector<vi>;
 using vs = std::vector<std::string>;
 
 
@@ -19,12 +17,9 @@ struct Letter
 {
     char val;
     bool is_leading;
-    bool is_addend;
-    // Sorts: is_addend == true first, then letter alphabetically
+    // Pure alphabetical sorting: 'A' < 'B' < 'C'...
     bool operator < (const Letter& other) const {
-      // Negating 'is_addend' (!is_addend) ensures 'true' (0) comes before 'false' (1)
-      return std::make_tuple(!is_addend, val) < 
-             std::make_tuple(!other.is_addend, other.val);
+     return val < other.val;
     }
 };
 
@@ -136,13 +131,16 @@ namespace algorithms::kattis::complete_search::send_me_more_money
         std::string origin;
         while(std::getline(std::cin, origin)) {
 
-          // Strip trailing '\r' and spaces
+          // 1. Strip trailing \r, \n, and spaces
           while (!origin.empty() && 
-                 (origin.back() == '\r' || 
-                  origin.back() == ' ')) {
+                 std::isspace(origin.back())) {
             origin.pop_back();
           }
-         if (origin.empty()) continue;
+    
+          // 2. Safely skip empty lines
+          if (origin.empty()) {
+            continue;
+          }
 
           std::vector<std::string> words;
 
@@ -160,7 +158,7 @@ namespace algorithms::kattis::complete_search::send_me_more_money
           for(char v : first_addend) {
             auto it = find_letter_it(letters, v);
             if(it == letters.end()) {
-              letters.push_back({v, v == first_addend.front(), true});
+              letters.push_back({v, v == first_addend.front()});
             } else { 
               bool old = it->is_leading;
               it->is_leading = old || (v == first_addend.front());
@@ -170,7 +168,7 @@ namespace algorithms::kattis::complete_search::send_me_more_money
           for(char v : second_addend) {
             auto it = find_letter_it(letters, v);
             if(it == letters.end()) {
-              letters.push_back({v, v == second_addend.front(), true});
+              letters.push_back({v, v == second_addend.front()});
             } else {
               bool old = it->is_leading;
               it->is_leading = old || (v == second_addend.front());
@@ -180,7 +178,7 @@ namespace algorithms::kattis::complete_search::send_me_more_money
           for(char v : resultant) {
             auto it = find_letter_it(letters, v);
             if(it == letters.end()) {
-              letters.push_back({v, v == resultant.front(), false});
+              letters.push_back({v, v == resultant.front()});
             } else {
                bool old = it->is_leading;
               it->is_leading = old || (v == resultant.front());

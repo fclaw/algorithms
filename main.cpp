@@ -1,6 +1,6 @@
 #define DBG_MACRO_NO_WARNING
 
-#include "algorithms/kattis/complete_search/SendMoreMoney.cpp"
+#include "algorithms/kattis/complete_search/CommitteeAssignment.cpp"
 #include <chrono>
 #include <iomanip>
 #include <bits/stdc++.h>
@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     auto start = std::chrono::system_clock::now();
     // algorithm starts
     // algorithms::onlinejudge::advanced_topics::rooks::submit(file, debug_mode);
-    algorithms::kattis::complete_search::send_me_more_money::submit(file, debug_mode);
+    algorithms::kattis::complete_search::committee_assignment::submit(file, debug_mode);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

@@ -2,6 +2,45 @@
 ───────────────────────────────────────────────────────────────
 🧳 UVa 11513 9 Puzzle, https://onlinejudge.org/external/115/11513.pdf, rt: s
 ───────────────────────────────────────────────────────────────
+ * ============================================================================
+ * Problem: UVa 11513 - 9-Puzzle
+ * Paradigm: Offline Precomputation via Single-Source Backward BFS
+ * ============================================================================
+ * 
+ * 💡 KEY ARCHITECTURAL INSIGHT:
+ * ----------------------------
+ * 1. Small Finite State Space:
+ *    The puzzle is a permutation of 9 unique digits (1..9).
+ *    Total possible board configurations = 9! = 362,880 states.
+ * 
+ * 2. Shared Target & Multiple Test Cases:
+ *    Every single test case shares the EXACT SAME goal state:
+ *        1 2 3
+ *        4 5 6
+ *        7 8 9
+ *    Running a forward BFS per test case repeatedly traverses the same states 
+ *    and results in Time Limit Exceeded (TLE).
+ * 
+ * 🚀 STRATEGY: BACKWARD BFS PRECOMPUTATION
+ * ---------------------------------------
+ * • At program startup, execute ONE single BFS starting BACKWARDS from the 
+ *   solved goal state {1, 2, 3, 4, 5, 6, 7, 8, 9}.
+ * 
+ * • Transition Inversion:
+ *   To move AWAY from the goal into ancestor states, apply inverse shifts:
+ *     - Forward H_r (Shift Left)  <---> Backward: Shift RIGHT (record as H_r)
+ *     - Forward V_c (Shift Down)  <---> Backward: Shift UP    (record as V_c)
+ * 
+ * • Path Reconstruction:
+ *   If state V is reached from U via inverse move M, the forward solution for V is:
+ *       path(V) = M + path(U)
+ * 
+ * ⏱️ COMPLEXITY:
+ * -------------
+ * • Precomputation Time : O(9!) ≈ 0.08 seconds (executed once at startup).
+ * • Query Time          : O(1) instant hash lookup per test case.
+ * • Space Complexity    : ~15 MB to store all 362,880 answers in memory.
+ * ============================================================================
 */
 
 #include "../debug.h"
@@ -13,9 +52,11 @@ using vi = std::vector<int>;
 using vvi = std::vector<vi>;
 
 
-constexpr int inf = std::numeric_limits<int>::max();
 constexpr int L = 3;
 constexpr int SHIFT = 4; 
+
+const std::string H_moves[3] = {"H1", "H2", "H3"};
+const std::string V_moves[3] = {"V1", "V2", "V3"};
 
 struct State
 {
@@ -33,18 +74,6 @@ struct State
      * Total possible permutations = 9! = 362,880 states.
      */
     vi layout;
-
-    /**
-     * 2. steps (Move Count / Distance)
-     * --------------------------------
-     * The number of shift operations (H1..H3, V1..V3) executed 
-     * to reach this layout.
-     * 
-     * Since all moves cost 1, this is unweighted shortest path distance.
-     */
-    int steps;
-
-    std::string path;  // Sequence of moves taken so far (e.g., "H1V2H3")
 };
 
 // Pack vector of 9 ints into a single uint64_t
@@ -54,15 +83,6 @@ inline uint64_t pack(const vi& layout) {
     packed |= (static_cast<uint64_t>(layout[i]) << (i * SHIFT));
   }
   return packed;
-}
-
-// Unpack uint64_t back into vector of 9 ints
-inline vi unpack(uint64_t packed) {
-  vi layout(9);
-  for (int i = 0; i < 3 * L; ++i) {
-    layout[i] = (packed >> (i * SHIFT)) & 0xF; // 0xF is mask 0b1111 (4 bits)
-  }
-  return layout;
 }
 
 
@@ -93,62 +113,66 @@ void shift_up(vi& layout, int c) {
 }
 
 
-std::string get_min_steps_required(const vi& target) {
+// Stores the precomputed shortest answer for each configuration
+struct Answer {
+  int steps;
+  std::string path;
+};
+
+std::unordered_map<uint32_t, Answer> memo;
+
+// ============================================================
+// 1. RUN THIS ONCE AT START OF MAIN (Precompute all 362,880 states)
+// ============================================================
+void precompute() {
 
   vi source = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-  uint64_t t_packed = pack(target);
   std::queue<State> queue;
-  std::unordered_set<uint64_t> visited;
-  queue.push({source, 0, {}});
-  
-  int min_steps_required = inf;
-  std::string min_path;
-
+  memo[pack(source)] = {0, {}};
+  queue.push({source});
   while(!queue.empty()) {
-
     State state = queue.front(); queue.pop();
     vi layout = state.layout;
-    int steps = state.steps;
-    auto path = state.path;
-
-    uint64_t l_packed = pack(layout);
+    uint32_t l_packed = pack(layout);
 
 
-    if(l_packed == t_packed) {
-      min_steps_required = steps;
-      min_path = path;
-      break;
-    }
-   
-    if(visited.count(l_packed)) {
-      continue;
-    }
-
-    visited.insert(l_packed);
-
+    Answer ans = memo[l_packed];
     for(int r = 0; r < L; ++r) {
       shift_left(layout, r);
-      std::string  new_path = path + "H" + std::to_string(r + 1);
-      State new_state = {layout, 1 + steps, new_path};
-      queue.push(new_state);
-      shift_right(layout, r);
+      std::string new_path = H_moves[r] + ans.path;
+      int new_steps = 1 + ans.steps;
+      uint32_t n_packed = pack(layout);
+      if(memo.find(n_packed) == memo.end()) {
+        memo[n_packed] = {new_steps, new_path};
+        queue.push({layout});
+      }
+      shift_right(layout, r); // backtrack
     }
 
     for(int c = 0; c < L; ++c) {
       shift_down(layout, c);
-      std::string  new_path = path + "V" + std::to_string(c + 1);
-      State new_state = {layout, 1 + steps, new_path};
-      queue.push(new_state);
-      shift_up(layout, c);
+      std::string new_path = V_moves[c] + ans.path;
+      int new_steps = 1 + ans.steps;
+      uint32_t n_packed = pack(layout);
+      if(memo.find(n_packed) == memo.end()) {
+        memo[n_packed] = {new_steps, new_path};
+        queue.push({layout});
+      }
+      shift_up(layout, c); // backtrack
     }
-
   }
+}
 
-  if(min_steps_required == inf) {
+// ============================================================
+// 2. QUERY FUNCTION: O(1) Instant Lookup!
+// ============================================================
+std::string get_min_steps_required(const vi& target) {
+  uint32_t t_packed = pack(target);
+  auto it = memo.find(t_packed);
+  if (it == memo.end()) {
     return "Not solvable";
-  } else {
-    return std::to_string(min_steps_required) + " " + min_path;
   }
+  return std::to_string(it->second.steps) + " " + it->second.path;
 }
 
 namespace algorithms::onlinejudge::advanced_topics::puzzle_9
@@ -168,6 +192,7 @@ namespace algorithms::onlinejudge::advanced_topics::puzzle_9
           }
         }
 
+        precompute();
         vi target(3 * L);
         while(scanf("%d %d %d %d %d %d %d %d %d",
                     &target[0], &target[1], &target[2],

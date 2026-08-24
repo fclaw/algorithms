@@ -17,7 +17,7 @@ using vb = std::vector<bool>;
 using vvb = std::vector<vb>;
 
 
-// #define DEBUG 
+#define DEBUG 
 
 struct State
 {
@@ -56,30 +56,33 @@ std::string get_min_path_required(int R, int S, const vvi& graph, const vvi& swi
 
      
     #ifdef DEBUG
-    std::cerr << "========================================\n";
-    std::cerr << "📍 Room: " << (state.room + 1) 
+    std::cout << "========================================\n";
+    std::cout << "📍 Room: " << (state.room + 1) 
             << " | 💡 Lit Rooms: " << std::bitset<10>(state.lit_rooms) 
             << " | 👣 Steps: " << actions_so_far.size() << "\n";
-    std::cerr << "Actions so far:\n";
+    std::cout << "Actions so far:\n";
 
     for (size_t i = 0; i < actions_so_far.size(); ++i) {
-        std::cerr << "  " << (i + 1) << ". " << actions_so_far[i] << "\n";
+        std::cout << "  " << (i + 1) << ". " << actions_so_far[i] << "\n";
     }
-    std::cerr << "========================================\n";
+    std::cout << "========================================\n";
     #endif
 
 
      if(curr_room == R - 1) {
        if(lit_rooms == (1 << (R - 1))) {
-          min_steps = (int)actions_so_far.size();
-          for(auto a : actions_so_far) {
-            path += a + "\n";   
-          }
-          path.pop_back();
-          break;
+         min_steps = (int)actions_so_far.size();
+         for(int i = 0; i < min_steps; ++i) {
+           path += actions_so_far[i];
+           if(i < min_steps - 1) {
+            path += "\n";
+           }
+         }
+         break;
        }
      }
 
+ 
      // try all combination of switches
      int SIZE = (int)switches[curr_room].size();
      for(int com = 0; com < (1 << SIZE); ++com) {
@@ -92,8 +95,8 @@ std::string get_min_path_required(int R, int S, const vvi& graph, const vvi& swi
            int bit = 1 << val;
            auto s_room = std::to_string(val + 1);
            if(!(new_lit_rooms & bit)) {
-            // turn the light on
-            new_actions_so_far.push_back("- Switch on light in room " + s_room + ".");
+             // turn the light on
+             new_actions_so_far.push_back("- Switch on light in room " + s_room + ".");
            } else {
              if(val != curr_room) {
                new_actions_so_far.push_back("- Switch off light in room " + s_room + ".");

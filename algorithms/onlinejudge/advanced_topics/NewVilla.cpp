@@ -58,7 +58,7 @@ std::string get_min_path_required(int R, int S, const vvi& graph, const vvi& swi
      State state =  queue.front(); queue.pop();
      int curr_room = state.room;
      int lit_rooms = state.lit_rooms;
-     auto actions_so_far = state.actions;
+     auto& actions_so_far = state.actions;
 
      if(curr_room == bedroom) {
        if(lit_rooms == target_lit) {
@@ -76,7 +76,6 @@ std::string get_min_path_required(int R, int S, const vvi& graph, const vvi& swi
     // ============================================================
     // 1. ATOMIC ACTION: Flip ONE switch in current room (Cost: 1 step)
     // ============================================================
-     auto toggle_actions = actions_so_far;
      for(int s : switches[curr_room]) {
        int bit = 1 << s;
        auto s_room = std::to_string(s + 1);
@@ -85,20 +84,20 @@ std::string get_min_path_required(int R, int S, const vvi& graph, const vvi& swi
          int new_lit_rooms = lit_rooms;
          new_lit_rooms ^= bit;
          if(!visited[curr_room][new_lit_rooms]) {
-           toggle_actions.push_back(turn_on + s_room + ".");
+           actions_so_far.push_back(turn_on + s_room + ".");
            visited[curr_room][new_lit_rooms] = true;
-           queue.push({curr_room, new_lit_rooms, toggle_actions});
-           toggle_actions.pop_back();
+           queue.push({curr_room, new_lit_rooms, actions_so_far});
+           actions_so_far.pop_back();
          }
        } else {
          if(s != curr_room) {
            int new_lit_rooms = lit_rooms;
            new_lit_rooms ^= bit;
            if(!visited[curr_room][new_lit_rooms]) {
-             toggle_actions.push_back(turn_off + s_room + ".");
+             actions_so_far.push_back(turn_off + s_room + ".");
              visited[curr_room][new_lit_rooms] = true;
-             queue.push({curr_room, new_lit_rooms, toggle_actions});
-             toggle_actions.pop_back();
+             queue.push({curr_room, new_lit_rooms, actions_so_far});
+             actions_so_far.pop_back();
            }
          }
        }
@@ -107,15 +106,14 @@ std::string get_min_path_required(int R, int S, const vvi& graph, const vvi& swi
     // ============================================================
     // 2. ATOMIC ACTION: Move to an adjacent room (Cost: 1 step)
     // ============================================================
-     auto move_actions = actions_so_far;
      for(int room : graph[curr_room]) {
        if((lit_rooms & (1 << room)) && 
           !visited[room][lit_rooms]) {
          auto s_room = std::to_string(room + 1);
          visited[room][lit_rooms] = true;
-         move_actions.push_back(move + s_room + ".");
-         queue.push({room, lit_rooms, move_actions});
-         move_actions.pop_back(); // backtrack
+         actions_so_far.push_back(move + s_room + ".");
+         queue.push({room, lit_rooms, actions_so_far});
+         actions_so_far.pop_back(); // backtrack
        }
      }
    }

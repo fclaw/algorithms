@@ -17,8 +17,6 @@ using vb = std::vector<bool>;
 using vvb = std::vector<vb>;
 
 
-#define DEBUG 
-
 struct State
 {
     int room;      // Current room Mr. Black is in (0-indexed: 0 to r-1)
@@ -36,13 +34,21 @@ struct State
      */
 };
 
+const std::string turn_off = "- Switch off light in room ";
+const std::string turn_on = "- Switch on light in room ";
+const std::string move = "- Move to room ";
+
 std::string get_min_path_required(int R, int S, const vvi& graph, const vvi& switches) {
+
+   int hallway = 0;
+   int bedroom = R - 1;
+   int target_lit = 1 << (R - 1);
 
    std::queue<State> queue;
    vvb visited(R, vb(1 << R, false));
    // init
-   queue.push({0, (1 << 0), {}});
-   visited[0][1 << 0] = true;
+   queue.push({hallway, (1 << 0), {}});
+   visited[hallway][1 << 0] = true;
    
    // ans
    int min_steps = -1;
@@ -54,78 +60,62 @@ std::string get_min_path_required(int R, int S, const vvi& graph, const vvi& swi
      int lit_rooms = state.lit_rooms;
      auto actions_so_far = state.actions;
 
-     
-    #ifdef DEBUG
-    std::cout << "========================================\n";
-    std::cout << "📍 Room: " << (state.room + 1) 
-            << " | 💡 Lit Rooms: " << std::bitset<10>(state.lit_rooms) 
-            << " | 👣 Steps: " << actions_so_far.size() << "\n";
-    std::cout << "Actions so far:\n";
-
-    for (size_t i = 0; i < actions_so_far.size(); ++i) {
-        std::cout << "  " << (i + 1) << ". " << actions_so_far[i] << "\n";
-    }
-    std::cout << "========================================\n";
-    #endif
-
-
-     if(curr_room == R - 1) {
-       if(lit_rooms == (1 << (R - 1))) {
+     if(curr_room == bedroom) {
+       if(lit_rooms == target_lit) {
          min_steps = (int)actions_so_far.size();
          for(int i = 0; i < min_steps; ++i) {
            path += actions_so_far[i];
-           if(i < min_steps - 1) {
+           if(i + 1 < min_steps) {
             path += "\n";
            }
          }
          break;
+        }
+     }
+
+    // ============================================================
+    // 1. ATOMIC ACTION: Flip ONE switch in current room (Cost: 1 step)
+    // ============================================================
+     auto toggle_actions = actions_so_far;
+     for(int s : switches[curr_room]) {
+       int bit = 1 << s;
+       auto s_room = std::to_string(s + 1);
+       if(!(lit_rooms & bit)) {
+         // turn the light on
+         int new_lit_rooms = lit_rooms;
+         new_lit_rooms ^= bit;
+         if(!visited[curr_room][new_lit_rooms]) {
+           toggle_actions.push_back(turn_on + s_room + ".");
+           visited[curr_room][new_lit_rooms] = true;
+           queue.push({curr_room, new_lit_rooms, toggle_actions});
+           toggle_actions.pop_back();
+         }
+       } else {
+         if(s != curr_room) {
+           int new_lit_rooms = lit_rooms;
+           new_lit_rooms ^= bit;
+           if(!visited[curr_room][new_lit_rooms]) {
+             toggle_actions.push_back(turn_off + s_room + ".");
+             visited[curr_room][new_lit_rooms] = true;
+             queue.push({curr_room, new_lit_rooms, toggle_actions});
+             toggle_actions.pop_back();
+           }
+         }
        }
      }
 
- 
-     // try all combination of switches
-     int SIZE = (int)switches[curr_room].size();
-     for(int com = 0; com < (1 << SIZE); ++com) {
-       auto new_actions_so_far = actions_so_far;
-       int new_lit_rooms = lit_rooms;
-       bool is_light_off_in_curr_room = false;
-       for(int i = 0; i < SIZE; ++i) {
-         if((com & (1 << i))) {
-           int val = switches[curr_room][i];
-           int bit = 1 << val;
-           auto s_room = std::to_string(val + 1);
-           if(!(new_lit_rooms & bit)) {
-             // turn the light on
-             new_actions_so_far.push_back("- Switch on light in room " + s_room + ".");
-           } else {
-             if(val != curr_room) {
-               new_actions_so_far.push_back("- Switch off light in room " + s_room + ".");
-             } else {
-               is_light_off_in_curr_room = true;
-             }
-           }
-           if(val != curr_room || 
-              !is_light_off_in_curr_room) { // Mr. Black never stays in a dark room
-             new_lit_rooms ^= bit; // toggle
-           }
-         }
-       }
-
-       // stay 
-       if(!visited[curr_room][new_lit_rooms]) {
-         visited[curr_room][new_lit_rooms] = true;
-         queue.push({curr_room, new_lit_rooms, new_actions_so_far});
-       }
-
-       // move
-       for(int room : graph[curr_room]) {
-         if((new_lit_rooms & (1 << room)) && 
-            !visited[room][new_lit_rooms]) {
-          auto s_room = std::to_string(room + 1);
-          visited[room][new_lit_rooms] = true;
-          new_actions_so_far.push_back("- Move to room " + s_room + ".");
-          queue.push({room, new_lit_rooms, new_actions_so_far});
-         }
+    // ============================================================
+    // 2. ATOMIC ACTION: Move to an adjacent room (Cost: 1 step)
+    // ============================================================
+     auto move_actions = actions_so_far;
+     for(int room : graph[curr_room]) {
+       if((lit_rooms & (1 << room)) && 
+          !visited[room][lit_rooms]) {
+         auto s_room = std::to_string(room + 1);
+         visited[room][lit_rooms] = true;
+         move_actions.push_back(move + s_room + ".");
+         queue.push({room, lit_rooms, move_actions});
+         move_actions.pop_back(); // backtrack
        }
      }
    }
@@ -133,7 +123,7 @@ std::string get_min_path_required(int R, int S, const vvi& graph, const vvi& swi
    if(!(~min_steps)) {
      return "The problem cannot be solved.";
    } else {
-     return "The problem can be solved in " + std::to_string(min_steps) + " steps:\n" + path;
+     return "The problem can be solved in " + std::to_string(min_steps) + " steps:" + (min_steps > 0 ? "\n" : "") + path;
    }
 }
 
@@ -157,19 +147,7 @@ namespace algorithms::onlinejudge::advanced_topics::new_villa
         
         // R stands for rooms, D stands for doors connecting rooms, S - for switches
         int R, D, S, t_case = 1;
-        bool is_first = true;
         while(std::cin >> R >> D >> S && R) {
-
-          if(is_first) {
-            is_first = false;
-          } else {
-            std::cout << std::endl;
-          }
-
-          if(D == 0 && S == 0) {
-            printf("Villa #%d\nThe problem can be solved in 0 steps:\n", t_case++);
-            continue;
-          }
 
           vvi graph(R);
           int from, to;
@@ -186,7 +164,9 @@ namespace algorithms::onlinejudge::advanced_topics::new_villa
             --switch_room; --toggle;
             switches[switch_room].push_back(toggle);
           }
-          printf("Villa #%d\n%s\n", t_case++, get_min_path_required(R, S, graph, switches).c_str());
+
+
+          printf("Villa #%d\n%s\n\n", t_case++, get_min_path_required(R, S, graph, switches).c_str());
         }
     }
 }

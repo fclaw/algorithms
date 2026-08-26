@@ -1,7 +1,7 @@
 #define DBG_MACRO_NO_WARNING
 
-// #include "algorithms/kattis/complete_search/CommitteeAssignment.cpp"
-#include "algorithms/onlinejudge/advanced_topics/ForróParty.cpp"
+// #include "algorithms/kattis/graph/FlipFive.cpp"
+#include "algorithms/onlinejudge/advanced_topics/EditingBook.cpp"
 #include <chrono>
 #include <iomanip>
 #include <bits/stdc++.h>
@@ -28,8 +28,8 @@ int main(int argc, char* argv[])
     long mem_before = get_memory_usage();
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::advanced_topics::forró_party::submit(file, debug_mode);
-    // algorithms::kattis::complete_search::committee_assignment::submit(file, debug_mode);
+    algorithms::onlinejudge::advanced_topics::editing_book::submit(file, debug_mode);
+    // algorithms::kattis::graph::flip_five::submit(file, debug_mode);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

@@ -136,6 +136,28 @@ int get_min_cut_paste_operations(const vi& paragraph) {
       }
     }
 
+    /**
+     * 🧠 MEET-IN-THE-MIDDLE DEDUCTION (Halim Case 3):
+     * ------------------------------------------------
+     * 1. Theoretical Diameter for N <= 9:
+     *    It is mathematically proven that ANY permutation of length N <= 9 
+     *    can be sorted in AT MOST 5 cut-and-paste operations (Max distance <= 5).
+     * 
+     * 2. Bidirectional Search Coverage:
+     *    - Forward BFS from Source (s) explores all states at depth <= 2.
+     *    - Backward BFS from Target (t) explores all states at depth <= 2.
+     *    - Therefore, any path of length 0, 1, 2, 3, or 4 will GUARANTEE an 
+     *      intersection (v in both sets) since 2 + 2 = 4.
+     * 
+     * 3. Deduction by Elimination:
+     *    If no intersection is found, then:
+     *        Distance > 4  AND  Distance <= 5  ===>  Distance MUST BE EXACTLY 5!
+     * 
+     * ⚡ PERFORMANCE BENEFIT:
+     * -----------------------
+     * This avoids having to expand BFS to depth 3 (which would require generating 
+     * O(N^3 * N^3 * N^3) ≈ 10^7 states), keeping the search blazing fast in O(N^6)!
+     */
     if(min_cut_paste_operation == INT32_MAX) {
       min_cut_paste_operation = 5;
     }

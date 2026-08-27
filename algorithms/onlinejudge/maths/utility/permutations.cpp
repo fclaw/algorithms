@@ -1,9 +1,8 @@
 #include <bits/stdc++.h>
-using namespace std;
 
-typedef long long ll;
-typedef vector<int> vi;
-typedef vector<ll> vll;
+using ll = long long;
+using vi = std::vector<int>;;
+using vll = std::vector<ll>;
 
 
 namespace algorithms::onlinejudge::maths::utility::permutations

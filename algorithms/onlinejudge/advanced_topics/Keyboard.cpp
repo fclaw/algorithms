@@ -53,6 +53,7 @@
 
 
 using ii = std::pair<int, int>;
+using vi = std::vector<int>;
 using vii = std::vector<ii>;
 using vvii = std::vector<vii>;
 using vvvii = std::vector<vvii>; // 3D vector: [row][col] -> vector<ii>
@@ -66,9 +67,30 @@ using Keyboard = std::vector<vc>;
 
 
 constexpr int MAX_LENGTH = 10000;
-constexpr int MAX_ASCII = 127;
+constexpr int TOTAL_CHARS = 38;
 
 int R, C;
+
+
+// 1. Fast O(1) Mapper: char -> [0 .. 37]
+const vi char_to_id = []() {
+    vi table(128, -1);
+
+    // 'A'-'Z' -> 0 .. 25
+    for (char c = 'A'; c <= 'Z'; ++c) {
+        table[c] = c - 'A';
+    }
+    // '0'-'9' -> 26 .. 35
+    for (char c = '0'; c <= '9'; ++c) {
+        table[c] = 26 + (c - '0');
+    }
+    // '-' -> 36
+    table['-'] = 36;
+    // '*' -> 37
+    table['*'] = 37;
+
+    return table;
+}();
 
 
 struct State
@@ -185,7 +207,7 @@ int get_min_presses(const Keyboard& keyboard, const std::string& raw) {
   vvvii neighs = precalculate_neighbours(keyboard);
 
   std::queue<State> queue;
-  vvvvb visited(R, vvvb(C, vvb(MAX_ASCII + 1, vb(MAX_LENGTH + 2, false))));
+  vvvvb visited(R, vvvb(C, vvb(TOTAL_CHARS + 1, vb(MAX_LENGTH + 2, false))));
   
   // init
   queue.push({0, 0, 0, 0});
@@ -212,8 +234,9 @@ int get_min_presses(const Keyboard& keyboard, const std::string& raw) {
       int neigh_row = neigh.first;
       int neigh_col = neigh.second;
       char neigh_letter = keyboard[neigh_row][neigh_col];
-      if(!visited[neigh_row][neigh_col][neigh_letter][idx]) {
-        visited[neigh_row][neigh_col][neigh_letter][idx] = true;
+      int neigh_id = char_to_id[neigh_letter];
+      if(!visited[neigh_row][neigh_col][neigh_id][idx]) {
+        visited[neigh_row][neigh_col][neigh_id][idx] = true;
         queue.push({neigh_row, neigh_col, idx, 1 + presses});
       }
     }

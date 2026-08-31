@@ -10,6 +10,69 @@
 #include <bits/stdc++.h>
 
  
+template<int SIZE>
+struct FastHashMap {
+    static_assert((SIZE & (SIZE - 1)) == 0, "SIZE must be a power of 2!");
+
+    int keys[SIZE];
+    int vals[SIZE];
+    int count_elements; // Safety counter
+
+    FastHashMap() {
+        clear();
+    }
+
+    void clear() {
+        std::memset(keys, -1, sizeof(keys));
+        count_elements = 0;
+    }
+
+    inline size_t hash_key(int x) const {
+        uint32_t u = static_cast<uint32_t>(x);
+        u = ((u >> 16) ^ u) * 0x45d9f3b;
+        u = ((u >> 16) ^ u) * 0x45d9f3b;
+        u = (u >> 16) ^ u;
+        return u & (SIZE - 1);
+    }
+
+    inline bool count(int key) const {
+        size_t idx = hash_key(key);
+        while (keys[idx] != -1) {
+            if (keys[idx] == key) return true;
+            idx = (idx + 1) & (SIZE - 1);
+        }
+        return false;
+    }
+
+    inline int get(int key) const {
+        size_t idx = hash_key(key);
+        while (keys[idx] != -1) {
+            if (keys[idx] == key) return vals[idx];
+            idx = (idx + 1) & (SIZE - 1);
+        }
+        return -1;
+    }
+
+    inline bool insert(int key, int val) {
+        size_t idx = hash_key(key);
+        while (keys[idx] != -1) {
+            if (keys[idx] == key) {
+                vals[idx] = val;
+                return false;
+            }
+            idx = (idx + 1) & (SIZE - 1);
+        }
+
+        // Safety Assertion: Warn if table exceeds 85% capacity
+        assert(count_elements < (SIZE * 85 / 100) && "FastHashMap Overflow! Increase SIZE!");
+
+        keys[idx] = key;
+        vals[idx] = val;
+        count_elements++;
+        return true;
+    }
+};
+
 
 using vi = std::vector<int>;
 
@@ -153,6 +216,8 @@ struct State
     int moves;
 };
 
+FastHashMap<1 << 20> dist_s;
+FastHashMap<1 << 20> dist_t;
 
 int min_moves_required(vi& target) {
 
@@ -162,8 +227,7 @@ int min_moves_required(vi& target) {
   perm::ll d_perm_idx = perm::getPermutationIndex(target);
 
   std::queue<State> queue;
-  std::unordered_map<perm::ll, int> dist_s; // expansion from source
-  dist_s[s_perm_idx] = 0;
+  dist_s.insert(s_perm_idx, 0);
   queue.push({source, 0});
 
   int min_moves = INT32_MAX;
@@ -185,20 +249,19 @@ int min_moves_required(vi& target) {
     for(std::pair<MoveFunc, MoveFunc> m : moves) {
       m.first(curr_perm); // 1. Apply Turn
       perm::ll next_idx = perm::getPermutationIndex(curr_perm);
-      if(dist_s.find(next_idx) == dist_s.end()) {
-        dist_s[next_idx] = 1 + moves_so_far;
+      if(!dist_s.count(next_idx)) {
+        dist_s.insert(next_idx, 1 + moves_so_far);
         queue.push({curr_perm,  1 + moves_so_far});
       }
       m.second(curr_perm); // 2. Restore (Backtrack)
     }
   }
 
-  if(auto it = dist_s.find(d_perm_idx); it != dist_s.end()) {
-    min_moves = it->second;
+  if(dist_s.count(d_perm_idx)) {
+    min_moves = dist_s.get(d_perm_idx);
   } else {  
     std::queue<State> queue;
-    std::unordered_map<perm::ll, int> dist_t; // expansion from target
-    dist_t[d_perm_idx] = 0;
+    dist_t.insert(d_perm_idx, 0);
     queue.push({target, 0});
     
     while(!queue.empty()) {
@@ -207,9 +270,8 @@ int min_moves_required(vi& target) {
       int moves_so_far = state.moves;
       perm::ll curr_perm_idx = perm::getPermutationIndex(curr_perm);
 
-      if(auto it = dist_s.find(curr_perm_idx); 
-         it != dist_s.end()) {
-        min_moves = it->second + moves_so_far;
+      if(dist_s.count(curr_perm_idx)) {
+        min_moves = dist_s.get(curr_perm_idx) + moves_so_far;
         break;
       }
         
@@ -220,8 +282,8 @@ int min_moves_required(vi& target) {
       for(std::pair<MoveFunc, MoveFunc> m : moves) {
         m.first(curr_perm); // 1. Apply Turn
         perm::ll next_idx = perm::getPermutationIndex(curr_perm);
-        if(dist_t.find(next_idx) == dist_t.end()) {
-          dist_t[next_idx] = 1 + moves_so_far;
+        if(!dist_t.count(next_idx)) {
+          dist_t.insert(next_idx, 1 + moves_so_far);
           queue.push({curr_perm,  1 + moves_so_far});
         }
         m.second(curr_perm); // 2. Restore (Backtrack)
@@ -261,6 +323,8 @@ namespace algorithms::onlinejudge::advanced_topics::happy_12
             std::cin >> puzzle[i];
           }
           printf("%d\n", min_moves_required(puzzle));
+          dist_s.clear();
+          dist_t.clear();
         }
     }
 }

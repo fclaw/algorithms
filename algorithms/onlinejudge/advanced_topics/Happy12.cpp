@@ -5,84 +5,21 @@
 */
 
 #include "../maths/utility/permutations.cpp"
+#include "utility/fast_hash_map.cpp"
 #include "../debug.h"
 #include "../../aux.h"
 #include <bits/stdc++.h>
 
  
-template<int SIZE>
-struct FastHashMap {
-    static_assert((SIZE & (SIZE - 1)) == 0, "SIZE must be a power of 2!");
-
-    int keys[SIZE];
-    int vals[SIZE];
-    int count_elements; // Safety counter
-
-    FastHashMap() {
-        clear();
-    }
-
-    void clear() {
-        std::memset(keys, -1, sizeof(keys));
-        count_elements = 0;
-    }
-
-    inline size_t hash_key(int x) const {
-        uint32_t u = static_cast<uint32_t>(x);
-        u = ((u >> 16) ^ u) * 0x45d9f3b;
-        u = ((u >> 16) ^ u) * 0x45d9f3b;
-        u = (u >> 16) ^ u;
-        return u & (SIZE - 1);
-    }
-
-    inline bool count(int key) const {
-        size_t idx = hash_key(key);
-        while (keys[idx] != -1) {
-            if (keys[idx] == key) return true;
-            idx = (idx + 1) & (SIZE - 1);
-        }
-        return false;
-    }
-
-    inline int get(int key) const {
-        size_t idx = hash_key(key);
-        while (keys[idx] != -1) {
-            if (keys[idx] == key) return vals[idx];
-            idx = (idx + 1) & (SIZE - 1);
-        }
-        return -1;
-    }
-
-    inline bool insert(int key, int val) {
-        size_t idx = hash_key(key);
-        while (keys[idx] != -1) {
-            if (keys[idx] == key) {
-                vals[idx] = val;
-                return false;
-            }
-            idx = (idx + 1) & (SIZE - 1);
-        }
-
-        // Safety Assertion: Warn if table exceeds 85% capacity
-        assert(count_elements < (SIZE * 85 / 100) && "FastHashMap Overflow! Increase SIZE!");
-
-        keys[idx] = key;
-        vals[idx] = val;
-        count_elements++;
-        return true;
-    }
-};
-
-
 using vi = std::vector<int>;
 
 constexpr int SIZE = 12;
-constexpr int MAX_MOVES_DEPTH = 8;
+constexpr int MAX_MOVES_DEPTH = 9;
 constexpr int MAX_SOLUTION_DEPTH = 19;
 
 
 namespace perm = algorithms::onlinejudge::maths::utility::permutations;
-
+namespace fhm = algorithms::onlinejudge::advanced_topics::utility::hash_map;
 
 // ============================================================
 // 1. LEFT RING ROTATIONS (Indices: 0, 1, 2, 3, 4, 5, 11)
@@ -216,32 +153,23 @@ struct State
     int moves;
 };
 
-FastHashMap<1 << 20> dist_s;
-FastHashMap<1 << 20> dist_t;
+fhm::FastHashMap<1 << 22> dist_s;
+fhm::FastHashMap<1 << 22> dist_t;
 
-int min_moves_required(vi& target) {
 
+void precompute_dist_s() {
   vi source = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }; // source
-
   perm::ll s_perm_idx = perm::getPermutationIndex(source);
-  perm::ll d_perm_idx = perm::getPermutationIndex(target);
 
   std::queue<State> queue;
   dist_s.insert(s_perm_idx, 0);
   queue.push({source, 0});
 
-  int min_moves = INT32_MAX;
-  
   while(!queue.empty()) {
     State state = queue.front(); queue.pop();
     vi& curr_perm = state.permutation;
     int moves_so_far = state.moves;
-    perm::ll curr_perm_idx = perm::getPermutationIndex(curr_perm);
-
-    if(curr_perm_idx == d_perm_idx) {
-      break;
-    }
-    
+  
     if(moves_so_far > MAX_MOVES_DEPTH) {
       continue;
     }
@@ -256,7 +184,16 @@ int min_moves_required(vi& target) {
       m.second(curr_perm); // 2. Restore (Backtrack)
     }
   }
+}
 
+
+
+int min_moves_required(vi& target) {
+
+  perm::ll d_perm_idx = perm::getPermutationIndex(target);
+  
+  int min_moves = INT32_MAX;
+   
   if(dist_s.count(d_perm_idx)) {
     min_moves = dist_s.get(d_perm_idx);
   } else {  
@@ -315,6 +252,8 @@ namespace algorithms::onlinejudge::advanced_topics::happy_12
           }
         }
 
+        precompute_dist_s();
+
         int t_cases;
         std::cin >> t_cases;
         while(t_cases--) {
@@ -323,7 +262,6 @@ namespace algorithms::onlinejudge::advanced_topics::happy_12
             std::cin >> puzzle[i];
           }
           printf("%d\n", min_moves_required(puzzle));
-          dist_s.clear();
           dist_t.clear();
         }
     }

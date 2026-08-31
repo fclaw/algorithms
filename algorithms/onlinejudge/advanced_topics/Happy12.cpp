@@ -175,7 +175,6 @@ int min_moves_required(vi& target) {
     perm::ll curr_perm_idx = perm::getPermutationIndex(curr_perm);
 
     if(curr_perm_idx == d_perm_idx) {
-      min_moves = moves_so_far;
       break;
     }
     
@@ -194,7 +193,9 @@ int min_moves_required(vi& target) {
     }
   }
 
-  if(min_moves == INT32_MAX) {
+  if(auto it = dist_s.find(d_perm_idx); it != dist_s.end()) {
+    min_moves = it->second;
+  } else {  
     std::queue<State> queue;
     std::unordered_map<perm::ll, int> dist_t; // expansion from target
     dist_t[d_perm_idx] = 0;

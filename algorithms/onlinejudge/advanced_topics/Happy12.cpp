@@ -5,7 +5,7 @@
 */
 
 #include "../maths/utility/permutations.cpp"
-#include "utility/fast_hash_map.cpp"
+#include "utility/fast_hash_containers.cpp"
 #include "../debug.h"
 #include "../../aux.h"
 #include <bits/stdc++.h>
@@ -19,7 +19,7 @@ constexpr int MAX_SOLUTION_DEPTH = 19;
 
 
 namespace perm = algorithms::onlinejudge::maths::utility::permutations;
-namespace fhm = algorithms::onlinejudge::advanced_topics::utility::hash_map;
+namespace fhm = algorithms::onlinejudge::advanced_topics::utility::hash_containers;
 
 // ============================================================
 // 1. LEFT RING ROTATIONS (Indices: 0, 1, 2, 3, 4, 5, 11)

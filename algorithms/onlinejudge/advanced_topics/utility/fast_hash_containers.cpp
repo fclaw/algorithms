@@ -21,7 +21,7 @@
 #include <bits/stdc++.h>
 
 
-namespace algorithms::onlinejudge::advanced_topics::utility::hash_map {
+namespace algorithms::onlinejudge::advanced_topics::utility::hash_containers {
 
     template<int SIZE>
     struct FastHashMap {
@@ -83,6 +83,58 @@ namespace algorithms::onlinejudge::advanced_topics::utility::hash_map {
             vals[idx] = val;
             count_elements++;
             return true;
+        }
+    };
+
+    template<int SIZE = (1 << 20)> // Default: 1,048,576 slots (Only 4 MB RAM!)
+    struct FastHashSet {
+        static_assert((SIZE & (SIZE - 1)) == 0, "SIZE must be a power of 2!");
+
+        int keys[SIZE]; // -1 represents an empty slot
+
+        FastHashSet() {
+            clear();
+        }
+
+        // Reset table in ~0.2 milliseconds
+        inline void clear() {
+            std::memset(keys, -1, sizeof(keys));
+        }
+
+        // Fast O(1) integer hash mixer (1 CPU instruction)
+        inline size_t hash_key(int x) const {
+            uint32_t u = static_cast<uint32_t>(x);
+            u = ((u >> 16) ^ u) * 0x45d9f3b;
+            u = ((u >> 16) ^ u) * 0x45d9f3b;
+            u = (u >> 16) ^ u;
+            return u & (SIZE - 1); // Instant modulo for power of 2
+        }
+
+        // 1. Check if key exists (O(1))
+        inline bool count(int key) const {
+            size_t idx = hash_key(key);
+            while (keys[idx] != -1) {
+                if (keys[idx] == key) return true;
+                idx = (idx + 1) & (SIZE - 1); // Linear probe
+            }
+            return false;
+        }
+
+        /**
+         * 2. Insert key:
+         *    - Returns TRUE  if newly inserted (NOT visited before).
+         *    - Returns FALSE if key was ALREADY in the set.
+         */
+        inline bool insert(int key) {
+            size_t idx = hash_key(key);
+            while (keys[idx] != -1) {
+                if (keys[idx] == key) {
+                    return false; // Already visited!
+                }
+                idx = (idx + 1) & (SIZE - 1);
+            }
+            keys[idx] = key;
+            return true; // Newly inserted!
         }
     };
 

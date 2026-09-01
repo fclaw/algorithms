@@ -4,7 +4,7 @@
 ───────────────────────────────────────────────────────────────
 */
 
-#include "utility/fast_hash_containers.cpp"
+
 #include "../debug.h"
 #include "../../aux.h"
 #include <bits/stdc++.h>
@@ -16,8 +16,6 @@ using vi = std::vector<int>;
 using vvi = std::vector<vi>;
 using vb = std::vector<bool>;
 
-
-namespace fhc = algorithms::onlinejudge::advanced_topics::utility::hash_containers;
 
 enum Cell { EMPTY = 0, OBSTACLE = 1, ROBOT = 2 };
 
@@ -79,21 +77,12 @@ struct State
      */
     int obstacle_mask;
 
-    /**
-     * 3. moves_seq (History of Executed Actions)
-     * ------------------------------------------
-     * Stores the step-by-step move history as pairs: {from_vertex, to_vertex}.
-     * Required for problem output:
-     *   - Number of steps = moves_seq.size()
-     *   - Step details: "from_node to_node"
-     */
-    vii moves_seq;
+    int node_pool_idx;
 };
 
 
-int pack_state_2bit(int NODES, const State& state) {
+int pack_state_2bit(int NODES, int obstacles, int robot_node) {
     int res = 0;
-    int obstacles = state.obstacle_mask;
 
     // 1. Pack obstacles (2 bits each: value 1)
     for (int node = 0; node < NODES; ++node) {
@@ -103,7 +92,7 @@ int pack_state_2bit(int NODES, const State& state) {
     }
 
     // 2. Pack robot (2 bits: value 2)
-    res |= (ROBOT << (state.robot_node * 2));
+    res |= (ROBOT << (robot_node * 2));
 
     return res;
 }
@@ -124,62 +113,89 @@ std::string format_moves(const vii& moves_seq) {
   return res;
 }
 
-fhc::FastHashSet<1 << 22> visited;
+struct Node
+{
+    int parent_idx;
+    ii last_move;
+};
+
+
 
 std::pair<int, std::string> get_min_moves_requrired(int NODES, const vvi& tree, int obstacle_mask, int s, int e) {
 
-  // clear
-  visited.clear();
-
   std::queue<State> queue;
-  
+  std::unordered_set<int> visited;
+  std::vector<Node> node_pool(50000, {-1, {0, 0}}); 
+
+
   // init
-  State state = {s, obstacle_mask, {}};
+  State state = {s, obstacle_mask, 0};
   queue.push(state);
-  visited.insert(pack_state_2bit(NODES, state));
+  visited.insert(pack_state_2bit(NODES, obstacle_mask, s));
   
   int min_moves = -1;
   std::string seq;
+
+  int nodes_pool_idx = 0;
 
   while(!queue.empty()) {
    State state = queue.front(); queue.pop();
    int robot_node = state.robot_node;
    int obstacles = state.obstacle_mask;
-   vii& moves_seq_so_far = state.moves_seq;
+  
+   int curr_node_pool_idx = state.node_pool_idx;
 
    if(robot_node == e) {
-      seq = format_moves(moves_seq_so_far);
-      min_moves = (int)moves_seq_so_far.size();
-     break;
+      // ==========================================
+      // Backtrack Tree to Reconstruct Path (O(depth))
+      // ==========================================
+      vii path;
+      int curr = curr_node_pool_idx;
+      while (node_pool[curr].parent_idx != -1) {
+        path.push_back(node_pool[curr].last_move);
+        curr = node_pool[curr].parent_idx; // Step up the tree!
+      }
+
+      min_moves = (int)path.size();
+      std::reverse(path.begin(), path.end());
+      seq = format_moves(path);
+      break;
    }
 
-   // move robot
+   // ==========================================
+   // 1. MOVE ROBOT
+   // ==========================================
    for(int u : tree[robot_node]) {
      if(!(obstacles & (1 << u))) {
-       moves_seq_so_far.push_back({robot_node, u});
-       State new_state = {u, obstacles, moves_seq_so_far};
-       moves_seq_so_far.pop_back();
-       int state_mask = pack_state_2bit(NODES, new_state);
+       int state_mask = pack_state_2bit(NODES, obstacles, u);
        if(!visited.count(state_mask)) {
+         // ✅ Increment ONLY when adding a new valid state!
+         State new_state = {u, obstacles, ++nodes_pool_idx};
          visited.insert(state_mask);
          queue.push(new_state);
+         ii last_move = std::make_pair(robot_node, u);
+         node_pool[nodes_pool_idx] = {curr_node_pool_idx, last_move};
        }
      }
    }
-   // move obstacles
+
+   // ==========================================
+   // 2. MOVE OBSTACLES
+   // ==========================================
    for(int n = 0; n < NODES; ++n) {
      if((obstacles & (1 << n))) {
        for(int u : tree[n]) {
          if(!(obstacles & (1 << u)) && 
             u != robot_node) {
            int new_obstacles = (obstacles & ~(1 << n)) | (1 << u);
-           moves_seq_so_far.push_back({n, u});
-           State new_state = {robot_node, new_obstacles, moves_seq_so_far};
-           moves_seq_so_far.pop_back();
-           int state_mask = pack_state_2bit(NODES, new_state);
+           int state_mask = pack_state_2bit(NODES, new_obstacles, robot_node);
            if(!visited.count(state_mask)) {
+             // ✅ Increment ONLY when adding a new valid state!
+             State new_state = {robot_node, new_obstacles, ++nodes_pool_idx};
              visited.insert(state_mask);
              queue.push(new_state);
+             ii last_move = std::make_pair(n, u);
+             node_pool[nodes_pool_idx] = {curr_node_pool_idx, last_move};
            }
          }
        }

@@ -10,11 +10,12 @@
 
 
 
-
 using vi = std::vector<int>;
 using vvi = std::vector<vi>;
 using vvvi = std::vector<vvi>;
 
+
+constexpr int MAX_CITY_IDX = 200;
 
 
 struct Ticket
@@ -31,26 +32,6 @@ struct Itinerary
     vi cities;
 };
 
-/**
- * Finds the immediate next city on this ticket after 'current_city'.
- * Returns -1 if current_city is not found or is the last stop on the ticket.
- */
-int find_next_city_on_route(const Ticket& t, int current_city, int start_pos = 0) {
-  int n = t.cities.size();
-    
-  // Scan at most 10 cities:
-  for(int i = start_pos; i < n - 1; ++i) {
-    if(t.cities[i] == current_city) {
-      return t.cities[i + 1]; // The next city on the flight
-    }
-  }
-  return -1; // End of the ticket route
-}
-
-bool is_the_first_city_on_route(const Ticket& t, int city) {
-  auto it = std::find_if(t.cities.begin(), t.cities.end(), [city](int c) { return c == city; });
-  return it == t.cities.begin();
-}
 
 struct State
 {
@@ -60,7 +41,7 @@ struct State
      * The ID of the airport where the traveler is currently standing.
      * Starts at itinerary[0].
      */
-    int current_city;
+    int current_city_id;
 
     /**
      * 2. itinerary_idx (Itinerary Checkpoint Progress)
@@ -71,25 +52,54 @@ struct State
      */
     int itinerary_idx;
 
-    int last_ticket;
+    /**
+     * 3. last_ticket_id (Active Flight Ticket Mode)
+     * ---------------------------------------------
+     * Stores the ID (1 to N) of the ticket currently being used for travel.
+     * Starts at -1 (or 0) before any ticket is purchased.
+     * 
+     * Role in Dijkstra:
+     *   - If last_ticket_id != -1: 
+     *       The traveler is currently in-flight on this ticket. They can advance 
+     *       to the next city along this ticket's route for $0 cost!
+     *   - Serves as the 3rd dimension in the cost table:
+     *       cost[current_city][itinerary_idx][last_ticket_id]
+     *       distinguishing whether you arrived at a city on Ticket #1 vs Ticket #2.
+     */
+    int last_ticket_id;
 
+    /**
+     * 4. node_pool_idx (Backtracking Tree Pointer)
+     * --------------------------------------------
+     * The index in the global `node_pool` array pointing to the chain of tickets 
+     * purchased to reach this state.
+     * 
+     * Role in Path Reconstruction:
+     *   - Acts as a pointer in an append-only tree: node_pool[idx] = {parent_idx, ticket_id}.
+     *   - When a NEW ticket is bought, a new node is allocated:
+     *       node_pool[++nodes_pool_idx] = {curr.node_pool_idx, new_ticket_id};
+     *   - When an intermediate flight leg is flown, this index is simply carried over 
+     *     (no new tickets are added to the history).
+     *   - At the goal, we trace parent_idx back to -1 to extract the exact list 
+     *     of ticket IDs in O(depth) time with zero vector copying in the queue!
+     */
     int node_pool_idx;
 
     /**
-     * 4. travel_cost (Accumulated Monetary Cost g(n))
+     * 5. travel_cost (Accumulated Monetary Cost g(n))
      * -----------------------------------------------
      * Total dollars spent on tickets so far.
      * This is the objective function to minimize in Dijkstra.
      */
     int travel_cost;
 
+    int ticket_pos; // Index in ticket.cities (0, 1, 2... 9)
+
     /**
-     * 5. Priority Queue Min-Heap Comparator
+     * 6. Priority Queue Min-Heap Comparator
      * -------------------------------------
      * Inverts '<' using 'travel_cost > other.travel_cost' so that 
      * std::priority_queue pops the CHEAPEST route first.
-     * 
-     * Tie-breaker: If costs are equal, prefer FEWER tickets used!
      */
     bool operator < (const State& other) const {
       return travel_cost > other.travel_cost; // Min-cost first
@@ -99,15 +109,17 @@ struct State
 // Global or per-testcase City ID Mapper
 std::unordered_map<int, int> city_to_id;
 vi id_to_city;
+int global_id;
 
 
 int get_id(int raw_city) {
     auto it = city_to_id.find(raw_city);
     if (it != city_to_id.end()) return it->second;
-    int id = id_to_city.size();
-    city_to_id[raw_city] = id;
+    city_to_id[raw_city] = global_id;
     id_to_city.push_back(raw_city);
-    return id;
+    int old_global_id = global_id;
+    global_id++;
+    return old_global_id;
 }
 
 struct Node
@@ -120,12 +132,12 @@ struct Node
 std::pair<int, std::string> get_min_cost(const std::vector<Ticket>& tickets, Itinerary& itinerary) {
 
   std::priority_queue<State> queue;
-  vvvi cost(4000, vvi(itinerary.cities.size(), vi(tickets.size() + 2, INT32_MAX)));
+  vvvi cost(MAX_CITY_IDX, vvi(itinerary.cities.size(), vi(tickets.size() + 2, INT32_MAX)));
   std::vector<Node> node_pool(200000, {-1, 0}); 
 
   // init
   int nodes_pool_idx = 0;
-  queue.push({itinerary.cities.front(), 0, 0, 0, 0});
+  queue.push({itinerary.cities.front(), 0, 0, 0, 0, 0});
 
   int min_cost = -1;
   std::string tickets_in_trip;
@@ -133,16 +145,17 @@ std::pair<int, std::string> get_min_cost(const std::vector<Ticket>& tickets, Iti
   while(!queue.empty()) {
 
     State state = queue.top(); queue.pop();
-    int curr_city = state.current_city;
-    int curr_city_id = get_id(curr_city);
+    int curr_city_id = state.current_city_id;
     int itinerary_idx = state.itinerary_idx;
     int travel_cost_so_far = state.travel_cost;
-    int last_ticket_id = state.last_ticket;
+    int last_ticket_id = state.last_ticket_id;
+    int curr_ticket_pos = state.ticket_pos;
 
     int curr_node_pool_idx = state.node_pool_idx;
    
-    if(curr_city == itinerary.cities[itinerary_idx]) {
-      itinerary_idx++;
+
+    if(curr_city_id == itinerary.cities[itinerary_idx]) {
+      ++itinerary_idx;
     }
 
     if(itinerary_idx == (int)itinerary.cities.size()) {
@@ -169,25 +182,41 @@ std::pair<int, std::string> get_min_cost(const std::vector<Ticket>& tickets, Iti
       continue;
     }
 
-    // transition logic
+    // ============================================================================
+    // DIJKSTRA TRANSITION LOGIC (The 2-Phase Ticket State Machine)
+    // ============================================================================
     for(const auto& ticket : tickets) {
       int ident = ticket.id;
+      // ------------------------------------------------------------------------
+      // CASE 1: IN-FLIGHT LEG (Continue flying on the currently active ticket)
+      // ------------------------------------------------------------------------
       if(ident == last_ticket_id) { // go on with the current ticket
-        int next_city = find_next_city_on_route(ticket, curr_city);
-        if(!~next_city) continue;
-        int& cost_so_far = cost[get_id(next_city)][itinerary_idx][ident];
-        if(travel_cost_so_far < cost_so_far) {
-          cost_so_far = travel_cost_so_far;
-          State new_state = {next_city, itinerary_idx, last_ticket_id, curr_node_pool_idx, travel_cost_so_far};
-          queue.push(new_state);
+        int next_ticket_pos = curr_ticket_pos + 1;
+        if(next_ticket_pos < (int)ticket.cities.size()) {
+          int next_city_id = ticket.cities[next_ticket_pos];
+          // Flying an intermediate leg on an already-purchased ticket costs $0!
+          int& cost_so_far = cost[next_city_id][itinerary_idx][ident];
+          if(travel_cost_so_far < cost_so_far) {
+            cost_so_far = travel_cost_so_far;
+            // Notice: curr_node_pool_idx is unchanged because we are still using 
+            // the SAME ticket (we only add a new node to the pool upon purchase!)
+            State new_state = {next_city_id, itinerary_idx, last_ticket_id, curr_node_pool_idx, travel_cost_so_far, next_ticket_pos};
+            queue.push(new_state);
+          }
         }
+      // ------------------------------------------------------------------------
+      // CASE 2: NEW TICKET PURCHASE (Drop previous ticket, buy & board a new one)
+      // ------------------------------------------------------------------------
       } else { // drop the current ticket and start from another
-        if(is_the_first_city_on_route(ticket, curr_city)) {
+        // Airline Rule: You can ONLY buy a ticket if you are physically 
+        // standing at its first departure city (ticket.cities.front())!
+        if(ticket.cities.front() == curr_city_id) {
           int new_travel_cost = ticket.cost + travel_cost_so_far;
           int& cost_so_far = cost[curr_city_id][itinerary_idx][ident];
+          // Relax edge in Dijkstra:
           if(new_travel_cost < cost_so_far) {
             cost_so_far = new_travel_cost;
-            State new_state = {curr_city, itinerary_idx, ident, ++nodes_pool_idx, new_travel_cost};
+            State new_state = {curr_city_id, itinerary_idx, ident, ++nodes_pool_idx, new_travel_cost, 0};
             queue.push(new_state);
             node_pool[nodes_pool_idx] = {curr_node_pool_idx, ident};
           }
@@ -223,6 +252,7 @@ namespace algorithms::onlinejudge::advanced_topics::low_cost_air_travel
           // Reset ID mapper for the new test case
           city_to_id.clear();
           id_to_city.clear();
+          global_id = 0;
 
           std::vector<Ticket> tickets(N);
           for(int i = 0; i < N; ++i) {

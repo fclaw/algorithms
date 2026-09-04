@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import random
 
-def generate_valid_ticket(city_pool, min_len=2, max_len=6):
+def generate_valid_ticket(city_pool, min_len=2, max_len=10):
     """Generates a ticket with random price and distinct adjacent cities."""
     length = random.randint(min_len, max_len)
     price = random.randint(30, 300) * 5  # Realistic prices like 150, 240, 450
@@ -17,8 +17,8 @@ def generate_valid_ticket(city_pool, min_len=2, max_len=6):
 def generate_connected_case():
     """Generates a fully connected set of tickets and solvable itineraries."""
     # 1. Pick a pool of realistic arbitrary city IDs
-    all_possible_cities = [1, 2, 3, 5, 8, 10, 15, 20, 42, 100, 250, 500, 1000]
-    num_cities = random.randint(5, 8)
+    all_possible_cities = [1, 2, 3, 5, 8, 10, 15, 20, 42, 100, 250, 500, 1000, 1500, 2000, 3000, 4000, 5000]
+    num_cities = random.randint(5, 10)
     city_pool = random.sample(all_possible_cities, num_cities)
     
     tickets = []
@@ -34,16 +34,16 @@ def generate_connected_case():
     # 3. Add random multi-leg shortcut tickets (up to NT <= 15)
     extra_tickets_count = random.randint(3, 8)
     for _ in range(extra_tickets_count):
-        tickets.append(generate_valid_ticket(city_pool, min_len=2, max_len=5))
+        tickets.append(generate_valid_ticket(city_pool, min_len=2, max_len=10))
         
     random.shuffle(tickets)
     NT = len(tickets)
     
     # 4. Generate random itineraries from the city pool
-    NI = random.randint(2, 4)
+    NI = random.randint(2, 10)
     itineraries = []
     for _ in range(NI):
-        k = random.randint(2, 5)
+        k = random.randint(2, 10)
         itin = [random.choice(city_pool)]
         while len(itin) < k:
             nxt = random.choice(city_pool)
@@ -54,7 +54,7 @@ def generate_connected_case():
     return NT, tickets, NI, itineraries
 
 def main():
-    NUM_CASES = 5  # Number of test cases to generate
+    NUM_CASES = 1  # Number of test cases to generate
     
     for _ in range(NUM_CASES):
         NT, tickets, NI, itineraries = generate_connected_case()

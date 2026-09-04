@@ -2,6 +2,50 @@
 ───────────────────────────────────────────────────────────────
 🧳 UVa 1048 Low Cost Air Travel, https://onlinejudge.org/external/10/1048.pdf, rt: s
 ───────────────────────────────────────────────────────────────
+ * ============================================================================
+ * 🧠 CRITICAL DIJKSTRA INSIGHT: Non-Strict Inequality (<=) on Zero-Cost Legs
+ * ============================================================================
+ * 
+ * 1. THE REPEATED-CITY PHENOMENON (Zero-Weight Plateaus):
+ * ------------------------------------------------------
+ * Airline ticket routes frequently revisit the same hub city:
+ *     Example: Ticket #k = [8, 3, 15, 100, 4000, 100, 4000, 3, 15]
+ *                                         ▲          ▲
+ *                                       1st Visit   2nd Visit
+ * 
+ * In our model, the entire ticket price is paid UPFRONT upon purchase. 
+ * Therefore, all subsequent intermediate in-flight legs cost exactly $0!
+ * 
+ * 2. WHY STRICT '<' FAILS (The Pruning Trap):
+ * -------------------------------------------
+ * • Arriving at City 4000 the 1st time: Cost is C.
+ *   Table records: cost[4000][itin][ident] = C.
+ * 
+ * • Arriving at City 4000 the 2nd time: Cost is still C (C + $0 = C).
+ *   If we use strict inequality `if (travel_cost < cost_so_far)`:
+ *       C < C  ===>  EVALUATES TO FALSE!
+ * 
+ *   Dijkstra prematurely PRUNES and KILLS the in-flight trajectory!
+ *   The plane is stranded, preventing it from ever reaching the remaining 
+ *   cities on the ticket (-> 3 -> 15), causing a false Wrong Answer!
+ * 
+ * 3. WHY NON-STRICT '<=' IS 100% SAFE (Monotonic Progress):
+ * ---------------------------------------------------------
+ * In standard graphs, using `<=` with zero-cost edges can cause infinite loops. 
+ * HOWEVER, here it is mathematically guaranteed NOT to loop because:
+ *     next_ticket_pos = curr_ticket_pos + 1
+ * 
+ * The ticket position advances STRICTLY MONOTONICALLY from 0 to M-1 (M <= 10). 
+ * When position reaches the end of the ticket, it terminates. 
+ * Thus, `<=` safely allows the plane to fly through repeated cities at the 
+ * exact same accumulated cost without infinite cycling!
+ * 
+ * 4. CONSECUTIVE SAME-TICKET RE-PURCHASE (The '1 1 1' Rule):
+ * ---------------------------------------------------------
+ * If `next_city_id == ticket.cities.front()`, the traveler can legally discard 
+ * the current ticket and IMMEDIATELY purchase a brand-new copy of the SAME 
+ * ticket offer, resetting to leg 0. This enables sequences like '1 1 1'.
+ * ============================================================================
 */
 
 #include "../debug.h"
@@ -137,7 +181,7 @@ std::pair<int, std::string> get_min_cost(const std::vector<Ticket>& tickets, Iti
 
   // init
   int nodes_pool_idx = 0;
-  queue.push({itinerary.cities.front(), 0, 0, 0, 0, 0});
+  queue.push({itinerary.cities.front(), 0, -1, 0, 0, 0});
 
   int min_cost = -1;
   std::string tickets_in_trip;
@@ -154,7 +198,6 @@ std::pair<int, std::string> get_min_cost(const std::vector<Ticket>& tickets, Iti
     int curr_node_pool_idx = state.node_pool_idx;
  
     assert((curr_node_pool_idx < MAX_NODE_IDX) && "Exceeded node pool size. Increase MAX_NODE_IDX.");
-
 
     if(curr_city_id == itinerary.cities[itinerary_idx]) {
       ++itinerary_idx;
@@ -198,12 +241,41 @@ std::pair<int, std::string> get_min_cost(const std::vector<Ticket>& tickets, Iti
           int next_city_id = ticket.cities[next_ticket_pos];
           // Flying an intermediate leg on an already-purchased ticket costs $0!
           int& cost_so_far = cost[next_city_id][itinerary_idx][ident];
-          if(travel_cost_so_far < cost_so_far) {
+          if(travel_cost_so_far <= cost_so_far) {
             cost_so_far = travel_cost_so_far;
             // Notice: curr_node_pool_idx is unchanged because we are still using 
             // the SAME ticket (we only add a new node to the pool upon purchase!)
             State new_state = {next_city_id, itinerary_idx, last_ticket_id, curr_node_pool_idx, travel_cost_so_far, next_ticket_pos};
             queue.push(new_state);
+          }
+
+          // ==================================================================
+          // 🔁 CONSECUTIVE SAME-TICKET RE-PURCHASE (The "1 1 1" Scenario)
+          // ==================================================================
+          // The outer 'else' branch only allows purchasing a ticket if 
+          // `ident != last_ticket_id`. This creates a critical blind spot: 
+          // it completely blocks buying the SAME ticket offer twice in a row!
+          //
+          // By checking `ticket.cities.front() == next_city_id`:
+          // If the plane lands at a city that also happens to be the DEPARTURE 
+          // airport of this exact same ticket, the traveler has a legal choice:
+          //   1. Throw away the current ticket.
+          //   2. Immediately buy a BRAND-NEW copy of this exact same ticket.
+          //   3. Reset to leg 0 (ticket_pos = 0) to start flying it again!
+          //
+          // This allows valid repeated sequences like: 'Tickets used: 1 1 1'.
+          // ==================================================================
+          if(ticket.cities.front() == next_city_id) {
+            // If the next city is the first city of the ticket, we can also consider 
+            // dropping this ticket and buying it again (resetting to the first leg).
+            int& cost_so_far = cost[next_city_id][itinerary_idx][ident];
+            if(travel_cost_so_far <= cost_so_far) {
+              int new_travel_cost = ticket.cost + travel_cost_so_far;
+              cost_so_far = new_travel_cost;
+              State new_state = {next_city_id, itinerary_idx, last_ticket_id, ++nodes_pool_idx, new_travel_cost, 0};
+              queue.push(new_state);
+              node_pool[nodes_pool_idx] = {curr_node_pool_idx, ident};
+            }
           }
         }
       // ------------------------------------------------------------------------

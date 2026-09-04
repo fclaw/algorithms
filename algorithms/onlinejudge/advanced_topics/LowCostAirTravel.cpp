@@ -7,7 +7,7 @@
 #include "../debug.h"
 #include "../../aux.h"
 #include <bits/stdc++.h>
-
+#include <cassert>
 
 
 using vi = std::vector<int>;
@@ -16,6 +16,7 @@ using vvvi = std::vector<vvi>;
 
 
 constexpr int MAX_CITY_IDX = 200;
+constexpr int MAX_NODE_IDX = 1000; // Maximum number of nodes in the backtracking tree (ticket purchase history)
 
 
 struct Ticket
@@ -28,8 +29,8 @@ struct Ticket
 
 struct Itinerary
 {
-    int id;
-    vi cities;
+    int id; // Itinerary ID (1-based: 1, 2, ..., I) required for output!
+    vi cities; // Ordered sequence of airports to visit: e.g. {1, 3, 4}
 };
 
 
@@ -109,31 +110,30 @@ struct State
 // Global or per-testcase City ID Mapper
 std::unordered_map<int, int> city_to_id;
 vi id_to_city;
-int global_id;
+int unique_city_counter;
 
 
 int get_id(int raw_city) {
     auto it = city_to_id.find(raw_city);
     if (it != city_to_id.end()) return it->second;
-    city_to_id[raw_city] = global_id;
+    city_to_id[raw_city] = unique_city_counter++;
     id_to_city.push_back(raw_city);
-    int old_global_id = global_id;
-    global_id++;
-    return old_global_id;
+    return city_to_id.at(raw_city);
 }
 
+// Node structure for the backtracking tree
 struct Node
 {
-    int parent_idx;
-    int last_ticket;
+    int parent_idx; // Index of the parent node in the node_pool (or -1 for root)
+    int last_ticket; // The ticket ID used to reach this node from its parent
 };
 
-
+// Function to find the minimum cost itinerary
 std::pair<int, std::string> get_min_cost(const std::vector<Ticket>& tickets, Itinerary& itinerary) {
 
   std::priority_queue<State> queue;
   vvvi cost(MAX_CITY_IDX, vvi(itinerary.cities.size(), vi(tickets.size() + 2, INT32_MAX)));
-  std::vector<Node> node_pool(200000, {-1, 0}); 
+  std::vector<Node> node_pool(MAX_NODE_IDX, {-1, 0}); 
 
   // init
   int nodes_pool_idx = 0;
@@ -152,13 +152,16 @@ std::pair<int, std::string> get_min_cost(const std::vector<Ticket>& tickets, Iti
     int curr_ticket_pos = state.ticket_pos;
 
     int curr_node_pool_idx = state.node_pool_idx;
-   
+ 
+    assert((curr_node_pool_idx < MAX_NODE_IDX) && "Exceeded node pool size. Increase MAX_NODE_IDX.");
+
 
     if(curr_city_id == itinerary.cities[itinerary_idx]) {
       ++itinerary_idx;
     }
 
     if(itinerary_idx == (int)itinerary.cities.size()) {
+      min_cost = travel_cost_so_far;
       // ==========================================
       // Backtrack Tree to Reconstruct Path (O(depth))
       // ==========================================
@@ -171,13 +174,12 @@ std::pair<int, std::string> get_min_cost(const std::vector<Ticket>& tickets, Iti
 
       std::reverse(path.begin(), path.end());
       for(int t : path) {
-        tickets_in_trip += std::to_string(t) + " ";
+        tickets_in_trip += " " + std::to_string(t);
       }
-      tickets_in_trip.pop_back();
-      min_cost = travel_cost_so_far;
       break;
     }
 
+    // Prune states that are already worse than the best known cost to reach this city and itinerary index with the same last ticket
     if(travel_cost_so_far > cost[curr_city_id][itinerary_idx][last_ticket_id]) {
       continue;
     }
@@ -252,7 +254,7 @@ namespace algorithms::onlinejudge::advanced_topics::low_cost_air_travel
           // Reset ID mapper for the new test case
           city_to_id.clear();
           id_to_city.clear();
-          global_id = 0;
+          unique_city_counter = 0;
 
           std::vector<Ticket> tickets(N);
           for(int i = 0; i < N; ++i) {
@@ -284,7 +286,7 @@ namespace algorithms::onlinejudge::advanced_topics::low_cost_air_travel
           t_case++;
           for(auto itinerary : itineraries) {
             std::pair<int, std::string> ans = get_min_cost(tickets, itinerary);
-            printf("Case %d, Trip %d: Cost = %d\n  Tickets used: %s\n", t_case, itinerary.id, ans.first, ans.second.c_str());
+            printf("Case %d, Trip %d: Cost = %d\n  Tickets used:%s\n", t_case, itinerary.id, ans.first, ans.second.c_str());
           }
         }
     }

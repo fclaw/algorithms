@@ -14,43 +14,23 @@ using vi = std::vector<int>;
 using vvi = std::vector<vi>;
 
 constexpr int INF = (int)1e9; // Represents "infinity" for unreachable nodes
+constexpr int MAX_NODES = 105; // Maximum number of nodes in the graph
 
-
-struct State
-{
-    int current_node; // Current node in the graph
-    int min_edges; // Minimum number of edges traversed to reach this node
-
-    vi nodes; // Sequence of nodes traversed to reach this node (for path reconstruction)
-
-    /**
-     * Inverts '<' using 'min_edges > other.min_edges' so that 
-     * std::priority_queue pops the SHORTEST path first.
-     */  
-    bool operator < (const State& other) const {
-
-      if(min_edges == other.min_edges) {
-        return nodes.size() > other.nodes.size(); // If equal, prefer the one with fewer nodes
-      }
-      return min_edges > other.min_edges; // Min-edges first
-
-    }
-};
 
 int get_min_unique_nodes(const vvi& paths_to_dest, const vvi& paths_to_src) {
-    int min_unique_count = 1e9;
+    int min_unique_count = INF;
 
     // 1. Pre-convert paths to bitsets (O(P * length)):
-    std::vector<std::bitset<105>> masks_dest;
+    std::vector<std::bitset<MAX_NODES>> masks_dest;
     for (const auto& p : paths_to_dest) {
-        std::bitset<105> b;
+        std::bitset<MAX_NODES> b;
         for (int node : p) b.set(node);
         masks_dest.push_back(b);
     }
 
-    std::vector<std::bitset<105>> masks_src;
+    std::vector<std::bitset<MAX_NODES>> masks_src;
     for (const auto& p : paths_to_src) {
-        std::bitset<105> b;
+        std::bitset<MAX_NODES> b;
         for (int node : p) b.set(node);
         masks_src.push_back(b);
     }
@@ -102,7 +82,7 @@ int get_min_unique_nodes(const vvi& paths_to_dest, const vvi& paths_to_src) {
  *   • Every path that reaches the base case is guaranteed to be of minimal length.
  * ============================================================================
  */
-void all_shortest_path_from_source_to_dest(int u, int v, const vvi& graph, const vvi& apsp, std::vector<vi>& all_paths, vi& current_path) {
+void shortest_path_from_source_to_dest(int u, int v, const vvi& graph, const vvi& apsp, vvi& all_paths, vi& current_path) {
 
   if(apsp[u][v] == 0) { // Base case: reached destination
     all_paths.push_back(current_path);
@@ -112,7 +92,7 @@ void all_shortest_path_from_source_to_dest(int u, int v, const vvi& graph, const
   for(int w : graph[u]) { // Explore neighbors of u
     if(apsp[u][v] == 1 + apsp[w][v]) { // Check if w is on a shortest path to v
       current_path.push_back(w);
-      all_shortest_path_from_source_to_dest(w, v, graph, apsp, all_paths, current_path);
+      shortest_path_from_source_to_dest(w, v, graph, apsp, all_paths, current_path);
       current_path.pop_back(); // Backtrack
     }
   }
@@ -126,12 +106,12 @@ std::string get_min_unique_nodes(const vvi& graph) {
 
   // Initialize distances and next nodes
   for(int u = 0; u < N; ++u) {
-    apsp[u][u] = 0;
     for(int v = 0; v < N; ++v) {
       if(std::find(graph[u].begin(), graph[u].end(), v) != graph[u].end()) { // If there's an edge from u to v
         apsp[u][v] = 1; // Assuming unit edge weights
       }
     }
+    apsp[u][u] = 0;
   }
 
   // Floyd-Warshall algorithm
@@ -143,76 +123,24 @@ std::string get_min_unique_nodes(const vvi& graph) {
     }
   }
   
-
-  int source = 0; // Starting node (0-based)
-  int destination = 1; // Destination node (0-based)
-  vi nodes_to_destination;
-
-  std::priority_queue<State> queue_forward;
-  // init 
-  queue_forward.push({source, 0, {source}});
-  while(!queue_forward.empty()) {
-    State state = queue_forward.top(); queue_forward.pop();
-    int curr_node = state.current_node;
-    int min_edges_so_far = state.min_edges;
-    vi& path_so_far = state.nodes;
-
-    if(curr_node == destination) {
-      nodes_to_destination = path_so_far; // Store the first shortest path found
-      break; // We only need one shortest path for the forward trip
-    }
-
-    for(int next_node = 0; next_node < N; ++next_node) {
-      if(min_edges_so_far + 1 <= apsp[curr_node][next_node]) { // Only consider edges that are on a shortest path
-        path_so_far.push_back(next_node);
-        queue_forward.push({next_node, min_edges_so_far + 1, path_so_far});
-        path_so_far.pop_back(); // Backtrack
-      }
-    }
-  }
+  int source = 0; // Node 1 in 1-based indexing
+  int destination = 1; // Node 2 in 1-based indexing
 
   vvi all_paths_to_destination;
-  for(int i = 0; i < (int)nodes_to_destination.size() - 1; ++i) {
-    vi current_path = {nodes_to_destination[i]};
-    int dest = nodes_to_destination[i + 1];
-    all_shortest_path_from_source_to_dest(source, dest, graph, apsp, all_paths_to_destination, current_path);
+  for(int v : graph[source]) { // Explore neighbors of source
+    vi current_path = {source, v}; // Start from source and include neighbor v
+    shortest_path_from_source_to_dest(v, destination, graph, apsp, all_paths_to_destination, current_path);
   }
-
-  vi nodes_to_source;
-  std::priority_queue<State> queue_backward;
-  // init
-  queue_backward.push({destination, 0, {destination}});
-  while(!queue_backward.empty()) {
-    State state = queue_backward.top(); queue_backward.pop();
-    int curr_node = state.current_node;
-    int min_edges_so_far = state.min_edges;
-    vi& path_so_far = state.nodes;
-
-    if(curr_node == source) {
-      // Found a shortest path back to the source
-      nodes_to_source = path_so_far; // Store the first shortest path found
-      break; // We only need one shortest path for the return trip
-    }
-
-    for(int next_node = 0; next_node < N; ++next_node) {
-      if(min_edges_so_far + 1 <= apsp[curr_node][next_node]) { // Only consider edges that are on a shortest path
-        path_so_far.push_back(next_node);
-        queue_backward.push({next_node, min_edges_so_far + 1, path_so_far});
-        path_so_far.pop_back(); // Backtrack
-      }
-    }
-  } 
 
   vvi all_paths_to_source;
-  for(int i = 0; i < (int)nodes_to_source.size() - 1; ++i) {
-    vi current_path = {nodes_to_source[i]};
-    int dest = nodes_to_source[i + 1];
-    all_shortest_path_from_source_to_dest(destination, dest, graph, apsp, all_paths_to_source, current_path);
+  for(int v : graph[destination]) { // Explore neighbors of destination
+    vi current_path = {destination, v}; // Start from destination and include neighbor v
+    shortest_path_from_source_to_dest(v, source, graph, apsp, all_paths_to_source, current_path);
   }
 
-  if(all_paths_to_destination.empty() || 
+  if(all_paths_to_destination.empty() ||
      all_paths_to_source.empty()) {
-    return "IMPOSSIBLE";
+    return "Impossible";
   }
 
   return "Minimum number of nodes = " + std::to_string(get_min_unique_nodes(all_paths_to_destination, all_paths_to_source));
@@ -238,20 +166,16 @@ namespace algorithms::onlinejudge::advanced_topics::routing
         }
 
         int N, E, t_case = 0;
-        bool is_first = true;
-        while(std::cin >> N >> E && N && E) {
-          
-          if(!is_first) std::cout << "\n";
-          is_first = false;
+        while(std::cin >> N >> E && N) {
 
-          std::vector<vi> graph(N); // Initialize graph with empty vectors
+          vvi graph(N); // Initialize graph with empty vectors
           for(int e = 0; e < E; ++e) {
             int u, v;
             std::cin >> u >> v;
             --u; --v; // Convert to 0-based indexing
             graph[u].push_back(v); // directed edge from u to v with cost 1
           }
-          printf("Network %d\n%s\n", ++t_case, get_min_unique_nodes(graph).c_str());
+          printf("Network %d\n%s\n\n", ++t_case, get_min_unique_nodes(graph).c_str());
         }
     }
 }

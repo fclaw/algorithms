@@ -60,12 +60,10 @@ struct State
     /**
      * 4. Priority Queue Min-Heap Comparator
      * -------------------------------------
-     * 1. Primary Goal   : FEWER days popped first.
-     * 2. Tie-Breaker    : If days are equal, MORE remaining stamina popped first!
-     *                     (Having more stamina left on the same day is strictly better).
+     *  Primary Goal   : FEWER days popped first.
      */
     bool operator < (const State& other) const {
-        return days > other.days; // Min-Heap on days
+      return days > other.days; // Min-Heap on days
     }
 };
 
@@ -107,9 +105,29 @@ int find_min_days(const std::vector<std::vector<Terrain>>& treasure_map, int ROW
         if(new_row < 0 || new_row >= ROW || new_col < 0 || new_col >= COL) continue;
     
         Terrain terrain_cost = treasure_map[new_row][new_col];
-        if(terrain_cost == RIVER || 
-           STAMINA < terrain_cost) {
-          continue; // Skip impassable terrain
+
+        // ====================================================================
+        // 🛡️ UNIFIED IMPASSABILITY CHECK (Prevents Crashes & Negative Stamina)
+        // ====================================================================
+        // By defining `RIVER = INF` (e.g., 1e9), this single elegant condition 
+        // completely eliminates the need for a separate `terrain == RIVER` check:
+        //
+        // 1. Natural Obstacles (Rivers):
+        //    Since STAMINA (K <= 100) is always strictly less than INF (1e9), 
+        //    `STAMINA < RIVER` is ALWAYS true! Rivers are automatically blocked.
+        //
+        // 2. Insufficient Daily Stamina (e.g., Mountain when K <= 2):
+        //    If entering the terrain requires more stamina than an entire day's 
+        //    replenished budget (K < terrain_cost), the hunter can NEVER cross 
+        //    this cell, even after camping a full night.
+        //
+        // 3. SIGABRT / Crash Prevention:
+        //    Guaranteeing `STAMINA >= terrain_cost` ensures that subsequent 
+        //    camping math `next_stamina = STAMINA - terrain_cost` is STRICTLY >= 0,
+        //    completely preventing out-of-bounds negative array indices (e.g. dist[r][c][-1]).
+        // ====================================================================
+        if (STAMINA < terrain_cost) {
+          continue; // Physically impassable!
         }
     
         int new_stamina_left = stamina_left;
@@ -121,7 +139,7 @@ int find_min_days(const std::vector<std::vector<Terrain>>& treasure_map, int ROW
         // CASE B: Not enough stamina today -> Must CAMP overnight and move TOMORROW:
         else {
           new_days_so_far++; // Starts a new day!
-          new_stamina_left = STAMINA - terrain_cost;      // Stamina was replenished to K, then spent C
+          new_stamina_left = STAMINA - terrain_cost;      // Stamina was replenished to STAMINA, then spent terrain_cost
         }
         
         // Only proceed if this path offers more remaining stamina than previously recorded

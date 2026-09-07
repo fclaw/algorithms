@@ -143,8 +143,9 @@ int find_min_days(const std::vector<std::vector<Terrain>>& treasure_map, int ROW
         }
         
         // Only proceed if this path offers more remaining stamina than previously recorded
-        if(new_days_so_far < day[new_row][new_col][new_stamina_left]) {
-          day[new_row][new_col][new_stamina_left] = new_days_so_far;
+        int& new_days_tbl = day[new_row][new_col][new_stamina_left];
+        if(new_days_so_far < new_days_tbl) {
+          new_days_tbl = new_days_so_far;
           queue.push({{new_row, new_col}, new_stamina_left, new_days_so_far});
         }
       }

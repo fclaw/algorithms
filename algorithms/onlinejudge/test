@@ -1,39 +1,26 @@
 5
-2
-City1 OS/2 10
-City2 Mac 20
-2
-City3 Mac 30
-City4 OS/2 40
-3
-N1 OS/2 50
-N2 OS/2 20
-N3 OS/2 30
-3
-S1 OS/2 50
-S2 OS/2 30
-S3 Linux 20
-2
-North1 Mac 100
-North2 Windows 200
-2
-South1 Linux 50
-South2 OS/2 70
-3
-A Mac 10
-B Linux 20
-C OS/2 30
-3
-D Mac 5
-E Linux 15
-F OS/2 25
-4
-N_A Linux 10
-N_B Mac 20
-N_C Linux 30
-N_D Mac 40
-4
-S_A Mac 15
-S_B Linux 25
-S_C Mac 35
-S_D Linux 45
+
+4 5 12
+3 5 8 12
+100 50 200 150
+3 4 2 5
+
+2 10 10
+2 10
+100 50
+5 2
+
+2 10 10
+5 6
+100 200
+1 8
+
+3 5 10
+4 4 8
+100 200 50
+2 2 3
+
+2 10 5
+1 2
+50 70
+5 6

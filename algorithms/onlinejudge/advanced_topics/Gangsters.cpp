@@ -2,6 +2,31 @@
 ───────────────────────────────────────────────────────────────
 🧳 UVa 672 Gangsters, https://onlinejudge.org/external/6/672.pdf, rt: s
 ───────────────────────────────────────────────────────────────
+ * ============================================================================
+ * 🧠 ARCHITECTURAL INSIGHT: The Reachability Cone & The "Unused T" Paradox
+ * ============================================================================
+ * 
+ * 1. THE REACHABILITY CONE (Your Notepad Derivation):
+ * ---------------------------------------------------
+ * In Δt = (T_next - T_curr) seconds, the door speed limit is 1 unit/second.
+ * Starting from openness S_curr, the door can physically reach any width in:
+ * 
+ *     min_openness = max(0, S_curr - Δt)
+ *     max_openness = min(K, S_curr + Δt)
+ * 
+ * A future gangster with stoutness S_next is reachable IF AND ONLY IF:
+ *     S_next ∈ [min_openness, max_openness]  <===>  |S_next - S_curr| <= Δt
+ * 
+ * 2. WHY PARAMETER 'T' (Closing Time) IS COMPLETELY REDUNDANT:
+ * ------------------------------------------------------------
+ * • By problem definition, all gangsters arrive before closing time (T_i <= T).
+ * • There is NO requirement to return the door to state 0 when the restaurant closes.
+ * • Once the last admitted gangster walks in, all profit has been gathered. 
+ *   Anything that happens between the last gangster's arrival and T is irrelevant!
+ * 
+ * • Parameter T exists only for the naive O(T * K) second-by-second DP table.
+ *   In our optimal O(N^2) event-based jump model, T is safely discarded!
+ * ============================================================================
 */
 
 #include "../debug.h"
@@ -88,37 +113,39 @@ std::pair<int, int> get_accumulated_prosperity(int i, int curr_openness, const s
 }
 
 
-int get_max_total_prosperity(int i, int time_so_far, int curr_openness, const std::vector<Gangster>& mobsters, vvvi& cache) {
+int get_max_total_prosperity(int i, int curr_openness, const std::vector<Gangster>& mobsters, vvi& cache) {
 
+  // 1. BASE CASE: All gangsters have been processed
   if(i == (int)mobsters.size()) {
-    return (cache[i][curr_openness][time_so_far] = 0);
+    return (cache[i][curr_openness] = 0);
   } 
 
-  if(~cache[i][curr_openness][time_so_far]) {
-    return cache[i][curr_openness][time_so_far];
+  // 2. MEMOIZATION CHECK: Using the ~ bitwise trick (~(-1) == 0)
+  if(~cache[i][curr_openness]) {
+    return cache[i][curr_openness];
   }
 
-  int curr_prosperity = 0;
-  int next_i = i;
-  if(mobsters[i].arrival_time == time_so_far) {
-    auto res = get_accumulated_prosperity(i, curr_openness, mobsters);
-    curr_prosperity = res.second;
-    next_i = res.first;
-  }
-
+  // 3. PHYSICAL REACHABILITY CONE:
+  // Calculate time elapsed since the previous event (T[i] - T[i - 1]).
+  // Note: For i = 1, mobsters[0] is our dummy mobster (T=0, S=0).
+  int t_diff = mobsters[i].arrival_time - mobsters[i - 1].arrival_time;
+  // In t_diff seconds, the door speed limit is 1 unit/second.
+  // The door can physically reach any openness in [min_openness, max_openness]:
+  int min_openness = std::max(0, curr_openness - t_diff);
+  int max_openness = std::min(K, curr_openness + t_diff);
   int best = 0;
-  if(time_so_far <= T) {
-    best = std::max(best, curr_prosperity + get_max_total_prosperity(next_i, time_so_far + 1, curr_openness, mobsters, cache));
-    if(curr_openness >= 1) {
-      best = std::max(best, curr_prosperity + get_max_total_prosperity(next_i, time_so_far + 1, curr_openness - 1, mobsters, cache));
-    }
-    if(curr_openness <= K) {
-       best = std::max(best, curr_prosperity + get_max_total_prosperity(next_i, time_so_far + 1, curr_openness + 1, mobsters, cache));
-    }
+  // 4. TRANSITIONS: Try setting the door to every physically achievable width 'o'
+  for(int o = min_openness; o <= max_openness; ++o) {
+    // Collect all gangsters arriving at T[i] whose stoutness matches 'o'
+    // (Simultaneously handles multiple gangsters arriving at the same timestamp!)
+    //   - res.second: Total prosperity of all gangsters admitted at width 'o'
+    //   - res.first : Index of the first gangster arriving at a future timestamp
+    auto res = get_accumulated_prosperity(i, o, mobsters);
+    int curr_prosperity = res.second;
+    int next_i = res.first;
+    best = std::max(best, curr_prosperity + get_max_total_prosperity(next_i, o, mobsters, cache));
   }
-
-  return (cache[i][curr_openness][time_so_far] = best);
-
+  return (cache[i][curr_openness] = best);
 }
 
 
@@ -141,7 +168,12 @@ namespace algorithms::onlinejudge::advanced_topics::gangsters
 
         int t_cases, N;
         std::cin >> t_cases;
+        bool is_first = true;
         while(t_cases--) {
+
+          if(!is_first) std::cout << "\n";
+          is_first = false;
+
           std::cin >> N >> K >> T;
           std::vector<Gangster> mobsters(N);
           for(int p = 0; p < 3; ++p) {
@@ -156,8 +188,9 @@ namespace algorithms::onlinejudge::advanced_topics::gangsters
             }
           }
           std::sort(mobsters.begin(), mobsters.end());
-          vvvi cache(N + 1, vvi(K + 10, vi(T + 10, -1)));
-          printf("%d\n\n", get_max_total_prosperity(0, 0, 0, mobsters, cache));
+          mobsters.insert(mobsters.begin(), {0, 0, 0}); // dummy mobster
+          vvi cache(N + 2, vi(K + 1, -1));
+          printf("%d\n", get_max_total_prosperity(1, 0, mobsters, cache));
         }
     }
 }

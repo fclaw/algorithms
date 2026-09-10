@@ -73,21 +73,6 @@ struct State
       }
       return cost > o.cost; // Lower cost is better!
     }
-
-   /**
-     * Overloaded Stream Output (std::cout / std::cerr << state)
-     * Format: [Benefit: 22.5, Cost: $18, Dishes: 1 2 1 3]
-     */
-    friend std::ostream& operator<<(std::ostream& os, const State& s) {
-        os << std::fixed << std::setprecision(1);
-        os << "[Benefit: " << s.benefit << ", Cost: $" << s.cost << ", Dishes: ";
-        for (size_t i = 0; i < s.dishes.size(); ++i) {
-            os << s.dishes[i] << (i + 1 < s.dishes.size() ? " " : "");
-        }
-        os << "]";
-        return os;
-    }
-
 };
 
 State def = {0.0, 0, {}};

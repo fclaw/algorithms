@@ -13,13 +13,6 @@
 using vi = std::vector<int>;
 
 
-
-#include <vector>
-#include <algorithm>
-
-using vi = std::vector<int>;
-
-
 // 22 elements (Index 0..21)
 // Index 1 = 1.0, Index 2 = 0.5, Index 3..21 = 0.0
 constexpr double BENEFIT_FACTOR[22] = {

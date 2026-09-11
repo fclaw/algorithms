@@ -73,7 +73,7 @@ void undo_right_move(int pos, int& pebbles) {
  * (All remaining pebbles are completely isolated / solitary).
  */
 bool are_all_pebbles_solitaire(int pebbles) {
-    for (int pos = 0; pos < 12; ++pos) {
+    for (int pos = 0; pos < SIZE; ++pos) {
         if (can_left_move(pos, pebbles) || can_right_move(pos, pebbles)) {
             return false; // A move is still possible!
         }

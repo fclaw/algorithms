@@ -14,6 +14,10 @@ using vi = std::vector<int>;
 using vvi = std::vector<vi>;
 
 
+constexpr int INF = (int)1e9;
+
+
+
 
 // Represents the result of mixing chemical i and chemical j
 struct Reaction {
@@ -46,7 +50,7 @@ int dp(const vi& tubes, const ReactionTable& table, std::map<vi, int>& cache) {
   if(alive_tubes.size() == 2) {
     int f = alive_tubes.front();
     int s = alive_tubes.back();
-    return cache[tubes] = std::min(table[f][s].heat, table[s][f].heat);
+    return cache[tubes] = std::min(table[f][s].heat, table[s][f].heat);  // ✅ Tests BOTH!
   }
  
 
@@ -54,7 +58,7 @@ int dp(const vi& tubes, const ReactionTable& table, std::map<vi, int>& cache) {
     return it->second;
   }
 
-  int min_heat = (int)1e9;
+  int min_heat = INF;
   for(int i = 0; i < (int)tubes.size(); ++i) {
     for(int j = 0; j < (int)tubes.size(); ++j) {
       int ci = tubes[i];
@@ -93,7 +97,6 @@ int dp(const vi& tubes, const ReactionTable& table, std::map<vi, int>& cache) {
         //    tight DAG.
         // ====================================================================
         std::sort(next_tubes.begin(), next_tubes.end(), std::greater<int>());
-        std::sort(next_tubes.begin(), next_tubes.end(), std::greater<int>());
         min_heat = std::min(min_heat, ij_r.heat + dp(next_tubes, table, cache));
       }
     }
@@ -104,7 +107,6 @@ int dp(const vi& tubes, const ReactionTable& table, std::map<vi, int>& cache) {
 
 int get_min_heat(int chemicals_n, const ReactionTable& table, vi& tubes) {
   std::map<vi, int> cache;
-  std::sort(tubes.begin(), tubes.end());
   return dp(tubes, table, cache);
 }
 

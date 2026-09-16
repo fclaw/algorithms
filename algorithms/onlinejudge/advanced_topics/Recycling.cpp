@@ -34,25 +34,28 @@ int cache[110][110];
 
 int dp(int left, int right, const vi& things) {
 
-  if(left >= right) {
+  if(left > right) {
     return 0;
   }
 
+  if(left == right) {
+    return 1;
+  }
 
   if(~cache[left][right]) {
     return cache[left][right];
   }
 
-  int throw_first = 1 + dp(left + 1, right, things);
+  int best = 1 + dp(left + 1, right, things);
  
-  int throw_bundle = INF;
-  for(int k = left + 1; k < right; ++k) {
+  // int throw_bundle = INF;
+  for(int k = left + 1; k <= right; ++k) {
     if(things[k] == things[left]) {
-      throw_bundle = std::min(throw_bundle, 1 + dp(left + 1, k, things) + dp(k + 1, right, things));
+      best = std::min(best, dp(left + 1, k - 1, things) + dp(k, right, things));
     }
   }
 
-  return (cache[left][right] = std::min(throw_first, throw_bundle));
+  return (cache[left][right] = best);
 }
 
 
@@ -60,7 +63,7 @@ int get_optimal_moves(const vvi& disposable_bundles) {
   int min_moves = 0;
   for(vi bundle : disposable_bundles) {
     std::memset(cache, -1, sizeof cache);
-    min_moves += dp(0, (int)bundle.size(), bundle);
+    min_moves += dp(0, (int)bundle.size() - 1, bundle);
   }
   return min_moves;
 }

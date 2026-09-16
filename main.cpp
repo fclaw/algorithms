@@ -1,7 +1,7 @@
 #define DBG_MACRO_NO_WARNING
 
 // #include "algorithms/kattis/bfs_dijkstra/TreasureHunt.cpp"
-#include "algorithms/onlinejudge/advanced_topics/ComboDeal.cpp"
+#include "algorithms/onlinejudge/advanced_topics/Recycling.cpp"
 #include <chrono>
 #include <iomanip>
 #include <bits/stdc++.h>
@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     long mem_before = get_memory_usage();
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::advanced_topics::combo_deal::submit(file, debug_mode);
+    algorithms::onlinejudge::advanced_topics::recycling::submit(file, debug_mode);
     // algorithms::kattis::graph::flip_five::submit(file, debug_mode);
     // algorithm ends
     auto end = std::chrono::system_clock::now();

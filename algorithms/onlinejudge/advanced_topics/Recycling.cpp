@@ -2,6 +2,65 @@
 ───────────────────────────────────────────────────────────────
 🧳 11523 Recycling, https://onlinejudge.org/external/115/11523.pdf,  rt: s
 ───────────────────────────────────────────────────────────────
+ * ============================================================================
+ * 🧠 INTERVAL DP: The Chain Propagation Mechanism ("Passing the Torch")
+ * ============================================================================
+ * 
+ * 1. THE PROBLEM: Linking Multiple Distant Identical Elements
+ * -----------------------------------------------------------
+ * Consider a sequence with 3 or more separated identical items:
+ *     [A_l] ... (gap 1) ... [A_k] ... (gap 2) ... [A_m]
+ * 
+ * Ideally, we want to clear (gap 1) and (gap 2) so that ALL three 'A's 
+ * collapse into a single contiguous block: [A_l, A_k, A_m], which can then 
+ * be eliminated together in ONE single move (or scored as (c_l + c_k + c_m)^2).
+ * 
+ * 2. THE FATAL TRAP: Premature Termination (The Broken Chain)
+ * ------------------------------------------------------------
+ * A common naive recurrence attempts:
+ *     cost = 1 + dp(l + 1, k - 1) + dp(k + 1, r)
+ *                                   ▲
+ *                                   └── 🚨 THE SEVERED LINK!
+ * 
+ * Why this fails:
+ *   • Adding '+ 1' prematurely declares: "I am throwing away pair (A_l, A_k) 
+ *     right now as a closed, finished move."
+ *   • Jumping to 'k + 1' permanently excludes A_k from the future!
+ *   • A_m (the 3rd item) is now completely isolated in the right subproblem.
+ *   • RESULT: The chain is capped at strictly 2 elements! Triples and 
+ *     quadruples are permanently lost.
+ * 
+ * 3. THE RELAY MECHANISM: "Passing the Torch" via dp(k, r)
+ * -------------------------------------------------------
+ * The correct formulation preserves the chain:
+ * 
+ *     cost = dp(l + 1, k - 1)  +  dp(k, r)
+ *                                 ▲
+ *                                 └── 🔦 THE TORCH IS PASSED!
+ * 
+ * How the chain reaction propagates:
+ *   Step 1: The gap [l + 1 ... k - 1] is completely eradicated as its own 
+ *           subproblem via `dp(l + 1, k - 1)`.
+ *   Step 2: With the middle junk gone, A_l and A_k physically touch!
+ *   Step 3: We do NOT pay +1 move yet. A_l is absorbed into A_k.
+ *   Step 4: In the remaining subproblem [k, r], A_k becomes the NEW LEADER 
+ *           at the front of the interval.
+ *   Step 5: When dp(k, r) evaluates, A_k looks across (gap 2), finds A_m, 
+ *           and absorbs it too!
+ * 
+ * Inductive Propagation:
+ *     A_l  ──(absorb)──►  A_k  ──(absorb)──►  A_m  ──(absorb)──► ... ──► FINALE
+ * 
+ * 4. GENERALIZATION (2D vs 3D):
+ * -----------------------------
+ * • In 2D Flat Cost (UVa 11523 - Recycling, cost = 1 move):
+ *       dp(l + 1, k - 1) + dp(k, r)
+ *   (A_k acts as the positional placeholder; no baggage needed).
+ * 
+ * • In 3D Convex Reward (LeetCode 546 - Remove Boxes, reward = K^2):
+ *       dp(l + 1, k - 1, 0) + dp(k, r, cnt + freq[l])
+ *   (A_k inherits the accumulated physical mass 'cnt + freq[l]' of the snowball!).
+ * ============================================================================
 */
 
 #include "../debug.h"

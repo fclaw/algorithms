@@ -44,17 +44,15 @@ namespace algorithms::onlinejudge::advanced_topics::ktv
 
           int max_score = -1;
           for(int i = 0; i < n; ++i) {
-            for(int j = 0; j < n; ++j) {
-              for(int k = 0; k < n; ++k) {
-                if(i != j && j != k && i != k) {
-                  ii i_group = groups[i];
-                  ii j_group = groups[j];
-                  ii k_group = groups[k];
-                  int all_9_mask = i_group.first | j_group.first | k_group.first;
-                  int total_score = i_group.second + j_group.second + k_group.second;
-                  if(__builtin_popcount(all_9_mask) == 9) {
-                    max_score = std::max(max_score, total_score);
-                  }
+            for(int j = i + 1; j < n; ++j) {
+              for(int k = j + 1; k < n; ++k) {
+                ii i_group = groups[i];
+                ii j_group = groups[j];
+                ii k_group = groups[k];
+                int all_9_mask = i_group.first | j_group.first | k_group.first;
+                int total_score = i_group.second + j_group.second + k_group.second;
+                if(__builtin_popcount(all_9_mask) == 9) {
+                  max_score = std::max(max_score, total_score);
                 }
               }
             }

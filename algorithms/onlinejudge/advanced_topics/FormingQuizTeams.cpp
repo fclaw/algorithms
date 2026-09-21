@@ -64,21 +64,21 @@ double calc_dist(const ii& fst, const ii& snd) {
 
 // Let x1 be the distance between the houses of group 1, x2 be the distance
 // between the houses of group 2 and so on. You have to make sure the summation (x1+x2+x3+. . .+xn) is minimized.
-double get_minimal_summation(int pool, const vvd& dist) {
+double dp(int mask, const vvd& dist) {
 
-  if(pool == 0) {
-    return 0.0;
+  if(mask == 0) {
+    return 0;
   }
 
-  int i_bit = LSOne(pool);
+  int i_bit = LSOne(mask);
   int i = __builtin_ctz(i_bit);
-  pool -= i_bit;
+  mask -= i_bit;
   double best = 1e9;
-  int tmp = pool;
+  int tmp = mask;
   while(tmp) {
     int j_bit = LSOne(tmp);
     int j = __builtin_ctz(j_bit);
-    best = std::min(best, dist[i][j] + get_minimal_summation(pool - j_bit, dist));
+    best = std::min(best, dist[i][j] + dp(mask - j_bit, dist));
     tmp -= j_bit;
   }
 
@@ -119,7 +119,7 @@ namespace algorithms::onlinejudge::advanced_topics::forming_quiz_teams
             }
           }
 
-          std::cout << "Case " << t_case++ << ": " << std::fixed << std::setprecision(2) << get_minimal_summation((1 << 2 * N) - 1, dist) << std::endl;
+          std::cout << "Case " << t_case++ << ": " << std::fixed << std::setprecision(2) << dp((1 << 2 * N) - 1, dist) << std::endl;
         }
     }
 }

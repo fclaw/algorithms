@@ -1,7 +1,7 @@
 #define DBG_MACRO_NO_WARNING
 
 // #include "algorithms/kattis/dp/ProtectingCollection.cpp"
-#include "algorithms/onlinejudge/advanced_topics/FormingQuizTeams.cpp"
+#include "algorithms/onlinejudge/advanced_topics/FreeParentheses.cpp"
 #include <chrono>
 #include <iomanip>
 #include <bits/stdc++.h>
@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
     long mem_before = get_memory_usage();
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::advanced_topics::forming_quiz_teams::submit(file, debug_mode);
+    algorithms::onlinejudge::advanced_topics::free_parentheses::submit(file, debug_mode);
     // algorithms::kattis::dp::protecting_collection::submit(file, debug_mode);
     // algorithm ends
     auto end = std::chrono::system_clock::now();

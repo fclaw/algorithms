@@ -5,40 +5,55 @@
  * ============================================================================
  * ALGORITHM & APPROACH:
  * ============================================================================
- * This problem asks for a Minimum Weight Perfect Matching on a general 
- * 2D Euclidean graph of 2N vertices, where 1 <= N <= 8 (at most 16 vertices).
+ * Minimum Weight Perfect Matching on a general 2D Euclidean graph of 2N 
+ * vertices (where 1 <= N <= 8, at most 16 vertices).
  *
- * 1. Symmetry Breaking (The Key Insight):
- *    Instead of exploring all pairs, which leads to an O((2N)!) search space,
- *    we fix the first available person (i) at each step using LSOne(pool).
- *    We then only iterate through every remaining person (j) to form a pair.
- *    Because pairing order does not matter, this reduces the search space from
- *    a full factorial down to the double factorial:
- *        (2N - 1)!! = (2N - 1) * (2N - 3) * ... * 3 * 1
- *    For the worst case (N = 8, 2N = 16):
- *        15!! = 2,027,025 leaves.
+ * 1. Symmetry Breaking (Reducing the Search Space):
+ *    Arbitrarily fix the first available person (i) using LSOne(mask).
+ *    Then, iterate through each remaining person (j) to form a pair (i, j).
+ *    This avoids equivalent permutations of pairs and reduces the branching
+ *    factor to at most (2N - 1) transitions per state.
  *
- * 2. Why Pure Backtracking beats DP here:
- *    - Memory & Cache: The recursion state is purely CPU-register driven.
- *      The distance matrix is 16x16 (~2 KB), which fits entirely within the 
- *      CPU's L1 cache (~32-48 KB), yielding near-zero cache misses.
- *    - No Reset Overhead: DP requires resetting a 65,536-element table (512 KB)
- *      for every test case. Since many test cases have N <= 6 (<= 10k ops),
- *      the overhead of clearing memory exceeds the search time itself.
+ * 2. Precomputed Euclidean Distances:
+ *    Avoids calculating std::hypot/sqrt inside the recursive loop. Precomputing
+ *    takes O((2N)^2) once per testcase instead of millions of times during DP.
  *
- * 3. Optimizations:
- *    - Precomputed Euclidean Distances: Computes sqrt() only (2N)^2 / 2 = 120
- *      times per test case instead of ~2 million times inside the recursion.
- *    - Bitwise Intrinsics: LSOne(S) and __builtin_ctz provide hardware-accelerated
- *      O(1) bit manipulation and index lookup.
+ * ============================================================================
+ * CRUCIAL IMPLEMENTATION PITFALL: THE "PARITY TRAP" (Ghost Cache)
+ * ============================================================================
+ * Why `mask` MUST remain immutable inside the function:
+ *
+ * 1. Parity Invariant:
+ *    All valid matching states consist of an EVEN number of unmatched people 
+ *    (bits): 16, 14, 12, ..., 2, 0.
+ *
+ * 2. The Mutation Bug:
+ *    If we mutate the mask directly:
+ *        mask -= i_bit;              // mask now has ODD parity!
+ *        ...
+ *        return cache[mask] = best;  // BUG: stored under an ODD key!
+ *
+ * 3. The Consequence (0% Cache Hit Rate):
+ *    Future calls always query EVEN-parity masks:
+ *        if (cache[mask] >= 0) ...   // Always misses!
+ *    The cache is populated exclusively with odd-parity entries that no future
+ *    recursive step will ever read. The result is pure backtracking with 
+ *    2+ million useless memory writes, making the runtime WORSE than no cache!
+ *
+ * 4. The Fix:
+ *    Keep `mask` immutable. Subtract bits only into temporary variables:
+ *        int tmp = mask - i_bit;
+ *        ...
+ *        int new_mask = mask - i_bit - j_bit; // maintains even parity
+ *        return cache[mask] = best;           // cached under original even key!
  *
  * ============================================================================
  * COMPLEXITY:
  * ============================================================================
- * - Time Complexity:  O((2N)^2) precomputation + O((2N - 1)!!) search
- *                     Worst case (N=8) ~ 2.03 x 10^6 operations (< 0.20s).
- * - Space Complexity: O((2N)^2) auxiliary space for the distance matrix,
- *                     O(N) recursion stack depth. (Effectively O(1) memory).
+ * - Time Complexity:  O(N * 2^(2N))
+ *                     There are only 2^(2N-1) reachable states with even parity.
+ *                     For 2N = 16: at most 32,768 states visited.
+ * - Space Complexity: O(2^(2N)) for memoization table + O((2N)^2) for dist table.
  * ============================================================================
 */
 
@@ -62,6 +77,8 @@ double calc_dist(const ii& fst, const ii& snd) {
   return std::sqrt(x * x + y * y);
 }
 
+double cache[1 << 16];
+
 // Let x1 be the distance between the houses of group 1, x2 be the distance
 // between the houses of group 2 and so on. You have to make sure the summation (x1+x2+x3+. . .+xn) is minimized.
 double dp(int mask, const vvd& dist) {
@@ -70,19 +87,23 @@ double dp(int mask, const vvd& dist) {
     return 0;
   }
 
+  if(cache[mask] >= 0) {
+    return cache[mask];
+  }
+
   int i_bit = LSOne(mask);
   int i = __builtin_ctz(i_bit);
-  mask -= i_bit;
   double best = 1e9;
-  int tmp = mask;
+  int tmp = mask - i_bit;
   while(tmp) {
     int j_bit = LSOne(tmp);
     int j = __builtin_ctz(j_bit);
-    best = std::min(best, dist[i][j] + dp(mask - j_bit, dist));
+    int new_mask = mask - j_bit - i_bit;
+    best = std::min(best, dist[i][j] + dp(new_mask, dist));
     tmp -= j_bit;
   }
 
-  return best;
+  return (cache[mask] = best);
 }
 
 
@@ -119,6 +140,7 @@ namespace algorithms::onlinejudge::advanced_topics::forming_quiz_teams
             }
           }
 
+          std::memset(cache, -1, sizeof cache);
           std::cout << "Case " << t_case++ << ": " << std::fixed << std::setprecision(2) << dp((1 << 2 * N) - 1, dist) << std::endl;
         }
     }

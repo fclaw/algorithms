@@ -104,12 +104,8 @@ bool can_laser_reach_sensor(ii cell, Dir dir, bool has_aux_mirror, int target_ro
   int c = cell.second;
 
   if(~cache[r][c][dir][has_aux_mirror]) {
-    return cache[r][c][dir][has_aux_mirror] == 1;
+    return cache[r][c][dir][has_aux_mirror];
   }
-
-  // Mark as 0 (visiting / assumed false) to break any infinite mirror cycles!
-  cache[r][c][dir][has_aux_mirror] = 0;
-
 
   Mirror_Orientation m = room[r][c];
   // ==========================================
@@ -118,7 +114,7 @@ bool can_laser_reach_sensor(ii cell, Dir dir, bool has_aux_mirror, int target_ro
   if(m) {
     Dir new_dir = reflect(dir, m);
     if(step_forward(r, c, new_dir, has_aux_mirror, N, target_row, room)) {
-      return (cache[r][c][dir][has_aux_mirror] = 1);
+      return (cache[r][c][dir][has_aux_mirror] = 1);         
     }
   // ==========================================
   // CASE 2: Empty floor '.'

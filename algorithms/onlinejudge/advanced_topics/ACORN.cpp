@@ -18,21 +18,32 @@ struct Tree
     int idx;
     vi acorns;
 
-   friend std::ostream& operator<<(std::ostream& os, const Tree& t) {
-        os << "Tree #" << t.idx << " (" << t.acorns.size() << " acorns): [";
-        for (size_t i = 0; i < t.acorns.size(); ++i) {
-            os << t.acorns[i] << (i + 1 < t.acorns.size() ? ", " : "");
-        }
-        os << "]";
-        return os;
-    }
-
 };
 
 
 
-int dp(int height, const std::vector<Tree>& trees, int flight_drop) {
-  return 0;
+int cache[2001][2001];
+
+int dp(int idx, int height, const std::vector<Tree>& trees, int flight_drop) {
+
+  if(height == 0) {
+    return (cache[idx][height] = 0);
+  }
+
+  if(~cache[idx][height]) {
+    return cache[idx][height];
+  }
+
+  int climb_down = trees[idx].acorns[height - 1] + dp(idx, height - 1, trees, flight_drop);
+  int fly_over = 0;
+  for(const Tree& t : trees) {
+    if(t.idx != idx && 
+       height > flight_drop) {
+      fly_over = std::max(fly_over, trees[t.idx].acorns[height - flight_drop] + dp(t.idx, height - flight_drop, trees, flight_drop));
+    }
+  }
+
+  return (cache[idx][height] = std::max(climb_down, fly_over));
 }
 
 
@@ -42,7 +53,12 @@ int dp(int height, const std::vector<Tree>& trees, int flight_drop) {
 // DP solution. Remember that no programming contest problem is unsolvable, the problem
 // author must have known a trick!!!
 int get_maximum_acorns(const std::vector<Tree>& trees, int height, int flight_drop) {
-   return dp(height, trees, flight_drop);
+  int max_acorns = 0;
+  std::memset(cache, -1, sizeof cache);
+  for(const Tree& t : trees) {
+    max_acorns = std::max(max_acorns, dp(t.idx, height, trees, flight_drop));
+  }
+  return max_acorns;
 }
 
 namespace algorithms::onlinejudge::advanced_topics::ACORN

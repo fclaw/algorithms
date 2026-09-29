@@ -15,6 +15,8 @@ std::istream& operator >> (std::istream& is, std::pair<T1, T2>& p) { return is >
 template<typename... Args>
 bool while_read(Args&... args) { return (... && static_cast<bool>(std::cin >> args)); }
 
+template<typename... Args>
+bool stdin_read(Args&... args) { return (... && static_cast<bool>(std::cin >> args)); }
 
 // --- RECOMMENDED ALTERNATIVE: Specialize std::hash ---
 // This is often considered cleaner because you don't need to specify

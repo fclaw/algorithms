@@ -48,30 +48,105 @@ int get_id(const std::string& raw_country) {
   return country_to_id.at(raw_country);
 }
 
+/**
+ * Post-Order Tree Knapsack DP (Subtree Convolution)
+ *
+ * ============================================================================
+ * DP STATE DEFINITION:
+ * ============================================================================
+ * dp[u][v] = Minimum diamonds needed to acquire AT LEAST 'v' votes
+ *            from the subtree rooted at node 'u'.
+ *
+ * ============================================================================
+ * CONNECTION TO THE NOTEBOOK DRAWING:
+ * ============================================================================
+ * At each node 'u', we merge its children iteratively.
+ * Imagine an expanding bar of total available votes:
+ *
+ *   |<---------------------------- L --------------------------->|
+ *   [==== Accumulated Votes (u) ====][==== New Child Votes (v) ====]
+ *              'max_votes'                   'max_v_votes'
+ *              (Left Bar)                     (Right Bar)
+ *
+ * - Left Bar  (max_votes)   : All vote counts currently reachable from node 'u'
+ *                             and previously processed children.
+ * - Right Bar (max_v_votes) : All vote counts reachable from new child 'v'.
+ * - Combined  (Length L)    : The bar naturally expands to (max_votes + max_v_votes).
+ *
+ * ----------------------------------------------------------------------------
+ * COMPLEXITY: WHY THIS IS O(N^2) (NOT O(N^3)):
+ * ----------------------------------------------------------------------------
+ * The two nested loops execute (max_votes * max_v_votes) times.
+ * Geometrically, this is a rectangle of pairs: (Node in Subtree A, Node in Subtree B).
+ * Any two nodes x and y in the tree are merged in this rectangle EXACTLY ONCE
+ * across the entire algorithm—specifically, at their Lowest Common Ancestor (LCA).
+ * Therefore, Total Operations across the tree = Sum of pairs = N*(N-1)/2 = O(N^2)!
+ * ============================================================================
+ */
 void dfs(int u, const Tree& forest, const vi& diamonds, vi& subtree_size, vvi& dp, int countries_n) {
 
-  // base case
+  // ------------------------------------------------------------------------
+  // 1. BASE INITIALIZATION (Leaf State / Self-State)
+  // ------------------------------------------------------------------------
+  // Getting 0 votes costs 0 diamonds (universal invariant).
   dp[u][0] = 0;
+
+  // 'max_votes' is a reference to subtree_size[u].
+  // Initially, node 'u' represents only itself (Left Bar begins at size 1).
   int& max_votes = subtree_size[u];
   max_votes = 1;
 
-  // collect the result from children
+  // ------------------------------------------------------------------------
+  // 2. POST-ORDER TRAVERSAL & SIBLING MERGING
+  // ------------------------------------------------------------------------
   for(int v : forest[u].children) {
+    // Step 2a: Recursively solve child 'v' first (dive down to leaves).
+    // By post-order property, child 'v' will have its entire 'dp[v]' table
+    // fully computed and finalized before we touch it here.
     dfs(v, forest, diamonds, subtree_size, dp, countries_n);
-    // merge subtree result into root
-    vi next_dp(countries_n + 2, Inf);
-    for (int p_v = 0; p_v <= max_votes; ++p_v) {
-      for (int c_v = 0; c_v <= max_votes && p_v + c_v <= countries_n; ++c_v) {
-        next_dp[p_v + c_v] = std::min(next_dp[p_v + c_v], dp[u][p_v] + dp[v][c_v]);
+
+    // Step 2b: Prepare temporary buffer to compute the expanded bar L.
+    // We use a fresh buffer initialized to INF so that combinations
+    // from this step do not accidentally overwrite and read from the same state.
+    vi dp_buffer(countries_n + 2, Inf);
+    int max_v_votes = subtree_size[v];
+    // --------------------------------------------------------------------
+    // Step 2c: The 2-Loop Convolution (Expanding from Drawing)
+    // --------------------------------------------------------------------
+    // Loop 1: Iterate over all vote counts achieved so far in Left Bar [0 .. max_votes]
+    for (int u_votes = 0; u_votes <= max_votes; ++u_votes) {
+      // Loop 2: Iterate over all vote counts possible in Right Bar [0 .. max_v_votes]
+      for (int v_votes = 0; v_votes <= max_v_votes; ++v_votes) {
+        if(u_votes + v_votes <= countries_n) {
+          int sum = u_votes + v_votes;
+          // Transition Formula:
+          // Take the best way to get 'u_votes' from previous children
+          // + the best way to get 'v_votes' from the new child 'v'.
+          dp_buffer[sum] = std::min(dp_buffer[sum], dp[u][u_votes] + dp[v][v_votes]);
+        }
       }
     }
 
-    max_votes += subtree_size[v];
+    // --------------------------------------------------------------------
+    // Step 2d: Expand the Bar to Length L
+    // --------------------------------------------------------------------
+    // The parent's subtree size naturally grows by the size of the merged child.
+    max_votes += max_v_votes;
     for (int v = 0; v <= max_votes; ++v) {
-      dp[u][v] = next_dp[v];
+      dp[u][v] = dp_buffer[v];
     }
   }
 
+  // ------------------------------------------------------------------------
+  // 3. THE MASTER OVERRIDE (Node u's Direct Bribe Choice)
+  // ------------------------------------------------------------------------
+  // After considering all combinations of cherry-picking its children,
+  // node 'u' has one final superpower:
+  // It can pay 'diamonds[u]' directly to instantly buy the ENTIRE subtree!
+  //
+  // This gives all 'max_votes' at once for a flat price of 'diamonds[u]'.
+  // Note: We skip this for 'root' (Dummy Node 0) because Node 0 is an imaginary
+  // placeholder unifying the forest; it cannot be bought directly!
   if(u != root) {
     // whether it is cheaper to bribe the root
     dp[u][max_votes] = std::min(dp[u][max_votes], diamonds[u]);

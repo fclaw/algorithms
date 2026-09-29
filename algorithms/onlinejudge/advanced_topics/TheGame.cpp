@@ -35,42 +35,9 @@ struct State
 
 const std::vector<std::pair<Dir, ii>> dirs4 = { {DN, {-1, 0}}, {DE, {0, 1}}, {DS, {1, 0}}, {DW, {0, -1}} };
 
-void print_board(int W, int H, const vvi& board, int x1 = -1, int y1 = -1, int x2 = -1, int y2 = -1) {
-    std::cout << "\n--- Padded Board (Cols 0.." << W + 1 << ", Rows 0.." << H + 1 << ") ---\n";
-    
-    // Print column index header
-    std::cout << "    ";
-    for (int c = 0; c <= W + 1; ++c) {
-        std::cout << c << (c >= 10 ? "" : " ");
-    }
-    std::cout << "\n";
-
-    for (int r = 0; r <= H + 1; ++r) {
-        // Print row index header
-        std::cout << std::setw(2) << r << " | ";
-
-        for (int c = 0; c <= W + 1; ++c) {
-            // Highlight Start (S), Target (T), Obstacle (X), or Empty (.)
-            if (c == x1 && r == y1) {
-                std::cout << "S ";
-            } else if (c == x2 && r == y2) {
-                std::cout << "T ";
-            } else if (board[r][c] == 1) {
-                std::cout << "X ";
-            } else {
-                std::cout << ". ";
-            }
-        }
-        std::cout << "\n";
-    }
-    std::cout << "-----------------------------------------------\n\n";
-}
-
 
 int get_connected_segments(const ii& source, const ii& sink, const vvi& board) {
  
-    // print_board(W, H, board, source.first, source.second, sink.first, sink.second);
-
     vvi curr_board = board;
     curr_board[source.second][source.first] = 0;
     curr_board[sink.second][sink.first] = 0;

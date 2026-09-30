@@ -13,6 +13,7 @@ constexpr int Inf = (int)1e9;
 
 using vi = std::vector<int>;
 using vvi = std::vector<vi>;
+using vb = std::vector<bool>;
 
 
 struct State {
@@ -44,20 +45,20 @@ using v_state = std::vector<State>;
 using vv_state = std::vector<v_state>;
 
 
-void dfs(int u, int parent, const vvi& network, vv_state& dp) {
+void dfs(int u, int parent, const vvi& network, vv_state& dp, vb& visited) {
 
   dp[u][1] = {1, 0}; // lamppost installed
   dp[u][0] = {0, 0}; 
 
+  visited[u] = true;
+
   for(int v : network[u]) {
     if(v != parent) {
-      dfs(v, u, network, dp);
-
+      dfs(v, u, network, dp, visited);
       dp[u][0] += dp[v][1];
-
-      State tmp = dp[v][1];
-      tmp.double_lit_roads++;
-      dp[u][1] += std::min(dp[v][0], tmp);
+      State child_has_lamppost = dp[v][1];
+      child_has_lamppost.double_lit_roads++;
+      dp[u][1] += std::min(dp[v][0], child_has_lamppost);
     }
   }
 
@@ -71,8 +72,16 @@ State get_min_lampposts_installed(const vvi& network, int V) {
   }
 
   vv_state dp(V, v_state(2, {0, 0})); // 0/1
-  dfs(0, -1, network, dp);
-  return std::min(dp[0][0], dp[0][1]);
+  vb visited(V, false);
+ 
+  State ans = {0, 0};
+  for(int u = 0; u < V; ++u) {
+    if(!visited[u]) {
+      dfs(u, -1, network, dp, visited);
+      ans += std::min(dp[u][0], dp[u][1]);
+    }
+  }
+  return ans;
 }
 
 

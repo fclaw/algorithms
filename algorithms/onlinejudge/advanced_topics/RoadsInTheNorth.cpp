@@ -24,14 +24,15 @@ enum Choice { ROOT_AS_START, GOES_THROUGH_ROOT };
 
 
 // Helper lambda: updates pair {first_max, second_max} with a new value
-auto update_top2 = [](std::pair<ll, ll>& p, ll val) {
-  if(val > p.first) {
-    p.second = p.first;
-    p.first = val;
-  } else if (val > p.second) {
-    p.second = val;
-  }
-};
+auto update_top2 = 
+  [](std::pair<ll, ll>& p, ll val) {
+    if(val > p.first) {
+      p.second = p.first;
+      p.first = val;
+    } else if (val > p.second) {
+      p.second = val;
+    }
+  };
 
 
 /**

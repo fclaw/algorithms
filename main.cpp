@@ -1,7 +1,7 @@
 #define DBG_MACRO_NO_WARNING
 
 // #include "algorithms/kattis/dp/ProtectingCollection.cpp"
-#include "algorithms/onlinejudge/advanced_topics/EditStepLadders.cpp"
+#include "algorithms/onlinejudge/advanced_topics/FreeCandies.cpp"
 // #include "algorithms/cses/NumberSpiral.cpp"
 #include <chrono>
 #include <iomanip>
@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
     long mem_before = get_memory_usage();
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::advanced_topics::edit_step_ladders::submit(file, debug_mode);
+    algorithms::onlinejudge::advanced_topics::free_candies::submit(file, debug_mode);
     // algorithms::kattis::dp::protecting_collection::submit(file, debug_mode);
     // algorithms::cses::number_spiral::submit(file, debug_mode);
     // algorithm ends

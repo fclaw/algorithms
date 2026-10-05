@@ -1,4 +1,3 @@
-
 # 🌲 The Complete Roadmap to Dynamic Programming on Trees (Tree DP)
 
 **Document Type:** Curriculum, Architecture Guide & Contest Reference
@@ -78,12 +77,12 @@ Before writing a single line of code, every Tree DP problem relies on these thre
 
 ### The 4-Case Truth Table (UVa 1218 Model):
 
-|   Parent   |   Current   | Who serves current?    | Allowed for Children?                   |      Resulting DP State      |
-| :---------: | :---------: | :--------------------- | :-------------------------------------- | :--------------------------: |
-| **S** | **S** | None ($u$ is Server) | Both$S$ and $C$ in any ratio        |        `SERVER (0)`        |
-| **C** | **S** | None ($u$ is Server) | Both$S$ and $C$ in any ratio        |        `SERVER (0)`        |
-| **S** | **C** | Parent above ($S$)   | **0 Servers! All must be C!**     | `CLIENT_PARENT_SERVER (1)` |
-| **C** | **C** | Must be from below     | **Exactly 1 child is S, rest C!** | `CLIENT_PARENT_CLIENT (2)` |
+|   Parent   |   Current   | Who serves current?                                       | Allowed for Children?                   |      Resulting DP State      |
+| :---------: | :---------: | :-------------------------------------------------------- | :-------------------------------------- | :--------------------------: |
+| **S** | **S** | None ($u$ is Server) | Both$S$ and $C$ in any ratio | `SERVER (0)`                          |                              |
+| **C** | **S** | None ($u$ is Server) | Both$S$ and $C$ in any ratio | `SERVER (0)`                          |                              |
+| **S** | **C** | Parent above ($S$)                                      | **0 Servers! All must be C!**     | `CLIENT_PARENT_SERVER (1)` |
+| **C** | **C** | Must be from below                                        | **Exactly 1 child is S, rest C!** | `CLIENT_PARENT_CLIENT (2)` |
 
 ### Practice Checklist:
 
@@ -112,7 +111,7 @@ Before writing a single line of code, every Tree DP problem relies on these thre
 ### Practice Checklist:
 
 * [X] **UVa 1222** — *Bribing FIPA* (Tree Knapsack with Dummy Root)
-* [X] **Codeforces Blog 20935 Problem 3** — *Connected Subtree Counting of Size $\le K$*
+* [ ] **Codeforces Blog 20935 Problem 3** — *Connected Subtree Counting of Size $\le K$*
 * [ ] **Codeforces 461B** — *Appleman and Tree* (Connected component partition DP)
 * [ ] **Codeforces 161D** — *Distance in Tree* ($K$-distance pairwise merge)
 

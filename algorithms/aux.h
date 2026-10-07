@@ -2,6 +2,15 @@
 
 #include <bits/stdc++.h>
 
+
+
+using vi = std::vector<int>;
+using vvi = std::vector<vi>;
+using ii = std::pair<int, int>;
+using ll = long long;
+
+
+
 template<typename F>
 inline void loop(size_t n, F&& f) {
   for(size_t i = 0; i < n; ++i)

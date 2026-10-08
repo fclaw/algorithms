@@ -8,8 +8,12 @@ using vi = std::vector<int>;
 using vvi = std::vector<vi>;
 using ii = std::pair<int, int>;
 using ll = long long;
+using vb = std::vector<bool>;
+using vvb = std::vector<vb>;
+using vvvb = std::vector<vvb>;
 
 
+constexpr int Inf = (int)1e9;
 
 template<typename F>
 inline void loop(size_t n, F&& f) {

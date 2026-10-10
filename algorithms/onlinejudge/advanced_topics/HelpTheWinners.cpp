@@ -10,9 +10,6 @@
 
 
 
-constexpr int STATUS_MASK = ((1 << 3) - 1) << 15;
-
-
 enum Status {
   INCOMPLETE  = 0,  // Tainted by at least one '0', and NO '2' yet (Needs a 2 to win!)
   FULL_MATCH  = 1, // All pairs so far are '1' (Clean: no 0, no 2)
@@ -66,14 +63,12 @@ ll dp(int id, int mask, Status s, const vvi& matching_map, int N) {
   }
 
   ll ways = 0ULL;
-  for(int i = id; i < N; ++i) {
-    for(int j = 0; j < N; ++j) {
-      int bit = 1 << j;
-      if(!(mask & bit)) {
-        int m = matching_map[i][j];
-        Status ns = update_status(m, s);
-        ways += dp(i + 1, mask | bit, ns, matching_map, N);
-      }
+  for(int j = 0; j < N; ++j) {
+    int bit = 1 << j;
+    if(!(mask & bit)) {
+      int m = matching_map[id][j];
+      Status ns = update_status(m, s);
+      ways += dp(id + 1, mask | bit, ns, matching_map, N);
     }
   }
   return (cache[id][mask][s] = ways);
@@ -84,7 +79,6 @@ ll get_ways_to_form_pairs(const vvi& matching_map, int N) {
   std::memset(cache, -1, sizeof cache);
   return dp(0, 0, NONE, matching_map, N);
 }
-
 
 
 namespace algorithms::onlinejudge::advanced_topics::help_the_winners

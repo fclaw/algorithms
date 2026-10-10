@@ -47,22 +47,23 @@ Status update_status(int cell, Status s) {
 }
 
 
-ll cache[16][1 << 15][4];
+ll cache[1 << 15][4];
 
 
 ll dp(int id, int mask, Status s, const vvi& matching_map, int N) {
   if(__builtin_popcount(mask) == N) {
+    // Invalid (Had a 0 and never found a 2!)
     if(s == INCOMPLETE) {
-      return (cache[id][mask][s] = 0ULL);
+      return (cache[mask][s] = 0LL);
     }
-    return (cache[id][mask][s] = 1ULL);
+    return (cache[mask][s] = 1LL);
   }
 
-  if(~cache[id][mask][s]) {
-    return cache[id][mask][s];
+  if(~cache[mask][s]) {
+    return cache[mask][s];
   }
 
-  ll ways = 0ULL;
+  ll ways = 0LL;
   for(int j = 0; j < N; ++j) {
     int bit = 1 << j;
     if(!(mask & bit)) {
@@ -71,12 +72,12 @@ ll dp(int id, int mask, Status s, const vvi& matching_map, int N) {
       ways += dp(id + 1, mask | bit, ns, matching_map, N);
     }
   }
-  return (cache[id][mask][s] = ways);
+  return (cache[mask][s] = ways);
 }
 
 
 ll get_ways_to_form_pairs(const vvi& matching_map, int N) {
-  std::memset(cache, -1, sizeof cache);
+  std::memset(cache, -1LL, sizeof cache);
   return dp(0, 0, NONE, matching_map, N);
 }
 

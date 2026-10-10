@@ -16,6 +16,14 @@ using ll = long long;
 using vll = std::vector<ll>;
 
 
+inline int find_next_trip_pos(const vi& trips, int s, int period) {
+  auto it = std::upper_bound(trips.begin(), trips.end(), trips[s] + period - 1);
+  if(it == trips.end()) {
+    return (int)trips.size();
+  }
+  return std::distance(trips.begin(), it);
+}
+
 namespace algorithms::kattis::dp::bus_ticket
 {
     void submit(std::optional<char*> file, bool debug_mode)

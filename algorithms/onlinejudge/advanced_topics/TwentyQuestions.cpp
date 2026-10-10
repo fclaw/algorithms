@@ -39,7 +39,8 @@ int dp(int features_mask, int answers_mask, int features_n, const vi& objects, s
   }
 
    ii key = std::make_pair(features_mask, answers_mask);
-   if(auto it = cache.find(key); it != cache.end()) {
+   if(auto it = cache.find(key); 
+      it != cache.end()) {
      return it->second;
    }
 

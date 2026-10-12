@@ -29,13 +29,13 @@ int get_id(const std::string& raw_person) {
 int root;
 
 
-void dfs(int u, int parent, const vvi& tree, vvi& dp, vvi& is_unique) {
+void dfs(int u, int parent, const vvi& tree, vvi& dp, vvb& is_unique) {
   // Base Case for node u:
   dp[u][INVITED] = 1;
-  is_unique[u][INVITED] = 1;
+  is_unique[u][INVITED] = true;
 
   dp[u][NOT_INVITED] = 0;
-  is_unique[u][NOT_INVITED] = 1;
+  is_unique[u][NOT_INVITED] = true;
 
   for(int v : tree[u]) {
     if(v != parent) {
@@ -49,7 +49,7 @@ void dfs(int u, int parent, const vvi& tree, vvi& dp, vvi& is_unique) {
             
       // If child v's NOT_INVITED choice was not unique, u inherits it!
       if (!is_unique[v][NOT_INVITED]) {
-        is_unique[u][INVITED] = 0;
+        is_unique[u][INVITED] = false;
       }
 
       // ================================================================
@@ -59,18 +59,18 @@ void dfs(int u, int parent, const vvi& tree, vvi& dp, vvi& is_unique) {
       if (dp[v][INVITED] == dp[v][NOT_INVITED]) {
         // A TIE! We could choose either -> automatically NOT unique!
         dp[u][NOT_INVITED] += dp[v][INVITED];
-        is_unique[u][NOT_INVITED] = 0;
+        is_unique[u][NOT_INVITED] = false;
       } else if (dp[v][INVITED] > dp[v][NOT_INVITED]) {
         dp[u][NOT_INVITED] += dp[v][INVITED];
         // Inherit child v's uniqueness:
         if (!is_unique[v][INVITED]) {
-          is_unique[u][NOT_INVITED] = 0;
+          is_unique[u][NOT_INVITED] = false;
         }
       } else { // dp[v][NOT_INVITED] > dp[v][INVITED]
         dp[u][NOT_INVITED] += dp[v][NOT_INVITED];
         // Inherit child v's uniqueness:
         if (!is_unique[v][NOT_INVITED]) {
-          is_unique[u][NOT_INVITED] = 0;
+          is_unique[u][NOT_INVITED] = false;
         }
       }
     }
@@ -113,7 +113,7 @@ namespace algorithms::onlinejudge::advanced_topics::party_at_Hali_Bula
             tree[b_id].push_back(p_id);
           }
           vvi dp(N, vi(2, 0));
-          vvi is_unique(N, vi(2, 1));
+          vvb is_unique(N, vb(2, true));
           root = get_id(big_boss);
           dfs(root, -1, tree, dp, is_unique);
 

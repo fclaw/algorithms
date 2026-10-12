@@ -16,6 +16,8 @@ using vvvb = std::vector<vvb>;
 
 constexpr int Inf = (int)1e9;
 
+constexpr int MOD = (int)1e9 + 7;
+
 template<typename F>
 inline void loop(size_t n, F&& f) {
   for(size_t i = 0; i < n; ++i)

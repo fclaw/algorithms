@@ -37,9 +37,6 @@
 
 
 
-#define LSOne(S) ((S) & (-S))
-
-
 int cache[1 << 20][4];
 
 
@@ -51,7 +48,7 @@ bool can_square_formed(int sticks_mask, int sides_mask, int curr_side_length, in
   // ------------------------------------------------------------------------
   // All sticks have been used AND all required sides have been completed.
   if(__builtin_popcount(sticks_mask) == S && 
-     sides_mask == 0) {
+     sides_mask == 4) {
     return true;
   }
 
@@ -77,9 +74,8 @@ bool can_square_formed(int sticks_mask, int sides_mask, int curr_side_length, in
          }
        // Case B: Stick PERFECTLY completes the current side!
        } else if (new_side_length == side) {
-         int bit = LSOne(sides_mask); // the first bit that is on
          // Reset curr_side_length to 0 to begin building the next side
-         if(can_square_formed(sticks_mask | s_bit, sides_mask & ~bit, 0, side, sticks)) {
+         if(can_square_formed(sticks_mask | s_bit, sides_mask + 1, 0, side, sticks)) {
            return (cache[sticks_mask][sides_mask] = true);
          }
        }
@@ -124,7 +120,7 @@ namespace algorithms::onlinejudge::advanced_topics::square
           } else {
             int side = total_length / 4;
             std::memset(cache, -1, sizeof cache);
-            bool ans = can_square_formed(0, (1 << 4) - 1, 0, side, sticks);
+            bool ans = can_square_formed(0, 0, 0, side, sticks);
             std::cout << (ans ? "yes" : "no") << "\n";
           }
         }

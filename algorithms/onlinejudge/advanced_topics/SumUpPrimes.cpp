@@ -23,14 +23,13 @@ std::array<int, 62> primes = {
   3, 31, 37, 41, 43, 47, 5, 53, 59, 61, 67, 7, 71, 73, 79, 83, 89, 97
 };
 
-int cache[62][14][3][1001];
+int cache[62][14][1001];
 
-bool dp(int i, int primes_used, int used_counter, int curr_val, int target, vi& sol, vi& tmp, int primes_n) {
+vi sol;
+
+bool dp(int i, int primes_used, int curr_val, int target, int primes_n) {
 
   if(primes_used == primes_n) {
-    if(curr_val == target) {
-      sol = tmp;
-    }
     return curr_val == target;
   }
 
@@ -38,45 +37,43 @@ bool dp(int i, int primes_used, int used_counter, int curr_val, int target, vi& 
     return false;
   }
 
-  if(~cache[i][primes_used][used_counter][curr_val]) {
-    return cache[i][primes_used][used_counter][curr_val];
+  if(~cache[i][primes_used][curr_val]) {
+    return cache[i][primes_used][curr_val];
   }
 
+   int p = primes[i];
 
-  if(primes[i] == 2) {
-    int next_val = curr_val + primes[i];
-    if(next_val <= target) {
-      tmp.push_back(2);
-      if(dp(i + 1, primes_used + 1, used_counter, next_val, target, sol, tmp, primes_n)) {
-        return (cache[i][primes_used][used_counter][curr_val] = true);
-      }
-      tmp.pop_back();
-    }
-  } else {
-    if(used_counter < 2) {
-      int next_val = curr_val + primes[i];
-      if(next_val <= target) {
-        tmp.push_back(primes[i]);
-        if(dp(i, primes_used + 1, used_counter + 1, next_val, target, sol, tmp, primes_n)) {
-          return (cache[i][primes_used][used_counter][curr_val] = true);
-        }
-        tmp.pop_back();
-      }
+  // Choice 1: Try using the prime TWICE (only if it's not 2)
+  if (p != 2 &&
+      primes_used + 2 <= primes_n && 
+      curr_val + 2 * p <= target) {
+    if(dp(i + 1, primes_used + 2, curr_val + 2 * p, target, primes_n)) {
+      sol.push_back(p);
+      sol.push_back(p);
+      return (cache[i][primes_used][curr_val] = true);
     }
   }
 
-  if(dp(i + 1, primes_used, 0, curr_val, target, sol, tmp, primes_n)) {
-    return (cache[i][primes_used][used_counter][curr_val] = true);
+  // Choice 2: Try using the prime ONCE
+  if(primes_used + 1 <= primes_n && 
+     curr_val + p <= target) {
+    if (dp(i + 1, primes_used + 1, curr_val + p, target, primes_n)) {
+      sol.push_back(p);
+      return (cache[i][primes_used][curr_val] = true);
+    }
   }
 
-  return (cache[i][primes_used][used_counter][curr_val] = false);
+  if(dp(i + 1, primes_used, curr_val, target, primes_n)) {
+    return (cache[i][primes_used][curr_val] = true);
+  }
 
+  return (cache[i][primes_used][curr_val] = false);
 }
 
 std::pair<bool, vi> can_target_sum_up(int target, int primes_n) {
-  vi sol, tmp;
+  sol.clear();
   std::memset(cache, -1, sizeof cache);
-  bool ans = dp(0, 0, 0, 0, target, sol, tmp, primes_n);
+  bool ans = dp(0, 0, 0, target, primes_n);
   return {ans, sol};
 }
 
@@ -106,6 +103,7 @@ namespace algorithms::onlinejudge::advanced_topics::sum_up_primes
             printf("CASE %d:\nNo Solution.\n", t_case++);
           } else {
             std::string sol;
+            std::reverse(ans.second.begin(), ans.second.end());
             for(int p : ans.second) {
               sol += std::to_string(p) + "+";
             }

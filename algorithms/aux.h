@@ -34,6 +34,13 @@ bool while_read(Args&... args) { return (... && static_cast<bool>(std::cin >> ar
 template<typename... Args>
 bool stdin_read(Args&... args) { return (... && static_cast<bool>(std::cin >> args)); }
 
+// Row (dr) and Column (dc) deltas
+constexpr std::array<ii, 8> DIRS8 = {{
+    {-1, -1}, {-1,  0}, {-1,  1}, // Up-Left,    Up,    Up-Right
+    { 0, -1},           { 0,  1}, // Left,               Right
+    { 1, -1}, { 1,  0}, { 1,  1}  // Down-Left,  Down,  Down-Right
+}};
+
 // --- RECOMMENDED ALTERNATIVE: Specialize std::hash ---
 // This is often considered cleaner because you don't need to specify
 // the hasher every time you declare a map.

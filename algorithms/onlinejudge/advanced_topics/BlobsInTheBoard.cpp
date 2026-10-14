@@ -37,7 +37,70 @@
  * Every jump strictly reduces the total number of blobs on the board by 1.
  * This guarantees that the state space is a strictly decreasing DAG (no cycles)!
  * ============================================================================
-*/
+ *
+ * ============================================================================
+ * ARCHITECTURAL INSIGHT: CROSS-TESTCASE (PERSISTENT) MEMOIZATION
+ * ============================================================================
+ * ----------------------------------------------------------------------------
+ * 1. THE REPEATED SUBPROBLEM TRAP:
+ * ----------------------------------------------------------------------------
+ * In many multi-testcase problems, naive implementations wipe the cache 
+ * clean on every single testcase:
+ *
+ *     while (T--) {
+ *         memset(cache, -1, sizeof(cache)); // WIPING AWAY FREE WORK!
+ *         solve();
+ *     }
+ *
+ * Why this is catastrophic:
+ * - A grid of size R x C with a given bitmask of blobs has the EXACT SAME 
+ *   number of solutions in Testcase 1, Testcase 5, and Testcase 100!
+ * - Discarding the cache throws away millions of solved subproblems, forcing
+ *   the CPU to repeatedly re-traverse identical recursion trees.
+ * - Additionally, calling memset on a multi-megabyte table dozens of times 
+ *   burns raw clock cycles and evicts useful L1/L2 cache lines.
+ *
+ * ----------------------------------------------------------------------------
+ * 2. THE PERSISTENT LIFECYCLE SOLUTION:
+ * ----------------------------------------------------------------------------
+ * By sizing the table to include the board dimensions:
+ *
+ *     int memo[5][5][1 << 16]; // ~6.5 MB of static BSS memory
+ *
+ * We initialize the table ONCE at the very start of main():
+ *
+ *     int main() {
+ *         memset(memo, -1, sizeof(memo)); // INITIALIZED EXACTLY ONCE!
+ *
+ *         while (T--) {
+ *             // Testcase 1 fills parts of the cache.
+ *             // Testcases 2, 3, 4... get instant O(1) cache hits!
+ *             solve();
+ *         }
+ *     }
+ *
+ * ----------------------------------------------------------------------------
+ * 3. COMPLEXITY COLLAPSE (AMORTIZED ANALYSIS):
+ * ----------------------------------------------------------------------------
+ * Across the entire execution of the program:
+ * - The total number of unique states in the universe is bounded by:
+ *       4 x 4 x 2^16 = 1,048,576 states.
+ * - Because the cache is never cleared, EVERY SUBPROBLEM IS SOLVED AT MOST 
+ *   ONCE IN THE ENTIRE PROGRAM RUN.
+ * - Later testcases skip recursion entirely, turning queries into pure O(1)
+ *   table lookups.
+ *
+ * ----------------------------------------------------------------------------
+ * 4. THE GOLDEN CHECKLIST: WHEN IS GLOBAL MEMOIZATION SAFE?
+ * ----------------------------------------------------------------------------
+ * You can safely keep the cache global across testcases IF AND ONLY IF:
+ *   [x] The DP function is PURE: f(state) depends strictly on its state inputs.
+ *   [x] Transitions do NOT depend on testcase-specific external data
+ *       (e.g., no testcase-specific edge weights, costs, or dynamically 
+ *       changing rules).
+ *   [x] The state tuple completely and uniquely determines the subproblem.
+ * ============================================================================
+ */
 
 #include "../debug.h"
 #include "../../aux.h"
@@ -51,7 +114,7 @@ bool in_board(const ii& pos, int R, int C) {
   return pos.first >= 0 && pos.first < R && pos.second >= 0 && pos.second < C;
 }
 
-ll cache[1 << 16];
+ll cache[5][5][1 << 16];
 
 
 ll dp(int mask, int ROWS, int COLS) {
@@ -65,8 +128,8 @@ ll dp(int mask, int ROWS, int COLS) {
     return 1LL;
   }
 
-  if(~cache[mask]) {
-    return cache[mask];
+  if(~cache[ROWS][COLS][mask]) {
+    return cache[ROWS][COLS][mask];
   }
 
   ll ways = 0LL;
@@ -106,13 +169,12 @@ ll dp(int mask, int ROWS, int COLS) {
     blobs -= bit;
   }
 
-  return (cache[mask] = ways);
+  return (cache[ROWS][COLS][mask] = ways);
 
 }
 
 
 ll count_ways(int ROWS, int COLS, int mask) {
-  std::memset(cache, -1, sizeof cache);
   return dp(mask, ROWS, COLS);
 }
 
@@ -134,6 +196,7 @@ namespace algorithms::onlinejudge::advanced_topics::blobs_in_the_board
           }
         }
 
+        std::memset(cache, -1, sizeof cache);
         int t_cases, t_case = 1;
         stdin_read(t_cases);
         while(t_cases--) {

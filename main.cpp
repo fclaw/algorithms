@@ -1,7 +1,7 @@
 #define DBG_MACRO_NO_WARNING
 
 // #include "algorithms/kattis/dp/ProtectingCollection.cpp"
-#include "algorithms/onlinejudge/advanced_topics/BlobsInTheBoard.cpp"
+#include "algorithms/onlinejudge/graph/LiftlessEME.cpp"
 // #include "algorithms/cses/NumberSpiral.cpp"
 #include <chrono>
 #include <iomanip>
@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
     long mem_before = get_memory_usage();
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::advanced_topics::blobs_in_the_board::submit(file, debug_mode);
+    algorithms::onlinejudge::graph::liftless_EME::submit(file, debug_mode);
     // algorithms::kattis::dp::protecting_collection::submit(file, debug_mode);
     // algorithms::cses::number_spiral::submit(file, debug_mode);
     // algorithm ends

@@ -2,7 +2,7 @@
 
 // #include "algorithms/kattis/dp/ProtectingCollection.cpp"
 // #include "algorithms/onlinejudge/graph/NumberingThePaths.cpp"
-#include "algorithms/cses/AppleDivision.cpp"
+#include "algorithms/cses/TwoSets.cpp"
 #include <chrono>
 #include <iomanip>
 #include <bits/stdc++.h>
@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
     // algorithm starts
     // algorithms::onlinejudge::graph::numbering_the_path::submit(file, debug_mode);
     // algorithms::kattis::dp::protecting_collection::submit(file, debug_mode);
-    algorithms::cses::apple_division::submit(file, debug_mode);
+    algorithms::cses::two_sets::submit(file, debug_mode);
     // algorithm ends
     auto end = std::chrono::system_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

@@ -2,66 +2,97 @@
 ───────────────────────────────────────────────────────────────
 🧳 UVa 11375 Matches, https://onlinejudge.org/external/113/11375.pdf, rt: s
 ───────────────────────────────────────────────────────────────
+ * Category: Dynamic Programming / Digit Construction / Unbounded Knapsack
+ * Language: C++11 (with BigInt)
+ *
+ * ============================================================================
+ * PROBLEM DESCRIPTION:
+ * ============================================================================
+ * Given at most N matchsticks (N <= 2000), determine the total number of 
+ * different non-negative integers that can be formed.
+ *
+ * Digit Matchstick Costs:
+ *   '0': 6,  '1': 2,  '2': 5,  '3': 5,  '4': 4,
+ *   '5': 5,  '6': 6,  '7': 3,  '8': 7,  '9': 6
+ *
+ * Rules & Invariants:
+ * 1. Leading zeros are ILLEGAL (e.g., "05", "007" are invalid).
+ * 2. The number "0" alone is VALID (requires 6 matches).
+ * 3. The answer easily exceeds 64-bit integers -> BigInt is strictly required.
+ *
+ * ============================================================================
+ * THE DP STATE & PERSISTENT CACHE ARCHITECTURE:
+ * ============================================================================
+ * State: count_numbers(is_start, matches)
+ *   - is_start: True if placing the very first (most significant) digit.
+ *               Used to enforce the no-leading-zero rule.
+ *   - matches:  Remaining budget of matchsticks.
+ *
+ * Total State Space:
+ *   2 * 2001 = 4,002 states.
+ *
+ * PERSISTENT CACHE (The 0.010s Secret):
+ *   The rules and costs of digits never change between test cases.
+ *   Therefore, the DP transitions form an immutable DAG that is solved ONCE.
+ *   The cache is NEVER cleared between test cases, allowing O(1) lookups for
+ *   all subsequent queries!
+ * ============================================================================
 */
 
 #include "../debug.h"
 #include "../../aux.h"
 #include "../maths/utility/fast_bigint.cpp"
-#include "../maths/utility/arithmetics.cpp"
 #include <bits/stdc++.h>
 
 
 
 
 namespace bi = algorithms::onlinejudge::maths::utility::fast_bigint;
-namespace arith = algorithms::onlinejudge::maths::utility::arithmetics;
 
-// how many matches are needed for a number to form
+// Matchstick cost table for digits 0 through 9
 std::array<int, 10> numbers = {6, 2, 5, 5, 4, 5, 6, 3, 7, 6};
 
 
-std::unordered_map<ii, ll> cache;
-
-ll powers[11][16];
-
-void precompute_powers() {
- 
-  for(int n = 0; n <= 10; ++n) {
-    for(int p = 0; p <= 15; ++p) {
-      powers[n][p] = arith::power(n, p);
-    }
-  }
-}
+// Global memoization table: cache[is_start (0 or 1)][remaining_matches]
+// Initialized once to -1 before processing test cases.
+bi::BigInt cache[2][2001];
 
 
-// cache is no need for DAG nature
-ll count_numbers(int curr_num, int matches) {
+/**
+ * Counts all valid positive numbers that can be formed with at most 'matches' sticks.
+ *
+ * @param is_start True if we are placing the first digit (forbids '0').
+ * @param matches  Remaining matchsticks available to use.
+ * @return         Total count of valid numbers as a BigInt.
+ */
+bi::BigInt count_numbers(bool is_start, int matches) {
 
-
-  if(matches == 0 || 
-     curr_num == 0) {
-    return 0LL;
+  // Base Case: No matchsticks remaining to form any digit
+  if(matches == 0) {
+    return bi::BigInt(0);
   }
 
-  ii key = std::make_pair(curr_num, matches);
-  if(auto it = cache.find(key); it != cache.end()) {
-    return it->second;
+  if(!(cache[is_start][matches] == bi::BigInt(-1))) {
+    return cache[is_start][matches];
   }
 
-  int digits = curr_num != -1 ? (int)std::log10(curr_num) + 1 : 0;
-  int add = curr_num;
-  if(add == -1) {
-    add = 0;
-  }
-  ll count = 0LL;
+  bi::BigInt count(0);
+  // Try placing every digit from 0 to 9
   for(int n = 0; n <= 9; ++n) {
     int matches_needed = numbers[n];
+    // RULE: No leading zeros allowed for multi-digit or non-zero numbers
+    if(is_start && n == 0) continue;
+    // If we have enough matches to place digit 'n':
     if(matches_needed <= matches) {
-      int next_num = add + powers[n][digits + 1];
-      count += 1 + count_numbers(next_num, matches - matches_needed);
+      // THE '+ 1' PREFIX COUNTING INVARIANT:
+      // 1. Placing digit 'n' right now completes a valid number (+1).
+      // 2. Any further digits appended to it form additional valid numbers!
+      // This counts all numbers of ANY length <= budget without needing
+      // an explicit length loop!
+      count = count + bi::BigInt(1) + count_numbers(false, matches - matches_needed);
     }
   }
-  return (cache[key] = count);
+  return (cache[is_start][matches] = count);
 }
 
 
@@ -82,10 +113,21 @@ namespace algorithms::onlinejudge::advanced_topics::matches
           }
         }
 
-        precompute_powers();
+        for(int i = 0; i < 2; ++i) {
+          for(int j = 0; j < 2001; ++j) {
+            cache[i][j] = bi::BigInt(-1);
+          }
+        }
+
         int matches;
         while(stdin_read(matches)) {
-          std::cout << count_numbers(-1, matches) << "\n";
+          // ============================================================================
+          // MAIN USAGE & THE SPECIAL CASE FOR '0':
+          // ============================================================================
+          // Because 'count_numbers(true, matches)' strictly forbids leading zeros,
+          // the number "0" itself is never generated by the recursion.
+          // If we have at least 6 matches (numbers[0] == 6), we must add +1 for "0":
+          std::cout << bi::BigInt((numbers[0] <= matches ? 1 : 0)) + count_numbers(true, matches) << "\n";
         }
     }
 }

@@ -151,17 +151,17 @@ ll dfs(Block first, Block last, bool is_first_set, vi& marbles) {
     // A block can consist of 1, 2, or 3 contiguous marbles of color 'c'
     for(int size = 1; size <= 3; ++size) {
       if(size > marbles[c]) continue;  // Not enough marbles of color 'c'
+      Block block = {size, c};
       marbles[c] -= size; // Consume marbles for this block
       if(!is_first_set) { 
         // First block of the circle!
         // It serves as both the 'first' anchor and the current 'last' block.
-        ways += dfs({size, c}, {size, c}, true, marbles);
+        ways += dfs(block, block, true, marbles);
       } else {
-        Block curr = {size, c};
         // Check adjacency constraint:
         // 'last != curr' verifies that 'curr' differs in BOTH color and size from 'last'
-        if(last != curr) {
-          ways += dfs(first, curr, is_first_set, marbles);
+        if(last != block) {
+          ways += dfs(first, block, is_first_set, marbles);
         }
       }
       // Backtracking: restore marble count for the next branch

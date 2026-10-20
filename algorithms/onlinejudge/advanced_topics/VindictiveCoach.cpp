@@ -14,10 +14,10 @@
 enum Dir { UP, DOWN };
 
 
-ll cache[23][23][23][2];
+ll cache[23][23][2];
 
 
-std::pair<int, int> get_l_h_numbers(int mask, int x) {
+std::pair<int, int> get_l_h_counts(int mask, int x) {
   // 1. Create a mask for bits lower than x (bits 0 to x-1)
   // If x is 4, (1 << 4) - 1 creates binary 0000...1111
   int lower_mask = (1 << x) - 1;
@@ -34,16 +34,16 @@ std::pair<int, int> get_l_h_numbers(int mask, int x) {
   return {lower_count, higher_count};
 }
 
-ll dfs(int mask, int last, Dir dir, bool is_1) {
+ll dfs(int mask, int last, Dir dir, bool is_captain_1) {
 
   if(mask == 0) {
     return 1LL;
   }
 
-   std::pair<int, int> nums = get_l_h_numbers(mask, last);
+   auto nums = get_l_h_counts(mask, last);
 
-  if(~cache[nums.first][nums.second][last][dir]) {
-    return cache[nums.first][nums.second][last][dir];
+  if(~cache[nums.first][nums.second][dir]) {
+    return cache[nums.first][nums.second][dir];
   }
 
   ll ways = 0LL;
@@ -51,9 +51,9 @@ ll dfs(int mask, int last, Dir dir, bool is_1) {
     int tmp = mask;
     while(tmp) {
        int t = LSOne(tmp); // the first bit that is on
-       int n = __builtin_ctz(t) + 1;
+       int n = 1 + __builtin_ctz(t);
        if(n < last) {
-         ways += dfs(mask & ~t, n, UP, is_1);
+         ways += dfs(mask & ~t, n, UP, is_captain_1);
        }
        tmp -= t;
     }
@@ -63,21 +63,22 @@ ll dfs(int mask, int last, Dir dir, bool is_1) {
     int tmp = mask;
     while(tmp) {
        int t = LSOne(tmp); // the first bit that is on
-       int n = __builtin_ctz(t) + 1;
-       if(is_1 &&  // special case for 1 -> 3
-          last == 1 &&
-          n - last != 2) {
-        tmp -= t;
-        continue;
+       int n = 1 + __builtin_ctz(t);
+       // special case for 1 -> 3
+       if(is_captain_1 && 
+          last == 1 && 
+          n != 3) {
+         tmp -= t;
+         continue;
        }
        if(n > last) {
-         ways += dfs(mask & ~t, n, DOWN, is_1);
+         ways += dfs(mask & ~t, n, DOWN, is_captain_1);
        }
        tmp -= t;
     }
   }
 
-  return (cache[nums.first][nums.second][last][dir] = ways);
+  return (cache[nums.first][nums.second][dir] = ways);
 
 }
 

@@ -39,15 +39,14 @@ int MAX_DAYS;    // Total days in the schedule (2 * D)
 int MAX_STREAK;  // Maximum allowed consecutive days on one project (G)
 
 
-ll dfs(int pid, int root_pid, vi& days, int curr_streak, std::vector<bool>& is_finished) {
+ll dfs(int pid, int root_pid, vi& days, int curr_streak) {
 
   // ------------------------------------------------------------------------
   // 1. PRUNING / INVALID BOUNDS
   // ------------------------------------------------------------------------
   // 1. Streak exceeded the maximum allowed G days.
   // 2. We over-allocated days for a project (days < 0).
-  if(curr_streak > MAX_STREAK || 
-     days[pid] < 0) {
+  if(curr_streak > MAX_STREAK || days[pid] < 0) {
     return 0LL;
   }
 
@@ -60,58 +59,40 @@ ll dfs(int pid, int root_pid, vi& days, int curr_streak, std::vector<bool>& is_f
   //   - All remaining days MUST be spent on the other project (zero branching).
   //   - Since root_pid is finished, the G-streak constraint is lifted!
   //   - Therefore, there is EXACTLY 1 deterministic way to finish the schedule.
-  if(is_finished[root_pid] && 
-     !is_finished[(root_pid + 1) % 2]) {
+  if(days[root_pid] == 0 && days[(root_pid + 1) % 2] > 0) {
     return 1LL;
   }
- 
    
   if(~cache[pid][root_pid][days[0]][days[1]][curr_streak]) {
     return cache[pid][root_pid][days[0]][days[1]][curr_streak];
   }
 
   ll ways = 0LL;
-  int days_left = days[pid] +  days[(pid + 1) % 2];
+  int other = (pid + 1) % 2;
+  int days_left = days[pid] + days[other];
 
   // ========================================================================
   // CHOICE A: CONTINUE ON THE SAME PROJECT ('pid')
   // ========================================================================
-  if(!is_finished[pid]) {
-    // Dynamic Anchor: On Day 1, lock in who started first!
-    if(days_left == MAX_DAYS) {
-      root_pid = pid;
-    }
-    days[pid]--;
-    if(days[pid] == 0) {
-      is_finished[pid] = true;
-    }
-    ways += dfs(pid, root_pid, days, curr_streak + 1, is_finished);
-    if(days[pid] == 0) {
-      is_finished[pid] = false;
-    }
-    days[pid]++;
-  }
-
-  // ========================================================================
-  // CHOICE B: SWITCH TO THE OTHER PROJECT ('(pid + 1) % 2')
-  // ========================================================================
-  int other = (pid + 1) % 2;
-
+  // Dynamic Anchor: On Day 1, lock in who started first!
   if(days_left == MAX_DAYS) {
-    root_pid = other;
-  }
+    root_pid = pid;
+   }
+   days[pid]--;
+   ways += dfs(pid, root_pid, days, curr_streak + 1);
+   days[pid]++; // backtrack
 
-  days[other]--;
-  if(days[other] == 0) {
-    is_finished[other] = true;
-  }
-  ways += dfs(other, root_pid, days, 1, is_finished);
-  if(days[other] == 0) {
-    is_finished[other] = false;
-  }
-  days[other]++;
+   // ========================================================================
+   // CHOICE B: SWITCH TO THE OTHER PROJECT ('(pid + 1) % 2')
+   // ========================================================================
+   if(days_left == MAX_DAYS) {
+     root_pid = other;
+   }
+   days[other]--;
+   ways += dfs(other, root_pid, days, 1);
+   days[other]++; // backtrack
 
-  return (cache[pid][root_pid][days[0]][days[1]][curr_streak] = ways);
+   return (cache[pid][root_pid][days[0]][days[1]][curr_streak] = ways);
 }
 
 
@@ -121,8 +102,7 @@ ll get_all_schedules_number(int days_per_project, int max_streak) {
   MAX_STREAK = max_streak;
   std::memset(cache, -1, sizeof cache);
   vi days(2, days_per_project);
-  std::vector<bool> is_finished(2, false);
-  return dfs(0, 0, days, 0, is_finished);
+  return dfs(0, 0, days, 0);
 }
 
 

@@ -1,35 +1,19 @@
 /*
 ───────────────────────────────────────────────────────────────
-🧳 UVa 558 Wormholes, rt: 0.440s
+🧳 UVa 558 Wormholes, https://onlinejudge.org/external/5/558.pdf, rt: 0s
 ───────────────────────────────────────────────────────────────
 */
 
 #include "../debug.h"
 #include "../../aux.h"
-#include "tools/bellman_ford.cpp"
-
-#include <optional>
-#include <iostream>
-#include <cstdio>
-#include <vector>
-#include <algorithm>
-#include <numeric>
-#include <stdexcept>
-#include <cstring>
-#include <bitset>
-#include <unordered_map>
-#include <unordered_set>
 
 
-
-namespace bf = algorithms::onlinejudge::graph::tools::bellman_ford;
-namespace wg = algorithms::onlinejudge::graph::tools::wg;
-
+struct Edge {
+  int u, v, time;
+};
 
 namespace algorithms::onlinejudge::graph::wormholes
 {
-    /** https://onlinejudge.org/external/5/558.pdf */
-    int t_cases, V, E;
     void submit(std::optional<char*> file, bool debug_mode)
     {
         if (file.has_value())
@@ -43,23 +27,50 @@ namespace algorithms::onlinejudge::graph::wormholes
             throw std::ios_base::failure(errorMessage);
           }
         
-        while_read(t_cases);
+        int t_cases;
+        stdin_read(t_cases);
         while(t_cases--) {
-          while_read(V, E);
-          wg::WGraph<> graph(V);
+          int V, E;
+          stdin_read(V, E);
+          std::vector<Edge> edges(E);
           for(int e = 0; e < E; ++e) {
-            int u, v, time;
-            while_read(u, v, time);
-            wg::pair(graph, u, v, time);
+            stdin_read(edges[e].u, edges[e].v, edges[e].time);
           }
-           
-          wg::WNode<> start = wg::mkWNode(0, 0);
-          bf::BellmanFord<> bf_s(V, start, [](int d, int w) { return d + w; });
-          bool is_source_in_cycle = false;
-          bf_s.on_cycle = [&](int u, int v) { is_source_in_cycle = u == 0 || v == 0; };
-          bf::bellman_ford(graph, bf_s);
+          
+          vvi dp(V + 1, vi(V, Inf));
+          dp[0][0] = 0;
+          bool has_negative_cycle = false;
+          for (int i = 1; i <= V; ++i) {
+            // Step 1: Inherit distances from previous step (<= i - 1 edges)
+            for (int v = 0; v < V; ++v) {
+              dp[i][v] = dp[i - 1][v];
+            }
 
-          std::cout << (bf_s.hasNegativeCycle && !is_source_in_cycle ? "possible" : "not possible") << std::endl;
-        }  
+            // Step 2: Try relaxing all directed edges (u -> v)
+            bool any_update = false;
+            for (const auto& edge : edges) {
+              int u = edge.u;
+              int v = edge.v;
+              int time = edge.time;
+              if (dp[i - 1][u] != Inf && 
+                  dp[i - 1][u] + time < dp[i][v]) {
+                dp[i][v] = dp[i - 1][u] + time;
+                any_update = true;
+              }
+            }
+
+            // If no distance changed, early exit!
+            if (!any_update) {
+              break;
+            }
+
+            // If distances STILL decrease on round V -> Negative Cycle exists!
+            if(i == V && any_update) {
+              has_negative_cycle = true;
+            }
+          }
+
+          std::cout << (has_negative_cycle ? "possible" : "not possible") << "\n";
+        }
     }
 }

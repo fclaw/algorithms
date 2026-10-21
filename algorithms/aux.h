@@ -13,6 +13,8 @@ using vb = std::vector<bool>;
 using vvb = std::vector<vb>;
 using vvvb = std::vector<vvb>;
 
+using vvii = std::vector<std::vector<ii>>;
+
 
 constexpr int Inf = (int)1e9;
 

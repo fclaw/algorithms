@@ -61,6 +61,12 @@ namespace algorithms::onlinejudge::maths::utility::fast_bigint
             return res;
         }
 
+        BigInt operator += (const BigInt& o) const {
+            BigInt res;
+            res = this->operator+(o);
+            return res;
+        }
+
         // Subtraction (A - B, assumes A >= B)
         BigInt operator-(const BigInt& o) const {
             BigInt res = *this;

@@ -15,7 +15,7 @@
 // [pos]: The index of the current bit we are inspecting (up to 64).
 // [bits_left]: The number of '1' bits we still need to place (up to N/2, max 32).
 // [rem]: The running remainder modulo K (up to 100).
-ll cache[66][40][102];
+ll cache[66][33][102];
 
 
 /**
@@ -56,7 +56,7 @@ ll count_numbers(int pos, int bits_left, int rem, int N, int K) {
     // is strictly less than the number of '1' bits we still need to place (bits_left),
     // it's mathematically impossible to finish. We can safely break the loop early.
     if (i + 1 < bits_left) {
-        break; 
+      break; 
     }
 
     // Calculate the value added by placing a '1' at bit position 'i' (2^i)

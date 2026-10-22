@@ -6,6 +6,7 @@
 
 using vi = std::vector<int>;
 using vvi = std::vector<vi>;
+using vvvi = std::vector<vvi>;
 using ii = std::pair<int, int>;
 using ll = long long;
 using ull = unsigned long long;

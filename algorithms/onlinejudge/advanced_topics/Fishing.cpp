@@ -81,6 +81,15 @@
 
 void go_fishing(const vvi& ocean, vvvi& dp, int rows, int cols, int max_events) {
 
+  /**
+   * max_dp[r][c][e] stores the MAXIMUM possible fishing score using exactly 'e' events 
+   * within the strict suffix subgrid bounded from cell (r, c) down to (rows-1, cols-1).
+   *
+   * Use-case: FISHING (Max Profit Optimization)
+   * - Goal: Maximize fish caught.
+   * - Initialization: 0 (or a safe negative floor if ocean values can be negative).
+   * - Transition: Combined via std::max() to absorb the best downstream profit.
+  */
   vvvi max_dp(rows + 1, vvi(cols + 1, vi(max_events + 1, 0)));
 
   // Base Case: 1 event
@@ -106,6 +115,16 @@ void go_fishing(const vvi& ocean, vvvi& dp, int rows, int cols, int max_events) 
 
 void go_nourishing(const vvi& ocean, vvvi& dp, int rows, int cols, int max_events) {
 
+  /**
+   * min_dp[r][c][e] stores the MINIMUM possible ecological cost using exactly 'e' events 
+   * within the strict suffix subgrid bounded from cell (r, c) down to (rows-1, cols-1).
+   *
+   * Use-case: NOURISHING (Min Cost / Environmental Risk Optimization)
+   * - Goal: Minimize ecological damage, resource depletion, or nourishment costs.
+   * - Initialization: Infinity (Inf) to ensure unvisited or invalid paths never choke 
+   *   the true minimum during optimization.
+   * - Transition: Combined via std::min() to filter out high-cost paths.
+  */
   vvvi min_dp(rows + 1, vvi(cols + 1, vi(max_events + 1, Inf)));
 
   // Base Case: 1 event

@@ -2,6 +2,74 @@
 ───────────────────────────────────────────────────────────────
 🧳 UVa 12870 Fishing, https://onlinejudge.org/external/128/12870.pdf, rt: s
 ───────────────────────────────────────────────────────────────
+ * ====================================================================================
+ * OPTIMIZATION COMMENTARY: 2D SUFFIX MAXIMUM FOR O(R * C * E) DYNAMIC PROGRAMMING
+ * ====================================================================================
+ * 
+ * 1. THE BRUTE FORCE PROBLEM (O(R^2 * C^2 * E) -> TLE)
+ * ---------------------------------------------------
+ * In the naive approach, computing the maximum profit for choosing 'e' fishing spots 
+ * starting from cell (i, j) requires iterating over all possible next spots (p, l) 
+ * such that p > i and l > j:
+ * 
+ *      f(i, j, e) = val(i, j) + max_{p > i, l > j} { f(p, l, e - 1) }
+ * 
+ * Searching every valid (p, l) pair inside the bottom-right subgrid introduces two 
+ * nested loops of size R and C inside our main state loops, yielding a catastrophic 
+ * O(R^2 * C^2 * E) time complexity that causes an instant Time Limit Exceeded (TLE).
+ * 
+ * 
+ * 2. RECONCILING THE SUBGRID VIA REGION COMPOSITION
+ * --------------------------------------------------
+ * To eliminate the nested subgrid search, we introduce an auxiliary DP table, g(i, j, e),
+ * defined as the maximum value of f(p, l, e) for any cell in the bounding suffix region 
+ * extending from (i, j) to the bottom-right corner (Rows-1, Cols-1).
+ * 
+ * Geometrically, the suffix subgrid starting at (i, j) can be decomposed into three 
+ * overlapping parts:
+ * 
+ *      +------------+------------+     Legend:
+ *      |  (i, j)    |  Region B  |     - (i, j):   The standalone current cell ("Blind Spot").
+ *      |  [dp/f]    |  [g(i,j+1)]|     - Region B: Suffix grid from the right neighbor (i, j+1).
+ *      +------------+------------+     - Region C: Suffix grid from the bottom neighbor (i+1, j).
+ *      |  Region C  | Overlap    |
+ *      |  [g(i+1,j)]| (g(i+1,j+1)|     Note: The "Overlap" region is fully contained within 
+ *      +------------+------------+     both Region B and Region C.
+ * 
+ * 
+ * 3. THE MATHEMATICAL IDEMPOTENCY OF MAX()
+ * ----------------------------------------
+ * In standard 2D Prefix/Suffix sums (like finding an area total), overlapping regions 
+ * must be subtracted to avoid double-counting. However, because our target operator 
+ * is MAX(), we can exploit its idempotent property:
+ * 
+ *      max(x, x) = x
+ * 
+ * Overlapping queries do not distort or corrupt the maximum value. Therefore, Region B 
+ * and Region C can overlap completely without consequence. Combining them covers every 
+ * cell in the subgrid *except* for the top-left coordinate (i, j) itself. 
+ * 
+ * By including the value of the current cell—our "Blind Spot"—we achieve 100% gapless 
+ * coverage of the entire suffix subgrid in exactly O(1) constant time.
+ * 
+ * 
+ * 4. SYSTEM OF RECURRENCES
+ * ------------------------
+ * Executing in a bottom-up direction (from Rows-1 down to 0, and Cols-1 down to 0), 
+ * the transitions reduce to two elegant, intertwined O(1) steps:
+ * 
+ *    Step 1: Compute optimal state for the current spot 'e' using the strict subgrid.
+ *            f(i, j, e) = val(i, j) + g(i + 1, j + 1, e - 1)
+ * 
+ *    Step 2: Update the suffix maximum table to include the new cell for future lookups.
+ *            g(i, j, e) = max({ g(i + 1, j, e), g(i, j + 1, e), f(i, j, e) })
+ * 
+ * 
+ * 5. COMPLEXITY REDUCTION RESULT
+ * ------------------------------
+ * - Old Time Complexity: O(R^2 * C^2 * E)
+ * - New Time Complexity: O(R * C * E)  --> Guaranteed Accepted (AC)
+ * ====================================================================================
 */
 
 #include "../debug.h"

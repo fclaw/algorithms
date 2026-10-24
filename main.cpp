@@ -1,7 +1,7 @@
 #define DBG_MACRO_NO_WARNING
 
 // #include "algorithms/kattis/dp/ProtectingCollection.cpp"
-#include "algorithms/onlinejudge/divide_conquer/AngryBids.cpp"
+#include "algorithms/onlinejudge/divide_conquer/Popes.cpp"
 // #include "algorithms/cses/TwoSets.cpp"
 #include <chrono>
 #include <iomanip>
@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
     long mem_before = get_memory_usage();
     auto start = std::chrono::system_clock::now();
     // algorithm starts
-    algorithms::onlinejudge::divide_conquer::angry_bids::submit(file, debug_mode);
+    algorithms::onlinejudge::divide_conquer::popes::submit(file, debug_mode);
     // algorithms::kattis::dp::protecting_collection::submit(file, debug_mode);
     // algorithms::cses::two_sets::submit(file, debug_mode);
     // algorithm ends

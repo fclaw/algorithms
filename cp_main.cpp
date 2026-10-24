@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
-#include <boost/multiprecision/cpp_int.hpp> // The header for the bigint class
+// #include <boost/multiprecision/cpp_int.hpp> // The header for the bigint class
 
 
-namespace mp = boost::multiprecision;
+// namespace mp = boost::multiprecision;
 
 using ll = long long;
 
@@ -64,18 +64,11 @@ bool can_be_palindrome_by_one_replacement(const std::string& s) {
 
 int main(int argc, char* argv[])
 {
-  std::string s;
-  while(std::cin >> s) {
-    int count = 0;
-    std::set<char> un(s.begin(), s.end());
-    for(int i = 0; i < s.size(); ++i) {
-      for(int j = i; j < s.size(); ++j) {
-        auto sub = s.substr(i, j - i + 1);
-        if(can_form_palindrome_ascii(sub) || can_be_palindrome_by_one_replacement(sub)) {
-          count++;
-        }
-      }
+    int t_cases;
+    std::cin >> t_cases;
+    while(t_cases--) {
+      int a, b;
+      std::cin >> a >> b;
+      std::cout << (!((a + b) % 3) ? "YES" : "NO") << "\n";
     }
-    std::cout << count << std::endl;
-  }
 }
